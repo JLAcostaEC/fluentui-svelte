@@ -1,0 +1,59 @@
+<!-- <script lang="ts">
+  import { Breadcrumb, InfoBar } from '$lib/index.js';
+  import { m } from '$i18n/messages.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+
+  const items = [
+    { name: 'Home', path: '/' },
+    { name: 'Docs', path: '/docs' },
+    { name: 'Components', path: '/docs/components' },
+    { name: 'Forms', path: '/docs/components/forms' },
+    { name: 'Buttons', path: '/docs/components/forms/buttons', disabled: true },
+    { name: 'Inputs', path: '/docs/components/forms/inputs' },
+    { name: 'Data Display', path: '/docs/components/forms/inputs/data-display' },
+    { name: 'Navigation', path: '/docs/components/forms/inputs/data-display/navigation', disabled: true },
+    { name: 'Feedback', path: '/docs/components/forms/inputs/data-display/navigation/feedback' }
+  ]
+</script>
+
+# Breadcrumb
+
+{m.bc_description()}
+
+<InfoBar status="critical" style="multiline" title={m.bc_early_access_title()} hideCloseButton>
+	<p>
+		{m.bc_early_access_description_before_link()}
+		<a href="https://floating-ui-svelte.vercel.app/" target="_blank">
+			FloatingUI Svelte
+		</a>
+		{m.bc_early_access_description_after_link()}
+	</p>
+</InfoBar>
+
+<Showcase columns={1}>
+  <Breadcrumb
+    {items}
+  />
+  <Breadcrumb 
+    appearance="minimal"
+    {items} 
+  />
+</Showcase>
+<Breadcrumb
+    {items}
+  />
+  <Breadcrumb 
+    appearance="minimal"
+    {items} 
+  />
+
+### {m.bc_component_props_title()}
+
+| **Name**     | **Type**                                                    | **Description**                       |
+| ------------ | ----------------------------------------------------------- | ------------------------------------- |
+| `items`      | `Array<{ name: string, path: string, disabled?: boolean }>` | {m.bc_props_items_description()}      |
+| `maxVisible` | `number`                                                    | {m.bc_props_maxvisible_description()} |
+| `appearance` | `string`                                                    | {m.bc_props_appearance_description()} |
+| `element`    | `HTMLDivElement`                                            | {m.bc_props_element_description()}    |
+| `hideFrom`   | `number`                                                    | {m.bc_props_hidefrom_description()}   |
+| `size`       | `number`                                                    | {m.bc_props_size_description()}       | -->

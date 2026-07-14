@@ -1,0 +1,39 @@
+@font-face {
+	font-family: 'Selawik';
+	src:
+		local('Selawik'),
+		url('/fonts/selawik/selawk.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Selawik Bold';
+	src:
+		local('Selawik'),
+		url('/fonts/selawik/selawkb.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Selawik Light';
+	src:
+		local('Selawik'),
+		url('/fonts/selawik/selawkl.ttf') format('truetype');
+	font-weight: 200;
+	font-style: normal;
+}
+html {
+	scroll-behavior: smooth;
+}
+#app {
+	background: var(--fs-radial-mica-bg);
+	min-height: 100dvh;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	grid-template-columns: 1fr;
+	position: relative;
+	z-index: 0;
+	& :is(header, main, footer) {
+		z-index: 1;
+	}
+}

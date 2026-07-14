@@ -1,0 +1,89 @@
+<!-- <script>
+  import { Rating } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Rating
+
+{m.rating_description()}
+
+<Showcase columns={5} autoCenter>
+  <Rating value={1} />
+  <Rating value={2} />
+  <Rating value={3} />
+  <Rating value={4} />
+  <Rating value={5} />
+</Showcase>
+
+## {m.rating_usage_title()}
+
+```svelte
+<script>
+  import { Rating } from 'fluentui-svelte';
+</script>
+
+<Rating value={3} />
+```
+
+## {m.rating_component_api_title()}
+
+{m.rating_component_api_description_before_link()} <a href="#component-props">{m.rating_component_api_description_link_text()}</a>.
+
+### {m.rating_value_title()}
+
+{m.rating_value_description()}
+
+<Showcase columns={3} autoCenter minHeight="140px">
+  <Rating value={1} />
+  <Rating value={2} />
+  <Rating value={3} />
+  <Rating value={4} />
+  <Rating value={5} />
+</Showcase>
+
+### {m.rating_interactive_title()}
+
+{m.rating_interactive_description()}
+
+<Showcase columns={1} minHeight="100px" >
+  <Rating interactive />
+</Showcase>
+
+### {m.rating_max_title()}
+
+{m.rating_max_description()}
+
+<Showcase columns={3} autoCenter minHeight="140px">
+  <Rating value={1} max={3} />
+  <Rating value={3} max={5} />
+  <Rating value={8} max={10} />
+</Showcase>
+
+### {m.rating_tooltips_title()}
+
+{m.rating_tooltips_description()}
+
+```svelte
+<script>
+  import { Rating } from 'fluentui-svelte';
+</script>
+
+<Rating
+  tooltips={['Terrible', 'Bad', 'Poor', 'Average', 'Good', 'Great', 'Excellent', 'Exceptional']}
+  interactive
+  max={8}
+  rateCallback={(val) => console.log(val)}
+/>
+```
+
+## {m.rating_component_props_title()}
+
+| **Prop**       | **Type**   | **Description**                                           |
+| -------------- | ---------- | --------------------------------------------------------- |
+| `value`        | `number`   | {m.rating_props_value_description()}                        |
+| `interactive`  | `boolean`  | {m.rating_props_interactive_description()}   |
+| `max`          | `number`   | {m.rating_props_max_description()}                  |
+| `size`         | `string`   | {m.rating_props_size_description()}       |
+| `tooltips`     | `string[]` | {m.rating_props_tooltips_description()}                  |
+| `rateCallback` | `function` | {m.rating_props_ratecallback_description()} | -->

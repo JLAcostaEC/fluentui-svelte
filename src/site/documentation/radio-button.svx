@@ -1,0 +1,84 @@
+<script>
+  import { RadioButton } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+
+  let groupValue = $state('');
+
+  $inspect(groupValue);
+</script>
+
+# Radio Button
+
+{m.rb_description()}
+
+<Showcase columns={3} autoCenter>
+  <RadioButton label="Option 1" name="group1" value="A" checked />
+  <RadioButton label="Option 2" name="group1" value="B" />
+  <RadioButton label="Option 3" name="group1" value="C" disabled />
+</Showcase>
+
+## {m.rb_usage_title()}
+
+```svelte
+<script>
+  import { RadioButton } from 'fluentui-svelte';
+</script>
+
+<RadioButton label="Option 1" />
+```
+
+## {m.rb_component_api_title()}
+
+{m.rb_component_api_description()}
+
+### {m.rb_grouping_title()}
+
+<p>{m.rb_grouping_description()} <a href="https://svelte.dev/tutorial/svelte/group-inputs">{m.rb_grouping_read_more()}</a></p>
+
+```svelte
+<script>
+  import { RadioButton } from 'fluentui-svelte';
+  let groupValue = $state('');
+  $inspect(groupValue);
+</script>
+
+<RadioButton label="Option 1" name="group1" value="$1" bind:group={groupValue} />
+<RadioButton label="Option 2" name="group1" value="$2" bind:group={groupValue} />
+<RadioButton label="Option 3" name="group1" value="$3" disabled bind:group={groupValue} />
+```
+
+<Showcase columns={3} autoCenter minHeight="100px">
+  <RadioButton label="Option 1" name="group1" value="$1" bind:group={groupValue} />
+  <RadioButton label="Option 2" name="group1" value="$2" bind:group={groupValue} />
+  <RadioButton label="Option 3" name="group1" value="$3" bind:group={groupValue} />
+</Showcase>
+
+### {m.rb_disabled_title()}
+
+{m.rb_disabled_description()}
+
+<Showcase columns={2} autoCenter minHeight="100px">
+  <RadioButton label="Enabled Option" value="D" />
+  <RadioButton label="Disabled Option" value="E" disabled />
+</Showcase>
+
+### {m.rb_checked_title()}
+
+{m.rb_checked_description()}
+
+<Showcase columns={2} autoCenter minHeight="100px">
+  <RadioButton label="Checked Option" value="F" checked />
+  <RadioButton label="Unchecked Option" value="G" />
+</Showcase>
+
+### {m.rb_component_props_title()}
+
+| **Name**           | **Type**           | **Description**                                                 |
+| ------------------ | ------------------ | --------------------------------------------------------------- |
+| `label`            | `string`           | {m.rb_props_label_description()} |
+| `group`            | `unknown`          | {m.rb_props_group_description()} |
+| `checked`          | `boolean`          | {m.rb_props_checked_description()} |
+| `disabled`         | `boolean`          | {m.rb_props_disabled_description()} |
+| `ref`              | `HTMLInputElement` | {m.rb_props_ref_description()} |
+| Element Attributes |                    | {m.rb_props_elementattributes_description()} |

@@ -1,0 +1,77 @@
+<script>
+  import { ProgressBar } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Progress Bar
+
+{m.pbar_description()}
+
+<Showcase columns={1} autoCenter>
+  <ProgressBar value={30} />
+  <ProgressBar value={50} />
+  <ProgressBar value={70} />
+</Showcase>
+
+## {m.pbar_usage_title()}
+
+```svelte
+<script>
+  import { ProgressBar } from 'fluentui-svelte';
+</script>
+
+<ProgressBar value={50} />
+```
+
+## {m.pbar_component_api_title()}
+
+{m.pbar_component_api_description()}
+
+### {m.pbar_value_title()}
+
+{m.pbar_value_description()}
+
+<Showcase minHeight="150px" minZoom={1} columns={1}>
+  <ProgressBar value={30} />
+  <ProgressBar value={50} />
+  <ProgressBar value={70} />
+</Showcase>
+
+### {m.pbar_indeterminate_title()}
+
+{m.pbar_indeterminate_description()}
+
+<Showcase minHeight="100px" minZoom={1} columns={1}>
+  <ProgressBar indeterminate />
+</Showcase>
+
+### {m.pbar_hide_rail_title()}
+
+{m.pbar_hide_rail_description()}
+
+<Showcase minHeight="100px" minZoom={1}>
+  <ProgressBar value={50} hideRail />
+</Showcase>
+
+### {m.pbar_status_title()}
+
+{m.pbar_status_description()}
+
+<Showcase minHeight="100px" columns={1}>
+  <ProgressBar value={50} status="paused" />
+  <ProgressBar value={50} status="error" />
+</Showcase>
+
+## {m.pbar_component_props_title()}
+
+| **Name**                | **Type**                           | **Description**                                               |
+| ----------------------- | ---------------------------------- | ------------------------------------------------------------- |
+| `value`                 | bindable `number &vert; undefined` | {m.pbar_props_value_description()} |
+| `indeterminate`         | `boolean`                          | {m.pbar_props_indeterminate_description()} |
+| `hideRail`              | `boolean`                          | {m.pbar_props_hiderail_description()} |
+| `status`                | `'paused' &vert; 'error'`          | {m.pbar_props_status_description()} |
+| `element`               | bindable `SVGElement`              | {m.pbar_props_element_description()} |
+| `railElement`           | bindable `SVGRectElement`          | {m.pbar_props_railelement_description()} |
+| `trackElement`          | bindable `SVGRectElement`          | {m.pbar_props_trackelement_description()} |
+| `secondaryTrackElement` | bindable `SVGRectElement`          | {m.pbar_props_secondarytrackelement_description()} |

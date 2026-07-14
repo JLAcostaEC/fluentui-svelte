@@ -1,0 +1,117 @@
+<script>
+  import { Divider } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Divider
+
+{m.divider_description()}
+
+<Showcase columns={1} initialZoom={1} autoCenter>
+  <div style="width: 16rem;">
+    <Divider>Divider</Divider>
+  </div>
+</Showcase>
+
+## {m.divider_usage_title()}
+
+```svelte
+<script>
+  import { Divider } from 'fluentui-svelte';
+</script>
+
+<Divider>Divider</Divider>
+```
+
+## {m.divider_divider_api_title()}
+
+{m.divider_divider_api_description_before_link()} <a href="#divider-props">{m.divider_divider_api_description_link_text()}</a>.
+
+### {m.divider_appearance_title()}
+
+{m.divider_appearance_description()}
+
+<Showcase columns={1} initialZoom={1} autoCenter>
+  <div style="width: 16rem;">
+    <Divider appearance="standard">Standard Divider</Divider>
+  </div>
+  <div style="width: 16rem;">
+    <Divider appearance="accent">Accent Divider</Divider>
+  </div>
+  <div style="width: 16rem;">
+    <Divider appearance="subtle">Subtle Divider</Divider>
+  </div>
+</Showcase>
+
+### {m.divider_vertical_title()}
+
+{m.divider_vertical_description()}
+
+<Showcase columns={1} initialZoom={1} autoCenter>
+  <div style="width: 16rem; height: 8rem;">
+    <Divider vertical>Vertical</Divider>
+  </div>
+</Showcase>
+
+### {m.divider_align_content_title()}
+
+{m.divider_align_content_description()}
+
+<Showcase columns={1} initialZoom={1} autoCenter>
+  <div style="width: 16rem;">
+    <Divider alignContent="start">Start Aligned Divider</Divider>
+  </div>
+  <div style="width: 16rem;">
+    <Divider alignContent="center">Center Aligned Divider</Divider>
+  </div>
+  <div style="width: 16rem;">
+    <Divider alignContent="end">End Aligned Divider</Divider>
+  </div>
+</Showcase>
+
+{m.divider_align_content_vertical_description()}
+
+<Showcase columns={3} initialZoom={1} autoCenter>
+  <div style="width: 8rem; height: 8rem;">
+    <Divider alignContent="start" vertical>Start</Divider>
+  </div>
+  <div style="width: 8rem; height: 8rem;">
+    <Divider alignContent="center" vertical>Center</Divider>
+  </div>
+  <div style="width: 8rem; height: 8rem;">
+    <Divider alignContent="end" vertical>End</Divider>
+  </div>
+</Showcase>
+
+### {m.divider_inset_title()}
+
+{m.divider_inset_description()}
+
+<Showcase columns={1} initialZoom={1} autoCenter>
+  <div style="width: 16rem;">
+    <Divider inset>Inset Divider</Divider>
+  </div>
+</Showcase>
+
+### {m.divider_custom_element_title()}
+
+{m.divider_custom_element_description()}
+
+<Showcase columns={1} initialZoom={1} autoCenter>
+  <div style="width: 16rem;">
+    <Divider as="hr" />
+  </div>
+</Showcase>
+
+### {m.divider_divider_props_title()}
+
+| **Name**       | **Type**            | **Description**                                                                                |
+| -------------- | ------------------- | ------------------------------------------------------------------------------------------------ |
+| `as`           | `string`            | {m.divider_props_as_description()}           |
+| `vertical`     | `boolean`           | {m.divider_props_vertical_description()}                              |
+| `alignContent` | `string`            | {m.divider_props_aligncontent_description()} |
+| `appearance`   | `string`            | {m.divider_props_appearance_description()} |
+| `inset`        | `boolean`           | {m.divider_props_inset_description()}                                                  |
+| `ref`          | `HTMLDivElement` &vert; `HTMLHRElement` &vert; `HTMLSpanElement` | {m.divider_props_ref_description()} |
+| `children`     | `Snippet`           | {m.divider_props_children_description()}                                             |

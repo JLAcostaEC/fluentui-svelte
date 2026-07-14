@@ -1,0 +1,271 @@
+/* 
+* Author: JLAcostaEC
+* Remenber, you can learn more about the Windows UI 3 / Fluent UI 2 at figma file (Check the README.md)
+*/
+:root {
+	color-scheme: light dark;
+	/* Accent Colors 
+		* These colors need to be setted as RGB to allow apply alpha channels.
+	*/
+	--fs-accent-light-3: 152, 236, 254; /* #98ECFE */
+	--fs-accent-light-2: 96, 204, 254; /* #60CCFE */
+	--fs-accent-light-1: 152, 236, 254; /* #0093F9 */
+	--fs-accent-base: 0, 120, 212; /* #0078D4 */
+	--fs-accent-dark-1: 0, 94, 183; /* #005EB7 */
+	--fs-accent-dark-2: 0, 61, 146; /* #003D92 */
+	--fs-accent-dark-3: 0, 25, 104; /* #001968 */
+
+	/* Text Colors */
+	--fs-text-primary: #000000e4;
+	--fs-text-secondary: #0000009e;
+	--fs-text-tertiary: #00000072;
+	--fs-text-disabled: #0000005c;
+
+	--fs-accent-text-primary: rgb(var(--fs-accent-dark-2));
+	--fs-accent-text-secondary: rgb(var(--fs-accent-dark-3));
+	--fs-accent-text-tertiary: rgb(var(--fs-accent-dark-1));
+
+	--fs-text-on-accent-primary: #fff;
+	--fs-text-on-accent-secondary: #ffffffb3;
+	--fs-text-on-accent-disabled: #fff;
+	--fs-text-on-accent-selected: #fff;
+
+	/* Control Fill Colors
+	 * These colors are used for standard controls like buttons, dropdowns, search, etc.
+	*/
+	--fs-control-fill-default: #ffffffb3;
+	--fs-control-fill-secondary: #e7e7e7b3; /* Changed to #e7e7e7b3 from original: #f9f9f980 */
+	--fs-control-fill-tertiary: #f9f9f94d;
+	--fs-control-fill-quaternary: #f3f3f3c2;
+	--fs-control-fill-disabled: #f9f9f98c; /* Changed to #f9f9f98c from original: #f9f9f94d */
+	--fs-control-fill-transparent: transparent;
+	--fs-control-fill-input-active: #ffffff;
+
+	/* Control Alt Fill Colors
+	* These colors are used for standard controls like toggle, radio, checkbox, rating, etc.
+	*/
+	--fs-control-alt-fill-transparent: transparent;
+	--fs-control-alt-fill-secondary: #00000006;
+	--fs-control-alt-fill-tertiary: #0000000f;
+	--fs-control-alt-fill-quaternary: #00000018;
+	--fs-control-alt-fill-disabled: transparent;
+
+	/* Control Solid/Strong Colors
+		* --fs-control-solid Fills used for Sliders thumb control to cover the track beneath it.
+		---------------------------
+		* --fs-control-strong-default and --fs-control-strong-disabled Used for control fills that must meet contrast ratio requirements of 3:1 Examples: Scroll bar, Slider, Flip view
+	*/
+	--fs-control-solid: #fff;
+	--fs-control-strong-default: #00000072;
+	--fs-control-strong-disabled: #00000051;
+
+	/* Subtle Colors 
+    * Used for list items and fills that are transparent at rest and appear upon interaction.
+  */
+	--fs-subtle-fill-transparent: transparent;
+	/** 👇 Changed hex opacity to 12 from original 09 */
+	--fs-subtle-fill-secondary: #00000012;
+	/** 👇 Changed hex opacity to 0e from original 06 */
+	--fs-subtle-fill-tertiary: #0000000e;
+	--fs-subtle-fill-disabled: transparent;
+
+	/* Control On Image Fill
+		* These colors are used for controls that are placed on top of images.
+	*/
+	--fs-control-on-image-fill-default: #ffffffc9;
+	--fs-control-on-image-fill-secondary: #ffffff;
+	--fs-control-on-image-fill-tertiary: #ebebeb;
+	--fs-control-on-image-fill-disabled: transparent;
+
+	/* Accent Fill Colors */
+	--fs-accent-fill-default: rgb(var(--fs-accent-dark-1));
+	/* 👇 Changed to 0.84 from original 0.9 */
+	--fs-accent-fill-secondary: rgba(var(--fs-accent-dark-1), 0.84);
+	--fs-accent-fill-tertiary: rgba(var(--fs-accent-dark-1), 0.67);
+	--fs-accent-fill-disabled: #0000003b;
+	--fs-accent-fill-selected-text-bg: rgb(var(--fs-accent-base));
+
+	/* Elevation */
+	--fs-elevation-control-border: linear-gradient(180deg, rgba(0, 0, 0, 0.06) 91%, rgba(0, 0, 0, 0.16) 100%);
+	--fs-elevation-accent-control-border: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 91%, rgba(0, 0, 0, 0.4) 100%);
+	--fs-elevation-circle-border: linear-gradient(180deg, rgba(0, 0, 0, 0.06) 50%, rgba(0, 0, 0, 0.16) 95%);
+	--fs-elevation-text-border: linear-gradient(
+		180deg,
+		rgba(0, 0, 0, 0.06) calc(100% - 0.075rem),
+		rgba(0, 0, 0, 0.45) calc(100% - 0.075rem)
+	);
+	--fs-elevation-text-border-focused: linear-gradient(
+		180deg,
+		rgba(0, 0, 0, 0.06) 95.2%,
+		rgb(var(--fs-accent-base)) 95.2%
+	);
+
+	/* Control Stroke */
+	--fs-control-stroke-default: #0000000f;
+	--fs-control-stroke-secondary: #00000029;
+	--fs-control-stroke-on-accent-default: #ffffff14;
+	--fs-control-stroke-on-accent-secondary: #ffffff66;
+	--fs-control-stroke-on-accent-tertiary: #ffffff37;
+	--fs-control-stroke-on-accent-disabled: #0000000f;
+	--fs-control-stroke-on-image: #ffffff59;
+	--fs-card-stroke-default: #0000000f;
+	--fs-card-stroke-solid: #ebebeb;
+
+	/* Control Strong Stroke */
+	--fs-control-strong-stroke-default: #0000009c;
+	--fs-control-strong-stroke-disabled: #00000037;
+
+	/* Control Surface Stroke */
+	--fs-control-surface-stroke-default: #75757566;
+	--fs-control-surface-stroke-flyout: #0000000f;
+
+	/* Divider Stroke */
+	--fs-divider-stroke-default: #0000000f;
+
+	/* Focus Stroke */
+	--fs-focus-stroke-outer: #000000e4;
+	--fs-focus-stroke-inner: #ffffffb3;
+
+	/* Card Background */
+	--fs-card-background-default: #ffffffb3;
+	--fs-card-background-secondary: #f6f6f680;
+
+	/* Smoke Background */
+	--fs-smoke-background-default: #0000004d;
+
+	/* Layer */
+	--fs-layer-default: #ffffff80;
+	--fs-layer-alt: #fff;
+
+	/* Layer on Acrylic */
+	--fs-layer-on-acrylic-default: #ffffff40;
+
+	/* Solid Background */
+	--fs-solid-background-base: #f3f3f3;
+	--fs-solid-background-secondary: #eee;
+	--fs-solid-background-tertiary: #f9f9f9;
+	--fs-solid-background-quaternary: #fff;
+
+	/* Acrylic Background */
+	--fs-acrylic-background-base: #f3f3f3;
+	--fs-acrylic-background-default: #fcfcfc;
+
+	/* Accent Acrylic Background */
+	--fs-accent-acrylic-background-base: rgba(var(--fs-accent-light-3), 0.8);
+	--fs-accent-acrylic-background-default: rgba(var(--fs-accent-light-3), 0.8);
+
+	/* System */
+	--fs-system-attention: rgb(var(--fs-accent-base));
+	/* 👇 changed from original #f6f6f608 to color mix with 75% white */
+	--fs-system-attetion-bg: color-mix(in srgb, rgb(var(--fs-accent-base)), white 75%);
+	--fs-system-attention-solid-bg: #f7f7f7;
+
+	--fs-system-success: #0f7b0f;
+	--fs-system-success-bg: #dff6dd;
+
+	--fs-system-caution: #9d5d00;
+	--fs-system-caution-bg: #fff4ce;
+
+	--fs-system-critical: #c42b1c;
+	--fs-system-critical-bg: #fde7e9;
+
+	--fs-system-neutral: #00000072;
+	/* 👇 changed from original #00000006 to #00000012 */
+	--fs-system-neutral-bg: #00000012;
+
+	--fs-system-solid-neutral: #8a8a8a;
+	--fs-system-solid-neutral-bg: #f3f3f3;
+
+	/* Border Radius */
+	--fs-control-border-radius: 0.25rem;
+	--fs-control-inner-border-radius: 0.188rem;
+	--fs-control-overlay-border-radius: 0.5rem;
+
+	/* Durations */
+	--fs-fast-duration: 167ms;
+	--fs-normal-duration: 333ms;
+	--fs-slow-duration: 500ms;
+
+	/* Easing */
+	--fs-strong-invoke: cubic-bezier(0.13, 1.62, 0, 0.92);
+	--fs-fast-dismiss: cubic-bezier(0, 0, 0, 1);
+	--fs-soft-dismiss: cubic-bezier(1, 0, 1, 1);
+	--fs-point-to-point: cubic-bezier(0.55, 0.55, 0, 1);
+
+	/** Here I have decided to use the FluentUI React documentation since it is more complete in terms of text elements. 
+  * Notes:
+  * - I have removed the number 1 in the variables, ex: (--fs-title1-font-size) > (--fs-title-font-size)
+  * - I swapped body-font-size with body2-font-size, It's stupid that all other font-sizes are smaller than *2-font-size but body2-font-size is larger than body-font-size 😒 https://react.fluentui.dev/?path=/docs/theme-typography--docs
+  * - I added 2px to subtitle2, I've been struggling with the size of h5 and h6 subheadings for years. It's a subheading, not a bold text
+  */
+
+	/* Font Size */
+	--fs-caption2-font-size: 0.625rem; /* 10px */
+	--fs-caption-font-size: 0.75rem; /* 12px */
+	--fs-body2-font-size: 0.875rem; /* 14px */
+	--fs-body-font-size: 1rem; /* 16px */
+	--fs-subtitle2-font-size: 1.125rem; /* 18px from original 16px */
+	--fs-subtitle-font-size: 1.25rem; /* 20px */
+	--fs-title3-font-size: 1.5rem; /* 24px */
+	--fs-title2-font-size: 1.75rem; /* 28px */
+	--fs-title-font-size: 2rem; /* 32px */
+	--fs-title-large-font-size: 2.5rem; /* 40px */
+	--fs-display-font-size: 4.25rem; /* 68px */
+
+	/* Line Height */
+	--fs-caption2-line-height: 1.4em; /* 14px */
+	--fs-caption-line-height: 1.4em; /* 14px */
+	--fs-body2-line-height: 1.43em; /* 20px */
+	--fs-body-line-height: 1.375em; /* 22px */
+	--fs-subtitle2-line-height: 1.375em; /* 22px */
+	--fs-subtitle-line-height: 1.4em; /* 28px */
+	--fs-title3-line-height: 1.333em; /* 32px */
+	--fs-title2-line-height: 1.286em; /* 36px */
+	--fs-title-line-height: 1.25em; /* 40px */
+	--fs-title-large-line-height: 1.3em; /* 52px */
+	--fs-display-line-height: 1.35em; /* 92px */
+
+	/* Shadows */
+	--fs-shadow-card: 0 0.125rem 0.25rem #0000000a; /* 4% opacity */
+	--fs-shadow-tooltip: 0 0.25rem 0.5rem #00000024; /* 14% opacity */
+	--fs-shadow-flyout: 0 0.5rem 1rem #00000024; /* 14% opacity */
+	--fs-shadow-dialog: 0 2rem 4rem #00000030, 0 1.125rem 1.313rem #00000026; /* 19% and 15% opacity respectively */
+
+	/* Shell Shadows */
+	--fs-shell-shadow-inactive:
+		0 1rem 2rem #00000030, 0 0.125rem 0.625rem #00000026; /* 19% and 15% opacity respectively */
+	--fs-shell-shadow-active: 0 2rem 4rem #00000047, 0 0.125rem 1.313rem #00000038; /* 28% and 22% opacity respectively */
+
+	/* Font Families */
+	--fs-font-family-fallback:
+		'Selawik', '-apple-system', 'ui-sans-serif', 'system-ui', 'BlinkMacSystemFont', 'Roboto', 'Oxygen-Sans', 'Ubuntu',
+		'Cantarell', 'Helvetica Neue', 'sans-serif';
+	--fs-font-family-base: 'Segoe UI', var(--fs-font-family-fallback);
+	--fs-font-family-monospace: 'Consolas', 'Courier New', 'Courier', 'monospace';
+	--fs-font-family-numeric: 'Bahnschrift', 'Segoe UI', 'Segoe UI Web (West European)', var(--fs-font-family-fallback);
+
+	--fs-acrilic-noise: url("data:image/svg+xml, %3Csvg width='34' height='34' viewBox='0 0 34 34' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='xmb7xhlwkzcgxm'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1' numOctaves='1' stitchTiles='stitch' /%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23xmb7xhlwkzcgxm)' opacity='1' /%3E%3C/svg%3E");
+
+	/* Customs Variables */
+	--fs-radial-mica-bg: radial-gradient(
+		circle,
+		rgba(239, 243, 249, 1) 0%,
+		rgba(232, 236, 243, 1) 63%,
+		rgba(207, 212, 221, 1) 100%
+	);
+
+	--fs-system-neutral-text: color-mix(in srgb, var(--fs-system-neutral), black 50%);
+	--fs-system-attention-text: color-mix(in srgb, var(--fs-system-attention), black 50%);
+	--fs-system-caution-text: color-mix(in srgb, var(--fs-system-caution), black 50%);
+	--fs-system-success-text: color-mix(in srgb, var(--fs-system-success), black 50%);
+	--fs-system-critical-text: color-mix(in srgb, var(--fs-system-critical), black 50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	:root {
+		--fs-control-slow-duration: 0ms;
+		--fs-control-normal-duration: 0ms;
+		--fs-control-fast-duration: 0ms;
+		--fs-control-faster-duration: 0ms;
+	}
+}

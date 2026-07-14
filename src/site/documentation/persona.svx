@@ -1,0 +1,108 @@
+<script lang="ts">
+  import { Persona } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Persona
+
+{m.persona_description()}
+
+<Showcase columns={4} autoCenter>
+  <Persona name="John Doe" primaryText="Software Engineer" secondaryText="Intranet" tertiaryText="Team A" presence={{status: 'available'}}  avatar={{ color: "colorful", idForColor: '' }}/>
+  <Persona presenceOnly name="Presence Only" presence={{status: 'available'}} secondaryText="Available" />
+  <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="bottom" textAlign="center" />
+  <Persona name="Custom Size" size={24} />
+</Showcase>
+
+## {m.persona_usage_title()}
+
+```svelte
+<script>
+  import { Persona } from 'fluentui-svelte';
+</script>
+
+<Persona
+  name="John Doe"
+  primaryText="Software Engineer"
+  secondaryText="Intranet"
+  tertiaryText="Team A"
+  presence={{ status: 'available' }}
+  avatar={{ color: 'colorful' }}
+/>
+```
+
+## {m.persona_component_api_title()}
+
+### {m.persona_text_align_title()}
+
+{m.persona_text_align_description()}
+
+<Showcase columns={3} autoCenter>
+  <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" />
+  <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textAlign="center" />
+  <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textAlign="right" />
+</Showcase>
+
+### {m.persona_text_position_title()}
+
+{m.persona_text_position_description()}
+
+<Showcase columns={4} autoCenter>
+  <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" />
+  <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="bottom" textAlign="center"/>
+  <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="left" />
+  <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="top" textAlign="center"/>
+</Showcase>
+
+### {m.persona_size_title()}
+
+{m.persona_size_description()}
+
+<Showcase columns={3} autoCenter>
+  <Persona name="John Doe" size={24} />
+  <Persona name="John Doe" size={32} />
+  <Persona name="John Doe" size={56} />
+</Showcase>
+
+### {m.persona_avatar_title()}
+
+{m.persona_avatar_description()}
+
+<Showcase columns={3} autoCenter>
+  <Persona name="John Doe" avatar={{ color: "attention" }} />
+  <Persona name="John Doe" avatar={{ color: "colorful", idForColor: '' }} />
+  <Persona name="John Doe" avatar={{ image: { src: 'https://placehold.co/96x96/jpeg', alt: 'Placeholder Image' } }} />
+</Showcase>
+
+### {m.persona_presence_title()}
+
+{m.persona_presence_description()}
+
+<Showcase columns={4} autoCenter>
+  <Persona name="John Doe" presence={{ status: 'available' }} />
+  <Persona name="John Doe" presence={{ status: 'away' }} />
+  <Persona name="John Doe" presence={{ status: 'busy' }} />
+  <Persona name="John Doe" presence={{ status: 'do-not-disturb' }} />
+  <Persona name="John Doe" presence={{ status: 'offline' }} />
+  <Persona name="John Doe" presence={{ status: 'out-of-office' }} />
+  <Persona name="John Doe" presence={{ status: 'blocked' }} />
+  <Persona name="John Doe" presence={{ status: 'unknown' }} />
+</Showcase>
+
+## {m.persona_component_props_title()}
+
+| Name          | Type      | Description                                                                                                                                                      |
+| ------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name          | `string`  | {m.persona_props_name_description()} |
+| primaryText   | `string`  | {m.persona_props_primarytext_description()} |
+| secondaryText | `string`  | {m.persona_props_secondarytext_description()} |
+| tertiaryText  | `string`  | {m.persona_props_tertiarytext_description()} |
+| size          | `number`  | {m.persona_props_size_description()} |
+| textAlign     | `string`  | {m.persona_props_textalign_description()} |
+| textPosition  | `string`  | {m.persona_props_textposition_description()} |
+| avatarAlign   | `string`  | {m.persona_props_avataralign_description()} |
+| avatar        | `object`  | {m.persona_props_avatar_description()} |
+| presence      | `object`  | {m.persona_props_presence_description()} |
+| presenceOnly  | `boolean` | {m.persona_props_presenceonly_description()} |
+| element       | `HTMLDivElement` | {m.persona_props_element_description()} |

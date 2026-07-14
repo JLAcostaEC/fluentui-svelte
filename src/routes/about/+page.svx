@@ -1,0 +1,45 @@
+<script lang="ts">
+  import { Flyout, Button } from '$lib/index.js';
+  import { m } from '$i18n/messages.js';
+</script>
+
+<section class="about-page">
+  <Flyout>
+
+# {m.about_title()}
+
+<strong>{m.about_intro_bold()}</strong> {m.about_intro_after_bold()}
+
+{m.about_paragraph2_before_wip()} <strong>{m.about_paragraph2_wip()}</strong> {m.about_paragraph2_after_wip()}
+
+{m.about_paragraph3()}
+<div class="row">
+  <Button as="a" href="https://github.com/sponsors/JLAcostaEC">
+    {m.about_github_sponsor_button()}
+  </Button>
+
+  <Button appearance="standard" as="a" href="https://github.com/JLAcostaEC/fluentui-svelte">
+    {m.about_star_github_button()}
+  </Button>
+</div>
+  </Flyout>
+</section>
+
+<style>
+  .about-page {
+    padding: 1rem;
+    max-width: 800px;
+    margin: auto;
+    & :global(.fs-flyout) {
+      padding: 2rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    & .row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,45 @@
+<script lang="ts">
+  import { NumberBox } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Number Box
+
+{m.nb_description()}
+
+<Showcase columns={1}>
+  <NumberBox value={0} min={0} max={100} step={1} />
+</Showcase>
+
+## {m.nb_usage_title()}
+
+```svelte
+<script>
+  import { NumberBox } from 'fluentui-svelte';
+</script>
+
+<NumberBox value={0} min={0} max={100} step={1} />
+```
+
+## {m.nb_component_api_title()}
+
+{m.nb_component_api_description_prefix()} [here](#component-props) {m.nb_component_api_description_suffix()}
+
+### {m.nb_variant_title()}
+
+{m.nb_variant_description()}
+
+<Showcase columns={1} minHeight="250px">
+  <NumberBox hideActionButtons min={0} max={100} step={1} />
+  <NumberBox hideActionButtons min={0} max={100} step={1} variant="compact" />
+</Showcase>
+
+## {m.nb_component_props_title()}
+
+| **Name**                         | **Type**           | **Description**                                                |
+| -------------------------------- | ------------------ | -------------------------------------------------------------- |
+| `value`                          | `number`           | {m.nb_props_value_description()}                               |
+| `variant`                        | `'inline' \| 'compact'` | {m.nb_props_variant_description()}                         |
+| `ref`                            | `HTMLInputElement` | {m.nb_props_ref_description()}                                 |
+| [TextBox Props](./text-box) |                    | {m.nb_props_textboxprops_description()}                        |

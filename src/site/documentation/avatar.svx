@@ -1,0 +1,111 @@
+<script lang="ts">
+	import {Avatar} from '$lib/index.js'; import {m} from '$i18n/messages.js'; import Showcase from
+	'$site/components/showcase/showcase.svelte'; import {ClockRegular} from 'fluentui-icons-svelte';
+</script>
+
+# Avatar
+
+{m.avatar_description()}
+
+{m.avatar_overview_description()}
+
+<Showcase columns={6} gap="40px" minHeight="280px" autoCenter>
+	<Avatar size={40} name="FluentUI Svelte" />
+	<Avatar size={40} name="FluentUI Svelte" color="information" shape="rounded" />
+	<Avatar size={40} name="FluentUI Svelte" color="warning" shape="square" />
+	<Avatar size={40} name="FluentUI Svelte" color="success" />
+	<Avatar size={40} name="FluentUI Svelte" color="critical" activeAppearance="ring-shadow" />
+	<Avatar active="active" size={40} name="FluentUI Svelte" color="success" />
+	<Avatar active="active" size={48} name="FluentUI Svelte" color="critical" />
+	<Avatar active="active" size={56} name="FluentUI Svelte" badge={{ status: 'available' }} color="warning" />
+	<Avatar active="active" size={64} name="FluentUI Svelte" badge={{ status: 'unknown', outOfOffice: true }} />
+	<Avatar active="active" size={72} name="FluentUI Svelte" icon={ClockRegular} color="information" />
+	<Avatar
+		active="active"
+		size={96}
+		name="FluentUI Svelte"
+		image={{ src: 'https://placehold.co/96x96/jpeg' }}
+		badge={{ status: 'do-not-disturb' }}
+	/>
+</Showcase>
+
+## {m.avatar_usage_title()}
+
+```svelte
+<script>
+	import { Avatar } from 'fluentui-svelte';
+</script>
+
+<Avatar size={40} name="FluentUI Svelte" />
+```
+
+## {m.avatar_component_api_title()}
+
+{m.avatar_component_api_description_before_link()} <a href="#component-props">{m.avatar_component_api_description_link_text()}</a>.
+
+### {m.avatar_image_title()}
+
+{m.avatar_image_description()}
+
+<Showcase columns={1} gap="40px" autoCenter>
+	<Avatar
+		active="active"
+		size={56}
+		name="FluentUI Svelte"
+		image={{ src: 'https://placehold.co/120x120/jpeg' }}
+		badge={{ status: 'do-not-disturb' }}
+	/>
+</Showcase>
+
+### {m.avatar_icon_title()}
+
+{m.avatar_icon_description()}
+
+<Showcase columns={1} gap="40px" autoCenter>
+	<Avatar active="active" size={56} name="FluentUI Svelte" icon={ClockRegular} color="information" />
+</Showcase>
+
+### {m.avatar_badge_title()}
+
+{m.avatar_badge_description()}
+
+<Showcase columns={1} gap="40px" autoCenter>
+	<Avatar active="active" size={56} name="FluentUI Svelte" badge={{ status: 'available' }} />
+</Showcase>
+
+### {m.avatar_shape_title()}
+
+{m.avatar_shape_description()}
+
+<Showcase columns={3} gap="40px" autoCenter>
+	<Avatar active="active" size={56} name="FluentUI Svelte" badge={{ status: 'available' }} />
+	<Avatar active="active" size={56} name="FluentUI Svelte" badge={{ status: 'available' }} shape="rounded" />
+	<Avatar active="active" size={56} name="FluentUI Svelte" badge={{ status: 'available' }} shape="square" />
+</Showcase>
+
+### {m.avatar_colorful_title()}
+
+{m.avatar_colorful_description()}
+
+<Showcase columns={3} gap="40px" autoCenter>
+	<Avatar active="active" size={56} name="FluentUI Svelte" color="colorful" />
+	<Avatar active="active" size={56} name="FluentUI Svelte" color="colorful" />
+	<Avatar active="active" size={56} name="FluentUI Svelte" color="colorful" />
+</Showcase>
+
+## {m.avatar_component_props_title()}
+
+| **Name**           | **Type**                     | **Description**                                 |
+| ------------------ | ---------------------------- | ----------------------------------------------- |
+| `name`             | `string`                     | {m.avatar_props_name_description()}             |
+| `image`            | `{ src: string }`            | {m.avatar_props_image_description()}            |
+| `ref`              | `HTMLDivElement`             | {m.avatar_props_ref_description()}              |
+| `size`             | `number`                     | {m.avatar_props_size_description()}             |
+| `shape`            | `string`                     | {m.avatar_props_shape_description()}            |
+| `color`            | `string`                     | {m.avatar_props_color_description()}            |
+| `active`           | `string`                     | {m.avatar_props_active_description()}           |
+| `activeAppearance` | `string`                     | {m.avatar_props_activeappearance_description()} |
+| `initials`         | `string`                     | {m.avatar_props_initials_description()}         |
+| `idForColor`       | `string`                     | {m.avatar_props_idforcolor_description()}       |
+| `icon`             | `Snippet` &vert; `Component` | {m.avatar_props_icon_description()}             |
+| `badge`            | `object`                     | {m.avatar_props_badge_description()}            |

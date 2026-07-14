@@ -1,0 +1,65 @@
+<script>
+  import { Skeleton } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Skeleton
+
+{m.skeleton_description()}
+
+<Skeleton style="width: 24px;" />
+<Skeleton style="width: 42px;" />
+<Skeleton style="width: 72px;" />
+
+## {m.skeleton_usage_title()}
+
+{m.skeleton_usage_description()}
+
+```svelte
+<script>
+  import { Skeleton } from 'fluentui-svelte';
+</script>
+
+<Skeleton style="width: 42px;" />
+<Skeleton justify style="height: 12px;" />
+```
+
+## {m.skeleton_component_api_title()}
+
+{m.skeleton_component_api_description_before_link()} <a href="#component-props">{m.skeleton_component_api_description_link_text()}</a>.
+
+### {m.skeleton_animation_title()}
+
+{m.skeleton_animation_description()}
+
+<Skeleton style="width: 72px;" animation="pulse" />
+
+### {m.skeleton_justify_title()}
+
+{m.skeleton_justify_description()}
+
+<Skeleton style="width: 120px;" justify />
+
+### {m.skeleton_shape_title()}
+
+{m.skeleton_shape_description()}
+
+<Skeleton style="width: 72px;" shape="circle" />
+<Skeleton style="width: 72px;" shape="rounded" />
+<Skeleton style="width: 72px;" shape="square" />
+
+### {m.skeleton_as_title()}
+
+{m.skeleton_as_description()}
+
+## {m.skeleton_component_props_title()}
+
+| Name               | Type                    | Description                                                                                                                                       |
+| ------------------ | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `as`               | `'div'` \| `'span'`     | {m.skeleton_props_as_description()}                                                                                    |
+| `animation`        | `'wave'` \| `'pulse'`   | {m.skeleton_props_animation_description()}                                                                                            |
+| `shape`            | `'circle'` \| `'rounded'` \| `'square'` | {m.skeleton_props_shape_description()}                                                                                  |
+| `justify`          | `boolean`               | {m.skeleton_props_justify_description()}                          |
+| `element`          | `HTMLElement`           | {m.skeleton_props_element_description()}                                                                                        |
+| Element Attributes |                         | {m.skeleton_props_elementattributes_description()}                                                                               |

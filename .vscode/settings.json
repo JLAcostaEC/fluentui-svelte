@@ -1,0 +1,42 @@
+{
+	"editor.wordWrap": "on",
+	"files.associations": {
+		"*.svx": "markdown",
+		"wrangler.json": "jsonc"
+	},
+	"[markdown]": {
+		"editor.wordWrap": "off"
+	},
+	"explorer.fileNesting.enabled": true,
+	"explorer.fileNesting.expand": false,
+	"explorer.fileNesting.patterns": {
+		"+layout.svelte": "+layout.server.ts,+layout.server.js,+layout.ts,+layout.js",
+		"+page.svelte": "+page.server.ts,+page.server.js,+page.ts,+page.js"
+	},
+	"workbench.editor.customLabels.patterns": {
+		// Page
+		"**/routes/**/*/+page.svelte": "${dirname} ❱ page",
+		"**/routes/+page.svelte": "/ ❱ page",
+		// Layout
+		"**/routes/**/*/+layout.svelte": "${dirname} ❱ layout",
+		"**/routes/+layout.svelte": "/ ❱ layout",
+		// Page Data
+		"**/routes/**/*/+page.[tj]s": "${dirname} ❱ page",
+		"**/routes/+page.[tj]s": "/ ❱ page",
+		// Layout Data
+		"**/routes/**/*/+layout.[tj]s": "${dirname} ❱ layout",
+		"**/routes/+layout.[tj]s": "/ ❱ layout",
+		// Page Server Data
+		"**/routes/**/*/+page.server.[tj]s": "${dirname} ❱ page.server",
+		"**/routes/+page.server.[tj]s": "/ ❱ page.server",
+		// Page Layout Data
+		"**/routes/**/*/+layout.server.[tj]s": "${dirname} ❱ layout.server",
+		"**/routes/+layout.server.[tj]s": "/ ❱ layout.server",
+		// Error Page
+		"**/routes/**/*/+error.svelte": "${dirname} ❱ error",
+		"**/routes/+error.svelte": "/ ❱ error",
+		// Server Endpoint
+		"**/routes/**/*/+server.[tj]s": "${dirname} ❱ API",
+		"**/routes/+server.[tj]s": "/ ❱ API"
+	}
+}

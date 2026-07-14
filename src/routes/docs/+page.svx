@@ -1,0 +1,33 @@
+<script lang="ts">
+  import { InfoBar } from '$lib/index.js';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# {m.docs_overview_title()}
+
+{m.docs_overview_description()}
+
+<InfoBar title={m.docs_overview_attention_title()} status="warning" style="multiline" hideCloseButton>
+  <p>
+    {m.docs_overview_attention_description()}
+  </p>
+</InfoBar>
+
+## {m.docs_overview_what_is_title()}
+
+{m.docs_overview_what_is_description()}
+
+## {m.docs_overview_features_title()}
+
+- {m.docs_overview_features_item1()}
+- {m.docs_overview_features_item2_before_link()} <a href="https://www.w3.org/WAI/standards-guidelines/aria/" target="_blank" rel="noreferrer">{m.docs_overview_features_item2_link_text()}</a> {m.docs_overview_features_item2_after_link()}
+- {m.docs_overview_features_item3_before_code()} `<dialog></dialog>` {m.docs_overview_features_item3_middle()} `<summary></summary>` {m.docs_overview_features_item3_after_code()}
+- {m.docs_overview_features_item4()}
+
+## {m.docs_overview_undocumented_title()}
+
+{m.docs_overview_undocumented_description_before_link()} <a href="https://github.com/JLAcostaEC/fluentui-svelte" target="_blank" rel="noreferrer">{m.docs_overview_undocumented_description_link_text()}</a>.
+
+## {m.docs_overview_changelog_title()}
+
+{m.docs_overview_changelog_description_before_link()} <a href="/changelog">{m.docs_overview_changelog_description_link_text()}</a>.

@@ -1,0 +1,216 @@
+<script lang="ts">
+  import { Badge, BadgeIcon, InfoBar, Avatar } from '$lib/index.js';
+  import { m } from '$i18n/messages.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { AccessibilityRegular, InfoFilled } from 'fluentui-icons-svelte'
+</script>
+
+# Badge
+
+{m.badge_description()}
+
+<Showcase columns={6} initialZoom={1}>
+	<Badge color="information">5</Badge>
+	<Badge color="information" appearance="outline">
+		5
+	</Badge>
+	<Badge color="information" appearance="tint">
+		5
+	</Badge>
+	<Badge color="information" appearance="ghost">
+		5
+	</Badge>
+	<Badge color="attention" size={28}>
+		5
+	</Badge>
+	<Badge color="success" size={28}>
+		5
+	</Badge>
+	<Badge color="warning" size={28}>
+		5
+	</Badge>
+	<Badge color="critical" size={28}>
+		5
+	</Badge>
+	<Badge color="attention" size={36}>
+		36
+	</Badge>
+	<Badge color="attention" size={48}>
+		48
+	</Badge>
+	<Badge color="attention" size={64}>
+		64
+	</Badge>
+	<Badge color="attention" size={96} icon={AccessibilityRegular} />
+</Showcase>
+
+## {m.badge_usage_title()}
+
+```svelte
+<script>
+	import { Badge } from 'fluentui-svelte';
+</script>
+
+<Badge>36</Badge>
+```
+
+## {m.badge_api_title()}
+
+{m.badge_api_description_before_link()} <a href="#component-props">{m.badge_api_description_link_text()}</a>.
+
+### {m.badge_appearance_title()}
+
+{m.badge_appearance_description()}
+
+<Showcase columns={4} initialZoom={1} autoCenter>
+	<Badge size={46} color="attention">
+		5
+	</Badge>
+	<Badge size={46} color="attention" appearance="outline">
+		5
+	</Badge>
+	<Badge size={46} color="attention" appearance="tint">
+		5
+	</Badge>
+	<Badge size={46} color="attention" appearance="ghost">
+		5
+	</Badge>
+</Showcase>
+
+### {m.badge_sizes_title()}
+
+{m.badge_sizes_description()}
+
+<Showcase columns={4} initialZoom={1} autoCenter>
+	<Badge size={42} color="attention">
+		46
+	</Badge>
+	<Badge size={56} color="attention">
+		56
+	</Badge>
+	<Badge size={64} color="attention">
+		64
+	</Badge>
+	<Badge size={96} color="attention">
+		96
+	</Badge>
+</Showcase>
+
+### {m.badge_shapes_title()}
+
+{m.badge_shapes_description()}
+
+<Showcase columns={4} initialZoom={1} autoCenter>
+	<Badge size={36} color="attention">
+		36
+	</Badge>
+	<Badge size={36} color="attention" shape="rounded">
+		36
+	</Badge>
+	<Badge size={36} color="attention" shape="square">
+		36
+	</Badge>
+</Showcase>
+
+### {m.badge_color_title()}
+
+{m.badge_color_description()}
+
+<Showcase columns={5} initialZoom={1} autoCenter>
+	<Badge size={36} color="information">
+		I
+	</Badge>
+	<Badge size={36} color="attention">
+		A
+	</Badge>
+	<Badge size={36} color="warning">
+		W
+	</Badge>
+	<Badge size={36} color="critical">
+		C
+	</Badge>
+	<Badge size={36} color="success">
+		S
+	</Badge>
+</Showcase>
+
+### {m.badge_icon_title()}
+
+{m.badge_icon_description()}
+
+<InfoBar status="warning" style="multiline" title={m.badge_only_icon_title()} hideCloseButton>
+	<p>{m.badge_only_icon_description()}</p>
+</InfoBar>
+
+<Showcase columns={1} initialZoom={1} autoCenter>
+	<Badge color="attention" size={96} icon={AccessibilityRegular} />
+</Showcase>
+
+### {m.badge_badge_props_title()}
+
+| **Name**       | **Type**                     | **Description**                            |
+| -------------- | ---------------------------- | ------------------------------------------ |
+| `size`         | `number`                     | {m.badge_props_size_description()}         |
+| `shape`        | `string`                     | {m.badge_props_shape_description()}        |
+| `appearance`   | `string`                     | {m.badge_props_appearance_description()}   |
+| `iconPosition` | `string`                     | {m.badge_props_iconposition_description()} |
+| `color`        | `string`                     | {m.badge_props_color_description()}        |
+| `icon`         | `Snippet` &vert; `Component` | {m.badge_props_icon_description()}         |
+| `ref`          | `HTMLSpanElement`            | {m.badge_props_ref_description()}          |
+| `children`     | `Snippet`                    | {m.badge_props_children_description()}     |
+
+## {m.badge_badgeicon_api_title()}
+
+{m.badge_badgeicon_api_description()}
+
+<Showcase columns={1} initialZoom={1} autoCenter>
+	<BadgeIcon size={96} icon={AccessibilityRegular} />
+</Showcase>
+
+### {m.badge_badgeicon_usage_title()}
+
+```svelte
+<script>
+	import { BadgeIcon } from 'fluentui-svelte';
+	import { AccessibilityRegular } from 'fluentui-icons-svelte';
+</script>
+
+<BadgeIcon size={96} icon={AccessibilityRegular} />
+```
+
+{m.badge_badgeicon_avatar_example_description()}
+
+{#snippet customBadge(args)}
+
+<Badge color="attention" size={args.width} aria-hidden={args['aria-hidden']} icon={AccessibilityRegular} />
+{/snippet}
+
+<Showcase columns={3} initialZoom={1} autoCenter>
+	<Avatar active="active" size={96} name="FluentUI Svelte" badge={{ icon: customBadge }} />
+	<Avatar active="active" size={96} name="FluentUI Svelte" badge={{ status: 'do-not-disturb' }} />
+	<Avatar active="active" size={96} name="FluentUI Svelte" badge={{ icon: InfoFilled }} />
+</Showcase>
+
+{m.badge_badgeicon_avatar_details_description()}
+
+```svelte
+<script>
+	import { Avatar, Badge } from 'fluentui-svelte';
+</script>
+
+<!-- args: [size: number, shape: string] -->
+{#snippet customBadge(args)}
+	<Badge color="attention" size={args.width} aria-hidden={args['aria-hidden']} icon={AccessibilityRegular} />
+{/snippet}
+
+<Avatar active="active" size={96} name="FluentUI Svelte" badge={{ icon: customBadge }} />
+```
+
+### {m.badge_badgeicon_props_title()}
+
+| **Name** | **Type**                     | **Description**                     |
+| -------- | ---------------------------- | ----------------------------------- |
+| `size`   | `number`                     | {m.badge_props_size_description()}  |
+| `color`  | `string`                     | {m.badge_props_color_description()} |
+| `icon`   | `Snippet` &vert; `Component` | {m.badge_props_icon_description()}  |
+| `ref`    | `HTMLSpanElement`            | {m.badge_props_ref_description()}   |

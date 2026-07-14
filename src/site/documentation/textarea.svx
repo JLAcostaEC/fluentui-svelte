@@ -1,0 +1,49 @@
+<script>
+  import { TextArea } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# TextArea
+
+{m.ta_description()}
+
+<Showcase columns={1}>
+  <TextArea placeholder="Type your message here..." />
+</Showcase>
+
+## {m.ta_usage_title()}
+
+```svelte
+<script>
+  import { TextArea } from 'fluentui-svelte';
+</script>
+
+<TextArea placeholder="Type your message here..." />
+```
+
+## {m.ta_component_api_title()}
+
+{m.ta_component_api_description_before_link()} <a href="#component-props">{m.ta_component_api_description_link_text()}</a>.
+
+### {m.ta_placeholder_title()}
+
+{m.ta_placeholder_description()}
+
+### {m.ta_resize_title()}
+
+{m.ta_resize_description()}
+
+### {m.ta_on_change_title()}
+
+{m.ta_on_change_description()}
+
+## {m.ta_component_props_title()}
+
+| **Name**           | **Type**   | **Description**                                                                                                    |
+| ------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------ |
+| `placeholder`      | `string`   | {m.ta_props_placeholder_description()}                                                                             |
+| `resize`           | `string`   | {m.ta_props_resize_description()} |
+| `onChange`         | `function` | {m.ta_props_onchange_description()}                                                        |
+| `element`          |            | {m.ta_props_element_description()}                                                                         |
+| Element Attributes |            | {m.ta_props_elementattributes_description()}                                                  |

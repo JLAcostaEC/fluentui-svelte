@@ -1,0 +1,39 @@
+<script>
+  import { ToggleSwitch } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Toggle Switch
+
+{m.tswitch_description()}
+
+<Showcase>
+  <ToggleSwitch />
+  <ToggleSwitch label="Toggle me" />
+  <ToggleSwitch label="I'm disabled" disabled />
+</Showcase>
+
+## {m.tswitch_usage_title()}
+
+```svelte
+<script>
+  import { ToggleSwitch } from 'fluentui-svelte';
+</script>
+
+<ToggleSwitch />
+<ToggleSwitch label="Toggle me" />
+<ToggleSwitch label="I'm disabled" disabled />
+```
+
+## {m.tswitch_component_props_title()}
+
+| Prop               | Type                  | Description                                                  |
+| ------------------ | --------------------- | ------------------------------------------------------------ |
+| `ref`              | `HTMLInputElement`    | {m.tswitch_props_ref_description()}                          |
+| `label`            | `string`              | {m.tswitch_props_label_description()}                        |
+| `labelAttributes`  | `HTMLLabelAttributes` | {m.tswitch_props_labelattributes_description()}              |
+| `labelElement`     | `HTMLLabelElement`    | {m.tswitch_props_labelelement_description()}                 |
+| `disabled`         | `boolean`             | {m.tswitch_props_disabled_description()}                     |
+| `checked`          | `boolean`             | {m.tswitch_props_checked_description()}                      |
+| Element Attributes | `object`              | {m.tswitch_props_elementattributes_description()}            |

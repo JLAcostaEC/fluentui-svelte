@@ -1,0 +1,102 @@
+<script lang="ts">
+  import { TreeView, TreeViewItem, TreeViewItemContent, InfoBar } from '$lib/index.js';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Tree View
+
+{m.tv_description()}
+
+<TreeView>
+  <TreeViewItem id="fruits" type="branch">
+    <TreeViewItemContent>Fruits</TreeViewItemContent>
+    <TreeView>
+      <TreeViewItem id="apple">
+        <TreeViewItemContent>Apple</TreeViewItemContent>
+      </TreeViewItem>
+      <TreeViewItem id="banana" disabled>
+        <TreeViewItemContent>Banana</TreeViewItemContent>
+      </TreeViewItem>
+    </TreeView>
+  </TreeViewItem>
+  <TreeViewItem id="vegetables">
+    <TreeViewItemContent>Vegetables</TreeViewItemContent>
+  </TreeViewItem>
+</TreeView>
+
+<InfoBar status="critical" style="multiline" title={m.tv_early_access_title()} hideCloseButton>
+  <p>
+    {m.tv_early_access_description()}
+  </p>
+</InfoBar>
+
+## {m.tv_usage_title()}
+
+```svelte
+<script>
+  import { TreeView, TreeViewItem, TreeViewItemContent } from 'fluentui-svelte';
+</script>
+
+<TreeView selectionMode="multiple">
+  <TreeViewItem id="fruits" type="branch">
+    <TreeViewItemContent>Fruits</TreeViewItemContent>
+    <TreeView>
+      <TreeViewItem id="apple">
+        <TreeViewItemContent>Apple</TreeViewItemContent>
+      </TreeViewItem>
+      <TreeViewItem id="banana" disabled>
+        <TreeViewItemContent>Banana</TreeViewItemContent>
+      </TreeViewItem>
+    </TreeView>
+  </TreeViewItem>
+  <TreeViewItem id="vegetables">
+    <TreeViewItemContent>Vegetables</TreeViewItemContent>
+  </TreeViewItem>
+</TreeView>
+```
+
+{m.tv_usage_description()}
+
+## {m.tv_component_props_treeview_title()}
+
+| **Name**          | **Type**                                          | **Description**                                                                                          |
+| ----------------- | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ref`             | `HTMLUListElement`                                | {m.tv_props_ref_description()}                                                                          |
+| `size`            | `'small'` \| `'medium'` \| `'large'`              | {m.tv_props_size_description()}                                                                         |
+| `navigationMode`  | `'tree'` \| `'treegrid'`                          | {m.tv_props_navigationmode_description()}                                                               |
+| `selectionMode`   | `'single'` \| `'multiple'`                        | {m.tv_props_selectionmode_description()}                                                                |
+| `openItems`       | `string[]` \| `SvelteSet<string>`                 | {m.tv_props_openitems_description()}                                                                    |
+| `checkedItems`    | `string[]` \| `SvelteSet<string>`                 | {m.tv_props_checkeditems_description()}                                                                 |
+| `onOpenChange`    | `(e: Event, openItems: string[]) => void`         | {m.tv_props_onopenchange_description()}                                                                 |
+| `onCheckedChange` | `(e: Event, checkedItems: string[]) => void`      | {m.tv_props_oncheckedchange_description()}                                                              |
+| `virtualizer`     | `TreeViewVirtualizer`                             | {m.tv_props_virtualizer_description()}                                                                  |
+| `children`        | `Snippet`                                         | {m.tv_props_children_description()}                                                                     |
+
+## {m.tv_component_props_treeviewitem_title()}
+
+| **Name**          | **Type**                                                       | **Description**                                                                        |
+| ----------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `id`              | `string`                                                       | {m.tv_props_id_description()}                                                         |
+| `type`            | `'item'` \| `'branch'`                                         | {m.tv_props_type_description()}                                                       |
+| `ref`             | `HTMLLIElement`                                                | {m.tv_props_treeviewitem_ref_description()}                                           |
+| `value`           | `string` \| `number`                                           | {m.tv_props_value_description()}                                                      |
+| `text`            | `string`                                                       | {m.tv_props_text_description()}                                                       |
+| `open`            | `boolean`                                                      | {m.tv_props_open_description()}                                                       |
+| `checked`         | `boolean`                                                      | {m.tv_props_checked_description()}                                                    |
+| `indeterminate`   | `boolean`                                                      | {m.tv_props_indeterminate_description()}                                              |
+| `disabled`        | `boolean`                                                      | {m.tv_props_disabled_description()}                                                   |
+| `index`           | `number`                                                       | {m.tv_props_index_description()}                                                      |
+| `onOpenChange`    | `(e: Event, data: { id: string; open: boolean }) => void`      | {m.tv_props_treeviewitem_onopenchange_description()}                                  |
+| `onCheckedChange` | `(e: Event, data: { id: string; checked: boolean }) => void`   | {m.tv_props_treeviewitem_oncheckedchange_description()}                               |
+
+## {m.tv_component_props_treeviewitemcontent_title()}
+
+| **Name**      | **Type**                 | **Description**                                                     |
+| ------------- | ------------------------ | ------------------------------------------------------------------- |
+| `ref`         | `HTMLDivElement`         | {m.tv_props_treeviewitemcontent_ref_description()}                  |
+| `expandIcon`  | `Snippet` \| `Component` | {m.tv_props_expandicon_description()}                               |
+| `iconBefore`  | `Snippet` \| `Component` | {m.tv_props_iconbefore_description()}                               |
+| `iconAfter`   | `Snippet` \| `Component` | {m.tv_props_iconafter_description()}                                |
+| `aside`       | `Snippet` \| `Component` | {m.tv_props_aside_description()}                                    |
+| `actions`     | `Snippet` \| `Component` | {m.tv_props_actions_description()}                                  |
+| `children`    | `Snippet`                | {m.tv_props_treeviewitemcontent_children_description()}             |

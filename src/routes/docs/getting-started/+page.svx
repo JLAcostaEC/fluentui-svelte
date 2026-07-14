@@ -1,0 +1,71 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+# {m.gs_title()}
+
+{m.gs_description()}
+
+## {m.gs_installation_title()}
+
+{m.gs_installation_description()}
+
+{m.gs_npm_label()}
+```bash
+npm i -D fluentui-svelte
+```
+
+{m.gs_yarn_label()}
+```bash
+yarn add -D fluentui-svelte
+```
+
+{m.gs_pnpm_label()}
+```bash
+pnpm add -D fluentui-svelte
+```
+
+### {m.gs_required_css_title()}
+
+{m.gs_required_css_description_before_code()} `+layout.svelte` {m.gs_required_css_description_after_code()}
+
+```js
+import 'fluentui-svelte/theme.css';
+```
+- {m.gs_required_css_bullet1()}
+- {m.gs_required_css_bullet2_before_code()} `dist` {m.gs_required_css_bullet2_after_code()}
+
+### {m.gs_optional_css_title()}
+
+{m.gs_optional_css_description()}
+
+```js
+import 'fluentui-svelte/reset.css'; /* Dont use if you already have a reset in your project. Ej: Using TailwindCSS */
+import 'fluentui-svelte/typography.css';
+import 'fluentui-svelte/media-darkmode.css'; /* Or:  import 'fluentui-svelte/class-darkmode.css' */
+```
+
+## {m.gs_import_components_title()}
+
+{m.gs_import_components_description()}
+
+```svelte
+<script>
+  import { Button } from 'fluentui-svelte';
+</script>
+```
+
+### {m.gs_namespace_import_title()}
+
+{m.gs_namespace_import_description()}
+
+```svelte
+<script>
+  import * as FluentUISvelte from 'fluentui-svelte';
+</script>
+
+<FluentUISvelte.Button>
+  Click me
+</FluentUISvelte.Button>
+```
+

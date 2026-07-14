@@ -1,0 +1,189 @@
+@media (prefers-color-scheme: dark) {
+	:root {
+		/* Text Colors */
+		--fs-text-primary: #fff;
+		--fs-text-secondary: #ffffffc5;
+		--fs-text-tertiary: #ffffff87;
+		--fs-text-disabled: #ffffff5d;
+
+		--fs-accent-text-primary: rgb(var(--fs-accent-light-3));
+		--fs-accent-text-secondary: rgb(var(--fs-accent-light-3));
+		--fs-accent-text-tertiary: rgb(var(--fs-accent-light-2));
+
+		--fs-text-on-accent-primary: #000;
+		--fs-text-on-accent-secondary: #00000080;
+		--fs-text-on-accent-disabled: #ffffff87;
+		/* --fs-text-on-accent-selected: #fff; <- Same on light/dark */
+
+		/* Control Fill Colors
+	 * These colors are used for standard controls like buttons, dropdowns, search, etc.
+	*/
+		--fs-control-fill-default: #ffffff0f;
+		--fs-control-fill-secondary: #ffffff15;
+		--fs-control-fill-tertiary: #ffffff0b;
+		--fs-control-fill-quaternary: #ffffff0f;
+		--fs-control-fill-disabled: #f9f9f90b;
+		/* --fs-control-fill-transparent: transparent; <- Same on light/dark */
+		--fs-control-fill-input-active: #1e1e1eb3;
+
+		/* Control Alt Fill Colors
+	* These colors are used for standard controls like toggle, radio, checkbox, rating, etc.
+	*/
+		--fs-control-alt-fill-transparent: transparent;
+		--fs-control-alt-fill-secondary: #00000019;
+		--fs-control-alt-fill-tertiary: #ffffff0b;
+		--fs-control-alt-fill-quaternary: #ffffff12;
+		--fs-control-alt-fill-disabled: transparent;
+
+		/* Special Control Colors (Control solid and control strong fill)
+		* --fs-control-solid Fills used for Sliders thumb control to cover the track beneath it.
+		---------------------------
+		* --fs-control-strong-default and --fs-control-strong-disabled Used for control fills that must meet contrast ratio requirements of 3:1 Examples: Scroll bar, Slider, Flip view
+	*/
+		--fs-control-solid: #454545;
+		--fs-control-strong-default: #ffffff8b;
+		--fs-control-strong-disabled: #ffffff3f;
+
+		/* Subtle Colors */
+		/* --fs-subtle-fill-transparent: transparent; <- Same on light/dark */
+		--fs-subtle-fill-secondary: #ffffff0f;
+		--fs-subtle-fill-tertiary: #ffffff0a;
+		/* --fs-subtle-fill-disabled: transparent; <- Same on light/dark */
+
+		/* Control On Image Fill
+		* These colors are used for controls that are placed on top of images.
+	*/
+		--fs-control-on-image-fill-default: #1c1c1cb3;
+		--fs-control-on-image-fill-secondary: #1a1a1a;
+		--fs-control-on-image-fill-tertiary: #131313;
+		--fs-control-on-image-fill-disabled: #1e1e1e;
+
+		/* Accent Fill Colors */
+		--fs-accent-fill-default: rgb(var(--fs-accent-light-2));
+		--fs-accent-fill-secondary: rgba(var(--fs-accent-light-2), 0.7);
+		--fs-accent-fill-tertiary: rgba(var(--fs-accent-light-2), 0.6);
+		--fs-accent-fill-disabled: #ffffff28;
+		/* --fs-accent-fill-selected-text-bg: rgb(var(--fs-accent-base)); <- Same on light/dark */
+
+		/* Elevation */
+		--fs-elevation-control-border: linear-gradient(180deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.07) 10%);
+		--fs-elevation-accent-control-border: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.1) 91%,
+			/* Changed opacity to 0.1 from original 0.08 */ rgba(0, 0, 0, 0.14) 100%
+		);
+		--fs-elevation-circle-border: linear-gradient(180deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.07) 50%);
+		--fs-elevation-text-border: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.03) calc(100% - 0.07rem),
+			rgba(255, 255, 255, 0.54) calc(100% - 0.07rem)
+		);
+		--fs-elevation-text-border-focused: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.08) 94.5%,
+			rgb(var(--fs-accent-light-1)) 94.5%
+		);
+
+		/* Control Stroke */
+		--fs-control-stroke-default: #ffffff12;
+		--fs-control-stroke-secondary: #ffffff18;
+		--fs-control-stroke-on-accent-default: #ffffff14;
+		--fs-control-stroke-on-accent-secondary: #00000023;
+		--fs-control-stroke-on-accent-tertiary: #00000037;
+		--fs-control-stroke-on-accent-disabled: #00000033;
+		--fs-control-stroke-on-image: #0000006b;
+		--fs-card-stroke-default: #00000019;
+		--fs-card-stroke-solid: #1c1c1c;
+
+		/* Control Strong Stroke */
+		--fs-control-strong-stroke-default: #ffffff8b;
+		--fs-control-strong-stroke-disabled: #ffffff28;
+
+		/* Control Surface Stroke */
+		/* --fs-control-surface-stroke-default: #75757566; <- Same on light/dark */
+		--fs-control-surface-stroke-flyout: #00000033;
+
+		/* Divider Stroke */
+		--fs-divider-stroke-default: #ffffff15;
+
+		/* Focus Stroke */
+		--fs-focus-stroke-outer: #fff;
+		--fs-focus-stroke-inner: #000000b3;
+
+		/* Card Background */
+		--fs-card-background-default: #ffffff0d;
+		--fs-card-background-secondary: #ffffff08;
+
+		/* Smoke Background */
+		/* --fs-smoke-background-default: #0000004d; <- Same on light/dark */
+
+		/* Layer */
+		--fs-layer-default: #3a3a3a4c;
+		--fs-layer-alt: #ffffff0d;
+
+		/* Layer on Acrylic */
+		--fs-layer-on-acrylic-default: #ffffff09;
+
+		/* Solid Background */
+		--fs-solid-background-base: #202020;
+		--fs-solid-background-secondary: #1c1c1c;
+		--fs-solid-background-tertiary: #282828;
+		--fs-solid-background-quaternary: #2c2c2c;
+
+		/* Acrylic Background */
+		--fs-acrylic-background-base: #202020;
+		--fs-acrylic-background-default: #2c2c2c;
+
+		/* Accent Acrylic Background */
+		--fs-accent-acrylic-background-base: rgba(var(--fs-accent-dark-2), 0.8);
+		--fs-accent-acrylic-background-default: rgba(var(--fs-accent-dark-1), 0.8);
+
+		/* System */
+		--fs-system-attention: rgb(var(--fs-accent-light-3));
+		--fs-system-attetion-bg: #f6f6f608;
+		--fs-system-attention-solid-bg: #2e2e2e;
+
+		--fs-system-success: #6ccb5f;
+		--fs-system-success-bg: #393d1b;
+
+		--fs-system-caution: #fce100;
+		--fs-system-caution-bg: #433519;
+
+		--fs-system-critical: #ff4658; /* Changed from #ff99a4 to #ff4658 for better visibility */
+		--fs-system-critical-bg: #442726;
+
+		--fs-system-neutral: #ffffff8b;
+		--fs-system-neutral-bg: #ffffff08;
+
+		--fs-system-solid-neutral: #9d9d9d;
+		--fs-system-solid-neutral-bg: #2e2e2e;
+
+		/* Shadows */
+		--fs-shadow-card: 0 0.125rem 0.25rem #00000021; /* 13% opacity */
+		--fs-shadow-tooltip: 0 0.25rem 0.5rem #00000042; /* 26% opacity */
+		--fs-shadow-flyout: 0 0.5rem 1rem #00000042; /* 26% opacity */
+		--fs-shadow-dialog: 0 2rem 4rem #0000005e, 0 1.125rem 1.313rem #0000005e; /* 37% opacity */
+
+		/* Shell Shadows */
+		--fs-shell-shadow-inactive: 0 1rem 2rem #0000005e, 0 0.125rem 0.625rem #0000005e; /* 37% opacity */
+		--fs-shell-shadow-active:
+			0 2rem 4rem #0000008f, 0 0.125rem 1.313rem #0000008c; /* 56% and 55% opacity respectively */
+
+		/* Customs Variables */
+		--fs-radial-mica-bg: radial-gradient(
+			circle,
+			rgba(28, 35, 42, 1) 0%,
+			rgba(30, 35, 43, 1) 30%,
+			rgba(27, 33, 41, 1) 43%,
+			rgba(27, 32, 40, 1) 63%,
+			rgba(27, 33, 41, 1) 72%,
+			rgba(27, 33, 41, 1) 100%
+		);
+
+		--fs-system-neutral-text: color-mix(in srgb, var(--fs-system-neutral), white 50%);
+		--fs-system-attention-text: color-mix(in srgb, var(--fs-system-attention), white 50%);
+		--fs-system-caution-text: color-mix(in srgb, var(--fs-system-caution), white 50%);
+		--fs-system-success-text: color-mix(in srgb, var(--fs-system-success), white 50%);
+		--fs-system-critical-text: color-mix(in srgb, var(--fs-system-critical), white 20%);
+	}
+}

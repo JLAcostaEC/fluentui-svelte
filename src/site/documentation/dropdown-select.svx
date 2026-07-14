@@ -1,0 +1,32 @@
+<script lang="ts">
+  import { DropdownSelect, DropdownSelectOption, Persona, InfoBar } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Dropdown Select
+
+```ts
+import { DropdownSelect } from 'fluentui-svelte';
+```
+
+{m.ds_description()}
+
+<InfoBar status="critical" style="multiline" title={m.ds_early_access_title()} hideCloseButton>
+  <p>
+    {m.ds_early_access_description_prefix()} <a href="https://floating-ui-svelte.vercel.app/" target="_blank">FloatingUI Svelte</a> {m.ds_early_access_description_suffix()}
+  </p>
+</InfoBar>
+
+<Showcase columns={1}>
+  <DropdownSelect/>
+</Showcase>
+
+<DropdownSelect>
+  <DropdownSelectOption value="Jhon Doe" text="Jhon Doe">
+    <Persona name="John Doe" primaryText="Software Engineer"  presence={{status: 'available'}}  avatar={{ color: "colorful", idForColor: '' }}/>
+  </DropdownSelectOption>
+  <DropdownSelectOption value="B">Option B</DropdownSelectOption>
+  <DropdownSelectOption value="C">Option C</DropdownSelectOption>
+  <DropdownSelectOption value="D">Option D</DropdownSelectOption>
+</DropdownSelect>

@@ -16,10 +16,8 @@
 			status: ''
 		}
 	];
-
-	const secondaryNavigation = data.paths;
 </script>
 
-<Docs {primaryNavigation} {secondaryNavigation}>
+<Docs {primaryNavigation} secondaryNavigation={data.paths}>
 	{@render children()}
 </Docs>

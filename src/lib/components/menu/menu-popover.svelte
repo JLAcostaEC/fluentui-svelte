@@ -11,8 +11,9 @@
 	let {
 		ref: _ref,
 		open: _open = $bindable(),
+		placement = 'bottom-start',
 		positionConfig: floatingPosition = {
-			placement: 'bottom-start',
+			placement: placement,
 			middleware: [offset(-2), flip({ crossAxis: true, padding: 0 }), shift({ crossAxis: true, padding: 0 }), hide()],
 			strategy: 'fixed'
 		},
@@ -20,6 +21,7 @@
 	}: {
 		ref?: HTMLElement;
 		open?: boolean;
+		placement?: ComputePositionConfig['placement'];
 		positionConfig?: Partial<ComputePositionConfig>;
 		children: Snippet;
 	} = $props();

@@ -31,3 +31,6 @@ project.inlang/cache/
 
 .dev.vars*
 !.dev.vars.example
+
+# Auto-generated files
+src/site/index.js

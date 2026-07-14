@@ -87,7 +87,7 @@
 		return () => off();
 	});
 
-	const menuTriggerProps: ButtonProps<'button'> = $derived({
+	const menuTriggerProps: Omit<ButtonProps<'button'>, 'ref'> = $derived({
 		disabled,
 		shape,
 		'aria-controls': `fs-menu-popover-${id}`,

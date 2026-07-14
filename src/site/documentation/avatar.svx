@@ -1,6 +1,8 @@
 <script lang="ts">
-	import {Avatar} from '$lib/index.js'; import {m} from '$i18n/messages.js'; import Showcase from
-	'$site/components/showcase/showcase.svelte'; import {ClockRegular} from 'fluentui-icons-svelte';
+	import {Avatar} from '$lib/index.js'; 
+	import {m} from '$i18n/messages.js'; 
+	import Showcase from '$site/components/showcase/showcase.svelte'; 
+	import {ClockRegular} from 'fluentui-icons-svelte';
 </script>
 
 # Avatar

@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { Flyout, Button, Divider } from 'fluentui-svelte';
+	import { Flyout, Button, Divider } from '$lib/index.js';
 	import { floating } from '$internal';
 	import { flip, hide, offset, shift } from '@floating-ui/dom';
 	import DynamicCarousel from '$lib/internal/components/dynamic-carousel/dynamic-carousel.svelte';
 	import { CheckmarkRegular, DismissRegular } from 'fluentui-icons-svelte';
 
 	let {
-		format = 'MM/dd/yyyy',
+		format = 'dd/MM/yyyy',
 		value = $bindable(''),
 		open = $bindable(false),
 		hideYears = false,

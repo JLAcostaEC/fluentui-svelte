@@ -15,7 +15,7 @@ export function cascadeCheck(itemId: string, state: SvelteMap<string, TreeViewNo
 
 	if (node.disabled) return true;
 
-	let indeterminate = $state(false);
+	let indeterminate = false;
 
 	function checkItem(id: string, _checked: boolean, _indeterminate: boolean = false): void {
 		const _node = state.get(id);

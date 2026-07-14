@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { circOut } from 'svelte/easing';
-	import { Flyout } from 'fluentui-svelte';
+	import { Flyout } from '$lib/index.js';
 	import CalendarViewDays from './calendar-view-days.svelte';
 	import CalendarViewYears from './calendar-view-years.svelte';
 	import CalendarViewMonths from './calendar-view-months.svelte';
@@ -160,6 +160,7 @@
 			)
 	]);
 
+	// svelte-ignore state_referenced_locally
 	setCalendarViewContext({
 		config: {
 			minDate,

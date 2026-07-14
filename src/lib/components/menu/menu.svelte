@@ -124,9 +124,8 @@
 		}
 	});
 
-	$effect.pre(() => {
-		setMenuContext({ config, state: _state, events, methods });
-	});
+	// svelte-ignore state_referenced_locally
+	setMenuContext({ config, state: _state, events, methods });
 </script>
 
 {@render children?.()}

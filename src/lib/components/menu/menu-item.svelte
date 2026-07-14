@@ -55,16 +55,16 @@
 	{id}
 	role="menuitem"
 	appearance="subtle"
-	onclick={(e: MouseEvent) => invokeHandlers(e, !!disabled, [onclick, () => !!persistOnItemActivation && toggle])}
+	onclick={(e: MouseEvent) => invokeHandlers(e, [persistOnItemActivation, disabled], [onclick, toggle])}
 	onkeydown={(e: KeyboardEvent) =>
-		invokeHandlers(e, [e.key !== 'Enter', !!disabled], [onkeydown, () => !!persistOnItemActivation && toggle])}
+		invokeHandlers(e, [e.key !== 'Enter', persistOnItemActivation, disabled], [onkeydown, toggle])}
 	as={href ? 'a' : 'button'}
 	style={`--margin-left: ${marginLeft}rem;`}
 	class="fs-menu-item {hasIcons || hasCheckmarks ? 'align' : ''} {classes}"
 	bind:ref
 	{...attributes}
 >
-	<span class="label" aria-label="{secondaryContent}, Use {secondaryContent}">
+	<span class="label" aria-label={secondaryContent ? `${secondaryContent}, Use ${secondaryContent}` : undefined}>
 		{#if Icon}
 			<RenderSoC SoC={Icon} args={[{ class: 'menu-item-icon' }]} class="menu-item-icon" />
 		{/if}
@@ -90,13 +90,7 @@
 		justify-content: space-between;
 		font-size: var(--fs-body2-font-size);
 		line-height: var(--fs-caption-line-height);
-		& :global(svg) {
-			width: 1.25rem;
-			fill: currentColor;
-			& > :global(path) {
-				fill: currentColor;
-			}
-		}
+
 		& .label {
 			display: flex;
 			align-items: center;
@@ -108,13 +102,6 @@
 			font-size: var(--fs-caption-font-size);
 			color: var(--fs-text-secondary);
 			margin-left: 0.6rem;
-		}
-		& :global(svg.indicator) {
-			width: 1rem;
-			height: auto;
-			margin-left: 0.6rem;
-			margin-right: 0.2rem;
-			color: var(--fs-text-secondary);
 		}
 		&:global(.align) {
 			& .label:not(:has(.menu-item-icon)),

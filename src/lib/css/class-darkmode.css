@@ -1,4 +1,4 @@
-:is(html:has(.dark-mode), html.dark-mode):root {
+:is(html:has(.dark), html.dark):root {
 	/* Text Colors */
 	--fs-text-primary: #fff;
 	--fs-text-secondary: #ffffffc5;

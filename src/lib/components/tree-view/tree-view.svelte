@@ -186,7 +186,7 @@
 
 <!--
 $config: {
-  "status": "Prototype",
+  "status": "Experimental",
   "icon": "TextBulletListTreeRegular"
 }
 -->

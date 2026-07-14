@@ -41,20 +41,25 @@
 		secondaryNavigation
 	}: { children: Snippet; primaryNavigation: Navigation[]; secondaryNavigation: Navigation[] } = $props();
 
-	const suggestions = primaryNavigation.map((nav) => nav.label);
-	suggestions.push(...secondaryNavigation.map((nav) => nav.label));
+	const suggestions = $derived.by(() => {
+		const nav = primaryNavigation.map((nav) => nav.label);
+		nav.push(...secondaryNavigation.map((nav) => nav.label));
+		return nav;
+	});
 
 	const handleNav = async (item: string) => {
 		const navItem =
 			primaryNavigation.find((nav) => nav.label === item) || secondaryNavigation.find((nav) => nav.label === item);
 
 		if (navItem) {
-			goto(resolve(navItem.url));
+			goto(resolve(localizeHref(navItem.url)));
 		}
 	};
 
 	const badgeStyle = (item: string) => {
 		switch (item) {
+			case 'AI':
+				return { appearance: 'tint', color: 'success' };
 			case 'Experimental':
 				return { appearance: 'tint', color: 'warning' };
 			case 'New':

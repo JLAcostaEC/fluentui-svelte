@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Flyout, Button, Divider } from 'fluentui-svelte';
+	import { Flyout, Button, Divider } from '$lib/index.js';
 	import { floating } from '$internal';
 	import { flip, hide, offset, shift } from '@floating-ui/dom';
 	import DynamicCarousel from '$lib/internal/components/dynamic-carousel/dynamic-carousel.svelte';

@@ -103,6 +103,7 @@
 		"fluentui-icons-svelte": "^1.1.1",
 		"globals": "^17.6.0",
 		"mdsvex": "^0.12.7",
+		"mode-watcher": "^1.1.0",
 		"panzoom": "^9.4.4",
 		"playwright": "^1.60.0",
 		"prettier": "^3.8.3",

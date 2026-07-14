@@ -2,12 +2,13 @@
 	import '../app.css';
 	import '../shiki.css';
 	import '$css/theme.css';
-	import '$css/media-darkmode.css';
+	import '$css/class-darkmode.css';
 	import '$css/reset.css';
 	import '$css/typography.css';
 
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
+	import { ModeWatcher } from "mode-watcher";
 	import { FluentUISvelte } from '$lib/index.js';
 	import { locales, localizeHref } from '$i18n/runtime.js';
 	import type { Pathname } from '$app/types';
@@ -24,6 +25,7 @@
 	{/each}
 </div>
 
+<ModeWatcher />
 <FluentUISvelte>
 	<Header />
 	<main id="content">

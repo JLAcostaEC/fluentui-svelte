@@ -1,65 +1,57 @@
-# Svelte library
+<p align="center">
+	<picture>
+  		<source media="(prefers-color-scheme: dark)" srcset="https://github.com/JLAcostaEC/fluentui-svelte/blob/main/static/images/banner-white.png?raw=true" height="130" style="margin-bottom: 20px">
+  		<img alt="Fluent UI Svelte Logo" src="https://github.com/JLAcostaEC/fluentui-svelte/blob/main/static/images/banner.png?raw=true" height="130" style="margin-bottom: 20px"/>
+	</picture>
+</p>
 
-Everything you need to build a Svelte library, powered by [`sv`](https://npmjs.com/package/sv).
+<p align="center">
+  Modern components based on <a href="https://learn.microsoft.com/en-us/windows/apps/design/">Microsoft's Fluent UI</a> for Svelte 5.
+</p>
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
+## Features
 
-## Creating a project
+- Svelte 5 components!
+- All components will be accessible following [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) standards.
+- Semantic HTML & Native Behavior Elements (Like: `<dialog></dialog>` or `<details></details>`)
+- Reduced motion supported.
 
-If you're seeing this, you've probably already done this step. Congrats!
+### Undocumented Components
 
-```sh
-# create a new project in the current directory
-npx sv create
+The documentation site is currently in building fase. All components exported in the library are not yet documented.
 
-# create a new project in my-app
-npx sv create my-app
-```
+Please keep in mind that any undocumented component is _considered to be in the 0.x phase of development_. This means that they could potentially recieve breaking API changes or be heavily updated before being finalized.
 
-To recreate this project with the same configuration:
+## Resources
 
-```sh
-# recreate this project
-pnpm dlx sv@0.16.1 create --template library --types ts --add prettier eslint vitest="usages:unit,component" playwright mdsvex paraglide="languageTags:en, es+demo:no" mcp="ide:other+setup:local" --install pnpm fluentui-svelte
-```
+> ### [Windows UI Kit - Figma File](https://www.figma.com/community/file/1440832812269040007)
+>
+> The Windows UI Toolkit is a resource for creating experiences on Windows. It contains a control library and examples of how those controls are used within the WinUI platform.
 
-## Developing
+> ### Official Gallery Docs: [WinUI 3 Gallery](https://apps.microsoft.com/detail/9p3jfpwwdzrc)
+>
+> This app demonstrates all of the Windows UI 3 library controls and styles available to make a WinUI 3 app with the Windows App SDK.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+> ### Documentation: [Microsoft's Fluent UI](https://learn.microsoft.com/en-us/windows/apps/design/)
+>
+> Design guidelines and UI code examples for creating Windows app experiences.
 
-```sh
-npm run dev
+> ### [Fluent UI 2 Web - Figma File](https://www.figma.com/community/file/836828295772957889)
+>
+> Explore the next evolution of Microsoft’s design system with the Fluent 2 Web UI Kit.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## Credits
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+> - [Microsoft's Fluent UI](https://learn.microsoft.com/en-us/windows/apps/design/): Thank Microsoft for creating this masterpiece.
+> - [Fluent Svelte](https://github.com/Tropix126/fluent-svelte): Which was unfortunately abandoned.
 
-## Building
+## Notes
 
-To build your library:
+> [!IMPORTANT]
+> This repository is not affiliated with or connected to Microsoft in any way. It is merely an open-source package that provides their components to use with Svelte 5 applications.
 
-```sh
-npm pack
-```
+> [!IMPORTANT]
+> The fluentui-svelte library relies on new CSS features that (for now) are only available in Chromium-based browsers (such as Chrome or Edge). This means that in browsers like Firefox and Safari, some styles may not render correctly or may exhibit visual issues.
 
-To create a production version of your showcase app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
-
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```sh
-npm publish
-```
+> [!NOTE]
+> This package is not an exact port/reimplementation of Fluent UI (React, Web or any other official/unofficial variation), many features/APIs are not the same as those described in the Fluent UI documentation.

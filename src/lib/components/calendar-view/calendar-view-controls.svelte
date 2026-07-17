@@ -66,7 +66,6 @@
 		display: flex;
 		justify-content: space-between;
 		padding: 0.5rem;
-		background-color: var(--fs-control-surface-background);
 		border-bottom: 1px solid var(--fs-control-surface-stroke);
 		width: 100%;
 		gap: 0.5rem;

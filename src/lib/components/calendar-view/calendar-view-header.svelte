@@ -29,7 +29,6 @@
 		padding-top: 0.4rem;
 		width: 100%;
 		position: relative;
-		background: var(--fs-acrylic-background-default);
 		z-index: 1;
 		&::before {
 			content: '';
@@ -38,7 +37,6 @@
 			height: 100%;
 			position: absolute;
 			inset: 0;
-			background: var(--fs-acrilic-noise);
 			background-size: 2.5rem;
 			opacity: 0.065;
 			filter: grayscale(1);

@@ -1,12 +1,4 @@
 /* Shiki Syntax Highlighting */
-@media (prefers-color-scheme: dark) {
-	.shiki span {
-		color: var(--shiki-dark) !important;
-		font-style: var(--shiki-dark-font-style) !important;
-		font-weight: var(--shiki-dark-font-weight) !important;
-		text-decoration: var(--shiki-dark-text-decoration) !important;
-	}
-}
 pre.shiki,
 table.fs-docs {
 	border: 1px solid var(--fs-card-stroke-default);

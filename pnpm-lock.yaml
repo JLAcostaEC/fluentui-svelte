@@ -20,6 +20,9 @@ importers:
       '@inlang/paraglide-js':
         specifier: ^2.18.2
         version: 2.21.0(typescript@6.0.3)
+      '@inlang/paraglide-js-svelte':
+        specifier: ^1.0.3
+        version: 1.0.3(@inlang/paraglide-js@2.21.0(typescript@6.0.3))(svelte@5.56.4(@typescript-eslint/types@8.63.0))
       '@playwright/test':
         specifier: ^1.60.0
         version: 1.61.1
@@ -568,6 +571,12 @@ packages:
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [x64]
     os: [win32]
+
+  '@inlang/paraglide-js-svelte@1.0.3':
+    resolution: {integrity: sha512-K65UnMaVy5z8+VqhBpX6Mt4dt7wxLFupejQ+sQTSga6Wh5bL7rnUq9ZU3Tn2OIk1Uah7scw9GHVZxSqhjJrWzA==}
+    peerDependencies:
+      '@inlang/paraglide-js': '>=2.11.0 <3'
+      svelte: ^5.0.0
 
   '@inlang/paraglide-js@2.21.0':
     resolution: {integrity: sha512-t+OOui1i5p73zQ2Dk28yFzu6rZhh7hsDOCHjkXDmSwFFsUsS5HyUD4CvPJ+wf02qgmlCMu2z1qffJ5aWwgx1CA==}
@@ -2433,6 +2442,11 @@ snapshots:
 
   '@img/sharp-win32-x64@0.34.5':
     optional: true
+
+  '@inlang/paraglide-js-svelte@1.0.3(@inlang/paraglide-js@2.21.0(typescript@6.0.3))(svelte@5.56.4(@typescript-eslint/types@8.63.0))':
+    dependencies:
+      '@inlang/paraglide-js': 2.21.0(typescript@6.0.3)
+      svelte: 5.56.4(@typescript-eslint/types@8.63.0)
 
   '@inlang/paraglide-js@2.21.0(typescript@6.0.3)':
     dependencies:

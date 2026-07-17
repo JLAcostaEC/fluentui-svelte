@@ -89,6 +89,7 @@
 		"@floating-ui/dom": "^1.7.6",
 		"@humanspeak/svelte-virtual-list": "^0.5.9",
 		"@inlang/paraglide-js": "^2.18.2",
+		"@inlang/paraglide-js-svelte": "^1.0.3",
 		"@playwright/test": "^1.60.0",
 		"@sveltejs/adapter-auto": "^7.0.1",
 		"@sveltejs/adapter-cloudflare": "^7.2.9",

@@ -60,7 +60,7 @@
 	"asb_component_api_description_before_link": "Una breve explicación de las propiedades que realmente necesitan explicación. Puedes ver el resto de las propiedades",
 	"asb_component_api_description_link_text": "aquí",
 	"asb_suggestions_title": "Sugerencias",
-	"asb_suggestions_description": "Las sugerencias se proporcionan como elementos hijos `<AutoSuggestBoxOption>` del `AutoSuggestBox`. A medida que el usuario escribe, se mostrarán las opciones coincidentes.",
+	"asb_suggestions_description": "Las sugerencias se proporcionan como elementos hijos {#code}<AutoSuggestBoxOption>{/code} del {#code}AutoSuggestBox{/code}. A medida que el usuario escribe, se mostrarán las opciones coincidentes.",
 	"asb_keyboard_navigation_title": "Navegación por Teclado",
 	"asb_keyboard_navigation_description": "Los usuarios pueden navegar por las sugerencias usando las teclas de flecha Arriba y Abajo. Al presionar Enter se selecciona la sugerencia resaltada.",
 	"asb_max_items_title": "Máximo de Elementos Visibles",

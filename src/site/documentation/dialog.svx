@@ -14,12 +14,6 @@ const exampleText =
 
 {m.dialog_description()}
 
-<InfoBar status="critical" style="multiline" title={m.dialog_early_access_title()} hideCloseButton>
-  <p>
-    {m.dialog_early_access_description()}
-  </p>
-</InfoBar>
-
 <Showcase columns={1} minHeight="250px">
   <Dialog>
     <DialogTrigger>Open Dialog</DialogTrigger>

@@ -2,6 +2,7 @@
   import { AutoSuggestBox, AutoSuggestBoxOption, InfoBar } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { m } from '$i18n/messages.js';
+  import { ParaglideMessage } from "@inlang/paraglide-js-svelte"; 
 </script>
 
 # AutoSuggestBox
@@ -44,7 +45,15 @@
 
 ### {m.asb_suggestions_title()}
 
-{m.asb_suggestions_description()}
+<p class="fs-docs">
+  <ParaglideMessage message={m.asb_suggestions_description} inputs={{}}>
+    {#snippet code({ children, options })}
+		  <code>
+			  {@render children?.()}
+		  </code>
+	  {/snippet}
+  </ParaglideMessage>
+</p>
 
 <InfoBar status="information" title={m.asb_keyboard_navigation_title()} style="multiline" hideCloseButton>
   <p>{m.asb_keyboard_navigation_description()}</p>
@@ -122,4 +131,4 @@
 | `maxItemsInView`   | `number`                                                  | {m.asb_props_maxitemsinview_description()} |
 | `ref`              | `HTMLElement`                                             | {m.asb_props_ref_description()}               |
 | `suggestionChosen` | `(e: Event, selection: string) => void`                   | {m.asb_props_suggestionchosen_description()}                     |
-| `querySubmitted`   | `(e: MouseEvent \| KeyboardEvent, query: string) => void` | {m.asb_props_querysubmitted_description()}                       |
+| `querySubmitted`   | `(e: MouseEvent &#124; KeyboardEvent, query: string) => void` | {m.asb_props_querysubmitted_description()}                       |

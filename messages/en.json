@@ -60,7 +60,7 @@
 	"asb_component_api_description_before_link": "A brief explanation of the props that really need explaining. You can see the rest of the props",
 	"asb_component_api_description_link_text": "here",
 	"asb_suggestions_title": "Suggestions",
-	"asb_suggestions_description": "Suggestions are provided as `<AutoSuggestBoxOption>` children of the `AutoSuggestBox`. As the user types, matching options will be shown.",
+	"asb_suggestions_description": "Suggestions are provided as {#code}AutoSuggestBoxOption{/code} a children of the {#code}AutoSuggestBox{/code}. As the user types, matching options will be shown.",
 	"asb_keyboard_navigation_title": "Keyboard Navigation",
 	"asb_keyboard_navigation_description": "Users can navigate through suggestions using the Up and Down arrow keys. Pressing Enter selects the highlighted suggestion.",
 	"asb_max_items_title": "Max Items In View",

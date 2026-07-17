@@ -25,7 +25,7 @@
 		`--av-size: ${pxToRem(size)}; ${color === 'colorful' ? '--av-color: ' + pickColorByWord(idForColor ?? name) + ';' : ''}`
 	);
 
-	const badgeSize = $derived((size / 2).toFixed(2) + 'px');
+	const badgeSize = $derived((size / 2).toFixed(0) + 'px');
 
 	let hideBg = $state(false);
 </script>
@@ -77,7 +77,7 @@
 	</span>
 	{#if badge}
 		<BadgeIcon
-			size={Number((size / 3.1).toFixed(1))}
+			size={Number((size / 3.25).toFixed(0))}
 			icon={badge?.icon || undefined}
 			status={badge?.status}
 			outOfOffice={badge?.outOfOffice}
@@ -118,7 +118,7 @@
 			width: 100%;
 			height: 100%;
 			z-index: 1;
-			color: currentColor;
+			color: var(--fs-text-on-accent-primary);
 		}
 		&::before {
 			content: '';
@@ -139,7 +139,7 @@
 			width: calc(100% + 1em);
 			height: calc(100% + 1em);
 			transform: translate(-50%, -50%);
-			border: clamp(1px, 0.3em, 10px) solid transparent;
+			border: max(1px, 0.3em) solid transparent;
 			opacity: 0;
 			transition: opacity 0.1s;
 			z-index: 0;
@@ -225,27 +225,33 @@
 			transform: scale(0.875);
 		}
 		&.mask {
-			--pos: calc((var(--av-size) / 3.1416) / 2);
+			/* Crop center */
+			--pos: calc(var(--av-size) / 6.1);
+			/* Transparent cutout radius */
+			--cut: calc(var(--av-size) * 0.228);
+			/* Border gradient width (fake anti-aliasing) */
+			--feather: max(1%, calc(var(--av-size) * 0.01));
 			& .content,
 			&::before,
 			& :global(.fs-avatar-image) {
-				mask-image: radial-gradient(
+				--fs-mask: radial-gradient(
 					circle at right var(--pos) bottom var(--pos),
-					rgba(0, 0, 0, 0)
-						clamp(calc(var(--pos) + 1px), round(calc(var(--pos) + 5.4%), 0.01rem), calc(var(--pos) + 0.625rem)),
-					rgb(255, 255, 255)
-						clamp(calc(var(--pos) + 1px), round(calc(var(--pos) + 5.7%), 0.01rem), calc(var(--pos) + 0.65rem))
+					rgba(0, 0, 0, 0) var(--cut),
+					rgb(255, 255, 255) calc(var(--cut) + var(--feather))
 				);
+				-webkit-mask-image: var(--fs-mask);
+				mask-image: var(--fs-mask);
 			}
 			&::after {
 				--after-pos: calc(var(--pos) + (var(--av-size) / 4) / 2);
-				mask-image: radial-gradient(
+				--after-cut: calc(var(--av-size) * 0.236);
+				--fs-mask: radial-gradient(
 					circle at right var(--after-pos) bottom var(--after-pos),
-					rgba(0, 0, 0, 0)
-						clamp(calc(var(--pos) + 1px), round(calc(var(--pos) + 5.3%), 0.01rem), calc(var(--pos) + 0.625rem)),
-					rgb(255, 255, 255)
-						clamp(calc(var(--pos) + 1.4px), round(calc(var(--pos) + 5.6%), 0.01rem), calc(var(--pos) + 0.65rem))
+					rgba(0, 0, 0, 0) var(--after-cut),
+					rgb(255, 255, 255) calc(var(--after-cut) + var(--feather))
 				);
+				-webkit-mask-image: var(--fs-mask);
+				mask-image: var(--fs-mask);
 			}
 		}
 		&.hide-bg {

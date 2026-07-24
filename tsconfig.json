@@ -11,7 +11,7 @@
 		"strict": true,
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
-		"types": ["node", "src/worker-configuration.d.ts"]
+		"types": ["node", "./src/worker-configuration.d.ts"]
 	},
 	"files": ["vitest-setup-client.ts"]
 }

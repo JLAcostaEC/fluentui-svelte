@@ -16,12 +16,6 @@
 	}: DropdownSelectProps = $props();
 </script>
 
-<!--
-$config: {
-  "status": "Native Prototype",
-  "icon": "ChevronDownFilled"
-}
--->
 <div class="fs-dropdown" bind:this={wrapperRef} {...wrapperProps}>
 	{#if !multiple}
 		<ChevronDownFilled class="indicator" />
@@ -33,7 +27,6 @@ $config: {
 	{#if multiple}
 		<select
 			class="fs-dropdown-select"
-			tabindex="0"
 			{@attach selectDirection()}
 			multiple
 			bind:value
@@ -51,7 +44,6 @@ $config: {
 	{:else}
 		<select
 			class="fs-dropdown-select"
-			tabindex="0"
 			{@attach selectDirection()}
 			bind:value
 			bind:this={ref}

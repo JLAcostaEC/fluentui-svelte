@@ -7,7 +7,7 @@
 		value,
 		text,
 		disabled,
-		element = $bindable(),
+		ref = $bindable(),
 		class: classes,
 		children,
 		...attributes
@@ -15,12 +15,12 @@
 		value?: string;
 		text?: string;
 		disabled?: boolean;
-		element?: HTMLElement;
+		ref?: HTMLElement;
 		children?: Snippet;
 	} & HTMLAttributes<HTMLOptionElement> = $props();
 </script>
 
-<option class="fs-dropdown-select-option {classes}" {value} {disabled} bind:this={element} {...attributes}>
+<option class="fs-dropdown-select-option {classes}" {value} {disabled} bind:this={ref} {...attributes}>
 	<span class="option-content">
 		<CheckmarkFilled class="checkmark" width="16" height="16" />
 		{#if text}
@@ -36,9 +36,10 @@
 	.fs-dropdown-select-option {
 		padding: 0 !important;
 		display: flex;
+		border-radius: var(--fs-control-border-radius);
+		
 		/* User-Agent Override Styles Hack  */
 		transition: background calc(infinity * 1s) !important;
-		border-radius: var(--fs-control-border-radius);
 
 		&::checkmark,
 		& :global(.checkmark),

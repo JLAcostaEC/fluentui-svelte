@@ -77,6 +77,9 @@
 	// The trigger shows the committed value; `true` once `value` holds a full date.
 	const hasValue = $derived(/^\d{4}-\d{2}-\d{2}$/.test(value ?? ''));
 
+	// Parsed committed value used for the trigger label, so the trigger reflects `value`
+	const committed = $derived(parseValue(value));
+
 	// Columns to render, ordered by `format` and filtered by the hide* flags.
 	const columns = $derived.by<Column[]>(() => {
 		const base: Column[] = format === 'dd/MM/yyyy' ? ['day', 'month', 'year'] : ['month', 'day', 'year'];
@@ -138,22 +141,15 @@
 		open = false;
 	}
 
-	// Trigger label per column: the live selection while open, the committed value once set,
-	// otherwise the placeholder column name.
+	// Trigger label per column
 	function display(col: Column): string {
-		if (!open && !hasValue) return LABELS[col];
-		if (col === 'month') return MONTH_NAMES[month];
-		if (col === 'day') return pad(effectiveDay);
-		return String(year);
+		if (!hasValue) return LABELS[col];
+		if (col === 'month') return MONTH_NAMES[committed.mo];
+		if (col === 'day') return pad(committed.d);
+		return String(committed.y);
 	}
 </script>
 
-<!--
-$config: {
-  "status": "AI",
-  "icon": "CalendarMonthFilled"
-}
--->
 <div
 	class="fs-date-picker"
 	role="button"

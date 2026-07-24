@@ -1,0 +1,75 @@
+<script lang="ts">
+  import { Badge, BadgeIcon, Avatar } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+  import { AccessibilityRegular, InfoFilled } from 'fluentui-icons-svelte';
+</script>
+
+## {m.badge_badge_props_title()}
+
+| **Name**       | **Type**                     | **Description**                            |
+| -------------- | ---------------------------- | ------------------------------------------ |
+| `size`         | `number`                     | {m.badge_props_size_description()}         |
+| `shape`        | `string`                     | {m.badge_props_shape_description()}        |
+| `appearance`   | `string`                     | {m.badge_props_appearance_description()}   |
+| `iconPosition` | `string`                     | {m.badge_props_iconposition_description()} |
+| `color`        | `string`                     | {m.badge_props_color_description()}        |
+| `icon`         | `Snippet` &vert; `Component` | {m.badge_props_icon_description()}         |
+| `ref`          | `HTMLSpanElement`            | {m.badge_props_ref_description()}          |
+| `children`     | `Snippet`                    | {m.badge_props_children_description()}     |
+
+## {m.badge_badgeicon_api_title()}
+
+{m.badge_badgeicon_api_description()}
+
+<Showcase columns={1} initialZoom={1} autoCenter>
+  <BadgeIcon size={96} icon={AccessibilityRegular} />
+</Showcase>
+
+### {m.badge_badgeicon_usage_title()}
+
+```svelte
+<script>
+	import { BadgeIcon } from 'fluentui-svelte';
+	import { AccessibilityRegular } from 'fluentui-icons-svelte';
+</script>
+
+<BadgeIcon size={96} icon={AccessibilityRegular} />
+```
+
+{m.badge_badgeicon_avatar_example_description()}
+
+{#snippet customBadge(args)}
+  <Badge color="attention" size={args.width} aria-hidden={args['aria-hidden']} icon={AccessibilityRegular} />
+{/snippet}
+
+<Showcase columns={3} initialZoom={1} autoCenter>
+  <Avatar active="active" size={96} name="FluentUI Svelte" badge={{ icon: customBadge }} />
+  <Avatar active="active" size={96} name="FluentUI Svelte" badge={{ status: 'do-not-disturb' }} />
+  <Avatar active="active" size={96} name="FluentUI Svelte" badge={{ icon: InfoFilled }} />
+</Showcase>
+
+{m.badge_badgeicon_avatar_details_description()}
+
+```svelte
+<script>
+	import { Avatar, Badge } from 'fluentui-svelte';
+	import { AccessibilityRegular } from 'fluentui-icons-svelte';
+</script>
+
+<!-- args: [size: number, shape: string] -->
+{#snippet customBadge(args)}
+	<Badge color="attention" size={args.width} aria-hidden={args['aria-hidden']} icon={AccessibilityRegular} />
+{/snippet}
+
+<Avatar active="active" size={96} name="FluentUI Svelte" badge={{ icon: customBadge }} />
+```
+
+### {m.badge_badgeicon_props_title()}
+
+| **Name** | **Type**                     | **Description**                     |
+| -------- | ---------------------------- | ----------------------------------- |
+| `size`   | `number`                     | {m.badge_props_size_description()}  |
+| `color`  | `string`                     | {m.badge_props_color_description()} |
+| `icon`   | `Snippet` &vert; `Component` | {m.badge_props_icon_description()}  |
+| `ref`    | `HTMLSpanElement`            | {m.badge_props_ref_description()}   |

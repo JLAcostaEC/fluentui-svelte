@@ -1,0 +1,18 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.asb_component_props_title()}
+
+| **Name**           | **Type**                                                  | **Description**                                                   |
+| ------------------ | --------------------------------------------------------- | ---------------------------------------------------------------- |
+| `placeholder`      | `string`                                                  | {m.asb_props_placeholder_description()}                             |
+| `value`            | `string`                                                  | {m.asb_props_value_description()}                            |
+| `open`             | `boolean`                                                 | {m.asb_props_open_description()}         |
+| `multiselect`      | `boolean`                                                 | {m.asb_props_multiselect_description()}                            |
+| `selectOnFocus`    | `boolean`                                                 | {m.asb_props_selectonfocus_description()} |
+| `notFoundText`     | `string`                                                  | {m.asb_props_notfoundtext_description()} |
+| `maxItemsInView`   | `number`                                                  | {m.asb_props_maxitemsinview_description()} |
+| `ref`              | `HTMLElement`                                             | {m.asb_props_ref_description()}               |
+| `suggestionChosen` | `(e: Event, selection: string) => void`                   | {m.asb_props_suggestionchosen_description()}                     |
+| `querySubmitted`   | `(e: MouseEvent &#124; KeyboardEvent, query: string) => void` | {m.asb_props_querysubmitted_description()}                       |

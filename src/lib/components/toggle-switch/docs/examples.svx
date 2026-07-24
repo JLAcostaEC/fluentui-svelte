@@ -1,0 +1,19 @@
+<script lang="ts">
+  import { ToggleSwitch } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+
+  const statesCode = `
+<ToggleSwitch label="Off" />
+<ToggleSwitch label="On" checked />
+<ToggleSwitch label="Disabled" disabled />`;
+</script>
+
+### States
+
+A toggle switch can be labeled, checked, or disabled.
+
+<Showcase code={statesCode}>
+  <ToggleSwitch label="Off" />
+  <ToggleSwitch label="On" checked />
+  <ToggleSwitch label="Disabled" disabled />
+</Showcase>

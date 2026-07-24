@@ -1,0 +1,27 @@
+<script lang="ts">
+  import { NumberBox } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Number Box
+
+{m.nb_description()}
+
+<Showcase columns={1}>
+  <NumberBox value={0} min={0} max={100} step={1} />
+</Showcase>
+
+## {m.nb_usage_title()}
+
+```svelte
+<script>
+	import { NumberBox } from 'fluentui-svelte';
+</script>
+
+<NumberBox value={0} min={0} max={100} step={1} />
+```
+
+## {m.nb_component_api_title()}
+
+{m.nb_component_api_description_prefix()} [here](#component-props) {m.nb_component_api_description_suffix()}

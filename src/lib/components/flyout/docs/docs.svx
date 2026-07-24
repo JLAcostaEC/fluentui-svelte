@@ -1,0 +1,31 @@
+<script lang="ts">
+  import { Flyout } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Flyout
+
+{m.flyout_description()}
+
+<Showcase columns={1}>
+  <div style="max-width: 300px; margin: auto;">
+    <Flyout>
+      <p>This is the content of the flyout.</p>
+    </Flyout>
+  </div>
+</Showcase>
+
+## {m.flyout_usage_title()}
+
+```svelte
+<script>
+  import { Flyout } from 'fluentui-svelte';
+</script>
+
+<Flyout>
+  <p>This is the content of the flyout.</p>
+</Flyout>
+```
+
+{m.flyout_usage_description()}

@@ -1,0 +1,31 @@
+<script lang="ts">
+  import { Checkbox } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Checkbox
+
+{m.cb_description()}
+
+<Showcase>
+  <Checkbox wrapperAs="label">Default</Checkbox>
+  <Checkbox wrapperAs="label" checked>Checked</Checkbox>
+  <Checkbox wrapperAs="label" indeterminate>Indeterminate</Checkbox>
+  <Checkbox wrapperAs="label" disabled>Disabled</Checkbox>
+  <Checkbox wrapperAs="label" checked disabled>Checked & Disabled</Checkbox>
+</Showcase>
+
+## {m.cb_usage_title()}
+
+```svelte
+<script>
+  import { Checkbox } from 'fluentui-svelte';
+</script>
+
+<Checkbox wrapperAs="label">Default</Checkbox>
+```
+
+## {m.cb_component_api_title()}
+
+{m.cb_component_api_description_before_link()} <a href="#checkbox-props">{m.cb_component_api_description_link_text()}</a>.

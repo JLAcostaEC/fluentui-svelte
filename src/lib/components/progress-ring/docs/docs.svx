@@ -1,0 +1,32 @@
+<script lang="ts">
+  import { ProgressRing } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Progress Ring
+
+{m.pring_description()}
+
+<Showcase columns={4}>
+  <ProgressRing value={50} />
+  <ProgressRing value={75} size={60} />
+  <ProgressRing value={100} indeterminate />
+  <ProgressRing value={100} size={80} indeterminate />
+  <ProgressRing value={50} hideRail />
+  <ProgressRing value={75} indeterminate hideRail />
+</Showcase>
+
+## {m.pring_usage_title()}
+
+```svelte
+<script>
+  import { ProgressRing } from 'fluentui-svelte';
+</script>
+
+<ProgressRing value={50} />
+```
+
+## {m.pring_component_api_title()}
+
+{m.pring_component_api_description()}

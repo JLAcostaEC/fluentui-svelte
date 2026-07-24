@@ -1,0 +1,16 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.tooltip_component_props_title()}
+
+| **Name**           | **Type**                             | **Description**                                   |
+| ------------------ | ------------------------------------ | ------------------------------------------------- |
+| `content`          | `string` \| `Snippet` \| `Component` | {m.tooltip_props_content_description()}           |
+| `positionConfig`   | `Partial<ComputePositionConfig>`     | {m.tooltip_props_positionconfig_description()}    |
+| `withArrow`        | `boolean`                            | {m.tooltip_props_witharrow_description()}         |
+| `openDelay`        | `number`                             | {m.tooltip_props_opendelay_description()}         |
+| `hideDelay`        | `number`                             | {m.tooltip_props_hidedelay_description()}         |
+| `onVisibleChange`  | `(visible: boolean) => void`         | {m.tooltip_props_onvisiblechange_description()}   |
+| `element`          | `HTMLElement`                        | {m.tooltip_props_element_description()}           |
+| Element Attributes |                                      | {m.tooltip_props_elementattributes_description()} |

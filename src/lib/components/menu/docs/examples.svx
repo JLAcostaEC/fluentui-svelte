@@ -1,0 +1,137 @@
+<script lang="ts">
+  import { Button, SplitButton, Menu, MenuTrigger, ContextMenuTrigger, MenuPopover, MenuList, MenuGroup, MenuItem, MenuDivider, MenuItemCheckbox, MenuItemSwitch, MenuItemRadio } from '$lib/index.js';
+  import { AccessTimeRegular, ChevronRightFilled } from 'fluentui-icons-svelte';
+  import { m } from '$i18n/messages.js';
+
+  let checkedValues = $state({});
+</script>
+
+## {m.menu_more_examples_title()}
+
+### {m.menu_checkable_nested_submenus_title()}
+
+<Menu hasCheckmarks hasIcons {checkedValues} onCheckedValueChange={(e, value) => { checkedValues = value; }}>
+  <MenuTrigger>
+    {#snippet children({ state, menuTriggerProps })}
+      <Button isMenuButton bind:ref={state.ref} {...menuTriggerProps}>
+        <AccessTimeRegular /> Open Menu
+      </Button>
+    {/snippet}
+  </MenuTrigger>
+  <MenuPopover>
+    <MenuList>
+      <MenuItem subText="An explanation here">Item With Subtext</MenuItem>
+      <MenuDivider />
+      <MenuItem disabled>I'm Disabled</MenuItem>
+      <MenuItemCheckbox name="item4" value="item4" icon={AccessTimeRegular} subText="Click doesn't close menu">I'm a checkbox</MenuItemCheckbox>
+      <MenuItemSwitch subText="Click doesn't close menu">I'm a switch</MenuItemSwitch>
+      <MenuItemRadio name="item6" value="item6" icon={AccessTimeRegular} subText="Click closes menu">I'm a radio</MenuItemRadio>
+      <Menu>
+        <MenuTrigger>
+          {#snippet children({ state, menuTriggerProps })}
+            <Button bind:ref={state.ref} icon={ChevronRightFilled} {...menuTriggerProps}>I'm a nested menu</Button>
+          {/snippet}
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItem>Item 1</MenuItem>
+            <MenuItem>Item 2</MenuItem>
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </MenuList>
+  </MenuPopover>
+</Menu>
+
+```svelte
+<Menu hasCheckmarks hasIcons {checkedValues} onCheckedValueChange={(e, value) => (checkedValues = value)}>
+	<MenuTrigger>
+		{#snippet children({ state, menuTriggerProps })}
+			<Button isMenuButton bind:ref={state.ref} {...menuTriggerProps}>
+				<AccessTimeRegular /> Open Menu
+			</Button>
+		{/snippet}
+	</MenuTrigger>
+	<MenuPopover>
+		<MenuList>
+			<MenuItem subText="An explanation here">Item With Subtext</MenuItem>
+			<MenuDivider />
+			<MenuItem disabled>I'm Disabled</MenuItem>
+			<MenuItemCheckbox name="item4" value="item4" icon={AccessTimeRegular}>I'm a checkbox</MenuItemCheckbox>
+			<MenuItemSwitch>I'm a switch</MenuItemSwitch>
+			<MenuItemRadio name="item6" value="item6" icon={AccessTimeRegular}>I'm a radio</MenuItemRadio>
+		</MenuList>
+	</MenuPopover>
+</Menu>
+```
+
+### {m.menu_splitbutton_trigger_title()}
+
+<Menu>
+  <MenuTrigger>
+    {#snippet children({ state, menuTriggerProps, primaryButtonProps })}
+      <SplitButton bind:menuTriggerRef={state.ref} {menuTriggerProps} primaryButtonProps={{ onclick: () => alert('Primary action'), ...primaryButtonProps }}>
+        Primary Action
+      </SplitButton>
+    {/snippet}
+  </MenuTrigger>
+  <MenuPopover>
+    <MenuList>
+      <MenuGroup header="Group 1">
+        <MenuItem>Item 1</MenuItem>
+        <MenuItem>Item 2</MenuItem>
+      </MenuGroup>
+      <MenuDivider />
+      <MenuGroup header="Group 2">
+        <MenuItem>Item 3</MenuItem>
+        <MenuItem>Item 4</MenuItem>
+      </MenuGroup>
+    </MenuList>
+  </MenuPopover>
+</Menu>
+
+```svelte
+<Menu>
+	<MenuTrigger>
+		{#snippet children({ state, menuTriggerProps, primaryButtonProps })}
+			<SplitButton
+				bind:menuTriggerRef={state.ref}
+				{menuTriggerProps}
+				primaryButtonProps={{ onclick: () => alert('Primary action'), ...primaryButtonProps }}
+			>
+				Primary Action
+			</SplitButton>
+		{/snippet}
+	</MenuTrigger>
+	<MenuPopover>
+		<MenuList>
+			<MenuItem>Item 1</MenuItem>
+			<MenuItem>Item 2</MenuItem>
+		</MenuList>
+	</MenuPopover>
+</Menu>
+```
+
+## {m.menu_context_menu_title()}
+
+{m.menu_context_menu_description_prefix()} `MenuTrigger` {m.menu_context_menu_description_middle()} `ref` {m.menu_context_menu_description_suffix()} `document.body` {m.menu_context_menu_description_end()}
+
+<div id="context-menu-box" style="width: 100%; height: 200px; border: 1px dashed var(--fs-control-stroke-default); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+  Right click anywhere in this box to open the context menu.
+</div>
+<Menu>
+  <ContextMenuTrigger ref={globalThis.document ? document?.querySelector('#context-menu-box') : undefined} />
+  <MenuPopover>
+    <MenuList>
+      <MenuGroup header="Group 1">
+        <MenuItem>Item 1</MenuItem>
+        <MenuItem>Item 2</MenuItem>
+      </MenuGroup>
+      <MenuDivider />
+      <MenuGroup header="Group 2">
+        <MenuItem>Item 3</MenuItem>
+        <MenuItem>Item 4</MenuItem>
+      </MenuGroup>
+    </MenuList>
+  </MenuPopover>
+</Menu>

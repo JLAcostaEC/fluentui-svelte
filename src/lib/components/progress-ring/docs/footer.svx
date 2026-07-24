@@ -1,0 +1,18 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.pring_component_props_title()}
+
+| **Name**        | **Type**              | **Description**                                             |
+| --------------- | --------------------- | ----------------------------------------------------------- |
+| `value`         | `number`              | {m.pring_props_value_description()} |
+| `min`           | `number`              | {m.pring_props_min_description()} |
+| `max`           | `number`              | {m.pring_props_max_description()} |
+| `size`          | `number`              | {m.pring_props_size_description()} |
+| `indeterminate` | `boolean`             | {m.pring_props_indeterminate_description()} |
+| `hideRail`      | `boolean`             | {m.pring_props_hiderail_description()} |
+| `status`        | `'paused' \| 'error'` | {m.pring_props_status_description()} |
+| `ref`           | `SVGElement`          | {m.pring_props_ref_description()} |
+| `railElement`   | `SVGCircleElement`    | {m.pring_props_railelement_description()} |
+| `trackElement`  | `SVGCircleElement`    | {m.pring_props_trackelement_description()} |

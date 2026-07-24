@@ -1,0 +1,32 @@
+<script lang="ts">
+  import { Button } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Button
+
+{m.btn_description()}
+
+<Showcase autoCenter>
+  <Button appearance="accent" />
+  <Button appearance="standard" />
+  <Button appearance="subtle" />
+  <Button disabled isMenuButton />
+  <Button appearance="standard" disabled />
+  <Button appearance="subtle" disabled />
+</Showcase>
+
+## {m.btn_usage_title()}
+
+```svelte
+<script>
+	import { Button } from 'fluentui-svelte';
+</script>
+
+<Button>I am a Button</Button>
+```
+
+## {m.btn_component_api_title()}
+
+{m.btn_component_api_description_before_link()} <a href="#component-props">{m.btn_component_api_description_link_text()}</a>.

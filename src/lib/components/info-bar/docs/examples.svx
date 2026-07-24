@@ -1,0 +1,87 @@
+<script lang="ts">
+  import { InfoBar } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+
+  const statusCode = `
+<InfoBar status="information" title="Information">
+  <p>This is an informational message.</p>
+</InfoBar>
+<InfoBar status="attention" title="Attention">
+  <p>This is an attention message.</p>
+</InfoBar>
+<InfoBar status="warning" title="Warning">
+  <p>This is a warning message.</p>
+</InfoBar>
+<InfoBar status="critical" title="Critical">
+  <p>This is a critical message.</p>
+</InfoBar>
+<InfoBar status="success" title="Success">
+  <p>This is a success message.</p>
+</InfoBar>`;
+
+  const styleCode = `
+<InfoBar status="information" style="inline" title="Inline Style">
+  <p>This is an inline styled InfoBar.</p>
+</InfoBar>
+<InfoBar status="information" style="multiline" title="Multiline Style">
+  <p>This is a multiline styled InfoBar.</p>
+</InfoBar>`;
+
+  const hideCloseButtonCode = `
+<InfoBar status="information" title="Without Close Button" hideCloseButton>
+  <p>This InfoBar does not have a close button.</p>
+</InfoBar>
+<InfoBar status="information" title="With Close Button">
+  <p>This InfoBar has a close button.</p>
+</InfoBar>`;
+
+</script>
+
+### {m.ib_status_title()}
+
+{m.ib_status_description()}
+
+<Showcase columns={1} minHeight="350px" code={statusCode}>
+  <InfoBar status="information" title="Information">
+    <p>This is an informational message.</p>
+  </InfoBar>
+  <InfoBar status="attention" title="Attention">
+    <p>This is an attention message.</p>
+  </InfoBar>
+  <InfoBar status="warning" title="Warning">
+    <p>This is a warning message.</p>
+  </InfoBar>
+  <InfoBar status="critical" title="Critical">
+    <p>This is a critical message.</p>
+  </InfoBar>
+  <InfoBar status="success" title="Success">
+    <p>This is a success message.</p>
+  </InfoBar>
+</Showcase>
+
+### {m.ib_style_title()}
+
+{m.ib_style_description()}
+
+<Showcase columns={1} minHeight="250px" code={styleCode}>
+  <InfoBar status="information" style="inline" title="Inline Style">
+    <p>This is an inline styled InfoBar.</p>
+  </InfoBar>
+  <InfoBar status="information" style="multiline" title="Multiline Style">
+    <p>This is a multiline styled InfoBar.</p>
+  </InfoBar>
+</Showcase>
+
+### {m.ib_hide_close_button_title()}
+
+{m.ib_hide_close_button_description()}
+
+<Showcase columns={1} minHeight="250px" code={hideCloseButtonCode}>
+  <InfoBar status="information" title="Without Close Button" hideCloseButton>
+    <p>This InfoBar does not have a close button.</p>
+  </InfoBar>
+  <InfoBar status="information" title="With Close Button">
+    <p>This InfoBar has a close button.</p>
+  </InfoBar>
+</Showcase>

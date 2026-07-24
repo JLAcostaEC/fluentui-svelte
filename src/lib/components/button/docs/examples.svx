@@ -1,0 +1,52 @@
+<script lang="ts">
+  import { Button } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+
+  const asCode = `
+<Button>I am a Button</Button>
+<Button as="a" href="/">I am a Anchor</Button>
+<Button as="div">I am a Div</Button>`;
+
+  const shapeCode = `
+<Button shape="circular" />
+<Button />
+<Button shape="square" />`;
+
+  const appearanceCode = `
+<Button appearance="accent" />
+<Button appearance="standard" />
+<Button appearance="subtle" />`;
+</script>
+
+### {m.btn_as_title()}
+
+{m.btn_as_description()}
+
+<Showcase code={asCode} minHeight="100px" minZoom={1}>
+  <Button>I am a Button</Button>
+  <Button as="a" href="/">
+    I am a Anchor
+  </Button>
+  <Button as="div">I am a Div</Button>
+</Showcase>
+
+### {m.btn_shape_title()}
+
+{m.btn_shape_description()}
+
+<Showcase code={shapeCode} minHeight="100px" minZoom={1}>
+  <Button shape="circular" />
+  <Button />
+  <Button shape="square" />
+</Showcase>
+
+### {m.btn_appearance_title()}
+
+{m.btn_appearance_description()}
+
+<Showcase code={appearanceCode} minHeight="100px" minZoom={1}>
+  <Button appearance="accent" />
+  <Button appearance="standard" />
+  <Button appearance="subtle" />
+</Showcase>

@@ -1,0 +1,40 @@
+<script lang="ts">
+  import { TextArea } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+
+  const placeholderCode = `<TextArea placeholder="Type your message here..." />`;
+
+  const resizeCode = `
+<TextArea resize="none" placeholder="No resize" />
+<TextArea resize="vertical" placeholder="Vertical resize" />
+<TextArea resize="both" placeholder="Resize both" />`;
+
+  const onChangeCode = `<TextArea onChange={(e) => console.log(e)} placeholder="Type..." />`;
+</script>
+
+### {m.ta_placeholder_title()}
+
+{m.ta_placeholder_description()}
+
+<Showcase columns={1} code={placeholderCode}>
+  <TextArea placeholder="Type your message here..." />
+</Showcase>
+
+### {m.ta_resize_title()}
+
+{m.ta_resize_description()}
+
+<Showcase columns={1} code={resizeCode}>
+  <TextArea resize="none" placeholder="No resize" />
+  <TextArea resize="vertical" placeholder="Vertical resize" />
+  <TextArea resize="both" placeholder="Resize both" />
+</Showcase>
+
+### {m.ta_on_change_title()}
+
+{m.ta_on_change_description()}
+
+<Showcase columns={1} code={onChangeCode}>
+  <TextArea onChange={(e) => console.log(e)} placeholder="Type..." />
+</Showcase>

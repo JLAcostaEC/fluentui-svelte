@@ -1,0 +1,15 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.divider_divider_props_title()}
+
+| **Name**       | **Type**            | **Description**                                                                                |
+| -------------- | ------------------- | ------------------------------------------------------------------------------------------------ |
+| `as`           | `string`            | {m.divider_props_as_description()}           |
+| `vertical`     | `boolean`           | {m.divider_props_vertical_description()}                              |
+| `alignContent` | `string`            | {m.divider_props_aligncontent_description()} |
+| `appearance`   | `string`            | {m.divider_props_appearance_description()} |
+| `inset`        | `boolean`           | {m.divider_props_inset_description()}                                                  |
+| `ref`          | `HTMLDivElement` &vert; `HTMLHRElement` &vert; `HTMLSpanElement` | {m.divider_props_ref_description()} |
+| `children`     | `Snippet`           | {m.divider_props_children_description()}                                             |

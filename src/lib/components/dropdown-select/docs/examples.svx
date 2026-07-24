@@ -1,0 +1,46 @@
+<script lang="ts">
+  import { DropdownSelect, DropdownSelectOption, Persona } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+
+  const customCode = `
+<DropdownSelect>
+  <DropdownSelectOption value="John Doe" text="John Doe">
+    <Persona name="John Doe" primaryText="Software Engineer" presence={{ status: 'available' }} avatar={{ color: 'colorful', idForColor: '' }} />
+  </DropdownSelectOption>
+  <DropdownSelectOption value="B">Option B</DropdownSelectOption>
+  <DropdownSelectOption value="C">Option C</DropdownSelectOption>
+</DropdownSelect>`;
+
+  const multipleCode = `
+<DropdownSelect multiple>
+  <DropdownSelectOption value="A">Option A</DropdownSelectOption>
+  <DropdownSelectOption value="B">Option B</DropdownSelectOption>
+  <DropdownSelectOption value="C">Option C</DropdownSelectOption>
+</DropdownSelect>`;
+</script>
+
+### Custom Option Content
+
+Options can render rich content such as a `Persona`. Provide a `text` prop for the plain-text selection label.
+
+<Showcase columns={1} code={customCode}>
+  <DropdownSelect>
+    <DropdownSelectOption value="John Doe" text="John Doe">
+      <Persona name="John Doe" primaryText="Software Engineer" presence={{ status: 'available' }} avatar={{ color: 'colorful', idForColor: '' }} />
+    </DropdownSelectOption>
+    <DropdownSelectOption value="B">Option B</DropdownSelectOption>
+    <DropdownSelectOption value="C">Option C</DropdownSelectOption>
+  </DropdownSelect>
+</Showcase>
+
+### Multiple Selection
+
+Set the `multiple` prop to allow selecting more than one option.
+
+<Showcase columns={1} code={multipleCode}>
+  <DropdownSelect multiple>
+    <DropdownSelectOption value="A">Option A</DropdownSelectOption>
+    <DropdownSelectOption value="B">Option B</DropdownSelectOption>
+    <DropdownSelectOption value="C">Option C</DropdownSelectOption>
+  </DropdownSelect>
+</Showcase>

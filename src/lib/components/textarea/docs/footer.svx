@@ -1,0 +1,13 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.ta_component_props_title()}
+
+| **Name**           | **Type**   | **Description**                              |
+| ------------------ | ---------- | -------------------------------------------- |
+| `placeholder`      | `string`   | {m.ta_props_placeholder_description()}       |
+| `resize`           | `string`   | {m.ta_props_resize_description()}            |
+| `onChange`         | `function` | {m.ta_props_onchange_description()}          |
+| `element`          |            | {m.ta_props_element_description()}           |
+| Element Attributes |            | {m.ta_props_elementattributes_description()} |

@@ -172,6 +172,21 @@
 					gap: 0.5rem;
 				}
 			}
+
+			@media (max-width: 768px) {
+				padding: 0.75rem 1rem;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+				align-items: center;
+				& .logo-link .logo {
+					max-width: 120px;
+				}
+				& nav {
+					width: 100%;
+					flex-wrap: wrap;
+					justify-content: space-between;
+				}
+			}
 		}
 	}
 </style>

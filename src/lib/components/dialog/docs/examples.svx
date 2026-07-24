@@ -1,0 +1,46 @@
+<script lang="ts">
+  import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent, DialogActions, Button } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+
+  let actionsDialog = $state();
+
+  const actionsCode = `
+<script>
+  import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent, DialogActions, Button } from 'fluentui-svelte';
+  let dialog = $state();
+<\/script>
+
+<Dialog bind:this={dialog}>
+  <DialogTrigger>Actions Dialog</DialogTrigger>
+  <DialogSurface>
+    <DialogTitle>Dialog Title</DialogTitle>
+    <DialogContent>
+      <p>Dialog body content.</p>
+    </DialogContent>
+    <DialogActions fluid>
+      <Button style="flex: 1 1 auto;">Save</Button>
+      <Button style="flex: 1 1 auto;" appearance="standard" onclick={() => dialog.closeDialog()}>Close</Button>
+    </DialogActions>
+  </DialogSurface>
+</Dialog>`;
+</script>
+
+### With Actions
+
+Add a `DialogActions` region to render action buttons in the dialog footer. Use `bind:this` on the `Dialog` to call `closeDialog()` programmatically.
+
+<Showcase columns={1} minHeight="250px" code={actionsCode}>
+  <Dialog bind:this={actionsDialog}>
+    <DialogTrigger>Actions Dialog</DialogTrigger>
+    <DialogSurface>
+      <DialogTitle>Dialog Title</DialogTitle>
+      <DialogContent>
+        <p>Dialog body content.</p>
+      </DialogContent>
+      <DialogActions fluid>
+        <Button style="flex: 1 1 auto;">Save</Button>
+        <Button style="flex: 1 1 auto;" appearance="standard" onclick={() => actionsDialog.closeDialog()}>Close</Button>
+      </DialogActions>
+    </DialogSurface>
+  </Dialog>
+</Showcase>

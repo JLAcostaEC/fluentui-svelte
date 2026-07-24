@@ -1,0 +1,71 @@
+<script lang="ts">
+  import { TreeView, TreeViewItem, TreeViewItemContent } from '$lib/index.js';
+
+  let openItems = $state(['fruits']);
+  let checkedItems = $state<string[]>([]);
+
+  const selectionCode = `
+<TreeView selectionMode="multiple">
+  <TreeViewItem id="fruits" type="branch">
+    <TreeViewItemContent>Fruits</TreeViewItemContent>
+    <TreeView>
+      <TreeViewItem id="apple">
+        <TreeViewItemContent>Apple</TreeViewItemContent>
+      </TreeViewItem>
+    </TreeView>
+  </TreeViewItem>
+</TreeView>`;
+
+  const controlledCode = `
+<script>
+  let openItems = $state(['fruits']);
+  let checkedItems = $state([]);
+<\/script>
+
+<TreeView bind:openItems bind:checkedItems selectionMode="multiple">
+  <TreeViewItem id="fruits" type="branch">
+    <TreeViewItemContent>Fruits</TreeViewItemContent>
+    <TreeView>
+      <TreeViewItem id="apple">
+        <TreeViewItemContent>Apple</TreeViewItemContent>
+      </TreeViewItem>
+    </TreeView>
+  </TreeViewItem>
+</TreeView>`;
+</script>
+
+### Checkable Items
+
+Set `selectionMode="multiple"` to render checkboxes on selectable items.
+
+<TreeView selectionMode="multiple">
+  <TreeViewItem id="fruits" type="branch">
+    <TreeViewItemContent>Fruits</TreeViewItemContent>
+    <TreeView>
+      <TreeViewItem id="apple">
+        <TreeViewItemContent>Apple</TreeViewItemContent>
+      </TreeViewItem>
+      <TreeViewItem id="banana">
+        <TreeViewItemContent>Banana</TreeViewItemContent>
+      </TreeViewItem>
+    </TreeView>
+  </TreeViewItem>
+</TreeView>
+
+### Controlling Open and Checked State
+
+Use the bindable `openItems` and `checkedItems` props on the root `TreeView` to control state programmatically.
+
+<TreeView bind:openItems bind:checkedItems selectionMode="multiple">
+  <TreeViewItem id="fruits" type="branch">
+    <TreeViewItemContent>Fruits</TreeViewItemContent>
+    <TreeView>
+      <TreeViewItem id="apple">
+        <TreeViewItemContent>Apple</TreeViewItemContent>
+      </TreeViewItem>
+      <TreeViewItem id="banana">
+        <TreeViewItemContent>Banana</TreeViewItemContent>
+      </TreeViewItem>
+    </TreeView>
+  </TreeViewItem>
+</TreeView>

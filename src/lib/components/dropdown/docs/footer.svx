@@ -1,0 +1,20 @@
+## Component Props
+
+| **Name**          | **Type**                | **Description**                                                          |
+| ----------------- | ----------------------- | ------------------------------------------------------------------------ |
+| `value`           | bindable `string \| string[]` | The selected value, or an array of values when `multiple` is set.  |
+| `multiple`        | `boolean`               | Allow selecting more than one option.                                    |
+| `placeholder`     | `string`                | Text shown when no option is selected. Default: `'Select an option'`.    |
+| `disabled`        | `boolean`               | Disables user interaction.                                               |
+| `flyoutMaxHeight` | `number`                | Maximum height of the options flyout before it scrolls.                  |
+| `name`            | `string`                | Name of the underlying form control.                                     |
+| `ref`             | bindable `HTMLElement`  | The DOM reference of the dropdown element.                               |
+| `children`        | `Snippet`               | The `DropdownOption` items to render.                                    |
+
+## DropdownOption Props
+
+| **Name**   | **Type**  | **Description**                                                                 |
+| ---------- | --------- | ------------------------------------------------------------------------------- |
+| `value`    | `string`  | The value of the option, used for selection.                                    |
+| `text`     | `string`  | Plain-text label used to display the selection when the flyout is closed.       |
+| `children` | `Snippet` | The content rendered for the option (can be rich content such as a `Persona`).  |

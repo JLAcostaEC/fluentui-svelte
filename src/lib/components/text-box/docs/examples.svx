@@ -1,0 +1,62 @@
+<script lang="ts">
+  import { TextBox } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+
+  const typeCode = `
+<TextBox type="text" placeholder="Text" />
+<TextBox type="search" placeholder="Search" />
+<TextBox type="password" placeholder="Password" />
+<TextBox type="number" placeholder="Number" />`;
+
+  const readonlyCode = `<TextBox readonly value="Read-only value" />`;
+
+  const hideButtonsCode = `<TextBox type="search" hideActionButtons placeholder="No action buttons" />`;
+</script>
+
+### {m.tb_type_title()}
+
+{m.tb_type_description()}
+
+<Showcase code={typeCode}>
+  <TextBox type="text" placeholder="Text" />
+  <TextBox type="search" placeholder="Search" />
+  <TextBox type="password" placeholder="Password" />
+  <TextBox type="number" placeholder="Number" />
+</Showcase>
+
+### {m.tb_input_element_title()}
+
+{m.tb_input_element_description()}
+
+### {m.tb_readonly_title()}
+
+{m.tb_readonly_description()}
+
+<Showcase columns={1} code={readonlyCode}>
+  <TextBox readonly value="Read-only value" />
+</Showcase>
+
+### {m.tb_placeholder_title()}
+
+{m.tb_placeholder_description()}
+
+### {m.tb_hide_buttons_title()}
+
+{m.tb_hide_buttons_description()}
+
+<Showcase columns={1} code={hideButtonsCode}>
+  <TextBox type="search" hideActionButtons placeholder="No action buttons" />
+</Showcase>
+
+### {m.tb_query_submitted_title()}
+
+{m.tb_query_submitted_description()}
+
+### {m.tb_text_changed_title()}
+
+{m.tb_text_changed_description()}
+
+### {m.tb_on_clear_title()}
+
+{m.tb_on_clear_description()}

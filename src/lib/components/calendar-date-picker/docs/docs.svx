@@ -1,0 +1,29 @@
+<script lang="ts">
+  import { CalendarDatePicker } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Calendar Date Picker
+
+{m.cdp_description()}
+
+<Showcase columns={1}>
+  <CalendarDatePicker />
+</Showcase>
+
+## Usage
+
+```svelte
+<script>
+	import { CalendarDatePicker } from 'fluentui-svelte';
+
+	let value = $state(null);
+</script>
+
+<CalendarDatePicker bind:value />
+```
+
+## Component API
+
+The `CalendarDatePicker` combines a button trigger with a `CalendarView` popup. Clicking the trigger opens the calendar, and selecting a day updates the bound `value` and closes the popup. Because it builds on `CalendarView`, calendar props such as `blackoutDates`, `minDate`, `maxDate`, `weekStart` and `headers` are forwarded straight to the popup calendar. You can see the full list in the [Component Props](#component-props) table below.

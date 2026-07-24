@@ -1,0 +1,18 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.expander_component_props_title()}
+
+| **Name**      | **Type**                | **Description**                              |
+| ------------- | ----------------------- | -------------------------------------------- |
+| `header`      | `string`                | {m.expander_props_header_description()}      |
+| `description` | `string`                | {m.expander_props_description_description()} |
+| `direction`   | `string`                | {m.expander_props_direction_description()}   |
+| `justify`     | `boolean`               | {m.expander_props_justify_description()}     |
+| `disabled`    | `boolean`               | {m.expander_props_disabled_description()}    |
+| `animation`   | `object`                | {m.expander_props_animation_description()}   |
+| `expanded`    | `boolean`               | {m.expander_props_expanded_description()}    |
+| `element`     | `HTMLDetailsElement`    | {m.expander_props_element_description()}     |
+| `Icon`        | `Snippet` &vert; `Component` | {m.expander_props_icon_description()}   |
+| `children`    | `Snippet`               | {m.expander_props_children_description()}    |

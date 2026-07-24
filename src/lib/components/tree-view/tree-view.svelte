@@ -184,12 +184,6 @@
 	});
 </script>
 
-<!--
-$config: {
-  "status": "Experimental",
-  "icon": "TextBulletListTreeRegular"
-}
--->
 <!-- Render only when necessary (virtualizer perf) -->
 {#if _state.forceVirtualRender || (config.virtualized && (!IS_SUB_TREE || ITEM_CONTEXT?.open)) || !config.virtualized}
 	<ul

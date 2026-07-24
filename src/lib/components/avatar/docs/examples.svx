@@ -1,0 +1,85 @@
+<script lang="ts">
+  import { Avatar } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+  import { ClockRegular } from 'fluentui-icons-svelte';
+
+  const imageCode = `
+<Avatar
+  active="active"
+  size={56}
+  name="FluentUI Svelte"
+  image={{ src: 'https://placehold.co/120x120/jpeg' }}
+  badge={{ status: 'do-not-disturb' }}
+/>`;
+
+  const iconCode = `
+<script>
+  import { ClockRegular } from 'fluentui-icons-svelte';
+<\/script>
+
+<Avatar active="active" size={56} name="FluentUI Svelte" icon={ClockRegular} color="information" />`;
+
+  const badgeCode = `
+<Avatar active="active" size={56} name="FluentUI Svelte" badge={{ status: 'available' }} />`;
+
+  const shapeCode = `
+<Avatar active="active" size={56} name="FluentUI Svelte" badge={{ status: 'available' }} />
+<Avatar active="active" size={56} name="FluentUI Svelte" badge={{ status: 'available' }} shape="rounded" />
+<Avatar active="active" size={56} name="FluentUI Svelte" badge={{ status: 'available' }} shape="square" />`;
+
+  const colorfulCode = `
+<Avatar active="active" size={56} name="FluentUI Svelte" color="colorful" />
+<Avatar active="active" size={56} name="FluentUI Svelte" color="colorful" />
+<Avatar active="active" size={56} name="FluentUI Svelte" color="colorful" />`;
+</script>
+
+### {m.avatar_image_title()}
+
+{m.avatar_image_description()}
+
+<Showcase columns={1} gap="40px" code={imageCode} autoCenter>
+  <Avatar
+    active="active"
+    size={56}
+    name="FluentUI Svelte"
+    image={{ src: 'https://placehold.co/120x120/jpeg' }}
+    badge={{ status: 'do-not-disturb' }}
+  />
+</Showcase>
+
+### {m.avatar_icon_title()}
+
+{m.avatar_icon_description()}
+
+<Showcase columns={1} gap="40px" code={iconCode} autoCenter>
+  <Avatar active="active" size={56} name="FluentUI Svelte" icon={ClockRegular} color="information" />
+</Showcase>
+
+### {m.avatar_badge_title()}
+
+{m.avatar_badge_description()}
+
+<Showcase columns={1} gap="40px" code={badgeCode} autoCenter>
+  <Avatar active="active" size={56} name="FluentUI Svelte" badge={{ status: 'available' }} />
+</Showcase>
+
+### {m.avatar_shape_title()}
+
+{m.avatar_shape_description()}
+
+<Showcase columns={3} gap="40px" code={shapeCode} autoCenter>
+  <Avatar active="active" size={56} name="FluentUI Svelte" badge={{ status: 'available' }} />
+  <Avatar active="active" size={56} name="FluentUI Svelte" badge={{ status: 'available' }} shape="rounded" />
+  <Avatar active="active" size={56} name="FluentUI Svelte" badge={{ status: 'available' }} shape="square" />
+</Showcase>
+
+### {m.avatar_colorful_title()}
+
+{m.avatar_colorful_description()}
+
+<Showcase columns={3} gap="40px" code={colorfulCode} autoCenter>
+  <Avatar active="active" size={56} name="FluentUI Svelte" color="colorful" />
+  <Avatar active="active" size={56} name="FluentUI Svelte" color="colorful" />
+  <Avatar active="active" size={56} name="FluentUI Svelte" color="colorful" />
+</Showcase>

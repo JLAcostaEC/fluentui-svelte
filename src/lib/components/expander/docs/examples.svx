@@ -1,0 +1,56 @@
+<script lang="ts">
+  import { Expander } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { InfoRegular } from 'fluentui-icons-svelte';
+  import { m } from '$i18n/messages.js';
+
+  const controllingExpansionCode = `
+<Expander header="Expander Title" expanded>
+  <p>This is the content of the expander</p>
+</Expander>`;
+
+  const openingDirectionCode = `
+<Expander header="Expander Title" direction="up">
+  <p>This is the content of the expander</p>
+</Expander>`;
+
+  const addingIconCode = `
+<script>
+  import { Expander } from 'fluentui-svelte';
+  import { InfoRegular } from 'fluentui-icons-svelte';
+<\/script>
+
+<Expander header="Expander With Icon" Icon={InfoRegular}>
+  <p>This is the content of the expander</p>
+</Expander>`;
+</script>
+
+### {m.expander_controlling_expansion_title()}
+
+{m.expander_controlling_expansion_description()}
+
+<Showcase columns={1} code={controllingExpansionCode}>
+  <Expander header="Expander Title" expanded>
+    <p style="padding: 1rem">This is the content of the expander</p>
+  </Expander>
+</Showcase>
+
+### {m.expander_opening_direction_title()}
+
+{m.expander_opening_direction_description()}
+
+<Showcase columns={1} code={openingDirectionCode}>
+  <Expander header="Expander Title" direction="up">
+    <p style="padding: 1rem">This is the content of the expander</p>
+  </Expander>
+</Showcase>
+
+### {m.expander_adding_an_icon_title()}
+
+{m.expander_adding_an_icon_description()}
+
+<Showcase columns={1} code={addingIconCode}>
+  <Expander header="Expander With Icon" Icon={InfoRegular}>
+    <p style="padding: 1rem">This is the content of the expander</p>
+  </Expander>
+</Showcase>

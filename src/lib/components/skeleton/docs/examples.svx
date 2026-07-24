@@ -1,0 +1,47 @@
+<script lang="ts">
+  import { Skeleton } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+
+  const animationCode = `<Skeleton style="width: 72px;" animation="pulse" />`;
+  const justifyCode = `<Skeleton style="width: 120px;" justify />`;
+  const shapeCode = `
+<Skeleton style="width: 72px;" shape="circle" />
+<Skeleton style="width: 72px;" shape="rounded" />
+<Skeleton style="width: 72px;" shape="square" />`;
+  const asCode = `<Skeleton as="span" style="width: 72px;" />`;
+</script>
+
+### {m.skeleton_animation_title()}
+
+{m.skeleton_animation_description()}
+
+<Showcase columns={1} code={animationCode}>
+  <Skeleton style="width: 72px;" animation="pulse" />
+</Showcase>
+
+### {m.skeleton_justify_title()}
+
+{m.skeleton_justify_description()}
+
+<Showcase columns={1} code={justifyCode}>
+  <Skeleton style="width: 120px;" justify />
+</Showcase>
+
+### {m.skeleton_shape_title()}
+
+{m.skeleton_shape_description()}
+
+<Showcase code={shapeCode}>
+  <Skeleton style="width: 72px;" shape="circle" />
+  <Skeleton style="width: 72px;" shape="rounded" />
+  <Skeleton style="width: 72px;" shape="square" />
+</Showcase>
+
+### {m.skeleton_as_title()}
+
+{m.skeleton_as_description()}
+
+<Showcase columns={1} code={asCode}>
+  <Skeleton as="span" style="width: 72px;" />
+</Showcase>

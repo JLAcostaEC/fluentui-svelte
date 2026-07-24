@@ -1,0 +1,35 @@
+<script lang="ts">
+  import { Persona } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Persona
+
+{m.persona_description()}
+
+<Showcase columns={4} autoCenter>
+  <Persona name="John Doe" primaryText="Software Engineer" secondaryText="Intranet" tertiaryText="Team A" presence={{status: 'available'}} avatar={{ color: "colorful", idForColor: '' }} />
+  <Persona presenceOnly name="Presence Only" presence={{status: 'available'}} secondaryText="Available" />
+  <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="bottom" textAlign="center" />
+  <Persona name="Custom Size" size={24} />
+</Showcase>
+
+## {m.persona_usage_title()}
+
+```svelte
+<script>
+	import { Persona } from 'fluentui-svelte';
+</script>
+
+<Persona
+	name="John Doe"
+	primaryText="Software Engineer"
+	secondaryText="Intranet"
+	tertiaryText="Team A"
+	presence={{ status: 'available' }}
+	avatar={{ color: 'colorful' }}
+/>
+```
+
+## {m.persona_component_api_title()}

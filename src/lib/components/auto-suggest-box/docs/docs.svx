@@ -1,0 +1,62 @@
+<script lang="ts">
+  import { AutoSuggestBox, AutoSuggestBoxOption, InfoBar, Badge } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+  import { ParaglideMessage } from "@inlang/paraglide-js-svelte";
+</script>
+
+# AutoSuggestBox <Badge appearance="tint" color="attention">Beta</Badge>
+
+{m.asb_description()}
+
+<Showcase columns={1} >
+  <AutoSuggestBox
+    placeholder="Type a fruit..."
+    suggestionChosen={(e, item) => console.log('Suggestion chosen:', item)}
+    querySubmitted={(e, query) => console.log('Query submitted:', query)}
+  >
+    <AutoSuggestBoxOption index={0} value="Apple">Apple</AutoSuggestBoxOption>
+    <AutoSuggestBoxOption index={1} value="Banana">Banana</AutoSuggestBoxOption>
+    <AutoSuggestBoxOption index={2} value="Cherry">Cherry</AutoSuggestBoxOption>
+  </AutoSuggestBox>
+</Showcase>
+
+## {m.asb_usage_title()}
+
+```svelte
+<script>
+	import { AutoSuggestBox } from 'fluentui-svelte';
+</script>
+
+<AutoSuggestBox placeholder="Type a fruit...">
+	<AutoSuggestBoxOption index={0} value="Apple">Apple</AutoSuggestBoxOption>
+	<AutoSuggestBoxOption index={1} value="Banana">Banana</AutoSuggestBoxOption>
+	<AutoSuggestBoxOption index={2} value="Cherry">Cherry</AutoSuggestBoxOption>
+</AutoSuggestBox>
+```
+
+## {m.asb_component_api_title()}
+
+{m.asb_component_api_description_before_link()} <a href="#component-props">{m.asb_component_api_description_link_text()}</a>.
+
+### {m.asb_suggestions_title()}
+
+<p class="fs-docs">
+  <ParaglideMessage message={m.asb_suggestions_description} inputs={{}}>
+    {#snippet code({ children, options })}
+		  <code>
+			  {@render children?.()}
+		  </code>
+	  {/snippet}
+  </ParaglideMessage>
+</p>
+
+<InfoBar status="information" title={m.asb_keyboard_navigation_title()} style="multiline" hideCloseButton>
+  <p>{m.asb_keyboard_navigation_description()}</p>
+</InfoBar>
+
+<AutoSuggestBox placeholder="Type a fruit...">
+  <AutoSuggestBoxOption index={0} value="Apple">Apple</AutoSuggestBoxOption>
+  <AutoSuggestBoxOption index={1} value="Banana">Banana</AutoSuggestBoxOption>
+  <AutoSuggestBoxOption index={2} value="Cherry">Cherry</AutoSuggestBoxOption>
+</AutoSuggestBox>

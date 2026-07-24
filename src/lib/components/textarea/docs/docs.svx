@@ -1,0 +1,27 @@
+<script lang="ts">
+  import { TextArea } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# TextArea
+
+{m.ta_description()}
+
+<Showcase columns={1}>
+  <TextArea placeholder="Type your message here..." />
+</Showcase>
+
+## {m.ta_usage_title()}
+
+```svelte
+<script>
+	import { TextArea } from 'fluentui-svelte';
+</script>
+
+<TextArea placeholder="Type your message here..." />
+```
+
+## {m.ta_component_api_title()}
+
+{m.ta_component_api_description_before_link()} <a href="#component-props">{m.ta_component_api_description_link_text()}</a>.

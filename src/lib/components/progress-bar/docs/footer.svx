@@ -1,0 +1,16 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.pbar_component_props_title()}
+
+| **Name**                | **Type**                           | **Description**                                               |
+| ----------------------- | ---------------------------------- | ------------------------------------------------------------- |
+| `value`                 | bindable `number &vert; undefined` | {m.pbar_props_value_description()} |
+| `indeterminate`         | `boolean`                          | {m.pbar_props_indeterminate_description()} |
+| `hideRail`              | `boolean`                          | {m.pbar_props_hiderail_description()} |
+| `status`                | `'paused' &vert; 'error'`          | {m.pbar_props_status_description()} |
+| `element`               | bindable `SVGElement`              | {m.pbar_props_element_description()} |
+| `railElement`           | bindable `SVGRectElement`          | {m.pbar_props_railelement_description()} |
+| `trackElement`          | bindable `SVGRectElement`          | {m.pbar_props_trackelement_description()} |
+| `secondaryTrackElement` | bindable `SVGRectElement`          | {m.pbar_props_secondarytrackelement_description()} |

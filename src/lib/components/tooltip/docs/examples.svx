@@ -1,0 +1,59 @@
+<script lang="ts">
+  import { Tooltip, Button } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+
+  const withArrowCode = `
+<Tooltip content="Tooltip with arrow" relationship="description" withArrow>
+  {#snippet children(attrs)}
+    <Button {...attrs}>With arrow</Button>
+  {/snippet}
+</Tooltip>`;
+
+  const delayCode = `
+<Tooltip content="Delayed tooltip" openDelay={500} hideDelay={200}>
+  {#snippet children(attrs)}
+    <Button {...attrs}>Delayed</Button>
+  {/snippet}
+</Tooltip>`;
+</script>
+
+### {m.tooltip_content_title()}
+
+{m.tooltip_content_description()}
+
+### {m.tooltip_position_title()}
+
+{m.tooltip_position_description()}
+
+### {m.tooltip_with_arrow_title()}
+
+{m.tooltip_with_arrow_description()}
+
+<Showcase columns={1} minHeight="200px" code={withArrowCode}>
+  <Tooltip content="Tooltip with arrow" relationship="description" withArrow>
+    {#snippet children(attrs)}
+      <Button {...attrs}>With arrow</Button>
+    {/snippet}
+  </Tooltip>
+</Showcase>
+
+### {m.tooltip_delay_title()}
+
+{m.tooltip_delay_description()}
+
+<Showcase columns={1} minHeight="200px" code={delayCode}>
+  <Tooltip content="Delayed tooltip" openDelay={500} hideDelay={200}>
+    {#snippet children(attrs)}
+      <Button {...attrs}>Delayed</Button>
+    {/snippet}
+  </Tooltip>
+</Showcase>
+
+### {m.tooltip_on_visible_change_title()}
+
+{m.tooltip_on_visible_change_description()}
+
+### {m.tooltip_relationship_title()}
+
+{m.tooltip_relationship_description()}

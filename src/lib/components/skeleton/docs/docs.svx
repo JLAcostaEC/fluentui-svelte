@@ -1,0 +1,32 @@
+<script lang="ts">
+  import { Skeleton } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Skeleton
+
+{m.skeleton_description()}
+
+<Showcase columns={1}>
+  <Skeleton style="width: 24px;" />
+  <Skeleton style="width: 42px;" />
+  <Skeleton style="width: 72px;" />
+</Showcase>
+
+## {m.skeleton_usage_title()}
+
+{m.skeleton_usage_description()}
+
+```svelte
+<script>
+	import { Skeleton } from 'fluentui-svelte';
+</script>
+
+<Skeleton style="width: 42px;" />
+<Skeleton justify style="height: 12px;" />
+```
+
+## {m.skeleton_component_api_title()}
+
+{m.skeleton_component_api_description_before_link()} <a href="#component-props">{m.skeleton_component_api_description_link_text()}</a>.

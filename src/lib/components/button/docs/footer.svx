@@ -1,0 +1,67 @@
+<script lang="ts">
+  import { SplitButton } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.btn_component_props_title()}
+
+| **Name**            | **Type**                 | **Description**                               |
+| ------------------- | ------------------------ | --------------------------------------------- |
+| `ref`               | `HTMLElement`            | {m.btn_props_ref_description()}               |
+| `as`                | `string`                 | {m.btn_props_as_description()}                |
+| `disabled`          | `boolean`                | {m.btn_props_disabled_description()}          |
+| `shape`             | `string`                 | {m.btn_props_shape_description()}             |
+| `appearance`        | `string`                 | {m.btn_props_appearance_description()}        |
+| `disabledFocusable` | `boolean`                | {m.btn_props_disabledfocusable_description()} |
+| `isMenuButton`      | `boolean`                | {m.btn_props_ismenubutton_description()}      |
+| `indicatorPosition` | `'before'` \| `'after'`  | {m.btn_props_indicatorposition_description()} |
+| `indicatorIcon`     | `Snippet` \| `Component` | {m.btn_props_indicatoricon_description()}     |
+| Element Attributes  |                          | {m.btn_props_elementattributes_description()} |
+
+## {m.btn_split_button_title()}
+
+{m.btn_split_button_description()}
+
+### {m.btn_split_button_usage_title()}
+
+```svelte
+<script>
+	import { SplitButton } from 'fluentui-svelte';
+</script>
+
+<SplitButton />
+<SplitButton appearance="standard" />
+<SplitButton appearance="subtle" />
+<SplitButton shape="circular" />
+<SplitButton shape="circular" appearance="standard" />
+<SplitButton shape="circular" appearance="subtle" />
+```
+
+<Showcase minHeight="200px" minZoom={1}>
+  <SplitButton />
+  <SplitButton appearance="standard" />
+  <SplitButton appearance="subtle" />
+  <SplitButton shape="circular" />
+  <SplitButton shape="circular" appearance="standard" />
+  <SplitButton shape="circular" appearance="subtle" />
+</Showcase>
+
+### {m.btn_adding_a_menu_title()}
+
+{m.btn_adding_a_menu_description_before_link()} <a href="./menu">{m.btn_adding_a_menu_description_link_text()}</a> {m.btn_adding_a_menu_description_after_link()}
+
+### {m.btn_split_button_component_props_title()}
+
+| **Name**                  | **Type**                | **Description**                                      |
+| ------------------------- | ----------------------- | ---------------------------------------------------- |
+| `wrapperRef`              | `HTMLDivElement`        | {m.btn_props_wrapperref_description()}               |
+| `primaryButtonRef`        | `HTMLButtonElement`     | {m.btn_props_primarybuttonref_description()}         |
+| `primaryButtonProps`      | `ButtonProps<'button'>` | {m.btn_props_primarybuttonprops_description()}       |
+| `menuTriggerRef`          | `HTMLButtonElement`     | {m.btn_props_menutriggerref_description()}           |
+| `menuTriggerProps`        | `ButtonProps<'button'>` | {m.btn_props_menutriggerprops_description()}         |
+| `class`                   | `string`                | {m.btn_props_class_description()}                    |
+| `shape`                   | `string`                | {m.btn_props_shape_description()}                    |
+| `appearance`              | `string`                | {m.btn_props_appearance_description()}               |
+| `disabled`                | `boolean`               | {m.btn_props_disabled_description()}                 |
+| WrapperElement Attributes | HTMLElement Attributes  | {m.btn_props_wrapperelementattributes_description()} |

@@ -1,0 +1,15 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.tswitch_component_props_title()}
+
+| **Name**           | **Type**              | **Description**                                   |
+| ------------------ | --------------------- | ------------------------------------------------- |
+| `ref`              | `HTMLInputElement`    | {m.tswitch_props_ref_description()}               |
+| `label`            | `string`              | {m.tswitch_props_label_description()}             |
+| `labelAttributes`  | `HTMLLabelAttributes` | {m.tswitch_props_labelattributes_description()}   |
+| `labelElement`     | `HTMLLabelElement`    | {m.tswitch_props_labelelement_description()}      |
+| `disabled`         | `boolean`             | {m.tswitch_props_disabled_description()}          |
+| `checked`          | `boolean`             | {m.tswitch_props_checked_description()}           |
+| Element Attributes | `object`              | {m.tswitch_props_elementattributes_description()} |

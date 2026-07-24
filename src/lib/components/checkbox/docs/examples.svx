@@ -1,0 +1,68 @@
+<script lang="ts">
+  import { Checkbox } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+
+  const labelCode = `
+<Checkbox />
+<Checkbox wrapperAs="label">FluentUI Checkbox</Checkbox>
+<Checkbox wrapperAs="label">Another Checkbox</Checkbox>`;
+
+  const checkedCode = `
+<Checkbox wrapperAs="label">Unchecked</Checkbox>
+<Checkbox wrapperAs="label" checked>Checked</Checkbox>`;
+
+  const indeterminateCode = `
+<Checkbox wrapperAs="label" indeterminate>Indeterminate</Checkbox>`;
+
+  const disabledCode = `
+<Checkbox wrapperAs="label" disabled>Disabled</Checkbox>
+<Checkbox wrapperAs="label" checked disabled>Checked & Disabled</Checkbox>`;
+
+  const valueCode = `
+<Checkbox wrapperAs="label" value="checkbox-value">Checkbox with Value</Checkbox>`;
+</script>
+
+### {m.cb_label_title()}
+
+{m.cb_label_description()}
+
+<Showcase minHeight="100px" code={labelCode}>
+  <Checkbox />
+  <Checkbox wrapperAs="label">FluentUI Checkbox</Checkbox>
+  <Checkbox wrapperAs="label">Another Checkbox</Checkbox>
+</Showcase>
+
+### {m.cb_checked_title()}
+
+{m.cb_checked_description()}
+
+<Showcase minHeight="100px" columns={2} code={checkedCode}>
+  <Checkbox wrapperAs="label">Unchecked</Checkbox>
+  <Checkbox wrapperAs="label" checked>Checked</Checkbox>
+</Showcase>
+
+### {m.cb_indeterminate_title()}
+
+{m.cb_indeterminate_description()}
+
+<Showcase minHeight="100px" columns={1} code={indeterminateCode}>
+  <Checkbox wrapperAs="label" indeterminate>Indeterminate</Checkbox>
+</Showcase>
+
+### {m.cb_disabled_title()}
+
+{m.cb_disabled_description()}
+
+<Showcase minHeight="100px" code={disabledCode}>
+  <Checkbox wrapperAs="label" disabled>Disabled</Checkbox>
+  <Checkbox wrapperAs="label" checked disabled>Checked & Disabled</Checkbox>
+</Showcase>
+
+### {m.cb_value_title()}
+
+{m.cb_value_description()}
+
+<Showcase minHeight="100px" columns={1} code={valueCode}>
+  <Checkbox wrapperAs="label" value="checkbox-value">Checkbox with Value</Checkbox>
+</Showcase>

@@ -1,0 +1,29 @@
+<script lang="ts">
+  import { RadioButton } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Radio Button
+
+{m.rb_description()}
+
+<Showcase columns={3} autoCenter>
+  <RadioButton label="Option 1" name="group1" value="A" checked />
+  <RadioButton label="Option 2" name="group1" value="B" />
+  <RadioButton label="Option 3" name="group1" value="C" disabled />
+</Showcase>
+
+## {m.rb_usage_title()}
+
+```svelte
+<script>
+	import { RadioButton } from 'fluentui-svelte';
+</script>
+
+<RadioButton label="Option 1" />
+```
+
+## {m.rb_component_api_title()}
+
+{m.rb_component_api_description()}

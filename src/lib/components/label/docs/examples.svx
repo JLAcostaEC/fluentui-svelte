@@ -1,0 +1,59 @@
+<script lang="ts">
+  import { Label } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+
+  const sizeCode = `
+<Label size="small" label="Small" />
+<Label size="medium" label="Medium" />
+<Label size="large" label="Large" />`;
+
+  const weightCode = `
+<Label weight="regular" label="Regular" />
+<Label weight="semibold" label="Semibold" />`;
+
+  const positionCode = `
+<Label labelPosition="before" label="Before" />
+<Label labelPosition="after" label="After" />
+<Label labelPosition="above" label="Above" />
+<Label labelPosition="below" label="Below" />`;
+
+  const requiredCode = `<Label label="Email" required={{ message: 'Required field' }} />`;
+</script>
+
+### Size
+
+Use the `size` prop to control the label text size.
+
+<Showcase code={sizeCode}>
+  <Label size="small" label="Small" />
+  <Label size="medium" label="Medium" />
+  <Label size="large" label="Large" />
+</Showcase>
+
+### Weight
+
+Use the `weight` prop to switch between a regular and a semibold label.
+
+<Showcase code={weightCode}>
+  <Label weight="regular" label="Regular" />
+  <Label weight="semibold" label="Semibold" />
+</Showcase>
+
+### Label Position
+
+Use the `labelPosition` prop to place the label text relative to the wrapped control.
+
+<Showcase columns={2} code={positionCode}>
+  <Label labelPosition="before" label="Before" />
+  <Label labelPosition="after" label="After" />
+  <Label labelPosition="above" label="Above" />
+  <Label labelPosition="below" label="Below" />
+</Showcase>
+
+### Required
+
+Pass a `required` object to mark the label as required and render a required indicator.
+
+<Showcase columns={1} code={requiredCode}>
+  <Label label="Email" required={{ message: 'Required field' }} />
+</Showcase>

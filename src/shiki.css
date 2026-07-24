@@ -1,10 +1,15 @@
 /* Shiki Syntax Highlighting */
 pre.shiki,
-table.fs-docs {
+table.fs-docs,
+code.shiki {
 	border: 1px solid var(--fs-card-stroke-default);
 	border-radius: var(--fs-control-overlay-border-radius);
 	padding: 1rem 3rem 1rem 1rem;
 	background-clip: padding-box;
+	tab-size: 4;
+	& .line {
+		min-height: 1rem;
+	}
 }
 #docs table.fs-docs {
 	background-color: var(--fs-card-background-default) !important;

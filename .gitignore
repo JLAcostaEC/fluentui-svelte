@@ -36,4 +36,4 @@ project.inlang/cache/
 src/site/documentation/index.js
 
 # AI
-.claude
+.claude/*.local.*

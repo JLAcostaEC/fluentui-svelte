@@ -54,7 +54,9 @@
 
 <style>
 	#banner {
-		width: 50%;
+		flex: 1 1 50%;
+		/* Without this the flyout's min-content width pushes the whole page wider. */
+		min-width: 0;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -62,11 +64,13 @@
 		padding: 0 4rem 8rem 2rem;
 		z-index: 1;
 		& .logo {
+			width: 100%;
 			max-width: 400px;
 			height: auto;
 		}
 		& .buttons {
 			display: flex;
+			flex-wrap: wrap;
 			gap: 1rem;
 			& :global(.fs-button) {
 				padding-inline: 1.5rem;
@@ -74,7 +78,8 @@
 		}
 	}
 	#showcase {
-		width: 50%;
+		flex: 1 1 50%;
+		min-width: 0;
 		overflow: hidden;
 		padding-right: 2rem;
 		display: flex;
@@ -87,11 +92,70 @@
 			transform: rotateX(5deg) rotateY(-5.5deg) rotateZ(3deg);
 		}
 	}
+
 	.bg-effect {
 		position: fixed;
 		top: -1000px;
 		left: -1000px;
 		width: 0;
 		height: 0;
+	}
+
+	/* Tablet: the two halves stop fitting side by side, so stack them. */
+	@media (max-width: 1024px) {
+		#banner {
+			flex-basis: 100%;
+			align-items: center;
+			text-align: center;
+			padding: 2rem 2rem 1.5rem;
+			& .logo {
+				max-width: 340px;
+			}
+			& p {
+				max-width: 52ch;
+			}
+			& .buttons {
+				justify-content: center;
+			}
+		}
+		#showcase {
+			flex-basis: 100%;
+			padding: 0 2rem 3rem;
+			justify-content: center;
+			/* The tilt only reads well next to the banner; flat once stacked. */
+			perspective: none;
+			& :global(.fs-flyout) {
+				transform: none;
+			}
+		}
+	}
+
+	@media (max-width: 768px) {
+		#banner {
+			gap: 0.75rem;
+			padding: 1.5rem 1rem 1rem;
+			& .logo {
+				max-width: 280px;
+			}
+			& .title {
+				font-size: var(--fs-title2-font-size);
+				line-height: var(--fs-title2-line-height);
+			}
+		}
+		#showcase {
+			padding: 0 1rem 2rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		#banner {
+			& .title {
+				font-size: var(--fs-subtitle-font-size);
+				line-height: var(--fs-subtitle-line-height);
+			}
+			& .buttons :global(.fs-button) {
+				flex: 1 1 auto;
+			}
+		}
 	}
 </style>

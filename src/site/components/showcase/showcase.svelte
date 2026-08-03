@@ -42,7 +42,7 @@
 	let showCode = $state(false);
 </script>
 
-<div class="showcase-wrapper">
+<div class={["showcase-wrapper", code && 'has-code']}>
 	{#if code}
 		<ToggleSwitch label="View Code" bind:checked={showCode} labelAttributes={{ class: `switch-view ${showCode ? 'show' : ''}` }} />
 	{/if}
@@ -97,6 +97,9 @@
 		flex-direction: column;
 		width: 100%;
 		position: relative;
+		&.has-code :global(.shiki){
+			padding: 4rem 1rem 1rem !important;
+		}
 	}
 	.showcase {
 		position: relative;
@@ -115,19 +118,20 @@
 	.inner {
 		display: flex;
 		justify-content: center;
+		flex: 1;
 		align-items: center;
-		position: absolute;
+		position: relative;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
 		min-width: max-content;
-		min-height: max-content;
+		min-height: 100%;
 		max-width: 100%;
 	}
 	.showcase-grid {
 		transform-origin: 40% 40%;
-		margin: 24px;
+		margin: 3rem 2rem 2rem;
 		position: relative;
 		display: grid;
 		place-items: center;
@@ -151,8 +155,17 @@
 		top: 14px;
 		right: 5px;
 		transition: right var(--fs-normal-duration) var(--fs-point-to-point);
+		&::before{
+			content: '';
+			position: absolute;
+			inset: -0.25rem;
+			z-index: -1;
+			border-radius: 999px;
+			padding: 0.5rem;
+			backdrop-filter: blur(8px);
+		}
 		&.show {
-			right: 35px;
+			right: 45px;
 		}
 	}
 </style>

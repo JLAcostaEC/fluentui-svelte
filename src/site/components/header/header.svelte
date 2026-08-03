@@ -4,7 +4,7 @@
 	import { toggleMode, mode } from 'mode-watcher';
 	import { Button, Menu, MenuItem, MenuList, MenuPopover, MenuTrigger, Tooltip } from '$lib/index.js';
 	import { getLocale, locales, localizeHref } from '$i18n/runtime.js';
-	import { LocalLanguageRegular, WeatherMoonFilled, WeatherSunnyFilled } from 'fluentui-icons-svelte';
+	import { WeatherMoonFilled, WeatherSunnyFilled } from 'fluentui-icons-svelte';
 	import PageLoader from '$site/components/page-loader/page-loader.svelte';
 	import type { Pathname } from '$app/types';
 
@@ -65,7 +65,7 @@
 
 <header id="header">
 	<section class="container">
-		<a href={resolve(localizeHref('/'))} class="logo-link">
+		<a href={resolve(localizeHref('/') as any)} class="logo-link">
 			<picture>
 				<source
 					srcset="/images/banner-white.png"
@@ -76,9 +76,54 @@
 			</picture>
 		</a>
 		<nav>
-			<Button as="a" appearance={page.url.pathname === '/' ? 'accent' : 'subtle'} href={localizeHref('/')}>Home</Button>
-			<Button as="a" appearance={page.url.pathname === '/docs' ? 'accent' : 'subtle'} href={localizeHref('/docs')}>Docs</Button>
-			<Button as="a" appearance={page.url.pathname === '/about' ? 'accent' : 'subtle'} href={localizeHref('/about')}>About</Button>
+			<div class="nav-links">
+				<Button as="a" appearance={page.url.pathname === '/' ? 'accent' : 'subtle'} href={localizeHref('/')}>Home</Button>
+				<Button as="a" appearance={page.url.pathname === '/docs' ? 'accent' : 'subtle'} href={localizeHref('/docs')}>Docs</Button>
+				<Button as="a" appearance={page.url.pathname === '/about' ? 'accent' : 'subtle'} href={localizeHref('/about')}>About</Button>
+			</div>
+			<!-- TODO: this is not SEO friendly -->
+			 <Menu>
+				<MenuTrigger>
+					{#snippet children({ state, menuTriggerProps })}
+						<Tooltip withArrow content="Navigate to a different page">
+							{#snippet children(attrs)}
+								<Button
+									bind:ref={state.ref as HTMLButtonElement}
+									{...menuTriggerProps}
+									appearance="subtle"
+									aria-label="Navigate to a different page"
+									{...attrs}
+								>
+									...
+								</Button>
+							{/snippet}
+						</Tooltip>
+					{/snippet}
+				</MenuTrigger>
+				<MenuPopover placement="bottom-end">
+					<MenuList>
+						<MenuItem
+							as="a"
+							href="/"
+						>
+							Home
+						</MenuItem>
+						<MenuItem
+							as="a"
+							href="/docs"
+						>
+							Docs
+						</MenuItem>
+						<MenuItem
+							as="a"
+							href="/about"
+						>
+							About
+						</MenuItem>
+					</MenuList>
+				</MenuPopover>
+			</Menu>
+
 			<Menu>
 				<MenuTrigger>
 					{#snippet children({ state, menuTriggerProps })}
@@ -92,7 +137,6 @@
 									{...attrs}
 								>
 									{@render flag(locale)}
-									<LocalLanguageRegular width="1em" height="1em" style="pointer-events: none;" />
 								</Button>
 							{/snippet}
 						</Tooltip>
@@ -100,8 +144,9 @@
 				</MenuTrigger>
 				<MenuPopover placement="bottom-end">
 					<MenuList>
+						{@const localeNames = new Intl.DisplayNames(locales, { type: 'language' })}
 						{#each locales as locale (locale)}
-							{@const localeName = new Intl.DisplayNames([locale], { type: 'language' }).of(locale)!}
+							{@const localeName = localeNames.of(locale)!}
 							<MenuItem
 								class="language-selector"
 								as="a"
@@ -168,6 +213,10 @@
 			& nav {
 				display: flex;
 				gap: 0.5rem;
+				& .nav-links {
+					display: flex;
+					gap: 0.5rem;
+				}
 				& :global(.language-selector .label) {
 					gap: 0.5rem;
 				}
@@ -182,9 +231,11 @@
 					max-width: 120px;
 				}
 				& nav {
-					width: 100%;
 					flex-wrap: wrap;
 					justify-content: space-between;
+					& .nav-links {
+						display: none;
+					}
 				}
 			}
 		}

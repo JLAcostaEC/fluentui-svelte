@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { DEFAULT_THEMES, getHighlighter } from '$site/utils/highlighter.js';
+	import { getHighlighter } from '$site/utils/highlighter.js';
 	import { fsShikiCopyButton } from '../../../../scripts/shiki-copy-button.js';
 
 	let {
@@ -33,5 +33,6 @@
 {#await highlighted}
 	<pre class="shiki"><code>{code.trim()}</code></pre>
 {:then html}
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 	{@html html}
 {/await}

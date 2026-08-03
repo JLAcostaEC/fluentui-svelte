@@ -305,8 +305,7 @@
 		<CaretUpFilled />
 	</Button>
 	<div
-		class="fs-dynamic-carousel-viewport"
-		class:scrolling
+		class={['fs-dynamic-carousel-viewport', { scrolling }]}
 		{@attach bindGestures}
 		onkeydown={handleKeydown}
 		role="listbox"
@@ -318,9 +317,11 @@
 			{#each virtualItems as item (item.key)}
 				<div
 					id="carousel-item-{item.key}"
-					class="fs-dynamic-carousel-item"
-					class:selected={item.realIndex === currentSelectedIndex}
-					class:disabled={disabledSet.has(item.realIndex)}
+					class={[
+						'fs-dynamic-carousel-item',
+						item.realIndex === currentSelectedIndex && 'selected',
+						disabledSet.has(item.realIndex) && 'disabled'
+					]}
 					role="option"
 					tabindex="-1"
 					aria-selected={item.realIndex === currentSelectedIndex}

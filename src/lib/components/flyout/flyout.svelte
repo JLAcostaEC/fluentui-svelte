@@ -85,7 +85,7 @@ A contextual popup that displays a set of actions or options. It appears when us
   </Flyout>
     ```
 -->
-<div class="fs-flyout {roundClass} {classes}" class:floating bind:this={ref} {...attributes}>
+<div class={['fs-flyout', roundClass, classes, { floating }]} bind:this={ref} {...attributes}>
 	{@render children?.()}
 </div>
 

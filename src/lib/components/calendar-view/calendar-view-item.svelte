@@ -18,12 +18,7 @@
 <td class="fs-calendar-view-item variant-{variant === 'day' ? 'day' : 'month-year'}" role="gridcell" {...attributes}>
 	<button
 		type="button"
-		class="calendar-item-button"
-		class:selected
-		class:disabled
-		class:current
-		class:out-of-range={outOfRange}
-		class:blackout
+		class={['calendar-item-button', { selected, disabled, current, blackout }, outOfRange && 'out-of-range']}
 		aria-disabled={disabled}
 		{disabled}
 		{...buttonAttributes}

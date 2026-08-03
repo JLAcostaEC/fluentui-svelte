@@ -16,10 +16,14 @@
 </script>
 
 <label
-	class="fs-label size-{size} weight-{weight} {classes}"
-	class:column={labelPosition === 'above' || labelPosition === 'below'}
-	class:disabled
-	class:required
+	class={[
+		'fs-label',
+		`size-${size}`,
+		`weight-${weight}`,
+		classes,
+		{ disabled, required },
+		(labelPosition === 'above' || labelPosition === 'below') && 'column'
+	]}
 	bind:this={ref}
 	{...attributes}
 >

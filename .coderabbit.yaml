@@ -1,0 +1,204 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+
+language: en-US
+tone_instructions: >-
+  Be concise and technical. Focus on correctness, accessibility (WAI-ARIA),
+  Svelte 5 runes idioms and public API stability. Skip nitpicks already covered
+  by Prettier or ESLint.
+early_access: false
+
+reviews:
+  profile: chill
+  request_changes_workflow: false
+  high_level_summary: true
+  review_status: true
+  commit_status: true
+  collapse_walkthrough: false
+  changed_files_summary: true
+  sequence_diagrams: false
+  estimate_code_review_effort: true
+  assess_linked_issues: true
+  related_issues: true
+  related_prs: true
+  suggested_labels: true
+  auto_apply_labels: false
+  suggested_reviewers: false
+  poem: false
+
+  auto_review:
+    enabled: false
+    auto_incremental_review: false
+    reviews.auto_review.labels: ['coderabbit']
+    drafts: false
+    ignore_title_keywords:
+      - wip
+      - draft
+      - '[skip ci]'
+    base_branches:
+      - main
+
+  # Generated files, build artifacts and lockfiles are not reviewed.
+  path_filters:
+    - '!pnpm-lock.yaml'
+    - '!package-lock.json'
+    - '!**/dist/**'
+    - '!**/.svelte-kit/**'
+    - '!**/.wrangler/**'
+    - '!static/**'
+    - '!src/i18n/**'
+    - '!src/worker-configuration.d.ts'
+    - '!src/site/documentation/index.js'
+    - '!project.inlang/cache/**'
+    - '!test-results/**'
+
+  path_instructions:
+    - path: 'src/lib/components/**/*.svelte'
+      instructions: >-
+        Public library components. Enforce Svelte 5 runes mode: `$props()` with
+        destructuring and `$bindable()` instead of `export let`,
+        `$state`/`$derived`/`$effect` instead of reactive `$:` statements,
+        snippets (`{#snippet}` / `{@render}`) instead of slots, and `class`
+        attributes with objects/arrays instead of the `class:` directive
+        (Svelte 5.16+). Flag `$effect` used where `$derived` would suffice.
+        Verify WAI-ARIA accessibility: roles, `aria-*`, accessible name, focus
+        management and keyboard navigation; prefer semantic HTML and native
+        elements (`<dialog>`, `<details>`, `<button>`) over divs with handlers.
+        Do not add `tabindex` where the native element is already focusable.
+        All animations must respect `prefers-reduced-motion`. Flag changes that
+        break the public API (renamed or removed props, events, types) since
+        this library is published to npm.
+    - path: 'src/lib/**/*.ts'
+      instructions: >-
+        Library TypeScript code. Anything that is public API must be exported
+        from `src/lib/index.ts` and explicitly typed (no implicit `any`).
+        Shared types belong in `src/lib/types`. Avoid adding new runtime
+        dependencies: they are `peerDependencies`/`devDependencies` and any
+        added import ends up in the published package. Code must be SSR-safe
+        (no `window`/`document` access outside `$effect`/`onMount`).
+    - path: 'src/lib/internal/**'
+      instructions: >-
+        Internal utilities, not exported to consumers. Check that they are not
+        accidentally re-exported from `src/lib/index.ts` and that they do not
+        duplicate existing helpers.
+    - path: 'src/lib/css/**'
+      instructions: >-
+        Fluent 2 design tokens and base styles. Use existing custom properties
+        (`--fs-*`) instead of hardcoded values; verify changes work in both
+        light and dark themes (`class-darkmode.css` and `media-darkmode.css`)
+        and respect `prefers-reduced-motion`. Any new CSS file meant for
+        consumers must be added to the `exports` field in package.json.
+    - path: 'src/routes/**'
+      instructions: >-
+        Documentation site (SvelteKit). This is not published code: prioritize
+        correctness over exhaustiveness. Verify correct use of `load`,
+        `+page`/`+layout`, and that user-facing strings go through paraglide
+        (`src/i18n`) instead of being hardcoded.
+    - path: 'src/site/**'
+      instructions: >-
+        Documentation site content and components. Check that the rendered
+        examples match the current component API.
+    - path: 'src/**/*.{test,spec}.{ts,svelte.ts}'
+      instructions: >-
+        Vitest tests (browser mode with vitest-browser-svelte). Prefer queries
+        by role/accessible text over CSS selectors (but CSS selectors are
+        allowed when necessary), and assert observable behavior instead of
+        internal state. Avoid fixed-duration waits.
+    - path: 'src/tests/**'
+      instructions: >-
+        Playwright E2E tests. Use resilient locators (role, label) and rely on
+        auto-waiting; flag any `waitForTimeout` or brittle selector.
+    - path: '**/*.md'
+      instructions: >-
+        Documentation. Check for broken links, code blocks that do not compile
+        against the current API, and consistency with the README.
+    - path: '{wrangler.jsonc,vite.config.ts,svelte.config.js,eslint.config.js,tsconfig.json}'
+      instructions: >-
+        Build and deployment configuration (Cloudflare Pages/Workers). Flag
+        changes that could break `pnpm build`, `pnpm prepack` or the deploy,
+        and verify no secrets are exposed.
+    - path: 'package.json'
+      instructions: >-
+        Review `exports`, `files`, `svelte`, `types`, `peerDependencies` and
+        `sideEffects` carefully: a mistake here breaks the published package.
+        Library dependencies must stay in `devDependencies`/`peerDependencies`,
+        not in `dependencies`.
+    - path: '.github/workflows/**'
+      instructions: >-
+        Pin third-party actions to a SHA or major version, scope `permissions`
+        to the minimum required, and do not expose secrets in logs or in
+        workflows triggered by `pull_request_target`.
+
+  finishing_touches:
+    docstrings:
+      enabled: false
+    unit_tests:
+      enabled: false
+
+  tools:
+    eslint:
+      enabled: true
+    gitleaks:
+      enabled: true
+    markdownlint:
+      enabled: true
+    yamllint:
+      enabled: true
+    actionlint:
+      enabled: true
+    shellcheck:
+      enabled: true
+    osv-scanner:
+      enabled: true
+    github-checks:
+      enabled: true
+      timeout_ms: 180000
+    languagetool:
+      enabled: true
+      level: default
+    # Other ecosystems' tools: disabled to avoid noise.
+    biome:
+      enabled: false
+    oxc:
+      enabled: false
+    semgrep:
+      enabled: false
+    ruff:
+      enabled: false
+    flake8:
+      enabled: false
+    pylint:
+      enabled: false
+    rubocop:
+      enabled: false
+    golangci-lint:
+      enabled: false
+    hadolint:
+      enabled: false
+    checkov:
+      enabled: false
+    phpstan:
+      enabled: false
+    swiftlint:
+      enabled: false
+    detekt:
+      enabled: false
+
+chat:
+  auto_reply: true
+  art: false
+
+knowledge_base:
+  opt_out: false
+  learnings:
+    scope: auto
+  issues:
+    scope: auto
+  pull_requests:
+    scope: auto
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
+      - '.github/copilot-instructions.md'
+      - 'CONTRIBUTING.md'

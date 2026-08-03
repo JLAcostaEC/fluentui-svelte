@@ -29,8 +29,13 @@
 <div class="bg-effect"></div>
 <section id="banner">
 	<picture>
-		<source srcset="/images/banner-white.png" type="image/png" media={`${mode.current === 'dark' ? '' : '(prefers-color-scheme: dark)'}`} class="logo" />
-		
+		<source
+			srcset="/images/banner-white.png"
+			type="image/png"
+			media={`${mode.current === 'dark' ? '' : '(prefers-color-scheme: dark)'}`}
+			class="logo"
+		/>
+
 		<img src="/images/banner.png" alt="Logo" class="logo" />
 	</picture>
 	<h1 class="title">{m.home_title()}</h1>

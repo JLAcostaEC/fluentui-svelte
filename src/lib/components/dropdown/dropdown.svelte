@@ -139,7 +139,7 @@
 	});
 </script>
 
-<div class="fs-dropdown square-{roundClass}" class:open class:disabled bind:this={ref} {...wrapperProps}>
+<div class={['fs-dropdown', `square-${roundClass}`, { open, disabled }]} bind:this={ref} {...wrapperProps}>
 	<ChevronDownFilled class="indicator" />
 	<button
 		bind:this={buttonRef}
@@ -152,8 +152,7 @@
 		id={`${id}-button`}
 		aria-haspopup="listbox"
 		{disabled}
-		class="fs-dropdown-button"
-		class:has-value={hasValue}
+		class={['fs-dropdown-button', hasValue && 'has-value']}
 		{...buttonProps}
 	>
 		{displayLabel}

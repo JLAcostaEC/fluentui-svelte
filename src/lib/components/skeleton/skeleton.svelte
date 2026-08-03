@@ -30,8 +30,7 @@
 <svelte:element
 	this={as}
 	bind:this={element}
-	class="fs-skeleton {animation} {shape} {classes}"
-	class:justify
+	class={['fs-skeleton', animation, shape, classes, { justify }]}
 	{...attributes}
 ></svelte:element>
 

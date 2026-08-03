@@ -35,7 +35,8 @@ export const META: Meta = {
 		faq: [
 			{
 				question: 'How do I group radio buttons?',
-				answer: 'Give them the same name to allow only one to be checked, or use bind:group to bind the selected value to a variable.'
+				answer:
+					'Give them the same name to allow only one to be checked, or use bind:group to bind the selected value to a variable.'
 			},
 			{
 				question: 'How do I read the selected radio value?',

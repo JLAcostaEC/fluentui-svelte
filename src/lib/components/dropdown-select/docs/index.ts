@@ -35,11 +35,13 @@ export const META: Meta = {
 		faq: [
 			{
 				question: 'Is DropdownSelect production-ready?',
-				answer: 'No. It is an early-access prototype and will be rebuilt on FloatingUI Svelte, so its API may change significantly.'
+				answer:
+					'No. It is an early-access prototype and will be rebuilt on FloatingUI Svelte, so its API may change significantly.'
 			},
 			{
 				question: 'How is DropdownSelect different from Dropdown?',
-				answer: 'DropdownSelect is built on the native <select> element, whereas Dropdown is a fully custom flyout-based control.'
+				answer:
+					'DropdownSelect is built on the native <select> element, whereas Dropdown is a fully custom flyout-based control.'
 			}
 		]
 	},

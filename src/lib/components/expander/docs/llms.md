@@ -74,15 +74,15 @@ You can easily add an icon to an expander's header using the `Icon` prop. You ca
 
 ## Component Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `header` | `string` | Label of the expander. |
-| `description` | `string` | Description to render below the header. |
-| `direction` | `string` | The opening direction of the expander. Possible values: `'down'`, `'up'`. |
-| `justify` | `boolean` | Whether the expander is justified to the full width of the container. |
-| `disabled` | `boolean` | Disables the user interaction. |
-| `animation` | `object` | The animation configuration. |
-| `expanded` | `boolean` | Controls the opening state of the expander. |
-| `element` | `HTMLDetailsElement` | The DOM reference of the expander element. |
-| `Icon` | `Snippet \| Component` | The icon to display before the label. |
-| `children` | `Snippet` | The children elements to render inside the expander. |
+| Name          | Type                   | Description                                                               |
+| ------------- | ---------------------- | ------------------------------------------------------------------------- |
+| `header`      | `string`               | Label of the expander.                                                    |
+| `description` | `string`               | Description to render below the header.                                   |
+| `direction`   | `string`               | The opening direction of the expander. Possible values: `'down'`, `'up'`. |
+| `justify`     | `boolean`              | Whether the expander is justified to the full width of the container.     |
+| `disabled`    | `boolean`              | Disables the user interaction.                                            |
+| `animation`   | `object`               | The animation configuration.                                              |
+| `expanded`    | `boolean`              | Controls the opening state of the expander.                               |
+| `element`     | `HTMLDetailsElement`   | The DOM reference of the expander element.                                |
+| `Icon`        | `Snippet \| Component` | The icon to display before the label.                                     |
+| `children`    | `Snippet`              | The children elements to render inside the expander.                      |

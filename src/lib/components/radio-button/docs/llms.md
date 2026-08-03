@@ -54,11 +54,11 @@ The checked prop allows you to control the checked state of the radio button. Th
 
 ## Component Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `label` | `string` | The label text for the radio button. |
-| `group` | `unknown` | Bindable value representing a group of radio inputs that the input will be bound to. |
-| `checked` | `boolean` | Indicates whether the radio button is checked. |
-| `disabled` | `boolean` | Indicates whether the radio button is disabled. |
-| `ref` | `HTMLInputElement` | Gets the DOM reference of the radio button element. |
-| Element Attributes | | All standard HTML attributes for input elements can be applied. |
+| Name               | Type               | Description                                                                          |
+| ------------------ | ------------------ | ------------------------------------------------------------------------------------ |
+| `label`            | `string`           | The label text for the radio button.                                                 |
+| `group`            | `unknown`          | Bindable value representing a group of radio inputs that the input will be bound to. |
+| `checked`          | `boolean`          | Indicates whether the radio button is checked.                                       |
+| `disabled`         | `boolean`          | Indicates whether the radio button is disabled.                                      |
+| `ref`              | `HTMLInputElement` | Gets the DOM reference of the radio button element.                                  |
+| Element Attributes |                    | All standard HTML attributes for input elements can be applied.                      |

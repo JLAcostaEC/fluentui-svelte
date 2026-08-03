@@ -35,7 +35,8 @@ export const META: Meta = {
 		faq: [
 			{
 				question: 'How is a Flyout positioned?',
-				answer: 'By default it is a plain panel; enable the floating prop to position it with Floating UI relative to a reference element, controlled by placement and offset.'
+				answer:
+					'By default it is a plain panel; enable the floating prop to position it with Floating UI relative to a reference element, controlled by placement and offset.'
 			},
 			{
 				question: 'Can I round only some corners of a Flyout?',

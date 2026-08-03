@@ -35,7 +35,8 @@ export const META: Meta = {
 		faq: [
 			{
 				question: 'What severity levels does InfoBar support?',
-				answer: "Set the status prop to 'information', 'attention', 'warning', 'critical', or 'success' to change the visual style and meaning."
+				answer:
+					"Set the status prop to 'information', 'attention', 'warning', 'critical', or 'success' to change the visual style and meaning."
 			},
 			{
 				question: 'How do I make an InfoBar non-dismissible?',

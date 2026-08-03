@@ -55,13 +55,13 @@ The status prop allows you to set the status of the progress bar to 'paused' or 
 
 ## Component Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `value` | bindable `number \| undefined` | The current progress value of the bar, between 0 and 100. |
-| `indeterminate` | `boolean` | If true, the progress bar enters an indeterminate state. |
-| `hideRail` | `boolean` | If true, the progress bar rail is hidden. |
-| `status` | `'paused' \| 'error'` | The current status of the progress bar. |
-| `element` | bindable `SVGElement` | The DOM reference of the progress bar element. |
-| `railElement` | bindable `SVGRectElement` | The DOM reference of the rail element. |
-| `trackElement` | bindable `SVGRectElement` | The DOM reference of the track element. |
-| `secondaryTrackElement` | bindable `SVGRectElement` | The DOM reference of the secondary track element. |
+| Name                    | Type                           | Description                                               |
+| ----------------------- | ------------------------------ | --------------------------------------------------------- |
+| `value`                 | bindable `number \| undefined` | The current progress value of the bar, between 0 and 100. |
+| `indeterminate`         | `boolean`                      | If true, the progress bar enters an indeterminate state.  |
+| `hideRail`              | `boolean`                      | If true, the progress bar rail is hidden.                 |
+| `status`                | `'paused' \| 'error'`          | The current status of the progress bar.                   |
+| `element`               | bindable `SVGElement`          | The DOM reference of the progress bar element.            |
+| `railElement`           | bindable `SVGRectElement`      | The DOM reference of the rail element.                    |
+| `trackElement`          | bindable `SVGRectElement`      | The DOM reference of the track element.                   |
+| `secondaryTrackElement` | bindable `SVGRectElement`      | The DOM reference of the secondary track element.         |

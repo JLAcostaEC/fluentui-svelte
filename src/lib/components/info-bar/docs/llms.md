@@ -70,12 +70,12 @@ The hideCloseButton prop allows you to hide the close button in the InfoBar.
 
 ## Component Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `status` | `string` | The status of the InfoBar. Possible values: 'information', 'attention', 'warning', 'critical', 'success'. |
-| `style` | `string` | The style of the InfoBar. Possible values: 'inline', 'multiline'. |
-| `title` | `string` | The title of the InfoBar. |
-| `icon` | `Snippet \| Component` | The icon to display in the InfoBar. |
-| `iconSize` | `number` | The size of the icon in pixels. Default: 20. |
-| `hideCloseButton` | `boolean` | Whether to hide the close button. Default: false. |
-| `children` | `Snippet` | The child elements to render inside the InfoBar. |
+| Name              | Type                   | Description                                                                                               |
+| ----------------- | ---------------------- | --------------------------------------------------------------------------------------------------------- |
+| `status`          | `string`               | The status of the InfoBar. Possible values: 'information', 'attention', 'warning', 'critical', 'success'. |
+| `style`           | `string`               | The style of the InfoBar. Possible values: 'inline', 'multiline'.                                         |
+| `title`           | `string`               | The title of the InfoBar.                                                                                 |
+| `icon`            | `Snippet \| Component` | The icon to display in the InfoBar.                                                                       |
+| `iconSize`        | `number`               | The size of the icon in pixels. Default: 20.                                                              |
+| `hideCloseButton` | `boolean`              | Whether to hide the close button. Default: false.                                                         |
+| `children`        | `Snippet`              | The child elements to render inside the InfoBar.                                                          |

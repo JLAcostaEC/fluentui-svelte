@@ -36,7 +36,8 @@ export const META: Meta = {
 		faq: [
 			{
 				question: 'How do I set the range of a Slider?',
-				answer: 'Use the min and max props to define the bounds, and the step prop to control the increment between selectable values.'
+				answer:
+					'Use the min and max props to define the bounds, and the step prop to control the increment between selectable values.'
 			},
 			{
 				question: 'How do I make a Slider vertical?',
@@ -44,7 +45,8 @@ export const META: Meta = {
 			},
 			{
 				question: 'How do I add tick marks to a Slider?',
-				answer: 'Pass an array of values to the ticks prop, and use tickPlacement to position them around, before, or after the rail.'
+				answer:
+					'Pass an array of values to the ticks prop, and use tickPlacement to position them around, before, or after the rail.'
 			}
 		]
 	},

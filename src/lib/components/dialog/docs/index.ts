@@ -8,7 +8,8 @@ import { ReadingModeMobileRegular } from 'fluentui-icons-svelte';
 export const META: Meta = {
 	// SEO
 	title: 'Dialog',
-	description: 'A window overlaid on the page that requires user attention, composed of trigger, surface, title, content, and actions.',
+	description:
+		'A window overlaid on the page that requires user attention, composed of trigger, surface, title, content, and actions.',
 	keywords: ['dialog', 'modal', 'popup', 'overlay', 'alert dialog', 'svelte'],
 	canonical: '/docs/components/dialog',
 	robots: 'index, follow',
@@ -35,11 +36,13 @@ export const META: Meta = {
 		faq: [
 			{
 				question: 'What components make up a Dialog?',
-				answer: 'Dialog (root/context), DialogTrigger, DialogSurface, DialogTitle, DialogContent, and DialogActions work together through a shared context.'
+				answer:
+					'Dialog (root/context), DialogTrigger, DialogSurface, DialogTitle, DialogContent, and DialogActions work together through a shared context.'
 			},
 			{
 				question: 'How do I close a Dialog programmatically?',
-				answer: 'Bind the Dialog with bind:this and call its closeDialog() method, or control it with the bindable open prop.'
+				answer:
+					'Bind the Dialog with bind:this and call its closeDialog() method, or control it with the bindable open prop.'
 			}
 		]
 	},

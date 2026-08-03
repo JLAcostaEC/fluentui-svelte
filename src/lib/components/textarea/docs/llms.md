@@ -46,10 +46,10 @@ The `onChange` event is triggered whenever the content of the textarea changes. 
 
 ## Component Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `placeholder` | `string` | The placeholder text for the textarea. |
-| `resize` | `string` | Controls the resizing behavior of the textarea. Possible values: `'none'`, `'both'`, `'horizontal'`, `'vertical'`. |
-| `onChange` | `function` | Event handler for when the content of the textarea changes. |
-| `element` | | The DOM reference of the textarea element. |
-| Element Attributes | | All other attributes that can be applied to the textarea element. |
+| Name               | Type       | Description                                                                                                        |
+| ------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------ |
+| `placeholder`      | `string`   | The placeholder text for the textarea.                                                                             |
+| `resize`           | `string`   | Controls the resizing behavior of the textarea. Possible values: `'none'`, `'both'`, `'horizontal'`, `'vertical'`. |
+| `onChange`         | `function` | Event handler for when the content of the textarea changes.                                                        |
+| `element`          |            | The DOM reference of the textarea element.                                                                         |
+| Element Attributes |            | All other attributes that can be applied to the textarea element.                                                  |

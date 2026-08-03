@@ -65,7 +65,9 @@ function generateComponentIndex() {
 		return { folder, id };
 	});
 
-	const imports = entries.map(({ folder, id }) => `import { META as ${id} } from '$components/${folder}/docs/index.js';`);
+	const imports = entries.map(
+		({ folder, id }) => `import { META as ${id} } from '$components/${folder}/docs/index.js';`
+	);
 	const list = entries.map(({ id }) => `\t${id}`).join(',\n');
 
 	const output =

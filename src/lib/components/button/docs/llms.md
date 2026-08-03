@@ -50,18 +50,18 @@ A button can have its content and borders styled for greater emphasis or to be s
 
 ## Component Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `ref` | `HTMLElement` | The DOM reference of the button element. |
-| `as` | `string` | The DOM element to render. Possible values: 'button', 'a', 'div'. |
-| `disabled` | `boolean` | Disables user interaction. |
-| `shape` | `string` | The shape of the button or buttons. Possible values: 'circular', 'rounded', 'square'. |
-| `appearance` | `string` | The appearance of the button or buttons. Possible values: 'accent', 'standard', 'subtle'. |
-| `disabledFocusable` | `boolean` | Allows the button to be focusable even when disabled. |
-| `isMenuButton` | `boolean` | Adds an icon that indicates the button triggers a menu. |
-| `indicatorPosition` | `'before' \| 'after'` | The position of the icon. Possible values: 'before', 'after'. |
-| `indicatorIcon` | `Snippet \| Component` | The icon used as the menu indicator. Defaults to a chevron-down icon. |
-| Element Attributes | | Based on the chosen component tag, you will get autocomplete for all HTML attributes of that tag. |
+| Name                | Type                   | Description                                                                                       |
+| ------------------- | ---------------------- | ------------------------------------------------------------------------------------------------- |
+| `ref`               | `HTMLElement`          | The DOM reference of the button element.                                                          |
+| `as`                | `string`               | The DOM element to render. Possible values: 'button', 'a', 'div'.                                 |
+| `disabled`          | `boolean`              | Disables user interaction.                                                                        |
+| `shape`             | `string`               | The shape of the button or buttons. Possible values: 'circular', 'rounded', 'square'.             |
+| `appearance`        | `string`               | The appearance of the button or buttons. Possible values: 'accent', 'standard', 'subtle'.         |
+| `disabledFocusable` | `boolean`              | Allows the button to be focusable even when disabled.                                             |
+| `isMenuButton`      | `boolean`              | Adds an icon that indicates the button triggers a menu.                                           |
+| `indicatorPosition` | `'before' \| 'after'`  | The position of the icon. Possible values: 'before', 'after'.                                     |
+| `indicatorIcon`     | `Snippet \| Component` | The icon used as the menu indicator. Defaults to a chevron-down icon.                             |
+| Element Attributes  |                        | Based on the chosen component tag, you will get autocomplete for all HTML attributes of that tag. |
 
 ## Split Button
 
@@ -88,15 +88,15 @@ To add a menu to the split button, please refer to the Menu documentation for de
 
 ### Component Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `wrapperRef` | `HTMLDivElement` | The DOM reference of the split button wrapper element. |
-| `primaryButtonRef` | `HTMLButtonElement` | The DOM reference of the primary button element. |
-| `primaryButtonProps` | `ButtonProps<'button'>` | Additional props to pass to the primary button. |
-| `menuTriggerRef` | `HTMLButtonElement` | The DOM reference of the menu trigger button element. |
-| `menuTriggerProps` | `ButtonProps<'button'>` | Additional props to pass to the menu trigger button. |
-| `class` | `string` | Additional classes to add to the split button wrapper element. |
-| `shape` | `string` | The shape of the button or buttons. Possible values: 'circular', 'rounded', 'square'. |
-| `appearance` | `string` | The appearance of the button or buttons. Possible values: 'accent', 'standard', 'subtle'. |
-| `disabled` | `boolean` | Disables user interaction. |
-| WrapperElement Attributes | HTMLElement Attributes | All other attributes can be applied to the split button wrapper element. |
+| Name                      | Type                    | Description                                                                               |
+| ------------------------- | ----------------------- | ----------------------------------------------------------------------------------------- |
+| `wrapperRef`              | `HTMLDivElement`        | The DOM reference of the split button wrapper element.                                    |
+| `primaryButtonRef`        | `HTMLButtonElement`     | The DOM reference of the primary button element.                                          |
+| `primaryButtonProps`      | `ButtonProps<'button'>` | Additional props to pass to the primary button.                                           |
+| `menuTriggerRef`          | `HTMLButtonElement`     | The DOM reference of the menu trigger button element.                                     |
+| `menuTriggerProps`        | `ButtonProps<'button'>` | Additional props to pass to the menu trigger button.                                      |
+| `class`                   | `string`                | Additional classes to add to the split button wrapper element.                            |
+| `shape`                   | `string`                | The shape of the button or buttons. Possible values: 'circular', 'rounded', 'square'.     |
+| `appearance`              | `string`                | The appearance of the button or buttons. Possible values: 'accent', 'standard', 'subtle'. |
+| `disabled`                | `boolean`               | Disables user interaction.                                                                |
+| WrapperElement Attributes | HTMLElement Attributes  | All other attributes can be applied to the split button wrapper element.                  |

@@ -48,8 +48,9 @@
 		<Expander header="Expander Label" description="A description of the expander">
 			<h1>Content</h1>
 			<p>
-				Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur ipsa consequatur voluptates minima esse modi
-				soluta commodi sit facere. Dolore, autem suscipit voluptatem pariatur corporis velit sint quaerat ipsa porro.
+				Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur ipsa consequatur voluptates minima esse
+				modi soluta commodi sit facere. Dolore, autem suscipit voluptatem pariatur corporis velit sint quaerat ipsa
+				porro.
 			</p>
 		</Expander>
 	</Flyout>

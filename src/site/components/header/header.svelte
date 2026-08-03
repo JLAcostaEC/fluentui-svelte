@@ -77,12 +77,18 @@
 		</a>
 		<nav>
 			<div class="nav-links">
-				<Button as="a" appearance={page.url.pathname === '/' ? 'accent' : 'subtle'} href={localizeHref('/')}>Home</Button>
-				<Button as="a" appearance={page.url.pathname === '/docs' ? 'accent' : 'subtle'} href={localizeHref('/docs')}>Docs</Button>
-				<Button as="a" appearance={page.url.pathname === '/about' ? 'accent' : 'subtle'} href={localizeHref('/about')}>About</Button>
+				<Button as="a" appearance={page.url.pathname === '/' ? 'accent' : 'subtle'} href={localizeHref('/')}
+					>Home</Button
+				>
+				<Button as="a" appearance={page.url.pathname === '/docs' ? 'accent' : 'subtle'} href={localizeHref('/docs')}
+					>Docs</Button
+				>
+				<Button as="a" appearance={page.url.pathname === '/about' ? 'accent' : 'subtle'} href={localizeHref('/about')}
+					>About</Button
+				>
 			</div>
 			<!-- TODO: this is not SEO friendly -->
-			 <Menu>
+			<Menu>
 				<MenuTrigger>
 					{#snippet children({ state, menuTriggerProps })}
 						<Tooltip withArrow content="Navigate to a different page">
@@ -103,24 +109,9 @@
 				</MenuTrigger>
 				<MenuPopover placement="bottom-end">
 					<MenuList>
-						<MenuItem
-							as="a"
-							href="/"
-						>
-							Home
-						</MenuItem>
-						<MenuItem
-							as="a"
-							href="/docs"
-						>
-							Docs
-						</MenuItem>
-						<MenuItem
-							as="a"
-							href="/about"
-						>
-							About
-						</MenuItem>
+						<MenuItem as="a" href="/">Home</MenuItem>
+						<MenuItem as="a" href="/docs">Docs</MenuItem>
+						<MenuItem as="a" href="/about">About</MenuItem>
 					</MenuList>
 				</MenuPopover>
 			</Menu>

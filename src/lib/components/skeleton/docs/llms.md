@@ -57,11 +57,11 @@ The `as` prop lets you choose the HTML tag used to render the skeleton. Possible
 
 ## Component Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `as` | `'div' \| 'span'` | The HTML element used to render the skeleton. Default: `'div'`. |
-| `animation` | `'wave' \| 'pulse'` | The animation type for the skeleton. Default: `'wave'`. |
-| `shape` | `'circle' \| 'rounded' \| 'square'` | The shape of the skeleton. Default: `'rounded'`. |
-| `justify` | `boolean` | If `true` the skeleton fills the full width of its container; otherwise it keeps a `1:1` aspect ratio based on its width. |
-| `element` | `HTMLElement` | The DOM reference of the skeleton element (`bind:element`). |
-| Element Attributes | | All other attributes are passed to the root element of the skeleton. |
+| Name               | Type                                | Description                                                                                                               |
+| ------------------ | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `as`               | `'div' \| 'span'`                   | The HTML element used to render the skeleton. Default: `'div'`.                                                           |
+| `animation`        | `'wave' \| 'pulse'`                 | The animation type for the skeleton. Default: `'wave'`.                                                                   |
+| `shape`            | `'circle' \| 'rounded' \| 'square'` | The shape of the skeleton. Default: `'rounded'`.                                                                          |
+| `justify`          | `boolean`                           | If `true` the skeleton fills the full width of its container; otherwise it keeps a `1:1` aspect ratio based on its width. |
+| `element`          | `HTMLElement`                       | The DOM reference of the skeleton element (`bind:element`).                                                               |
+| Element Attributes |                                     | All other attributes are passed to the root element of the skeleton.                                                      |

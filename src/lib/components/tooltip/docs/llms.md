@@ -62,13 +62,13 @@ The relationship prop allows you to specify the relationship between the tooltip
 
 ## Component Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `content` | `string \| Snippet \| Component` | The content to be displayed in the tooltip. This can be a string, a Svelte component, or a Snippet. |
-| `positionConfig` | `Partial<ComputePositionConfig>` | The position configuration of the tooltip. This allows you to define custom offsets, middleware, and more. |
-| `withArrow` | `boolean` | Whether the tooltip should display an arrow pointing towards the target element. |
-| `openDelay` | `number` | The delay, in milliseconds, before the tooltip is shown after the user hovers over the target element. |
-| `hideDelay` | `number` | The delay, in milliseconds, before the tooltip is hidden after the user stops hovering over the target element. |
-| `onVisibleChange` | `(visible: boolean) => void` | A callback function that is called whenever the visibility of the tooltip changes. |
-| `element` | `HTMLElement` | The DOM reference of the tooltip element. |
-| Element Attributes | | All other attributes that can be applied to the tooltip element. |
+| Name               | Type                             | Description                                                                                                     |
+| ------------------ | -------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `content`          | `string \| Snippet \| Component` | The content to be displayed in the tooltip. This can be a string, a Svelte component, or a Snippet.             |
+| `positionConfig`   | `Partial<ComputePositionConfig>` | The position configuration of the tooltip. This allows you to define custom offsets, middleware, and more.      |
+| `withArrow`        | `boolean`                        | Whether the tooltip should display an arrow pointing towards the target element.                                |
+| `openDelay`        | `number`                         | The delay, in milliseconds, before the tooltip is shown after the user hovers over the target element.          |
+| `hideDelay`        | `number`                         | The delay, in milliseconds, before the tooltip is hidden after the user stops hovering over the target element. |
+| `onVisibleChange`  | `(visible: boolean) => void`     | A callback function that is called whenever the visibility of the tooltip changes.                              |
+| `element`          | `HTMLElement`                    | The DOM reference of the tooltip element.                                                                       |
+| Element Attributes |                                  | All other attributes that can be applied to the tooltip element.                                                |

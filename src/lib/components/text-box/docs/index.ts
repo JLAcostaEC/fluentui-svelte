@@ -8,7 +8,8 @@ import { ConvertToTextRegular } from 'fluentui-icons-svelte';
 export const META: Meta = {
 	// SEO
 	title: 'Text Box',
-	description: 'A single-line (or configurable) text input for capturing plain text, with search, password, and number types.',
+	description:
+		'A single-line (or configurable) text input for capturing plain text, with search, password, and number types.',
 	keywords: ['text box', 'textbox', 'text input', 'input', 'search', 'form control', 'svelte'],
 	canonical: '/docs/components/text-box',
 	robots: 'index, follow',
@@ -39,7 +40,8 @@ export const META: Meta = {
 			},
 			{
 				question: 'How do I handle search submissions in a TextBox?',
-				answer: 'Use the querySubmitted event, which fires when the user presses Enter or clicks the search icon on type="search".'
+				answer:
+					'Use the querySubmitted event, which fires when the user presses Enter or clicks the search icon on type="search".'
 			}
 		]
 	},

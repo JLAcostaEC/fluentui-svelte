@@ -8,14 +8,16 @@ import { ArrowSyncCircleRegular } from 'fluentui-icons-svelte';
 export const META: Meta = {
 	// SEO
 	title: 'Progress Ring',
-	description: 'A circular progress indicator that shows determinate or indeterminate progress, with paused and error states.',
+	description:
+		'A circular progress indicator that shows determinate or indeterminate progress, with paused and error states.',
 	keywords: ['progress ring', 'spinner', 'loading', 'circular progress', 'indeterminate', 'svelte'],
 	canonical: '/docs/components/progress-ring',
 	robots: 'index, follow',
 	locale: 'en_US',
 	openGraph: {
 		title: 'Progress Ring — Fluent UI Svelte',
-		description: 'A Fluent UI Svelte circular progress indicator with determinate, indeterminate, paused, and error states.',
+		description:
+			'A Fluent UI Svelte circular progress indicator with determinate, indeterminate, paused, and error states.',
 		type: 'article',
 		url: '/docs/components/progress-ring',
 		siteName: 'Fluent UI Svelte'
@@ -23,7 +25,8 @@ export const META: Meta = {
 	twitter: {
 		card: 'summary_large_image',
 		title: 'Progress Ring — Fluent UI Svelte',
-		description: 'A Fluent UI Svelte circular progress indicator with determinate, indeterminate, paused, and error states.'
+		description:
+			'A Fluent UI Svelte circular progress indicator with determinate, indeterminate, paused, and error states.'
 	},
 	// GEO
 	geo: {
@@ -35,7 +38,8 @@ export const META: Meta = {
 		faq: [
 			{
 				question: 'How do I make a ProgressRing indeterminate?',
-				answer: 'Set the indeterminate prop; the ring spins without a specific value, which is useful when progress cannot be determined.'
+				answer:
+					'Set the indeterminate prop; the ring spins without a specific value, which is useful when progress cannot be determined.'
 			},
 			{
 				question: 'How do I change the size of a ProgressRing?',

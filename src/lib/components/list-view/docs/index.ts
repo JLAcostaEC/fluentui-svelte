@@ -35,11 +35,13 @@ export const META: Meta = {
 		faq: [
 			{
 				question: 'How do I make ListView items selectable?',
-				answer: "Set selectionMode ('single', 'multiselect', or 'extended') and bind selectedItems / handle onSelectionChange."
+				answer:
+					"Set selectionMode ('single', 'multiselect', or 'extended') and bind selectedItems / handle onSelectionChange."
 			},
 			{
 				question: 'How do I handle items with multiple actionable elements?',
-				answer: "Set navigationMode to 'composite' so nested buttons and menus are keyboard-navigable; call e.stopPropagation() in their handlers."
+				answer:
+					"Set navigationMode to 'composite' so nested buttons and menus are keyboard-navigable; call e.stopPropagation() in their handlers."
 			}
 		]
 	},

@@ -51,7 +51,15 @@ Add a `DialogActions` region to render action buttons in the dialog footer. Use 
 
 ```svelte
 <script>
-	import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent, DialogActions, Button } from 'fluentui-svelte';
+	import {
+		Dialog,
+		DialogTrigger,
+		DialogSurface,
+		DialogTitle,
+		DialogContent,
+		DialogActions,
+		Button
+	} from 'fluentui-svelte';
 	let dialog = $state();
 </script>
 
@@ -72,52 +80,52 @@ Add a `DialogActions` region to render action buttons in the dialog footer. Use 
 
 ## Dialog Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `type` | `'modal' \| 'non-modal' \| 'alert'` | The behavior type of the dialog. Default: `modal`. |
-| `open` | bindable `boolean` | Whether the dialog is open. |
-| `onOpenChange` | `(open: boolean) => void` | Callback fired when the dialog opens or closes. |
-| `children` | `Snippet` | The dialog sub-components to render. |
+| Name           | Type                                | Description                                        |
+| -------------- | ----------------------------------- | -------------------------------------------------- |
+| `type`         | `'modal' \| 'non-modal' \| 'alert'` | The behavior type of the dialog. Default: `modal`. |
+| `open`         | bindable `boolean`                  | Whether the dialog is open.                        |
+| `onOpenChange` | `(open: boolean) => void`           | Callback fired when the dialog opens or closes.    |
+| `children`     | `Snippet`                           | The dialog sub-components to render.               |
 
 ## DialogTrigger Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `ref` | `HTMLButtonElement` | The DOM reference of the trigger button. |
-| `children` | `Snippet` | The content of the trigger button. |
-| ...ButtonProps | `ButtonProps<'button'>` | Inherits all `Button` props. |
+| Name           | Type                    | Description                              |
+| -------------- | ----------------------- | ---------------------------------------- |
+| `ref`          | `HTMLButtonElement`     | The DOM reference of the trigger button. |
+| `children`     | `Snippet`               | The content of the trigger button.       |
+| ...ButtonProps | `ButtonProps<'button'>` | Inherits all `Button` props.             |
 
 ## DialogSurface Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `ref` | bindable `HTMLDialogElement` | The DOM reference of the dialog element. |
-| `children` | `Snippet` | The content to render inside the dialog surface. |
-| ...Attributes | `HTMLAttributes<HTMLDialogElement>` | All native `<dialog>` attributes are forwarded. |
+| Name          | Type                                | Description                                      |
+| ------------- | ----------------------------------- | ------------------------------------------------ |
+| `ref`         | bindable `HTMLDialogElement`        | The DOM reference of the dialog element.         |
+| `children`    | `Snippet`                           | The content to render inside the dialog surface. |
+| ...Attributes | `HTMLAttributes<HTMLDialogElement>` | All native `<dialog>` attributes are forwarded.  |
 
 ## DialogTitle Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `as` | `'div' \| 'h1'`–`'h6'` | The element to render the title as. Default: `h3`. |
-| `ref` | bindable element | The DOM reference of the title element. |
-| `children` | `Snippet` | The title content. |
-| ...Attributes | Polymorphic | All HTML attributes of the chosen `as` element are forwarded. |
+| Name          | Type                   | Description                                                   |
+| ------------- | ---------------------- | ------------------------------------------------------------- |
+| `as`          | `'div' \| 'h1'`–`'h6'` | The element to render the title as. Default: `h3`.            |
+| `ref`         | bindable element       | The DOM reference of the title element.                       |
+| `children`    | `Snippet`              | The title content.                                            |
+| ...Attributes | Polymorphic            | All HTML attributes of the chosen `as` element are forwarded. |
 
 ## DialogContent Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `ref` | `HTMLDivElement` | The DOM reference of the content element. |
-| `children` | `Snippet` | The content to render inside the dialog body. |
-| ...Attributes | `HTMLAttributes<HTMLDivElement>` | All native `<div>` attributes are forwarded. |
+| Name          | Type                             | Description                                   |
+| ------------- | -------------------------------- | --------------------------------------------- |
+| `ref`         | `HTMLDivElement`                 | The DOM reference of the content element.     |
+| `children`    | `Snippet`                        | The content to render inside the dialog body. |
+| ...Attributes | `HTMLAttributes<HTMLDivElement>` | All native `<div>` attributes are forwarded.  |
 
 ## DialogActions Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `ref` | bindable `HTMLDivElement` | The DOM reference of the actions element. |
-| `position` | `'start' \| 'center' \| 'end'` | Horizontal alignment of the actions. Default: `end`. |
-| `fluid` | `boolean` | Whether the actions container uses a full-width layout. |
-| `children` | `Snippet` | The action elements to render, typically buttons. |
-| ...Attributes | `HTMLAttributes<HTMLDivElement>` | All native `<div>` attributes are forwarded. |
+| Name          | Type                             | Description                                             |
+| ------------- | -------------------------------- | ------------------------------------------------------- |
+| `ref`         | bindable `HTMLDivElement`        | The DOM reference of the actions element.               |
+| `position`    | `'start' \| 'center' \| 'end'`   | Horizontal alignment of the actions. Default: `end`.    |
+| `fluid`       | `boolean`                        | Whether the actions container uses a full-width layout. |
+| `children`    | `Snippet`                        | The action elements to render, typically buttons.       |
+| ...Attributes | `HTMLAttributes<HTMLDivElement>` | All native `<div>` attributes are forwarded.            |

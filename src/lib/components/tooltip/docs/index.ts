@@ -35,7 +35,8 @@ export const META: Meta = {
 		faq: [
 			{
 				question: 'How do I attach a Tooltip to a target element?',
-				answer: 'Provide a children snippet that receives attrs and spread them onto your target element, e.g. a Button.'
+				answer:
+					'Provide a children snippet that receives attrs and spread them onto your target element, e.g. a Button.'
 			},
 			{
 				question: 'How do I add an arrow to a Tooltip?',

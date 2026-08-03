@@ -6,7 +6,7 @@ The Hyperlink component is used to create clickable links that navigate to a spe
 
 ```svelte
 <script>
-  import { Hyperlink } from 'fluentui-svelte';
+	import { Hyperlink } from 'fluentui-svelte';
 </script>
 
 <Hyperlink href="/">Go to Home</Hyperlink>
@@ -24,10 +24,10 @@ Disables the hyperlink and prevents navigation.
 
 ## Component Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `href` | `string` | The URL to navigate to when the link is clicked. |
-| `disabled` | `boolean` | Disables the hyperlink and prevents navigation. |
-| `children` | `Snippet` | The content of the hyperlink. |
-| `ref` | `HTMLAnchorElement` | A bindable reference to the underlying anchor element. |
-| Element Attributes | | You can use any valid HTML anchor attributes (e.g., target, rel, etc.). |
+| Name               | Type                | Description                                                             |
+| ------------------ | ------------------- | ----------------------------------------------------------------------- |
+| `href`             | `string`            | The URL to navigate to when the link is clicked.                        |
+| `disabled`         | `boolean`           | Disables the hyperlink and prevents navigation.                         |
+| `children`         | `Snippet`           | The content of the hyperlink.                                           |
+| `ref`              | `HTMLAnchorElement` | A bindable reference to the underlying anchor element.                  |
+| Element Attributes |                     | You can use any valid HTML anchor attributes (e.g., target, rel, etc.). |

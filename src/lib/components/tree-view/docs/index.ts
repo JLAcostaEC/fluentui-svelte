@@ -39,7 +39,8 @@ export const META: Meta = {
 			},
 			{
 				question: 'How do I control open and checked items?',
-				answer: 'Use the bindable openItems and checkedItems props on the root TreeView (arrays or SvelteSet when a virtualizer is provided).'
+				answer:
+					'Use the bindable openItems and checkedItems props on the root TreeView (arrays or SvelteSet when a virtualizer is provided).'
 			}
 		]
 	},

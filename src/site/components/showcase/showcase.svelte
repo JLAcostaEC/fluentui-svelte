@@ -42,9 +42,13 @@
 	let showCode = $state(false);
 </script>
 
-<div class={["showcase-wrapper", code && 'has-code']}>
+<div class={['showcase-wrapper', code && 'has-code']}>
 	{#if code}
-		<ToggleSwitch label="View Code" bind:checked={showCode} labelAttributes={{ class: `switch-view ${showCode ? 'show' : ''}` }} />
+		<ToggleSwitch
+			label="View Code"
+			bind:checked={showCode}
+			labelAttributes={{ class: `switch-view ${showCode ? 'show' : ''}` }}
+		/>
 	{/if}
 	{#if code && showCode}
 		<RenderShiki {code} />
@@ -96,7 +100,7 @@
 		flex-direction: column;
 		width: 100%;
 		position: relative;
-		&.has-code :global(.shiki){
+		&.has-code :global(.shiki) {
 			padding: 4rem 1rem 1rem !important;
 		}
 	}
@@ -154,7 +158,7 @@
 		top: 14px;
 		right: 5px;
 		transition: right var(--fs-normal-duration) var(--fs-point-to-point);
-		&::before{
+		&::before {
 			content: '';
 			position: absolute;
 			inset: -0.25rem;

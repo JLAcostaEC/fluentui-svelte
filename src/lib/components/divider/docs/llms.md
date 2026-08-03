@@ -72,12 +72,12 @@ The `as` prop lets you change the underlying HTML element rendered by the divide
 
 ## Divider Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `as` | `string` | The HTML element to render the divider as. Possible values: `'div'`, `'hr'`, `'span'`. |
-| `vertical` | `boolean` | Whether the divider is rendered vertically instead of horizontally. |
-| `alignContent` | `string` | The alignment of the content within the divider. Possible values: `'start'`, `'center'`, `'end'`. |
-| `appearance` | `string` | The appearance of the divider. Possible values: `'default'`, `'accent'`, `'standard'`, `'subtle'`. |
-| `inset` | `boolean` | Whether the divider has inline padding applied. |
-| `ref` | `HTMLDivElement \| HTMLHRElement \| HTMLSpanElement` | The DOM reference of the divider element, its type depends on the `as` prop. |
-| `children` | `Snippet` | The content to render as a label within the divider. |
+| Name           | Type                                                 | Description                                                                                        |
+| -------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `as`           | `string`                                             | The HTML element to render the divider as. Possible values: `'div'`, `'hr'`, `'span'`.             |
+| `vertical`     | `boolean`                                            | Whether the divider is rendered vertically instead of horizontally.                                |
+| `alignContent` | `string`                                             | The alignment of the content within the divider. Possible values: `'start'`, `'center'`, `'end'`.  |
+| `appearance`   | `string`                                             | The appearance of the divider. Possible values: `'default'`, `'accent'`, `'standard'`, `'subtle'`. |
+| `inset`        | `boolean`                                            | Whether the divider has inline padding applied.                                                    |
+| `ref`          | `HTMLDivElement \| HTMLHRElement \| HTMLSpanElement` | The DOM reference of the divider element, its type depends on the `as` prop.                       |
+| `children`     | `Snippet`                                            | The content to render as a label within the divider.                                               |

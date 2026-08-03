@@ -62,15 +62,15 @@ The status prop allows you to set the status of the progress ring for visual fee
 
 ## Component Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `value` | `number` | The percentage of the progress ring that is filled. |
-| `min` | `number` | The minimum value of the progress ring. Default is 0. |
-| `max` | `number` | The maximum value of the progress ring. Default is 100. |
-| `size` | `number` | The size of the progress ring in pixels. Default is 32. |
-| `indeterminate` | `boolean` | If true, the progress ring displays an indeterminate state. |
-| `hideRail` | `boolean` | If true, the progress ring hides the rail. |
-| `status` | `'paused' \| 'error'` | The status of the progress ring, for example 'paused' or 'error'. |
-| `ref` | `SVGElement` | The DOM reference to the SVG element. |
-| `railElement` | `SVGCircleElement` | The DOM reference to the rail element. |
-| `trackElement` | `SVGCircleElement` | The DOM reference to the track element. |
+| Name            | Type                  | Description                                                       |
+| --------------- | --------------------- | ----------------------------------------------------------------- |
+| `value`         | `number`              | The percentage of the progress ring that is filled.               |
+| `min`           | `number`              | The minimum value of the progress ring. Default is 0.             |
+| `max`           | `number`              | The maximum value of the progress ring. Default is 100.           |
+| `size`          | `number`              | The size of the progress ring in pixels. Default is 32.           |
+| `indeterminate` | `boolean`             | If true, the progress ring displays an indeterminate state.       |
+| `hideRail`      | `boolean`             | If true, the progress ring hides the rail.                        |
+| `status`        | `'paused' \| 'error'` | The status of the progress ring, for example 'paused' or 'error'. |
+| `ref`           | `SVGElement`          | The DOM reference to the SVG element.                             |
+| `railElement`   | `SVGCircleElement`    | The DOM reference to the rail element.                            |
+| `trackElement`  | `SVGCircleElement`    | The DOM reference to the track element.                           |

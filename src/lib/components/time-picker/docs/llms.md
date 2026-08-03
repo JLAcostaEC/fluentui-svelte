@@ -35,13 +35,13 @@ Use `hideHours`, `hideMinutes`, or `hideSeconds` to hide individual columns. By 
 
 ## Component Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `value` | bindable `string` | Selected time as 24h `HH:mm` or `HH:mm:ss` (matches `<input type="time">`). |
-| `format` | `12 \| 24` | Clock format: `24` (00–23) or `12` (01–12 with an AM/PM column). Default: `24`. |
-| `open` | bindable `boolean` | Whether the picker flyout is open. |
-| `hideHours` | `boolean` | Hide the hours column. |
-| `hideMinutes` | `boolean` | Hide the minutes column. |
-| `hideSeconds` | `boolean` | Hide the seconds column. |
-| `element` | bindable `HTMLElement` | The DOM reference of the time picker root element. |
-| `inputElement` | bindable `HTMLInputElement` | The DOM reference of the underlying input element. |
+| Name           | Type                        | Description                                                                     |
+| -------------- | --------------------------- | ------------------------------------------------------------------------------- |
+| `value`        | bindable `string`           | Selected time as 24h `HH:mm` or `HH:mm:ss` (matches `<input type="time">`).     |
+| `format`       | `12 \| 24`                  | Clock format: `24` (00–23) or `12` (01–12 with an AM/PM column). Default: `24`. |
+| `open`         | bindable `boolean`          | Whether the picker flyout is open.                                              |
+| `hideHours`    | `boolean`                   | Hide the hours column.                                                          |
+| `hideMinutes`  | `boolean`                   | Hide the minutes column.                                                        |
+| `hideSeconds`  | `boolean`                   | Hide the seconds column.                                                        |
+| `element`      | bindable `HTMLElement`      | The DOM reference of the time picker root element.                              |
+| `inputElement` | bindable `HTMLInputElement` | The DOM reference of the underlying input element.                              |

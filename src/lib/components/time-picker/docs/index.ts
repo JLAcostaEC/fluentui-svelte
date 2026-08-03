@@ -8,7 +8,8 @@ import { ClockRegular } from 'fluentui-icons-svelte';
 export const META: Meta = {
 	// SEO
 	title: 'Time Picker',
-	description: 'An input for selecting a time from carousel-style hour, minute, and second columns, in 12- or 24-hour format.',
+	description:
+		'An input for selecting a time from carousel-style hour, minute, and second columns, in 12- or 24-hour format.',
 	keywords: ['time picker', 'timepicker', 'time input', 'clock', '12 hour', '24 hour', 'svelte'],
 	canonical: '/docs/components/time-picker',
 	robots: 'index, follow',

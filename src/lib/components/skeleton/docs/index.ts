@@ -35,7 +35,8 @@ export const META: Meta = {
 		faq: [
 			{
 				question: 'How do I size a Skeleton?',
-				answer: 'Use standard HTML/CSS via the style, class, width and height attributes, or the justify prop to fill the container width.'
+				answer:
+					'Use standard HTML/CSS via the style, class, width and height attributes, or the justify prop to fill the container width.'
 			},
 			{
 				question: 'What animations does Skeleton support?',

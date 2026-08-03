@@ -35,7 +35,8 @@ export const META: Meta = {
 		faq: [
 			{
 				question: 'When should I use a ToggleSwitch instead of a Checkbox?',
-				answer: 'Use a ToggleSwitch when choosing an option should produce an immediate result, such as turning a setting on or off.'
+				answer:
+					'Use a ToggleSwitch when choosing an option should produce an immediate result, such as turning a setting on or off.'
 			},
 			{
 				question: 'How do I add a label to a ToggleSwitch?',

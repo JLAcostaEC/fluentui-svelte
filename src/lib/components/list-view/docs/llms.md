@@ -69,37 +69,42 @@ Add and configure a checkbox for the element. You can use the same props for the
 >
 	<div style="...">
 		Card Content Inside ListItem
-		<Button onclick={(e) => { e.stopPropagation(); alert('Installing'); }}>Install</Button>
+		<Button
+			onclick={(e) => {
+				e.stopPropagation();
+				alert('Installing');
+			}}>Install</Button
+		>
 	</div>
 </ListViewItem>
 ```
 
 ## ListView Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `as` | `string` | The HTML tag to use for the list container. Possible values: ul, ol, div. |
-| `selectionMode` | `string` | Selection mode for the list. Possible values: single, multiselect, extended. |
-| `navigationMode` | `string` | Navigation mode for keyboard navigation. Possible values: items, composite. |
-| `selectedItems` | `string[]` | The currently selected item values. |
-| `shape` | `string` | The shape of the list items. Possible values: rounded, circular, square. |
-| `onSelectionChange` | `(Event, string[]) => void` | Callback fired when the selection changes. |
-| `element` | Dynamic | Reference to the list DOM element. Depends on the selected as value. |
-| `children` | Only `ListViewItem` | The ListViewItem children of the list. |
-| Element Attributes | Dynamic | Based on the chosen as value, you will have autocomplete for all HTML attributes of that tag. |
+| Name                | Type                        | Description                                                                                   |
+| ------------------- | --------------------------- | --------------------------------------------------------------------------------------------- |
+| `as`                | `string`                    | The HTML tag to use for the list container. Possible values: ul, ol, div.                     |
+| `selectionMode`     | `string`                    | Selection mode for the list. Possible values: single, multiselect, extended.                  |
+| `navigationMode`    | `string`                    | Navigation mode for keyboard navigation. Possible values: items, composite.                   |
+| `selectedItems`     | `string[]`                  | The currently selected item values.                                                           |
+| `shape`             | `string`                    | The shape of the list items. Possible values: rounded, circular, square.                      |
+| `onSelectionChange` | `(Event, string[]) => void` | Callback fired when the selection changes.                                                    |
+| `element`           | Dynamic                     | Reference to the list DOM element. Depends on the selected as value.                          |
+| `children`          | Only `ListViewItem`         | The ListViewItem children of the list.                                                        |
+| Element Attributes  | Dynamic                     | Based on the chosen as value, you will have autocomplete for all HTML attributes of that tag. |
 
 ## ListViewItem Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `as` | `string` | The HTML tag to use for the item container. Possible values: li, a, div. |
-| `active` | `boolean` | Whether the item is currently active or selected. |
-| `shape` | `string` | The shape of the item. Possible values: rounded, circular, square. |
-| `value` | `string` | The value of the item used for selection. |
-| `onAction` | `(MouseEvent, string) => void` | Callback fired when the item is activated. |
-| `onFocus` | `(Event, string) => void` | Callback fired when the item receives focus. |
-| `role` | `string` | ARIA role for the item. Possible values: treeitem, menuitem, option, row. |
-| `disabled` | `boolean` | Whether the item is disabled. |
-| `checkmark` | `object` | Props for the checkmark or checkbox. |
-| `children` | `Snippet` | The content of the item. |
-| Element Attributes | Dynamic | Based on the chosen as value, you will have autocomplete for all HTML attributes of that tag. |
+| Name               | Type                           | Description                                                                                   |
+| ------------------ | ------------------------------ | --------------------------------------------------------------------------------------------- |
+| `as`               | `string`                       | The HTML tag to use for the item container. Possible values: li, a, div.                      |
+| `active`           | `boolean`                      | Whether the item is currently active or selected.                                             |
+| `shape`            | `string`                       | The shape of the item. Possible values: rounded, circular, square.                            |
+| `value`            | `string`                       | The value of the item used for selection.                                                     |
+| `onAction`         | `(MouseEvent, string) => void` | Callback fired when the item is activated.                                                    |
+| `onFocus`          | `(Event, string) => void`      | Callback fired when the item receives focus.                                                  |
+| `role`             | `string`                       | ARIA role for the item. Possible values: treeitem, menuitem, option, row.                     |
+| `disabled`         | `boolean`                      | Whether the item is disabled.                                                                 |
+| `checkmark`        | `object`                       | Props for the checkmark or checkbox.                                                          |
+| `children`         | `Snippet`                      | The content of the item.                                                                      |
+| Element Attributes | Dynamic                        | Based on the chosen as value, you will have autocomplete for all HTML attributes of that tag. |

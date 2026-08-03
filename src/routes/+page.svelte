@@ -91,7 +91,7 @@
 		max-width: 700px;
 		margin: 0 auto;
 		flex-wrap: wrap;
-		& :global(.components-flyout-wrapper){
+		& :global(.components-flyout-wrapper) {
 			perspective: 700px;
 		}
 		& :global(.fs-flyout) {

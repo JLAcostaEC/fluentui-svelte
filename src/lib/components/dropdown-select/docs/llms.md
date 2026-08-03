@@ -27,7 +27,12 @@ Options can render rich content such as a `Persona`. Provide a `text` prop for t
 ```svelte
 <DropdownSelect>
 	<DropdownSelectOption value="John Doe" text="John Doe">
-		<Persona name="John Doe" primaryText="Software Engineer" presence={{ status: 'available' }} avatar={{ color: 'colorful', idForColor: '' }} />
+		<Persona
+			name="John Doe"
+			primaryText="Software Engineer"
+			presence={{ status: 'available' }}
+			avatar={{ color: 'colorful', idForColor: '' }}
+		/>
 	</DropdownSelectOption>
 	<DropdownSelectOption value="B">Option B</DropdownSelectOption>
 	<DropdownSelectOption value="C">Option C</DropdownSelectOption>
@@ -48,20 +53,20 @@ Set the `multiple` prop to allow selecting more than one option.
 
 ## Component Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `value` | bindable `string \| string[]` | The selected value, or an array of values when `multiple` is set. |
-| `multiple` | `boolean` | Allow selecting more than one option. |
-| `placeholder` | `string` | Text shown when no option is selected. Default: `'Native Select Dropdown'`. |
-| `hidePlaceholder` | `boolean` | Hides the placeholder option. |
-| `ref` | bindable `HTMLSelectElement` | The DOM reference of the underlying `<select>` element. |
-| `wrapperRef` | bindable `HTMLDivElement` | The DOM reference of the wrapper element. |
-| `children` | `Snippet` | The `DropdownSelectOption` items to render. |
+| Name              | Type                          | Description                                                                 |
+| ----------------- | ----------------------------- | --------------------------------------------------------------------------- |
+| `value`           | bindable `string \| string[]` | The selected value, or an array of values when `multiple` is set.           |
+| `multiple`        | `boolean`                     | Allow selecting more than one option.                                       |
+| `placeholder`     | `string`                      | Text shown when no option is selected. Default: `'Native Select Dropdown'`. |
+| `hidePlaceholder` | `boolean`                     | Hides the placeholder option.                                               |
+| `ref`             | bindable `HTMLSelectElement`  | The DOM reference of the underlying `<select>` element.                     |
+| `wrapperRef`      | bindable `HTMLDivElement`     | The DOM reference of the wrapper element.                                   |
+| `children`        | `Snippet`                     | The `DropdownSelectOption` items to render.                                 |
 
 ## DropdownSelectOption Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `value` | `string` | The value of the option, used for selection. |
-| `text` | `string` | Plain-text label used to display the selection when the list is closed. |
-| `children` | `Snippet` | The content rendered for the option. |
+| Name       | Type      | Description                                                             |
+| ---------- | --------- | ----------------------------------------------------------------------- |
+| `value`    | `string`  | The value of the option, used for selection.                            |
+| `text`     | `string`  | Plain-text label used to display the selection when the list is closed. |
+| `children` | `Snippet` | The content rendered for the option.                                    |

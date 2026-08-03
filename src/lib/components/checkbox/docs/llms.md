@@ -64,15 +64,15 @@ The `value` prop sets the value of the checkbox input. It is useful when the che
 
 ## Checkbox Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `wrapperAs` | `'div' \| 'label'` | The element the wrapper renders as. Set to `label` to show a visible label. Defaults to `div`. |
-| `children` | `Snippet` | Label content rendered next to the input. Only allowed when `wrapperAs="label"`. |
-| `checked` | `boolean` | Determines if the checkbox is checked. |
-| `indeterminate` | `boolean` | Sets the checkbox to an indeterminate state. |
-| `disabled` | `boolean` | Disables the checkbox, preventing user interaction. |
-| `value` | `string` | The value of the checkbox input, useful for form submissions. |
-| `wrapperAttributes` | `object` | Additional attributes for the wrapper element. |
-| `ref` | bindable `HTMLInputElement` | The DOM reference of the checkbox input element. |
-| `wrapperRef` | bindable `HTMLDivElement \| HTMLLabelElement` | The DOM reference of the checkbox wrapper element. |
-| Input Attributes | | Additional attributes for the checkbox input element. |
+| Name                | Type                                          | Description                                                                                    |
+| ------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `wrapperAs`         | `'div' \| 'label'`                            | The element the wrapper renders as. Set to `label` to show a visible label. Defaults to `div`. |
+| `children`          | `Snippet`                                     | Label content rendered next to the input. Only allowed when `wrapperAs="label"`.               |
+| `checked`           | `boolean`                                     | Determines if the checkbox is checked.                                                         |
+| `indeterminate`     | `boolean`                                     | Sets the checkbox to an indeterminate state.                                                   |
+| `disabled`          | `boolean`                                     | Disables the checkbox, preventing user interaction.                                            |
+| `value`             | `string`                                      | The value of the checkbox input, useful for form submissions.                                  |
+| `wrapperAttributes` | `object`                                      | Additional attributes for the wrapper element.                                                 |
+| `ref`               | bindable `HTMLInputElement`                   | The DOM reference of the checkbox input element.                                               |
+| `wrapperRef`        | bindable `HTMLDivElement \| HTMLLabelElement` | The DOM reference of the checkbox wrapper element.                                             |
+| Input Attributes    |                                               | Additional attributes for the checkbox input element.                                          |

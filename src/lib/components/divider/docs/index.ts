@@ -15,7 +15,8 @@ export const META: Meta = {
 	locale: 'en_US',
 	openGraph: {
 		title: 'Divider — Fluent UI Svelte',
-		description: 'A Fluent UI Svelte divider that separates content horizontally or vertically, with an optional label.',
+		description:
+			'A Fluent UI Svelte divider that separates content horizontally or vertically, with an optional label.',
 		type: 'article',
 		url: '/docs/components/divider',
 		siteName: 'Fluent UI Svelte'
@@ -39,7 +40,8 @@ export const META: Meta = {
 			},
 			{
 				question: 'Can a Divider have a label?',
-				answer: "Yes. Pass children as the label and use alignContent ('start', 'center', 'end') to position it along the divider."
+				answer:
+					"Yes. Pass children as the label and use alignContent ('start', 'center', 'end') to position it along the divider."
 			}
 		]
 	},

@@ -79,16 +79,16 @@ Use the icon prop to render an icon inside the badge. You can pass the icon as a
 
 ## Badge Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `size` | `number` | The size of the badge in pixels. |
-| `shape` | `string` | The shape of the badge. Possible values: 'circular', 'rounded', 'square'. |
-| `appearance` | `string` | The appearance of the badge. Possible values: 'filled', 'outline', 'ghost', 'tint'. |
-| `iconPosition` | `string` | The position of the icon inside the badge. Possible values: 'before', 'after'. |
-| `color` | `string` | The color of the badge. Possible values: 'information', 'attention', 'warning', 'success', 'critical'. |
-| `icon` | `Snippet` \| `Component` | The icon to display inside the badge. |
-| `ref` | `HTMLSpanElement` | The DOM reference of the badge element. |
-| `children` | `Snippet` | The children elements to render inside the badge. |
+| Name           | Type                     | Description                                                                                            |
+| -------------- | ------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `size`         | `number`                 | The size of the badge in pixels.                                                                       |
+| `shape`        | `string`                 | The shape of the badge. Possible values: 'circular', 'rounded', 'square'.                              |
+| `appearance`   | `string`                 | The appearance of the badge. Possible values: 'filled', 'outline', 'ghost', 'tint'.                    |
+| `iconPosition` | `string`                 | The position of the icon inside the badge. Possible values: 'before', 'after'.                         |
+| `color`        | `string`                 | The color of the badge. Possible values: 'information', 'attention', 'warning', 'success', 'critical'. |
+| `icon`         | `Snippet` \| `Component` | The icon to display inside the badge.                                                                  |
+| `ref`          | `HTMLSpanElement`        | The DOM reference of the badge element.                                                                |
+| `children`     | `Snippet`                | The children elements to render inside the badge.                                                      |
 
 ## BadgeIcon API
 
@@ -125,9 +125,9 @@ By default, Avatar uses an instance of BadgeIcon. As you can see, the first exam
 
 ### BadgeIcon Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `size` | `number` | The size of the badge in pixels. |
-| `color` | `string` | The color of the badge. Possible values: 'information', 'attention', 'warning', 'success', 'critical'. |
-| `icon` | `Snippet` \| `Component` | The icon to display inside the badge. |
-| `ref` | `HTMLSpanElement` | The DOM reference of the badge element. |
+| Name    | Type                     | Description                                                                                            |
+| ------- | ------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `size`  | `number`                 | The size of the badge in pixels.                                                                       |
+| `color` | `string`                 | The color of the badge. Possible values: 'information', 'attention', 'warning', 'success', 'critical'. |
+| `icon`  | `Snippet` \| `Component` | The icon to display inside the badge.                                                                  |
+| `ref`   | `HTMLSpanElement`        | The DOM reference of the badge element.                                                                |

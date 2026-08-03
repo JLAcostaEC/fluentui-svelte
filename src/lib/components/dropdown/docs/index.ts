@@ -35,7 +35,8 @@ export const META: Meta = {
 		faq: [
 			{
 				question: 'How do I provide options to a Dropdown?',
-				answer: 'Render DropdownOption components as children, each with a value and a text label; the text is shown when the flyout is closed.'
+				answer:
+					'Render DropdownOption components as children, each with a value and a text label; the text is shown when the flyout is closed.'
 			},
 			{
 				question: 'How do I allow selecting multiple options?',

@@ -8,14 +8,16 @@ import { BookmarkRegular } from 'fluentui-icons-svelte';
 export const META: Meta = {
 	// SEO
 	title: 'Label',
-	description: 'An accessible caption for a form control, with configurable size, weight, position, and required state.',
+	description:
+		'An accessible caption for a form control, with configurable size, weight, position, and required state.',
 	keywords: ['label', 'form label', 'caption', 'accessibility', 'required field', 'svelte'],
 	canonical: '/docs/components/label',
 	robots: 'index, follow',
 	locale: 'en_US',
 	openGraph: {
 		title: 'Label — Fluent UI Svelte',
-		description: 'A Fluent UI Svelte label that captions form controls, with size, weight, position, and required options.',
+		description:
+			'A Fluent UI Svelte label that captions form controls, with size, weight, position, and required options.',
 		type: 'article',
 		url: '/docs/components/label',
 		siteName: 'Fluent UI Svelte'
@@ -23,7 +25,8 @@ export const META: Meta = {
 	twitter: {
 		card: 'summary_large_image',
 		title: 'Label — Fluent UI Svelte',
-		description: 'A Fluent UI Svelte label that captions form controls, with size, weight, position, and required options.'
+		description:
+			'A Fluent UI Svelte label that captions form controls, with size, weight, position, and required options.'
 	},
 	// GEO
 	geo: {
@@ -35,7 +38,8 @@ export const META: Meta = {
 		faq: [
 			{
 				question: 'How do I mark a Label as required?',
-				answer: 'Pass a required object (e.g. required={{ message: "Required" }}); it renders a required indicator, defaulting to an asterisk.'
+				answer:
+					'Pass a required object (e.g. required={{ message: "Required" }}); it renders a required indicator, defaulting to an asterisk.'
 			},
 			{
 				question: 'How do I position the label text relative to a control?',

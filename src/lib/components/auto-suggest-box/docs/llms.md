@@ -49,10 +49,7 @@ The `maxItemsInView` prop sets how many suggestions are visible before the flyou
 The `suggestionChosen` event is triggered when a user selects a suggestion from the list. The chosen suggestion value is passed as the second argument.
 
 ```svelte
-<AutoSuggestBox
-	placeholder="Type a fruit..."
-	suggestionChosen={(e, item) => console.log('Suggestion chosen:', item)}
->
+<AutoSuggestBox placeholder="Type a fruit..." suggestionChosen={(e, item) => console.log('Suggestion chosen:', item)}>
 	<AutoSuggestBoxOption index={0} value="Apple">Apple</AutoSuggestBoxOption>
 	<AutoSuggestBoxOption index={1} value="Banana">Banana</AutoSuggestBoxOption>
 	<AutoSuggestBoxOption index={2} value="Cherry">Cherry</AutoSuggestBoxOption>
@@ -64,10 +61,7 @@ The `suggestionChosen` event is triggered when a user selects a suggestion from 
 The `querySubmitted` event is triggered when the user submits a query through the Search Button or typically by pressing Enter. This event can be used to handle the submission of the current input value.
 
 ```svelte
-<AutoSuggestBox
-	placeholder="Type a fruit..."
-	querySubmitted={(e, query) => console.log('Query submitted:', query)}
->
+<AutoSuggestBox placeholder="Type a fruit..." querySubmitted={(e, query) => console.log('Query submitted:', query)}>
 	<AutoSuggestBoxOption index={0} value="Apple">Apple</AutoSuggestBoxOption>
 	<AutoSuggestBoxOption index={1} value="Banana">Banana</AutoSuggestBoxOption>
 	<AutoSuggestBoxOption index={2} value="Cherry">Cherry</AutoSuggestBoxOption>
@@ -76,15 +70,15 @@ The `querySubmitted` event is triggered when the user submits a query through th
 
 ## Component Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `placeholder` | `string` | Placeholder text shown in the input. |
-| `value` | `string` | The current value of the input field. |
-| `open` | `boolean` | Whether the suggestion flyout is open. Default: `false`. |
-| `multiselect` | `boolean` | Allow selecting multiple suggestions. |
-| `selectOnFocus` | `boolean` | Select a suggestion as it is focused during keyboard navigation. |
-| `notFoundText` | `string` | Text shown when no suggestions match. Default: `No results found`. |
-| `maxItemsInView` | `number` | Number of suggestions visible before the flyout scrolls. Default: `6`. |
-| `ref` | `HTMLElement` | The DOM reference of the auto-suggest box element. |
-| `suggestionChosen` | `(e: Event, selection: string) => void` | Event triggered when a suggestion is chosen. |
-| `querySubmitted` | `(e: MouseEvent \| KeyboardEvent, query: string) => void` | Event triggered when a query is submitted. |
+| Name               | Type                                                      | Description                                                            |
+| ------------------ | --------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `placeholder`      | `string`                                                  | Placeholder text shown in the input.                                   |
+| `value`            | `string`                                                  | The current value of the input field.                                  |
+| `open`             | `boolean`                                                 | Whether the suggestion flyout is open. Default: `false`.               |
+| `multiselect`      | `boolean`                                                 | Allow selecting multiple suggestions.                                  |
+| `selectOnFocus`    | `boolean`                                                 | Select a suggestion as it is focused during keyboard navigation.       |
+| `notFoundText`     | `string`                                                  | Text shown when no suggestions match. Default: `No results found`.     |
+| `maxItemsInView`   | `number`                                                  | Number of suggestions visible before the flyout scrolls. Default: `6`. |
+| `ref`              | `HTMLElement`                                             | The DOM reference of the auto-suggest box element.                     |
+| `suggestionChosen` | `(e: Event, selection: string) => void`                   | Event triggered when a suggestion is chosen.                           |
+| `querySubmitted`   | `(e: MouseEvent \| KeyboardEvent, query: string) => void` | Event triggered when a query is submitted.                             |

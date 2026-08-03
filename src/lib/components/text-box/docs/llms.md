@@ -67,20 +67,20 @@ The `onClear` event is triggered when the input is cleared, allowing you to hand
 
 ## Component Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `type` | `string` | The type of the input element. Possible values: `'text'`, `'search'`, `'email'`, `'url'`, `'tel'`, `'password'`, `'number'`. |
-| `ref` | `HTMLInputElement` | The DOM reference of the input element. |
-| `wrapperRef` | `HTMLDivElement` | The DOM reference of the wrapper element. |
-| `wrapperAttributes` | `HTMLAttributes<HTMLDivElement>` | Additional attributes forwarded to the wrapper element. |
-| `size` | `'small' \| 'medium' \| 'large'` | The size of the input. |
-| `readonly` | `boolean` | Whether the input is read-only. |
-| `placeholder` | `string` | The placeholder text for the input. |
-| `hideActionButtons` | `boolean` | Whether to hide the extra action buttons in the input. |
-| `justify` | `boolean` | Whether the input fills the full width of the container. |
-| `contentBefore` | `string \| Snippet \| Component` | Content rendered before the input (e.g. an icon). |
-| `contentAfter` | `string \| Snippet \| Component` | Content rendered after the input (e.g. an icon). |
-| `textChanged` | `(e: InputEvent, text: string) => void` | Event triggered when content changes in the text box. |
-| `querySubmitted` | `(e: MouseEvent \| KeyboardEvent, query: string) => void` | Event triggered when a query is submitted (Enter or search icon click on `type="search"`). |
-| `onClear` | `(e: MouseEvent) => void` | Event triggered when the input is cleared. |
-| `children` | `Snippet` | The children elements to render inside the input. |
+| Name                | Type                                                      | Description                                                                                                                  |
+| ------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `type`              | `string`                                                  | The type of the input element. Possible values: `'text'`, `'search'`, `'email'`, `'url'`, `'tel'`, `'password'`, `'number'`. |
+| `ref`               | `HTMLInputElement`                                        | The DOM reference of the input element.                                                                                      |
+| `wrapperRef`        | `HTMLDivElement`                                          | The DOM reference of the wrapper element.                                                                                    |
+| `wrapperAttributes` | `HTMLAttributes<HTMLDivElement>`                          | Additional attributes forwarded to the wrapper element.                                                                      |
+| `size`              | `'small' \| 'medium' \| 'large'`                          | The size of the input.                                                                                                       |
+| `readonly`          | `boolean`                                                 | Whether the input is read-only.                                                                                              |
+| `placeholder`       | `string`                                                  | The placeholder text for the input.                                                                                          |
+| `hideActionButtons` | `boolean`                                                 | Whether to hide the extra action buttons in the input.                                                                       |
+| `justify`           | `boolean`                                                 | Whether the input fills the full width of the container.                                                                     |
+| `contentBefore`     | `string \| Snippet \| Component`                          | Content rendered before the input (e.g. an icon).                                                                            |
+| `contentAfter`      | `string \| Snippet \| Component`                          | Content rendered after the input (e.g. an icon).                                                                             |
+| `textChanged`       | `(e: InputEvent, text: string) => void`                   | Event triggered when content changes in the text box.                                                                        |
+| `querySubmitted`    | `(e: MouseEvent \| KeyboardEvent, query: string) => void` | Event triggered when a query is submitted (Enter or search icon click on `type="search"`).                                   |
+| `onClear`           | `(e: MouseEvent) => void`                                 | Event triggered when the input is cleared.                                                                                   |
+| `children`          | `Snippet`                                                 | The children elements to render inside the input.                                                                            |

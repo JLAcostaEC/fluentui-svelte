@@ -36,16 +36,16 @@ Bind a variable to the `value` prop to read the selected date. The value updates
 
 ## Component Props
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `value` | bindable `Date \| null` | The selected date. Bind to it to read or set the current selection. |
-| `locale` | `string` | Locale used to format the displayed date. Default: `'en-US'`. |
-| `format` | `Intl.DateTimeFormatOptions` | Formatting options for the displayed date. Default: numeric year, month and day. |
-| `calendarPosition` | `object` | Positioning configuration forwarded to the calendar popup. |
-| `blackoutDates` | `Date[]` | Dates that cannot be selected. Forwarded to the underlying `CalendarView`. |
-| `minDate` | `Date` | Earliest selectable date. Forwarded to the underlying `CalendarView`. |
-| `maxDate` | `Date` | Latest selectable date. Forwarded to the underlying `CalendarView`. |
-| `weekStart` | `number` | The first day of the week. Forwarded to the underlying `CalendarView`. |
-| `headers` | `object` | Header configuration forwarded to the underlying `CalendarView`. |
-| `onChange` | `(value: Date) => void` | Callback fired when the selected date changes. |
-| `element` | bindable `HTMLDivElement` | The DOM reference of the calendar date picker root element. |
+| Name               | Type                         | Description                                                                      |
+| ------------------ | ---------------------------- | -------------------------------------------------------------------------------- |
+| `value`            | bindable `Date \| null`      | The selected date. Bind to it to read or set the current selection.              |
+| `locale`           | `string`                     | Locale used to format the displayed date. Default: `'en-US'`.                    |
+| `format`           | `Intl.DateTimeFormatOptions` | Formatting options for the displayed date. Default: numeric year, month and day. |
+| `calendarPosition` | `object`                     | Positioning configuration forwarded to the calendar popup.                       |
+| `blackoutDates`    | `Date[]`                     | Dates that cannot be selected. Forwarded to the underlying `CalendarView`.       |
+| `minDate`          | `Date`                       | Earliest selectable date. Forwarded to the underlying `CalendarView`.            |
+| `maxDate`          | `Date`                       | Latest selectable date. Forwarded to the underlying `CalendarView`.              |
+| `weekStart`        | `number`                     | The first day of the week. Forwarded to the underlying `CalendarView`.           |
+| `headers`          | `object`                     | Header configuration forwarded to the underlying `CalendarView`.                 |
+| `onChange`         | `(value: Date) => void`      | Callback fired when the selected date changes.                                   |
+| `element`          | bindable `HTMLDivElement`    | The DOM reference of the calendar date picker root element.                      |

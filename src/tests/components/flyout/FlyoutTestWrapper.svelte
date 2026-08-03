@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Flyout } from '$lib/index.js';
-	import type { FlyoutProps } from '$lib/components/flyout/types.ts';
+	import type { FlyoutProps } from '$lib/components/flyout/types.js';
 
 	let { content = 'Flyout content', ...props }: Partial<FlyoutProps> & { content?: string } = $props();
 </script>

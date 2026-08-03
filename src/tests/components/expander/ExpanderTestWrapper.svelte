@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Expander } from '$lib/index.js';
-	import type { ExpanderProps } from '$lib/components/expander/types.ts';
+	import type { ExpanderProps } from '$lib/components/expander/types.js';
 
 	let { content = 'Expander content', ...props }: Partial<ExpanderProps> & { content?: string } = $props();
 </script>

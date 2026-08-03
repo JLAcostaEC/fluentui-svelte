@@ -12,7 +12,7 @@
 		'aria-label': ariaLabel,
 		indeterminate,
 		value = $bindable(0),
-		element = $bindable(),
+		ref = $bindable(),
 		railElement = $bindable(),
 		trackElement = $bindable(),
 		...attributes
@@ -39,7 +39,7 @@
     ```
 -->
 <svg
-	bind:this={element}
+	bind:this={ref}
 	tabindex="-1"
 	class={['progress-ring', status && `status-${status}`, classes, { indeterminate }]}
 	width={size}

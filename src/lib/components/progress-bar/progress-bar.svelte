@@ -8,7 +8,7 @@
 		min = 0,
 		max = 100,
 		value = $bindable(),
-		element = $bindable(),
+		ref = $bindable(),
 		railElement = $bindable(),
 		trackElement = $bindable(),
 		secondaryTrackElement = $bindable(),
@@ -37,7 +37,7 @@
 	aria-valuemin={min}
 	aria-valuemax={max}
 	aria-valuenow={checkValue}
-	bind:this={element}
+	bind:this={ref}
 	{...attributes}
 >
 	{#if !hideRail}

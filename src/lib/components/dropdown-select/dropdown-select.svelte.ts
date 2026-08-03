@@ -1,7 +1,7 @@
 import { onClickOutside } from 'runed';
 import type { Attachment } from 'svelte/attachments';
 
-export function selectDirection(): Attachment<HTMLElement & { multiple?: boolean }> {
+export function selectDirection(): Attachment<HTMLSelectElement & { multiple?: boolean }> {
 	return (node) => {
 		// No needed when multiple is enabled
 		if (node.multiple) return;
@@ -10,7 +10,7 @@ export function selectDirection(): Attachment<HTMLElement & { multiple?: boolean
 		let isOpen = $state(false);
 
 		function updateDirection() {
-			const positionArea = window?.getComputedStyle(node, '::picker(select)').positionArea;
+			const positionArea = window?.getComputedStyle(node as any, '::picker(select)').positionArea;
 			node.classList.toggle('popover-up', positionArea.includes('start'));
 			if (isOpen) {
 				node.classList.add('open');
@@ -41,7 +41,7 @@ export function selectDirection(): Attachment<HTMLElement & { multiple?: boolean
 		}
 
 		onClickOutside(
-			() => node,
+			() => node as any,
 			() => {
 				cleanup?.();
 			}

@@ -67,11 +67,9 @@
 	<section class="container">
 		<a href={resolve(localizeHref('/') as any)} class="logo-link">
 			<picture>
-				<source
-					srcset="/images/banner-white.png"
-					type="image/png"
-					media={`${mode.current === 'dark' ? '' : '(prefers-color-scheme: dark)'}`}
-				/>
+				{#if mode.current === 'dark'}
+					<source srcset="/images/banner-white.png" type="image/png" />
+				{/if}
 				<img src="/images/banner.png" alt="Logo" class="logo" />
 			</picture>
 		</a>

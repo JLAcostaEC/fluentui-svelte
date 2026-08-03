@@ -34,3 +34,6 @@ project.inlang/cache/
 
 # Auto-generated files
 src/site/documentation/index.js
+
+# AI
+.claude

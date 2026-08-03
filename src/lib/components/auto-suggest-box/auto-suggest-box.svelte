@@ -299,9 +299,8 @@
 </script>
 
 <div
-	class="fs-autosuggestbox"
+	class={['fs-autosuggestbox', { open }]}
 	style="--max-items: {maxItemsInView}; --current-items: {items.size};"
-	class:open
 	bind:this={ref}
 >
 	<TextBox

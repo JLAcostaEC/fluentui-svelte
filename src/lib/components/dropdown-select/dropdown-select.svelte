@@ -25,14 +25,7 @@
 		We need to use a if block with the same structure 
 	-->
 	{#if multiple}
-		<select
-			class="fs-dropdown-select"
-			{@attach selectDirection()}
-			multiple
-			bind:value
-			bind:this={ref}
-			{...attributes}
-		>
+		<select class="fs-dropdown-select" {@attach selectDirection()} multiple bind:value bind:this={ref} {...attributes}>
 			<button>
 				<selectedcontent></selectedcontent>
 			</button>
@@ -42,13 +35,7 @@
 			{@render children?.()}
 		</select>
 	{:else}
-		<select
-			class="fs-dropdown-select"
-			{@attach selectDirection()}
-			bind:value
-			bind:this={ref}
-			{...attributes}
-		>
+		<select class="fs-dropdown-select" {@attach selectDirection()} bind:value bind:this={ref} {...attributes}>
 			<button>
 				<selectedcontent></selectedcontent>
 			</button>

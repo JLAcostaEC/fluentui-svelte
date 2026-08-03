@@ -37,7 +37,7 @@
 		padding: 0 !important;
 		display: flex;
 		border-radius: var(--fs-control-border-radius);
-		
+
 		/* User-Agent Override Styles Hack  */
 		transition: background calc(infinity * 1s) !important;
 

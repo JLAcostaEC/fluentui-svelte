@@ -21,8 +21,7 @@ F
 <a
 	// eslint-disable-next-line svelte/no-navigation-without-resolve
 	{href}
-	class:disabled
-	class="fs-hyperlink {classes}"
+	class={['fs-hyperlink', classes, { disabled }]}
 	tabindex={disabled ? -1 : undefined}
 	aria-disabled={disabled || undefined}
 	onclick={disabled ? (e) => e?.preventDefault() : undefined}

@@ -200,9 +200,8 @@ A calendar view lets a user view and interact with a calendar that they can navi
 This implementation is originally made by Tropix126 in his FluentSvelte library, I have changed several things but almost everything has been devised by him.
 -->
 <div
-	class="fs-calendar-view"
+	class={['fs-calendar-view', { floating }]}
 	bind:this={element}
-	class:floating
 	in:flyToOffset={floating && floating.ref
 		? {
 				y: -floating.ref.getBoundingClientRect().height / 2,

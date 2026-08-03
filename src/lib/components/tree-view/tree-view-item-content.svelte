@@ -24,8 +24,7 @@
 <!-- Presentational row. The interactive element is the parent treeitem (`<li>`); this
 	div is plain markup so it is not exposed as a separate control. -->
 <div
-	class="fs-tree-view-item-content size-{size}"
-	class:disabled={ITEM_CONTEXT.disabled}
+	class={['fs-tree-view-item-content', `size-${size}`, ITEM_CONTEXT.disabled && 'disabled']}
 	style="--depth: {ITEM_CONTEXT.depth}"
 	bind:this={ref}
 	{...attributes}

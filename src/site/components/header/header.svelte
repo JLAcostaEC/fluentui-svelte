@@ -77,8 +77,12 @@
 		</a>
 		<nav>
 			<Button as="a" appearance={page.url.pathname === '/' ? 'accent' : 'subtle'} href={localizeHref('/')}>Home</Button>
-			<Button as="a" appearance={page.url.pathname === '/docs' ? 'accent' : 'subtle'} href={localizeHref('/docs')}>Docs</Button>
-			<Button as="a" appearance={page.url.pathname === '/about' ? 'accent' : 'subtle'} href={localizeHref('/about')}>About</Button>
+			<Button as="a" appearance={page.url.pathname === '/docs' ? 'accent' : 'subtle'} href={localizeHref('/docs')}>
+				Docs
+			</Button>
+			<Button as="a" appearance={page.url.pathname === '/about' ? 'accent' : 'subtle'} href={localizeHref('/about')}>
+				About
+			</Button>
 			<Menu>
 				<MenuTrigger>
 					{#snippet children({ state, menuTriggerProps })}

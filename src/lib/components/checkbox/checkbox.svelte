@@ -46,8 +46,7 @@
 	this={wrapperAs}
 	bind:this={wrapperRef}
 	{...wrapperAttributes as PolymorphicProps<T>}
-	class:label-wrapper={wrapperAs === 'label'}
-	class="fs-checkbox {wrapperAttributes?.class}"
+	class={['fs-checkbox', wrapperAttributes?.class, wrapperAs === 'label' && 'label-wrapper']}
 >
 	<input
 		{id}

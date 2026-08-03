@@ -7,7 +7,7 @@
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
 	let {
-		element = $bindable(),
+		ref = $bindable(),
 		group = $bindable(undefined),
 		id = ID,
 		label,
@@ -38,7 +38,7 @@
  -->
 
 <label class="fs-radio-button" {...labelAttributes}>
-	<input type="radio" {id} {name} {value} {checked} bind:this={element} bind:group {...attributes} />
+	<input type="radio" {id} {name} {value} {checked} bind:this={ref} bind:group {...attributes} />
 	{#if label}
 		<span>{label}</span>
 	{/if}

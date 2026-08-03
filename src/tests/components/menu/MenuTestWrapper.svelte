@@ -34,7 +34,7 @@
 <Menu {open} {hasIcons} {hasCheckmarks} {checkedValues} {onOpenChange} {onCheckedValueChange}>
 	<MenuTrigger>
 		{#snippet children({ state, menuTriggerProps })}
-			<Button bind:ref={state.ref} {...menuTriggerProps}>Open Menu</Button>
+			<Button bind:ref={state.ref} {...menuTriggerProps as any}>Open Menu</Button>
 		{/snippet}
 	</MenuTrigger>
 	<MenuPopover>

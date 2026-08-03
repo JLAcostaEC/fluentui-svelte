@@ -185,6 +185,7 @@
 
 		if (key === 'ArrowUp') {
 			e.preventDefault();
+			e.stopPropagation();
 			open = true;
 
 			await tick();
@@ -219,6 +220,7 @@
 		}
 		if (key === 'ArrowDown') {
 			e.preventDefault();
+			e.stopPropagation();
 			open = true;
 
 			await tick();
@@ -309,8 +311,8 @@
 		{hideActionButtons}
 		bind:value
 		bind:ref={inputRef}
-		querySubmitted={(e) => querySubmitted?.(e, (e.currentTarget as HTMLInputElement).value)}
-		textChanged={(e) => handleTextChanged(e, (e.currentTarget as HTMLInputElement).value)}
+		querySubmitted={(e) => querySubmitted?.(e, value)}
+		textChanged={(e) => handleTextChanged(e, value)}
 		onClear={handleClear}
 		role="combobox"
 		aria-expanded={open}
@@ -364,8 +366,8 @@
 			& :global(.fs-flyout) {
 				border-color: rgba(0, 0, 0, 0.06);
 				z-index: 10;
-				max-height: calc(var(--max-items) * 2.5rem);
-				height: calc(var(--current-items) * 2.5rem);
+				max-height: calc(var(--max-items) * 2.7rem);
+				height: calc(var(--current-items) * 2.7rem);
 				min-height: 3.4rem;
 				&:global(.top-shadow) {
 					box-shadow: 0 -0.5rem 0.8rem #00000024;

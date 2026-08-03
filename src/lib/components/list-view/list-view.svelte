@@ -120,7 +120,7 @@
 	bind:this={ref as ListViewDOM[Tag]}
 	class="fs-list-view"
 	role={ROLE}
-	aria-multiselectable={MULTISELECTABLE}
+	aria-multiselectable={MULTISELECTABLE || undefined}
 	{...tabspotAttrs}
 	{...attributes}
 >

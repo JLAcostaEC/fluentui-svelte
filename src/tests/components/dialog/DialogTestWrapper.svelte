@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent, DialogActions } from '$lib/index.js';
-	import type { DialogTitleTag } from '$lib/components/dialog/types.ts';
+	import type { DialogTitleTag } from '$lib/components/dialog/types.js';
 
 	let {
 		type = 'modal',

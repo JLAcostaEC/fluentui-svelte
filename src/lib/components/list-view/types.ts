@@ -11,7 +11,7 @@ export type ListViewProps<T extends 'ul' | 'ol' | 'div'> = {
 	selectedItems?: string[];
 	shape?: Shapes;
 	onSelectionChange?: (e: Event, selectedItems: string[] | []) => void;
-	as?: T;
+	as?: T | 'ul' | 'ol' | 'div';
 	ref?: ListViewDOM[T];
 	disableTabspot?: boolean;
 } & PolymorphicProps<T>;

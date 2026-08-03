@@ -7,7 +7,7 @@
 		shape = 'rounded',
 		justify,
 		class: classes,
-		element = $bindable(),
+		ref = $bindable(),
 		...attributes
 	}: SkeletonProps<Tag> = $props();
 </script>
@@ -29,7 +29,7 @@
  -->
 <svelte:element
 	this={as}
-	bind:this={element}
+	bind:this={ref}
 	class={['fs-skeleton', animation, shape, classes, { justify }]}
 	{...attributes}
 ></svelte:element>

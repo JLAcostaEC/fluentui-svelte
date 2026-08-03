@@ -24,6 +24,7 @@ describe('ListView', () => {
 	});
 
 	it('throws for invalid tag', async () => {
+		// @ts-expect-error incorrect tag type
 		expect(() => render(ListViewTestWrapper, { listProps: { as: 'span' } })).toThrow('Invalid tag: span');
 	});
 

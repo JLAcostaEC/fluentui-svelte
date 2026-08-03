@@ -64,7 +64,6 @@
 			>
 				<svg class="showcase-backdrop">
 					<pattern
-						id="pattern-14333"
 						x="5.800038310074086"
 						y="6.229276141719765"
 						width="11.17258097342026"

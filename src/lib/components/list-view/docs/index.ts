@@ -45,7 +45,7 @@ export const META: Meta = {
 	},
 	// Library-only (not SEO/GEO)
 	slug: 'list-view',
-	status: '',
+	status: 'Beta',
 	icon: TaskListSquareLtrRegular
 };
 

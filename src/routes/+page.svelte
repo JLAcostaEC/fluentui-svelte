@@ -85,14 +85,15 @@
 	#showcase {
 		flex: 1 1 50%;
 		min-width: 0;
-		overflow: hidden;
 		padding-right: 2rem;
 		display: flex;
 		align-items: center;
 		max-width: 700px;
 		margin: 0 auto;
-		perspective: 700px;
 		flex-wrap: wrap;
+		& :global(.components-flyout-wrapper){
+			perspective: 700px;
+		}
 		& :global(.fs-flyout) {
 			transform: rotateX(5deg) rotateY(-5.5deg) rotateZ(3deg);
 		}
@@ -148,7 +149,7 @@
 			}
 		}
 		#showcase {
-			padding: 0 1rem 2rem;
+			padding: 2rem 1rem 2rem;
 		}
 	}
 

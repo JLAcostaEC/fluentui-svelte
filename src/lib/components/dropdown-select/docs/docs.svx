@@ -14,7 +14,7 @@ import { DropdownSelect } from 'fluentui-svelte';
 
 <InfoBar status="critical" style="multiline" title={m.ds_early_access_title()} hideCloseButton>
   <p>
-    {m.ds_early_access_description_prefix()} <a href="https://floating-ui-svelte.vercel.app/" target="_blank">FloatingUI Svelte</a> {m.ds_early_access_description_suffix()}
+    {m.ds_early_access_description()}
   </p>
 </InfoBar>
 

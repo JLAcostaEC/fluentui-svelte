@@ -14,9 +14,6 @@
 	} from '$lib/index.js';
 </script>
 
-<!-- The wrapper is the size container: the flyout adapts to the space it gets,
-     which is not the same as the viewport width (the home page stacks its two
-     columns at 1024px, making this flyout wider, not narrower). -->
 <div class="components-flyout-wrapper">
 	<Flyout class="components-flyout">
 		<Button appearance="accent" />
@@ -78,8 +75,6 @@
 		gap: 1rem;
 	}
 
-	/* Narrow container: let the wide controls own a full row instead of
-	   overflowing, since they can't shrink below their max-content width. */
 	@container (max-width: 560px) {
 		:global(.components-flyout) {
 			gap: 0.75rem;

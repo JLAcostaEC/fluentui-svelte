@@ -92,6 +92,7 @@
 									{...menuTriggerProps}
 									appearance="subtle"
 									aria-label="Navigate to a different page"
+									class="mobile-nav-menu-button"
 									{...attrs}
 								>
 									...
@@ -236,6 +237,11 @@
 					& .nav-links {
 						display: none;
 					}
+				}
+			}
+			@media (min-width: 769px) {
+				:global(.mobile-nav-menu-button) {
+					display: none;
 				}
 			}
 		}

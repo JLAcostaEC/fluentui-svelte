@@ -51,12 +51,6 @@
   </ParaglideMessage>
 </p>
 
-<InfoBar status="information" title={m.asb_keyboard_navigation_title()} style="multiline" hideCloseButton>
+<InfoBar status="attention" title={m.asb_keyboard_navigation_title()} style="multiline" hideCloseButton>
   <p>{m.asb_keyboard_navigation_description()}</p>
 </InfoBar>
-
-<AutoSuggestBox placeholder="Type a fruit...">
-  <AutoSuggestBoxOption index={0} value="Apple">Apple</AutoSuggestBoxOption>
-  <AutoSuggestBoxOption index={1} value="Banana">Banana</AutoSuggestBoxOption>
-  <AutoSuggestBoxOption index={2} value="Cherry">Cherry</AutoSuggestBoxOption>
-</AutoSuggestBox>

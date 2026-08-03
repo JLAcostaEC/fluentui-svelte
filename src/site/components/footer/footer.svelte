@@ -9,9 +9,8 @@
 			<p>Open-Source Components by Jorge Acosta</p>
 		</div>
 		<nav>
-			<Button as="a" appearance="subtle" href="/">Home</Button>
-			<Button as="a" appearance="subtle" href="/docs">Docs</Button>
 			<Button as="a" appearance="subtle" href="/about">About</Button>
+			<Button as="a" appearance="subtle" href="https://jorgelacosta.com">Contact</Button>
 		</nav>
 	</section>
 </footer>

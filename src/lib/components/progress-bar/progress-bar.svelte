@@ -30,14 +30,13 @@
     ```
 -->
 <svg
-	class="fs-progress-bar status-{status} {classes}"
+	class={['fs-progress-bar', status && `status-${status}`, classes, typeof value !== 'number' && 'indeterminate']}
 	role="progressbar"
 	width="100%"
 	height="3"
 	aria-valuemin={min}
 	aria-valuemax={max}
 	aria-valuenow={checkValue}
-	class:indeterminate={typeof value !== 'number'}
 	bind:this={element}
 	{...attributes}
 >

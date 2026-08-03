@@ -9,7 +9,7 @@
 	});
 </script>
 
-<div class="dialog-actions justify-{position}" class:fluid bind:this={ref}>
+<div class={['dialog-actions', `justify-${position}`, { fluid }]} bind:this={ref}>
 	{@render children?.()}
 </div>
 

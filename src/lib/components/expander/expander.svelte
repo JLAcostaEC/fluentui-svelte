@@ -66,9 +66,7 @@ improve the user experience.
 	bind:this={ref}
 	bind:open={expanded}
 	use:expander
-	class:disabled
-	class:justify
-	class="fs-expander {direction}"
+	class={['fs-expander', direction, { disabled, justify }]}
 	{...attributes}
 >
 	<summary

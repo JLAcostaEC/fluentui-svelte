@@ -201,9 +201,7 @@
 />
 
 <div
-	class="fs-slider orientation-{orientation} {classes}"
-	class:disabled
-	class:reverse={directionAwareReverse}
+	class={['fs-slider', `orientation-${orientation}`, classes, { disabled }, directionAwareReverse && 'reverse']}
 	bind:this={ref}
 	tabindex={disabled ? -1 : 0}
 	role="slider"

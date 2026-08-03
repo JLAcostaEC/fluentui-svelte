@@ -52,10 +52,16 @@
 	role="img"
 	aria-label={name}
 	bind:this={ref}
-	class:hide-bg={hideBg}
 	style="{avatarStyle} {style}"
-	class:mask={badge?.status || badge?.icon}
-	class="fs-avatar {color} {activeAppearance} {active} {shape}"
+	class={[
+		'fs-avatar',
+		color,
+		activeAppearance,
+		active,
+		shape,
+		hideBg && 'hide-bg',
+		(badge?.status || badge?.icon) && 'mask'
+	]}
 	{...attributes}
 >
 	<span class="content">

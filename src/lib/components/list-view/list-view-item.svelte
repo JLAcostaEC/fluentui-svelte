@@ -58,14 +58,18 @@
 <svelte:element
 	this={as}
 	{role}
-	class:disabled
 	data-value={value}
 	aria-disabled={disabled || undefined}
-	class:indicator={role !== 'row'}
-	class:active={_active || active}
-	class:interactive={!disabled && role}
 	bind:this={ref as ListViewItemDOM[T]}
-	class="fs-list-view-item {shape ? shape : _shape} {classes}"
+	class={[
+		'fs-list-view-item',
+		shape ? shape : _shape,
+		classes,
+		{ disabled },
+		role !== 'row' && 'indicator',
+		(_active || active) && 'active',
+		!disabled && role && 'interactive'
+	]}
 	onfocus={(e: FocusEvent) => invokeHandlers(e, disabled, [(event: FocusEvent) => onfocus?.(event, value || '')])}
 	onclick={(e: MouseEvent) => {
 		invokeHandlers(

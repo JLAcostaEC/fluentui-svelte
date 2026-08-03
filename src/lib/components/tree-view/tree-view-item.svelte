@@ -147,8 +147,7 @@
 
 <li
 	{id}
-	class="fs-tree-view-item fs-tree-item-size-{size}"
-	class:open
+	class={['fs-tree-view-item', `fs-tree-item-size-${size}`, { open }]}
 	style="--depth: {depth}"
 	role="treeitem"
 	aria-expanded={type === 'branch' ? open : undefined}

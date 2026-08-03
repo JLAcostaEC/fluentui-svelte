@@ -31,10 +31,8 @@
 <svelte:element
 	this={as}
 	bind:this={ref}
-	class:inset
-	class:vertical
 	role="separator"
-	class="fs-divider {appearance} align-{alignContent}"
+	class={['fs-divider', appearance, `align-${alignContent}`, { inset, vertical }]}
 	style=" --divider-margin: {children ? (vertical ? '0.5rem' : '0.75rem') : '0'}"
 	aria-orientation={vertical ? 'vertical' : 'horizontal'}
 	{...attributes}

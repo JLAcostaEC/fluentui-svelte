@@ -41,8 +41,7 @@
 <svg
 	bind:this={element}
 	tabindex="-1"
-	class="progress-ring {status ? `status-${status}` : ''} {classes}"
-	class:indeterminate
+	class={['progress-ring', status && `status-${status}`, classes, { indeterminate }]}
 	width={size}
 	height={size}
 	viewBox="0 0 16 16"

@@ -1,0 +1,27 @@
+<script lang="ts">
+  import { DatePicker } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+
+  const formatCode = `
+<DatePicker format="dd/MM/yyyy" />
+<DatePicker format="MM/dd/yyyy" />`;
+
+  const hideColumnsCode = `<DatePicker hideDays />`;
+</script>
+
+### Date Format
+
+Use the `format` prop to switch between `dd/MM/yyyy` and `MM/dd/yyyy`.
+
+<Showcase columns={1} code={formatCode}>
+  <DatePicker format="dd/MM/yyyy" />
+  <DatePicker format="MM/dd/yyyy" />
+</Showcase>
+
+### Hiding Columns
+
+Use `hideDays`, `hideMonths`, or `hideYears` to hide individual selector columns (for example, a month/year-only picker).
+
+<Showcase columns={1} code={hideColumnsCode}>
+  <DatePicker hideDays />
+</Showcase>

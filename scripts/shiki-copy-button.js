@@ -13,7 +13,8 @@ export function fsShikiCopyButton() {
 				properties: {
 					class: 'copy',
 					'data-code': this.source,
-					onclick: `navigator.clipboard.writeText(this.dataset.code);this.classList.add('copied');setTimeout(() => this.classList.remove('copied'), 2000)`
+					onclick: `navigator.clipboard.writeText(this.dataset.code);this.classList.add('copied');setTimeout(() => this.classList.remove('copied'), 2000)`,
+					ariaLabel: 'Copy code to clipboard'
 				},
 				children: [
 					{

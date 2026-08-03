@@ -1,0 +1,49 @@
+<script lang="ts">
+  import { ListView, ListViewItem, Button } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+
+  const list = ['Apple', 'Banana', 'Cherry'];
+
+  const selectionCode = `
+<ListView selectionMode="multiselect" selectedItems={['Apple']}>
+  {#each ['Apple', 'Banana', 'Cherry'] as item (item)}
+    <ListViewItem value={item}>{item}</ListViewItem>
+  {/each}
+</ListView>`;
+</script>
+
+### {m.lv_listviewitem_value_title()}
+
+{m.lv_listviewitem_value_description()}
+
+### {m.lv_listviewitem_on_action_title()}
+
+{m.lv_listviewitem_on_action_description()}
+
+### Selection Mode
+
+Use `selectionMode` (`single`, `multiselect`, or `extended`) to control how items are selected.
+
+<Showcase columns={1} minHeight="220px" code={selectionCode}>
+  <ListView selectionMode="multiselect" selectedItems={['Apple']}>
+    {#each list as item (item)}
+      <ListViewItem value={item}>{item}</ListViewItem>
+    {/each}
+  </ListView>
+</Showcase>
+
+### {m.lv_listviewitem_checkmark_title()}
+
+{m.lv_listviewitem_checkmark_description_prefix()} [Checkbox](/docs/components/checkbox) {m.lv_listviewitem_checkmark_description_suffix()}
+
+<ListView as="div" navigationMode="composite">
+  <ListViewItem value="card" role="row" checkmark={{ style: 'position: absolute; top: 10px; left: 10px; z-index: 10;' }} style="padding: 0" onAction={() => alert('Triggered Primary Action')}>
+    <div style="width: 100%; height: 100px; border-radius: 8px; padding: 25px; background: var(--fs-card-background-default); display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      Card Content Inside ListItem
+      <Button onclick={(e) => { e.stopPropagation(); alert('Installing'); }}>Install</Button>
+    </div>
+  </ListViewItem>
+</ListView>
+
+{m.lv_checkmark_example_note_description()}

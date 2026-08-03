@@ -1,0 +1,18 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.cb_checkbox_props_title()}
+
+| **Name**            | **Type**                                 | **Description**                                                                 |
+| ------------------- | ---------------------------------------- | ------------------------------------------------------------------------------- |
+| `wrapperAs`         | `'div' \| 'label'`                       | {m.cb_props_wrapperas_description()} |
+| `children`          | `Snippet`                                | {m.cb_props_children_description()} |
+| `checked`           | `boolean`                                | {m.cb_props_checked_description()} |
+| `indeterminate`     | `boolean`                                | {m.cb_props_indeterminate_description()} |
+| `disabled`          | `boolean`                                | {m.cb_props_disabled_description()} |
+| `value`             | `string`                                 | {m.cb_props_value_description()} |
+| `wrapperAttributes` | `object`                                 | {m.cb_props_wrapperattributes_description()} |
+| `ref`               | bindable `HTMLInputElement`              | {m.cb_props_ref_description()} |
+| `wrapperRef`        | bindable `HTMLDivElement \| HTMLLabelElement` | {m.cb_props_wrapperref_description()} |
+| Input Attributes    |                                          | {m.cb_props_inputattributes_description()} |

@@ -10,7 +10,8 @@ export function selectDirection(): Attachment<HTMLSelectElement & { multiple?: b
 		let isOpen = $state(false);
 
 		function updateDirection() {
-			const positionArea = window?.getComputedStyle(node as any, '::picker(select)').positionArea;
+			const positionArea = window?.getComputedStyle(node as unknown as Element, '::picker(select)')
+				.positionArea;
 			node.classList.toggle('popover-up', positionArea.includes('start'));
 			if (isOpen) {
 				node.classList.add('open');
@@ -41,7 +42,7 @@ export function selectDirection(): Attachment<HTMLSelectElement & { multiple?: b
 		}
 
 		onClickOutside(
-			() => node as any,
+			() => node as unknown as Element,
 			() => {
 				cleanup?.();
 			}

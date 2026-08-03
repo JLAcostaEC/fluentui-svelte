@@ -1,0 +1,39 @@
+<script lang="ts">
+  import { Badge } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+  import { AccessibilityRegular } from 'fluentui-icons-svelte';
+</script>
+
+# Badge
+
+{m.badge_description()}
+
+<Showcase columns={6} initialZoom={1}>
+  <Badge color="information">5</Badge>
+  <Badge color="information" appearance="outline">5</Badge>
+  <Badge color="information" appearance="tint">5</Badge>
+  <Badge color="information" appearance="ghost">5</Badge>
+  <Badge color="attention" size={28}>5</Badge>
+  <Badge color="success" size={28}>5</Badge>
+  <Badge color="warning" size={28}>5</Badge>
+  <Badge color="critical" size={28}>5</Badge>
+  <Badge color="attention" size={36}>36</Badge>
+  <Badge color="attention" size={48}>48</Badge>
+  <Badge color="attention" size={64}>64</Badge>
+  <Badge color="attention" size={96} icon={AccessibilityRegular} />
+</Showcase>
+
+## {m.badge_usage_title()}
+
+```svelte
+<script>
+	import { Badge } from 'fluentui-svelte';
+</script>
+
+<Badge>36</Badge>
+```
+
+## {m.badge_api_title()}
+
+{m.badge_api_description_before_link()} <a href="#component-props">{m.badge_api_description_link_text()}</a>.

@@ -1,0 +1,37 @@
+<script lang="ts">
+  import { InfoBar } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# InfoBar
+
+{m.ib_description()}
+
+<Showcase columns={1} minHeight="280px">
+  <InfoBar status="attention" title="Attention">
+    <p>This is an attention message.</p>
+  </InfoBar>
+  <InfoBar status="warning" title="Warning">
+    <p>This is a warning message.</p>
+  </InfoBar>
+  <InfoBar status="success" title="Success">
+    <p>This is a success message.</p>
+  </InfoBar>
+</Showcase>
+
+## {m.ib_usage_title()}
+
+```svelte
+<script lang="ts">
+  import { InfoBar } from 'fluentui-svelte';
+</script>
+
+<InfoBar status="information" title="Information">
+  <p>This is an informational message.</p>
+</InfoBar>
+```
+
+## {m.ib_component_api_title()}
+
+{m.ib_component_api_description_prefix()} <a href="#component-props">{m.ib_component_api_link_text()}</a>.

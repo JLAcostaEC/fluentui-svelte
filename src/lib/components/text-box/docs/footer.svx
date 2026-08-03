@@ -1,0 +1,23 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.tb_component_props_title()}
+
+| **Name**            | **Type**                                                  | **Description**                              |
+| ------------------- | --------------------------------------------------------- | -------------------------------------------- |
+| `type`              | `string`                                                  | {m.tb_props_type_description()}              |
+| `ref`               | `HTMLInputElement`                                        | {m.tb_props_ref_description()}               |
+| `wrapperRef`        | `HTMLDivElement`                                          | {m.tb_props_wrapperref_description()}        |
+| `wrapperAttributes` | `HTMLAttributes<HTMLDivElement>`                          | {m.tb_props_wrapperattributes_description()} |
+| `size`              | `'small'` \| `'medium'` \| `'large'`                      | {m.tb_props_size_description()}              |
+| `readonly`          | `boolean`                                                 | {m.tb_props_readonly_description()}          |
+| `placeholder`       | `string`                                                  | {m.tb_props_placeholder_description()}       |
+| `hideActionButtons` | `boolean`                                                 | {m.tb_props_hideactionbuttons_description()} |
+| `justify`           | `boolean`                                                 | {m.tb_props_justify_description()}           |
+| `contentBefore`     | `string` \| `Snippet` \| `Component`                      | {m.tb_props_contentbefore_description()}     |
+| `contentAfter`      | `string` \| `Snippet` \| `Component`                      | {m.tb_props_contentafter_description()}      |
+| `textChanged`       | `(e: InputEvent, text: string) => void`                   | {m.tb_props_textchanged_description()}       |
+| `querySubmitted`    | `(e: MouseEvent \| KeyboardEvent, query: string) => void` | {m.tb_props_querysubmitted_description()}    |
+| `onClear`           | `(e: MouseEvent) => void`                                 | {m.tb_props_onclear_description()}           |
+| `children`          | `Snippet`                                                 | {m.tb_props_children_description()}          |

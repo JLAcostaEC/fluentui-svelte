@@ -1,0 +1,20 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.persona_component_props_title()}
+
+| **Name**        | **Type**         | **Description**                                |
+| --------------- | ---------------- | ---------------------------------------------- |
+| `name`          | `string`         | {m.persona_props_name_description()}           |
+| `primaryText`   | `string`         | {m.persona_props_primarytext_description()}    |
+| `secondaryText` | `string`         | {m.persona_props_secondarytext_description()}  |
+| `tertiaryText`  | `string`         | {m.persona_props_tertiarytext_description()}   |
+| `size`          | `number`         | {m.persona_props_size_description()}           |
+| `textAlign`     | `string`         | {m.persona_props_textalign_description()}      |
+| `textPosition`  | `string`         | {m.persona_props_textposition_description()}   |
+| `avatarAlign`   | `string`         | {m.persona_props_avataralign_description()}    |
+| `avatar`        | `object`         | {m.persona_props_avatar_description()}         |
+| `presence`      | `object`         | {m.persona_props_presence_description()}       |
+| `presenceOnly`  | `boolean`        | {m.persona_props_presenceonly_description()}   |
+| `element`       | `HTMLDivElement` | {m.persona_props_element_description()}        |

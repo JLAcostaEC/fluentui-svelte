@@ -1,0 +1,37 @@
+<script lang="ts">
+  import { Expander } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Expander
+
+{m.expander_description()}
+
+<Showcase columns={1}>
+  <Expander header="Expander Title" description="A description of the expander">
+    <p style="padding: 1rem">This is the content of the expander.</p>
+  </Expander>
+  <Expander header="Expander - Direction: Up" direction="up">
+    <p style="padding: 1rem">This is the content of the expander.</p>
+  </Expander>
+  <Expander header="Disabled Expander" disabled />
+</Showcase>
+
+## {m.expander_usage_title()}
+
+{m.expander_usage_description()}
+
+```svelte
+<script>
+  import { Expander } from 'fluentui-svelte';
+</script>
+
+<Expander header="Expander Title">
+  <p>This is the content of the expander</p>
+</Expander>
+```
+
+## {m.expander_component_api_title()}
+
+{m.expander_component_api_description_before_link()} <a href="#component-props">{m.expander_component_api_description_link_text()}</a>.

@@ -1,0 +1,107 @@
+<script lang="ts">
+  import { Divider } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+
+  const appearanceCode = `
+<Divider appearance="standard">Standard Divider</Divider>
+<Divider appearance="accent">Accent Divider</Divider>
+<Divider appearance="subtle">Subtle Divider</Divider>`;
+
+  const verticalCode = `
+<div style="height: 8rem;">
+  <Divider vertical>Vertical</Divider>
+</div>`;
+
+  const alignContentCode = `
+<Divider alignContent="start">Start Aligned Divider</Divider>
+<Divider alignContent="center">Center Aligned Divider</Divider>
+<Divider alignContent="end">End Aligned Divider</Divider>`;
+
+  const alignContentVerticalCode = `
+<Divider alignContent="start" vertical>Start</Divider>
+<Divider alignContent="center" vertical>Center</Divider>
+<Divider alignContent="end" vertical>End</Divider>`;
+
+  const insetCode = `
+<Divider inset>Inset Divider</Divider>`;
+
+  const customElementCode = `
+<Divider as="hr" />`;
+</script>
+
+### {m.divider_appearance_title()}
+
+{m.divider_appearance_description()}
+
+<Showcase columns={1} initialZoom={1} autoCenter code={appearanceCode}>
+  <div style="width: 16rem;">
+    <Divider appearance="standard">Standard Divider</Divider>
+  </div>
+  <div style="width: 16rem;">
+    <Divider appearance="accent">Accent Divider</Divider>
+  </div>
+  <div style="width: 16rem;">
+    <Divider appearance="subtle">Subtle Divider</Divider>
+  </div>
+</Showcase>
+
+### {m.divider_vertical_title()}
+
+{m.divider_vertical_description()}
+
+<Showcase columns={1} initialZoom={1} autoCenter code={verticalCode}>
+  <div style="width: 16rem; height: 8rem;">
+    <Divider vertical>Vertical</Divider>
+  </div>
+</Showcase>
+
+### {m.divider_align_content_title()}
+
+{m.divider_align_content_description()}
+
+<Showcase columns={1} initialZoom={1} autoCenter code={alignContentCode}>
+  <div style="width: 16rem;">
+    <Divider alignContent="start">Start Aligned Divider</Divider>
+  </div>
+  <div style="width: 16rem;">
+    <Divider alignContent="center">Center Aligned Divider</Divider>
+  </div>
+  <div style="width: 16rem;">
+    <Divider alignContent="end">End Aligned Divider</Divider>
+  </div>
+</Showcase>
+
+{m.divider_align_content_vertical_description()}
+
+<Showcase columns={3} initialZoom={1} autoCenter code={alignContentVerticalCode}>
+  <div style="width: 8rem; height: 8rem;">
+    <Divider alignContent="start" vertical>Start</Divider>
+  </div>
+  <div style="width: 8rem; height: 8rem;">
+    <Divider alignContent="center" vertical>Center</Divider>
+  </div>
+  <div style="width: 8rem; height: 8rem;">
+    <Divider alignContent="end" vertical>End</Divider>
+  </div>
+</Showcase>
+
+### {m.divider_inset_title()}
+
+{m.divider_inset_description()}
+
+<Showcase columns={1} initialZoom={1} autoCenter code={insetCode}>
+  <div style="width: 16rem;">
+    <Divider inset>Inset Divider</Divider>
+  </div>
+</Showcase>
+
+### {m.divider_custom_element_title()}
+
+{m.divider_custom_element_description()}
+
+<Showcase columns={1} initialZoom={1} autoCenter code={customElementCode}>
+  <div style="width: 16rem;">
+    <Divider as="hr" />
+  </div>
+</Showcase>

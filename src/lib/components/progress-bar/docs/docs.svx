@@ -1,0 +1,29 @@
+<script lang="ts">
+  import { ProgressBar } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Progress Bar
+
+{m.pbar_description()}
+
+<Showcase columns={1} autoCenter>
+  <ProgressBar value={30} />
+  <ProgressBar value={50} />
+  <ProgressBar value={70} />
+</Showcase>
+
+## {m.pbar_usage_title()}
+
+```svelte
+<script>
+  import { ProgressBar } from 'fluentui-svelte';
+</script>
+
+<ProgressBar value={50} />
+```
+
+## {m.pbar_component_api_title()}
+
+{m.pbar_component_api_description()}

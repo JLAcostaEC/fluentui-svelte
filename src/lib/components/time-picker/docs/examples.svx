@@ -1,0 +1,27 @@
+<script lang="ts">
+  import { TimePicker } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+
+  const formatCode = `
+<TimePicker format={24} />
+<TimePicker format={12} />`;
+
+  const hideSecondsCode = `<TimePicker format={24} hideSeconds />`;
+</script>
+
+### Clock Format
+
+Use the `format` prop to choose between a 24-hour clock (`24`) and a 12-hour clock with an AM/PM column (`12`).
+
+<Showcase columns={1} code={formatCode}>
+  <TimePicker format={24} />
+  <TimePicker format={12} />
+</Showcase>
+
+### Hiding Columns
+
+Use `hideHours`, `hideMinutes`, or `hideSeconds` to hide individual columns. By default the seconds column is shown.
+
+<Showcase columns={1} code={hideSecondsCode}>
+  <TimePicker format={24} hideSeconds />
+</Showcase>

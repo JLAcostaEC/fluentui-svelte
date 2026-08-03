@@ -1,7 +1,0 @@
-<script>
-  import { m } from '$i18n/messages.js';
-</script>
-
-# Teaching Tip
-
-{m.tt_description()}

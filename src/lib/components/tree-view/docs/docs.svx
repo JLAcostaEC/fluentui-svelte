@@ -1,0 +1,58 @@
+<script lang="ts">
+  import { TreeView, TreeViewItem, TreeViewItemContent, InfoBar } from '$lib/index.js';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Tree View
+
+{m.tv_description()}
+
+<TreeView>
+  <TreeViewItem id="fruits" type="branch">
+    <TreeViewItemContent>Fruits</TreeViewItemContent>
+    <TreeView>
+      <TreeViewItem id="apple">
+        <TreeViewItemContent>Apple</TreeViewItemContent>
+      </TreeViewItem>
+      <TreeViewItem id="banana" disabled>
+        <TreeViewItemContent>Banana</TreeViewItemContent>
+      </TreeViewItem>
+    </TreeView>
+  </TreeViewItem>
+  <TreeViewItem id="vegetables">
+    <TreeViewItemContent>Vegetables</TreeViewItemContent>
+  </TreeViewItem>
+</TreeView>
+
+<InfoBar status="critical" style="multiline" title={m.tv_early_access_title()} hideCloseButton>
+  <p>
+    {m.tv_early_access_description()}
+  </p>
+</InfoBar>
+
+## {m.tv_usage_title()}
+
+```svelte
+<script>
+	import { TreeView, TreeViewItem, TreeViewItemContent } from 'fluentui-svelte';
+</script>
+
+<TreeView selectionMode="multiple">
+	<TreeViewItem id="fruits" type="branch">
+		<TreeViewItemContent>Fruits</TreeViewItemContent>
+		<TreeView>
+			<TreeViewItem id="apple">
+				<TreeViewItemContent>Apple</TreeViewItemContent>
+			</TreeViewItem>
+			<TreeViewItem id="banana" disabled>
+				<TreeViewItemContent>Banana</TreeViewItemContent>
+			</TreeViewItem>
+		</TreeView>
+	</TreeViewItem>
+	<TreeViewItem id="vegetables">
+		<TreeViewItemContent>Vegetables</TreeViewItemContent>
+	</TreeViewItem>
+</TreeView>
+```
+
+{m.tv_usage_description()}

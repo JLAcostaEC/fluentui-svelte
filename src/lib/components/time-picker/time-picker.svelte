@@ -116,12 +116,6 @@
 	}
 </script>
 
-<!--
-$config: {
-  "status": "AI",
-  "icon": "ClockFilled"
-}
--->
 <div
 	class="fs-time-picker"
 	role="button"

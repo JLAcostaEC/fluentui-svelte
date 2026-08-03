@@ -1,0 +1,31 @@
+<script lang="ts">
+  import { TextBox } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# TextBox
+
+{m.tb_description()}
+
+<Showcase>
+  <TextBox type="text" placeholder="Type here..." />
+  <TextBox type="search" placeholder="Search..." />
+  <TextBox type="tel" placeholder="Phone number" />
+  <TextBox type="password" placeholder="Password" />
+  <TextBox type="number" placeholder="Number input" />
+</Showcase>
+
+## {m.tb_usage_title()}
+
+```svelte
+<script>
+	import { TextBox } from 'fluentui-svelte';
+</script>
+
+<TextBox type="text" placeholder="Type here..." />
+```
+
+## {m.tb_component_api_title()}
+
+{m.tb_component_api_description_before_link()} <a href="#component-props">{m.tb_component_api_description_link_text()}</a>.

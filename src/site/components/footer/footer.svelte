@@ -9,9 +9,8 @@
 			<p>Open-Source Components by Jorge Acosta</p>
 		</div>
 		<nav>
-			<Button as="a" appearance="subtle" href="/">Home</Button>
-			<Button as="a" appearance="subtle" href="/docs">Docs</Button>
 			<Button as="a" appearance="subtle" href="/about">About</Button>
+			<Button as="a" appearance="subtle" href="https://jorgelacosta.com">Contact</Button>
 		</nav>
 	</section>
 </footer>
@@ -36,6 +35,18 @@
 			& nav {
 				display: flex;
 				gap: 0.5rem;
+			}
+
+			@media (max-width: 768px) {
+				flex-direction: column;
+				align-items: center;
+				gap: 1rem;
+				padding: 1.5rem 1rem;
+				text-align: center;
+				& nav {
+					flex-wrap: wrap;
+					justify-content: center;
+				}
 			}
 		}
 	}

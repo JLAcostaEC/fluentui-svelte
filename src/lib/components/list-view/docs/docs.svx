@@ -1,0 +1,56 @@
+<script lang="ts">
+  import { ListView, ListViewItem, InfoBar } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+
+  const list = ['Chile', 'Colombia', 'Dominican Republic', 'Costa Rica', 'Venezuela'];
+  const selected = ['Chile', 'Dominican Republic', 'Venezuela'];
+</script>
+
+# ListView
+
+{m.lv_description()}
+
+<Showcase columns={1} minHeight="250px">
+  <ListView selectedItems={selected}>
+    {#each list as item (item)}
+      <ListViewItem value={item}>{item}</ListViewItem>
+    {/each}
+  </ListView>
+</Showcase>
+
+## {m.lv_usage_title()}
+
+```svelte
+<script>
+	import { ListView, ListViewItem } from 'fluentui-svelte';
+	let list = ['A', 'B', 'C'];
+	let selected = ['A'];
+</script>
+
+<ListView selectedItems={selected}>
+	{#each list as item (item)}
+		<ListViewItem value={item}>{item}</ListViewItem>
+	{/each}
+</ListView>
+```
+
+## {m.lv_listview_api_title()}
+
+<InfoBar status="warning" style="multiline" title={m.lv_best_practices_title()} hideCloseButton>
+  <p>
+    {m.lv_best_practices_description_prefix()} <a href="https://react.fluentui.dev/?path=/docs/components-list--docs#best-practices">List</a> {m.lv_best_practices_description_suffix()}
+  </p>
+</InfoBar>
+
+### {m.lv_listview_as_title()}
+
+{m.lv_listview_as_description()}
+
+### {m.lv_listview_shape_title()}
+
+{m.lv_listview_shape_description()}
+
+### {m.lv_navigation_mode_title()}
+
+{m.lv_navigation_mode_description()}

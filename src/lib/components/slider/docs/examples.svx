@@ -1,0 +1,48 @@
+<script lang="ts">
+  import { Slider } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+
+  const rangeCode = `
+<Slider value={20} min={0} max={50} step={5} />`;
+
+  const ticksCode = `
+<Slider value={50} step={25} ticks={[0, 25, 50, 75, 100]} />`;
+
+  const verticalCode = `
+<Slider value={40} orientation="vertical" />`;
+
+  const disabledCode = `
+<Slider value={30} disabled />`;
+</script>
+
+### Range and Step
+
+Use the `min`, `max`, and `step` props to control the range of values and the increment between them.
+
+<Showcase columns={1} code={rangeCode}>
+  <Slider value={20} min={0} max={50} step={5} />
+</Showcase>
+
+### Ticks
+
+Provide an array of values to the `ticks` prop to render tick marks along the track. Use `tickPlacement` to position them `around`, `before`, or `after` the rail.
+
+<Showcase columns={1} code={ticksCode}>
+  <Slider value={50} step={25} ticks={[0, 25, 50, 75, 100]} />
+</Showcase>
+
+### Vertical Orientation
+
+Set `orientation="vertical"` to lay the slider out vertically.
+
+<Showcase columns={1} code={verticalCode}>
+  <Slider value={40} orientation="vertical" />
+</Showcase>
+
+### Disabled
+
+Set the `disabled` prop to prevent interaction with the slider.
+
+<Showcase columns={1} code={disabledCode}>
+  <Slider value={30} disabled />
+</Showcase>

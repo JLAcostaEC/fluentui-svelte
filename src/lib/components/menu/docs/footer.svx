@@ -1,0 +1,52 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.menu_component_props_menu_title()}
+
+| **Name**                  | **Type**                                                      | **Description**                                      |
+| ------------------------- | ------------------------------------------------------------- | ---------------------------------------------------- |
+| `checkedValues`           | `Record<string, string[]>`                                    | {m.menu_props_checkedvalues_description()}           |
+| `onCheckedValueChange`    | `(e: Event, checkedValues: Record<string, string[]>) => void` | {m.menu_props_oncheckedvaluechange_description()}    |
+| `hasCheckmarks`           | `boolean`                                                     | {m.menu_props_hascheckmarks_description()}           |
+| `hasIcons`                | `boolean`                                                     | {m.menu_props_hasicons_description()}                |
+| `openingDelay`            | `number`                                                      | {m.menu_props_openingdelay_description()}            |
+| `open`                    | `boolean`                                                     | {m.menu_props_open_description()}                    |
+| `onOpenChange`            | `(e: Event, open: boolean) => void`                           | {m.menu_props_onopenchange_description()}            |
+| `openOnHover`             | `boolean`                                                     | {m.menu_props_openonhover_description()}             |
+| `persistOnItemActivation` | `boolean`                                                     | {m.menu_props_persistonitemactivation_description()} |
+| `positionConfig`          | `Partial<ComputePositionConfig>`                              | {m.menu_props_positionconfig_description()}          |
+
+## {m.menu_component_props_menutrigger_title()}
+
+| **Name**   | **Type**                            | **Description**                       |
+| ---------- | ----------------------------------- | ------------------------------------- |
+| `shape`    | `rounded` \| `circular` \| `square` | {m.menu_props_shape_description()}    |
+| `icon`     | `Snippet` \| `Component`            | {m.menu_props_icon_description()}     |
+| `disabled` | `boolean`                           | {m.menu_props_disabled_description()} |
+
+## {m.menu_component_props_menuitem_title()}
+
+| **Name**           | **Type**                 | **Description**                                |
+| ------------------ | ------------------------ | ---------------------------------------------- |
+| `icon`             | `Snippet` \| `Component` | {m.menu_props_menuitem_icon_description()}     |
+| `subText`          | `string`                 | {m.menu_props_subtext_description()}           |
+| `secondaryContent` | `string`                 | {m.menu_props_secondarycontent_description()}  |
+| `href`             | `string`                 | {m.menu_props_href_description()}              |
+| `disabled`         | `boolean`                | {m.menu_props_menuitem_disabled_description()} |
+| `onClick`          | `(e: Event) => void`     | {m.menu_props_onclick_description()}           |
+
+## {m.menu_component_props_menuitemcheckboxswitchradio_title()}
+
+| **Name**             | **Type**  | **Description**                                |
+| -------------------- | --------- | ---------------------------------------------- |
+| All `MenuItem` props |           | {m.menu_props_allmenuitemprops_description()}  |
+| `value`              | `string`  | {m.menu_props_value_description()}             |
+| `checked`            | `boolean` | {m.menu_props_checked_description()}           |
+| `name`               | `string`  | {m.menu_props_name_description()}              |
+
+## {m.menu_component_props_menugroup_title()}
+
+| **Name** | **Type** | **Description**                     |
+| -------- | -------- | ----------------------------------- |
+| `header` | `string` | {m.menu_props_header_description()} |

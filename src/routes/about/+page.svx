@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Flyout, Button } from '$lib/index.js';
+  import { Flyout, Button, InfoBar } from '$lib/index.js';
   import { m } from '$i18n/messages.js';
 </script>
 
@@ -10,7 +10,46 @@
 
 <strong>{m.about_intro_bold()}</strong> {m.about_intro_after_bold()}
 
-{m.about_paragraph2_before_wip()} <strong>{m.about_paragraph2_wip()}</strong> {m.about_paragraph2_after_wip()}
+<InfoBar status="warning" title={m.about_disclaimer_title()} hideCloseButton style="multiline">
+  {m.about_disclaimer_text()}
+</InfoBar>
+
+<img class="about-image" src="https://placehold.co/1200x500?text=Hero+image" alt={m.about_hero_image_alt()} />
+
+## {m.about_tech_title()}
+
+{m.about_tech_text1()}
+
+{m.about_tech_text2()}
+
+## {m.about_journey_title()}
+
+{m.about_journey_text()}
+
+{m.about_accessibility_text()}
+
+## {m.about_ux_title()}
+
+{m.about_ux_text()}
+
+### {m.about_tauri_title()}
+
+{m.about_tauri_text()}
+
+<img class="about-image" src="https://placehold.co/1200x700?text=Showcase+screenshot" alt={m.about_showcase_image_alt()} />
+
+## {m.about_help_title()}
+
+{m.about_help_text()}
+<div class="row">
+  <Button as="a" href="https://github.com/JLAcostaEC/fluentui-svelte/issues">
+    {m.about_help_issues_button()}
+  </Button>
+
+  <Button appearance="standard" as="a" href="https://github.com/JLAcostaEC/fluentui-svelte/blob/main/CONTRIBUTING.md">
+    {m.about_help_contributing_button()}
+  </Button>
+</div>
 
 {m.about_paragraph3()}
 <div class="row">
@@ -40,6 +79,14 @@
       display: flex;
       gap: 1rem;
       margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    & .about-image {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--fs-control-overlay-border-radius);
+      margin: 0.5rem 0;
     }
   }
 </style>

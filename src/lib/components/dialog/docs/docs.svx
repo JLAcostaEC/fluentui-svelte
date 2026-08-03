@@ -1,0 +1,62 @@
+<script lang="ts">
+  import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Dialog
+
+{m.dialog_description()}
+
+<Showcase columns={1} minHeight="250px">
+  <Dialog>
+    <DialogTrigger>Open Dialog</DialogTrigger>
+    <DialogSurface>
+      <DialogTitle>Dialog Title</DialogTitle>
+      <DialogContent>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptates.</p>
+      </DialogContent>
+    </DialogSurface>
+  </Dialog>
+</Showcase>
+
+{m.dialog_composition_description()}
+
+- `Dialog`: {m.dialog_composition_dialog_description()}
+- `DialogTrigger`: {m.dialog_composition_dialogtrigger_description()}
+- `DialogSurface`: {m.dialog_composition_dialogsurface_description()}
+- `DialogTitle`: {m.dialog_composition_dialogtitle_description()}
+- `DialogContent`: {m.dialog_composition_dialogcontent_description()}
+- `DialogActions`: {m.dialog_composition_dialogactions_description()}
+
+## {m.dialog_usage_title()}
+
+```svelte
+<script>
+	import {
+		Dialog,
+		DialogTrigger,
+		DialogSurface,
+		DialogTitle,
+		DialogContent,
+		DialogActions,
+		Button
+	} from 'fluentui-svelte';
+
+	let dialog = $state();
+</script>
+
+<Dialog bind:this={dialog}>
+	<DialogTrigger>Open Dialog</DialogTrigger>
+	<DialogSurface>
+		<DialogTitle>Dialog Title</DialogTitle>
+		<DialogContent>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+		</DialogContent>
+		<DialogActions fluid>
+			<Button>Save</Button>
+			<Button appearance="standard" onclick={() => dialog.closeDialog()}>Close</Button>
+		</DialogActions>
+	</DialogSurface>
+</Dialog>
+```

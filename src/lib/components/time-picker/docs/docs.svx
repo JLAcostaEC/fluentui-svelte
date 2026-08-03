@@ -1,0 +1,25 @@
+<script lang="ts">
+  import { TimePicker } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Time Picker
+
+{m.tp_description()}
+
+<Showcase columns={1}>
+  <TimePicker format={12} />
+</Showcase>
+
+## Usage
+
+```svelte
+<script>
+	import { TimePicker } from 'fluentui-svelte';
+
+	let value = $state('');
+</script>
+
+<TimePicker bind:value format={12} />
+```

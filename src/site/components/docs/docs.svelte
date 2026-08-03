@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { AutoSuggestBox, AutoSuggestBoxOption, ListView, ListViewItem, Badge, Button } from '$lib/index.js';
+	import { AutoSuggestBox, AutoSuggestBoxOption, ListView, ListViewItem, Badge, Button, Tooltip } from '$lib/index.js';
 	import { resolve } from '$app/paths';
 	import Toc from '../../components/toc/toc.svelte';
 	import { page } from '$app/state';
@@ -9,112 +9,157 @@
 	import { dev } from '$app/environment';
 	import EditRegular from 'fluentui-icons-svelte/EditRegular.svelte';
 	import { localizeHref, deLocalizeUrl } from '$i18n/runtime.js';
+	import type { Meta } from '$types';
+	import { GITHUB_REPO_URL } from '$site/constants.js';
 
-	const GITHUB_REPO_URL = 'https://github.com/JLAcostaEC/fluentui-svelte';
-
-	// Resolves the source file that documents the current route so it can be linked directly on GitHub.
-	// The pathname must be de-localized first since i18n may prefix it with a locale segment (e.g. /es/docs/...).
+	// Resolves the GitHub link that documents the current route.
 	const editUrl = $derived.by(() => {
 		const pathname = deLocalizeUrl(page.url).pathname;
 		const componentSlug = pathname.match(/^\/docs\/components\/(.+)$/);
 
-		let filePath: string;
 		if (componentSlug) {
-			filePath = `src/site/documentation/${componentSlug[1]}.svx`;
-		} else if (pathname === '/docs/getting-started') {
-			filePath = 'src/routes/docs/getting-started/+page.svx';
-		} else {
-			filePath = 'src/routes/docs/+page.svx';
+			return `${GITHUB_REPO_URL}/tree/main/src/lib/components/${componentSlug[1]}/docs`;
 		}
+
+		const filePath =
+			pathname === '/docs/getting-started' ? 'src/routes/docs/getting-started/+page.svx' : 'src/routes/docs/+page.svx';
 		return `${GITHUB_REPO_URL}/edit/main/${filePath}`;
 	});
 
-	type Navigation = {
+	type NavLink = {
 		label: string;
 		url: string;
-		status: string | null;
+		status?: string | null;
+		icon?: any;
 	};
 
 	let {
 		children,
 		primaryNavigation,
 		secondaryNavigation
-	}: { children: Snippet; primaryNavigation: Navigation[]; secondaryNavigation: Navigation[] } = $props();
+	}: { children: Snippet; primaryNavigation: NavLink[]; secondaryNavigation: Meta[] } = $props();
 
-	const suggestions = $derived.by(() => {
-		const nav = primaryNavigation.map((nav) => nav.label);
-		nav.push(...secondaryNavigation.map((nav) => nav.label));
-		return nav;
-	});
+	// Component navigation is derived from each component's META (title + slug).
+	const componentLinks = $derived<NavLink[]>(
+		secondaryNavigation.map((meta) => ({
+			label: meta.title,
+			url: `/docs/components/${meta.slug}`,
+			status: meta.status,
+			icon: meta.icon
+		}))
+	);
+
+	const suggestions = $derived([...primaryNavigation, ...componentLinks].map((nav) => nav.label));
 
 	const handleNav = async (item: string) => {
-		const navItem =
-			primaryNavigation.find((nav) => nav.label === item) || secondaryNavigation.find((nav) => nav.label === item);
+		const navItem = [...primaryNavigation, ...componentLinks].find((nav) => nav.label === item);
 
 		if (navItem) {
-			goto(resolve(localizeHref(navItem.url)));
+			goto(resolve(localizeHref(navItem.url) as any));
 		}
 	};
 
 	const badgeStyle = (item: string) => {
 		switch (item) {
 			case 'AI':
-				return { appearance: 'tint', color: 'success' };
+				return {
+					appearance: 'tint',
+					color: 'success',
+					message: 'More than 50% of this component has been built using AI tools'
+				};
 			case 'Experimental':
-				return { appearance: 'tint', color: 'warning' };
+				return {
+					appearance: 'tint',
+					color: 'warning',
+					message: 'This component is experimental and may change in future releases'
+				};
 			case 'New':
-				return { appearance: 'filled', color: 'attention' };
+				return { appearance: 'filled', color: 'attention', message: 'New fully implemented component' };
+			case 'Beta':
 			case 'WIP':
-				return { appearance: 'tint', color: 'attention' };
+				return {
+					appearance: 'tint',
+					color: 'attention',
+					message: 'This component is a work in progress and may not be fully implemented yet, bugs may be present'
+				};
 			case 'Empty':
-				return { appearance: 'tint', color: 'information' };
+				return {
+					appearance: 'tint',
+					color: 'information',
+					message: 'This component is not yet implemented, but the documentation is available'
+				};
+			case 'Prototype':
+				return {
+					appearance: 'tint',
+					color: 'critical',
+					message:
+						'This component is a prototype and may not be fully implemented yet (or may not be implemented at all), bugs may be present'
+				};
 			default:
-				return { appearance: 'tint', color: 'critical' };
+				return { appearance: 'tint', color: 'critical', message: '' };
 		}
 	};
 </script>
 
 <section class="container">
 	<aside id="navigation">
-		<AutoSuggestBox suggestionChosen={(e, item) => handleNav(item)}>
-			{#each suggestions as suggestion, index (suggestion)}
-				<AutoSuggestBoxOption {index} value={suggestion}>{suggestion}</AutoSuggestBoxOption>
-			{/each}
-		</AutoSuggestBox>
+		<div id="search-box" style="width: 100%; max-width: 100%; display: flex; flex-grow: 0;">
+			<AutoSuggestBox suggestionChosen={(e, item) => handleNav(item)} placeholder="Search docs...">
+				{#each suggestions as suggestion, index (suggestion)}
+					<AutoSuggestBoxOption {index} value={suggestion}>{suggestion}</AutoSuggestBoxOption>
+				{/each}
+			</AutoSuggestBox>
+		</div>
 
-		<nav id="navigation-list">
+		<nav class="navigation-list">
 			{#if primaryNavigation}
 				<ListView role="menu">
 					{#each primaryNavigation as nav (nav.label)}
 						<ListViewItem
 							role="menuitem"
 							as="a"
-							href={resolve(localizeHref(nav.url))}
-							active={page.url.pathname === nav.url}
+							href={resolve(localizeHref(nav.url) as any)}
+							active={page.url.pathname.endsWith(nav.url)}
 						>
 							{nav.label}
 						</ListViewItem>
 					{/each}
 				</ListView>
 			{/if}
+		</nav>
 
-			<h3>Components</h3>
+		<h3>Components</h3>
 
-			{#if secondaryNavigation}
+		<nav class="navigation-list">
+			{#if componentLinks}
 				<ListView role="menu">
-					{#each secondaryNavigation as doc (doc.label)}
+					{#each componentLinks as doc (doc.label)}
 						{#if doc.status !== 'Empty' || dev}
 							<ListViewItem
 								role="menuitem"
 								as="a"
-								href={resolve(localizeHref(doc.url))}
-								active={page.url.pathname === doc.url}
+								href={resolve(localizeHref(doc.url) as any)}
+								active={page.url.pathname.endsWith(doc.url)}
 							>
+								{#if doc.icon}
+									<doc.icon width="1.2rem" height="auto" />
+								{/if}
 								{doc.label}
 								{#if doc.status}
-									<Badge {...badgeStyle(doc.status) as any}>
+									{@const bagdeData = badgeStyle(doc.status)}
+									{let tooltipTarget: HTMLElement | null = $state(null)}
+
+									<Badge bind:ref={tooltipTarget} {...bagdeData as any}>
 										{doc.status}
 									</Badge>
+									{#if bagdeData.message && tooltipTarget}
+										<Tooltip
+											style="max-width: 200px; text-align: center;"
+											target={tooltipTarget}
+											content={bagdeData.message}
+											withArrow
+										/>
+									{/if}
 								{/if}
 							</ListViewItem>
 						{/if}
@@ -157,7 +202,7 @@
 			& :global(.fs-auto-suggest-box) {
 				width: 100%;
 			}
-			& #navigation-list {
+			& .navigation-list {
 				display: flex;
 				flex-direction: column;
 				gap: 0.5rem;
@@ -216,6 +261,38 @@
 			& :global(.fs-button svg) {
 				width: 1rem;
 				height: auto;
+			}
+		}
+
+		/* Tablet: drop the table of contents and collapse to navigation + docs. */
+		@media (max-width: 1024px) {
+			grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+			padding: 1.5rem;
+			& #table-of-contents {
+				display: none;
+			}
+		}
+
+		/* Mobile: single column with the navigation stacked above the docs. */
+		@media (max-width: 768px) {
+			grid-template-columns: minmax(0, 1fr);
+			padding: 1rem;
+			gap: 0.75rem;
+			& #navigation {
+				border-right: none;
+				border-bottom: 1px solid var(--fs-control-stroke-default);
+				padding: 0 0 1rem 0;
+				/* On mobile only the search box stays; the nav lists are hidden. */
+				& .navigation-list,
+				& h3 {
+					display: none;
+				}
+			}
+			& #docs > .docs-content {
+				padding: 1rem 0;
+				& > :global(h1) {
+					font-size: 2rem;
+				}
 			}
 		}
 	}

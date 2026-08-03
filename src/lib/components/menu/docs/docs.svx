@@ -1,0 +1,80 @@
+<script lang="ts">
+  import { Button, Menu, MenuTrigger, MenuPopover, MenuList, MenuGroup, MenuItem, MenuDivider } from '$lib/index.js';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Menu
+
+{m.menu_description()}
+
+<Menu>
+  <MenuTrigger>
+    {#snippet children({ state, menuTriggerProps })}
+      <Button bind:ref={state.ref} {...menuTriggerProps}>Open FS Menu</Button>
+    {/snippet}
+  </MenuTrigger>
+  <MenuPopover>
+    <MenuList>
+      <MenuGroup header="Group 1">
+        <MenuItem>Item 1</MenuItem>
+        <MenuItem>Item 2</MenuItem>
+      </MenuGroup>
+      <MenuDivider />
+      <MenuGroup header="Group 2">
+        <MenuItem>Item 3</MenuItem>
+        <MenuItem>Item 4</MenuItem>
+      </MenuGroup>
+    </MenuList>
+  </MenuPopover>
+</Menu>
+
+{m.menu_floating_ui_description_prefix()} [Floating UI](https://floating-ui.com/) {m.menu_floating_ui_description_suffix()}
+
+{m.menu_required_components_description()}
+
+- `Menu`: {m.menu_component_menu_description()}
+- `MenuTrigger`: {m.menu_component_menutrigger_description()}
+- `ContextMenuTrigger`: {m.menu_component_contextmenutrigger_description()}
+- `MenuPopover`: {m.menu_component_menupopover_description()}
+- `MenuList`: {m.menu_component_menulist_description()}
+- `MenuItem`: {m.menu_component_menuitem_description()}
+- `SplitButton` or `Button`: {m.menu_component_button_or_splitbutton_description()}
+
+{m.menu_optional_components_description()}
+
+- `MenuGroup`: {m.menu_component_menugroup_description()}
+- `MenuDivider`: {m.menu_component_menudivider_description()}
+- `MenuItemCheckbox`: {m.menu_component_menuitemcheckbox_description()}
+- `MenuItemSwitch`: {m.menu_component_menuitemswitch_description()}
+- `MenuItemRadio`: {m.menu_component_menuitemradio_description()}
+
+## {m.menu_usage_title()}
+
+{m.menu_usage_description_prefix()} `children()` `snippet` {m.menu_usage_description_suffix()}
+
+```svelte
+<script>
+	import { Button, Menu, MenuTrigger, MenuPopover, MenuList, MenuGroup, MenuItem, MenuDivider } from 'fluentui-svelte';
+</script>
+
+<Menu>
+	<MenuTrigger>
+		{#snippet children({ state, menuTriggerProps })}
+			<Button bind:ref={state.ref} {...menuTriggerProps}>Open Menu</Button>
+		{/snippet}
+	</MenuTrigger>
+	<MenuPopover>
+		<MenuList>
+			<MenuGroup header="Group 1">
+				<MenuItem>Item 1</MenuItem>
+				<MenuItem>Item 2</MenuItem>
+			</MenuGroup>
+			<MenuDivider />
+			<MenuGroup header="Group 2">
+				<MenuItem>Item 3</MenuItem>
+				<MenuItem>Item 4</MenuItem>
+			</MenuGroup>
+		</MenuList>
+	</MenuPopover>
+</Menu>
+```

@@ -7,12 +7,6 @@
 
 {m.docs_overview_description()}
 
-<InfoBar title={m.docs_overview_attention_title()} status="warning" style="multiline" hideCloseButton>
-  <p>
-    {m.docs_overview_attention_description()}
-  </p>
-</InfoBar>
-
 ## {m.docs_overview_what_is_title()}
 
 {m.docs_overview_what_is_description()}
@@ -24,9 +18,11 @@
 - {m.docs_overview_features_item3_before_code()} `<dialog></dialog>` {m.docs_overview_features_item3_middle()} `<summary></summary>` {m.docs_overview_features_item3_after_code()}
 - {m.docs_overview_features_item4()}
 
-## {m.docs_overview_undocumented_title()}
-
-{m.docs_overview_undocumented_description_before_link()} <a href="https://github.com/JLAcostaEC/fluentui-svelte" target="_blank" rel="noreferrer">{m.docs_overview_undocumented_description_link_text()}</a>.
+<InfoBar title={m.docs_overview_attention_title()} status="warning" style="multiline" hideCloseButton>
+  <p>
+    {m.docs_overview_attention_description()}
+  </p>
+</InfoBar>
 
 ## {m.docs_overview_changelog_title()}
 

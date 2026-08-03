@@ -1,0 +1,95 @@
+<script lang="ts">
+  import { Badge, InfoBar } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+  import { AccessibilityRegular } from 'fluentui-icons-svelte';
+
+  const appearanceCode = `
+<Badge size={46} color="attention">5</Badge>
+<Badge size={46} color="attention" appearance="outline">5</Badge>
+<Badge size={46} color="attention" appearance="tint">5</Badge>
+<Badge size={46} color="attention" appearance="ghost">5</Badge>`;
+
+  const sizesCode = `
+<Badge size={42} color="attention">46</Badge>
+<Badge size={56} color="attention">56</Badge>
+<Badge size={64} color="attention">64</Badge>
+<Badge size={96} color="attention">96</Badge>`;
+
+  const shapesCode = `
+<Badge size={36} color="attention">36</Badge>
+<Badge size={36} color="attention" shape="rounded">36</Badge>
+<Badge size={36} color="attention" shape="square">36</Badge>`;
+
+  const colorCode = `
+<Badge size={36} color="information">I</Badge>
+<Badge size={36} color="attention">A</Badge>
+<Badge size={36} color="warning">W</Badge>
+<Badge size={36} color="critical">C</Badge>
+<Badge size={36} color="success">S</Badge>`;
+
+  const iconCode = `
+<script>
+	import { Badge } from 'fluentui-svelte';
+	import { AccessibilityRegular } from 'fluentui-icons-svelte';
+<\/script>
+
+<Badge color="attention" size={96} icon={AccessibilityRegular} />
+`;
+</script>
+
+### {m.badge_appearance_title()}
+
+{m.badge_appearance_description()}
+
+<Showcase columns={4} initialZoom={1} autoCenter code={appearanceCode}>
+  <Badge size={46} color="attention">5</Badge>
+  <Badge size={46} color="attention" appearance="outline">5</Badge>
+  <Badge size={46} color="attention" appearance="tint">5</Badge>
+  <Badge size={46} color="attention" appearance="ghost">5</Badge>
+</Showcase>
+
+### {m.badge_sizes_title()}
+
+{m.badge_sizes_description()}
+
+<Showcase columns={4} initialZoom={1} autoCenter code={sizesCode}>
+  <Badge size={42} color="attention">46</Badge>
+  <Badge size={56} color="attention">56</Badge>
+  <Badge size={64} color="attention">64</Badge>
+  <Badge size={96} color="attention">96</Badge>
+</Showcase>
+
+### {m.badge_shapes_title()}
+
+{m.badge_shapes_description()}
+
+<Showcase columns={4} initialZoom={1} autoCenter code={shapesCode}>
+  <Badge size={36} color="attention">36</Badge>
+  <Badge size={36} color="attention" shape="rounded">36</Badge>
+  <Badge size={36} color="attention" shape="square">36</Badge>
+</Showcase>
+
+### {m.badge_color_title()}
+
+{m.badge_color_description()}
+
+<Showcase columns={5} initialZoom={1} autoCenter code={colorCode}>
+  <Badge size={36} color="information">I</Badge>
+  <Badge size={36} color="attention">A</Badge>
+  <Badge size={36} color="warning">W</Badge>
+  <Badge size={36} color="critical">C</Badge>
+  <Badge size={36} color="success">S</Badge>
+</Showcase>
+
+### {m.badge_icon_title()}
+
+{m.badge_icon_description()}
+
+<InfoBar status="warning" style="multiline" title={m.badge_only_icon_title()} hideCloseButton>
+  <p>{m.badge_only_icon_description()}</p>
+</InfoBar>
+
+<Showcase columns={1} initialZoom={1} autoCenter code={iconCode}>
+  <Badge color="attention" size={96} icon={AccessibilityRegular} />
+</Showcase>

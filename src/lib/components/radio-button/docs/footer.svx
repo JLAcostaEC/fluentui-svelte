@@ -1,0 +1,14 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.rb_component_props_title()}
+
+| **Name**           | **Type**           | **Description**                              |
+| ------------------ | ------------------ | -------------------------------------------- |
+| `label`            | `string`           | {m.rb_props_label_description()}             |
+| `group`            | `unknown`          | {m.rb_props_group_description()}             |
+| `checked`          | `boolean`          | {m.rb_props_checked_description()}           |
+| `disabled`         | `boolean`          | {m.rb_props_disabled_description()}          |
+| `ref`              | `HTMLInputElement` | {m.rb_props_ref_description()}               |
+| Element Attributes |                    | {m.rb_props_elementattributes_description()} |

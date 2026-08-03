@@ -26,8 +26,9 @@ reviews:
   poem: false
 
   auto_review:
-    enabled: true
-    auto_incremental_review: true
+    enabled: false
+    auto_incremental_review: false
+    reviews.auto_review.labels: ['coderabbit']
     drafts: false
     ignore_title_keywords:
       - wip

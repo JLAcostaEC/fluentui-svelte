@@ -1,5 +1,4 @@
 import Docs from './docs.svx';
-import Examples from './examples.svx';
 import Footer from './footer.svx';
 import LLMS from './llms.md?raw';
 import type { ConfigDocs, Meta } from '$types';
@@ -52,7 +51,7 @@ export const META: Meta = {
 export const DATA: ConfigDocs = {
 	meta: META,
 	docs: Docs,
-	examples: [Examples],
+	examples: [],
 	footer: Footer,
 	llms: LLMS
 };

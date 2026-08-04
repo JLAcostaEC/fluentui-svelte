@@ -18,22 +18,6 @@ A button trigger paired with a CalendarView popup for selecting a single date.
 
 The `CalendarDatePicker` combines a button trigger with a `CalendarView` popup. Clicking the trigger opens the calendar, and selecting a day updates the bound `value` and closes the popup. Because it builds on `CalendarView`, calendar props such as `blackoutDates`, `minDate`, `maxDate`, `weekStart` and `headers` are forwarded straight to the popup calendar.
 
-## Examples
-
-### Selecting a Date
-
-Bind a variable to the `value` prop to read the selected date. The value updates when the user picks a day and the popup closes.
-
-```svelte
-<script>
-	import { CalendarDatePicker } from 'fluentui-svelte';
-
-	let value = $state(null);
-</script>
-
-<CalendarDatePicker bind:value />
-```
-
 ## Component Props
 
 | Name               | Type                         | Description                                                                      |

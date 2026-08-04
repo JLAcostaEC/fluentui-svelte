@@ -218,7 +218,7 @@
 		linearScale([0, 50], [6, thumbClientWidth / 2])(percentage)}px;"
 	{...attributes}
 >
-	{#if tooltip && !disabled}]
+	{#if tooltip && !disabled}
 		<Tooltip
 			content={tooltipContent ?? `${prefix}${value}${suffix}`}
 			placement={tooltipPlacement}

@@ -358,7 +358,7 @@
 		& :global(.fs-flyout) {
 			position: absolute;
 			padding: 0;
-			top: 100%;
+			top: 0;
 			left: -1px;
 			width: calc(100% + 2px);
 		}
@@ -369,6 +369,7 @@
 				max-height: calc(var(--max-items) * 2.7rem);
 				height: calc(var(--current-items) * 2.7rem);
 				min-height: 3.4rem;
+				overflow: hidden;
 				&:global(.top-shadow) {
 					box-shadow: 0 -0.5rem 0.8rem #00000024;
 				}

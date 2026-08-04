@@ -100,7 +100,7 @@
 			Object.assign(arrowElement.style, {
 				left: x != null ? `${roundByDPR(x)}px` : '',
 				top: y != null ? `${roundByDPR(y)}px` : '',
-				[staticSide]: `${-(arrowElement.offsetWidth / 2) + 2}px`,
+				[staticSide]: `${-(arrowElement.offsetWidth / 2) + 1}px`,
 				transform: 'rotate(45deg)'
 			});
 			arrowElement.style.setProperty(

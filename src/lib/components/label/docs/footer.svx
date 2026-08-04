@@ -1,13 +1,17 @@
-## Component Props
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
 
-| **Name**        | **Type**                                    | **Description**                                                                 |
-| --------------- | ------------------------------------------- | ------------------------------------------------------------------------------- |
-| `label`         | `string`                                    | The text content of the label. Default: `'Label Element'`.                      |
-| `size`          | `'small' \| 'medium' \| 'large'`            | The size of the label text. Default: `'medium'`.                                |
-| `weight`        | `'regular' \| 'semibold'`                   | The font weight of the label. Default: `'regular'`.                             |
-| `labelPosition` | `'before' \| 'after' \| 'above' \| 'below'` | Position of the label text relative to the wrapped content. Default: `'after'`. |
-| `required`      | `{ message?: string; abbr?: string }`       | Marks the label as required and renders a required indicator (default `*`).     |
-| `disabled`      | `boolean`                                   | Renders the label in a disabled style and disables pointer events.              |
-| `class`         | `string`                                    | Additional classes applied to the label element.                               |
-| `ref`           | bindable `HTMLLabelElement`                 | The DOM reference of the label element.                                         |
-| `children`      | `Snippet`                                   | The content wrapped by the label (typically a form control).                    |
+## {m.label_component_props_title()}
+
+| **Name**        | **Type**                                    | **Description**                              |
+| --------------- | ------------------------------------------- | -------------------------------------------- |
+| `label`         | `string`                                    | {m.label_props_label_description()}          |
+| `size`          | `'small' \| 'medium' \| 'large'`            | {m.label_props_size_description()}           |
+| `weight`        | `'regular' \| 'semibold'`                   | {m.label_props_weight_description()}         |
+| `labelPosition` | `'before' \| 'after' \| 'above' \| 'below'` | {m.label_props_labelposition_description()}  |
+| `required`      | `{ message?: string; abbr?: string }`       | {m.label_props_required_description()}       |
+| `disabled`      | `boolean`                                   | {m.label_props_disabled_description()}       |
+| `class`         | `string`                                    | {m.label_props_class_description()}          |
+| `ref`           | bindable `HTMLLabelElement`                 | {m.label_props_ref_description()}            |
+| `children`      | `Snippet`                                   | {m.label_props_children_description()}       |

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Flyout } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
 
   const roundCornersCode = `
 <Flyout roundCorners="top">
@@ -8,9 +9,9 @@
 </Flyout>`;
 </script>
 
-### Round Corners
+### {m.flyout_round_corners_title()}
 
-Use the `roundCorners` prop to control which corners of the flyout are rounded. It accepts `'all'`, `'top'`, `'bottom'`, `'left'`, or `'right'`.
+{m.flyout_round_corners_description()}
 
 <Showcase columns={1} code={roundCornersCode}>
   <div style="max-width: 300px; margin: auto;">

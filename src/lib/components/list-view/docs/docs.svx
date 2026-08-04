@@ -35,8 +35,6 @@
 </ListView>
 ```
 
-## {m.lv_listview_api_title()}
-
 <InfoBar status="warning" style="multiline" title={m.lv_best_practices_title()} hideCloseButton>
   <p>
     {m.lv_best_practices_description_prefix()} <a href="https://react.fluentui.dev/?path=/docs/components-list--docs#best-practices">List</a> {m.lv_best_practices_description_suffix()}

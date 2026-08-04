@@ -1,17 +1,21 @@
-## Component Props
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
 
-| **Name**         | **Type**                       | **Description**                                                       |
-| ---------------- | ------------------------------ | -------------------------------------------------------------------- |
-| `value`          | bindable `string`              | Selected date as `YYYY-MM-DD` (matches the underlying `<input type="date">`). |
-| `format`         | `'MM/dd/yyyy' \| 'dd/MM/yyyy'` | The display format of the date. Default: `'dd/MM/yyyy'`.             |
-| `open`           | bindable `boolean`             | Whether the picker flyout is open.                                   |
-| `hideYears`      | `boolean`                      | Hide the year selector column.                                       |
-| `hideMonths`     | `boolean`                      | Hide the month selector column.                                      |
-| `hideDays`       | `boolean`                      | Hide the day selector column.                                        |
-| `minYear`        | `number`                       | Earliest selectable year. Default: current year − 100.               |
-| `maxYear`        | `number`                       | Latest selectable year. Default: current year.                       |
-| `disabledDates`  | `Date[]`                       | Specific days (year-month-day) that cannot be selected.              |
-| `disabledMonths` | `Date[]`                       | Specific months (by month + year) that cannot be selected.           |
-| `disabledYears`  | `Date[]`                       | Specific years (by year) that cannot be selected.                    |
-| `element`        | bindable `HTMLElement`         | The DOM reference of the date picker root element.                   |
-| `inputElement`   | bindable `HTMLInputElement`    | The DOM reference of the underlying input element.                   |
+## {m.dp_component_props_title()}
+
+| **Name**         | **Type**                       | **Description**                              |
+| ---------------- | ------------------------------ | -------------------------------------------- |
+| `value`          | bindable `string`              | {m.dp_props_value_description()}             |
+| `format`         | `'MM/dd/yyyy' \| 'dd/MM/yyyy'` | {m.dp_props_format_description()}            |
+| `open`           | bindable `boolean`             | {m.dp_props_open_description()}              |
+| `hideYears`      | `boolean`                      | {m.dp_props_hideyears_description()}         |
+| `hideMonths`     | `boolean`                      | {m.dp_props_hidemonths_description()}        |
+| `hideDays`       | `boolean`                      | {m.dp_props_hidedays_description()}          |
+| `minYear`        | `number`                       | {m.dp_props_minyear_description()}           |
+| `maxYear`        | `number`                       | {m.dp_props_maxyear_description()}           |
+| `disabledDates`  | `Date[]`                       | {m.dp_props_disableddates_description()}     |
+| `disabledMonths` | `Date[]`                       | {m.dp_props_disabledmonths_description()}    |
+| `disabledYears`  | `Date[]`                       | {m.dp_props_disabledyears_description()}     |
+| `element`        | bindable `HTMLElement`         | {m.dp_props_element_description()}           |
+| `inputElement`   | bindable `HTMLInputElement`    | {m.dp_props_inputelement_description()}      |

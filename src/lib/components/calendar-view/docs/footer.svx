@@ -1,17 +1,21 @@
-## Component Props
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
 
-| **Name**        | **Type**                              | **Description**                                                 |
-| --------------- | ------------------------------------- | --------------------------------------------------------------- |
-| `value`         | bindable `Date` \| `Date[]` \| `null` | The selected date, or an array of dates when `multiple` is set. |
-| `multiple`      | `boolean`                             | Allow selecting more than one date.                             |
-| `view`          | `days` \| `months` \| `years`         | The initial calendar view. Default: `'days'`.                   |
-| `minDate`       | `Date`                                | Earliest selectable date.                                       |
-| `maxDate`       | `Date`                                | Latest selectable date.                                         |
-| `locale`        | `string`                              | Locale used for formatting. Default: `'en-US'`.                 |
-| `weekStart`     | `number`                              | The first day of the week (0 = Sunday). Default: `1`.           |
-| `blackoutDates` | `Date[]`                              | Dates that cannot be selected.                                  |
-| `headers`       | `object`                              | Header configuration for the calendar.                          |
-| `floating`      | `object`                              | Floating UI configuration to render the calendar as a popup.    |
-| `onChange`      | `(e: Event, selection) => void`       | Callback fired when the selection changes.                      |
-| `onViewChange`  | `(view) => void`                      | Callback fired when the active view changes.                    |
-| `element`       | bindable `HTMLElement`                | The DOM reference of the calendar view root element.            |
+## {m.cv_component_props_title()}
+
+| **Name**        | **Type**                              | **Description**                           |
+| --------------- | ------------------------------------- | ----------------------------------------- |
+| `value`         | bindable `Date` \| `Date[]` \| `null` | {m.cv_props_value_description()}          |
+| `multiple`      | `boolean`                             | {m.cv_props_multiple_description()}       |
+| `view`          | `days` \| `months` \| `years`         | {m.cv_props_view_description()}           |
+| `minDate`       | `Date`                                | {m.cv_props_mindate_description()}        |
+| `maxDate`       | `Date`                                | {m.cv_props_maxdate_description()}        |
+| `locale`        | `string`                              | {m.cv_props_locale_description()}         |
+| `weekStart`     | `number`                              | {m.cv_props_weekstart_description()}      |
+| `blackoutDates` | `Date[]`                              | {m.cv_props_blackoutdates_description()}  |
+| `headers`       | `object`                              | {m.cv_props_headers_description()}        |
+| `floating`      | `object`                              | {m.cv_props_floating_description()}       |
+| `onChange`      | `(e: Event, selection) => void`       | {m.cv_props_onchange_description()}       |
+| `onViewChange`  | `(view) => void`                      | {m.cv_props_onviewchange_description()}   |
+| `element`       | bindable `HTMLElement`                | {m.cv_props_element_description()}        |

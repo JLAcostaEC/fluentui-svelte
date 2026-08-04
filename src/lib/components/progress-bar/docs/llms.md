@@ -1,6 +1,6 @@
 # Progress Bar
 
-Documentation for the Progress Bar component.
+A progress bar is a horizontal indicator that communicates the progress of an operation. Set `value` for determinate progress, or omit it for an indeterminate animation when the duration is unknown.
 
 ## Usage
 

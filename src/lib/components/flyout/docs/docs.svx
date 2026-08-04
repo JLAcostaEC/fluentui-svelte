@@ -18,6 +18,8 @@
 
 ## {m.flyout_usage_title()}
 
+{m.flyout_usage_description()}
+
 ```svelte
 <script>
   import { Flyout } from 'fluentui-svelte';

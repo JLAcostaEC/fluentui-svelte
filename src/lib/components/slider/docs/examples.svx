@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Slider } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
 
   const rangeCode = `
 <Slider value={20} min={0} max={50} step={5} />`;
@@ -15,9 +16,9 @@
 <Slider value={30} disabled />`;
 </script>
 
-### Range and Step
+### {m.slider_range_title()}
 
-Use the `min`, `max`, and `step` props to control the range of values and the increment between them.
+{m.slider_range_description()}
 
 <Showcase columns={1} code={rangeCode} minHeight="0" disablePanZoom showOverflow>
   <div style="width: 200px;">
@@ -25,9 +26,9 @@ Use the `min`, `max`, and `step` props to control the range of values and the in
   </div>
 </Showcase>
 
-### Ticks
+### {m.slider_ticks_title()}
 
-Provide an array of values to the `ticks` prop to render tick marks along the track. Use `tickPlacement` to position them `around`, `before`, or `after` the rail.
+{m.slider_ticks_description()}
 
 <Showcase columns={1} code={ticksCode} minHeight="0" disablePanZoom showOverflow>
   <div style="width: 200px;">
@@ -35,9 +36,9 @@ Provide an array of values to the `ticks` prop to render tick marks along the tr
   </div>
 </Showcase>
 
-### Vertical Orientation
+### {m.slider_orientation_title()}
 
-Set `orientation="vertical"` to lay the slider out vertically.
+{m.slider_orientation_description()}
 
 <Showcase columns={1} code={verticalCode} minHeight="0" disablePanZoom showOverflow>
   <div style="height: 200px;">
@@ -45,9 +46,9 @@ Set `orientation="vertical"` to lay the slider out vertically.
   </div>
 </Showcase>
 
-### Disabled
+### {m.slider_disabled_title()}
 
-Set the `disabled` prop to prevent interaction with the slider.
+{m.slider_disabled_description()}
 
 <Showcase columns={1} code={disabledCode} minHeight="0" disablePanZoom showOverflow>
   <div style="width: 200px;">

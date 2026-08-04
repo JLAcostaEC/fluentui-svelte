@@ -12,7 +12,7 @@
   <CalendarDatePicker />
 </Showcase>
 
-## Usage
+## {m.cdp_usage_title()}
 
 ```svelte
 <script>
@@ -24,6 +24,6 @@
 <CalendarDatePicker bind:value />
 ```
 
-## Component API
+## {m.cdp_component_api_title()}
 
-The `CalendarDatePicker` combines a button trigger with a `CalendarView` popup. Clicking the trigger opens the calendar, and selecting a day updates the bound `value` and closes the popup. Because it builds on `CalendarView`, calendar props such as `blackoutDates`, `minDate`, `maxDate`, `weekStart` and `headers` are forwarded straight to the popup calendar. You can see the full list in the [Component Props](#component-props) table below.
+{m.cdp_component_api_description()}

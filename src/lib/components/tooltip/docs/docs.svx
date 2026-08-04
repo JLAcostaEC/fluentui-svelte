@@ -18,7 +18,7 @@
 
 ## {m.tooltip_usage_title()}
 
-When using n
+{m.tooltip_usage_snippet_description()}
 
 ```svelte
 <script>
@@ -32,6 +32,8 @@ When using n
 </Tooltip>
 ```
 
+{m.tooltip_usage_plain_description()}
+
 ```svelte
 <script>
 	import { Tooltip, Button } from 'fluentui-svelte';
@@ -44,4 +46,4 @@ When using n
 
 ## {m.tooltip_component_api_title()}
 
-{m.tooltip_component_api_description_prefix()} [here](#component-props) {m.tooltip_component_api_description_suffix()}
+{m.tooltip_component_api_description()}

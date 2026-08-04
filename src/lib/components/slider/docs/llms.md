@@ -1,6 +1,6 @@
 # Slider
 
-Documentation for Slider soon.
+A slider lets users select a value from a continuous or discrete range by dragging a thumb along a track. It supports horizontal and vertical orientations, tick marks, a value tooltip and reverse direction.
 
 ## Usage
 

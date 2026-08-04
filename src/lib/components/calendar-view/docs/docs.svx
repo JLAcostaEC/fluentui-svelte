@@ -12,7 +12,7 @@
   <CalendarView />
 </Showcase>
 
-## Usage
+## {m.cv_usage_title()}
 
 ```svelte
 <script>

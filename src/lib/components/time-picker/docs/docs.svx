@@ -12,7 +12,7 @@
   <TimePicker format={12} />
 </Showcase>
 
-## Usage
+## {m.tp_usage_title()}
 
 ```svelte
 <script>

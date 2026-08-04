@@ -1,20 +1,24 @@
-## Component Props
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
 
-| **Name**          | **Type**                | **Description**                                                          |
-| ----------------- | ----------------------- | ------------------------------------------------------------------------ |
-| `value`           | bindable `string \| string[]` | The selected value, or an array of values when `multiple` is set.  |
-| `multiple`        | `boolean`               | Allow selecting more than one option.                                    |
-| `placeholder`     | `string`                | Text shown when no option is selected. Default: `'Select an option'`.    |
-| `disabled`        | `boolean`               | Disables user interaction.                                               |
-| `flyoutMaxHeight` | `number`                | Maximum height of the options flyout before it scrolls.                  |
-| `name`            | `string`                | Name of the underlying form control.                                     |
-| `ref`             | bindable `HTMLElement`  | The DOM reference of the dropdown element.                               |
-| `children`        | `Snippet`               | The `DropdownOption` items to render.                                    |
+## {m.dd_component_props_title()}
 
-## DropdownOption Props
+| **Name**          | **Type**                      | **Description**                              |
+| ----------------- | ----------------------------- | -------------------------------------------- |
+| `value`           | bindable `string \| string[]` | {m.dd_props_value_description()}             |
+| `multiple`        | `boolean`                     | {m.dd_props_multiple_description()}          |
+| `placeholder`     | `string`                      | {m.dd_props_placeholder_description()}       |
+| `disabled`        | `boolean`                     | {m.dd_props_disabled_description()}          |
+| `flyoutMaxHeight` | `number`                      | {m.dd_props_flyoutmaxheight_description()}   |
+| `name`            | `string`                      | {m.dd_props_name_description()}              |
+| `ref`             | bindable `HTMLElement`        | {m.dd_props_ref_description()}               |
+| `children`        | `Snippet`                     | {m.dd_props_children_description()}          |
 
-| **Name**   | **Type**  | **Description**                                                                 |
-| ---------- | --------- | ------------------------------------------------------------------------------- |
-| `value`    | `string`  | The value of the option, used for selection.                                    |
-| `text`     | `string`  | Plain-text label used to display the selection when the flyout is closed.       |
-| `children` | `Snippet` | The content rendered for the option (can be rich content such as a `Persona`).  |
+## {m.dd_dropdownoption_props_title()}
+
+| **Name**   | **Type**  | **Description**                             |
+| ---------- | --------- | ------------------------------------------- |
+| `value`    | `string`  | {m.dd_option_props_value_description()}     |
+| `text`     | `string`  | {m.dd_option_props_text_description()}      |
+| `children` | `Snippet` | {m.dd_option_props_children_description()}  |

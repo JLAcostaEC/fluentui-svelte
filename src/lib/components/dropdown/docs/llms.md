@@ -1,6 +1,6 @@
 # Dropdown
 
-The Dropdown component allows users to select an option from a list. It supports various sizes, disabled states, and customizable options for better user interaction.
+The Dropdown lets users select one or more options from a list of `DropdownOption` children. Options can render rich content, such as a `Persona`, and the current selection is exposed through a bindable `value`.
 
 ## Usage
 

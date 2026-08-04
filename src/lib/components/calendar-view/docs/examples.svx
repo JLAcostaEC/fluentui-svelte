@@ -1,22 +1,23 @@
 <script lang="ts">
   import { CalendarView } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
 
   const multipleCode = `<CalendarView multiple />`;
   const weekStartCode = `<CalendarView weekStart={3} />`;
 </script>
 
-### Multiple Selection
+### {m.cv_multiple_title()}
 
-Set the `multiple` prop to allow selecting more than one date.
+{m.cv_multiple_description()}
 
 <Showcase columns={1} code={multipleCode} minHeight="450px">
   <CalendarView multiple />
 </Showcase>
 
-### Week Start
+### {m.cv_week_start_title()}
 
-Use the `weekStart` prop to change the first day of the week (3 = Wednesday).
+{m.cv_week_start_description()}
 
 <Showcase columns={1} code={weekStartCode} minHeight="450px">
   <CalendarView weekStart={3} />

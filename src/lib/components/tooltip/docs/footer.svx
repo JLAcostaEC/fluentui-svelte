@@ -13,5 +13,5 @@
 | `hideDelay`        | `number`                                   | {m.tooltip_props_hidedelay_description()}         |
 | `onVisibleChange`  | `(visible: boolean) => void`               | {m.tooltip_props_onvisiblechange_description()}   |
 | `element`          | `HTMLElement`                              | {m.tooltip_props_element_description()}           |
-| `relationship`     | `label` \| `description` \| `inaccessible` | {m.tooltip_relationship_description()}            |     |
+| `relationship`     | `label` \| `description` \| `inaccessible` | {m.tooltip_relationship_description()}            |
 | Element Attributes |                                            | {m.tooltip_props_elementattributes_description()} |

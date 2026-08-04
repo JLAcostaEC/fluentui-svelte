@@ -1,6 +1,6 @@
 # Dropdown Select
 
-The Dropdown Select component allows users to select an option from a list. It supports various sizes, disabled states, and customizable options for better user interaction.
+The Dropdown Select is a dropdown built on the native `<select>` element. It lets users choose one option, or several with the `multiple` prop, from a list of `DropdownSelectOption` children.
 
 > **Early access:** The API, features, and behavior of the component are subject to significant changes. This component will be rebuilt using the FloatingUI Svelte package, which is still under active development. We strongly advise against using this component in production environments at this time.
 

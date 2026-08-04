@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent, DialogActions, Button } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
 
   let actionsDialog = $state();
 
@@ -25,9 +26,9 @@
 </Dialog>`;
 </script>
 
-### With Actions
+### {m.dialog_with_actions_title()}
 
-Add a `DialogActions` region to render action buttons in the dialog footer. Use `bind:this` on the `Dialog` to call `closeDialog()` programmatically.
+{m.dialog_with_actions_description()}
 
 <Showcase columns={1} minHeight="0" disablePanZoom showOverflow code={actionsCode}>
   <Dialog bind:this={actionsDialog}>

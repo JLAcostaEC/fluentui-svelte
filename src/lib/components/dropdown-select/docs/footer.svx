@@ -1,19 +1,23 @@
-## Component Props
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
 
-| **Name**          | **Type**                        | **Description**                                                        |
-| ----------------- | ------------------------------- | --------------------------------------------------------------------- |
-| `value`           | bindable `string \| string[]`   | The selected value, or an array of values when `multiple` is set.     |
-| `multiple`        | `boolean`                       | Allow selecting more than one option.                                 |
-| `placeholder`     | `string`                        | Text shown when no option is selected. Default: `'Native Select Dropdown'`. |
-| `hidePlaceholder` | `boolean`                       | Hides the placeholder option.                                         |
-| `ref`             | bindable `HTMLSelectElement`    | The DOM reference of the underlying `<select>` element.               |
-| `wrapperRef`      | bindable `HTMLDivElement`       | The DOM reference of the wrapper element.                             |
-| `children`        | `Snippet`                       | The `DropdownSelectOption` items to render.                           |
+## {m.ds_component_props_title()}
 
-## DropdownSelectOption Props
+| **Name**          | **Type**                      | **Description**                              |
+| ----------------- | ----------------------------- | -------------------------------------------- |
+| `value`           | bindable `string \| string[]` | {m.ds_props_value_description()}             |
+| `multiple`        | `boolean`                     | {m.ds_props_multiple_description()}          |
+| `placeholder`     | `string`                      | {m.ds_props_placeholder_description()}       |
+| `hidePlaceholder` | `boolean`                     | {m.ds_props_hideplaceholder_description()}   |
+| `ref`             | bindable `HTMLSelectElement`  | {m.ds_props_ref_description()}               |
+| `wrapperRef`      | bindable `HTMLDivElement`     | {m.ds_props_wrapperref_description()}        |
+| `children`        | `Snippet`                     | {m.ds_props_children_description()}          |
 
-| **Name**   | **Type**  | **Description**                                                          |
-| ---------- | --------- | ------------------------------------------------------------------------ |
-| `value`    | `string`  | The value of the option, used for selection.                             |
-| `text`     | `string`  | Plain-text label used to display the selection when the list is closed.  |
-| `children` | `Snippet` | The content rendered for the option.                                     |
+## {m.ds_dropdownselectoption_props_title()}
+
+| **Name**   | **Type**  | **Description**                             |
+| ---------- | --------- | ------------------------------------------- |
+| `value`    | `string`  | {m.ds_option_props_value_description()}     |
+| `text`     | `string`  | {m.ds_option_props_text_description()}      |
+| `children` | `Snippet` | {m.ds_option_props_children_description()}  |

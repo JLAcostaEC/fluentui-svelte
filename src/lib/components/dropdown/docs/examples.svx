@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Dropdown, DropdownOption, Persona } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
 
   const customCode = `
 <Dropdown>
@@ -19,9 +20,9 @@
 </Dropdown>`;
 </script>
 
-### Custom Option Content
+### {m.dd_custom_option_title()}
 
-Options can render any content, such as a `Persona`. Pass a `text` prop so the closed dropdown can still display the selection.
+{m.dd_custom_option_description()}
 
 <Showcase columns={1} code={customCode} minHeight="0" disablePanZoom showOverflow>
   <Dropdown>
@@ -33,9 +34,9 @@ Options can render any content, such as a `Persona`. Pass a `text` prop so the c
   </Dropdown>
 </Showcase>
 
-### Multiple Selection
+### {m.dd_multiple_title()}
 
-Set the `multiple` prop to allow selecting more than one option at a time while pressing `Ctrl` (or `Cmd` on Mac).
+{m.dd_multiple_description()}
 
 <Showcase columns={1} code={multipleCode} minHeight="0" disablePanZoom showOverflow>
   <Dropdown multiple>

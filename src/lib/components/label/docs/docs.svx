@@ -1,17 +1,18 @@
 <script lang="ts">
   import { Label } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
 </script>
 
 # Label
 
-A Label provides an accessible caption for a form control. It supports different sizes and weights, can be marked as required or disabled, and can be positioned relative to the control it wraps.
+{m.label_description()}
 
 <Showcase columns={1}>
   <Label label="Label" />
 </Showcase>
 
-## Usage
+## {m.label_usage_title()}
 
 ```svelte
 <script>

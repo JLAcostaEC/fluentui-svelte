@@ -20,7 +20,7 @@ import { Dropdown } from 'fluentui-svelte';
   </Dropdown>
 </Showcase>
 
-## Usage
+## {m.dd_usage_title()}
 
 ```svelte
 <script>

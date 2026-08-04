@@ -14,7 +14,7 @@
   </div>
 </Showcase>
 
-## Usage
+## {m.slider_usage_title()}
 
 ```svelte
 <script>

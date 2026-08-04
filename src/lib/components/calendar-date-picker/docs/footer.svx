@@ -1,15 +1,19 @@
-## Component Props
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
 
-| **Name**           | **Type**                     | **Description**                                                                            |
-| ------------------ | ---------------------------- | ------------------------------------------------------------------------------------------ |
-| `value`            | bindable `Date \| null`      | The selected date. Bind to it to read or set the current selection.                        |
-| `locale`           | `string`                     | Locale used to format the displayed date. Default: `'en-US'`.                              |
-| `format`           | `Intl.DateTimeFormatOptions` | Formatting options for the displayed date. Default: numeric year, month and day.           |
-| `calendarPosition` | `object`                     | Positioning configuration forwarded to the calendar popup.                                 |
-| `blackoutDates`    | `Date[]`                     | Dates that cannot be selected. Forwarded to the underlying `CalendarView`.                 |
-| `minDate`          | `Date`                       | Earliest selectable date. Forwarded to the underlying `CalendarView`.                      |
-| `maxDate`          | `Date`                       | Latest selectable date. Forwarded to the underlying `CalendarView`.                        |
-| `weekStart`        | `number`                     | The first day of the week. Forwarded to the underlying `CalendarView`.                     |
-| `headers`          | `object`                     | Header configuration forwarded to the underlying `CalendarView`.                           |
-| `onChange`         | `(value: Date) => void`      | Callback fired when the selected date changes.                                             |
-| `element`          | bindable `HTMLDivElement`    | The DOM reference of the calendar date picker root element.                                |
+## {m.cdp_component_props_title()}
+
+| **Name**           | **Type**                     | **Description**                              |
+| ------------------ | ---------------------------- | -------------------------------------------- |
+| `value`            | bindable `Date \| null`      | {m.cdp_props_value_description()}            |
+| `locale`           | `string`                     | {m.cdp_props_locale_description()}           |
+| `format`           | `Intl.DateTimeFormatOptions` | {m.cdp_props_format_description()}           |
+| `calendarPosition` | `object`                     | {m.cdp_props_calendarposition_description()} |
+| `blackoutDates`    | `Date[]`                     | {m.cdp_props_blackoutdates_description()}    |
+| `minDate`          | `Date`                       | {m.cdp_props_mindate_description()}          |
+| `maxDate`          | `Date`                       | {m.cdp_props_maxdate_description()}          |
+| `weekStart`        | `number`                     | {m.cdp_props_weekstart_description()}        |
+| `headers`          | `object`                     | {m.cdp_props_headers_description()}          |
+| `onChange`         | `(value: Date) => void`      | {m.cdp_props_onchange_description()}         |
+| `element`          | bindable `HTMLDivElement`    | {m.cdp_props_element_description()}          |

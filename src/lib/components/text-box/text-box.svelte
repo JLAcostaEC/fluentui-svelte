@@ -33,6 +33,7 @@
 	}: FSInput = $props();
 
 	let currentType = $derived(type);
+	let hasValue = $derived(!!((value && value.length > 0) || (typeof value === 'number' && value !== 0)));
 
 	const clearInput = (e: MouseEvent) => {
 		if (typeof value === 'string') {
@@ -112,8 +113,14 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 		</span>
 	{/if}
 	{#if !hideActionButtons}
-		{#if ((value && value.length > 0) || (typeof value === 'number' && value !== 0)) && !readonly}
-			<TextBoxButton class="clear-button" disabled={readonly} aria-label="Delete Text" onclick={(e) => clearInput(e)}>
+		{#if !readonly}
+			<TextBoxButton
+				class="clear-button {hasValue ? '' : 'is-empty'}"
+				disabled={!hasValue}
+				aria-hidden={hasValue ? undefined : 'true'}
+				aria-label="Delete Text"
+				onclick={(e) => clearInput(e)}
+			>
 				<DismissFilled />
 			</TextBoxButton>
 		{/if}
@@ -259,6 +266,9 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 					fill: currentColor;
 				}
 			}
+		}
+		& :global(.clear-button.is-empty) {
+			visibility: hidden;
 		}
 		&.text-box-size-small {
 			& :is(input, .content-after, .content-before) {

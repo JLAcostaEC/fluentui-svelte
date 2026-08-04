@@ -11,6 +11,7 @@
 	import { localizeHref, deLocalizeUrl } from '$i18n/runtime.js';
 	import type { Meta } from '$types';
 	import { GITHUB_REPO_URL } from '$site/constants.js';
+  import { m } from '$i18n/messages.js';
 
 	// Resolves the GitHub link that documents the current route.
 	const editUrl = $derived.by(() => {
@@ -128,7 +129,7 @@
 			{/if}
 		</nav>
 
-		<h3>Components</h3>
+		<h3>{m.docs_nav_title()}</h3>
 
 		<nav class="navigation-list">
 			{#if componentLinks}

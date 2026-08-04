@@ -1,9 +1,11 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
 	import panzoom from 'panzoom';
-	import ToggleSwitch from '$lib/components/toggle-switch/toggle-switch.svelte';
-	import type { PanZoomOptions } from 'panzoom';
+	import ToggleSwitch from '$components/toggle-switch/toggle-switch.svelte';
+	import RenderShiki from '$site/components/render-shiki/render-shiki.svelte';
+	import type { Snippet } from 'svelte';
 	import type { Action } from 'svelte/action';
+	import type { PanZoomOptions } from 'panzoom';
+	import type { Attachment } from 'svelte/attachments';
 
 	let {
 		columnWidth = '1fr',
@@ -11,14 +13,18 @@
 		gap = '32px',
 		initialZoom = 1,
 		minHeight = '200px',
+		minWidth = '200px',
 		minZoom = 0.5,
 		maxZoom = 20,
 		autoCenter = false,
 		code,
+		disablePanZoom = false,
+		showOverflow = false,
 		children
 	}: {
 		columns: number;
 		minHeight: string;
+		minWidth: string;
 		columnWidth: string;
 		initialZoom: number;
 		gap: string;
@@ -26,18 +32,21 @@
 		maxZoom: number;
 		autoCenter: boolean;
 		code: string;
+		disablePanZoom?: boolean;
+		showOverflow?: boolean;
 		children: Snippet;
 	} = $props();
 
-	const _panzoom: Action<HTMLElement, PanZoomOptions> = (node, options) => {
-		const instance = panzoom(node, options);
-		return {
-			destroy() {
+	const _panzoom = (options: PanZoomOptions): Attachment<HTMLElement> => {
+		return (element) => {
+			const instance = panzoom(element, options);
+			console.log('panzoom instance created', instance, element);
+
+			return () => {
 				instance.dispose();
-			}
+			};
 		};
 	};
-	import RenderShiki from '$site/components/render-shiki/render-shiki.svelte';
 
 	let showCode = $state(false);
 </script>
@@ -53,36 +62,40 @@
 	{#if code && showCode}
 		<RenderShiki {code} />
 	{:else}
-		<div class="showcase" style="min-height: {minHeight};">
+		<div class="showcase" style={`min-height: ${minHeight}; overflow: ${showOverflow ? 'visible' : 'hidden'}`}>
 			<div
-				use:_panzoom={{
-					minZoom,
-					maxZoom,
-					bounds: true,
-					initialZoom,
-					smoothScroll: true,
-					autocenter: autoCenter,
-					boundsPadding: 0
-				}}
+				{@attach !disablePanZoom &&
+					_panzoom({
+						minZoom,
+						maxZoom,
+						bounds: true,
+						initialZoom,
+						smoothScroll: true,
+						autocenter: autoCenter,
+						boundsPadding: 0
+					})}
 				class="inner"
 			>
-				<svg class="showcase-backdrop">
-					<pattern
-						x="5.800038310074086"
-						y="6.229276141719765"
-						width="11.17258097342026"
-						height="11.17258097342026"
-						patternUnits="userSpaceOnUse"
-					>
-						<circle
-							cx="0.2979354926245403"
-							cy="0.2979354926245403"
-							r="0.2979354926245403"
-							fill="var(--fds-text-disabled)"
-						></circle>
-					</pattern>
-					<rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-14333)"></rect>
-				</svg>
+				{#if !disablePanZoom}
+					<svg class="showcase-backdrop">
+						<pattern
+							id="showcase-backdrop-pattern"
+							x="5.800038310074086"
+							y="6.229276141719765"
+							width="11.17258097342026"
+							height="11.17258097342026"
+							patternUnits="userSpaceOnUse"
+						>
+							<circle
+								cx="0.2979354926245403"
+								cy="0.2979354926245403"
+								r="0.2979354926245403"
+								fill="var(--fds-text-disabled)"
+							></circle>
+						</pattern>
+						<rect x="0" y="0" width="100%" height="100%" fill="url(#showcase-backdrop-pattern)"></rect>
+					</svg>
+				{/if}
 				<div
 					class="showcase-grid"
 					style={`grid-template-columns: ${(columnWidth + ' ').repeat(columns)}; grid-auto-rows: auto; grid-gap: ${gap};`}
@@ -106,7 +119,6 @@
 	}
 	.showcase {
 		position: relative;
-		overflow: hidden;
 		outline: none;
 		contain: layout;
 		min-height: 280px;
@@ -134,7 +146,7 @@
 	}
 	.showcase-grid {
 		transform-origin: 40% 40%;
-		margin: 3rem 2rem 2rem;
+		margin: 3rem;
 		position: relative;
 		display: grid;
 		place-items: center;

@@ -31,7 +31,3 @@
   <p>This is the content of the expander</p>
 </Expander>
 ```
-
-## {m.expander_component_api_title()}
-
-{m.expander_component_api_description_before_link()} <a href="#component-props">{m.expander_component_api_description_link_text()}</a>.

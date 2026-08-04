@@ -23,7 +23,7 @@
 
 Options can render rich content such as a `Persona`. Provide a `text` prop for the plain-text selection label.
 
-<Showcase columns={1} code={customCode}>
+<Showcase columns={1} code={customCode} minHeight="0" disablePanZoom showOverflow>
   <DropdownSelect>
     <DropdownSelectOption value="John Doe" text="John Doe">
       <Persona name="John Doe" primaryText="Software Engineer" presence={{ status: 'available' }} avatar={{ color: 'colorful', idForColor: '' }} />
@@ -35,9 +35,9 @@ Options can render rich content such as a `Persona`. Provide a `text` prop for t
 
 ### Multiple Selection
 
-Set the `multiple` prop to allow selecting more than one option.
+Set the `multiple` prop to allow selecting more than one option at a time.
 
-<Showcase columns={1} code={multipleCode}>
+<Showcase columns={1} code={multipleCode} minHeight="0" disablePanZoom showOverflow>
   <DropdownSelect multiple>
     <DropdownSelectOption value="A">Option A</DropdownSelectOption>
     <DropdownSelectOption value="B">Option B</DropdownSelectOption>

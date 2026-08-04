@@ -23,7 +23,7 @@
 
 Options can render any content, such as a `Persona`. Pass a `text` prop so the closed dropdown can still display the selection.
 
-<Showcase columns={1} code={customCode}>
+<Showcase columns={1} code={customCode} minHeight="0" disablePanZoom showOverflow>
   <Dropdown>
     <DropdownOption value="John Doe" text="John Doe">
       <Persona name="John Doe" primaryText="Software Engineer" presence={{ status: 'available' }} avatar={{ color: 'colorful', idForColor: '' }} />
@@ -35,9 +35,9 @@ Options can render any content, such as a `Persona`. Pass a `text` prop so the c
 
 ### Multiple Selection
 
-Set the `multiple` prop to allow selecting more than one option.
+Set the `multiple` prop to allow selecting more than one option at a time while pressing `Ctrl` (or `Cmd` on Mac).
 
-<Showcase columns={1} code={multipleCode}>
+<Showcase columns={1} code={multipleCode} minHeight="0" disablePanZoom showOverflow>
   <Dropdown multiple>
     <DropdownOption value="A" text="Option A">Option A</DropdownOption>
     <DropdownOption value="B" text="Option B">Option B</DropdownOption>

@@ -18,6 +18,8 @@
 
 ## {m.tooltip_usage_title()}
 
+When using n
+
 ```svelte
 <script>
 	import { Tooltip, Button } from 'fluentui-svelte';
@@ -27,6 +29,16 @@
 	{#snippet children(attrs)}
 		<Button {...attrs}>Hover over me</Button>
 	{/snippet}
+</Tooltip>
+```
+
+```svelte
+<script>
+	import { Tooltip, Button } from 'fluentui-svelte';
+</script>
+
+<Tooltip content="Tooltip content" relationship="description" withArrow>
+  <Button>Hover over me</Button>
 </Tooltip>
 ```
 

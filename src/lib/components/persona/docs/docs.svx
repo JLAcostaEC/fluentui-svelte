@@ -31,5 +31,3 @@
 	avatar={{ color: 'colorful' }}
 />
 ```
-
-## {m.persona_component_api_title()}

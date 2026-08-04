@@ -23,7 +23,3 @@
 
 <Divider>Divider</Divider>
 ```
-
-## {m.divider_divider_api_title()}
-
-{m.divider_divider_api_description_before_link()} <a href="#divider-props">{m.divider_divider_api_description_link_text()}</a>.

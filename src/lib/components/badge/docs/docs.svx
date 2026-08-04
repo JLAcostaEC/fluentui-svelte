@@ -33,7 +33,3 @@
 
 <Badge>36</Badge>
 ```
-
-## {m.badge_api_title()}
-
-{m.badge_api_description_before_link()} <a href="#component-props">{m.badge_api_description_link_text()}</a>.

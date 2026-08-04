@@ -8,7 +8,7 @@
 
 {m.dialog_description()}
 
-<Showcase columns={1} minHeight="250px">
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow>
   <Dialog>
     <DialogTrigger>Open Dialog</DialogTrigger>
     <DialogSurface>

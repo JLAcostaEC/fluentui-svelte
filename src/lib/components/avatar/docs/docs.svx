@@ -40,7 +40,3 @@
 
 <Avatar size={40} name="FluentUI Svelte" />
 ```
-
-## {m.avatar_component_api_title()}
-
-{m.avatar_component_api_description_before_link()} <a href="#component-props">{m.avatar_component_api_description_link_text()}</a>.

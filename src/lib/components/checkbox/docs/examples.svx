@@ -27,20 +27,10 @@
 
 {m.cb_label_description()}
 
-<Showcase minHeight="100px" code={labelCode}>
-  <Checkbox />
-  <Checkbox wrapperAs="label">FluentUI Checkbox</Checkbox>
-  <Checkbox wrapperAs="label">Another Checkbox</Checkbox>
-</Showcase>
-
-### {m.cb_checked_title()}
-
-{m.cb_checked_description()}
-
-<Showcase minHeight="100px" columns={2} code={checkedCode}>
-  <Checkbox wrapperAs="label">Unchecked</Checkbox>
-  <Checkbox wrapperAs="label" checked>Checked</Checkbox>
-</Showcase>
+```svelte
+<Checkbox wrapperAs="label">I'm Labeled</Checkbox>
+<Checkbox>I'm Unlabeled</Checkbox>
+```
 
 ### {m.cb_indeterminate_title()}
 
@@ -57,12 +47,4 @@
 <Showcase minHeight="100px" code={disabledCode}>
   <Checkbox wrapperAs="label" disabled>Disabled</Checkbox>
   <Checkbox wrapperAs="label" checked disabled>Checked & Disabled</Checkbox>
-</Showcase>
-
-### {m.cb_value_title()}
-
-{m.cb_value_description()}
-
-<Showcase minHeight="100px" columns={1} code={valueCode}>
-  <Checkbox wrapperAs="label" value="checkbox-value">Checkbox with Value</Checkbox>
 </Showcase>

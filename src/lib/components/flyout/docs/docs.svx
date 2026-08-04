@@ -27,5 +27,3 @@
   <p>This is the content of the flyout.</p>
 </Flyout>
 ```
-
-{m.flyout_usage_description()}

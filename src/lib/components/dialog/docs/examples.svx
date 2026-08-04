@@ -29,7 +29,7 @@
 
 Add a `DialogActions` region to render action buttons in the dialog footer. Use `bind:this` on the `Dialog` to call `closeDialog()` programmatically.
 
-<Showcase columns={1} minHeight="250px" code={actionsCode}>
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow code={actionsCode}>
   <Dialog bind:this={actionsDialog}>
     <DialogTrigger>Actions Dialog</DialogTrigger>
     <DialogSurface>

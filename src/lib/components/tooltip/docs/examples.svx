@@ -18,14 +18,6 @@
 </Tooltip>`;
 </script>
 
-### {m.tooltip_content_title()}
-
-{m.tooltip_content_description()}
-
-### {m.tooltip_position_title()}
-
-{m.tooltip_position_description()}
-
 ### {m.tooltip_with_arrow_title()}
 
 {m.tooltip_with_arrow_description()}
@@ -49,11 +41,3 @@
     {/snippet}
   </Tooltip>
 </Showcase>
-
-### {m.tooltip_on_visible_change_title()}
-
-{m.tooltip_on_visible_change_description()}
-
-### {m.tooltip_relationship_title()}
-
-{m.tooltip_relationship_description()}

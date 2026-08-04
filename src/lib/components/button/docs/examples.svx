@@ -19,18 +19,6 @@
 <Button appearance="subtle" />`;
 </script>
 
-### {m.btn_as_title()}
-
-{m.btn_as_description()}
-
-<Showcase code={asCode} minHeight="100px" minZoom={1}>
-  <Button>I am a Button</Button>
-  <Button as="a" href="/">
-    I am a Anchor
-  </Button>
-  <Button as="div">I am a Div</Button>
-</Showcase>
-
 ### {m.btn_shape_title()}
 
 {m.btn_shape_description()}

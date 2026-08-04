@@ -9,7 +9,7 @@
 
 {m.asb_description()}
 
-<Showcase columns={1} >
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow>
   <AutoSuggestBox
     placeholder="Type a fruit..."
     suggestionChosen={(e, item) => console.log('Suggestion chosen:', item)}
@@ -34,12 +34,6 @@
 	<AutoSuggestBoxOption index={2} value="Cherry">Cherry</AutoSuggestBoxOption>
 </AutoSuggestBox>
 ```
-
-## {m.asb_component_api_title()}
-
-{m.asb_component_api_description_before_link()} <a href="#component-props">{m.asb_component_api_description_link_text()}</a>.
-
-### {m.asb_suggestions_title()}
 
 <p class="fs-docs">
   <ParaglideMessage message={m.asb_suggestions_description} inputs={{}}>

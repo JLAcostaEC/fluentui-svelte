@@ -555,7 +555,7 @@
 	"tooltip_on_visible_change_title": "onVisibleChange",
 	"tooltip_on_visible_change_description": "La propiedad onVisibleChange es una función callback que se ejecuta cada vez que cambia la visibilidad del tooltip. Esto te permite responder programáticamente a la apertura o cierre del tooltip.",
 	"tooltip_relationship_title": "relationship",
-	"tooltip_relationship_description": "La propiedad relationship te permite especificar la relación entre el tooltip y el elemento de destino. Esto puede usarse con fines de accesibilidad, como indicar que el tooltip es una descripción del elemento de destino.",
+	"tooltip_relationship_description": "La propiedad relationship te permite especificar la relación entre el tooltip y el elemento de destino.",
 	"tooltip_component_props_title": "Propiedades del componente",
 	"tooltip_props_content_description": "El contenido que se mostrará en el tooltip. Puede ser una cadena, un componente de Svelte o un Snippet.",
 	"tooltip_props_positionconfig_description": "La configuración de posición del tooltip. Esto te permite definir offsets personalizados, middleware y más.",
@@ -678,7 +678,7 @@
 	"rb_component_api_title": "API del componente",
 	"rb_component_api_description": "Una breve explicación de las props que realmente necesitan aclaración. Puedes ver el resto de las props en la sección Propiedades del componente más abajo.",
 	"rb_grouping_title": "Agrupación",
-	"rb_grouping_description": "Aunque puedes usar name=\"inputName\" para agrupar elementos y permitir que solo uno esté seleccionado, también puedes usar bind:group={someVariable} para actualizar esa variable con el valor de la entrada seleccionada e inspeccionarla en tu consola.",
+	"rb_grouping_description": "Aunque puedes usar name=\"inputName\" para agrupar elementos y permitir que solo uno esté seleccionado, también puedes usar `bind:group={someVariable}` para actualizar esa variable con el valor de la entrada seleccionada e inspeccionarla en tu consola.",
 	"rb_grouping_read_more": "Leer más",
 	"rb_disabled_title": "Deshabilitado",
 	"rb_disabled_description": "La prop disabled puede usarse para deshabilitar un radio button, evitando la interacción del usuario.",
@@ -762,5 +762,6 @@
 	"persona_props_presenceonly_description": "Muestra solo el indicador de presencia, sin avatar ni texto.",
 	"persona_props_element_description": "La referencia del DOM del elemento raíz de Persona.",
 	"docs_primary_nav_overview": "Resumen",
-	"docs_primary_nav_getting_started": "Primeros Pasos"
+	"docs_primary_nav_getting_started": "Primeros Pasos",
+	"docs_nav_title": "Componentes"
 }

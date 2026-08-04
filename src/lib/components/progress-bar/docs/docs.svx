@@ -23,7 +23,3 @@
 
 <ProgressBar value={50} />
 ```
-
-## {m.pbar_component_api_title()}
-
-{m.pbar_component_api_description()}

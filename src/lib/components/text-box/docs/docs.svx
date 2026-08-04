@@ -25,7 +25,3 @@
 
 <TextBox type="text" placeholder="Type here..." />
 ```
-
-## {m.tb_component_api_title()}
-
-{m.tb_component_api_description_before_link()} <a href="#component-props">{m.tb_component_api_description_link_text()}</a>.

@@ -25,7 +25,3 @@
 
 <Checkbox wrapperAs="label">Default</Checkbox>
 ```
-
-## {m.cb_component_api_title()}
-
-{m.cb_component_api_description_before_link()} <a href="#checkbox-props">{m.cb_component_api_description_link_text()}</a>.

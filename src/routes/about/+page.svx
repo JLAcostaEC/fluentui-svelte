@@ -1,20 +1,28 @@
 <script lang="ts">
   import { Flyout, Button, InfoBar } from '$lib/index.js';
   import { m } from '$i18n/messages.js';
+	import { mode } from 'mode-watcher';
 </script>
 
 <section class="about-page">
   <Flyout>
 
+
 # {m.about_title()}
 
 <strong>{m.about_intro_bold()}</strong> {m.about_intro_after_bold()}
+
+<picture>
+  {#if mode.current === 'dark'}
+    <source srcset="/images/about-banner-white.png" type="image/png" />
+  {/if}
+  <img class="about-image" src="/images/about-banner.png" style="border-radius: var(--fs-control-border-radius)" alt={m.about_hero_image_alt()} />
+</picture>
 
 <InfoBar status="warning" title={m.about_disclaimer_title()} hideCloseButton style="multiline">
   {m.about_disclaimer_text()}
 </InfoBar>
 
-<img class="about-image" src="https://placehold.co/1200x500?text=Hero+image" alt={m.about_hero_image_alt()} />
 
 ## {m.about_tech_title()}
 
@@ -36,7 +44,7 @@
 
 {m.about_tauri_text()}
 
-<img class="about-image" src="https://placehold.co/1200x700?text=Showcase+screenshot" alt={m.about_showcase_image_alt()} />
+<img class="about-image" src="/images/app-blur.jpg" alt={m.about_showcase_image_alt()} />
 
 ## {m.about_help_title()}
 

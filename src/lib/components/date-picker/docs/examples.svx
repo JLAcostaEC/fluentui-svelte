@@ -13,7 +13,7 @@
 
 Use the `format` prop to switch between `dd/MM/yyyy` and `MM/dd/yyyy`.
 
-<Showcase columns={1} code={formatCode}>
+<Showcase columns={1} code={formatCode} minHeight="0" disablePanZoom showOverflow>
   <DatePicker format="dd/MM/yyyy" />
   <DatePicker format="MM/dd/yyyy" />
 </Showcase>
@@ -22,6 +22,6 @@ Use the `format` prop to switch between `dd/MM/yyyy` and `MM/dd/yyyy`.
 
 Use `hideDays`, `hideMonths`, or `hideYears` to hide individual selector columns (for example, a month/year-only picker).
 
-<Showcase columns={1} code={hideColumnsCode}>
+<Showcase columns={1} code={hideColumnsCode} minHeight="0" disablePanZoom showOverflow>
   <DatePicker hideDays />
 </Showcase>

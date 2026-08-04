@@ -26,7 +26,3 @@
 
 <Button>I am a Button</Button>
 ```
-
-## {m.btn_component_api_title()}
-
-{m.btn_component_api_description_before_link()} <a href="#component-props">{m.btn_component_api_description_link_text()}</a>.

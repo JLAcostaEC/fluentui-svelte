@@ -555,7 +555,7 @@
 	"tooltip_on_visible_change_title": "onVisibleChange",
 	"tooltip_on_visible_change_description": "The onVisibleChange prop is a callback function that is called whenever the visibility of the tooltip changes. This allows you to programmatically respond to the tooltip being shown or hidden.",
 	"tooltip_relationship_title": "relationship",
-	"tooltip_relationship_description": "The relationship prop allows you to specify the relationship between the tooltip and the target element. This can be used for accessibility purposes, such as indicating that the tooltip is a description of the target element.",
+	"tooltip_relationship_description": "The relationship prop allows you to specify the relationship between the tooltip and the target element.",
 	"tooltip_component_props_title": "Component Props",
 	"tooltip_props_content_description": "The content to be displayed in the tooltip. This can be a string, a Svelte component, or a Snippet.",
 	"tooltip_props_positionconfig_description": "The position configuration of the tooltip. This allows you to define custom offsets, middleware, and more.",
@@ -678,7 +678,7 @@
 	"rb_component_api_title": "Component API",
 	"rb_component_api_description": "A brief explanation of the props that really need explaining. You can see the rest of the props in the Component Props section below.",
 	"rb_grouping_title": "Grouping",
-	"rb_grouping_description": "While you can use name=\"inputName\" to group items and have only one checked, you can use bind:group={someVariable} to update that variable with the value of the selected input and inspect it in your console.",
+	"rb_grouping_description": "While you can use name=\"inputName\" to group items and have only one checked, you can use bind:group to update that variable with the value of the selected input and inspect it in your console.",
 	"rb_grouping_read_more": "Read More",
 	"rb_disabled_title": "Disabled",
 	"rb_disabled_description": "The disabled prop can be used to disable a radio button, preventing user interaction.",
@@ -762,5 +762,6 @@
 	"persona_props_presenceonly_description": "Shows only the presence indicator, with no avatar or text.",
 	"persona_props_element_description": "The DOM reference of the persona root element.",
 	"docs_primary_nav_overview": "Overview",
-	"docs_primary_nav_getting_started": "Getting Started"
+	"docs_primary_nav_getting_started": "Getting Started",
+	"docs_nav_title": "Components"
 }

@@ -1,11 +1,20 @@
 <script lang="ts">
   import { InfoBar } from '$lib/index.js';
+	import { mode } from 'mode-watcher';
   import { m } from '$i18n/messages.js';
 </script>
+
 
 # {m.docs_overview_title()}
 
 {m.docs_overview_description()}
+
+<picture>
+  {#if mode.current === 'dark'}
+    <source srcset="/images/about-banner-white.png" type="image/png" />
+  {/if}
+  <img class="about-image" src="/images/about-banner.png" style="border-radius: var(--fs-control-border-radius)" alt={m.about_hero_image_alt()} />
+</picture>
 
 ## {m.docs_overview_what_is_title()}
 

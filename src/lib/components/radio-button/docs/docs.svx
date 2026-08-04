@@ -23,7 +23,3 @@
 
 <RadioButton label="Option 1" />
 ```
-
-## {m.rb_component_api_title()}
-
-{m.rb_component_api_description()}

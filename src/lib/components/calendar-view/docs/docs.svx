@@ -8,7 +8,7 @@
 
 {m.cv_description()}
 
-<Showcase columns={1} minHeight="450px">
+<Showcase columns={1} disablePanZoom showOverflow>
   <CalendarView />
 </Showcase>
 

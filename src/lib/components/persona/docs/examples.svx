@@ -2,13 +2,44 @@
   import { Persona } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { m } from '$i18n/messages.js';
+
+  const textAlignCode = `
+<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" />
+<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textAlign="center" />
+<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textAlign="right" />`
+
+  const textPositionCode = `
+<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" />
+<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="bottom" textAlign="center" />
+<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="left" />
+<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="top" textAlign="center" />`
+
+const sizeCode = `
+<Persona name="John Doe" size={24} />
+<Persona name="John Doe" size={32} />
+<Persona name="John Doe" size={56} />`
+
+const avatarCode = `
+<Persona name="John Doe" avatar={{ color: "attention" }} />
+<Persona name="John Doe" avatar={{ color: "colorful", idForColor: '' }} />
+<Persona name="John Doe" avatar={{ image: { src: 'https://placehold.co/96x96/jpeg', alt: 'Placeholder Image' } }} />`
+
+const presenceCode = `
+<Persona name="John Doe" presence={{ status: 'available' }} />
+<Persona name="John Doe" presence={{ status: 'away' }} />
+<Persona name="John Doe" presence={{ status: 'busy' }} />
+<Persona name="John Doe" presence={{ status: 'do-not-disturb' }} />
+<Persona name="John Doe" presence={{ status: 'offline' }} />
+<Persona name="John Doe" presence={{ status: 'out-of-office' }} />
+<Persona name="John Doe" presence={{ status: 'blocked' }} />
+<Persona name="John Doe" presence={{ status: 'unknown' }} />`
 </script>
 
 ### {m.persona_text_align_title()}
 
 {m.persona_text_align_description()}
 
-<Showcase columns={3} autoCenter>
+<Showcase columns={3} autoCenter code={textAlignCode}>
   <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" />
   <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textAlign="center" />
   <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textAlign="right" />
@@ -18,7 +49,7 @@
 
 {m.persona_text_position_description()}
 
-<Showcase columns={4} autoCenter>
+<Showcase columns={4} autoCenter code={textPositionCode}>
   <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" />
   <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="bottom" textAlign="center" />
   <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="left" />
@@ -29,7 +60,7 @@
 
 {m.persona_size_description()}
 
-<Showcase columns={3} autoCenter>
+<Showcase columns={3} autoCenter code={sizeCode}>
   <Persona name="John Doe" size={24} />
   <Persona name="John Doe" size={32} />
   <Persona name="John Doe" size={56} />
@@ -39,7 +70,7 @@
 
 {m.persona_avatar_description()}
 
-<Showcase columns={3} autoCenter>
+<Showcase columns={3} autoCenter code={avatarCode}>
   <Persona name="John Doe" avatar={{ color: "attention" }} />
   <Persona name="John Doe" avatar={{ color: "colorful", idForColor: '' }} />
   <Persona name="John Doe" avatar={{ image: { src: 'https://placehold.co/96x96/jpeg', alt: 'Placeholder Image' } }} />
@@ -49,7 +80,7 @@
 
 {m.persona_presence_description()}
 
-<Showcase columns={4} autoCenter>
+<Showcase columns={4} autoCenter code={presenceCode}>
   <Persona name="John Doe" presence={{ status: 'available' }} />
   <Persona name="John Doe" presence={{ status: 'away' }} />
   <Persona name="John Doe" presence={{ status: 'busy' }} />

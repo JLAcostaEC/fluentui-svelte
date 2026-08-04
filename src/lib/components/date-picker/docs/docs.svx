@@ -8,7 +8,7 @@
 
 {m.dp_description()}
 
-<Showcase columns={1}>
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow>
   <DatePicker />
 </Showcase>
 

@@ -21,7 +21,3 @@
 
 <NumberBox value={0} min={0} max={100} step={1} />
 ```
-
-## {m.nb_component_api_title()}
-
-{m.nb_component_api_description_prefix()} [here](#component-props) {m.nb_component_api_description_suffix()}

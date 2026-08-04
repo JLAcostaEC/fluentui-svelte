@@ -8,8 +8,10 @@
 
 {m.slider_description()}
 
-<Showcase columns={1}>
-  <Slider value={50} />
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow>
+  <div style="width: 200px;">
+    <Slider value={50}  />
+  </div>
 </Showcase>
 
 ## Usage

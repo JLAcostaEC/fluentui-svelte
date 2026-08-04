@@ -43,14 +43,6 @@
   </p>
 </InfoBar>
 
-### {m.lv_listview_as_title()}
-
-{m.lv_listview_as_description()}
-
-### {m.lv_listview_shape_title()}
-
-{m.lv_listview_shape_description()}
-
 ### {m.lv_navigation_mode_title()}
 
 {m.lv_navigation_mode_description()}

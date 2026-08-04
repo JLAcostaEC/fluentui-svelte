@@ -25,10 +25,6 @@
   <TextBox type="number" placeholder="Number" />
 </Showcase>
 
-### {m.tb_input_element_title()}
-
-{m.tb_input_element_description()}
-
 ### {m.tb_readonly_title()}
 
 {m.tb_readonly_description()}
@@ -37,10 +33,6 @@
   <TextBox readonly value="Read-only value" />
 </Showcase>
 
-### {m.tb_placeholder_title()}
-
-{m.tb_placeholder_description()}
-
 ### {m.tb_hide_buttons_title()}
 
 {m.tb_hide_buttons_description()}
@@ -48,15 +40,3 @@
 <Showcase columns={1} code={hideButtonsCode}>
   <TextBox type="search" hideActionButtons placeholder="No action buttons" />
 </Showcase>
-
-### {m.tb_query_submitted_title()}
-
-{m.tb_query_submitted_description()}
-
-### {m.tb_text_changed_title()}
-
-{m.tb_text_changed_description()}
-
-### {m.tb_on_clear_title()}
-
-{m.tb_on_clear_description()}

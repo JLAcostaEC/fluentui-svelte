@@ -13,14 +13,6 @@
 </ListView>`;
 </script>
 
-### {m.lv_listviewitem_value_title()}
-
-{m.lv_listviewitem_value_description()}
-
-### {m.lv_listviewitem_on_action_title()}
-
-{m.lv_listviewitem_on_action_description()}
-
 ### Selection Mode
 
 Use `selectionMode` (`single`, `multiselect`, or `extended`) to control how items are selected.

@@ -17,7 +17,7 @@
 
 {m.ta_placeholder_description()}
 
-<Showcase columns={1} code={placeholderCode}>
+<Showcase columns={1} code={placeholderCode} disablePanZoom showOverflow>
   <TextArea placeholder="Type your message here..." />
 </Showcase>
 
@@ -25,7 +25,7 @@
 
 {m.ta_resize_description()}
 
-<Showcase columns={1} code={resizeCode}>
+<Showcase columns={1} code={resizeCode} disablePanZoom showOverflow>
   <TextArea resize="none" placeholder="No resize" />
   <TextArea resize="vertical" placeholder="Vertical resize" />
   <TextArea resize="both" placeholder="Resize both" />
@@ -35,6 +35,6 @@
 
 {m.ta_on_change_description()}
 
-<Showcase columns={1} code={onChangeCode}>
-  <TextArea onChange={(e) => console.log(e)} placeholder="Type..." />
+<Showcase columns={1} code={onChangeCode} disablePanZoom showOverflow>
+  <TextArea onChange={(e) => console.log(e)} placeholder="Type to see the change at console..." />
 </Showcase>

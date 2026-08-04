@@ -8,7 +8,7 @@
 
 {m.ta_description()}
 
-<Showcase columns={1}>
+<Showcase columns={1} disablePanZoom showOverflow>
   <TextArea placeholder="Type your message here..." />
 </Showcase>
 
@@ -21,7 +21,3 @@
 
 <TextArea placeholder="Type your message here..." />
 ```
-
-## {m.ta_component_api_title()}
-
-{m.ta_component_api_description_before_link()} <a href="#component-props">{m.ta_component_api_description_link_text()}</a>.

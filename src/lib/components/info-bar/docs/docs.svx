@@ -31,7 +31,3 @@
   <p>This is an informational message.</p>
 </InfoBar>
 ```
-
-## {m.ib_component_api_title()}
-
-{m.ib_component_api_description_prefix()} <a href="#component-props">{m.ib_component_api_link_text()}</a>.

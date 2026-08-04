@@ -12,7 +12,7 @@ import { Dropdown } from 'fluentui-svelte';
 
 {m.dd_description()}
 
-<Showcase columns={1}>
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow>
   <Dropdown>
     <DropdownOption value="A" text="Option A">Option A</DropdownOption>
     <DropdownOption value="B" text="Option B">Option B</DropdownOption>

@@ -16,7 +16,8 @@
 
 {m.skeleton_animation_description()}
 
-<Showcase columns={1} code={animationCode}>
+<Showcase columns={2} code={animationCode}>
+  <Skeleton style="width: 72px;" />
   <Skeleton style="width: 72px;" animation="pulse" />
 </Showcase>
 
@@ -24,9 +25,7 @@
 
 {m.skeleton_justify_description()}
 
-<Showcase columns={1} code={justifyCode}>
-  <Skeleton style="width: 120px;" justify />
-</Showcase>
+<Skeleton style="height: 120px;" justify />
 
 ### {m.skeleton_shape_title()}
 
@@ -36,12 +35,4 @@
   <Skeleton style="width: 72px;" shape="circle" />
   <Skeleton style="width: 72px;" shape="rounded" />
   <Skeleton style="width: 72px;" shape="square" />
-</Showcase>
-
-### {m.skeleton_as_title()}
-
-{m.skeleton_as_description()}
-
-<Showcase columns={1} code={asCode}>
-  <Skeleton as="span" style="width: 72px;" />
 </Showcase>

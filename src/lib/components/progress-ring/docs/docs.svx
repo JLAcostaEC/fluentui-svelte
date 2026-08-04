@@ -26,7 +26,3 @@
 
 <ProgressRing value={50} />
 ```
-
-## {m.pring_component_api_title()}
-
-{m.pring_component_api_description()}

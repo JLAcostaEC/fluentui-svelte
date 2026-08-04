@@ -26,7 +26,3 @@
 <Skeleton style="width: 42px;" />
 <Skeleton justify style="height: 12px;" />
 ```
-
-## {m.skeleton_component_api_title()}
-
-{m.skeleton_component_api_description_before_link()} <a href="#component-props">{m.skeleton_component_api_description_link_text()}</a>.

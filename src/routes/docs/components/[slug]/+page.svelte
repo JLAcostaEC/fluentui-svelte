@@ -42,13 +42,14 @@
 	{#if meta.twitter?.image}<meta name="twitter:image" content={meta.twitter.image} />{/if}
 
 	{#if meta.geo}
-		{@html `<script type="application/ld+json">${stringifiedGEO}</script>`}
+		<!-- eslint-disable-next-line svelte/no-at-html-tags eslint-disable-next-line no-useless-escape -->
+		{@html `<script type="application/ld+json">${stringifiedGEO}<\/script>`}
 	{/if}
 </svelte:head>
 
 <Docs />
 
-{#each data.examples as Example}
+{#each data.examples as Example, index (index)}
 	<Example />
 {/each}
 

@@ -118,8 +118,9 @@
 		& .label {
 			display: flex;
 			align-items: center;
-			gap: 0.25rem;
+			gap: 0.5rem;
 			font-size: inherit;
+			justify-content: space-between;
 			flex: 1;
 			& :global(> .item-switch) {
 				margin-left: 1rem;

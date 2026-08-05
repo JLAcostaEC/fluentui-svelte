@@ -10,3 +10,7 @@ bun.lockb
 
 # Cloudflare
 src/worker-configuration.d.ts
+
+# Skills & AI
+.github/skills/*
+.github/agents/*

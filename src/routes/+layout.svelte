@@ -41,6 +41,5 @@
 		width: 100%;
 		max-width: min(100%, 1600px);
 		margin-inline: auto;
-		overflow: hidden;
 	}
 </style>

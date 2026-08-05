@@ -46,7 +46,7 @@
   ```
 -->
 {#if !closed}
-	<div class="fs-info-bar {status} {style}">
+	<div class={['fs-info-bar', status, style]}>
 		<div class="icon-wrapper">
 			{#if Icon}
 				<RenderSoC SoC={Icon} />

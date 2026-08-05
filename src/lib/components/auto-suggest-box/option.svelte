@@ -65,7 +65,7 @@
 		role="option"
 		{value}
 		tabindex={-1}
-		class="fs-autosuggest-option {selectOnFocus ? 'no-outline' : ''} {_state.activeOption?.id === id ? 'focus' : ''}"
+		class={['fs-autosuggest-option', selectOnFocus && 'no-outline', _state.activeOption?.id === id && 'focus']}
 		onclick={handleClick}
 		bind:ref
 		{disabled}

@@ -175,7 +175,7 @@
 -->
 <Flyout
 	{id}
-	class="fs-tooltip {classes} {!open ? 'tooltip-hidden' : ''}"
+	class={['fs-tooltip', !open && 'tooltip-hidden', classes]}
 	role="tooltip"
 	bind:ref
 	{...attributes}

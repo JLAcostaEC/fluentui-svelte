@@ -80,7 +80,7 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
   <TextBox type="text" placeholder="Enter your name" />
   ```
 -->
-<div class="fs-textbox {id} text-box-size-{size} {classes}" {...wrapperAttributes} bind:this={wrapperRef}>
+<div class={['fs-textbox', id, `text-box-size-${size}`, classes]} {...wrapperAttributes} bind:this={wrapperRef}>
 	{#if contentBefore}
 		<span class="content-before">
 			{#if typeof contentBefore === 'string'}

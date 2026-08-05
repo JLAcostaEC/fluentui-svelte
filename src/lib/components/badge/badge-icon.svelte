@@ -44,7 +44,7 @@
 	bind:this={ref}
 	aria-label={arialabel}
 	role="img"
-	class="fs-badge-icon {color || colors[status]} {classes}"
+	class={['fs-badge-icon', color || colors[status], classes]}
 	style="--badge-size: {pxToRem(size)}; {style}"
 	{...attributes}
 >

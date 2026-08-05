@@ -46,7 +46,7 @@
     <NumberBox />
     ```
 -->
-<TextBox class="fs-number-box {classes}" type="number" {id} {name} {placeholder} bind:value bind:ref {...attributes}>
+<TextBox class={['fs-number-box', classes]} type="number" {id} {name} {placeholder} bind:value bind:ref {...attributes}>
 	{#if variant === 'inline'}
 		<TextBoxButton aria-label="Increase Number" onclick={() => (value = value ? ++value : 1)}>
 			<ChevronUpFilled />

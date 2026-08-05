@@ -48,7 +48,7 @@
 	bind:this={ref}
 	disabled={disabled && as !== 'div' ? true : undefined}
 	aria-disabled={disabled && as !== 'div' ? true : undefined}
-	class="fs-button {shape} {appearance} {classes}"
+	class={['fs-button', shape, appearance, classes]}
 	tabindex={_tabIndex ?? (as !== 'div' ? (disabledFocusable || disabled ? -1 : tabIndex) : undefined)}
 	onclick={(e: MouseEvent) => invokeHandlers(e, disabled, [onclick])}
 	onkeydown={(e: KeyboardEvent) => invokeHandlers(e, [as === 'div', disabled], [onkeydown])}

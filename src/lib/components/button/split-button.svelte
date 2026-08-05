@@ -18,7 +18,7 @@
 	}: SplitButtonProps = $props();
 </script>
 
-<div class="fs-split-button {classes}" role="group" bind:this={wrapperRef} {...attributes}>
+<div class={['fs-split-button', classes]} role="group" bind:this={wrapperRef} {...attributes}>
 	<Button as="button" {appearance} {shape} {disabled} bind:ref={primaryButtonRef} {...primaryButtonProps}>
 		{#if children}
 			{@render children()}

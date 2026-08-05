@@ -331,7 +331,7 @@
 			roundCorners="bottom"
 			placementConfig={{ allowedPlacements: ['bottom', 'top'] }}
 			onPlacementChange={(place) => handlePlacementChange(place)}
-			class="fs-autosuggestbox-flyout {roundClass === 'top' ? 'top-shadow' : ''} {flyoutProps?.class}"
+			class={['fs-autosuggestbox-flyout', roundClass === 'top' && 'top-shadow', flyoutProps?.class]}
 			{...flyoutProps}
 		>
 			<ListView

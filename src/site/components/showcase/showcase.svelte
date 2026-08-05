@@ -3,7 +3,6 @@
 	import ToggleSwitch from '$components/toggle-switch/toggle-switch.svelte';
 	import RenderShiki from '$site/components/render-shiki/render-shiki.svelte';
 	import type { Snippet } from 'svelte';
-	import type { Action } from 'svelte/action';
 	import type { PanZoomOptions } from 'panzoom';
 	import type { Attachment } from 'svelte/attachments';
 
@@ -40,7 +39,6 @@
 	const _panzoom = (options: PanZoomOptions): Attachment<HTMLElement> => {
 		return (element) => {
 			const instance = panzoom(element, options);
-			console.log('panzoom instance created', instance, element);
 
 			return () => {
 				instance.dispose();

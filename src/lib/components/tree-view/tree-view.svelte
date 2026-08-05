@@ -74,7 +74,6 @@
 
 	const methods: TreeViewContext['methods'] = {
 		handleCheck: async (e, id, checked) => {
-			console.log('Forcing virtual render for item', virtualizer);
 			if (virtualizer) {
 				_state.forceVirtualRender = true;
 				await tick();

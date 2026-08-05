@@ -11,7 +11,12 @@
 	import { localizeHref, deLocalizeUrl } from '$i18n/runtime.js';
 	import type { Meta } from '$types';
 	import { GITHUB_REPO_URL } from '$site/constants.js';
-  import { m } from '$i18n/messages.js';
+	import { m } from '$i18n/messages.js';
+	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	
+	const globalContext = getGlobalFSContext();
+
+	const { state: globalState } = globalContext!;
 
 	// Resolves the GitHub link that documents the current route.
 	const editUrl = $derived.by(() => {
@@ -143,7 +148,7 @@
 								active={page.url.pathname.endsWith(doc.url)}
 							>
 								{#if doc.icon}
-									<doc.icon width="1.2rem" height="auto" />
+									<doc.icon width="1.2rem" />
 								{/if}
 								{doc.label}
 								{#if doc.status}
@@ -172,7 +177,7 @@
 
 	<article id="docs">
 		{#key page.url.pathname}
-			<div class="docs-content" in:fly={{ y: 200, duration: 500, delay: 500 }} out:fly={{ y: 200, duration: 500 }}>
+			<div class="docs-content" in:fly={!globalState.reducedMotion ? { y: 50, duration: 333, delay: 333 } : { duration: 0 }} out:fly={!globalState.reducedMotion ? { y: 50, duration: 333 } : { duration: 0 }}>
 				{@render children?.()}
 			</div>
 		{/key}
@@ -190,7 +195,7 @@
 <style>
 	.container {
 		display: grid;
-		grid-template-columns: auto 3fr auto;
+		grid-template-columns: 1fr 3fr 0.8fr;
 		gap: 1rem;
 		padding: 2rem;
 		width: 100%;

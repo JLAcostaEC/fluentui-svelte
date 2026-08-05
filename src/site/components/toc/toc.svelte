@@ -4,6 +4,11 @@
 	import { useIntersectionObserver } from 'runed';
 	import { ListView, ListViewItem } from '$lib/index.js';
 	import { getLinks, type TocLink, type TocProps } from './toc.ts';
+	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	
+	const globalContext = getGlobalFSContext();
+
+	const { state: globalState } = globalContext!;
 
 	let { selector, searchFor = 'h1, h2, h3, h4, h5, h6', offset = '80px' }: TocProps = $props();
 
@@ -51,7 +56,7 @@
 <div class="toc">
 	<h3>On this page:</h3>
 	{#key key}
-		<div in:blur={{ amount: 20, delay: 500 }} out:blur={{ amount: 20 }}>
+		<div in:blur={!globalState.reducedMotion ? { amount: 20, delay: 500 } : { duration: 0 }} out:blur={!globalState.reducedMotion ? { amount: 20 } : { duration: 0 }}>
 			<ListView role="menu">
 				{@render ToC(links)}
 			</ListView>

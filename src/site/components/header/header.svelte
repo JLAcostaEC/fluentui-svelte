@@ -2,11 +2,16 @@
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
 	import { toggleMode, mode } from 'mode-watcher';
-	import { Button, Menu, MenuItem, MenuList, MenuPopover, MenuTrigger, Tooltip } from '$lib/index.js';
+	import { SettingsRegular } from 'fluentui-icons-svelte';
 	import { getLocale, locales, localizeHref } from '$i18n/runtime.js';
-	import { WeatherMoonFilled, WeatherSunnyFilled } from 'fluentui-icons-svelte';
 	import PageLoader from '$site/components/page-loader/page-loader.svelte';
+	import { Button, Menu, MenuItem, MenuItemSwitch, MenuList, MenuPopover, MenuTrigger, Tooltip } from '$lib/index.js';
+	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import type { Pathname } from '$app/types';
+
+	const globalContext = getGlobalFSContext();
+	
+	const { state: globalState, methods } = globalContext!;
 
 	let locale = $derived(page.url.pathname && getLocale());
 </script>
@@ -85,6 +90,7 @@
 					>About</Button
 				>
 			</div>
+
 			<!-- TODO: this is not SEO friendly -->
 			<Menu>
 				<MenuTrigger>
@@ -113,60 +119,58 @@
 					</MenuList>
 				</MenuPopover>
 			</Menu>
-
-			<Menu>
-				<MenuTrigger>
-					{#snippet children({ state, menuTriggerProps })}
-						<Tooltip withArrow content="Select language">
-							{#snippet children(attrs)}
-								<Button
-									bind:ref={state.ref as HTMLButtonElement}
-									{...menuTriggerProps}
-									appearance="subtle"
-									aria-label="Select Language"
-									{...attrs}
-								>
-									{@render flag(locale)}
-								</Button>
-							{/snippet}
-						</Tooltip>
-					{/snippet}
-				</MenuTrigger>
-				<MenuPopover placement="bottom-end">
-					<MenuList>
-						{@const localeNames = new Intl.DisplayNames(locales, { type: 'language' })}
-						{#each locales as locale (locale)}
-							{@const localeName = localeNames.of(locale)!}
-							<MenuItem
-								class="language-selector"
-								as="a"
-								data-sveltekit-reload
-								href={resolve(localizeHref(page.url.pathname, { locale }) as Pathname)}
-							>
-								{@render flag(locale)}
-								{localeName[0].toUpperCase() + localeName.slice(1)}
-							</MenuItem>
-						{/each}
-					</MenuList>
-				</MenuPopover>
-			</Menu>
-			<Tooltip withArrow content="Toggle theme mode">
-				{#snippet children(attrs)}
+		</nav>
+		
+		<Menu>
+			<MenuTrigger>
+				{#snippet children({ state, menuTriggerProps })}
 					<Button
-						appearance={mode.current === 'light' ? 'standard' : 'accent'}
-						onclick={toggleMode}
-						{...attrs}
-						aria-label="Toggle color mode"
+						bind:ref={state.ref}
+						{...menuTriggerProps as any}
+						appearance="standard"
+						aria-label="Show Configuration Options"
 					>
-						{#if mode.current === 'dark'}
-							<WeatherSunnyFilled width="1em" height="1em" />
-						{:else}
-							<WeatherMoonFilled width="1em" height="1em" />
-						{/if}
+						<SettingsRegular width="1em" height="1em" />
 					</Button>
 				{/snippet}
-			</Tooltip>
-		</nav>
+			</MenuTrigger>
+			<MenuPopover placement="bottom-end">
+				<MenuList>
+					<MenuItemSwitch
+						bind:checked={() => globalState.reducedMotion, () => null}
+						onclick={() => methods.setReducedMotion(!globalState.reducedMotion)}>Reduce Motion</MenuItemSwitch
+					>
+					<MenuItemSwitch bind:checked={() => mode.current === 'dark', () => null} onclick={toggleMode}>
+						Dark Mode
+					</MenuItemSwitch>
+					<Menu>
+						<MenuTrigger>
+							{#snippet children({ state, menuTriggerProps })}
+								<Button bind:ref={state.ref} {...menuTriggerProps as any}>Change Language</Button>
+							{/snippet}
+						</MenuTrigger>
+						<MenuPopover placement="left-start">
+							<MenuList>
+								{@const localeNames = new Intl.DisplayNames(locales, { type: 'language' })}
+								{#each locales as _locale (_locale)}
+									{@const localeName = localeNames.of(_locale)!}
+									<MenuItem
+										class="language-selector"
+										as="a"
+										data-sveltekit-reload
+										appearance={_locale === locale ? 'accent' : 'subtle'}
+										href={resolve(localizeHref(page.url.pathname, { locale: _locale }) as Pathname)}
+									>
+										{@render flag(_locale)}
+										{localeName[0].toUpperCase() + localeName.slice(1)}
+									</MenuItem>
+								{/each}
+							</MenuList>
+						</MenuPopover>
+					</Menu>
+				</MenuList>
+			</MenuPopover>
+		</Menu>
 	</section>
 	<PageLoader />
 </header>

@@ -10,7 +10,7 @@
 	import type { Pathname } from '$app/types';
 
 	const globalContext = getGlobalFSContext();
-	
+
 	const { state: globalState, methods } = globalContext!;
 
 	let locale = $derived(page.url.pathname && getLocale());
@@ -120,7 +120,7 @@
 				</MenuPopover>
 			</Menu>
 		</nav>
-		
+
 		<Menu>
 			<MenuTrigger>
 				{#snippet children({ state, menuTriggerProps })}

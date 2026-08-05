@@ -125,16 +125,20 @@ A contextual popup that displays a set of actions or options. It appears when us
 		&.round-all {
 			border-radius: var(--fs-control-overlay-border-radius);
 		}
-		&.round-top, &.round-top::before {
+		&.round-top,
+		&.round-top::before {
 			border-radius: var(--fs-control-overlay-border-radius) var(--fs-control-overlay-border-radius) 0 0;
 		}
-		&.round-bottom, &.round-bottom::before {
+		&.round-bottom,
+		&.round-bottom::before {
 			border-radius: 0 0 var(--fs-control-overlay-border-radius) var(--fs-control-overlay-border-radius);
 		}
-		&.round-left, &.round-left::before {
+		&.round-left,
+		&.round-left::before {
 			border-radius: var(--fs-control-overlay-border-radius) 0 0 var(--fs-control-overlay-border-radius);
 		}
-		&.round-right, &.round-right::before {
+		&.round-right,
+		&.round-right::before {
 			border-radius: 0 var(--fs-control-overlay-border-radius) var(--fs-control-overlay-border-radius) 0;
 		}
 	}

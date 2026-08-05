@@ -20,7 +20,9 @@
 
 	let userReducedMotion = $state(false);
 
-	let _reducedMotion = $derived(userReducedMotion || (typeof reducedMotion === 'boolean' ? reducedMotion : reducedMotion.current));
+	let _reducedMotion = $derived(
+		userReducedMotion || (typeof reducedMotion === 'boolean' ? reducedMotion : reducedMotion.current)
+	);
 
 	let _state: FSProviderContext['state'] = defineState([
 		(o) => defineProperty(o, 'rtl', () => rtl),

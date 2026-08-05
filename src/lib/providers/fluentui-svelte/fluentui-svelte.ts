@@ -3,10 +3,10 @@ import type { TabspotInstance } from 'tabspot';
 
 export type FSProviderContext = FSContext<
 	null,
-	{ 
-		readonly rtl: boolean; 
-		readonly tabspotInstance: TabspotInstance,
-		readonly reducedMotion: boolean
+	{
+		readonly rtl: boolean;
+		readonly tabspotInstance: TabspotInstance;
+		readonly reducedMotion: boolean;
 	},
 	null,
 	{

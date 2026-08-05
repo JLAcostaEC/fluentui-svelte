@@ -5,7 +5,7 @@
 	import { ListView, ListViewItem } from '$lib/index.js';
 	import { getLinks, type TocLink, type TocProps } from './toc.ts';
 	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
-	
+
 	const globalContext = getGlobalFSContext();
 
 	const { state: globalState } = globalContext!;
@@ -56,7 +56,10 @@
 <div class="toc">
 	<h3>On this page:</h3>
 	{#key key}
-		<div in:blur={!globalState.reducedMotion ? { amount: 20, delay: 500 } : { duration: 0 }} out:blur={!globalState.reducedMotion ? { amount: 20 } : { duration: 0 }}>
+		<div
+			in:blur={!globalState.reducedMotion ? { amount: 20, delay: 500 } : { duration: 0 }}
+			out:blur={!globalState.reducedMotion ? { amount: 20 } : { duration: 0 }}
+		>
 			<ListView role="menu">
 				{@render ToC(links)}
 			</ListView>

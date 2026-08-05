@@ -13,7 +13,7 @@
 	import { GITHUB_REPO_URL } from '$site/constants.js';
 	import { m } from '$i18n/messages.js';
 	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
-	
+
 	const globalContext = getGlobalFSContext();
 
 	const { state: globalState } = globalContext!;
@@ -177,7 +177,11 @@
 
 	<article id="docs">
 		{#key page.url.pathname}
-			<div class="docs-content" in:fly={!globalState.reducedMotion ? { y: 50, duration: 333, delay: 333 } : { duration: 0 }} out:fly={!globalState.reducedMotion ? { y: 50, duration: 333 } : { duration: 0 }}>
+			<div
+				class="docs-content"
+				in:fly={!globalState.reducedMotion ? { y: 50, duration: 333, delay: 333 } : { duration: 0 }}
+				out:fly={!globalState.reducedMotion ? { y: 50, duration: 333 } : { duration: 0 }}
+			>
 				{@render children?.()}
 			</div>
 		{/key}

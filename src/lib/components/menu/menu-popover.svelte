@@ -1,19 +1,19 @@
 <script lang="ts">
 	import { circOut } from 'svelte/easing';
 	import { Flyout } from '$lib/index.js';
-	import { COMPONENT_NAME, getMenuContext } from './menu.svelte.ts';
+	import { COMPONENT_NAME, getIntroTransition, getMenuContext } from './menu.svelte.ts';
 	import { flip, hide, offset, shift } from '@floating-ui/dom';
 	import { useDebounce } from 'runed';
-	import { floating, flyToOffset, getCSSDuration, getOffset, reactiveBoundingRect } from '$internal';
+	import { floating, flyToOffset, getCSSDuration, reactiveBoundingRect } from '$internal';
 	import type { Snippet } from 'svelte';
 	import type { ComputePositionConfig } from '@floating-ui/dom';
 
 	let {
 		ref: _ref,
 		open: _open = $bindable(),
-		placement = 'bottom-start',
+		placement,
 		positionConfig: floatingPosition = {
-			placement: placement,
+			placement,
 			middleware: [offset(-2), flip({ crossAxis: true, padding: 0 }), shift({ crossAxis: true, padding: 0 }), hide()],
 			strategy: 'fixed'
 		},
@@ -40,9 +40,18 @@
 
 	let { state: _state } = context;
 
+	// The `placement` prop wins over the one coming from the config
+	let config = $derived.by(() => {
+		const base = positionConfig ?? floatingPosition;
+
+		return { ...base, placement: placement ?? base.placement ?? (isSubMenu ? 'right-start' : 'bottom-start') };
+	});
+
 	let boundingElement = reactiveBoundingRect();
 
 	let duration = $state(333);
+
+	let element: HTMLElement | null = $state(null);
 
 	const debounced = useDebounce((e: MouseEvent) => {
 		// Where the mouse is moving to
@@ -58,7 +67,7 @@
 	$effect.pre(() => {
 		duration = getCSSDuration('--fs-normal-duration') || 333;
 
-		if (isSubMenu) floatingPosition.placement = 'right-start';
+		if (isSubMenu) floatingPosition.placement ??= 'right-start';
 
 		if (ref && ref instanceof HTMLElement) boundingElement.ref = ref;
 
@@ -71,21 +80,16 @@
 	{@const isRefAnElement = ref instanceof HTMLElement}
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div
+		bind:this={element}
 		class="fs-menu-popover"
 		onmouseleave={openOnHover ? (e: MouseEvent) => debounced(e) : undefined}
-		{@attach ref ? floating(ref, positionConfig ?? floatingPosition) : undefined}
-		style:--position={isSubMenu ? 'absolute' : 'fixed'}
-		style:--min-width={isRefAnElement && !isSubMenu ? `${boundingElement.rect.width}px` : 'max-content'}
+		{@attach ref ? floating(ref, config) : undefined}
+		style={`--position=${isSubMenu ? 'absolute' : 'fixed'} --min-width=${isRefAnElement && !isSubMenu ? `${boundingElement.rect.width}px` : 'max-content'}`}
 		in:flyToOffset={isRefAnElement
 			? {
-					y: !isSubMenu ? 10 : undefined,
-					x: isSubMenu ? -15 : undefined,
-					offset: getOffset(positionConfig ?? floatingPosition) + (!isSubMenu ? boundingElement.rect.height : 0),
+					...getIntroTransition({ config, anchor: boundingElement.rect, element, ref, isSubMenu }),
 					duration: duration,
-					easing: circOut,
-					css: !isSubMenu
-						? `top: ${boundingElement.rect.top}px; left: ${boundingElement.rect.left}px;`
-						: `left: calc(100% + ${getOffset(positionConfig ?? floatingPosition) - 4}px); top: ${ref.offsetTop + 1}px;`
+					easing: circOut
 				}
 			: undefined}
 	>
@@ -97,7 +101,7 @@
 
 <style>
 	.fs-menu-popover {
-		position: fixed;
+		position: var(--position, fixed);
 		top: 0;
 		left: 0;
 		width: max-content;

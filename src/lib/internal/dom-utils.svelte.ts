@@ -1,7 +1,13 @@
 import { on } from 'svelte/events';
 import { useResizeObserver } from 'runed';
 
-export const reactiveBoundingRect = () => {
+export type ReactiveRect = {
+	ref: HTMLElement | null;
+	rect: Omit<DOMRect, 'toJSON'>;
+	update: () => void;
+};
+
+export const reactiveBoundingRect = (): ReactiveRect => {
 	let ref = $state<HTMLElement | null>(null);
 	let rect: Omit<DOMRect, 'toJSON'> = $state({
 		bottom: 0,

@@ -7,6 +7,10 @@ code.shiki {
 	padding: 1rem 3rem 1rem 1rem;
 	background-clip: padding-box;
 	tab-size: 4;
+	font-family: 'Cascadia Code', monospace;
+	& *:not(tr *) {
+		font-family: inherit;
+	}
 	& .line {
 		min-height: 1rem;
 	}
@@ -21,6 +25,8 @@ code.shiki {
 	}
 	& tr {
 		& td {
+			font-size: 0.8rem;
+			line-height: 1.8em;
 			padding: 0.4rem 1rem 0.4rem 0;
 			& > code {
 				background-color: var(--fs-card-background-default) !important;

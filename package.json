@@ -28,7 +28,7 @@
 	],
 	"scripts": {
 		"dev": "pnpm urls && vite dev",
-		"build:site": "pnpm urls && vite build",
+		"build:site": "pnpm urls && vite build && pnpm prepare",
 		"build": "vite build && npm run prepack",
 		"preview": "pnpm run build && wrangler pages dev",
 		"prepare": "svelte-kit sync || echo ''",
@@ -40,7 +40,7 @@
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run && npm run test:e2e",
 		"test:e2e": "playwright install && playwright test",
-		"deploy": "pnpm run build && wrangler pages deploy",
+		"deploy": "pnpm run build:site && wrangler pages deploy",
 		"urls": "node scripts/gen-urls.js",
 		"cf-typegen": "wrangler types src/worker-configuration.d.ts"
 	},

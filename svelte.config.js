@@ -3,17 +3,18 @@ import { mdsvex, escapeSvelte } from 'mdsvex';
 import rehypeClassNames from 'rehype-class-names';
 import adapter from '@sveltejs/adapter-cloudflare';
 import { fsShikiCopyButton } from './scripts/shiki-copy-button.js';
-import { createHighlighter, type BundledLanguage, type LanguageInput, type SpecialLanguage } from 'shiki';
-import type { Config } from '@sveltejs/kit';
+import { createHighlighter } from 'shiki';
 
-const langs: (BundledLanguage | LanguageInput | SpecialLanguage)[] = ['typescript', 'bash', 'css', 'svelte'];
+/** @type {(import('shiki').BundledLanguage | import('shiki').LanguageInput | import('shiki').SpecialLanguage)[]} */
+const langs = ['typescript', 'bash', 'css', 'svelte'];
 
 const highlighter = await createHighlighter({
 	themes: ['one-light', 'one-dark-pro'],
 	langs: langs
 });
 
-const config: Config = {
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
 	compilerOptions: {
 		// Force runes mode for the project, except for libraries. Can be removed in svelte 6.
 		runes: ({ filename }) => (filename.split(/[/\\]/).includes('node_modules') ? undefined : true)
@@ -21,7 +22,7 @@ const config: Config = {
 	preprocess: [
 		mdsvex({
 			rehypePlugins: [
-				rehypeSlug as any,
+				/** @type {any} */ (rehypeSlug),
 				[
 					rehypeClassNames,
 					{
@@ -33,7 +34,7 @@ const config: Config = {
 				highlighter: async (code, lang = 'text') => {
 					const html = escapeSvelte(
 						highlighter.codeToHtml(code, {
-							lang: lang as BundledLanguage | SpecialLanguage,
+							lang: /** @type {import('shiki').BundledLanguage | import('shiki').SpecialLanguage} */ (lang),
 							themes: {
 								light: 'one-light',
 								dark: 'one-dark-pro'

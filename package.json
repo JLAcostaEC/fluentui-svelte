@@ -46,8 +46,11 @@
 	},
 	"files": [
 		"dist",
+		"!dist/**/tests/**",
 		"!dist/**/*.test.*",
-		"!dist/**/*.spec.*"
+		"!dist/**/*.spec.*",
+		"!dist/**/docs/**",
+		"dist/**/docs/llms.md"
 	],
 	"sideEffects": [
 		"**/*.css"
@@ -81,12 +84,17 @@
 			"default": "./dist/css/media-darkmode.css"
 		}
 	},
+	"dependencies": {
+		"@floating-ui/dom": "^1.8.0",
+		"fluentui-icons-svelte": "^1.1.1",
+		"runed": "^0.37.1",
+		"tabspot": "^0.4.0"
+	},
 	"peerDependencies": {
 		"svelte": "^5.0.0"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
-		"@floating-ui/dom": "^1.8.0",
 		"@humanspeak/svelte-virtual-list": "^0.5.13",
 		"@inlang/paraglide-js": "^2.22.0",
 		"@inlang/paraglide-js-svelte": "^1.0.3",
@@ -101,7 +109,6 @@
 		"eslint": "^10.7.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.22.0",
-		"fluentui-icons-svelte": "^1.1.1",
 		"globals": "^17.7.0",
 		"mdsvex": "^0.12.8",
 		"mode-watcher": "^1.1.0",
@@ -112,12 +119,10 @@
 		"publint": "^0.3.22",
 		"rehype-class-names": "^2.0.0",
 		"rehype-slug": "^6.0.0",
-		"runed": "^0.37.1",
 		"shiki": "^4.3.1",
 		"simplex-noise": "^4.0.3",
 		"svelte": "^5.56.7",
 		"svelte-check": "^4.7.3",
-		"tabspot": "^0.4.0",
 		"typescript": "6.0.3",
 		"typescript-eslint": "^8.65.0",
 		"vite": "^8.1.5",

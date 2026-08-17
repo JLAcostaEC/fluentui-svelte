@@ -103,7 +103,7 @@ reviews:
         by role/accessible text over CSS selectors (but CSS selectors are
         allowed when necessary), and assert observable behavior instead of
         internal state. Avoid fixed-duration waits.
-    - path: 'src/tests/**'
+    - path: '**/*.e2e.{ts,js}'
       instructions: >-
         Playwright E2E tests. Use resilient locators (role, label) and rely on
         auto-waiting; flag any `waitForTimeout` or brittle selector.

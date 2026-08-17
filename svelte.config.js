@@ -62,7 +62,7 @@ const config = {
 			$constants: 'src/lib/internal/constants.js'
 		}
 	},
-	extensions: ['.svelte', '.svx', '.md']
+	extensions: ['.svelte', '.svx']
 };
 
 export default config;

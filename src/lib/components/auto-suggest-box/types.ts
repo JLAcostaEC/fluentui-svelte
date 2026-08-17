@@ -22,8 +22,7 @@ export type FSAutoSuggestBox = {
 	suggestionChosen?: (e: Event, selection: string) => void;
 	/**
 	 * The QuerySubmitted event occurs when:
-	 * 1. While the focus is in the text box, press Enter or click the query icon (when input type is search).
-	 * 2. While the focus is in the suggestion list, press Enter, click, or tap an item. */
+	 * 1. While the focus is in the text box, press Enter and no item is available to select or click the query icon (when input type is search) with/without item selected */
 	querySubmitted?: (e: MouseEvent | KeyboardEvent, query: string) => void;
 	virtualizer?: {
 		size: number;

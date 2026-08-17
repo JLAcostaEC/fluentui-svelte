@@ -1,7 +1,6 @@
 import type { HTMLAttributes } from 'svelte/elements';
 import type { FSContext } from '$internal';
-import type { Component } from 'vitest-browser-svelte/pure';
-import type { Snippet } from 'svelte';
+import type { Component, Snippet } from 'svelte';
 import type { SvelteMap, SvelteSet } from 'svelte/reactivity';
 import type { Sizes } from '$types';
 

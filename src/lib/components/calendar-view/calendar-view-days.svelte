@@ -9,10 +9,8 @@
 		indexOfDate
 	} from './calendar-view.svelte.js';
 	import CalendarViewItem from './calendar-view-item.svelte';
-	import type { FocusIncrementAmount } from './types.js';
-	import { tick } from 'svelte';
+	import { createCalendarKeyboard, DAY_GRID } from './calendar-view-grid.js';
 	import { getCSSDuration } from '$internal';
-	import { SvelteDate } from 'svelte/reactivity';
 
 	const CalendarContext = getCalendarViewContext();
 
@@ -36,80 +34,26 @@
 		return value && (Array.isArray(value) ? indexOfDate(value, day, 'day') > -1 : compareDates(value, day, 'day'));
 	};
 
-	async function handleKeyDown(event: KeyboardEvent, date: Date) {
-		if (!bodyElement) return;
+	const isDisabled = (day: Date) => (minDate && minDate > day) || (maxDate && maxDate < day);
 
-		const { key } = event;
+	const isBlackout = (day: Date) => !!blackoutDates && indexOfDate(blackoutDates, day, 'day') > -1;
 
-		if (
-			key === 'ArrowUp' ||
-			key === 'ArrowDown' ||
-			key === 'ArrowLeft' ||
-			key === 'ArrowRight' ||
-			key === 'Home' ||
-			key === 'End'
-		) {
-			event.preventDefault();
-		}
+	const navigate = createCalendarKeyboard({
+		grid: DAY_GRID,
+		body: () => bodyElement,
+		page: () => page,
+		disabled: (day) => !!isDisabled(day),
+		blackout: isBlackout,
+		updatePage
+	});
 
-		if (event.ctrlKey && (key === 'ArrowUp' || key === 'ArrowDown')) {
-			if (key === 'ArrowUp') {
-				updateView(event, 'months');
-				return;
-			}
-		}
-
-		let focusOrder = bodyElement.querySelectorAll('button');
-		let focusedDate = date;
-
-		const focusIndex = Array.from(focusOrder).indexOf(<HTMLButtonElement>document.activeElement);
-
-		if (focusOrder.length === 0) return;
-
-		let focusIncrementAmount: FocusIncrementAmount = {
-			ArrowUp: -7,
-			ArrowDown: 7,
-			ArrowLeft: -1,
-			ArrowRight: 1
-		};
-
-		if (!focusIncrementAmount[key as keyof FocusIncrementAmount] || event.shiftKey) return;
-
-		focusedDate = new SvelteDate(
-			new SvelteDate(focusedDate).setDate(
-				focusedDate.getDate() + focusIncrementAmount[key as keyof FocusIncrementAmount]
-			)
-		);
-
-		const nextDateIsBlackout = blackoutDates && indexOfDate(blackoutDates, focusedDate, 'day') > -1;
-
-		if (nextDateIsBlackout) {
-			focusedDate.setDate(focusedDate.getDate() + focusIncrementAmount[key as keyof FocusIncrementAmount]);
-		}
-
-		let newFocusedDate = calendarDays.find((day) => compareDates(day, focusedDate, 'time'));
-
-		if (newFocusedDate && ((minDate && minDate > newFocusedDate) || (maxDate && maxDate < newFocusedDate))) return;
-
-		if (focusedDate.getMonth() !== page.getMonth()) {
-			if (key === 'ArrowLeft' || key === 'ArrowUp') {
-				updatePage(-1, 'neutral');
-			} else if (key === 'ArrowRight' || key === 'ArrowDown') {
-				updatePage(1, 'neutral');
-			}
-
-			await tick();
-
-			newFocusedDate ??= calendarDays.find((day) => compareDates(day, focusedDate, 'time'));
-			focusOrder = bodyElement.querySelectorAll('button');
-			focusOrder?.[calendarDays.map(Number).indexOf(+(newFocusedDate || focusedDate))].focus();
-
+	function handleKeyDown(event: KeyboardEvent, day: Date, index: number) {
+		if (event.ctrlKey && event.key === 'ArrowUp') {
+			updateView(event, 'months', day);
 			return;
 		}
 
-		focusOrder?.[
-			focusIndex + focusIncrementAmount[key as keyof FocusIncrementAmount] * (nextDateIsBlackout ? 2 : 1)
-		].focus();
+		navigate(event, day, index);
 	}
 
 	$effect.pre(() => {
@@ -137,6 +81,7 @@
 		{#each Array(6) as _, week (week)}
 			<tr class="fs-calendar-view-week">
 				{#each calendarDays.slice(week * 7, week * 7 + 7) as day, i (week * 7 + i)}
+					{@const index = week * 7 + i}
 					{@const selected = isSelected(day)}
 					{@const inMonth = compareDates(day, page, 'month')}
 					{@const header =
@@ -146,14 +91,15 @@
 						{selected}
 						outOfRange={!inMonth}
 						current={compareDates(day, new Date(), 'day')}
-						disabled={(minDate && minDate > day) || (maxDate && maxDate < day)}
-						blackout={blackoutDates && indexOfDate(blackoutDates, day, 'day') > -1}
+						disabled={isDisabled(day)}
+						blackout={isBlackout(day)}
 						buttonAttributes={{
 							tabindex: inMonth ? 0 : -1,
+							'data-date': day.getTime(),
 							onclick: (e: MouseEvent) => {
 								selectDay(e, day);
 							},
-							onkeydown: (e: KeyboardEvent) => handleKeyDown(e, day)
+							onkeydown: (e: KeyboardEvent) => handleKeyDown(e, day, index)
 						}}
 					>
 						{day.getDate()}

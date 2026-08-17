@@ -9,10 +9,8 @@
 		getMonthLocale,
 		indexOfDate
 	} from './calendar-view.svelte.js';
-	import type { FocusIncrementAmount } from './types.js';
-	import { tick } from 'svelte';
+	import { createCalendarKeyboard, MONTH_GRID } from './calendar-view-grid.js';
 	import { getCSSDuration } from '$internal';
-	import { SvelteDate } from 'svelte/reactivity';
 
 	const CalendarContext = getCalendarViewContext();
 
@@ -55,82 +53,22 @@
 		);
 	};
 
-	async function handleKeyDown(event: KeyboardEvent, date: Date) {
-		if (!bodyElement) return;
+	const navigate = createCalendarKeyboard({
+		grid: MONTH_GRID,
+		body: () => bodyElement,
+		page: () => page,
+		disabled: (month) => !!isDisabled(month),
+		blackout: () => false,
+		updatePage
+	});
 
-		const { key } = event;
-
-		if (
-			key === 'ArrowUp' ||
-			key === 'ArrowDown' ||
-			key === 'ArrowLeft' ||
-			key === 'ArrowRight' ||
-			key === 'Home' ||
-			key === 'End'
-		) {
-			event.preventDefault();
-		}
-
-		if (event.ctrlKey && (key === 'ArrowUp' || key === 'ArrowDown')) {
-			if (key === 'ArrowUp') {
-				updateView(event, 'years');
-				return;
-			}
-		}
-
-		let focusOrder = bodyElement.querySelectorAll('button');
-		let focusedDate = date;
-
-		const focusIndex = Array.from(focusOrder).indexOf(<HTMLButtonElement>document.activeElement);
-
-		if (focusOrder.length === 0) return;
-
-		const focusIncrementAmount: FocusIncrementAmount = {
-			ArrowUp: -4,
-			ArrowDown: 4,
-			ArrowLeft: -1,
-			ArrowRight: 1
-		};
-
-		if (!focusIncrementAmount[key as keyof FocusIncrementAmount] || event.shiftKey) return;
-
-		focusedDate = new Date(
-			new SvelteDate(focusedDate).setMonth(
-				focusedDate.getMonth() + focusIncrementAmount[key as keyof FocusIncrementAmount],
-				1
-			)
-		);
-
-		let calendar = getCalendarMonths(focusedDate);
-		const newFocusedDate = calendar.find((day) => compareDates(day, focusedDate, 'month'));
-
-		const aboveMinimumMonths =
-			minDate &&
-			newFocusedDate &&
-			minDate.getMonth() > newFocusedDate.getMonth() &&
-			minDate.getFullYear() === newFocusedDate.getFullYear();
-
-		if (aboveMinimumMonths || (maxDate && newFocusedDate && maxDate < newFocusedDate)) return;
-
-		if (!compareDates(focusedDate, page, 'year')) {
-			if (key === 'ArrowLeft' || key === 'ArrowUp') {
-				updatePage(-1, 'neutral');
-			} else if (key === 'ArrowRight' || key === 'ArrowDown') {
-				updatePage(1, 'neutral');
-			}
-
-			await tick();
-
-			const newFocusedDate = calendar.find((day) => compareDates(day, focusedDate, 'month'));
-
-			focusedDate = newFocusedDate ?? focusedDate;
-			focusOrder = bodyElement.querySelectorAll('button');
-			focusOrder?.[calendar.map(Number).indexOf(+(newFocusedDate || focusedDate))].focus();
-
+	function handleKeyDown(event: KeyboardEvent, month: Date, index: number) {
+		if (event.ctrlKey && event.key === 'ArrowUp') {
+			updateView(event, 'years', month);
 			return;
 		}
 
-		focusOrder?.[focusIndex + focusIncrementAmount[key as keyof FocusIncrementAmount]].focus();
+		navigate(event, month, index);
 	}
 </script>
 
@@ -154,6 +92,7 @@
 		{#each Array(4) as _, row (row)}
 			<tr class="fs-calendar-view-row">
 				{#each calendarMonths.slice(row * 4, row * 4 + 4) as month, i (row * 4 + i)}
+					{@const index = row * 4 + i}
 					{@const selected = isSelected(month)}
 					{@const inYear = month.getFullYear() === page.getFullYear()}
 					{@const firstFocusableMonth = getFirstFocusableMonth()}
@@ -169,16 +108,11 @@
 						current={compareDates(month, new Date(), 'month')}
 						buttonAttributes={{
 							tabindex: firstFocusableMonth && compareDates(firstFocusableMonth, month, 'month') ? 0 : -1,
+							'data-date': month.getTime(),
 							onclick: (e: MouseEvent) => {
 								selectMonth(e, month);
 							},
-							onkeydown: (e: KeyboardEvent) => {
-								handleKeyDown(e, month);
-
-								if (e.key === 'Enter' || e.key === ' ') {
-									updateView(e, 'days');
-								}
-							}
+							onkeydown: (e: KeyboardEvent) => handleKeyDown(e, month, index)
 						}}
 					>
 						{getMonthLocale(month.getMonth(), {

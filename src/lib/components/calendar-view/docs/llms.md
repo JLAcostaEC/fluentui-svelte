@@ -32,6 +32,29 @@ Use the `weekStart` prop to change the first day of the week (0 = Sunday, 1 = Mo
 <CalendarView weekStart={0} />
 ```
 
+## Keyboard
+
+The grid is driven by [Tabspot](https://github.com/JLAcostaEC/tabspot): the calendar
+registers its table as a grid mover and only adds the paging on top of it.
+
+| Key                                     | Action                                                                       |
+| --------------------------------------- | ---------------------------------------------------------------------------- |
+| `ArrowLeft` / `ArrowRight`              | Previous / next cell, continuing into the neighbouring row.                  |
+| `ArrowUp` / `ArrowDown`                 | Same column, one row up / down.                                              |
+| `Home` / `End`                          | First / last cell of the current row.                                        |
+| `Ctrl` + `ArrowUp`                      | Zoom out: days to months, months to years.                                   |
+| `Ctrl` + `ArrowDown`                    | Zoom in: years to months.                                                    |
+
+Moving past the edge of the visible month, year or decade turns the page and keeps
+focus on the date you moved to. Dates outside `minDate`/`maxDate` cannot be focused,
+and `blackoutDates` are stepped over.
+
+Focus follows the grid. Opening the calendar as a popup (`floating`) puts focus on the
+selected date, on today, or on the first date of the page, in that order; an inline
+calendar never takes focus on its own. Changing the view from a cell — `Ctrl` + arrow,
+or picking a month or year — carries focus to the matching cell of the new view, while
+changing it from the header button leaves focus on the button.
+
 ## Component Props
 
 | Name            | Type                              | Description                                                     |

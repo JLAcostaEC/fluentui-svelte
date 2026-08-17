@@ -17,8 +17,17 @@
 		reactiveBoundingRect
 	} from '$internal';
 	import { getPageByOffset, indexOfDate, setCalendarViewContext } from './calendar-view.svelte.js';
-	import type { AnimationDirection, CalendarViewProps, CalendarViewState, View } from './types.js';
+	import { CALENDAR_GRID_CONFIG, VIEW_PRECISION, focusCalendarView } from './calendar-view-grid.js';
+	import type {
+		AnimationDirection,
+		CalendarViewProps,
+		CalendarViewState,
+		DateComparisonPrecision,
+		View
+	} from './types.js';
 	import { SvelteDate } from 'svelte/reactivity';
+	import { setTabspotAttributes } from 'tabspot';
+	import { onMount } from 'svelte';
 
 	let {
 		element = $bindable(),
@@ -56,6 +65,13 @@
 
 	let boundingElement = reactiveBoundingRect();
 
+	let tableElement: HTMLTableElement | undefined = $state();
+
+	// Set when a view change starts from a grid cell, so the new grid can pick focus
+	// up where the old one left it. A change started from the header leaves it null:
+	// focus belongs to the button that is still there.
+	let pendingFocus: { date: Date; precision: DateComparisonPrecision } | null = null;
+
 	function updatePage(amount: number = 0, directionOverride: AnimationDirection | undefined = undefined) {
 		page = getPageByOffset(amount, page, view);
 		if (directionOverride) {
@@ -71,7 +87,7 @@
 		}
 	}
 
-	function updateView(e: Event, newView: View) {
+	function updateView(e: Event, newView: View, focusDate?: Date) {
 		if ((view === 'days' && newView === 'months') || (view === 'months' && newView === 'years')) {
 			viewAnimationDirection = 'up';
 		} else if ((view === 'years' && newView === 'months') || (view === 'months' && newView === 'days')) {
@@ -80,6 +96,7 @@
 			viewAnimationDirection = 'neutral';
 		}
 
+		pendingFocus = focusDate ? { date: focusDate, precision: VIEW_PRECISION[newView] } : null;
 		pageAnimationDirection = 'neutral';
 		view = newView;
 		updatePage();
@@ -114,12 +131,12 @@
 
 	function selectMonth(e: Event, month: Date) {
 		page = new SvelteDate(month.setDate(1));
-		updateView(e, 'days');
+		updateView(e, 'days', page);
 	}
 
 	function selectYear(e: Event, year: Date) {
 		page.setFullYear(year.getFullYear());
-		updateView(e, 'months');
+		updateView(e, 'months', year);
 	}
 
 	const CALENDAR_STATE = defineState<CalendarViewState>([
@@ -191,13 +208,32 @@
 
 		if (floating?.ref && floating.ref instanceof HTMLElement) boundingElement.ref = floating.ref;
 	});
+
+	// Opening as a popup: hand focus to the grid so the arrows work straight away.
+	// An inline calendar is just part of the page and must not steal focus.
+	onMount(() => {
+		if (floating && tableElement) focusCalendarView(tableElement, null, VIEW_PRECISION[view]);
+	});
+
+	// The table is rebuilt on every view change, so the root is registered again
+	// each time. This is necessary for tabspot to work correctly.
+	$effect(() => {
+		if (!tableElement) return;
+
+		setTabspotAttributes({ element: tableElement, config: CALENDAR_GRID_CONFIG });
+
+		if (!pendingFocus) return;
+
+		focusCalendarView(tableElement, pendingFocus.date, pendingFocus.precision);
+		pendingFocus = null;
+	});
 </script>
 
 <!--
 @component
 A calendar view lets a user view and interact with a calendar that they can navigate by month, year, or decade. A user can select a single date or multiple dates.
 
-This implementation is originally made by Tropix126 in his FluentSvelte library, I have changed several things but almost everything has been devised by him.
+This implementation is originally made by Tropix126 in his FluentSvelte library, I have changed several things but thanks to him for the original work.
 -->
 <div
 	class={['fs-calendar-view', { floating }]}
@@ -222,6 +258,7 @@ This implementation is originally made by Tropix126 in his FluentSvelte library,
 		<div class="calendar-wrapper">
 			{#key view}
 				<table
+					bind:this={tableElement}
 					class="calendar-table"
 					in:fadeScale={{
 						duration: viewAnimationDirection !== 'neutral' ? 500 : 0,

@@ -20,11 +20,29 @@ export interface MonthLocaleOptions {
 	format?: DateTimeMonthFormat;
 }
 
-export interface FocusIncrementAmount {
-	ArrowUp: number;
-	ArrowDown: number;
-	ArrowLeft: number;
-	ArrowRight: number;
+/** Shape of one rendered calendar page, as seen by keyboard navigation. */
+export interface CalendarGrid {
+	/** Cells per row. */
+	columns: number;
+	/** Cells rendered per page. */
+	size: number;
+	/** Precision at which a date still belongs to the rendered page. */
+	precision: DateComparisonPrecision;
+	/** `date` moved by `amount` cells along the row axis. */
+	shift: (date: Date, amount: number) => Date;
+}
+
+export interface CalendarKeyboardOptions {
+	grid: CalendarGrid;
+	/** The `<tbody>` rendering the live page. */
+	body: () => HTMLElement | null;
+	/** The page currently rendered. */
+	page: () => Date;
+	/** Whether a date is out of the `minDate`/`maxDate` range. */
+	disabled: (date: Date) => boolean;
+	/** Whether a date is rendered but not selectable. */
+	blackout: (date: Date) => boolean;
+	updatePage: (amount: number, direction: AnimationDirection) => void;
 }
 
 export type CalendarViewProps = {
@@ -64,7 +82,8 @@ export type CalendarViewContext = FSContext<
 		onViewChange: (e: Event, newView: View) => void;
 	},
 	{
-		updateView: (e: Event, newView: View) => void;
+		/** `focusDate` carries focus into the new view; omit it to leave focus where it is. */
+		updateView: (e: Event, newView: View, focusDate?: Date) => void;
 		updatePage: (amount?: number, directionOverride?: AnimationDirection) => void;
 		selectDay: (e: Event, day: Date) => void;
 		selectMonth: (e: Event, month: Date) => void;

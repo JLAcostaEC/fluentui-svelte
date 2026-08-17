@@ -42,7 +42,7 @@
 	});
 
 	onMount(() => {
-		tabspotInstance = tabspot();
+		tabspotInstance ??= tabspot();
 
 		return () => {
 			tabspotInstance?.destroy();

@@ -44,7 +44,7 @@
 		<rect bind:this={railElement} height="1" rx="0.5" y="1" width="100%" class="progress-bar-rail" />
 	{/if}
 	{#if typeof value !== 'number'}
-		<rect bind:this={secondaryTrackElement} height="3" ry="3" class="progress-bar-track" />
+		<rect bind:this={secondaryTrackElement} height="3" ry="3" class="progress-bar-track progress-bar-secondary" />
 	{/if}
 	<rect
 		bind:this={trackElement}
@@ -134,6 +134,31 @@
 		100% {
 			transform: translateX(120%);
 			opacity: 1;
+		}
+	}
+	@keyframes fs-pulse {
+		0% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+
+	/*
+	 * Reduced motion swaps the spin for a pulse instead of shortening it — a 0ms spin is simply
+	 * invisible.
+	 */
+	:global(:root[data-fs-reduced-motion='true']) {
+		& .progress-bar-secondary {
+			display: none;
+		}
+		& .fs-progress-bar.indeterminate .progress-bar-track {
+			animation: fs-pulse 3s infinite linear;
+			stroke-dasharray: 0px;
 		}
 	}
 </style>

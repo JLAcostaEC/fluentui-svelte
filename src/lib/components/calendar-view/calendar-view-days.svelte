@@ -9,6 +9,8 @@
 		indexOfDate
 	} from './calendar-view.svelte.js';
 	import CalendarViewItem from './calendar-view-item.svelte';
+	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+
 	import { createCalendarKeyboard, DAY_GRID } from './calendar-view-grid.js';
 	import { getCSSDuration } from '$internal';
 
@@ -20,6 +22,8 @@
 
 	const { selectDay, updateView, updatePage } = CalendarContext.methods;
 
+	let reducedMotion = getReducedMotion();
+
 	let { value, page, pageAnimationDirection } = $derived(CalendarContext.state);
 
 	let { locale, minDate, weekStart, blackoutDates, headers, maxDate } = $derived(CalendarContext.config);
@@ -28,7 +32,7 @@
 
 	let bodyElement: HTMLElement | null = $state(null);
 
-	let pageAnimationDuration: number = $derived(getCSSDuration ? getCSSDuration('--fs-normal-duration') : 333);
+	let pageAnimationDuration: number = $derived(reducedMotion() ? 0 : getCSSDuration('--fs-normal-duration') || 333);
 
 	const isSelected = (day: Date) => {
 		return value && (Array.isArray(value) ? indexOfDate(value, day, 'day') > -1 : compareDates(value, day, 'day'));
@@ -56,9 +60,6 @@
 		navigate(event, day, index);
 	}
 
-	$effect.pre(() => {
-		pageAnimationDuration = getCSSDuration('--fs-normal-duration') || 333;
-	});
 </script>
 
 {#key page}

@@ -102,7 +102,7 @@
 			&:indeterminate + div :global(svg.indeterminate),
 			&:checked + div :global(svg.checked) {
 				clip-path: ellipse(60px 60px at 0% 50%);
-				transition: 1s cubic-bezier(0.55, 0, 0, 1) clip-path;
+				transition: var(--fs-slower-duration, 1s) cubic-bezier(0.55, 0, 0, 1) clip-path;
 			}
 			&:is(:checked, :indeterminate) {
 				& + div {

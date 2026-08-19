@@ -186,6 +186,11 @@
 	--fs-normal-duration: 333ms;
 	--fs-slow-duration: 500ms;
 
+	/* Custom Durations */
+	--fs-slower-duration: 1s;
+	--fs-very-slow-duration: 2s;
+	--fs-extra-slow-duration: 3s;
+
 	/* Easing */
 	--fs-strong-invoke: cubic-bezier(0.13, 1.62, 0, 0.92);
 	--fs-fast-dismiss: cubic-bezier(0, 0, 0, 1);
@@ -261,11 +266,11 @@
 	--fs-system-critical-text: color-mix(in srgb, var(--fs-system-critical), black 50%);
 }
 
-@media (prefers-reduced-motion: reduce) {
-	:root {
-		--fs-control-slow-duration: 0ms;
-		--fs-control-normal-duration: 0ms;
-		--fs-control-fast-duration: 0ms;
-		--fs-control-faster-duration: 0ms;
-	}
+:root[data-fs-reduced-motion='true'] {
+	--fs-fast-duration: 0ms;
+	--fs-normal-duration: 0ms;
+	--fs-slow-duration: 0ms;
+	--fs-slower-duration: 0ms;
+	--fs-very-slow-duration: 0ms;
+	--fs-extra-slow-duration: 0ms;
 }

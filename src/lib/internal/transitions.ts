@@ -1,8 +1,5 @@
 import { DURATION } from '$constants';
 
-const reducedMotion = () =>
-	typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
 export interface FlyToOffsetOptions {
 	delay?: number;
 	duration?: number;
@@ -11,6 +8,7 @@ export interface FlyToOffsetOptions {
 	x?: number;
 	offset?: number;
 	css?: string;
+	reducedMotion?: boolean;
 }
 
 /** Fades and scales an element in/out. */
@@ -20,15 +18,22 @@ export function fadeScale(
 		delay = 0,
 		duration = DURATION.NORMAL,
 		easing = (x: number) => x,
-		baseScale = 0
-	}: { delay?: number; duration?: number; easing?: (x: number) => number; baseScale?: number } = {}
+		baseScale = 0,
+		reducedMotion = false
+	}: {
+		delay?: number;
+		duration?: number;
+		easing?: (x: number) => number;
+		baseScale?: number;
+		reducedMotion?: boolean;
+	} = {}
 ) {
 	const opacity = +getComputedStyle(node).opacity;
 	const initialScale = 1 - baseScale;
 
 	return {
 		delay,
-		duration: reducedMotion() ? 0 : duration,
+		duration: reducedMotion ? DURATION.REDUCED : duration,
 		css: (t: number) => {
 			const eased = easing(t);
 			return `opacity: ${eased * opacity}; transform: scale(${eased * initialScale + baseScale})`;
@@ -42,7 +47,16 @@ export function fadeScale(
  */
 export function flyToOffset(
 	node: Element,
-	{ delay = 0, duration = DURATION.NORMAL, easing = (t: number) => t, y, x, offset = 0, css }: FlyToOffsetOptions = {}
+	{
+		delay = 0,
+		duration = DURATION.NORMAL,
+		easing = (t: number) => t,
+		y,
+		x,
+		offset = 0,
+		css,
+		reducedMotion = false
+	}: FlyToOffsetOptions = {}
 ) {
 	const style = getComputedStyle(node);
 	const opacity = +style.opacity;
@@ -50,7 +64,7 @@ export function flyToOffset(
 
 	return {
 		delay,
-		duration: reducedMotion() ? 0 : duration,
+		duration: reducedMotion ? DURATION.REDUCED : duration,
 		easing,
 		css: (t: number) => {
 			const eased = easing(t);

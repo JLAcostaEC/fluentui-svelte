@@ -4,30 +4,28 @@
 	import { setGlobalFSContext, type FSProviderContext } from './fluentui-svelte.ts';
 	import { onMount, type Snippet } from 'svelte';
 	import { prefersReducedMotion } from 'svelte/motion';
-	import type { MediaQuery } from 'svelte/reactivity';
+	import { PersistedState } from 'runed';
+	import { mode, setMode } from 'mode-watcher';
 
 	let {
 		children,
-		tabspotInstance,
-		reducedMotion = prefersReducedMotion,
-		rtl = false
+		tabspotInstance
 	}: {
-		rtl?: boolean;
 		tabspotInstance?: TabspotInstance;
-		reducedMotion?: boolean | MediaQuery;
 		children?: Snippet;
 	} = $props();
 
-	let userReducedMotion = $state(false);
+	// boolean flags for user preferences and null for system default
+	let userReducedMotion = new PersistedState<boolean | null>('fluentui-svelte-reduced-motion', null);
 
-	let _reducedMotion = $derived(
-		userReducedMotion || (typeof reducedMotion === 'boolean' ? reducedMotion : reducedMotion.current)
-	);
+	// Syncing
+	let reducedMotion = $derived(userReducedMotion.current ?? prefersReducedMotion.current);
+	let themeMode = new PersistedState('fluentui-svelte-theme-mode', mode);
 
 	let _state: FSProviderContext['state'] = defineState([
-		(o) => defineProperty(o, 'rtl', () => rtl),
 		(o) => defineProperty(o, 'tabspotInstance', () => tabspotInstance),
-		(o) => defineProperty(o, 'reducedMotion', () => _reducedMotion)
+		(o) => defineProperty(o, 'reducedMotion', () => reducedMotion),
+		(o) => defineProperty(o, 'theme', () => themeMode)
 	]);
 
 	setGlobalFSContext({
@@ -35,8 +33,11 @@
 		state: _state,
 		events: null,
 		methods: {
-			setReducedMotion: (value: boolean) => {
-				userReducedMotion = value;
+			setReducedMotion: (value) => {
+				userReducedMotion.current = value;
+			},
+			setTheme: (value) => {
+				setMode(value);
 			}
 		}
 	});
@@ -50,11 +51,13 @@
 	});
 
 	$effect(() => {
-		const isRTL = document.documentElement.dir === 'rtl' || document.body.dir === 'rtl';
+		const root = document.documentElement;
 
-		if (rtl !== isRTL) {
-			rtl = isRTL;
-		}
+		root.dataset.fsReducedMotion = String(_state.reducedMotion);
+
+		return () => {
+			delete root.dataset.fsReducedMotion;
+		};
 	});
 </script>
 

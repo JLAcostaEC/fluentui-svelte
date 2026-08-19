@@ -67,7 +67,7 @@
 				inset: 0.25rem;
 				border-radius: 50%;
 				background-color: var(--fs-text-on-accent-primary);
-				transition: transform 0.2s;
+				transition: transform var(--fs-fast-duration) var(--fs-point-to-point);
 				transform: scale(0);
 			}
 			&:hover {

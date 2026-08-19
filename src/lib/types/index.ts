@@ -30,6 +30,7 @@ export type XAxis = 'left' | 'right';
 export type YDirection = 'up' | 'middle' | 'down';
 export type XDirection = 'start' | 'center' | 'end';
 export type EASING = 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out';
+export type THEME = 'light' | 'dark' | 'system';
 
 /** Props for a polymorphic component that can render different HTML elements.
  * This remove "on:" and "aria" attributes due to "Expression produces a union type that is too complex to represent." error when using SvelteHTMLElements type.

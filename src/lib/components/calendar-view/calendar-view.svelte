@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { SvelteDate } from 'svelte/reactivity';
+	import { setTabspotAttributes } from 'tabspot';
+	import { onMount } from 'svelte';
 	import { circOut } from 'svelte/easing';
 	import { Flyout } from '$lib/index.js';
 	import CalendarViewDays from './calendar-view-days.svelte';
@@ -18,6 +21,7 @@
 	} from '$internal';
 	import { getPageByOffset, indexOfDate, setCalendarViewContext } from './calendar-view.svelte.js';
 	import { CALENDAR_GRID_CONFIG, VIEW_PRECISION, focusCalendarView } from './calendar-view-grid.js';
+	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import type {
 		AnimationDirection,
 		CalendarViewProps,
@@ -25,9 +29,6 @@
 		DateComparisonPrecision,
 		View
 	} from './types.js';
-	import { SvelteDate } from 'svelte/reactivity';
-	import { setTabspotAttributes } from 'tabspot';
-	import { onMount } from 'svelte';
 
 	let {
 		element = $bindable(),
@@ -45,6 +46,8 @@
 		onViewChange,
 		...attributes
 	}: CalendarViewProps = $props();
+
+	const reducedMotion = getReducedMotion();
 
 	let viewAnimationDirection = $state('neutral');
 
@@ -247,7 +250,8 @@ This implementation is originally made by Tropix126 in his FluentSvelte library,
 						: 0,
 				duration: pageAnimationDuration,
 				easing: circOut,
-				css: 'pointer-events: none;'
+				css: 'pointer-events: none;',
+				reducedMotion: reducedMotion()
 			}
 		: undefined}
 	{@attach floating?.ref ? _floating(floating.ref, floating.positionConfig) : undefined}
@@ -264,13 +268,15 @@ This implementation is originally made by Tropix126 in his FluentSvelte library,
 						duration: viewAnimationDirection !== 'neutral' ? 500 : 0,
 						easing: circOut,
 						baseScale: viewAnimationDirection === 'up' ? 1.29 : 0.84,
-						delay: viewAnimationDirection !== 'neutral' ? 150 : 0
+						delay: viewAnimationDirection !== 'neutral' ? 150 : 0,
+						reducedMotion: reducedMotion()
 					}}
 					out:fadeScale={{
 						duration: viewAnimationDirection !== 'neutral' ? 150 : 0,
 						easing: circOut,
 						baseScale: viewAnimationDirection === 'up' ? 0.84 : 1.29,
-						delay: 0
+						delay: 0,
+						reducedMotion: reducedMotion()
 					}}
 				>
 					{#if view === 'days'}

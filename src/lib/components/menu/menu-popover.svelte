@@ -5,6 +5,7 @@
 	import { flip, hide, offset, shift } from '@floating-ui/dom';
 	import { useDebounce } from 'runed';
 	import { floating, flyToOffset, getCSSDuration, reactiveBoundingRect } from '$internal';
+	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import type { Snippet } from 'svelte';
 	import type { ComputePositionConfig } from '@floating-ui/dom';
 
@@ -29,6 +30,8 @@
 	const context = getMenuContext();
 
 	if (!context) throw new Error(`No MenuContext found for ${COMPONENT_NAME}.`);
+
+	const reducedMotion = getReducedMotion();
 
 	const { positionConfig, id, isSubMenu, openOnHover, openingDelay } = context.config;
 
@@ -89,7 +92,8 @@
 			? {
 					...getIntroTransition({ config, anchor: boundingElement.rect, element, ref, isSubMenu }),
 					duration: duration,
-					easing: circOut
+					easing: circOut,
+					reducedMotion: reducedMotion()
 				}
 			: undefined}
 	>

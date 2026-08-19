@@ -1,4 +1,5 @@
 <script lang="ts" generics="Tag extends SkeletonTags = 'div'">
+	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import type { SkeletonProps, SkeletonTags } from './types.ts';
 
 	let {
@@ -10,6 +11,12 @@
 		ref = $bindable(),
 		...attributes
 	}: SkeletonProps<Tag> = $props();
+
+	let reducedMotion = getReducedMotion();
+
+	$effect.pre(() => {
+		animation = reducedMotion() ? 'pulse' : animation;
+	});
 </script>
 
 <!-- 
@@ -71,11 +78,11 @@
 				transparent 80%
 			);
 			transform: translateX(-100%);
-			animation: fs-skeleton-wave 3s infinite var(--fs-point-to-point);
+			animation: fs-skeleton-wave var(--fs-extra-slow-duration) infinite var(--fs-point-to-point);
 		}
 		&.pulse::after {
 			background: var(--fs-system-neutral-bg);
-			animation: fs-skeleton-pulse 1s infinite var(--fs-point-to-point);
+			animation: fs-skeleton-pulse 2s infinite var(--fs-point-to-point);
 		}
 	}
 

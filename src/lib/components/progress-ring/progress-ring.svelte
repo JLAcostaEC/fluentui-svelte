@@ -133,11 +133,13 @@
 				stroke: var(--fs-system-critical);
 			}
 		}
-		@media (prefers-reduced-motion: reduce) {
-			&.indeterminate circle.progress-ring-track {
-				animation: fs-pulse 3s infinite linear;
-				stroke-dasharray: 0px;
-			}
-		}
+	}
+	/*
+	 * Reduced motion swaps the spin for a pulse instead of shortening it — a 0ms spin is simply
+	 * invisible.
+	 */
+	:global(:root[data-fs-reduced-motion='true']) .progress-ring.indeterminate circle.progress-ring-track {
+		animation: fs-pulse 3s infinite linear;
+		stroke-dasharray: 0px;
 	}
 </style>

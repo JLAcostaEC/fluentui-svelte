@@ -14,15 +14,17 @@ export class Expander {
 	easing: EASING | string;
 	direction: YDirection;
 	cleanEvent: () => void;
+	reducedMotion: () => boolean;
 	get effectiveDuration(): number {
-		return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? DURATION.REDUCED : this.duration;
+		return this.reducedMotion() ? DURATION.REDUCED : this.duration;
 	}
 
 	constructor(
 		element: HTMLDetailsElement | null,
 		direction: YDirection = 'down',
 		duration: number = DURATION.NORMAL,
-		easing: EASING | string = 'ease-out'
+		easing: EASING | string = 'ease-out',
+		reducedMotion: () => boolean = () => false
 	) {
 		if (!element) {
 			throw new Error('Expander: Missing details element');
@@ -36,6 +38,7 @@ export class Expander {
 		this.duration = duration;
 		this.easing = easing;
 		this.direction = direction;
+		this.reducedMotion = reducedMotion;
 		if (!this.summary || !this.content) {
 			throw new Error('Expander: Missing summary or content element');
 		}

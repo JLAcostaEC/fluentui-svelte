@@ -3,3 +3,4 @@ allowBuilds:
   workerd: true
   sharp: true
 packages: []
+minimumReleaseAge: 0

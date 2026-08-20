@@ -20,7 +20,8 @@
 		reactiveBoundingRect
 	} from '$internal';
 	import { getPageByOffset, indexOfDate, setCalendarViewContext } from './calendar-view.svelte.js';
-	import { CALENDAR_GRID_CONFIG, VIEW_PRECISION, focusCalendarView } from './calendar-view-grid.js';
+	import { CALENDAR_GRID_CONFIG, VIEW_PRECISION, cellDate, focusCalendarView } from './calendar-view-grid.js';
+	import { on } from 'svelte/events';
 	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import type {
 		AnimationDirection,
@@ -212,6 +213,28 @@
 		if (floating?.ref && floating.ref instanceof HTMLElement) boundingElement.ref = floating.ref;
 	});
 
+	/** Which key zooms out of each view, and where it lands. */
+	const ZOOM: Record<View, { key: string; to: View }> = {
+		days: { key: 'ArrowUp', to: 'months' },
+		months: { key: 'ArrowUp', to: 'years' },
+		years: { key: 'ArrowDown', to: 'months' }
+	};
+
+	/**
+	 * `Ctrl` + arrow moves between views. That is a calendar shortcut rather than a
+	 * move inside the grid, so Tabspot never reports it — one delegated listener on
+	 * the table covers all three views and every cell.
+	 */
+	function zoomShortcut(node: HTMLElement) {
+		return on(node, 'keydown', (event) => {
+			const zoom = ZOOM[view];
+
+			if (!event.ctrlKey || event.key !== zoom.key) return;
+
+			updateView(event, zoom.to, cellDate(event.target as Element) ?? undefined);
+		});
+	}
+
 	// Opening as a popup: hand focus to the grid so the arrows work straight away.
 	// An inline calendar is just part of the page and must not steal focus.
 	onMount(() => {
@@ -264,6 +287,7 @@ This implementation is originally made by Tropix126 in his FluentSvelte library,
 				<table
 					bind:this={tableElement}
 					class="calendar-table"
+					{@attach zoomShortcut}
 					in:fadeScale={{
 						duration: viewAnimationDirection !== 'neutral' ? 500 : 0,
 						easing: circOut,

@@ -37,13 +37,13 @@ Use the `weekStart` prop to change the first day of the week (0 = Sunday, 1 = Mo
 The grid is driven by [Tabspot](https://github.com/JLAcostaEC/tabspot): the calendar
 registers its table as a grid mover and only adds the paging on top of it.
 
-| Key                                     | Action                                                                       |
-| --------------------------------------- | ---------------------------------------------------------------------------- |
-| `ArrowLeft` / `ArrowRight`              | Previous / next cell, continuing into the neighbouring row.                  |
-| `ArrowUp` / `ArrowDown`                 | Same column, one row up / down.                                              |
-| `Home` / `End`                          | First / last cell of the current row.                                        |
-| `Ctrl` + `ArrowUp`                      | Zoom out: days to months, months to years.                                   |
-| `Ctrl` + `ArrowDown`                    | Zoom in: years to months.                                                    |
+| Key                        | Action                                                      |
+| -------------------------- | ----------------------------------------------------------- |
+| `ArrowLeft` / `ArrowRight` | Previous / next cell, continuing into the neighbouring row. |
+| `ArrowUp` / `ArrowDown`    | Same column, one row up / down.                             |
+| `Home` / `End`             | First / last cell of the current row.                       |
+| `Ctrl` + `ArrowUp`         | Zoom out: days to months, months to years.                  |
+| `Ctrl` + `ArrowDown`       | Zoom in: years to months.                                   |
 
 Moving past the edge of the visible month, year or decade turns the page and keeps
 focus on the date you moved to. Dates outside `minDate`/`maxDate` cannot be focused,

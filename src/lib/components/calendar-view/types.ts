@@ -32,7 +32,7 @@ export interface CalendarGrid {
 	shift: (date: Date, amount: number) => Date;
 }
 
-export interface CalendarKeyboardOptions {
+export interface CalendarNavigationOptions {
 	grid: CalendarGrid;
 	/** The `<tbody>` rendering the live page. */
 	body: () => HTMLElement | null;

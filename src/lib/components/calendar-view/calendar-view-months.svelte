@@ -9,7 +9,8 @@
 		getMonthLocale,
 		indexOfDate
 	} from './calendar-view.svelte.js';
-	import { createCalendarKeyboard, MONTH_GRID } from './calendar-view-grid.js';
+	import { createCalendarNavigation, MONTH_GRID } from './calendar-view-grid.js';
+	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { getCSSDuration } from '$internal';
 
 	const CalendarContext = getCalendarViewContext();
@@ -18,7 +19,7 @@
 		throw new Error('CalendarViewMonths must be used within a CalendarView');
 	}
 
-	const { selectMonth, updateView, updatePage } = CalendarContext.methods;
+	const { selectMonth, updatePage } = CalendarContext.methods;
 
 	let { locale, minDate, headers, maxDate } = CalendarContext.config;
 
@@ -53,7 +54,9 @@
 		);
 	};
 
-	const navigate = createCalendarKeyboard({
+	const globalContext = getGlobalFSContext();
+
+	const navigate = createCalendarNavigation({
 		grid: MONTH_GRID,
 		body: () => bodyElement,
 		page: () => page,
@@ -62,14 +65,16 @@
 		updatePage
 	});
 
-	function handleKeyDown(event: KeyboardEvent, month: Date, index: number) {
-		if (event.ctrlKey && event.key === 'ArrowUp') {
-			updateView(event, 'years', month);
-			return;
-		}
+	// Tabspot reports what it cannot decide — running out of cells, or landing on a
+	// month this page does not own — and the calendar answers by turning the page.
+	$effect(() => {
+		const root = bodyElement?.closest('table');
+		const instance = globalContext?.state.tabspotInstance;
 
-		navigate(event, month, index);
-	}
+		if (!root || !instance) return;
+
+		return instance.subscribe(root, navigate);
+	});
 </script>
 
 {#key page}
@@ -92,7 +97,6 @@
 		{#each Array(4) as _, row (row)}
 			<tr class="fs-calendar-view-row">
 				{#each calendarMonths.slice(row * 4, row * 4 + 4) as month, i (row * 4 + i)}
-					{@const index = row * 4 + i}
 					{@const selected = isSelected(month)}
 					{@const inYear = month.getFullYear() === page.getFullYear()}
 					{@const firstFocusableMonth = getFirstFocusableMonth()}
@@ -111,8 +115,7 @@
 							'data-date': month.getTime(),
 							onclick: (e: MouseEvent) => {
 								selectMonth(e, month);
-							},
-							onkeydown: (e: KeyboardEvent) => handleKeyDown(e, month, index)
+							}
 						}}
 					>
 						{getMonthLocale(month.getMonth(), {

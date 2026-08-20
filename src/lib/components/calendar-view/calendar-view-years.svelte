@@ -3,7 +3,8 @@
 	import { circOut } from 'svelte/easing';
 	import CalendarViewItem from './calendar-view-item.svelte';
 	import { compareDates, getCalendarViewContext, getCalendarYears, indexOfDate } from './calendar-view.svelte.js';
-	import { createCalendarKeyboard, YEAR_GRID } from './calendar-view-grid.js';
+	import { createCalendarNavigation, YEAR_GRID } from './calendar-view-grid.js';
+	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { getCSSDuration } from '$internal';
 
 	const CalendarContext = getCalendarViewContext();
@@ -12,7 +13,7 @@
 		throw new Error('CalendarViewYears must be used within a CalendarView');
 	}
 
-	const { selectYear, updatePage, updateView } = CalendarContext.methods;
+	const { selectYear, updatePage } = CalendarContext.methods;
 
 	let { minDate, maxDate } = CalendarContext.config;
 
@@ -43,7 +44,9 @@
 		);
 	};
 
-	const navigate = createCalendarKeyboard({
+	const globalContext = getGlobalFSContext();
+
+	const navigate = createCalendarNavigation({
 		grid: YEAR_GRID,
 		body: () => bodyElement,
 		page: () => page,
@@ -52,14 +55,16 @@
 		updatePage
 	});
 
-	function handleKeyDown(event: KeyboardEvent, year: Date, index: number) {
-		if (event.ctrlKey && event.key === 'ArrowDown') {
-			updateView(event, 'months', year);
-			return;
-		}
+	// Tabspot reports what it cannot decide — running out of cells, or landing on a
+	// year this page does not own — and the calendar answers by turning the page.
+	$effect(() => {
+		const root = bodyElement?.closest('table');
+		const instance = globalContext?.state.tabspotInstance;
 
-		navigate(event, year, index);
-	}
+		if (!root || !instance) return;
+
+		return instance.subscribe(root, navigate);
+	});
 </script>
 
 {#key page}
@@ -82,7 +87,6 @@
 		{#each Array(4) as _, row (row)}
 			<tr class="fs-calendar-view-row">
 				{#each calendarYears.slice(row * 4, row * 4 + 4) as year, i (row * 4 + i)}
-					{@const index = row * 4 + i}
 					{@const selected = isSelected(year)}
 					{@const inDecade = compareDates(year, page, 'decade')}
 					{@const firstFocusableYear = getFirstFocusableYear()}
@@ -100,9 +104,6 @@
 								'data-date': year.getTime(),
 								onclick: (e: MouseEvent) => {
 									selectYear(e, year);
-								},
-								onkeydown: (e: KeyboardEvent) => {
-									handleKeyDown(e, year, index);
 								}
 							}}
 						>

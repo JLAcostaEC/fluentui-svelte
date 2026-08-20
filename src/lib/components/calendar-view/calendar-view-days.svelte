@@ -9,9 +9,9 @@
 		indexOfDate
 	} from './calendar-view.svelte.js';
 	import CalendarViewItem from './calendar-view-item.svelte';
-	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { getGlobalFSContext, getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 
-	import { createCalendarKeyboard, DAY_GRID } from './calendar-view-grid.js';
+	import { createCalendarNavigation, DAY_GRID } from './calendar-view-grid.js';
 	import { getCSSDuration } from '$internal';
 
 	const CalendarContext = getCalendarViewContext();
@@ -20,7 +20,7 @@
 		throw new Error('CalendarViewDays must be used within a CalendarView');
 	}
 
-	const { selectDay, updateView, updatePage } = CalendarContext.methods;
+	const { selectDay, updatePage } = CalendarContext.methods;
 
 	let reducedMotion = getReducedMotion();
 
@@ -42,7 +42,9 @@
 
 	const isBlackout = (day: Date) => !!blackoutDates && indexOfDate(blackoutDates, day, 'day') > -1;
 
-	const navigate = createCalendarKeyboard({
+	const globalContext = getGlobalFSContext();
+
+	const navigate = createCalendarNavigation({
 		grid: DAY_GRID,
 		body: () => bodyElement,
 		page: () => page,
@@ -51,15 +53,16 @@
 		updatePage
 	});
 
-	function handleKeyDown(event: KeyboardEvent, day: Date, index: number) {
-		if (event.ctrlKey && event.key === 'ArrowUp') {
-			updateView(event, 'months', day);
-			return;
-		}
+	// Tabspot reports what it cannot decide — running out of cells, or landing on a
+	// date this page does not own — and the calendar answers by turning the page.
+	$effect(() => {
+		const root = bodyElement?.closest('table');
+		const instance = globalContext?.state.tabspotInstance;
 
-		navigate(event, day, index);
-	}
+		if (!root || !instance) return;
 
+		return instance.subscribe(root, navigate);
+	});
 </script>
 
 {#key page}
@@ -68,13 +71,13 @@
 		class="fs-calendar-view-days"
 		in:fly={{
 			opacity: 1,
-			duration: pageAnimationDirection !== 'neutral' ? pageAnimationDuration : 0,
+			duration: pageAnimationDirection !== 'neutral' ? pageAnimationDuration: pageAnimationDuration,
 			easing: circOut,
 			y: pageAnimationDirection === 'neutral' ? 0 : pageAnimationDirection === 'up' ? -215 : 215
 		}}
 		out:fly={{
 			opacity: 0,
-			duration: pageAnimationDirection !== 'neutral' ? pageAnimationDuration : 0,
+			duration: pageAnimationDirection !== 'neutral' ? pageAnimationDuration: pageAnimationDuration,
 			easing: circOut,
 			y: pageAnimationDirection === 'neutral' ? 0 : pageAnimationDirection === 'up' ? 215 : -215
 		}}
@@ -82,7 +85,6 @@
 		{#each Array(6) as _, week (week)}
 			<tr class="fs-calendar-view-week">
 				{#each calendarDays.slice(week * 7, week * 7 + 7) as day, i (week * 7 + i)}
-					{@const index = week * 7 + i}
 					{@const selected = isSelected(day)}
 					{@const inMonth = compareDates(day, page, 'month')}
 					{@const header =
@@ -99,8 +101,7 @@
 							'data-date': day.getTime(),
 							onclick: (e: MouseEvent) => {
 								selectDay(e, day);
-							},
-							onkeydown: (e: KeyboardEvent) => handleKeyDown(e, day, index)
+							}
 						}}
 					>
 						{day.getDate()}

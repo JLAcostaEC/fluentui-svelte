@@ -1,8 +1,8 @@
 import { tick } from 'svelte';
 import { SvelteDate } from 'svelte/reactivity';
 import { compareDates } from './calendar-view.svelte.js';
-import type { TabspotNodeOptions } from 'tabspot';
-import type { CalendarGrid, CalendarKeyboardOptions, DateComparisonPrecision, View } from './types.js';
+import type { TabspotEventListener, TabspotNavigationEvent, TabspotNodeOptions } from 'tabspot';
+import type { CalendarGrid, CalendarNavigationOptions, DateComparisonPrecision, View } from './types.js';
 
 /**
  * Tabspot configuration shared by the three calendar grids.
@@ -57,42 +57,26 @@ export const YEAR_GRID: CalendarGrid = {
 	shift: (date, amount) => new SvelteDate(new SvelteDate(date).setFullYear(date.getFullYear() + amount))
 };
 
-/** How far one press of `key` travels, in cells. `undefined` for keys we ignore. */
-function shiftAmount(key: string, columns: number): number | undefined {
-	switch (key) {
-		case 'ArrowLeft':
-		case 'Home':
+/** How far one move travels, in cells. `undefined` for directions the calendar ignores. */
+function amountFor(direction: TabspotNavigationEvent['direction'], columns: number): number | undefined {
+	switch (direction) {
+		case 'left':
+		case 'home':
 			return -1;
-		case 'ArrowRight':
-		case 'End':
+		case 'right':
+		case 'end':
 			return 1;
-		case 'ArrowUp':
+		case 'up':
 			return -columns;
-		case 'ArrowDown':
+		case 'down':
 			return columns;
 		default:
 			return undefined;
 	}
 }
 
-/** Whether `key` pressed on cell `index` points outside the rendered page. */
-function leavesGrid(key: string, index: number, grid: CalendarGrid): boolean {
-	switch (key) {
-		case 'ArrowLeft':
-			return index === 0;
-		case 'ArrowRight':
-			return index === grid.size - 1;
-		case 'ArrowUp':
-			return index < grid.columns;
-		case 'ArrowDown':
-			return index >= grid.size - grid.columns;
-		default:
-			// Home/End never leave their row, so Tabspot always resolves them itself.
-			return false;
-	}
-}
-
-function dateOf(element: Element | null): Date | null {
+/** The date a rendered cell stands for. */
+export function cellDate(element: Element | null): Date | null {
 	const value = element?.getAttribute?.('data-date');
 	return value ? new SvelteDate(Number(value)) : null;
 }
@@ -109,7 +93,7 @@ const FOCUSABLE_CELL = 'tbody:not([inert]) button:not([disabled])';
 
 function cellFor(root: HTMLElement, date: Date, precision: DateComparisonPrecision) {
 	for (const cell of root.querySelectorAll<HTMLButtonElement>(FOCUSABLE_CELL)) {
-		const value = dateOf(cell);
+		const value = cellDate(cell);
 		if (value && compareDates(value, date, precision)) return cell;
 	}
 	return null;
@@ -133,19 +117,29 @@ export function focusCalendarView(root: HTMLElement, date: Date | null, precisio
 }
 
 /**
- * Turns the page when keyboard navigation runs off the rendered grid.
+ * Turns the page when navigation runs off the rendered grid.
  *
  * Tabspot owns everything that happens *inside* the six-by-seven (or four-by-four)
- * matrix: which cell the arrows resolve to, wrapping from one row into the next,
- * `Home`/`End`, and the fact that a disabled cell cannot take focus. It listens on
- * the document in the capture phase, so by the time this handler runs the move has
- * already happened and only two calendar-specific cases are left:
+ * matrix: which cell an arrow resolves to, wrapping from one row into the next,
+ * `Home`/`End`, and the fact that a disabled cell cannot take focus. It reports
+ * the two things it cannot decide on its own, and this listener answers them:
  *
- * - focus landed on a cell that does not belong to the page (an adjacent month,
- *   year or decade) or on a blacked-out date — page to it, or step past it;
- * - focus did not move because the destination is not rendered at all — page to it.
+ * - `atEdge` — the move ran out of cells. Only the calendar knows there is a date
+ *   beyond that edge, so it turns the page and lands on it.
+ * - the move resolved to a cell that does not belong to the page (an adjacent
+ *   month, year or decade) or to a blacked-out date — page to it, or step past it.
+ *
+ * Both cases claim the key: the grid ran out of cells but the calendar did not,
+ * so the browser must not scroll the page underneath it.
  */
-export function createCalendarKeyboard({ grid, body, page, disabled, blackout, updatePage }: CalendarKeyboardOptions) {
+export function createCalendarNavigation({
+	grid,
+	body,
+	page,
+	disabled,
+	blackout,
+	updatePage
+}: CalendarNavigationOptions): TabspotEventListener {
 	const onPage = (date: Date) => compareDates(date, page(), grid.precision);
 
 	/** Resolve `target` to a focusable cell, turning the page when it lies outside it. */
@@ -165,20 +159,23 @@ export function createCalendarKeyboard({ grid, body, page, disabled, blackout, u
 		body()?.querySelector<HTMLButtonElement>(`button[data-date="${target.getTime()}"]`)?.focus();
 	}
 
-	return async function handleKeyDown(event: KeyboardEvent, date: Date, index: number) {
-		const amount = shiftAmount(event.key, grid.columns);
+	return (event) => {
+		const amount = amountFor(event.direction, grid.columns);
 		if (amount === undefined) return;
 
-		const origin = event.currentTarget;
-		const landed = document.activeElement;
+		if (event.atEdge) {
+			const origin = cellDate(event.from);
+			if (!origin) return;
 
-		if (landed !== origin) {
-			const target = dateOf(landed);
-			if (target && (blackout(target) || !onPage(target))) await focusDate(target, amount);
+			event.preventDefault();
+			focusDate(grid.shift(origin, amount), amount);
 			return;
 		}
 
-		// Tabspot clamped at the edge of the rendered grid.
-		if (leavesGrid(event.key, index, grid)) await focusDate(grid.shift(date, amount), amount);
+		const landed = cellDate(event.to);
+		if (!landed || (!blackout(landed) && onPage(landed))) return;
+
+		event.preventDefault();
+		focusDate(landed, amount);
 	};
 }

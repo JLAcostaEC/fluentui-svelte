@@ -7,10 +7,19 @@
 	import { defineProperty, defineState } from '$internal';
 	import { setAutoSuggestBoxContext } from './auto-suggest-box.ts';
 	import { Flyout, TextBox, ListView, ListViewItem } from '$lib/index.js';
+	import {
+		clearTabspotActive,
+		setTabspotAttributes,
+		tabspotVirtual,
+		type TabspotNavigationEvent,
+		type TabspotNodeOptions
+	} from 'tabspot';
+	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import type { AutoSuggestBoxContext, FSAutoSuggestBox, OptionType } from './types.ts';
 
 	const FALLBACK_ID = $props.id();
 	const ID = `${PREFIX}autosuggestbox-${FALLBACK_ID}`;
+	const INPUT_ID = `${ID}-input`;
 
 	let {
 		placeholder,
@@ -54,7 +63,24 @@
 
 	let activeOption: OptionType | null = $state(null);
 
-	let itemsArr: OptionType[] = $derived(Array.from(items.values()).sort((a, b) => a.index - b.index));
+	let cursorKey: KeyboardEvent | undefined;
+
+	const OPTIONS = '.fs-autosuggest-option';
+
+	function navigationOver(items: string): TabspotNodeOptions {
+		return {
+			root: {},
+			mover: {
+				axis: 'vertical',
+				items,
+				activation: {
+					mode: 'activedescendant',
+					controller: `#${INPUT_ID}`,
+					mark: { attribute: 'data-active' }
+				}
+			}
+		};
+	}
 
 	let _state: AutoSuggestBoxContext['state'] = defineState([
 		(o) => defineProperty(o, 'lastTypedValue', () => lastTypedValue),
@@ -108,63 +134,127 @@
 	// svelte-ignore state_referenced_locally
 	setAutoSuggestBoxContext({ config, state: _state, methods, events: null });
 
-	async function scrollToIndex(index: number) {
-		if (virtualizer?.scrollToIndex) {
-			await virtualizer.scrollToIndex(index);
+	function applyNavigation() {
+		if (listViewRef) setTabspotAttributes({ element: listViewRef, config: navigationOver(OPTIONS) });
+	}
+
+	/**
+	 * True while we are driving Tabspot ourselves, so the key we synthesise to do it
+	 * is not mistaken for one the user pressed.
+	 */
+	let seeding = false;
+
+	/**
+	 * Put the cursor on `option`, or send it home when there is none.
+	 *
+	 * Landing on a* *particular* option still has no public API in Tabspot
+	 */
+	function pointCursorAt(option: OptionType | null) {
+		if (!listViewRef || option?.id === activeOption?.id) return;
+
+		if (!option) {
+			clearTabspotActive(listViewRef);
+			readCursor(null);
+			return;
+		}
+
+		clearTabspotActive(listViewRef);
+		setTabspotAttributes({ element: listViewRef, config: navigationOver(`#${CSS.escape(option.id)}`) });
+
+		seeding = true;
+		inputRef?.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, cancelable: true }));
+		seeding = false;
+
+		applyNavigation();
+	}
+
+	/** The option a query selects on its own: the first one it is a prefix of. */
+	function bestMatch(query: string): OptionType | null {
+		const needle = query.toLowerCase();
+		let best: OptionType | null = null;
+
+		for (const option of items.values()) {
+			if (option.disabled) continue;
+			if (!option.value.toLowerCase().startsWith(needle) && !option.text?.toLowerCase().startsWith(needle)) continue;
+			if (!best || option.index < best.index) best = option;
+		}
+
+		return best;
+	}
+
+	/** Take in where Tabspot has just put its cursor. `null` means it sits at home. */
+	function readCursor(element: HTMLElement | null) {
+		const option = element ? (items.get(element.id) ?? null) : null;
+
+		if (option?.id === activeOption?.id) return;
+
+		activeOption = option;
+
+		// Tabspot only scrolls when a move runs off the *rendered* window; inside it
+		// the option can still be out of sight, buffered below the fold.
+		if (option) document.getElementById(option.id)?.scrollIntoView({ block: 'nearest' });
+
+		// selectOnFocus mirrors the option into the text box, which must not happen
+		// while the user is the one typing in it.
+		if (!selectOnFocus || !cursorKey) return;
+
+		if (option) {
+			methods.toggleSelection(cursorKey, option.id);
+			value = option.text || option.value;
 		} else {
-			const item = itemsArr.find((item) => item.index === index);
-			const optionSize = (document.querySelector('.fs-autosuggest-option') as HTMLElement)?.offsetHeight || 30;
-
-			if (item) document.getElementById(item.id)?.scrollIntoView({ block: 'nearest' });
-			else
-				listViewRef?.scrollBy({
-					top: optionSize * (index - (activeOption?.index || 0)),
-					behavior: 'smooth'
-				});
+			value = lastTypedValue;
 		}
 	}
 
-	async function findOption(index: number, direction: 'up' | 'down') {
-		const listSize = virtualizer?.size || items.size;
-
-		let _index = index;
-		let arrIndex = itemsArr.findIndex((item) => item.index === _index);
-		let option: OptionType | undefined = itemsArr[arrIndex];
-
-		if (!option && virtualizer) {
-			await scrollToIndex(_index);
-			arrIndex = itemsArr.findIndex((item) => item.index === _index);
-			option = itemsArr[arrIndex];
+	/**
+	 * `atEdge` indicates that the list ran out of options.
+	 * Landing on a disabled option is a waypoint rather
+	 * than a destination — see `stepOver`.
+	 */
+	function navigate(event: TabspotNavigationEvent) {
+		if (event.atEdge) {
+			event.preventDefault();
+			leaveList();
+			return;
 		}
 
-		if (!option) return;
+		const landed = event.to ? (items.get(event.to.id) ?? null) : null;
 
-		while (option?.disabled) {
-			if (direction === 'up' && option.index === 0) return;
-			if (direction === 'down' && option.index === listSize - 1) return;
-
-			const offset = direction === 'up' ? -1 : 1;
-
-			_index = option.index + offset;
-			arrIndex = arrIndex + offset;
-
-			option = itemsArr[arrIndex];
+		if (landed?.disabled) {
+			stepOver(event.direction);
+			return;
 		}
 
-		await scrollToIndex(_index);
-
-		return option;
+		readCursor(event.to);
 	}
 
-	async function handleKeyDown(e: KeyboardEvent) {
-		if (e.target !== inputRef) return;
+	/**
+	 * Carry on past a disabled option in the direction the user was going.
+	 *
+	 * Every option is navigable as far as Tabspot is concerned — see `OPTIONS`
+	 * TODO: Open a feature request at Tabspot repo about this.  
+	 */
+	function stepOver(direction: TabspotNavigationEvent['direction']) {
+		const key = direction === 'up' ? 'ArrowUp' : direction === 'down' ? 'ArrowDown' : null;
+
+		if (!key) return;
+
+		queueMicrotask(() =>
+			inputRef?.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }))
+		);
+	}
+
+	/** Send the cursor home and give the user their query back. */
+	function leaveList() {
+		if (listViewRef) clearTabspotActive(listViewRef);
+
+		readCursor(null);
+	}
+
+	function handleKeyDown(e: KeyboardEvent) {
+		if (e.target !== inputRef || seeding) return;
 
 		const { key } = e;
-
-		const exit = () => {
-			activeOption = null;
-			if (selectOnFocus) value = lastTypedValue;
-		};
 
 		if (key === 'Escape') {
 			e.preventDefault();
@@ -174,83 +264,39 @@
 
 		if (key === 'Enter') {
 			e.preventDefault();
+
 			if (activeOption) {
 				methods.toggleSelection(e, activeOption.id);
 				open = false;
-				return;
 			} else {
 				querySubmitted?.(e, value);
 			}
-		}
-
-		if (key === 'ArrowUp') {
-			e.preventDefault();
-			e.stopPropagation();
-			open = true;
-
-			await tick();
-
-			let currentIndex = activeOption?.index ?? -1;
-
-			if (currentIndex === -1) {
-				await virtualizer?.scrollToBottom?.();
-				await tick();
-
-				currentIndex = virtualizer?.size ?? items.size;
-			}
-
-			if (currentIndex === 0) return exit();
-
-			const prevIndex = currentIndex - 1;
-			let prevItem = await findOption(prevIndex, 'up');
-
-			if (!prevItem) return exit();
-
-			activeOption = items.get(prevItem.id) || null;
-
-			if (selectOnFocus) {
-				const item = items.get(prevItem.id);
-				if (item) {
-					methods.toggleSelection(e, prevItem.id);
-					value = item.text || item.value;
-				}
-			}
-
 			return;
 		}
-		if (key === 'ArrowDown') {
-			e.preventDefault();
-			e.stopPropagation();
-			open = true;
 
-			await tick();
+		// Tabspot has already moved the cursor by the time this runs; all that is
+		// left is to keep the arrow from scrolling the page.
+		if (key === 'ArrowUp' || key === 'ArrowDown') e.preventDefault();
+	}
 
-			let currentIndex = activeOption?.index ?? -1;
+	/**
+	 * Whether the next arrow would *enter* the list rather than move inside it, and
+	 * would enter it in the wrong place if left alone.
+	 */
+	function entryNeedsScrolling() {
+		return !activeOption && (!open || !!virtualizer);
+	}
 
-			if (currentIndex === -1) {
-				await virtualizer?.scrollToTop?.();
-				await tick();
-			}
+	/** Open, scroll to the end the key is heading for, then let Tabspot enter. */
+	async function enterList(key: 'ArrowUp' | 'ArrowDown') {
+		open = true;
+		await tick();
 
-			if (!(itemsArr[itemsArr.length - 1].index > currentIndex)) return exit();
+		await (key === 'ArrowUp' ? virtualizer?.scrollToBottom?.() : virtualizer?.scrollToTop?.());
+		await tick();
 
-			const nextIndex = currentIndex + 1;
-			let nextItem = await findOption(nextIndex, 'down');
-
-			if (!nextItem) return exit();
-
-			activeOption = items.get(nextItem.id) || null;
-
-			if (selectOnFocus) {
-				const item = items.get(nextItem.id);
-				if (item) {
-					methods.toggleSelection(e, nextItem.id);
-					value = item.text || item.value;
-				}
-			}
-
-			return;
-		}
+		// Untrusted, so it passes straight through to Tabspot this time.
+		inputRef?.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
 	}
 
 	async function handleTextChanged(e: InputEvent, val: string) {
@@ -260,17 +306,12 @@
 
 		await tick();
 
-		// "focus" the element that starts with the typed value for better keyboard navigation
-		const match = itemsArr.find((item) => {
-			return (
-				item.text?.toLowerCase().startsWith(val.toLowerCase()) || item.value.toLowerCase().startsWith(val.toLowerCase())
-			);
-		});
-		if (match) {
-			activeOption = match;
-			await tick();
-			scrollToIndex(match.index);
-		}
+		// Automatic selection, per the WAI-ARIA combobox pattern: the option
+		// query is a prefix under the cursor as you type, so Enter accepts
+		// it. With nothing to match, the cursor goes "input" and Enter submits the query
+		// instead — the hook for fetching a fresh set of suggestions.
+		cursorKey = undefined;
+		pointCursorAt(val ? bestMatch(val) : null);
 	}
 
 	function handleClear() {
@@ -292,10 +333,70 @@
 	onMount(() => {
 		if (!inputRef) return;
 
-		const off = on(inputRef, 'keydown', handleKeyDown);
+		const off = [
+			on(inputRef, 'keydown', handleKeyDown),
+			// Tabspot listens on `document` in the capture phase,
+			// `window` comes first on the capture path, to note the
+			// key that caused a move,and to hold a move back until
+			// the list can answer it correctly.
+			on(
+				window,
+				'keydown',
+				(event) => {
+					if (event.target !== inputRef || !event.isTrusted) return;
+
+					const key = event.key;
+
+					if (key !== 'ArrowUp' && key !== 'ArrowDown') return;
+
+					cursorKey = event;
+
+					if (!entryNeedsScrolling()) return;
+
+					// Keep the key from Tabspot entirely: it would enter on the wrong
+					// item, and there would be no undoing that from here.
+					event.preventDefault();
+					event.stopPropagation();
+
+					enterList(key);
+				},
+				{ capture: true }
+			)
+		];
+
 		return () => {
 			activeOption = null;
-			off();
+			off.forEach((unsubscribe) => unsubscribe());
+		};
+	});
+
+	const globalContext = getGlobalFSContext();
+
+	// Closing takes the flyout down, and leaving `activeOption` behind,
+	// remove it..
+	$effect(() => {
+		if (!open) activeOption = null;
+	});
+
+	$effect(() => {
+		if (!open || !listViewRef) return;
+
+		applyNavigation();
+
+		const instance = globalContext?.state.tabspotInstance;
+		const detach = instance?.subscribe(listViewRef, navigate);
+
+		if (!virtualizer || !virtualizer?.scrollToIndex) return detach;
+
+		const detachVirtual = tabspotVirtual(listViewRef, {
+			count: () => virtualizer.size,
+			scrollToIndex: (index) => virtualizer.scrollToIndex?.(index),
+			tick
+		});
+
+		return () => {
+			detach?.();
+			detachVirtual();
 		};
 	});
 </script>
@@ -309,6 +410,7 @@
 		{type}
 		{placeholder}
 		{hideActionButtons}
+		id={INPUT_ID}
 		bind:value
 		bind:ref={inputRef}
 		querySubmitted={(e) => querySubmitted?.(e, value)}
@@ -319,7 +421,6 @@
 		aria-autocomplete="list"
 		aria-controls={open ? `${ID}-list` : undefined}
 		aria-haspopup="listbox"
-		aria-activedescendant={open ? activeOption?.id || '' : undefined}
 		class="square-{roundClass}"
 	/>
 	{#if open}
@@ -337,6 +438,7 @@
 			<ListView
 				role="listbox"
 				navigationMode="items"
+				disableTabspot
 				id="{ID}-list"
 				selectedItems={Array.from(selectedOptions.values()).map((opt) => opt.value)}
 				bind:ref={listViewRef}

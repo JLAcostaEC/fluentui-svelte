@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { PREFIX } from '$constants';
 	import ListViewItem from '$lib/components/list-view/list-view-item.svelte';
 	import { getAutoSuggestBoxContext } from './auto-suggest-box.ts';
@@ -40,23 +39,20 @@
 		if (!config.multiselect) _state.open = false;
 	}
 
-	// Sometimes virtualizer remounts same component instances with new data
-	if (virtualized) {
-		$effect(() => {
-			// Capture current values to avoid them being stale in the callback
-			const _id = id;
+	// An option counts only while it is on screen: that is what makes the empty
+	// list detectable when a query filters everything out, and it keeps keyboard
+	// navigation off options nobody can see. The effect also covers the virtualizer
+	// remounting the same component instance with new data.
+	$effect(() => {
+		if (!isVisible && !virtualized) return;
 
-			setOption?.({ id, index, value, text, disabled });
+		// Capture current values to avoid them being stale in the callback
+		const _id = id;
 
-			return () => deleteOption?.(_id);
-		});
-	} else {
-		onMount(() => {
-			setOption?.({ id, index, value, text, disabled });
+		setOption?.({ id, index, value, text, disabled });
 
-			return () => deleteOption?.(id);
-		});
-	}
+		return () => deleteOption?.(_id);
+	});
 </script>
 
 {#if isVisible || virtualized}
@@ -65,7 +61,8 @@
 		role="option"
 		{value}
 		tabindex={-1}
-		class={['fs-autosuggest-option', selectOnFocus && 'no-outline', _state.activeOption?.id === id && 'focus']}
+		data-index={index}
+		class={['fs-autosuggest-option', selectOnFocus && 'no-outline']}
 		onclick={handleClick}
 		bind:ref
 		{disabled}
@@ -76,11 +73,10 @@
 {/if}
 
 <style>
+	/* Tabspot marks the option under the cursor with `data-active`, which
+	   ListViewItem already outlines. With selectOnFocus the text box mirrors that
+	   option instead, so the outline would be noise. */
 	:global(.fs-autosuggest-option.no-outline) {
 		outline: 0 !important;
-	}
-	:global(.fs-autosuggest-option.focus) {
-		outline: 0.125rem var(--fs-focus-stroke-outer) solid;
-		outline-offset: 0.063rem;
 	}
 </style>

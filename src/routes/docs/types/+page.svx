@@ -1,0 +1,18 @@
+# Types
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:@types -->
+
+### Colors
+
+`'information'` &#124; `'attention'` &#124; `'warning'` &#124; `'success'` &#124; `'critical'`
+
+### Statuses
+
+`'available'` &#124; `'busy'` &#124; `'offline'` &#124; `'away'` &#124; `'do-not-disturb'` &#124; `'out-of-office'` &#124; `'unknown'` &#124; `'blocked'`
+
+### TextBoxTypes
+
+`'text'` &#124; `'search'` &#124; `'email'` &#124; `'url'` &#124; `'tel'` &#124; `'password'` &#124; `'number'`
+
+<!-- /props:@types -->

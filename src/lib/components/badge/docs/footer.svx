@@ -7,16 +7,21 @@
 
 ## {m.badge_badge_props_title()}
 
-| **Name**       | **Type**                     | **Description**                            |
-| -------------- | ---------------------------- | ------------------------------------------ |
-| `size`         | `number`                     | {m.badge_props_size_description()}         |
-| `shape`        | `string`                     | {m.badge_props_shape_description()}        |
-| `appearance`   | `string`                     | {m.badge_props_appearance_description()}   |
-| `iconPosition` | `string`                     | {m.badge_props_iconposition_description()} |
-| `color`        | `string`                     | {m.badge_props_color_description()}        |
-| `icon`         | `Snippet` &vert; `Component` | {m.badge_props_icon_description()}         |
-| `ref`          | `HTMLSpanElement`            | {m.badge_props_ref_description()}          |
-| `children`     | `Snippet`                    | {m.badge_props_children_description()}     |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:BadgeProps -->
+
+| Name             | Type                                                           | Default         | Description                                        |
+| ---------------- | -------------------------------------------------------------- | --------------- | -------------------------------------------------- |
+| `size`           | `number`                                                       | `20`            | {m.generated_fs_badge_props_props_size()}          |
+| `shape`          | `'circular'` &#124; `'rounded'` &#124; `'square'`              | `'circular'`    | {m.generated_fs_badge_props_props_shape()}         |
+| `appearance`     | `'filled'` &#124; `'outline'` &#124; `'ghost'` &#124; `'tint'` | `'filled'`      | {m.generated_fs_badge_props_props_appearance()}    |
+| `iconPosition`   | `'before'` &#124; `'after'`                                    | `'before'`      | {m.generated_fs_badge_props_props_icon_position()} |
+| `color`          | [`Colors`](/docs/types/#colors)                                | `'information'` | {m.generated_fs_badge_props_props_color()}         |
+| `icon`           | `Snippet` &#124; `Component`                                   |                 | {m.generated_fs_badge_props_props_icon()}          |
+| `ref` _bindable_ | `HTMLSpanElement`                                              |                 | {m.generated_fs_badge_props_props_ref()}           |
+| HTML Attributes  |                                                                |                 |                                                    |
+
+<!-- /props:BadgeProps -->
 
 ## {m.badge_badgeicon_api_title()}
 
@@ -67,9 +72,17 @@
 
 ### {m.badge_badgeicon_props_title()}
 
-| **Name** | **Type**                     | **Description**                     |
-| -------- | ---------------------------- | ----------------------------------- |
-| `size`   | `number`                     | {m.badge_props_size_description()}  |
-| `color`  | `string`                     | {m.badge_props_color_description()} |
-| `icon`   | `Snippet` &vert; `Component` | {m.badge_props_icon_description()}  |
-| `ref`    | `HTMLSpanElement`            | {m.badge_props_ref_description()}   |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:BadgeIconProps -->
+
+| Name             | Type                                | Default       | Description                                             |
+| ---------------- | ----------------------------------- | ------------- | ------------------------------------------------------- |
+| `status`         | [`Statuses`](/docs/types/#statuses) | `'available'` | {m.generated_fs_badge_icon_props_props_status()}        |
+| `outOfOffice`    | `boolean`                           | `false`       | {m.generated_fs_badge_icon_props_props_out_of_office()} |
+| `size`           | `number`                            | `20`          | {m.generated_fs_badge_icon_props_props_size()}          |
+| `color`          | [`Colors`](/docs/types/#colors)     |               | {m.generated_fs_badge_icon_props_props_color()}         |
+| `icon`           | `Snippet` &#124; `Component`        |               | {m.generated_fs_badge_icon_props_props_icon()}          |
+| `ref` _bindable_ | `HTMLSpanElement`                   |               | {m.generated_fs_badge_icon_props_props_ref()}           |
+| HTML Attributes  |                                     |               |                                                         |
+
+<!-- /props:BadgeIconProps -->

@@ -25,25 +25,7 @@ export const META: Meta = {
 		title: 'Persona — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte persona combining an avatar, presence, and descriptive text.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'Persona is a Fluent UI Svelte component that represents a person by wrapping an Avatar with up to four lines of text (name plus primary, secondary, and tertiary text) and presence information. Text alignment and position are configurable, and it can render presence-only.',
-		topics: ['people', 'user representation', 'presence', 'data display'],
-		entities: ['Persona', 'Avatar', 'presence', 'textPosition', 'textAlign', 'presenceOnly'],
-		category: 'Data Display',
-		faq: [
-			{
-				question: 'How do I customize the avatar inside a Persona?',
-				answer: 'Pass an avatar object; it accepts all the props available to the Avatar component.'
-			},
-			{
-				question: 'How do I show only a presence indicator?',
-				answer: 'Set the presenceOnly prop to display just the presence indicator, with no avatar or text.'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'persona',
 	status: '',
 	icon: PersonNoteRegular

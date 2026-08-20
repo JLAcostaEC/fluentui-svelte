@@ -1,7 +1,17 @@
-import type { FSInput } from '../text-box/types.ts';
+import type { TextBoxProps } from '../text-box/types.ts';
 
+/** @propsmith NumberBoxProps */
 export type NumberBoxProps = {
+	/** The current value of the input.
+	 * @bindable
+	 */
 	value?: number;
-	/** The type of the input element. (compacted variant add an interactive button to increase or decrease the number) */
+	/** How the increment and decrement buttons are laid out.
+	 *
+	 * `inline`: the buttons sit inside the input, one next to the other.
+	 *
+	 * `compact`: the buttons are stacked in a flyout, opened from inside the input.
+	 * @default 'inline'
+	 */
 	variant?: 'inline' | 'compact';
-} & Omit<FSInput, 'type'>;
+} & Omit<TextBoxProps, 'type'>;

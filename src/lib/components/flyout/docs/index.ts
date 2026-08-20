@@ -25,26 +25,7 @@ export const META: Meta = {
 		title: 'Flyout — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte floating panel for showing extra information or options non-intrusively.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'Flyout is a Fluent UI Svelte floating panel that shows extra information or options in a non-intrusive way. It can optionally use Floating UI for positioning via the floating, reference, placement, and offset props, and lets you control which corners are rounded.',
-		topics: ['overlays', 'floating panels', 'popovers', 'positioning'],
-		entities: ['Flyout', 'floating', 'reference', 'placement', 'roundCorners', 'offset'],
-		category: 'Overlays',
-		faq: [
-			{
-				question: 'How is a Flyout positioned?',
-				answer:
-					'By default it is a plain panel; enable the floating prop to position it with Floating UI relative to a reference element, controlled by placement and offset.'
-			},
-			{
-				question: 'Can I round only some corners of a Flyout?',
-				answer: "Yes. The roundCorners prop accepts 'all', 'top', 'bottom', 'left', or 'right'."
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'flyout',
 	status: '',
 	icon: TextboxAlignMiddleRegular

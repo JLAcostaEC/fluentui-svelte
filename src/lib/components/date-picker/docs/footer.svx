@@ -4,18 +4,25 @@
 
 ## {m.dp_component_props_title()}
 
-| **Name**         | **Type**                       | **Description**                              |
-| ---------------- | ------------------------------ | -------------------------------------------- |
-| `value`          | bindable `string`              | {m.dp_props_value_description()}             |
-| `format`         | `'MM/dd/yyyy' \| 'dd/MM/yyyy'` | {m.dp_props_format_description()}            |
-| `open`           | bindable `boolean`             | {m.dp_props_open_description()}              |
-| `hideYears`      | `boolean`                      | {m.dp_props_hideyears_description()}         |
-| `hideMonths`     | `boolean`                      | {m.dp_props_hidemonths_description()}        |
-| `hideDays`       | `boolean`                      | {m.dp_props_hidedays_description()}          |
-| `minYear`        | `number`                       | {m.dp_props_minyear_description()}           |
-| `maxYear`        | `number`                       | {m.dp_props_maxyear_description()}           |
-| `disabledDates`  | `Date[]`                       | {m.dp_props_disableddates_description()}     |
-| `disabledMonths` | `Date[]`                       | {m.dp_props_disabledmonths_description()}    |
-| `disabledYears`  | `Date[]`                       | {m.dp_props_disabledyears_description()}     |
-| `element`        | bindable `HTMLElement`         | {m.dp_props_element_description()}           |
-| `inputElement`   | bindable `HTMLInputElement`    | {m.dp_props_inputelement_description()}      |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DatePickerProps -->
+
+| Name                       | Type                                 | Default         | Description                                                |
+| -------------------------- | ------------------------------------ | --------------- | ---------------------------------------------------------- |
+| `value` _bindable_         | `string`                             | `''`            | {m.generated_fs_date_picker_props_props_value()}           |
+| `format`                   | `'MM/dd/yyyy'` &#124; `'dd/MM/yyyy'` | `'dd/MM/yyyy'`  | {m.generated_fs_date_picker_props_props_format()}          |
+| `open` _bindable_          | `boolean`                            | `false`         | {m.generated_fs_date_picker_props_props_open()}            |
+| `hideYears`                | `boolean`                            | `false`         | {m.generated_fs_date_picker_props_props_hide_years()}      |
+| `hideMonths`               | `boolean`                            | `false`         | {m.generated_fs_date_picker_props_props_hide_months()}     |
+| `hideDays`                 | `boolean`                            | `false`         | {m.generated_fs_date_picker_props_props_hide_days()}       |
+| `minYear`                  | `number`                             | `Current - 100` | {m.generated_fs_date_picker_props_props_min_year()}        |
+| `maxYear`                  | `number`                             | `Current + 100` | {m.generated_fs_date_picker_props_props_max_year()}        |
+| `disabledDates`            | `Date[]`                             | `[]`            | {m.generated_fs_date_picker_props_props_disabled_dates()}  |
+| `disabledMonths`           | `Date[]`                             | `[]`            | {m.generated_fs_date_picker_props_props_disabled_months()} |
+| `disabledYears`            | `Date[]`                             | `[]`            | {m.generated_fs_date_picker_props_props_disabled_years()}  |
+| `ref` _bindable_           | `HTMLDivElement`                     |                 | {m.generated_fs_date_picker_props_props_ref()}             |
+| `inputElement` _bindable_  | `HTMLInputElement`                   |                 | {m.generated_fs_date_picker_props_props_input_element()}   |
+| `inputProps`               | `HTMLAttributes<HTMLInputElement>`   |                 | {m.generated_fs_date_picker_props_props_input_props()}     |
+| Element Attributes (`div`) |                                      |                 |                                                            |
+
+<!-- /props:DatePickerProps -->

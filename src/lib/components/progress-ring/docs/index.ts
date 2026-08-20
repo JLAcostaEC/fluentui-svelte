@@ -28,26 +28,7 @@ export const META: Meta = {
 		description:
 			'A Fluent UI Svelte circular progress indicator with determinate, indeterminate, paused, and error states.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'ProgressRing is a Fluent UI Svelte circular progress indicator. Set value (0–100) for determinate progress or use indeterminate for unknown-duration operations. It supports a custom size, hiding the rail, and paused/error status colors.',
-		topics: ['progress', 'loading indicators', 'spinners', 'status & feedback'],
-		entities: ['ProgressRing', 'value', 'indeterminate', 'hideRail', 'status', 'size'],
-		category: 'Status & Feedback',
-		faq: [
-			{
-				question: 'How do I make a ProgressRing indeterminate?',
-				answer:
-					'Set the indeterminate prop; the ring spins without a specific value, which is useful when progress cannot be determined.'
-			},
-			{
-				question: 'How do I change the size of a ProgressRing?',
-				answer: 'Set the size prop (in pixels). The default is 32.'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'progress-ring',
 	status: '',
 	icon: ArrowSyncCircleRegular

@@ -4,30 +4,40 @@
 
 ## {m.lv_listview_props_title()}
 
-| **Name**            | **Type**                    | **Description**                                                                                               |
-| ------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `as`                | `string`                    | {m.lv_listview_props_as_description()}                                                                        |
-| `selectionMode`     | `string`                    | {m.lv_listview_props_selectionmode_description()}                                                             |
-| `navigationMode`    | `string`                    | {m.lv_listview_props_navigationmode_description()}                                                            |
-| `selectedItems`     | `string[]`                  | {m.lv_listview_props_selecteditems_description()}                                                             |
-| `shape`             | `string`                    | {m.lv_listview_props_shape_description()}                                                                     |
-| `onSelectionChange` | `(Event, string[]) => void` | {m.lv_listview_props_onselectionchange_description()}                                                         |
-| `element`           | Dynamic                     | {m.lv_listview_props_element_description()}                                                                   |
-| `children`          | Only `ListViewItem`         | {m.lv_listview_props_children_description_prefix()} <a href="/">{m.lv_listview_props_children_link_text()}</a> |
-| Element Attributes  | Dynamic                     | {m.lv_listview_props_elementattributes_description()}                                                         |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:ListViewProps -->
+
+| Name                       | Type                                                                  | Default     | Description                                                  |
+| -------------------------- | --------------------------------------------------------------------- | ----------- | ------------------------------------------------------------ |
+| `selectionMode`            | `'none'` &#124; `'single'` &#124; `'multiselect'` &#124; `'extended'` | `'none'`    | {m.generated_fs_list_view_props_props_selection_mode()}      |
+| `navigationMode`           | `'items'` &#124; `'composite'`                                        | `'items'`   | {m.generated_fs_list_view_props_props_navigation_mode()}     |
+| `selectedItems` _bindable_ | `string[]`                                                            |             | {m.generated_fs_list_view_props_props_selected_items()}      |
+| `shape`                    | `'circular'` &#124; `'rounded'` &#124; `'square'`                     | `'rounded'` | {m.generated_fs_list_view_props_props_shape()}               |
+| `onSelectionChange`        | `(e: Event, selectedItems: string[]` &#124; `[]) => void`             |             | {m.generated_fs_list_view_props_props_on_selection_change()} |
+| `as`                       | `'ul'` &#124; `'ol'` &#124; `'div'`                                   | `'ul'`      | {m.generated_fs_list_view_props_props_as()}                  |
+| `ref` _bindable_           | `HTMLUListElement` &#124; `HTMLOListElement` &#124; `HTMLDivElement`  |             | {m.generated_fs_list_view_props_props_ref()}                 |
+| `disableTabspot`           | `boolean`                                                             | `false`     | {m.generated_fs_list_view_props_props_disable_tabspot()}     |
+| HTML Attributes            |                                                                       |             |                                                              |
+
+<!-- /props:ListViewProps -->
 
 ## {m.lv_listviewitem_props_title()}
 
-| **Name**           | **Type**                       | **Description**                                           |
-| ------------------ | ------------------------------ | --------------------------------------------------------- |
-| `as`               | `string`                       | {m.lv_listviewitem_props_as_description()}                |
-| `active`           | `boolean`                      | {m.lv_listviewitem_props_active_description()}            |
-| `shape`            | `string`                       | {m.lv_listviewitem_props_shape_description()}             |
-| `value`            | `string`                       | {m.lv_listviewitem_props_value_description()}             |
-| `onAction`         | `(MouseEvent, string) => void` | {m.lv_listviewitem_props_onaction_description()}          |
-| `onFocus`          | `(Event, string) => void`      | {m.lv_listviewitem_props_onfocus_description()}           |
-| `role`             | `string`                       | {m.lv_listviewitem_props_role_description()}              |
-| `disabled`         | `boolean`                      | {m.lv_listviewitem_props_disabled_description()}          |
-| `checkmark`        | `object`                       | {m.lv_listviewitem_props_checkmark_description()}         |
-| `children`         | `Snippet`                      | {m.lv_listviewitem_props_children_description()}          |
-| Element Attributes | Dynamic                        | {m.lv_listviewitem_props_elementattributes_description()} |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:ListViewItemProps -->
+
+| Name             | Type                                                               | Default | Description                                             |
+| ---------------- | ------------------------------------------------------------------ | ------- | ------------------------------------------------------- |
+| `as`             | `'li'` &#124; `'a'` &#124; `'div'`                                 | `'li'`  | {m.generated_fs_list_view_item_props_props_as()}        |
+| `shape`          | `'circular'` &#124; `'rounded'` &#124; `'square'`                  |         | {m.generated_fs_list_view_item_props_props_shape()}     |
+| `value`          | `string`                                                           |         | {m.generated_fs_list_view_item_props_props_value()}     |
+| `active`         | `boolean`                                                          |         | {m.generated_fs_list_view_item_props_props_active()}    |
+| `role`           | `'treeitem'` &#124; `'menuitem'` &#124; `'option'` &#124; `'row'`  |         | {m.generated_fs_list_view_item_props_props_role()}      |
+| `disabled`       | `boolean`                                                          |         | {m.generated_fs_list_view_item_props_props_disabled()}  |
+| `checkmark`      | `CheckboxProps`                                                    |         | {m.generated_fs_list_view_item_props_props_checkmark()} |
+| `onAction`       | `(e: MouseEvent, value: string) => void`                           |         | {m.generated_fs_list_view_item_props_props_on_action()} |
+| `onfocus`        | `(e: Event, value: string) => void`                                |         | {m.generated_fs_list_view_item_props_props_onfocus()}   |
+| `ref` _bindable_ | `HTMLLIElement` &#124; `HTMLAnchorElement` &#124; `HTMLDivElement` |         | {m.generated_fs_list_view_item_props_props_ref()}       |
+| HTML Attributes  |                                                                    |         |                                                         |
+
+<!-- /props:ListViewItemProps -->

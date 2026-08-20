@@ -4,11 +4,16 @@
 
 ## {m.skeleton_component_props_title()}
 
-| **Name**           | **Type**                                | **Description**                                    |
-| ------------------ | --------------------------------------- | -------------------------------------------------- |
-| `as`               | `'div'` \| `'span'`                     | {m.skeleton_props_as_description()}                |
-| `animation`        | `'wave'` \| `'pulse'`                   | {m.skeleton_props_animation_description()}         |
-| `shape`            | `'circle'` \| `'rounded'` \| `'square'` | {m.skeleton_props_shape_description()}             |
-| `justify`          | `boolean`                               | {m.skeleton_props_justify_description()}           |
-| `element`          | `HTMLElement`                           | {m.skeleton_props_element_description()}           |
-| Element Attributes |                                         | {m.skeleton_props_elementattributes_description()} |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:SkeletonProps -->
+
+| Name             | Type                                              | Default     | Description                                       |
+| ---------------- | ------------------------------------------------- | ----------- | ------------------------------------------------- |
+| `as`             | `'div'` &#124; `'span'`                           | `'div'`     | {m.generated_fs_skeleton_props_props_as()}        |
+| `animation`      | `'wave'` &#124; `'pulse'`                         | `'wave'`    | {m.generated_fs_skeleton_props_props_animation()} |
+| `shape`          | `'circular'` &#124; `'rounded'` &#124; `'square'` | `'rounded'` | {m.generated_fs_skeleton_props_props_shape()}     |
+| `justify`        | `boolean`                                         |             | {m.generated_fs_skeleton_props_props_justify()}   |
+| `ref` _bindable_ | `HTMLElement`                                     |             | {m.generated_fs_skeleton_props_props_ref()}       |
+| HTML Attributes  |                                                   |             |                                                   |
+
+<!-- /props:SkeletonProps -->

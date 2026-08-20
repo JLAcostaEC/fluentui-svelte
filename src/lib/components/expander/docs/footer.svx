@@ -4,15 +4,22 @@
 
 ## {m.expander_component_props_title()}
 
-| **Name**      | **Type**                | **Description**                              |
-| ------------- | ----------------------- | -------------------------------------------- |
-| `header`      | `string`                | {m.expander_props_header_description()}      |
-| `description` | `string`                | {m.expander_props_description_description()} |
-| `direction`   | `string`                | {m.expander_props_direction_description()}   |
-| `justify`     | `boolean`               | {m.expander_props_justify_description()}     |
-| `disabled`    | `boolean`               | {m.expander_props_disabled_description()}    |
-| `animation`   | `object`                | {m.expander_props_animation_description()}   |
-| `expanded`    | `boolean`               | {m.expander_props_expanded_description()}    |
-| `element`     | `HTMLDetailsElement`    | {m.expander_props_element_description()}     |
-| `Icon`        | `Snippet` &vert; `Component` | {m.expander_props_icon_description()}   |
-| `children`    | `Snippet`               | {m.expander_props_children_description()}    |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:ExpanderProps -->
+
+| Name                           | Type                                    | Default  | Description                                           |
+| ------------------------------ | --------------------------------------- | -------- | ----------------------------------------------------- |
+| `header`                       | `string`                                |          | {m.generated_fs_expander_props_props_header()}        |
+| `description`                  | `string`                                |          | {m.generated_fs_expander_props_props_description()}   |
+| `direction`                    | `'down'` &#124; `'up'`                  | `'down'` | {m.generated_fs_expander_props_props_direction()}     |
+| `justify`                      | `boolean`                               | `false`  | {m.generated_fs_expander_props_props_justify()}       |
+| `disabled`                     | `boolean`                               | `false`  | {m.generated_fs_expander_props_props_disabled()}      |
+| `animation`                    | `{ duration: number; easing: string; }` |          | {m.generated_fs_expander_props_props_animation()}     |
+| `expanded` _bindable_          | `boolean`                               | `false`  | {m.generated_fs_expander_props_props_expanded()}      |
+| `ref` _bindable_               | `HTMLDetailsElement`                    |          | {m.generated_fs_expander_props_props_ref()}           |
+| `Icon`                         | `Snippet` &#124; `Component`            |          | {m.generated_fs_expander_props_props_icon()}          |
+| `summaryRef` _bindable_        | `HTMLElement`                           |          | {m.generated_fs_expander_props_props_summary_ref()}   |
+| `summaryProps`                 | `HTMLAttributes`                        |          | {m.generated_fs_expander_props_props_summary_props()} |
+| Element Attributes (`details`) |                                         |          |                                                       |
+
+<!-- /props:ExpanderProps -->

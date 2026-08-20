@@ -5,7 +5,7 @@
 	import EyeHideFilled from 'fluentui-icons-svelte/EyeHideFilled.svelte';
 	import { TextBoxButton } from '$lib/index.js';
 	import { RenderSoC } from '$internal';
-	import type { FSInput } from './types.ts';
+	import type { TextBoxProps } from './types.ts';
 
 	const FALLBACK_ID = $props.id();
 
@@ -30,7 +30,7 @@
 		onClear,
 		children,
 		...attributes
-	}: FSInput = $props();
+	}: TextBoxProps = $props();
 
 	let currentType = $derived(type);
 	let hasValue = $derived(!!((value && value.length > 0) || (typeof value === 'number' && value !== 0)));

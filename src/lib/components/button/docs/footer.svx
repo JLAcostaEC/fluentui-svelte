@@ -6,18 +6,23 @@
 
 ## {m.btn_component_props_title()}
 
-| **Name**            | **Type**                 | **Description**                               |
-| ------------------- | ------------------------ | --------------------------------------------- |
-| `ref`               | `HTMLElement`            | {m.btn_props_ref_description()}               |
-| `as`                | `string`                 | {m.btn_props_as_description()}                |
-| `disabled`          | `boolean`                | {m.btn_props_disabled_description()}          |
-| `shape`             | `string`                 | {m.btn_props_shape_description()}             |
-| `appearance`        | `string`                 | {m.btn_props_appearance_description()}        |
-| `disabledFocusable` | `boolean`                | {m.btn_props_disabledfocusable_description()} |
-| `isMenuButton`      | `boolean`                | {m.btn_props_ismenubutton_description()}      |
-| `indicatorPosition` | `'before'` \| `'after'`  | {m.btn_props_indicatorposition_description()} |
-| `indicatorIcon`     | `Snippet` \| `Component` | {m.btn_props_indicatoricon_description()}     |
-| Element Attributes  |                          | {m.btn_props_elementattributes_description()} |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:ButtonProps -->
+
+| Name                | Type                                              | Default     | Description                                              |
+| ------------------- | ------------------------------------------------- | ----------- | -------------------------------------------------------- |
+| `ref` _bindable_    | `ButtonElementDOMType[T]`                         |             | {m.generated_fs_button_props_props_ref()}                |
+| `as`                | `'button'` &#124; `'a'` &#124; `'div'`            | `'button'`  | {m.generated_fs_button_props_props_as()}                 |
+| `disabled`          | `boolean`                                         |             | {m.generated_fs_button_props_props_disabled()}           |
+| `shape`             | `'circular'` &#124; `'rounded'` &#124; `'square'` | `'rounded'` | {m.generated_fs_button_props_props_shape()}              |
+| `appearance`        | `'accent'` &#124; `'standard'` &#124; `'subtle'`  | `'accent'`  | {m.generated_fs_button_props_props_appearance()}         |
+| `disabledFocusable` | `boolean`                                         | `false`     | {m.generated_fs_button_props_props_disabled_focusable()} |
+| `isMenuButton`      | `boolean`                                         |             | {m.generated_fs_button_props_props_is_menu_button()}     |
+| `indicatorPosition` | `'before'` &#124; `'after'`                       | `'after'`   | {m.generated_fs_button_props_props_indicator_position()} |
+| `indicatorIcon`     | `Snippet` &#124; `Component`                      |             | {m.generated_fs_button_props_props_indicator_icon()}     |
+| HTML Attributes     |                                                   |             |                                                          |
+
+<!-- /props:ButtonProps -->
 
 ## {m.btn_split_button_title()}
 
@@ -53,15 +58,19 @@
 
 ### {m.btn_split_button_component_props_title()}
 
-| **Name**                  | **Type**                | **Description**                                      |
-| ------------------------- | ----------------------- | ---------------------------------------------------- |
-| `wrapperRef`              | `HTMLDivElement`        | {m.btn_props_wrapperref_description()}               |
-| `primaryButtonRef`        | `HTMLButtonElement`     | {m.btn_props_primarybuttonref_description()}         |
-| `primaryButtonProps`      | `ButtonProps<'button'>` | {m.btn_props_primarybuttonprops_description()}       |
-| `menuTriggerRef`          | `HTMLButtonElement`     | {m.btn_props_menutriggerref_description()}           |
-| `menuTriggerProps`        | `ButtonProps<'button'>` | {m.btn_props_menutriggerprops_description()}         |
-| `class`                   | `string`                | {m.btn_props_class_description()}                    |
-| `shape`                   | `string`                | {m.btn_props_shape_description()}                    |
-| `appearance`              | `string`                | {m.btn_props_appearance_description()}               |
-| `disabled`                | `boolean`               | {m.btn_props_disabled_description()}                 |
-| WrapperElement Attributes | HTMLElement Attributes  | {m.btn_props_wrapperelementattributes_description()} |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:SplitButtonProps -->
+
+| Name                          | Type                                              | Default     | Description                                                      |
+| ----------------------------- | ------------------------------------------------- | ----------- | ---------------------------------------------------------------- |
+| `appearance`                  | `'accent'` &#124; `'standard'` &#124; `'subtle'`  | `'accent'`  | {m.generated_fs_split_button_props_props_appearance()}           |
+| `shape`                       | `'circular'` &#124; `'rounded'` &#124; `'square'` | `'rounded'` | {m.generated_fs_split_button_props_props_shape()}                |
+| `disabled`                    | `boolean`                                         | `false`     | {m.generated_fs_split_button_props_props_disabled()}             |
+| `primaryButtonProps`          | `ButtonProps`                                     |             | {m.generated_fs_split_button_props_props_primary_button_props()} |
+| `menuTriggerProps`            | `ButtonProps`                                     |             | {m.generated_fs_split_button_props_props_menu_trigger_props()}   |
+| `wrapperRef` _bindable_       | `HTMLDivElement`                                  |             | {m.generated_fs_split_button_props_props_wrapper_ref()}          |
+| `primaryButtonRef` _bindable_ | `HTMLButtonElement`                               |             | {m.generated_fs_split_button_props_props_primary_button_ref()}   |
+| `menuTriggerRef` _bindable_   | `HTMLButtonElement`                               |             | {m.generated_fs_split_button_props_props_menu_trigger_ref()}     |
+| HTML Attributes               |                                                   |             |                                                                  |
+
+<!-- /props:SplitButtonProps -->

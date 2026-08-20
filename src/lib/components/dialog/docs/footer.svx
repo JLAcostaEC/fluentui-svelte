@@ -4,52 +4,77 @@
 
 ## {m.dialog_dialog_props_title()}
 
-| **Name**       | **Type**                                        | **Description**                             |
-| -------------- | ----------------------------------------------- | ------------------------------------------- |
-| `type`         | `'modal'` &vert; `'non-modal'` &vert; `'alert'` | {m.dialog_props_type_description()}         |
-| `open`         | bindable `boolean`                              | {m.dialog_props_open_description()}         |
-| `onOpenChange` | `(open: boolean) => void`                       | {m.dialog_props_onopenchange_description()} |
-| `children`     | `Snippet`                                       | {m.dialog_props_children_description()}     |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DialogProps -->
+
+| Name              | Type                                            | Default   | Description                                          |
+| ----------------- | ----------------------------------------------- | --------- | ---------------------------------------------------- |
+| `type`            | `'modal'` &#124; `'non-modal'` &#124; `'alert'` | `'modal'` | {m.generated_fs_dialog_props_props_type()}           |
+| `open` _bindable_ | `boolean`                                       |           | {m.generated_fs_dialog_props_props_open()}           |
+| `onOpenChange`    | `(open: boolean) => void`                       |           | {m.generated_fs_dialog_props_props_on_open_change()} |
+| `children`        | `Snippet`                                       |           | {m.generated_fs_dialog_props_props_children()}       |
+
+<!-- /props:DialogProps -->
 
 ## {m.dialog_dialogtrigger_props_title()}
 
-| **Name**       | **Type**                | **Description**                                 |
-| -------------- | ----------------------- | ----------------------------------------------- |
-| `ref`          | `HTMLButtonElement`     | {m.dialog_props_ref_description()}              |
-| `children`     | `Snippet`               | {m.dialog_props_trigger_children_description()} |
-| ...ButtonProps | `ButtonProps<'button'>` | {m.dialog_props_buttonprops_description()}      |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DialogTriggerProps -->
+
+| Name                    | Type                | Default | Description                                       |
+| ----------------------- | ------------------- | ------- | ------------------------------------------------- |
+| `ref`                   | `HTMLButtonElement` |         | {m.generated_fs_dialog_trigger_props_props_ref()} |
+| `ButtonProps<'button'>` |                     |         |                                                   |
+
+<!-- /props:DialogTriggerProps -->
 
 ## {m.dialog_dialogsurface_props_title()}
 
-| **Name**      | **Type**                            | **Description**                                 |
-| ------------- | ----------------------------------- | ----------------------------------------------- |
-| `ref`         | bindable `HTMLDialogElement`        | {m.dialog_props_surface_ref_description()}      |
-| `children`    | `Snippet`                           | {m.dialog_props_surface_children_description()} |
-| ...Attributes | `HTMLAttributes<HTMLDialogElement>` | {m.dialog_props_surface_attributes_description()} |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DialogSurfaceProps -->
+
+| Name                          | Type                | Default | Description                                       |
+| ----------------------------- | ------------------- | ------- | ------------------------------------------------- |
+| `ref` _bindable_              | `HTMLDialogElement` |         | {m.generated_fs_dialog_surface_props_props_ref()} |
+| Element Attributes (`dialog`) |                     |         |                                                   |
+
+<!-- /props:DialogSurfaceProps -->
 
 ## {m.dialog_dialogtitle_props_title()}
 
-| **Name**      | **Type**                     | **Description**                               |
-| ------------- | ---------------------------- | --------------------------------------------- |
-| `as`          | `'div'` &vert; `'h1'`–`'h6'` | {m.dialog_props_as_description()}             |
-| `ref`         | bindable element             | {m.dialog_props_title_ref_description()}      |
-| `children`    | `Snippet`                    | {m.dialog_props_title_children_description()} |
-| ...Attributes | Polymorphic                  | {m.dialog_props_title_attributes_description()} |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DialogTitleProps -->
+
+| Name             | Type                                         | Default | Description                                     |
+| ---------------- | -------------------------------------------- | ------- | ----------------------------------------------- |
+| `ref` _bindable_ | `HTMLDivElement` &#124; `HTMLHeadingElement` |         | {m.generated_fs_dialog_title_props_props_ref()} |
+| `as`             | `DialogTitleTag`                             | `'h3'`  | {m.generated_fs_dialog_title_props_props_as()}  |
+| HTML Attributes  |                                              |         |                                                 |
+
+<!-- /props:DialogTitleProps -->
 
 ## {m.dialog_dialogcontent_props_title()}
 
-| **Name**      | **Type**                         | **Description**                                 |
-| ------------- | -------------------------------- | ----------------------------------------------- |
-| `ref`         | `HTMLDivElement`                 | {m.dialog_props_content_ref_description()}      |
-| `children`    | `Snippet`                        | {m.dialog_props_content_children_description()} |
-| ...Attributes | `HTMLAttributes<HTMLDivElement>` | {m.dialog_props_content_attributes_description()} |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DialogContentProps -->
+
+| Name                       | Type             | Default | Description                                       |
+| -------------------------- | ---------------- | ------- | ------------------------------------------------- |
+| `ref`                      | `HTMLDivElement` |         | {m.generated_fs_dialog_content_props_props_ref()} |
+| Element Attributes (`div`) |                  |         |                                                   |
+
+<!-- /props:DialogContentProps -->
 
 ## {m.dialog_dialogactions_props_title()}
 
-| **Name**      | **Type**                                   | **Description**                                 |
-| ------------- | ------------------------------------------ | ----------------------------------------------- |
-| `ref`         | bindable `HTMLDivElement`                  | {m.dialog_props_actions_ref_description()}      |
-| `position`    | `'start'` &vert; `'center'` &vert; `'end'` | {m.dialog_props_position_description()}         |
-| `fluid`       | `boolean`                                  | {m.dialog_props_fluid_description()}            |
-| `children`    | `Snippet`                                  | {m.dialog_props_actions_children_description()} |
-| ...Attributes | `HTMLAttributes<HTMLDivElement>`           | {m.dialog_props_actions_attributes_description()} |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DialogActionsProps -->
+
+| Name                       | Type                                       | Default | Description                                            |
+| -------------------------- | ------------------------------------------ | ------- | ------------------------------------------------------ |
+| `ref` _bindable_           | `HTMLDivElement`                           |         | {m.generated_fs_dialog_actions_props_props_ref()}      |
+| `fluid`                    | `boolean`                                  |         | {m.generated_fs_dialog_actions_props_props_fluid()}    |
+| `position`                 | `'start'` &#124; `'center'` &#124; `'end'` | `'end'` | {m.generated_fs_dialog_actions_props_props_position()} |
+| Element Attributes (`div`) |                                            |         |                                                        |
+
+<!-- /props:DialogActionsProps -->

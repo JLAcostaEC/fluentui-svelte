@@ -100,34 +100,12 @@ export type SeoMeta = {
 	twitter?: TwitterMeta;
 };
 
-/** Generative Engine Optimization metadata: helps AI answer engines and LLMs ground on this page. */
-export type GeoMeta = {
-	/** Concise, self-contained summary optimized for AI answer engines. */
-	summary?: string;
-	/** Semantic topics the page covers. */
-	topics?: string[];
-	/** Named entities relevant to the content (APIs, concepts, related components). */
-	entities?: string[];
-	/** Category / group the component belongs to (e.g. `Inputs`, `Data Display`). */
-	category?: string;
-	/** Frequently asked questions, reused for FAQ structured data and AI grounding. */
-	faq?: FaqEntry[];
-	/** Content author. */
-	author?: { name: string; url?: string };
-	/** ISO date the page was first published. */
-	datePublished?: string;
-	/** ISO date the page was last modified. */
-	dateModified?: string;
-	/** Raw JSON-LD structured data block(s) to embed verbatim. */
-	jsonLd?: Record<string, unknown> | Record<string, unknown>[];
-};
-
 /**
  * Metadata for a documentation page.
  * Combines SEO + GEO fields with a couple of library-specific fields.
  * `status` and `icon` are exclusive to this library (navigation badge + icon) and are unrelated to SEO/GEO.
  */
-export type Meta = SeoMeta & { geo?: GeoMeta } & {
+export type Meta = SeoMeta & {
 	/** URL slug for the component page (`/docs/components/{slug}`). */
 	slug: string;
 	/** Library maturity/status badge. Not part of SEO/GEO. */

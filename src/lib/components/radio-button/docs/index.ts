@@ -25,26 +25,7 @@ export const META: Meta = {
 		title: 'Radio Button — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte radio button for choosing a single option from a group.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'RadioButton is a Fluent UI Svelte control for selecting a single option from a set. Group radios with a shared name, or use bind:group to bind the selected value to a variable. Each radio supports label, checked, and disabled.',
-		topics: ['forms', 'selection', 'radio group', 'inputs'],
-		entities: ['RadioButton', 'group', 'name', 'checked', 'disabled', 'label'],
-		category: 'Inputs',
-		faq: [
-			{
-				question: 'How do I group radio buttons?',
-				answer:
-					'Give them the same name to allow only one to be checked, or use bind:group to bind the selected value to a variable.'
-			},
-			{
-				question: 'How do I read the selected radio value?',
-				answer: 'Bind a variable with bind:group={value}; it updates to the value of the selected radio button.'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'radio-button',
 	status: '',
 	icon: RadioButtonFilled

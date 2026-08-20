@@ -1,7 +1,6 @@
 <script lang="ts">
+	import type { DropdownSelectOptionProps } from './types.ts';
 	import CheckmarkFilled from 'fluentui-icons-svelte/CheckmarkFilled.svelte';
-	import type { Snippet } from 'svelte';
-	import type { HTMLAttributes } from 'svelte/elements';
 
 	let {
 		value,
@@ -11,13 +10,7 @@
 		class: classes,
 		children,
 		...attributes
-	}: {
-		value?: string;
-		text?: string;
-		disabled?: boolean;
-		ref?: HTMLElement;
-		children?: Snippet;
-	} & HTMLAttributes<HTMLOptionElement> = $props();
+	}: DropdownSelectOptionProps = $props();
 </script>
 
 <option class="fs-dropdown-select-option {classes}" {value} {disabled} bind:this={ref} {...attributes}>

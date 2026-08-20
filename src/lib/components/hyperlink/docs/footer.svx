@@ -4,10 +4,14 @@
 
 ## {m.hl_props_title()}
 
-| **Name**           | **Type**            | **Description**                              |
-| ------------------ | ------------------- | -------------------------------------------- |
-| `href`             | `string`            | {m.hl_props_href_description()}              |
-| `disabled`         | `boolean`           | {m.hl_props_disabled_description()}          |
-| `children`         | `Snippet`           | {m.hl_props_children_description()}          |
-| `ref`              | `HTMLAnchorElement` | {m.hl_props_ref_description()}               |
-| Element Attributes |                     | {m.hl_props_elementattributes_description()} |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:HyperlinkProps -->
+
+| Name                     | Type                | Default | Description                                       |
+| ------------------------ | ------------------- | ------- | ------------------------------------------------- |
+| `href`                   | `string`            | `'#'`   | {m.generated_fs_hyperlink_props_props_href()}     |
+| `disabled`               | `boolean`           |         | {m.generated_fs_hyperlink_props_props_disabled()} |
+| `ref` _bindable_         | `HTMLAnchorElement` |         | {m.generated_fs_hyperlink_props_props_ref()}      |
+| Element Attributes (`a`) |                     |         |                                                   |
+
+<!-- /props:HyperlinkProps -->

@@ -28,26 +28,7 @@ export const META: Meta = {
 		description:
 			'A Fluent UI Svelte horizontal progress indicator with determinate, indeterminate, paused, and error states.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'ProgressBar is a Fluent UI Svelte horizontal progress indicator. Set value (0–100) for determinate progress; omit it for an indeterminate animation. It also supports hiding the rail and paused/error status colors.',
-		topics: ['progress', 'loading indicators', 'status & feedback'],
-		entities: ['ProgressBar', 'value', 'indeterminate', 'hideRail', 'status'],
-		category: 'Status & Feedback',
-		faq: [
-			{
-				question: 'How do I make a ProgressBar indeterminate?',
-				answer:
-					'Set the indeterminate prop (or omit value); the bar animates without a specific value for unknown-duration operations.'
-			},
-			{
-				question: 'How do I show an error or paused state?',
-				answer: "Set the status prop to 'paused' or 'error' to change the bar color and communicate the state."
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'progress-bar',
 	status: '',
 	icon: DataBarHorizontalRegular

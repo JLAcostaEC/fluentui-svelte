@@ -12,7 +12,6 @@
 		gap = '32px',
 		initialZoom = 1,
 		minHeight = '200px',
-		minWidth = '200px',
 		minZoom = 0.5,
 		maxZoom = 20,
 		autoCenter = false,
@@ -23,7 +22,6 @@
 	}: {
 		columns: number;
 		minHeight: string;
-		minWidth: string;
 		columnWidth: string;
 		initialZoom: number;
 		gap: string;
@@ -56,53 +54,55 @@
 			bind:checked={showCode}
 			labelAttributes={{ class: `switch-view ${showCode ? 'show' : ''}` }}
 		/>
-	{/if}
-	{#if code && showCode}
-		<RenderShiki {code} />
-	{:else}
-		<div class="showcase" style={`min-height: ${minHeight}; overflow: ${showOverflow ? 'visible' : 'hidden'}`}>
-			<div
-				{@attach !disablePanZoom &&
-					_panzoom({
-						minZoom,
-						maxZoom,
-						bounds: true,
-						initialZoom,
-						smoothScroll: true,
-						autocenter: autoCenter,
-						boundsPadding: 0
-					})}
-				class="inner"
-			>
-				{#if !disablePanZoom}
-					<svg class="showcase-backdrop">
-						<pattern
-							id="showcase-backdrop-pattern"
-							x="5.800038310074086"
-							y="6.229276141719765"
-							width="11.17258097342026"
-							height="11.17258097342026"
-							patternUnits="userSpaceOnUse"
-						>
-							<circle
-								cx="0.2979354926245403"
-								cy="0.2979354926245403"
-								r="0.2979354926245403"
-								fill="var(--fds-text-disabled)"
-							></circle>
-						</pattern>
-						<rect x="0" y="0" width="100%" height="100%" fill="url(#showcase-backdrop-pattern)"></rect>
-					</svg>
-				{/if}
-				<div
-					class="showcase-grid"
-					style={`grid-template-columns: ${(columnWidth + ' ').repeat(columns)}; grid-auto-rows: auto; grid-gap: ${gap};`}
-				>
-					{@render children?.()}
-				</div>
-			</div>
+		<div style={`display: ${code && showCode ? 'block' : 'none'};`}>
+			<RenderShiki {code} />
 		</div>
 	{/if}
+	<div
+		class="showcase"
+		style={`display: ${!showCode ? 'block' : 'none'};; min-height: ${minHeight}; overflow: ${showOverflow ? 'visible' : 'hidden'}`}
+	>
+		<div
+			{@attach !disablePanZoom &&
+				_panzoom({
+					minZoom,
+					maxZoom,
+					bounds: true,
+					initialZoom,
+					smoothScroll: true,
+					autocenter: autoCenter,
+					boundsPadding: 0
+				})}
+			class="inner"
+		>
+			{#if !disablePanZoom}
+				<svg class="showcase-backdrop">
+					<pattern
+						id="showcase-backdrop-pattern"
+						x="5.800038310074086"
+						y="6.229276141719765"
+						width="11.17258097342026"
+						height="11.17258097342026"
+						patternUnits="userSpaceOnUse"
+					>
+						<circle
+							cx="0.2979354926245403"
+							cy="0.2979354926245403"
+							r="0.2979354926245403"
+							fill="var(--fds-text-disabled)"
+						></circle>
+					</pattern>
+					<rect x="0" y="0" width="100%" height="100%" fill="url(#showcase-backdrop-pattern)"></rect>
+				</svg>
+			{/if}
+			<div
+				class="showcase-grid"
+				style={`grid-template-columns: ${(columnWidth + ' ').repeat(columns)}; grid-auto-rows: auto; grid-gap: ${gap};`}
+			>
+				{@render children?.()}
+			</div>
+		</div>
+	</div>
 </div>
 
 <style>

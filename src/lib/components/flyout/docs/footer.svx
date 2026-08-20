@@ -4,14 +4,20 @@
 
 ## {m.flyout_component_props_title()}
 
-| **Name**            | **Type**                                                  | **Description**                                                 |
-| ------------------- | --------------------------------------------------------- | --------------------------------------------------------------- |
-| `ref`               | Bindable `HTMLElement`                                    | {m.flyout_props_ref_description()}                              |
-| `children`          | `Snippet`                                                 | {m.flyout_props_children_description()}                         |
-| `floating`          | `boolean`                                                 | {m.flyout_props_floating_description()}                         |
-| `reference`         | `HTMLElement`                                             | {m.flyout_props_reference_description()}                        |
-| `placement`         | `Placement`                                               | {m.flyout_props_placement_description()}                        |
-| `onPlacementChange` | `(placement: Placement) => void`                          | {m.flyout_props_onplacementchange_description()}                |
-| `roundCorners`      | `'all'` \| `'top'` \| `'bottom'` \| `'left'` \| `'right'` | {m.flyout_props_roundcorners_description()}                     |
-| `offset`            | `number`                                                  | {m.flyout_props_offset_description()}                           |
-| Element Attributes  |                                                           | {m.flyout_props_elementattributes_description()}                |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:FlyoutProps -->
+
+| Name                       | Type                                                                      | Default    | Description                                               |
+| -------------------------- | ------------------------------------------------------------------------- | ---------- | --------------------------------------------------------- |
+| `ref` _bindable_           | `HTMLElement`                                                             |            | {m.generated_fs_flyout_props_props_ref()}                 |
+| `children`                 | `Snippet`                                                                 |            | {m.generated_fs_flyout_props_props_children()}            |
+| `floating`                 | `boolean`                                                                 | `false`    | {m.generated_fs_flyout_props_props_floating()}            |
+| `reference`                | `HTMLElement`                                                             |            | {m.generated_fs_flyout_props_props_reference()}           |
+| `placement`                | `Placement`                                                               | `'bottom'` | {m.generated_fs_flyout_props_props_placement()}           |
+| `onPlacementChange`        | `(placement: Placement) => void`                                          |            | {m.generated_fs_flyout_props_props_on_placement_change()} |
+| `roundCorners`             | `'all'` &#124; `'top'` &#124; `'bottom'` &#124; `'left'` &#124; `'right'` | `'all'`    | {m.generated_fs_flyout_props_props_round_corners()}       |
+| `offset`                   | `number`                                                                  | `8`        | {m.generated_fs_flyout_props_props_offset()}              |
+| `placementConfig`          | `AutoPlacementOptions`                                                    |            | {m.generated_fs_flyout_props_props_placement_config()}    |
+| Element Attributes (`div`) |                                                                           |            |                                                           |
+
+<!-- /props:FlyoutProps -->

@@ -4,44 +4,62 @@
 
 ## {m.tv_component_props_treeview_title()}
 
-| **Name**          | **Type**                                     | **Description**                             |
-| ----------------- | -------------------------------------------- | ------------------------------------------- |
-| `ref`             | `HTMLUListElement`                           | {m.tv_props_ref_description()}              |
-| `size`            | `'small'` \| `'medium'` \| `'large'`         | {m.tv_props_size_description()}             |
-| `navigationMode`  | `'tree'` \| `'treegrid'`                     | {m.tv_props_navigationmode_description()}   |
-| `selectionMode`   | `'single'` \| `'multiple'`                   | {m.tv_props_selectionmode_description()}    |
-| `openItems`       | `string[]` \| `SvelteSet<string>`            | {m.tv_props_openitems_description()}        |
-| `checkedItems`    | `string[]` \| `SvelteSet<string>`            | {m.tv_props_checkeditems_description()}     |
-| `onOpenChange`    | `(e: Event, openItems: string[]) => void`    | {m.tv_props_onopenchange_description()}     |
-| `onCheckedChange` | `(e: Event, checkedItems: string[]) => void` | {m.tv_props_oncheckedchange_description()}  |
-| `virtualizer`     | `TreeViewVirtualizer`                        | {m.tv_props_virtualizer_description()}      |
-| `children`        | `Snippet`                                    | {m.tv_props_children_description()}         |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TreeViewProps -->
+
+| Name                                                | Type                                         | Default      | Description                                                |
+| --------------------------------------------------- | -------------------------------------------- | ------------ | ---------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLUListElement`                           |              | {m.generated_fs_tree_view_props_props_ref()}               |
+| `size`                                              | `'small'` &#124; `'medium'` &#124; `'large'` | `'medium'`   | {m.generated_fs_tree_view_props_props_size()}              |
+| `navigationMode`                                    | `'tree'` &#124; `'treegrid'`                 | `'tree'`     | {m.generated_fs_tree_view_props_props_navigation_mode()}   |
+| `onOpenChange`                                      | `(e: Event, openItems: string[]) => void`    |              | {m.generated_fs_tree_view_props_props_on_open_change()}    |
+| `selectionMode`                                     | `'single'` &#124; `'multiple'`               | `'multiple'` | {m.generated_fs_tree_view_props_props_selection_mode()}    |
+| `onCheckedChange`                                   | `(e: Event, checkedItems: string[]) => void` |              | {m.generated_fs_tree_view_props_props_on_checked_change()} |
+| `virtualizer`                                       | `TreeViewVirtualizer`                        |              | {m.generated_fs_tree_view_props_props_virtualizer()}       |
+| `openItems` _bindable_                              | `string[]` &#124; `SvelteSet<string>`        |              | {m.generated_fs_tree_view_props_props_open_items()}        |
+| `checkedItems` _bindable_                           | `string[]` &#124; `SvelteSet<string>`        |              | {m.generated_fs_tree_view_props_props_checked_items()}     |
+| `children`                                          | `Snippet`                                    |              | {m.generated_fs_tree_view_props_props_children()}          |
+| `TreeViewVirtualProps` &#124; `TreeViewStaticProps` |                                              |              |                                                            |
+| Element Attributes (`ul`)                           |                                              |              |                                                            |
+
+<!-- /props:TreeViewProps -->
 
 ## {m.tv_component_props_treeviewitem_title()}
 
-| **Name**          | **Type**                                                     | **Description**                                        |
-| ----------------- | ------------------------------------------------------------ | ------------------------------------------------------ |
-| `id`              | `string`                                                     | {m.tv_props_id_description()}                          |
-| `type`            | `'item'` \| `'branch'`                                       | {m.tv_props_type_description()}                        |
-| `ref`             | `HTMLLIElement`                                              | {m.tv_props_treeviewitem_ref_description()}            |
-| `value`           | `string` \| `number`                                         | {m.tv_props_value_description()}                       |
-| `text`            | `string`                                                     | {m.tv_props_text_description()}                        |
-| `open`            | `boolean`                                                    | {m.tv_props_open_description()}                        |
-| `checked`         | `boolean`                                                    | {m.tv_props_checked_description()}                     |
-| `indeterminate`   | `boolean`                                                    | {m.tv_props_indeterminate_description()}               |
-| `disabled`        | `boolean`                                                    | {m.tv_props_disabled_description()}                    |
-| `index`           | `number`                                                     | {m.tv_props_index_description()}                       |
-| `onOpenChange`    | `(e: Event, data: { id: string; open: boolean }) => void`    | {m.tv_props_treeviewitem_onopenchange_description()}   |
-| `onCheckedChange` | `(e: Event, data: { id: string; checked: boolean }) => void` | {m.tv_props_treeviewitem_oncheckedchange_description()} |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TreeViewItemProps -->
+
+| Name                      | Type                                                         | Default  | Description                                                     |
+| ------------------------- | ------------------------------------------------------------ | -------- | --------------------------------------------------------------- |
+| `id`                      | `string`                                                     |          | {m.generated_fs_tree_view_item_props_props_id()}                |
+| `type`                    | `'item'` &#124; `'branch'`                                   | `'item'` | {m.generated_fs_tree_view_item_props_props_type()}              |
+| `ref`                     | `HTMLLIElement`                                              |          | {m.generated_fs_tree_view_item_props_props_ref()}               |
+| `value`                   | `string` &#124; `number`                                     | `id`     | {m.generated_fs_tree_view_item_props_props_value()}             |
+| `text`                    | `string`                                                     |          | {m.generated_fs_tree_view_item_props_props_text()}              |
+| `open`                    | `boolean`                                                    |          | {m.generated_fs_tree_view_item_props_props_open()}              |
+| `checked`                 | `boolean`                                                    |          | {m.generated_fs_tree_view_item_props_props_checked()}           |
+| `indeterminate`           | `boolean`                                                    |          | {m.generated_fs_tree_view_item_props_props_indeterminate()}     |
+| `disabled`                | `boolean`                                                    |          | {m.generated_fs_tree_view_item_props_props_disabled()}          |
+| `index`                   | `number`                                                     |          | {m.generated_fs_tree_view_item_props_props_index()}             |
+| `onOpenChange`            | `(e: Event, data: { id: string; open: boolean }) => void`    |          | {m.generated_fs_tree_view_item_props_props_on_open_change()}    |
+| `onCheckedChange`         | `(e: Event, data: { id: string; checked: boolean }) => void` |          | {m.generated_fs_tree_view_item_props_props_on_checked_change()} |
+| Element Attributes (`li`) |                                                              |          |                                                                 |
+
+<!-- /props:TreeViewItemProps -->
 
 ## {m.tv_component_props_treeviewitemcontent_title()}
 
-| **Name**     | **Type**                 | **Description**                                        |
-| ------------ | ------------------------ | ------------------------------------------------------ |
-| `ref`        | `HTMLDivElement`         | {m.tv_props_treeviewitemcontent_ref_description()}     |
-| `expandIcon` | `Snippet` \| `Component` | {m.tv_props_expandicon_description()}                  |
-| `iconBefore` | `Snippet` \| `Component` | {m.tv_props_iconbefore_description()}                  |
-| `iconAfter`  | `Snippet` \| `Component` | {m.tv_props_iconafter_description()}                   |
-| `aside`      | `Snippet` \| `Component` | {m.tv_props_aside_description()}                       |
-| `actions`    | `Snippet` \| `Component` | {m.tv_props_actions_description()}                     |
-| `children`   | `Snippet`                | {m.tv_props_treeviewitemcontent_children_description()} |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TreeViewItemLayoutProps -->
+
+| Name                       | Type                         | Default | Description                                                      |
+| -------------------------- | ---------------------------- | ------- | ---------------------------------------------------------------- |
+| `ref`                      | `HTMLDivElement`             |         | {m.generated_fs_tree_view_item_layout_props_props_ref()}         |
+| `expandIcon`               | `Snippet` &#124; `Component` |         | {m.generated_fs_tree_view_item_layout_props_props_expand_icon()} |
+| `iconBefore`               | `Snippet` &#124; `Component` |         | {m.generated_fs_tree_view_item_layout_props_props_icon_before()} |
+| `iconAfter`                | `Snippet` &#124; `Component` |         | {m.generated_fs_tree_view_item_layout_props_props_icon_after()}  |
+| `aside`                    | `Snippet` &#124; `Component` |         | {m.generated_fs_tree_view_item_layout_props_props_aside()}       |
+| `actions`                  | `Snippet` &#124; `Component` |         | {m.generated_fs_tree_view_item_layout_props_props_actions()}     |
+| Element Attributes (`div`) |                              |         |                                                                  |
+
+<!-- /props:TreeViewItemLayoutProps -->

@@ -25,25 +25,7 @@ export const META: Meta = {
 		title: 'Number Box — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte numeric input with min/max/step constraints and optional spinner buttons.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'NumberBox is a Fluent UI Svelte input for numeric values with min, max, and step constraints. It builds on TextBox (inheriting its props), offers inline and compact variants, and can hide its action buttons.',
-		topics: ['numeric input', 'forms', 'inputs', 'steppers'],
-		entities: ['NumberBox', 'TextBox', 'value', 'variant', 'min', 'max', 'step'],
-		category: 'Inputs',
-		faq: [
-			{
-				question: 'How do I constrain the values of a NumberBox?',
-				answer: 'Use the min, max, and step props to bound and increment the numeric value.'
-			},
-			{
-				question: 'Does NumberBox share props with TextBox?',
-				answer: 'Yes. NumberBox inherits TextBox props, so most TextBox configuration also applies.'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'number-box',
 	status: '',
 	icon: NumberSymbolSquareRegular

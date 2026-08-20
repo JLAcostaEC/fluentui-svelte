@@ -26,25 +26,7 @@ export const META: Meta = {
 		title: 'Hyperlink — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte link component for navigating to a URL with accessible defaults.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'Hyperlink is a Fluent UI Svelte component that renders an accessible anchor element for navigating to a URL. It supports an href target, a disabled state that prevents navigation, a bindable ref to the underlying anchor, and any valid HTML anchor attributes.',
-		topics: ['navigation', 'links', 'anchors', 'accessibility'],
-		entities: ['Hyperlink', 'href', 'disabled', 'ref'],
-		category: 'Navigation',
-		faq: [
-			{
-				question: 'How do I set where a Hyperlink navigates?',
-				answer: 'Set the href prop to the URL you want the link to navigate to when clicked.'
-			},
-			{
-				question: 'How do I disable a Hyperlink?',
-				answer: 'Add the disabled prop. This prevents navigation and removes the link from the tab order.'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'hyperlink',
 	status: '',
 	icon: LinkRegular

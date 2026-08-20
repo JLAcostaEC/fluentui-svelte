@@ -4,20 +4,34 @@
 
 ## {m.ds_component_props_title()}
 
-| **Name**          | **Type**                      | **Description**                              |
-| ----------------- | ----------------------------- | -------------------------------------------- |
-| `value`           | bindable `string \| string[]` | {m.ds_props_value_description()}             |
-| `multiple`        | `boolean`                     | {m.ds_props_multiple_description()}          |
-| `placeholder`     | `string`                      | {m.ds_props_placeholder_description()}       |
-| `hidePlaceholder` | `boolean`                     | {m.ds_props_hideplaceholder_description()}   |
-| `ref`             | bindable `HTMLSelectElement`  | {m.ds_props_ref_description()}               |
-| `wrapperRef`      | bindable `HTMLDivElement`     | {m.ds_props_wrapperref_description()}        |
-| `children`        | `Snippet`                     | {m.ds_props_children_description()}          |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DropdownSelectProps -->
+
+| Name                          | Type                       | Default                    | Description                                                     |
+| ----------------------------- | -------------------------- | -------------------------- | --------------------------------------------------------------- |
+| `value` _bindable_            | `string` &#124; `string[]` | `multiple ? [] : ''`       | {m.generated_fs_dropdown_select_props_props_value()}            |
+| `multiple`                    | `boolean`                  |                            | {m.generated_fs_dropdown_select_props_props_multiple()}         |
+| `placeholder`                 | `string`                   | `'Native Select Dropdown'` | {m.generated_fs_dropdown_select_props_props_placeholder()}      |
+| `hidePlaceholder`             | `boolean`                  |                            | {m.generated_fs_dropdown_select_props_props_hide_placeholder()} |
+| `ref` _bindable_              | `HTMLSelectElement`        |                            | {m.generated_fs_dropdown_select_props_props_ref()}              |
+| `wrapperRef` _bindable_       | `HTMLDivElement`           |                            | {m.generated_fs_dropdown_select_props_props_wrapper_ref()}      |
+| `wrapperProps`                | `HTMLAttributes`           |                            | {m.generated_fs_dropdown_select_props_props_wrapper_props()}    |
+| Element Attributes (`select`) |                            |                            |                                                                 |
+
+<!-- /props:DropdownSelectProps -->
 
 ## {m.ds_dropdownselectoption_props_title()}
 
-| **Name**   | **Type**  | **Description**                             |
-| ---------- | --------- | ------------------------------------------- |
-| `value`    | `string`  | {m.ds_option_props_value_description()}     |
-| `text`     | `string`  | {m.ds_option_props_text_description()}      |
-| `children` | `Snippet` | {m.ds_option_props_children_description()}  |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DropdownSelectOptionProps -->
+
+| Name                          | Type          | Default | Description                                                    |
+| ----------------------------- | ------------- | ------- | -------------------------------------------------------------- |
+| `value`                       | `string`      |         | {m.generated_fs_dropdown_select_option_props_props_value()}    |
+| `text`                        | `string`      |         | {m.generated_fs_dropdown_select_option_props_props_text()}     |
+| `disabled`                    | `boolean`     |         | {m.generated_fs_dropdown_select_option_props_props_disabled()} |
+| `ref` _bindable_              | `HTMLElement` |         | {m.generated_fs_dropdown_select_option_props_props_ref()}      |
+| `children`                    | `Snippet`     |         | {m.generated_fs_dropdown_select_option_props_props_children()} |
+| Element Attributes (`option`) |               |         |                                                                |
+
+<!-- /props:DropdownSelectOptionProps -->

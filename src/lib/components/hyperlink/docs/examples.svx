@@ -9,7 +9,7 @@
 
 ### Disabled
 
-{m.hl_props_disabled_description()}
+{m.generated_fs_hyperlink_props_props_disabled()}
 
 <Showcase column={2} autoCenter code={disabledCode}>
   <Hyperlink href="/" disabled>Disabled Link</Hyperlink>

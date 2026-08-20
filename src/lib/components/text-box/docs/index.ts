@@ -26,26 +26,7 @@ export const META: Meta = {
 		title: 'Text Box — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte text input supporting text, search, password, number and more.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'TextBox is a Fluent UI Svelte control for typing text into an app. It captures a single line of plaintext by default and supports several input types (text, search, email, url, tel, password, number), a placeholder, readonly mode, content before/after the input, and events such as textChanged, querySubmitted, and onClear.',
-		topics: ['text input', 'forms', 'search', 'inputs'],
-		entities: ['TextBox', 'type', 'placeholder', 'readonly', 'querySubmitted', 'textChanged', 'onClear'],
-		category: 'Inputs',
-		faq: [
-			{
-				question: 'What input types does TextBox support?',
-				answer: "Set the type prop to 'text', 'search', 'email', 'url', 'tel', 'password', or 'number'."
-			},
-			{
-				question: 'How do I handle search submissions in a TextBox?',
-				answer:
-					'Use the querySubmitted event, which fires when the user presses Enter or clicks the search icon on type="search".'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'text-box',
 	status: '',
 	icon: ConvertToTextRegular

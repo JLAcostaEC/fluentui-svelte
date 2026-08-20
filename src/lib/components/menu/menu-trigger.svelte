@@ -4,37 +4,12 @@
 	import { onMount, tick } from 'svelte';
 	import { COMPONENT_NAME, getMenuContext } from './menu.svelte.ts';
 	import ChevronRightFilled from 'fluentui-icons-svelte/ChevronRightFilled.svelte';
-	import type { Component, Snippet } from 'svelte';
-	import type { MenuState } from './types.ts';
+	import type { MenuTriggerProps } from './types.ts';
 	import type { ButtonProps } from '../button/types.ts';
-	import type { Shapes } from '$types';
 
 	let FALLBACK_ID = $props.id();
 
-	let {
-		disabled,
-		shape,
-		icon: Icon,
-		children
-	}: {
-		/** Disables the user interaction. */
-		disabled?: boolean;
-		/** A button can be rounded, circular, or square. */
-		shape?: Shapes;
-		/** An optional icon for the button. */
-		icon?: Snippet | Component;
-		children?:
-			| Snippet<
-					[
-						{
-							state: MenuState;
-							menuTriggerProps: ButtonProps<'button'>;
-							primaryButtonProps: ButtonProps<'button'>;
-						}
-					]
-			  >
-			| undefined;
-	} = $props();
+	let { disabled, shape, icon: Icon, children }: MenuTriggerProps = $props();
 
 	const context = getMenuContext();
 

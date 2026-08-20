@@ -25,26 +25,7 @@ export const META: Meta = {
 		title: 'Toggle Switch — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte switch for choosing between two mutually exclusive options.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'ToggleSwitch is a Fluent UI Svelte control representing a physical switch for choosing between two mutually exclusive options such as On/Off or Show/Hide. Choosing an option produces an immediate result. It supports a label, checked and disabled states.',
-		topics: ['forms', 'boolean input', 'switches', 'settings'],
-		entities: ['ToggleSwitch', 'checked', 'label', 'disabled'],
-		category: 'Inputs',
-		faq: [
-			{
-				question: 'When should I use a ToggleSwitch instead of a Checkbox?',
-				answer:
-					'Use a ToggleSwitch when choosing an option should produce an immediate result, such as turning a setting on or off.'
-			},
-			{
-				question: 'How do I add a label to a ToggleSwitch?',
-				answer: 'Pass the label prop; use labelAttributes and labelElement for additional label customization.'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'toggle-switch',
 	status: '',
 	icon: SwipeRightRegular

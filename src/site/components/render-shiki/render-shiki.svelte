@@ -16,7 +16,7 @@
 	// resolution, so no manual state/cancellation is needed.
 	const highlighted = $derived(
 		getHighlighter().then((highlighter) =>
-			highlighter.codeToHtml(code.trim(), {
+			highlighter.codeToHtml(code && code.trim(), {
 				lang,
 				themes: {
 					light: 'one-light',
@@ -31,7 +31,7 @@
 </script>
 
 {#await highlighted}
-	<pre class="shiki"><code>{code.trim()}</code></pre>
+	<pre class="shiki"><code>{code?.trim()}</code></pre>
 {:then html}
 	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 	{@html html}

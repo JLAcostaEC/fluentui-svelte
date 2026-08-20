@@ -25,26 +25,7 @@ export const META: Meta = {
 		title: 'Tooltip — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte tooltip that shows extra information about an element on hover.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'Tooltip is a Fluent UI Svelte component that displays additional information about a target element, shown above and near it. Content can be a string, a component, or a Snippet. It supports custom positioning via Floating UI, an optional arrow, open/hide delays, an onVisibleChange callback, and an accessibility relationship.',
-		topics: ['overlays', 'tooltips', 'hints', 'accessibility'],
-		entities: ['Tooltip', 'content', 'withArrow', 'positionConfig', 'relationship', 'openDelay', 'hideDelay'],
-		category: 'Overlays',
-		faq: [
-			{
-				question: 'How do I attach a Tooltip to a target element?',
-				answer:
-					'Provide a children snippet that receives attrs and spread them onto your target element, e.g. a Button.'
-			},
-			{
-				question: 'How do I add an arrow to a Tooltip?',
-				answer: 'Set the withArrow prop to true to render an arrow pointing at the target element.'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'tooltip',
 	status: '',
 	icon: TooltipQuoteRegular

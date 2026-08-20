@@ -26,27 +26,7 @@ export const META: Meta = {
 		title: 'Dialog — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte dialog window composed of trigger, surface, title, content, and actions.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'Dialog is a Fluent UI Svelte window overlaid on the page. Content outside a modal dialog is inert. It is composed of Dialog (root/context), DialogTrigger, DialogSurface (the <dialog> element), DialogTitle, DialogContent, and DialogActions. The dialog type can be modal, non-modal, or alert.',
-		topics: ['overlays', 'modals', 'dialogs', 'accessibility'],
-		entities: ['Dialog', 'DialogTrigger', 'DialogSurface', 'DialogTitle', 'DialogContent', 'DialogActions'],
-		category: 'Overlays',
-		faq: [
-			{
-				question: 'What components make up a Dialog?',
-				answer:
-					'Dialog (root/context), DialogTrigger, DialogSurface, DialogTitle, DialogContent, and DialogActions work together through a shared context.'
-			},
-			{
-				question: 'How do I close a Dialog programmatically?',
-				answer:
-					'Bind the Dialog with bind:this and call its closeDialog() method, or control it with the bindable open prop.'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'dialog',
 	status: '',
 	icon: ReadingModeMobileRegular

@@ -25,26 +25,7 @@ export const META: Meta = {
 		title: 'Button — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte button that triggers actions, with accent, standard, and subtle appearances.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'Button is a Fluent UI Svelte component that triggers an action or event. It supports accent, standard, and subtle appearances, circular/rounded/square shapes, polymorphic rendering via the as prop (button, a, div), a menu-button indicator, and a companion SplitButton for a primary action plus a menu.',
-		topics: ['actions', 'buttons', 'forms', 'split button', 'menu button'],
-		entities: ['Button', 'SplitButton', 'appearance', 'shape', 'as', 'isMenuButton'],
-		category: 'Buttons',
-		faq: [
-			{
-				question: 'What element does a Button render?',
-				answer: 'By default a <button>, but the as prop lets it render as an anchor (a) or a div for polymorphic usage.'
-			},
-			{
-				question: 'What is a SplitButton?',
-				answer:
-					'SplitButton combines a primary action button with a menu trigger, so users get a default action plus additional options. Attach a menu via its props (see the Menu documentation).'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'button',
 	status: '',
 	icon: CursorHoverRegular

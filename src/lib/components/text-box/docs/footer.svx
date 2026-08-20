@@ -4,20 +4,26 @@
 
 ## {m.tb_component_props_title()}
 
-| **Name**            | **Type**                                                  | **Description**                              |
-| ------------------- | --------------------------------------------------------- | -------------------------------------------- |
-| `type`              | `string`                                                  | {m.tb_props_type_description()}              |
-| `ref`               | `HTMLInputElement`                                        | {m.tb_props_ref_description()}               |
-| `wrapperRef`        | `HTMLDivElement`                                          | {m.tb_props_wrapperref_description()}        |
-| `wrapperAttributes` | `HTMLAttributes<HTMLDivElement>`                          | {m.tb_props_wrapperattributes_description()} |
-| `size`              | `'small'` \| `'medium'` \| `'large'`                      | {m.tb_props_size_description()}              |
-| `readonly`          | `boolean`                                                 | {m.tb_props_readonly_description()}          |
-| `placeholder`       | `string`                                                  | {m.tb_props_placeholder_description()}       |
-| `hideActionButtons` | `boolean`                                                 | {m.tb_props_hideactionbuttons_description()} |
-| `justify`           | `boolean`                                                 | {m.tb_props_justify_description()}           |
-| `contentBefore`     | `string` \| `Snippet` \| `Component`                      | {m.tb_props_contentbefore_description()}     |
-| `contentAfter`      | `string` \| `Snippet` \| `Component`                      | {m.tb_props_contentafter_description()}      |
-| `textChanged`       | `(e: InputEvent, text: string) => void`                   | {m.tb_props_textchanged_description()}       |
-| `querySubmitted`    | `(e: MouseEvent \| KeyboardEvent, query: string) => void` | {m.tb_props_querysubmitted_description()}    |
-| `onClear`           | `(e: MouseEvent) => void`                                 | {m.tb_props_onclear_description()}           |
-| `children`          | `Snippet`                                                 | {m.tb_props_children_description()}          |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TextBoxProps -->
+
+| Name                                 | Type                                                            | Default            | Description                                                 |
+| ------------------------------------ | --------------------------------------------------------------- | ------------------ | ----------------------------------------------------------- |
+| `type`                               | [`TextBoxTypes`](/docs/types/#textboxtypes)                     | `'text'`           | {m.generated_fs_text_box_props_props_type()}                |
+| `value` _bindable_                   | `string` &#124; `number`                                        |                    | {m.generated_fs_text_box_props_props_value()}               |
+| `wrapperRef` _bindable_              | `HTMLDivElement`                                                |                    | {m.generated_fs_text_box_props_props_wrapper_ref()}         |
+| `ref` _bindable_                     | `HTMLInputElement`                                              |                    | {m.generated_fs_text_box_props_props_ref()}                 |
+| `placeholder`                        | `string`                                                        | `'Fluent TextBox'` | {m.generated_fs_text_box_props_props_placeholder()}         |
+| `hideActionButtons`                  | `boolean`                                                       |                    | {m.generated_fs_text_box_props_props_hide_action_buttons()} |
+| `justify`                            | `boolean`                                                       |                    | {m.generated_fs_text_box_props_props_justify()}             |
+| `contentBefore`                      | `string` &#124; `Snippet` &#124; `Component`                    |                    | {m.generated_fs_text_box_props_props_content_before()}      |
+| `contentAfter`                       | `string` &#124; `Snippet` &#124; `Component`                    |                    | {m.generated_fs_text_box_props_props_content_after()}       |
+| `size`                               | `'small'` &#124; `'medium'` &#124; `'large'`                    | `'medium'`         | {m.generated_fs_text_box_props_props_size()}                |
+| `textChanged`                        | `(e: InputEvent, text: string) => void`                         |                    | {m.generated_fs_text_box_props_props_text_changed()}        |
+| `querySubmitted`                     | `(e: MouseEvent` &#124; `KeyboardEvent, query: string) => void` |                    | {m.generated_fs_text_box_props_props_query_submitted()}     |
+| `onClear`                            | `(e: MouseEvent) => void`                                       |                    | {m.generated_fs_text_box_props_props_on_clear()}            |
+| `children`                           | `Snippet`                                                       |                    | {m.generated_fs_text_box_props_props_children()}            |
+| `wrapperAttributes`                  | `HTMLAttributes`                                                |                    | {m.generated_fs_text_box_props_props_wrapper_attributes()}  |
+| `HTMLInputAttributes` without `size` |                                                                 |                    |                                                             |
+
+<!-- /props:TextBoxProps -->

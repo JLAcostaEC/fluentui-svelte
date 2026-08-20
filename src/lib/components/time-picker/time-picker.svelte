@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { TimePickerProps } from './types.ts';
 	import { Flyout, Button, Divider } from '$lib/index.js';
 	import { floating } from '$internal';
 	import { flip, hide, offset, shift } from '@floating-ui/dom';
@@ -14,18 +15,7 @@
 		hideSeconds = false,
 		element = $bindable(),
 		inputElement = $bindable()
-	}: {
-		/** Clock format: `24` (00–23) or `12` (01–12 with an AM/PM column). */
-		format?: 12 | 24;
-		/** Selected time as 24h `HH:mm` or `HH:mm:ss` (matches `<input type="time">`). */
-		value?: string;
-		open?: boolean;
-		hideHours?: boolean;
-		hideMinutes?: boolean;
-		hideSeconds?: boolean;
-		element?: HTMLElement;
-		inputElement?: HTMLInputElement;
-	} = $props();
+	}: TimePickerProps = $props();
 
 	type Column = 'hour' | 'minute' | 'second' | 'meridiem';
 

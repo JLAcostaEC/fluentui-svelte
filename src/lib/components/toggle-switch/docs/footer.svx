@@ -4,12 +4,16 @@
 
 ## {m.tswitch_component_props_title()}
 
-| **Name**           | **Type**              | **Description**                                   |
-| ------------------ | --------------------- | ------------------------------------------------- |
-| `ref`              | `HTMLInputElement`    | {m.tswitch_props_ref_description()}               |
-| `label`            | `string`              | {m.tswitch_props_label_description()}             |
-| `labelAttributes`  | `HTMLLabelAttributes` | {m.tswitch_props_labelattributes_description()}   |
-| `labelElement`     | `HTMLLabelElement`    | {m.tswitch_props_labelelement_description()}      |
-| `disabled`         | `boolean`             | {m.tswitch_props_disabled_description()}          |
-| `checked`          | `boolean`             | {m.tswitch_props_checked_description()}           |
-| Element Attributes | `object`              | {m.tswitch_props_elementattributes_description()} |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:ToggleSwitchProps -->
+
+| Name                          | Type                  | Default | Description                                                   |
+| ----------------------------- | --------------------- | ------- | ------------------------------------------------------------- |
+| `checked` _bindable_          | `boolean`             |         | {m.generated_fs_toggle_switch_props_props_checked()}          |
+| `ref` _bindable_              | `HTMLInputElement`    |         | {m.generated_fs_toggle_switch_props_props_ref()}              |
+| `label`                       | `string`              |         | {m.generated_fs_toggle_switch_props_props_label()}            |
+| `labelAttributes`             | `HTMLLabelAttributes` |         | {m.generated_fs_toggle_switch_props_props_label_attributes()} |
+| `labelElement`                | `HTMLLabelElement`    |         | {m.generated_fs_toggle_switch_props_props_label_element()}    |
+| `SvelteHTMLElements['input']` |                       |         |                                                               |
+
+<!-- /props:ToggleSwitchProps -->

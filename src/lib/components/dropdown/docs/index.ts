@@ -25,26 +25,7 @@ export const META: Meta = {
 		title: 'Dropdown — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte dropdown for selecting one or more options, with rich option content.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'Dropdown is a Fluent UI Svelte component that lets users select an option from a list of DropdownOption children. It supports single or multiple selection, custom (rich) option content such as a Persona, a placeholder, and a bindable value.',
-		topics: ['selection', 'dropdowns', 'combobox', 'forms'],
-		entities: ['Dropdown', 'DropdownOption', 'value', 'multiple', 'placeholder'],
-		category: 'Inputs',
-		faq: [
-			{
-				question: 'How do I provide options to a Dropdown?',
-				answer:
-					'Render DropdownOption components as children, each with a value and a text label; the text is shown when the flyout is closed.'
-			},
-			{
-				question: 'How do I allow selecting multiple options?',
-				answer: 'Set the multiple prop; value then becomes an array of the selected values.'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'dropdown',
 	status: '',
 	icon: ArrowAutofitDownRegular

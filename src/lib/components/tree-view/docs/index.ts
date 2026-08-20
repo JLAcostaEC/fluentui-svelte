@@ -25,26 +25,7 @@ export const META: Meta = {
 		title: 'Tree View — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte tree view for hierarchical data with expandable, checkable items.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'TreeView is a Fluent UI Svelte component that displays hierarchical data as a nested list. Items are composed with TreeViewItem and TreeViewItemContent (there is no data prop). Nest a TreeView inside a TreeViewItem of type="branch" to create subtrees, and control open/checked state with the bindable openItems and checkedItems props on the root.',
-		topics: ['hierarchy', 'trees', 'navigation', 'data display'],
-		entities: ['TreeView', 'TreeViewItem', 'TreeViewItemContent', 'openItems', 'checkedItems', 'selectionMode'],
-		category: 'Data Display',
-		faq: [
-			{
-				question: 'How do I create a nested subtree in a TreeView?',
-				answer: 'Nest a TreeView inside a TreeViewItem with type="branch"; the inner TreeView becomes the subtree.'
-			},
-			{
-				question: 'How do I control open and checked items?',
-				answer:
-					'Use the bindable openItems and checkedItems props on the root TreeView (arrays or SvelteSet when a virtualizer is provided).'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'tree-view',
 	status: 'Experimental',
 	icon: TextBulletListTreeRegular

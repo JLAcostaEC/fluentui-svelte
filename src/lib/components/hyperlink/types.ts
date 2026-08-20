@@ -1,8 +1,15 @@
 import type { HTMLAnchorAttributes } from 'svelte/elements';
 
+/** @propsmith HyperlinkProps */
 export type HyperlinkProps = {
-	/** Disable the user interaction. */
+	/** The URL the hyperlink points to.
+	 * @default '#'
+	 */
+	href?: string;
+	/** Disables the user interaction. */
 	disabled?: boolean;
-	/** The URL that the hyperlink points to. */
+	/** The DOM reference of the anchor element.
+	 * @bindable
+	 */
 	ref?: HTMLAnchorElement;
 } & HTMLAnchorAttributes;

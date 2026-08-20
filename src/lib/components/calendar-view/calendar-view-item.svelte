@@ -7,6 +7,7 @@
 		current,
 		outOfRange,
 		blackout,
+		rangePosition,
 		variant = 'day',
 		header = '',
 		children,
@@ -16,9 +17,13 @@
 </script>
 
 <div
-	class="fs-calendar-view-item variant-{variant === 'day' ? 'day' : 'month-year'}"
+	class={[
+		'fs-calendar-view-item',
+		`variant-${variant === 'day' ? 'day' : 'month-year'}`,
+		rangePosition && `in-range range-${rangePosition}`
+	]}
 	role="gridcell"
-	aria-selected={selected ?? false}
+	aria-selected={!!selected || rangePosition !== undefined}
 	{...attributes}
 >
 	<button
@@ -41,6 +46,25 @@
 		align-items: center;
 		justify-content: center;
 		border: 0;
+
+		/* ==== range band — tweak me ====================================================
+		   Painted on the cell rather than on the button, so it runs edge to edge while
+		   the button stays a circle inside it. Rows are separate grids, so a range that
+		   spans weeks breaks at the row edge, which is what a calendar should look like.
+		   Logical radii, so the band rounds on the correct side in RTL too. */
+		&.in-range {
+			background-color: color-mix(in srgb, var(--fs-accent-fill-default), transparent 88%);
+		}
+		&.range-start {
+			border-start-start-radius: 999px;
+			border-end-start-radius: 999px;
+		}
+		&.range-end {
+			border-start-end-radius: 999px;
+			border-end-end-radius: 999px;
+		}
+		/* ==== /range band ============================================================ */
+
 		& .calendar-item-button {
 			display: flex;
 			align-items: center;

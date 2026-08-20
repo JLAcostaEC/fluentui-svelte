@@ -5,6 +5,7 @@ import type { ComputePositionConfig, VirtualElement } from '@floating-ui/dom';
 
 export type View = 'days' | 'months' | 'years';
 export type AnimationDirection = 'up' | 'down' | 'neutral';
+export type CalendarSelectionMode = 'single' | 'multiple' | 'range';
 export type DateTimeWeekdayFormat = 'long' | 'short' | 'narrow';
 export type DateTimeMonthFormat = 'long' | 'short' | 'narrow' | 'numeric' | '2-digit';
 export type DateComparisonPrecision = 'time' | 'day' | 'month' | 'year' | 'decade';
@@ -19,6 +20,19 @@ export interface MonthLocaleOptions {
 	locale?: string;
 	format?: DateTimeMonthFormat;
 }
+
+/**
+ * A range of days.
+ *
+ * `end` stays `null` while the range is half-built
+ */
+export interface CalendarDateRange {
+	start: Date | null;
+	end: Date | null;
+}
+
+/** Where a day sits in the painted range: its two ends, or somewhere in between. */
+export type RangePosition = 'start' | 'between' | 'end';
 
 /** Shape of one rendered calendar page, as seen by keyboard navigation. */
 export interface CalendarGrid {
@@ -47,9 +61,16 @@ export interface CalendarNavigationOptions {
 
 export type CalendarViewProps = {
 	element?: HTMLElement;
-	multiple?: boolean;
+	/** How many dates the grid hands out, and in what shape. Default: `'single'`. */
+	selectionMode?: CalendarSelectionMode;
 	locale?: string;
 	value?: Date | Date[] | null;
+	/** The picked range. Only read and written when `selectionMode` is `'range'`. */
+	range?: CalendarDateRange;
+	/**
+	 * Stop a range from spanning a blacked-out date. Off by default
+	 */
+	blackoutBreaksRange?: boolean;
 	blackoutDates?: Date[];
 	headers?: boolean;
 	minDate?: Date;
@@ -63,6 +84,8 @@ export type CalendarViewProps = {
 		positionConfig?: Partial<ComputePositionConfig>;
 	};
 	onChange?: (event: Event, value: Date | Date[] | null) => void;
+	/** Fired on every step of a range, including the one that leaves `end` null. */
+	onRangeChange?: (event: Event, range: CalendarDateRange) => void;
 	onViewChange?: (event: Event, view: View) => void;
 };
 
@@ -74,7 +97,8 @@ export type CalendarViewContext = FSContext<
 		maxDate?: Date;
 		headers?: boolean;
 		blackoutDates?: Date[];
-		multiple?: boolean;
+		selectionMode: CalendarSelectionMode;
+		blackoutBreaksRange?: boolean;
 	},
 	CalendarViewState,
 	{
@@ -88,11 +112,14 @@ export type CalendarViewContext = FSContext<
 		selectDay: (e: Event, day: Date) => void;
 		selectMonth: (e: Event, month: Date) => void;
 		selectYear: (e: Event, year: Date) => void;
+		/** Empties whatever the current `selectionMode` holds. */
+		clearSelection: (e: Event) => void;
 	}
 >;
 
 export type CalendarViewState = {
 	value: Date | Date[];
+	range: CalendarDateRange;
 	view: View;
 	page: Date;
 	viewAnimationDirection: AnimationDirection;
@@ -105,6 +132,8 @@ export type CalendarViewItemProps = {
 	current?: boolean;
 	outOfRange?: boolean;
 	blackout?: boolean;
+	/** Set on the days a range covers, which paints the band behind them. */
+	rangePosition?: RangePosition;
 	header?: string;
 	variant?: string;
 	children?: Snippet;

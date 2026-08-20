@@ -6,4 +6,15 @@ export type CalendarDatePickerProps = {
 	format?: Intl.DateTimeFormatOptions;
 	calendarPosition?: Partial<ComputePositionConfig>;
 	onChange?: (event: Event, value: Date | null) => void;
-} & Omit<CalendarViewProps, 'floating' | 'multiple' | 'view' | 'onViewChange' | 'onChange' | 'value'>;
+} & Omit<
+	CalendarViewProps,
+	| 'floating'
+	| 'selectionMode'
+	| 'range'
+	| 'blackoutBreaksRange'
+	| 'onRangeChange'
+	| 'view'
+	| 'onViewChange'
+	| 'onChange'
+	| 'value'
+>;

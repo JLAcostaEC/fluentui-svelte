@@ -7,7 +7,8 @@
 		getCalendarMonths,
 		getCalendarViewContext,
 		getMonthLocale,
-		indexOfDate
+		indexOfDate,
+		rangeCovers
 	} from './calendar-view.svelte.js';
 	import { createCalendarNavigation, MONTH_GRID } from './calendar-view-grid.js';
 	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
@@ -21,9 +22,9 @@
 
 	const { selectMonth, updatePage } = CalendarContext.methods;
 
-	let { locale, minDate, headers, maxDate, multiple } = CalendarContext.config;
+	let { locale, minDate, headers, maxDate, selectionMode } = CalendarContext.config;
 
-	let { value, page, pageAnimationDirection } = $derived(CalendarContext.state);
+	let { value, range, page, pageAnimationDirection } = $derived(CalendarContext.state);
 
 	let calendarMonths = $derived(getCalendarMonths(page));
 
@@ -48,6 +49,10 @@
 	};
 
 	const isSelected = (month: Date) => {
+		// A month the range merely passes through counts as selected: it is one cell
+		// standing for the whole month, and the band belongs to the day view.
+		if (selectionMode === 'range') return rangeCovers(month, range, 'month');
+
 		return (
 			value !== null &&
 			(Array.isArray(value) ? indexOfDate(value, month, 'month') > -1 : compareDates(value, month, 'month'))
@@ -90,7 +95,7 @@
 		data-calendar-page
 		role="grid"
 		aria-label={pageLabel}
-		aria-multiselectable={multiple || undefined}
+		aria-multiselectable={selectionMode !== 'single' || undefined}
 		in:fly={{
 			opacity: 1,
 			duration: pageAnimationDirection !== 'neutral' ? pageAnimationDuration : 0,

@@ -2,7 +2,13 @@
 	import { fly } from 'svelte/transition';
 	import { circOut } from 'svelte/easing';
 	import CalendarViewItem from './calendar-view-item.svelte';
-	import { compareDates, getCalendarViewContext, getCalendarYears, indexOfDate } from './calendar-view.svelte.js';
+	import {
+		compareDates,
+		getCalendarViewContext,
+		getCalendarYears,
+		indexOfDate,
+		rangeCovers
+	} from './calendar-view.svelte.js';
 	import { createCalendarNavigation, YEAR_GRID } from './calendar-view-grid.js';
 	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { getCSSDuration } from '$internal';
@@ -15,9 +21,9 @@
 
 	const { selectYear, updatePage } = CalendarContext.methods;
 
-	let { locale, minDate, maxDate, multiple } = CalendarContext.config;
+	let { locale, minDate, maxDate, selectionMode } = CalendarContext.config;
 
-	let { value, page, pageAnimationDirection } = $derived(CalendarContext.state);
+	let { value, range, page, pageAnimationDirection } = $derived(CalendarContext.state);
 
 	let calendarYears = $derived(getCalendarYears(page));
 
@@ -38,6 +44,10 @@
 	};
 
 	const isSelected = (year: Date) => {
+		// Same reading as the month view: the cell stands for the whole year, so the
+		// range only has to touch it.
+		if (selectionMode === 'range') return rangeCovers(year, range, 'year');
+
 		return (
 			value !== null &&
 			(Array.isArray(value) ? indexOfDate(value, year, 'year') > -1 : compareDates(value, year, 'year'))
@@ -86,7 +96,7 @@
 		data-calendar-page
 		role="grid"
 		aria-label={pageLabel}
-		aria-multiselectable={multiple || undefined}
+		aria-multiselectable={selectionMode !== 'single' || undefined}
 		in:fly={{
 			opacity: 1,
 			duration: pageAnimationDirection !== 'neutral' ? pageAnimationDuration : 0,

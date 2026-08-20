@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Button } from '$lib/index.js';
-	import { CaretDownFilled, CaretUpFilled } from 'fluentui-icons-svelte';
+	import { CaretDownFilled, CaretUpFilled, DismissRegular } from 'fluentui-icons-svelte';
 	import { getCalendarViewContext } from './calendar-view.svelte.js';
 
 	const CalendarContext = getCalendarViewContext();
@@ -11,9 +11,13 @@
 
 	let locale = $derived(CalendarContext.config.locale);
 
+	let selectionMode = $derived(CalendarContext.config.selectionMode);
+
 	let view = $derived(CalendarContext.state.view);
 
 	let page = $derived(CalendarContext.state.page);
+
+	let range = $derived(CalendarContext.state.range);
 
 	let viewLabel = $derived.by(() => {
 		let label = '';
@@ -58,6 +62,21 @@
 		<Button appearance="subtle" aria-label="Next month" onclick={() => CalendarContext.methods.updatePage(1)}>
 			<CaretDownFilled width="16" />
 		</Button>
+		<!--
+			Only a range needs this. Clicking a selected day already takes it back in the
+			other two modes, but a range has no such click: every click builds it further
+			or starts it over.
+		-->
+		{#if selectionMode === 'range'}
+			<Button
+				appearance="subtle"
+				aria-label="Clear the selected dates"
+				disabled={!range.start && !range.end}
+				onclick={(e) => CalendarContext.methods.clearSelection(e)}
+			>
+				<DismissRegular width="16" />
+			</Button>
+		{/if}
 	</div>
 </div>
 
@@ -75,6 +94,8 @@
 			justify-content: flex-start;
 			font-weight: 500;
 			font-size: var(--fs-body2-font-size);
+			/* A third button on the right needs room, and this is where it comes from. */
+			min-width: 0;
 		}
 		& .navigation {
 			display: flex;

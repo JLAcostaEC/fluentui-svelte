@@ -4,18 +4,21 @@
 
 ## {m.cv_component_props_title()}
 
-| **Name**        | **Type**                              | **Description**                           |
-| --------------- | ------------------------------------- | ----------------------------------------- |
-| `value`         | bindable `Date` \| `Date[]` \| `null` | {m.cv_props_value_description()}          |
-| `multiple`      | `boolean`                             | {m.cv_props_multiple_description()}       |
-| `view`          | `days` \| `months` \| `years`         | {m.cv_props_view_description()}           |
-| `minDate`       | `Date`                                | {m.cv_props_mindate_description()}        |
-| `maxDate`       | `Date`                                | {m.cv_props_maxdate_description()}        |
-| `locale`        | `string`                              | {m.cv_props_locale_description()}         |
-| `weekStart`     | `number`                              | {m.cv_props_weekstart_description()}      |
-| `blackoutDates` | `Date[]`                              | {m.cv_props_blackoutdates_description()}  |
-| `headers`       | `object`                              | {m.cv_props_headers_description()}        |
-| `floating`      | `object`                              | {m.cv_props_floating_description()}       |
-| `onChange`      | `(e: Event, selection) => void`       | {m.cv_props_onchange_description()}       |
-| `onViewChange`  | `(view) => void`                      | {m.cv_props_onviewchange_description()}   |
-| `element`       | bindable `HTMLElement`                | {m.cv_props_element_description()}        |
+| **Name**              | **Type**                                  | **Description**                                 |
+| --------------------- | ----------------------------------------- | ----------------------------------------------- |
+| `value`               | bindable `Date` \| `Date[]` \| `null`     | {m.cv_props_value_description()}                |
+| `selectionMode`       | `single` \| `multiple` \| `range`         | {m.cv_props_selectionmode_description()}        |
+| `range`               | bindable `{ start, end: Date \| null }`   | {m.cv_props_range_description()}                |
+| `blackoutBreaksRange` | `boolean`                                 | {m.cv_props_blackoutbreaksrange_description()}  |
+| `view`                | `days` \| `months` \| `years`             | {m.cv_props_view_description()}                 |
+| `minDate`             | `Date`                                    | {m.cv_props_mindate_description()}              |
+| `maxDate`             | `Date`                                    | {m.cv_props_maxdate_description()}              |
+| `locale`              | `string`                                  | {m.cv_props_locale_description()}               |
+| `weekStart`           | `number`                                  | {m.cv_props_weekstart_description()}            |
+| `blackoutDates`       | `Date[]`                                  | {m.cv_props_blackoutdates_description()}        |
+| `headers`             | `object`                                  | {m.cv_props_headers_description()}              |
+| `floating`            | `object`                                  | {m.cv_props_floating_description()}             |
+| `onChange`            | `(e: Event, selection) => void`           | {m.cv_props_onchange_description()}             |
+| `onRangeChange`       | `(e: Event, range) => void`               | {m.cv_props_onrangechange_description()}        |
+| `onViewChange`        | `(view) => void`                          | {m.cv_props_onviewchange_description()}         |
+| `element`             | bindable `HTMLElement`                    | {m.cv_props_element_description()}              |

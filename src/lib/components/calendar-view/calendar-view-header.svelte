@@ -12,15 +12,20 @@
 	let weekStart = context.config.weekStart;
 </script>
 
-<thead class="fs-calendar-view-header">
-	<tr class="calendar-header-row">
+<!--
+	Decorative: every cell announces its own full date — "Thursday, 15 January 2026" —
+	so repeating the weekday here would only add noise. Marking it as a row of
+	`columnheader`s would also drag the grid structure into the clipped viewport.
+-->
+<div class="fs-calendar-view-header" aria-hidden="true">
+	<div class="calendar-header-row">
 		{#each Array(7) as _, i (i)}
-			<th class="calendar-header-item">
+			<div class="calendar-header-item">
 				{getWeekdayLocale(i, { format: 'short', locale, offset: weekStart })}
-			</th>
+			</div>
 		{/each}
-	</tr>
-</thead>
+	</div>
+</div>
 
 <style>
 	.fs-calendar-view-header {

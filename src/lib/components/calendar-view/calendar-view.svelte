@@ -69,7 +69,7 @@
 
 	let boundingElement = reactiveBoundingRect();
 
-	let tableElement: HTMLTableElement | undefined = $state();
+	let gridElement: HTMLElement | undefined = $state();
 
 	// Set when a view change starts from a grid cell, so the new grid can pick focus
 	// up where the old one left it. A change started from the header leaves it null:
@@ -223,7 +223,7 @@
 	/**
 	 * `Ctrl` + arrow moves between views. That is a calendar shortcut rather than a
 	 * move inside the grid, so Tabspot never reports it — one delegated listener on
-	 * the table covers all three views and every cell.
+	 * the grid covers all three views and every cell.
 	 */
 	function zoomShortcut(node: HTMLElement) {
 		return on(node, 'keydown', (event) => {
@@ -238,19 +238,19 @@
 	// Opening as a popup: hand focus to the grid so the arrows work straight away.
 	// An inline calendar is just part of the page and must not steal focus.
 	onMount(() => {
-		if (floating && tableElement) focusCalendarView(tableElement, null, VIEW_PRECISION[view]);
+		if (floating && gridElement) focusCalendarView(gridElement, null, VIEW_PRECISION[view]);
 	});
 
-	// The table is rebuilt on every view change, so the root is registered again
+	// The grid is rebuilt on every view change, so the root is registered again
 	// each time. This is necessary for tabspot to work correctly.
 	$effect(() => {
-		if (!tableElement) return;
+		if (!gridElement) return;
 
-		setTabspotAttributes({ element: tableElement, config: CALENDAR_GRID_CONFIG });
+		setTabspotAttributes({ element: gridElement, config: CALENDAR_GRID_CONFIG });
 
 		if (!pendingFocus) return;
 
-		focusCalendarView(tableElement, pendingFocus.date, pendingFocus.precision);
+		focusCalendarView(gridElement, pendingFocus.date, pendingFocus.precision);
 		pendingFocus = null;
 	});
 </script>
@@ -284,9 +284,10 @@ This implementation is originally made by Tropix126 in his FluentSvelte library,
 		<CalendarViewControls />
 		<div class="calendar-wrapper">
 			{#key view}
-				<table
-					bind:this={tableElement}
-					class="calendar-table"
+				<div
+					bind:this={gridElement}
+					class="calendar-view-stack"
+					data-calendar-grid
 					{@attach zoomShortcut}
 					in:fadeScale={{
 						duration: viewAnimationDirection !== 'neutral' ? 500 : 0,
@@ -305,13 +306,23 @@ This implementation is originally made by Tropix126 in his FluentSvelte library,
 				>
 					{#if view === 'days'}
 						<CalendarViewHeader />
-						<CalendarViewDays />
-					{:else if view === 'months'}
-						<CalendarViewMonths />
-					{:else if view === 'years'}
-						<CalendarViewYears />
 					{/if}
-				</table>
+
+					<!--
+						The page slides in and out of here. Clipping it at the viewport is what
+						keeps a flying month from crossing the weekday names: on a translucent
+						surface you cannot mask, only clip.
+					-->
+					<div class="page-viewport">
+						{#if view === 'days'}
+							<CalendarViewDays />
+						{:else if view === 'months'}
+							<CalendarViewMonths />
+						{:else if view === 'years'}
+							<CalendarViewYears />
+						{/if}
+					</div>
+				</div>
 			{/key}
 		</div>
 	</Flyout>
@@ -331,17 +342,19 @@ This implementation is originally made by Tropix126 in his FluentSvelte library,
 			position: relative;
 			width: 100%;
 			aspect-ratio: 1;
-			display: grid;
-			grid-template-rows: auto 1fr;
-			gap: 0.5rem;
-			& table {
+			& .calendar-view-stack {
 				padding: 0 0.5rem;
 				position: absolute;
-				width: 100%;
-				display: block;
 				inset: 0;
+				display: flex;
+				flex-direction: column;
 				background: var(--fs-layer-on-acrylic-default);
-				& :global(tbody[inert]) {
+				& .page-viewport {
+					position: relative;
+					overflow: hidden;
+					flex: 1;
+				}
+				& :global([data-calendar-page][inert]) {
 					z-index: -1;
 				}
 			}

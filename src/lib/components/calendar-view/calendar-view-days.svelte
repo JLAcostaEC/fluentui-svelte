@@ -26,7 +26,7 @@
 
 	let { value, page, pageAnimationDirection } = $derived(CalendarContext.state);
 
-	let { locale, minDate, weekStart, blackoutDates, headers, maxDate } = $derived(CalendarContext.config);
+	let { locale, minDate, weekStart, blackoutDates, headers, maxDate, multiple } = $derived(CalendarContext.config);
 
 	let calendarDays = $derived(getCalendarDays(page, weekStart));
 
@@ -42,6 +42,12 @@
 
 	const isBlackout = (day: Date) => !!blackoutDates && indexOfDate(blackoutDates, day, 'day') > -1;
 
+	/** What the grid as a whole is showing. */
+	let pageLabel = $derived(new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'long' }).format(page));
+
+	/** "Thursday, 15 January 2026" — the weekday is why the header row can stay decorative. */
+	const dayLabel = (day: Date) => new Intl.DateTimeFormat(locale, { dateStyle: 'full' }).format(day);
+
 	const globalContext = getGlobalFSContext();
 
 	const navigate = createCalendarNavigation({
@@ -56,7 +62,7 @@
 	// Tabspot reports what it cannot decide — running out of cells, or landing on a
 	// date this page does not own — and the calendar answers by turning the page.
 	$effect(() => {
-		const root = bodyElement?.closest('table');
+		const root = bodyElement?.closest<HTMLElement>('[data-calendar-grid]');
 		const instance = globalContext?.state.tabspotInstance;
 
 		if (!root || !instance) return;
@@ -66,24 +72,28 @@
 </script>
 
 {#key page}
-	<tbody
+	<div
 		bind:this={bodyElement}
 		class="fs-calendar-view-days"
+		data-calendar-page
+		role="grid"
+		aria-label={pageLabel}
+		aria-multiselectable={multiple || undefined}
 		in:fly={{
 			opacity: 1,
-			duration: pageAnimationDirection !== 'neutral' ? pageAnimationDuration: pageAnimationDuration,
+			duration: pageAnimationDirection !== 'neutral' ? pageAnimationDuration : pageAnimationDuration,
 			easing: circOut,
 			y: pageAnimationDirection === 'neutral' ? 0 : pageAnimationDirection === 'up' ? -215 : 215
 		}}
 		out:fly={{
 			opacity: 0,
-			duration: pageAnimationDirection !== 'neutral' ? pageAnimationDuration: pageAnimationDuration,
+			duration: pageAnimationDirection !== 'neutral' ? pageAnimationDuration : pageAnimationDuration,
 			easing: circOut,
 			y: pageAnimationDirection === 'neutral' ? 0 : pageAnimationDirection === 'up' ? 215 : -215
 		}}
 	>
 		{#each Array(6) as _, week (week)}
-			<tr class="fs-calendar-view-week">
+			<div class="fs-calendar-view-week" role="row">
 				{#each calendarDays.slice(week * 7, week * 7 + 7) as day, i (week * 7 + i)}
 					{@const selected = isSelected(day)}
 					{@const inMonth = compareDates(day, page, 'month')}
@@ -98,6 +108,7 @@
 						blackout={isBlackout(day)}
 						buttonAttributes={{
 							tabindex: inMonth ? 0 : -1,
+							'aria-label': dayLabel(day),
 							'data-date': day.getTime(),
 							onclick: (e: MouseEvent) => {
 								selectDay(e, day);
@@ -107,9 +118,9 @@
 						{day.getDate()}
 					</CalendarViewItem>
 				{/each}
-			</tr>
+			</div>
 		{/each}
-	</tbody>
+	</div>
 {/key}
 
 <style>
@@ -120,7 +131,7 @@
 		position: absolute;
 		left: 0;
 		bottom: 0;
-		padding: 0.5rem;
+		padding-bottom: 0.5rem;
 		& .fs-calendar-view-week {
 			display: grid;
 			grid-template-columns: repeat(7, 1fr);

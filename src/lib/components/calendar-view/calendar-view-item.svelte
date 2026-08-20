@@ -15,7 +15,12 @@
 	}: CalendarViewItemProps = $props();
 </script>
 
-<td class="fs-calendar-view-item variant-{variant === 'day' ? 'day' : 'month-year'}" role="gridcell" {...attributes}>
+<div
+	class="fs-calendar-view-item variant-{variant === 'day' ? 'day' : 'month-year'}"
+	role="gridcell"
+	aria-selected={selected ?? false}
+	{...attributes}
+>
 	<button
 		type="button"
 		class={['calendar-item-button', { selected, disabled, current, blackout }, outOfRange && 'out-of-range']}
@@ -28,7 +33,7 @@
 		{/if}
 		{@render children?.()}
 	</button>
-</td>
+</div>
 
 <style>
 	.fs-calendar-view-item {

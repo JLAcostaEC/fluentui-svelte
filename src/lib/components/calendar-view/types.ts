@@ -1,4 +1,4 @@
-import type { HTMLButtonAttributes, HTMLTdAttributes } from 'svelte/elements';
+import type { HTMLAttributes, HTMLButtonAttributes } from 'svelte/elements';
 import type { FSContext } from '$internal';
 import type { Snippet } from 'svelte';
 import type { ComputePositionConfig, VirtualElement } from '@floating-ui/dom';
@@ -34,7 +34,7 @@ export interface CalendarGrid {
 
 export interface CalendarNavigationOptions {
 	grid: CalendarGrid;
-	/** The `<tbody>` rendering the live page. */
+	/** The element rendering the live page. */
 	body: () => HTMLElement | null;
 	/** The page currently rendered. */
 	page: () => Date;
@@ -109,4 +109,4 @@ export type CalendarViewItemProps = {
 	variant?: string;
 	children?: Snippet;
 	buttonAttributes?: HTMLButtonAttributes;
-} & HTMLTdAttributes;
+} & HTMLAttributes<HTMLDivElement>;

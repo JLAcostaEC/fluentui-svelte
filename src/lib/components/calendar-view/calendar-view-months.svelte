@@ -21,7 +21,7 @@
 
 	const { selectMonth, updatePage } = CalendarContext.methods;
 
-	let { locale, minDate, headers, maxDate } = CalendarContext.config;
+	let { locale, minDate, headers, maxDate, multiple } = CalendarContext.config;
 
 	let { value, page, pageAnimationDirection } = $derived(CalendarContext.state);
 
@@ -54,6 +54,12 @@
 		);
 	};
 
+	/** What the grid as a whole is showing. */
+	let pageLabel = $derived(new Intl.DateTimeFormat(locale, { year: 'numeric' }).format(page));
+
+	/** "January 2026" rather than a bare "Jan". */
+	const monthLabel = (month: Date) => new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'long' }).format(month);
+
 	const globalContext = getGlobalFSContext();
 
 	const navigate = createCalendarNavigation({
@@ -68,7 +74,7 @@
 	// Tabspot reports what it cannot decide — running out of cells, or landing on a
 	// month this page does not own — and the calendar answers by turning the page.
 	$effect(() => {
-		const root = bodyElement?.closest('table');
+		const root = bodyElement?.closest<HTMLElement>('[data-calendar-grid]');
 		const instance = globalContext?.state.tabspotInstance;
 
 		if (!root || !instance) return;
@@ -78,9 +84,13 @@
 </script>
 
 {#key page}
-	<tbody
+	<div
 		bind:this={bodyElement}
 		class="fs-calendar-view-months"
+		data-calendar-page
+		role="grid"
+		aria-label={pageLabel}
+		aria-multiselectable={multiple || undefined}
 		in:fly={{
 			opacity: 1,
 			duration: pageAnimationDirection !== 'neutral' ? pageAnimationDuration : 0,
@@ -95,7 +105,7 @@
 		}}
 	>
 		{#each Array(4) as _, row (row)}
-			<tr class="fs-calendar-view-row">
+			<div class="fs-calendar-view-row" role="row">
 				{#each calendarMonths.slice(row * 4, row * 4 + 4) as month, i (row * 4 + i)}
 					{@const selected = isSelected(month)}
 					{@const inYear = month.getFullYear() === page.getFullYear()}
@@ -112,6 +122,7 @@
 						current={compareDates(month, new Date(), 'month')}
 						buttonAttributes={{
 							tabindex: firstFocusableMonth && compareDates(firstFocusableMonth, month, 'month') ? 0 : -1,
+							'aria-label': monthLabel(month),
 							'data-date': month.getTime(),
 							onclick: (e: MouseEvent) => {
 								selectMonth(e, month);
@@ -124,9 +135,9 @@
 						})}
 					</CalendarViewItem>
 				{/each}
-			</tr>
+			</div>
 		{/each}
-	</tbody>
+	</div>
 {/key}
 
 <style>

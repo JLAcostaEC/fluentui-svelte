@@ -15,7 +15,7 @@
 
 	const { selectYear, updatePage } = CalendarContext.methods;
 
-	let { minDate, maxDate } = CalendarContext.config;
+	let { locale, minDate, maxDate, multiple } = CalendarContext.config;
 
 	let { value, page, pageAnimationDirection } = $derived(CalendarContext.state);
 
@@ -44,6 +44,18 @@
 		);
 	};
 
+	/** The decade the grid is showing, e.g. "2020 – 2029". */
+	let pageLabel = $derived.by(() => {
+		const start = Math.floor(page.getFullYear() / 10) * 10;
+
+		return new Intl.DateTimeFormat(locale, { year: 'numeric' }).formatRange(
+			new Date(start, 0, 1),
+			new Date(start + 9, 0, 1)
+		);
+	});
+
+	const yearLabel = (year: Date) => new Intl.DateTimeFormat(locale, { year: 'numeric' }).format(year);
+
 	const globalContext = getGlobalFSContext();
 
 	const navigate = createCalendarNavigation({
@@ -58,7 +70,7 @@
 	// Tabspot reports what it cannot decide — running out of cells, or landing on a
 	// year this page does not own — and the calendar answers by turning the page.
 	$effect(() => {
-		const root = bodyElement?.closest('table');
+		const root = bodyElement?.closest<HTMLElement>('[data-calendar-grid]');
 		const instance = globalContext?.state.tabspotInstance;
 
 		if (!root || !instance) return;
@@ -68,9 +80,13 @@
 </script>
 
 {#key page}
-	<tbody
+	<div
 		bind:this={bodyElement}
 		class="fs-calendar-view-months"
+		data-calendar-page
+		role="grid"
+		aria-label={pageLabel}
+		aria-multiselectable={multiple || undefined}
 		in:fly={{
 			opacity: 1,
 			duration: pageAnimationDirection !== 'neutral' ? pageAnimationDuration : 0,
@@ -85,35 +101,34 @@
 		}}
 	>
 		{#each Array(4) as _, row (row)}
-			<tr class="fs-calendar-view-row">
+			<div class="fs-calendar-view-row" role="row">
 				{#each calendarYears.slice(row * 4, row * 4 + 4) as year, i (row * 4 + i)}
 					{@const selected = isSelected(year)}
 					{@const inDecade = compareDates(year, page, 'decade')}
 					{@const firstFocusableYear = getFirstFocusableYear()}
 					{@const disabled = isDisabled(year)}
 
-					<td role="gridcell">
-						<CalendarViewItem
-							{disabled}
-							{selected}
-							variant="monthYear"
-							outOfRange={!inDecade}
-							current={compareDates(year, new Date(), 'year')}
-							buttonAttributes={{
-								tabindex: firstFocusableYear && compareDates(firstFocusableYear, year, 'year') ? 0 : -1,
-								'data-date': year.getTime(),
-								onclick: (e: MouseEvent) => {
-									selectYear(e, year);
-								}
-							}}
-						>
-							{year.getFullYear()}
-						</CalendarViewItem>
-					</td>
+					<CalendarViewItem
+						{disabled}
+						{selected}
+						variant="monthYear"
+						outOfRange={!inDecade}
+						current={compareDates(year, new Date(), 'year')}
+						buttonAttributes={{
+							tabindex: firstFocusableYear && compareDates(firstFocusableYear, year, 'year') ? 0 : -1,
+							'aria-label': yearLabel(year),
+							'data-date': year.getTime(),
+							onclick: (e: MouseEvent) => {
+								selectYear(e, year);
+							}
+						}}
+					>
+						{year.getFullYear()}
+					</CalendarViewItem>
 				{/each}
-			</tr>
+			</div>
 		{/each}
-	</tbody>
+	</div>
 {/key}
 
 <style>

@@ -27,8 +27,8 @@ export const CALENDAR_GRID_CONFIG: TabspotNodeOptions = {
 	mover: {
 		layout: 'grid',
 		flow: 'linear',
-		rows: { by: 'selector', row: 'tr' },
-		items: 'tbody:not([inert]) button',
+		rows: { by: 'selector', row: '[role="row"]' },
+		items: '[data-calendar-page]:not([inert]) button',
 		activation: { mode: 'focus', roving: false }
 	}
 };
@@ -89,7 +89,7 @@ export const VIEW_PRECISION: Record<View, DateComparisonPrecision> = {
 };
 
 /** Cells of the live page that can take focus. */
-const FOCUSABLE_CELL = 'tbody:not([inert]) button:not([disabled])';
+const FOCUSABLE_CELL = '[data-calendar-page]:not([inert]) button:not([disabled])';
 
 function cellFor(root: HTMLElement, date: Date, precision: DateComparisonPrecision) {
 	for (const cell of root.querySelectorAll<HTMLButtonElement>(FOCUSABLE_CELL)) {

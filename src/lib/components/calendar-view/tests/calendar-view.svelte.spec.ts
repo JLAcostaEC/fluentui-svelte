@@ -21,12 +21,12 @@ const JANUARY_2026 = new Date(2026, 0, 15);
 const jan = (day: number) => 2 + day;
 
 /** Cells of the live page. The outgoing page keeps rendering until its transition ends. */
-const cells = () => page.selector('tbody:not([inert]) button');
+const cells = () => page.selector('[data-calendar-page]:not([inert]) button');
 
 const cell = (index: number) => cells().nth(index);
 
 function focusCell(index: number) {
-	const buttons = document.querySelectorAll<HTMLButtonElement>('tbody:not([inert]) button');
+	const buttons = document.querySelectorAll<HTMLButtonElement>('[data-calendar-page]:not([inert]) button');
 	buttons[index].focus();
 }
 
@@ -36,7 +36,7 @@ describe('CalendarView rendering', () => {
 	it('renders a 42 cell day grid', async () => {
 		render(CalendarViewTestWrapper, { value: JANUARY_2026 });
 		await expect.element(cell(41)).toBeInTheDocument();
-		expect(document.querySelectorAll('tbody:not([inert]) button')).toHaveLength(42);
+		expect(document.querySelectorAll('[data-calendar-page]:not([inert]) button')).toHaveLength(42);
 	});
 
 	it('opens on the month of the current value', async () => {
@@ -314,7 +314,7 @@ describe('CalendarView grid edges', () => {
 describe('CalendarView tabspot integration', () => {
 	it('drives the grid through a tabspot root', async () => {
 		render(CalendarViewTestWrapper, { value: JANUARY_2026 });
-		await expect.element(page.selector('table.calendar-table')).toHaveAttribute('data-tabspot');
+		await expect.element(page.selector('[data-calendar-grid]')).toHaveAttribute('data-tabspot');
 	});
 
 	it('moves to the start and end of the week with Home and End', async () => {
@@ -339,7 +339,7 @@ describe('CalendarView focus', () => {
 
 	it("falls back to today's cell when there is no selection", async () => {
 		render(CalendarViewTestWrapper, { value: null, popup: true });
-		await expect.element(page.selector('tbody:not([inert]) button.current')).toHaveFocus();
+		await expect.element(page.selector('[data-calendar-page]:not([inert]) button.current')).toHaveFocus();
 	});
 
 	it('does not steal focus when rendered inline', async () => {
@@ -403,7 +403,7 @@ describe('CalendarView focus', () => {
 		await periodLabel().click();
 
 		await expect.element(page.selector('.fs-calendar-view-months')).toBeInTheDocument();
-		expect(document.activeElement?.closest('tbody')).toBeNull();
+		expect(document.activeElement?.closest('[data-calendar-page]')).toBeNull();
 	});
 });
 
@@ -575,5 +575,60 @@ describe('CalendarView year navigation', () => {
 
 		await expect.element(page.selector('.fs-calendar-view-months')).toBeInTheDocument();
 		await expect.element(periodLabel()).toHaveTextContent('2022');
+	});
+});
+
+describe('CalendarView accessibility', () => {
+	it('exposes the page as a labelled grid of rows and cells', async () => {
+		render(CalendarViewTestWrapper, { value: JANUARY_2026 });
+
+		await expect.element(page.getByRole('grid', { name: 'January 2026' })).toBeInTheDocument();
+		expect(document.querySelectorAll('[role="row"]')).toHaveLength(6);
+		expect(document.querySelectorAll('[role="gridcell"]')).toHaveLength(42);
+	});
+
+	it('names every cell with its full date, weekday first', async () => {
+		render(CalendarViewTestWrapper, { value: JANUARY_2026 });
+
+		// Jan 15 2026 is a Thursday. The weekday is why the header row can stay decorative.
+		await expect.element(page.getByRole('button', { name: 'Thursday, January 15, 2026' })).toBeInTheDocument();
+	});
+
+	it('names cells in the requested locale', async () => {
+		render(CalendarViewTestWrapper, { value: JANUARY_2026, locale: 'es-ES' });
+
+		await expect.element(page.getByRole('button', { name: 'jueves, 15 de enero de 2026' })).toBeInTheDocument();
+	});
+
+	it('marks the selected cell with aria-selected', async () => {
+		render(CalendarViewTestWrapper, { value: JANUARY_2026 });
+
+		await expect.element(cell(jan(15))).toHaveAttribute('aria-label', 'Thursday, January 15, 2026');
+		expect(document.querySelectorAll('[role="gridcell"][aria-selected="true"]')).toHaveLength(1);
+	});
+
+	it('keeps the weekday row out of the accessibility tree', async () => {
+		render(CalendarViewTestWrapper, { value: JANUARY_2026 });
+		await expect.element(page.selector('.fs-calendar-view-header')).toHaveAttribute('aria-hidden', 'true');
+	});
+
+	it('names the month grid by its year and the year grid by its decade', async () => {
+		render(CalendarViewTestWrapper, { value: JANUARY_2026, view: 'months' });
+		await expect.element(page.getByRole('grid', { name: '2026' })).toBeInTheDocument();
+		await expect.element(page.getByRole('button', { name: 'January 2026' })).toBeInTheDocument();
+	});
+
+	it('leaves the weekday names outside the clipped viewport', async () => {
+		render(CalendarViewTestWrapper, { value: JANUARY_2026 });
+		await expect.element(cell(jan(15))).toBeInTheDocument();
+
+		// The page slides inside .page-viewport; if the header lived in there too, a
+		// flying month would cross the weekday names — the bug this markup fixes.
+		const header = document.querySelector('.fs-calendar-view-header')!;
+		const viewport = document.querySelector('.page-viewport')!;
+
+		expect(viewport.contains(header)).toBe(false);
+		expect(viewport.contains(document.querySelector('[data-calendar-page]'))).toBe(true);
+		expect(getComputedStyle(viewport).overflow).toBe('hidden');
 	});
 });

@@ -56,7 +56,6 @@ ties a rendered row back to the data.
 Filtering is yours to do in `textChanged`: a windowed list renders from your data, so the
 built-in filter that a plain option list applies is skipped.
 
-
 ## Component Props
 
 | Name               | Type                                                      | Description                                                            |

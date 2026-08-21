@@ -35,4 +35,4 @@
 
 ## {m.docs_overview_changelog_title()}
 
-{m.docs_overview_changelog_description_before_link()} <a href="https://github.com/JLAcostaEC/fluentui-svelte/blob/main/CONTRIBUTING.md">{m.docs_overview_changelog_description_link_text()}</a>.
+{m.docs_overview_changelog_description_before_link()} <a href="https://github.com/JLAcostaEC/fluentui-svelte/blob/main/CHANGELOG.md">{m.docs_overview_changelog_description_link_text()}</a>.

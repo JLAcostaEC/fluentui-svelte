@@ -57,7 +57,6 @@ const config = {
 			$components: 'src/lib/components',
 			$css: 'src/lib/css',
 			$site: 'src/site',
-			$docs: 'src/site/documentation',
 			$i18n: 'src/i18n',
 			$constants: 'src/lib/internal/constants.js'
 		}

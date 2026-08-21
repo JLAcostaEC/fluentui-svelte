@@ -40,8 +40,8 @@ function toIdentifier(folder) {
 }
 
 const libPath = path.join('src/lib/components');
-const sitePath = path.join('src/site/documentation');
-const outFile = 'index.js';
+const sitePath = path.join('src/site/utils');
+const outFile = 'components-index.js';
 
 /**
  * Generates the documentation index file.

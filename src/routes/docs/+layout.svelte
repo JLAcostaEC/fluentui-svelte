@@ -3,7 +3,7 @@
 	import { m } from '$i18n/messages.js';
 	// Imported directly (not via a server load) because each META may carry an
 	// `icon` Svelte component, which is not serializable across the load boundary.
-	import paths from '$docs/index.js';
+	import componentsMeta from '$site/utils/components-index.js';
 
 	let { children } = $props();
 
@@ -21,6 +21,6 @@
 	];
 </script>
 
-<Docs {primaryNavigation} secondaryNavigation={paths}>
+<Docs {primaryNavigation} secondaryNavigation={componentsMeta}>
 	{@render children()}
 </Docs>

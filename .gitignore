@@ -33,7 +33,7 @@ project.inlang/cache/
 !.dev.vars.example
 
 # Auto-generated files
-src/site/documentation/index.js
+src/site/utils/components-index.js
 
 # AI
 .claude/*.local.*

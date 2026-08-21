@@ -5,6 +5,7 @@
 		status,
 		class: classes,
 		hideRail,
+		'aria-label': ariaLabel,
 		min = 0,
 		max = 100,
 		value = $bindable(),
@@ -32,6 +33,8 @@
 <svg
 	class={['fs-progress-bar', status && `status-${status}`, classes, typeof value !== 'number' && 'indeterminate']}
 	role="progressbar"
+	aria-label={ariaLabel ??
+		(typeof value !== 'number' ? (!status ? 'Loading' : `Status: ${status}`) : `Progress: ${checkValue}%`)}
 	width="100%"
 	height="3"
 	aria-valuemin={min}

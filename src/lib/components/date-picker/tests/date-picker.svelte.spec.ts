@@ -1,4 +1,4 @@
-import { page } from 'vitest/browser';
+import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { DatePicker } from '$lib/index.js';
@@ -33,7 +33,25 @@ describe('rendering', () => {
 
 	it('carries the value on the underlying date input', async () => {
 		render(DatePicker, { value: '2024-03-15' });
-		await expect.element(page.selector('input.date-picker-input')).toHaveValue('2024-03-15');
+		await expect.element(page.selector('input[type="date"]')).toHaveValue('2024-03-15');
+	});
+
+	it('keeps that input out of the tab order and out of the accessibility tree', async () => {
+		render(DatePicker, { value: '2024-03-15' });
+
+		const input = document.querySelector<HTMLInputElement>('input[type="date"]')!;
+		expect(input.hidden).toBe(true);
+
+		document.querySelector<HTMLElement>('.fs-date-picker')?.focus();
+		await userEvent.tab();
+
+		expect(document.activeElement).not.toBe(input);
+	});
+
+	it('is a real button', async () => {
+		render(DatePicker);
+		await expect.element(page.getByRole('button', { name: /Day/ })).toBeInTheDocument();
+		expect(document.querySelector('.fs-date-picker')?.tagName).toBe('BUTTON');
 	});
 });
 
@@ -77,6 +95,27 @@ describe('the popup', () => {
 		await picker().click();
 
 		await expect.element(flyout()).toBeInTheDocument();
+	});
+
+	it('announces the popup as a dialog it controls', async () => {
+		render(DatePicker, { open: true });
+
+		const trigger = document.querySelector('.fs-date-picker')!;
+		const controls = trigger.getAttribute('aria-controls');
+
+		expect(trigger).toHaveAttribute('aria-haspopup', 'dialog');
+		expect(controls).toBeTruthy();
+		expect(document.getElementById(controls!)).toHaveAttribute('role', 'dialog');
+		expect(document.getElementById(controls!)).toHaveAttribute('aria-label', 'Choose a date');
+	});
+
+	it('closes on Escape and hands the focus back', async () => {
+		render(DatePicker, { open: true });
+
+		await userEvent.keyboard('{Escape}');
+
+		await expect.element(flyout()).not.toBeInTheDocument();
+		expect(document.activeElement).toBe(document.querySelector('.fs-date-picker'));
 	});
 
 	it('offers a way to confirm and a way to cancel', async () => {

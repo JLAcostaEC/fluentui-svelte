@@ -1,4 +1,4 @@
-import { page } from 'vitest/browser';
+import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { TimePicker } from '$lib/index.js';
@@ -28,7 +28,29 @@ describe('rendering', () => {
 
 	it('carries the value on the underlying time input', async () => {
 		render(TimePicker, { value: '13:45:30' });
-		await expect.element(page.selector('input.time-picker-input')).toHaveValue('13:45:30');
+		await expect.element(page.selector('input[type="time"]')).toHaveValue('13:45:30');
+	});
+
+	it('keeps that input out of the tab order and out of the accessibility tree', async () => {
+		render(TimePicker, { value: '13:45:30' });
+
+		const input = document.querySelector<HTMLInputElement>('input[type="time"]')!;
+		expect(input.hidden).toBe(true);
+
+		document.querySelector<HTMLElement>('.fs-time-picker')?.focus();
+		await userEvent.tab();
+
+		expect(document.activeElement).not.toBe(input);
+	});
+
+	it('is a real button', async () => {
+		render(TimePicker);
+		expect(document.querySelector('.fs-time-picker')?.tagName).toBe('BUTTON');
+	});
+
+	it('takes a name for the form through inputProps', async () => {
+		render(TimePicker, { value: '13:45:30', inputProps: { name: 'meeting-time' } });
+		await expect.element(page.selector('input[type="time"]')).toHaveAttribute('name', 'meeting-time');
 	});
 });
 
@@ -80,6 +102,26 @@ describe('the popup', () => {
 
 		await expect.element(picker()).toHaveAttribute('aria-expanded', 'true');
 		await expect.element(flyout()).toBeInTheDocument();
+	});
+
+	it('announces the popup as a dialog it controls', async () => {
+		render(TimePicker, { open: true });
+
+		const trigger = document.querySelector('.fs-time-picker')!;
+		const controls = trigger.getAttribute('aria-controls');
+
+		expect(trigger).toHaveAttribute('aria-haspopup', 'dialog');
+		expect(controls).toBeTruthy();
+		expect(document.getElementById(controls!)).toHaveAttribute('role', 'dialog');
+	});
+
+	it('closes on Escape and hands the focus back', async () => {
+		render(TimePicker, { open: true });
+
+		await userEvent.keyboard('{Escape}');
+
+		await expect.element(flyout()).not.toBeInTheDocument();
+		expect(document.activeElement).toBe(document.querySelector('.fs-time-picker'));
 	});
 
 	it('closes without committing when cancelled', async () => {

@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from 'svelte/elements';
+import type { HTMLAttributes, HTMLButtonAttributes, HTMLInputAttributes } from 'svelte/elements';
 
 /** @propsmith DatePickerProps */
 export type DatePickerProps = {
@@ -48,14 +48,28 @@ export type DatePickerProps = {
 	 * @default []
 	 */
 	disabledYears?: Date[];
-	/** The DOM reference of the picker element.
+	/** The DOM reference of the trigger button.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLButtonElement;
+	/** The DOM reference of the element wrapping the trigger and its input.
+	 * @bindable
+	 */
+	wrapperRef?: HTMLDivElement;
+	/** The attributes to spread on the wrapper element.
+	 * @type HTMLAttributes
+	 */
+	wrapperAttributes?: HTMLAttributes<HTMLDivElement>;
 	/** The DOM reference of the underlying input element.
 	 * @bindable
 	 */
 	inputElement?: HTMLInputElement;
-	/** HTML attributes for the underlying input element. */
-	inputProps?: HTMLAttributes<HTMLInputElement>;
-} & HTMLAttributes<HTMLDivElement>;
+	/** HTML attributes for the underlying input element. Give it a `name` to submit the
+	 * value with a form.
+	 */
+	inputProps?: HTMLInputAttributes;
+	/** The accessible name of the popup, which is announced as a dialog.
+	 * @default 'Choose a date'
+	 */
+	popupLabel?: string;
+} & HTMLButtonAttributes;

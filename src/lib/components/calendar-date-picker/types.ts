@@ -22,5 +22,17 @@ export type CalendarDatePickerProps = {
 	calendarPosition?: Partial<ComputePositionConfig>;
 	/** Called whenever the selected date changes. */
 	onChange?: (event: Event, value: Date | null) => void;
+	/** The accessible name of the calendar popup, which is announced as a dialog.
+	 * @default 'Choose a date'
+	 */
+	popupLabel?: string;
+	/** The DOM reference of the trigger button.
+	 * @bindable
+	 */
+	triggerRef?: HTMLButtonElement;
+	/** The DOM reference of the calendar popup.
+	 * @bindable
+	 */
+	popupRef?: HTMLDivElement;
 } & Pick<CalendarViewProps, 'locale' | 'blackoutDates' | 'headers' | 'minDate' | 'maxDate' | 'weekStart'> &
 	HTMLAttributes<HTMLDivElement>;

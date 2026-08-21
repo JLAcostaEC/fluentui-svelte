@@ -61,6 +61,7 @@
 	this={as}
 	{role}
 	data-value={value}
+	aria-selected={role === 'option' ? active : undefined}
 	aria-disabled={disabled || undefined}
 	bind:this={ref as ListViewItemDOM[T]}
 	class={[

@@ -74,7 +74,7 @@
 		onmouseover: openOnHover && !disabled ? (e: MouseEvent) => debounced(e) : undefined,
 		onmouseleave: openOnHover && !disabled ? (e: MouseEvent) => debounced(e) : undefined,
 		'aria-haspopup': 'menu',
-		'aria-expanded': isSubMenu ? (_state.open ? 'true' : 'false') : undefined,
+		'aria-expanded': _state.open ? 'true' : 'false',
 		role: isSubMenu ? 'menuitem' : undefined,
 		appearance: isSubMenu ? 'subtle' : undefined,
 		isMenuButton: isSubMenu,

@@ -1,4 +1,4 @@
-<script lang="ts" generics="T extends 'div' | 'label' = 'div'">
+<script lang="ts" generics="T extends 'div' | 'label' = 'label'">
 	import CheckmarkFilled from 'fluentui-icons-svelte/CheckmarkFilled.svelte';
 	import SubtractFilled from 'fluentui-icons-svelte/SubtractFilled.svelte';
 	import { PREFIX } from '$constants';
@@ -18,7 +18,7 @@
 		name = id,
 		'aria-hidden': ariaHidden,
 		disabled,
-		wrapperAs = 'div' as T,
+		wrapperAs = 'label' as T,
 		wrapperAttributes,
 		children,
 		...attributes

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { watch } from 'runed';
 	import { PREFIX } from '$constants';
-	import { Button, ToggleSwitch } from '$lib/index.js';
+	import { Button } from '$lib/index.js';
 	import { invokeHandlers, RenderSoC } from '$internal';
 	import { getMenuContext, COMPONENT_NAME as MENU_COMPONENT_NAME } from './menu.svelte.ts';
 	import type { MenuItemActionableProps } from './types.ts';
@@ -86,13 +86,7 @@
 		{:else}
 			{@render children?.()}
 		{/if}
-		<ToggleSwitch
-			{checked}
-			aria-hidden="true"
-			tabindex={-1}
-			class="item-switch"
-			labelAttributes={{ 'aria-hidden': 'true', tabindex: -1 }}
-		/>
+		<span class={['item-switch', { on: checked, disabled }]} aria-hidden="true"></span>
 	</span>
 	{#if secondaryContent}
 		<span class="secondary-content" aria-hidden="true">{secondaryContent}</span>
@@ -121,9 +115,53 @@
 			font-size: inherit;
 			justify-content: space-between;
 			flex: 1;
-			& :global(> .item-switch) {
+			/* Mirrors the ToggleSwitch track and thumb, driven by `.checked` on the item. */
+			& .item-switch {
 				margin-left: 1rem;
 				pointer-events: none;
+				position: relative;
+				display: inline-flex;
+				align-items: center;
+				box-sizing: border-box;
+				width: 2.5rem;
+				min-width: 2.5rem;
+				height: 1.25rem;
+				padding: 0.063rem;
+				border: 0.063rem solid var(--fs-control-strong-stroke-default);
+				border-radius: 1.125rem;
+				background-color: var(--fs-control-alt-fill-secondary);
+				&::after {
+					content: '';
+					position: absolute;
+					left: 0.22rem;
+					width: 0.75rem;
+					height: 0.75rem;
+					border-radius: 0.75rem;
+					background-color: var(--fs-text-secondary);
+					transition: transform var(--fs-fast-duration) var(--fs-point-to-point);
+				}
+				&.on {
+					background-color: var(--fs-accent-fill-default);
+					border-color: var(--fs-accent-fill-default);
+					&::after {
+						transform: translateX(1.25rem);
+						background-color: var(--fs-text-on-accent-primary);
+					}
+				}
+				&.disabled {
+					background-color: var(--fs-control-alt-fill-disabled);
+					border-color: var(--fs-control-strong-stroke-disabled);
+					&::after {
+						background-color: var(--fs-text-disabled);
+					}
+					&.on {
+						background-color: var(--fs-accent-fill-disabled);
+						border-color: var(--fs-accent-fill-disabled);
+						&::after {
+							background-color: var(--fs-text-on-accent-disabled);
+						}
+					}
+				}
 			}
 		}
 		& .secondary-content {

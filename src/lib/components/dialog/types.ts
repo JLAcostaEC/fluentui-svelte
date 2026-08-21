@@ -94,6 +94,8 @@ export type DialogContext = FSContext<
 	{
 		dialogRef: HTMLDialogElement | undefined;
 		readonly open: boolean | undefined;
+		/** Set by `DialogTitle`, to allow the surface pointing `aria-labelledby` at it. */
+		titleId: string | undefined;
 	},
 	null,
 	{

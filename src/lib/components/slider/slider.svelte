@@ -35,7 +35,7 @@
 		railRef = $bindable(),
 		trackRef = $bindable(),
 		tickBarRef = $bindable(),
-		'aria-label': ariaLabel = '',
+		'aria-label': ariaLabel = 'Slider',
 		...attributes
 	}: SliderProps = $props();
 
@@ -206,9 +206,13 @@
 	bind:this={ref}
 	tabindex={disabled ? -1 : 0}
 	role="slider"
+	aria-label={ariaLabel}
+	aria-orientation={orientation}
 	aria-valuemin={min}
 	aria-valuemax={max}
 	aria-valuenow={value}
+	aria-valuetext={prefix || suffix ? `${prefix}${value}${suffix}` : undefined}
+	aria-disabled={disabled || undefined}
 	ontouchstart={handleTouchStart}
 	onkeydown={handleArrowKeys}
 	onmousedown={preventDefault(() => {

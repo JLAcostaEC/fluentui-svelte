@@ -12,7 +12,7 @@
 ## Features
 
 - Svelte 5 components!
-- All components will be accessible following [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) standards.
+- All components are accessible following [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) standards.
 - Semantic HTML & Native Behavior Elements (Like: `<dialog></dialog>` or `<details></details>`)
 - Reduced motion supported.
 - Keyboard navigation handled by [Tabspot](https://github.com/JLAcostaEC/tabspot), so arrow keys, roving

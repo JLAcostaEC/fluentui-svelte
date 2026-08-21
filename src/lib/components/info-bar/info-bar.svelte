@@ -46,7 +46,7 @@
   ```
 -->
 {#if !closed}
-	<div class={['fs-info-bar', status, style]}>
+	<div class={['fs-info-bar', status, style]} role={status === 'critical' ? 'alert' : 'status'}>
 		<div class="icon-wrapper">
 			{#if Icon}
 				<RenderSoC SoC={Icon} />
@@ -55,7 +55,7 @@
 			{/if}
 		</div>
 		<div class="content">
-			<h1>{title}</h1>
+			{#if title}<h3>{title}</h3>{/if}
 			{@render children?.()}
 		</div>
 		{#if !hideCloseButton}
@@ -120,7 +120,7 @@
 			align-items: center;
 			gap: 0.5rem;
 			width: 100%;
-			& h1 {
+			& h3 {
 				font-weight: semibold;
 				font-size: var(--fs-body-font-size);
 				line-height: var(--fs-body-line-height);

@@ -6,6 +6,8 @@
 
 	let dialogRef: HTMLDialogElement | undefined = $state();
 
+	let titleId: string | undefined = $state();
+
 	const config: DialogContext['config'] = $derived({
 		type
 	});
@@ -19,6 +21,12 @@
 		},
 		set dialogRef(v) {
 			dialogRef = v;
+		},
+		get titleId() {
+			return titleId;
+		},
+		set titleId(v) {
+			titleId = v;
 		}
 	};
 

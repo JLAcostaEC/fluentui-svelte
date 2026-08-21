@@ -32,7 +32,7 @@
 	});
 </script>
 
-<dialog open={_state.open} class="fs-dialog" bind:this={ref} {...attributes}>
+<dialog open={_state.open} class="fs-dialog" aria-labelledby={_state.titleId} bind:this={ref} {...attributes}>
 	<div class="dialog-wrapper">
 		{#if config.type === 'non-modal'}
 			<Button class="close-icon" appearance="subtle" onclick={() => methods.closeDialog()} aria-label="Close dialog">

@@ -1,6 +1,9 @@
 <script lang="ts">
 	import type { DatePickerProps } from './types.ts';
 	import { Flyout, Button, Divider } from '$lib/index.js';
+	import { on } from 'svelte/events';
+	import { tick } from 'svelte';
+	import { PREFIX } from '$constants';
 	import { floating } from '$internal';
 	import { flip, hide, offset, shift } from '@floating-ui/dom';
 	import DynamicCarousel from '$lib/internal/components/dynamic-carousel/dynamic-carousel.svelte';
@@ -19,10 +22,45 @@
 		disabledMonths = [],
 		disabledYears = [],
 		ref = $bindable(),
+		wrapperRef = $bindable(),
+		wrapperAttributes,
 		inputElement = $bindable(),
 		inputProps,
+		popupLabel = 'Choose a date',
 		...attributes
 	}: DatePickerProps = $props();
+
+	const FALLBACK_ID = $props.id();
+	const POPUP_ID = `${PREFIX}datepicker-${FALLBACK_ID}-popup`;
+
+	let popupRef: HTMLElement | undefined = $state();
+
+	/** Closing always hands the focus back, so the keyboard never lands nowhere. */
+	function closePopup() {
+		open = false;
+		ref?.focus();
+	}
+
+	// Escape has to work from inside the popup too, and the popup is not a descendant
+	// of the trigger, so the listener goes on the document.
+	$effect(() => {
+		if (!open) return;
+
+		return on(document, 'keydown', (event: KeyboardEvent) => {
+			if (event.key !== 'Escape') return;
+			event.preventDefault();
+			closePopup();
+		});
+	});
+
+	// Move into the dialog on open: the first wheel, so the arrows work straight away.
+	$effect(() => {
+		if (!open || !popupRef) return;
+
+		tick().then(() => {
+			(popupRef?.querySelector<HTMLElement>('[role="listbox"]') ?? popupRef)?.focus();
+		});
+	});
 
 	type Column = 'month' | 'day' | 'year';
 
@@ -119,11 +157,11 @@
 
 	function confirm() {
 		value = `${year}-${pad(month + 1)}-${pad(effectiveDay)}`;
-		open = false;
+		closePopup();
 	}
 
 	function cancel() {
-		open = false;
+		closePopup();
 	}
 
 	// Trigger label per column
@@ -135,29 +173,30 @@
 	}
 </script>
 
-<div
-	class="fs-date-picker"
-	role="button"
-	tabindex="0"
-	aria-haspopup="dialog"
-	aria-expanded={open}
-	onclick={() => (open = !open)}
-	onkeydown={(e) => {
-		if (e.key === 'Enter' || e.key === ' ') {
-			e.preventDefault();
-			open = !open;
-		}
-	}}
-	bind:this={ref}
-	{...attributes}
->
-	{#each columns as col, idx (col)}
-		{#if idx > 0}
-			<Divider as="span" vertical />
-		{/if}
-		<span class="picker-content">{display(col)}</span>
-	{/each}
-	<input type="date" class="date-picker-input" {value} bind:this={inputElement} {...inputProps} />
+<div class="fs-date-picker-wrapper" bind:this={wrapperRef} {...wrapperAttributes}>
+	<!-- A real button: Enter and Space, the disabled state and High Contrast styling all
+	     come for free, and the hidden input cannot live inside it. -->
+	<button
+		type="button"
+		class="fs-date-picker"
+		aria-haspopup="dialog"
+		aria-expanded={open}
+		aria-controls={open ? POPUP_ID : undefined}
+		onclick={() => (open = !open)}
+		bind:this={ref}
+		{...attributes}
+	>
+		{#each columns as col, idx (col)}
+			{#if idx > 0}
+				<Divider as="span" vertical aria-hidden="true" />
+			{/if}
+			<span class="picker-content">{display(col)}</span>
+		{/each}
+	</button>
+
+	<!-- Carries the value into a form. `hidden` keeps it out of the tab order and out of
+	     the accessibility tree, and a hidden control is still submitted. -->
+	<input type="date" hidden {value} bind:this={inputElement} {...inputProps} />
 </div>
 
 {#if open}
@@ -175,6 +214,12 @@
 			strategy: 'fixed'
 		})}
 		reference={ref}
+		id={POPUP_ID}
+		role="dialog"
+		aria-modal="true"
+		aria-label={popupLabel}
+		tabindex={-1}
+		bind:ref={popupRef}
 		class="date-picker-flyout"
 	>
 		<div class="carousel-wrapper">
@@ -220,6 +265,10 @@
 {/if}
 
 <style>
+	/* Layout-neutral: the button keeps the box the wrapper used to have. */
+	.fs-date-picker-wrapper {
+		display: contents;
+	}
 	.fs-date-picker {
 		display: flex;
 		position: relative;
@@ -263,19 +312,6 @@
 			&::after {
 				background: var(--fs-control-stroke-default) !important;
 			}
-		}
-		& .date-picker-input {
-			appearance: none;
-			background: transparent;
-			outline: none;
-			border: none;
-			width: 0;
-			height: 0;
-			opacity: 0;
-			pointer-events: none;
-			position: absolute;
-			top: 0;
-			left: 0;
 		}
 		& .picker-content {
 			display: flex;

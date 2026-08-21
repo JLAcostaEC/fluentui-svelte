@@ -7,15 +7,20 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TimePickerProps -->
 
-| Name                      | Type               | Default | Description                                              |
-| ------------------------- | ------------------ | ------- | -------------------------------------------------------- |
-| `value` _bindable_        | `string`           | `''`    | {m.generated_fs_time_picker_props_props_value()}         |
-| `format`                  | `12` &#124; `24`   | `24`    | {m.generated_fs_time_picker_props_props_format()}        |
-| `open` _bindable_         | `boolean`          | `false` | {m.generated_fs_time_picker_props_props_open()}          |
-| `hideHours`               | `boolean`          | `false` | {m.generated_fs_time_picker_props_props_hide_hours()}    |
-| `hideMinutes`             | `boolean`          | `false` | {m.generated_fs_time_picker_props_props_hide_minutes()}  |
-| `hideSeconds`             | `boolean`          | `false` | {m.generated_fs_time_picker_props_props_hide_seconds()}  |
-| `element` _bindable_      | `HTMLElement`      |         | {m.generated_fs_time_picker_props_props_element()}       |
-| `inputElement` _bindable_ | `HTMLInputElement` |         | {m.generated_fs_time_picker_props_props_input_element()} |
+| Name                          | Type                  | Default           | Description                                                   |
+| ----------------------------- | --------------------- | ----------------- | ------------------------------------------------------------- |
+| `value` _bindable_            | `string`              | `''`              | {m.generated_fs_time_picker_props_props_value()}              |
+| `format`                      | `12` &#124; `24`      | `24`              | {m.generated_fs_time_picker_props_props_format()}             |
+| `open` _bindable_             | `boolean`             | `false`           | {m.generated_fs_time_picker_props_props_open()}               |
+| `hideHours`                   | `boolean`             | `false`           | {m.generated_fs_time_picker_props_props_hide_hours()}         |
+| `hideMinutes`                 | `boolean`             | `false`           | {m.generated_fs_time_picker_props_props_hide_minutes()}       |
+| `hideSeconds`                 | `boolean`             | `false`           | {m.generated_fs_time_picker_props_props_hide_seconds()}       |
+| `element` _bindable_          | `HTMLButtonElement`   |                   | {m.generated_fs_time_picker_props_props_element()}            |
+| `wrapperRef` _bindable_       | `HTMLDivElement`      |                   | {m.generated_fs_time_picker_props_props_wrapper_ref()}        |
+| `wrapperAttributes`           | `HTMLAttributes`      |                   | {m.generated_fs_time_picker_props_props_wrapper_attributes()} |
+| `inputElement` _bindable_     | `HTMLInputElement`    |                   | {m.generated_fs_time_picker_props_props_input_element()}      |
+| `inputProps`                  | `HTMLInputAttributes` |                   | {m.generated_fs_time_picker_props_props_input_props()}        |
+| `popupLabel`                  | `string`              | `'Choose a time'` | {m.generated_fs_time_picker_props_props_popup_label()}        |
+| Element Attributes (`button`) |                       |                   |                                                               |
 
 <!-- /props:TimePickerProps -->

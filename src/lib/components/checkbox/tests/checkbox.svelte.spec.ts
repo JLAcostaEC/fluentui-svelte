@@ -5,16 +5,21 @@ import { Checkbox } from '$lib/index.js';
 import CheckboxTestWrapper from './CheckboxTestWrapper.svelte';
 
 describe('rendering', () => {
-	it('renders a div wrapper by default', async () => {
+	it('renders a label wrapper by default, so the children name the input', async () => {
 		render(Checkbox);
+		const el = page.selector('label.fs-checkbox');
+		await expect.element(el).toBeInTheDocument();
+	});
+
+	it('renders a div wrapper when wrapperAs="div"', async () => {
+		render(Checkbox, { wrapperAs: 'div' });
 		const el = page.selector('div.fs-checkbox');
 		await expect.element(el).toBeInTheDocument();
 	});
 
-	it('renders a label wrapper when wrapperAs="label"', async () => {
-		render(Checkbox, { wrapperAs: 'label' });
-		const el = page.selector('label.fs-checkbox');
-		await expect.element(el).toBeInTheDocument();
+	it('gives the input an accessible name from its children', async () => {
+		render(CheckboxTestWrapper, { label: 'Accept terms' });
+		await expect.element(page.getByRole('checkbox', { name: 'Accept terms' })).toBeInTheDocument();
 	});
 
 	it('renders an input of type checkbox', async () => {

@@ -8,7 +8,9 @@ export type CheckboxProps<T extends 'div' | 'label' = 'div'> = {
 	 * @bindable
 	 */
 	ref?: HTMLInputElement;
-	/** The DOM element used to wrap the checkbox. Use a label to make the whole wrapper toggle the checkbox.
+	/** The DOM element used to wrap the checkbox. `label` associates the children with the
+	 * input; switch to `div` when the field is wrapped in a `<Label>` of its own.
+	 * @default 'label'
 	 * @type 'div' | 'label'
 	 * @default 'div'
 	 */

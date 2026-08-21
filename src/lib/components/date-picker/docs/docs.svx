@@ -12,7 +12,7 @@
   <DatePicker />
 </Showcase>
 
-## {m.dp_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

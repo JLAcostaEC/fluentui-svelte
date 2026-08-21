@@ -38,7 +38,7 @@
 
 </script>
 
-### {m.ib_status_title()}
+### {m.global_status()}
 
 {m.ib_status_description()}
 

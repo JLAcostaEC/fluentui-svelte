@@ -16,19 +16,26 @@
 		},
 		calendarPosition: _positionConfig,
 		blackoutDates,
-		element = $bindable(),
+		ref = $bindable(),
 		headers,
 		maxDate,
 		minDate,
 		weekStart,
-		onChange
+		onChange,
+		...attributes
 	}: CalendarDatePickerProps = $props();
 
 	let open = $state(false);
 
+	let positionConfig = $derived({
+		..._positionConfig,
+		placement: _positionConfig?.placement ?? 'bottom-start',
+		middleware: _positionConfig?.middleware ?? [offset(8), flip(), shift({ padding: 8 }), hide()]
+	});
+
 	onMount(() => {
 		const off = on(document, 'click', (event: MouseEvent) => {
-			if (element && !element.contains(event.target as Node)) {
+			if (ref && !ref.contains(event.target as Node)) {
 				open = false;
 			}
 		});
@@ -37,7 +44,7 @@
 	});
 </script>
 
-<div class="fs-calendar-date-picker" bind:this={element}>
+<div class="fs-calendar-date-picker" bind:this={ref} {...attributes}>
 	<Button appearance="standard" onclick={() => (open = !open)}>
 		{#if value}
 			{value.toLocaleDateString(locale, format)}
@@ -49,13 +56,7 @@
 	{#if open}
 		<CalendarView
 			bind:value
-			floating={{
-				ref: element,
-				positionConfig: {
-					placement: 'bottom-start',
-					middleware: [offset(8), flip(), shift({ padding: 8 }), hide()]
-				}
-			}}
+			floating={{ ref, positionConfig }}
 			onChange={onChange as any}
 			{blackoutDates}
 			{headers}

@@ -40,7 +40,7 @@
 	} from './types.js';
 
 	let {
-		element = $bindable(),
+		ref = $bindable(),
 		value = $bindable(null),
 		range = $bindable({ start: null, end: null }),
 		view = 'days',
@@ -335,7 +335,7 @@ This implementation is originally made by Tropix126 in his FluentSvelte library,
 -->
 <div
 	class={['fs-calendar-view', { floating }]}
-	bind:this={element}
+	bind:this={ref}
 	in:flyToOffset={floating && floating.ref
 		? {
 				y: -floating.ref.getBoundingClientRect().height / 2,

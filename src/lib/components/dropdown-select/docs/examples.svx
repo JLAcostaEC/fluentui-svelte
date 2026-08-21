@@ -20,7 +20,7 @@
 </DropdownSelect>`;
 </script>
 
-### {m.ds_custom_option_title()}
+### {m.global_custom_option_content()}
 
 {m.ds_custom_option_description()}
 
@@ -34,7 +34,7 @@
   </DropdownSelect>
 </Showcase>
 
-### {m.ds_multiple_title()}
+### {m.global_multiple_selection()}
 
 {m.ds_multiple_description()}
 

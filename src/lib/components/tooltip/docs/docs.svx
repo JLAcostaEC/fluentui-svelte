@@ -16,7 +16,7 @@
   </Tooltip>
 </Showcase>
 
-## {m.tooltip_usage_title()}
+## {m.global_usage()}
 
 {m.tooltip_usage_snippet_description()}
 
@@ -44,6 +44,6 @@
 </Tooltip>
 ```
 
-## {m.tooltip_component_api_title()}
+## {m.global_component_api()}
 
 {m.tooltip_component_api_description()}

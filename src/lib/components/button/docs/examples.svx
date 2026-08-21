@@ -19,7 +19,7 @@
 <Button appearance="subtle" />`;
 </script>
 
-### {m.btn_shape_title()}
+### {m.global_shape()}
 
 {m.btn_shape_description()}
 
@@ -29,7 +29,7 @@
   <Button shape="square" />
 </Showcase>
 
-### {m.btn_appearance_title()}
+### {m.global_appearance()}
 
 {m.btn_appearance_description()}
 

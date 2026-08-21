@@ -14,7 +14,7 @@
   <RadioButton label="Option 3" name="group1" value="C" disabled />
 </Showcase>
 
-## {m.rb_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

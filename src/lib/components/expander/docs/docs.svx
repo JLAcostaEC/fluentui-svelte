@@ -18,7 +18,7 @@
   <Expander header="Disabled Expander" disabled />
 </Showcase>
 
-## {m.expander_usage_title()}
+## {m.global_usage()}
 
 {m.expander_usage_description()}
 

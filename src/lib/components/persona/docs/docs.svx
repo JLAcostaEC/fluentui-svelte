@@ -15,7 +15,7 @@
   <Persona name="Custom Size" size={24} />
 </Showcase>
 
-## {m.persona_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

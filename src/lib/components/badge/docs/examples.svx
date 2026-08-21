@@ -38,7 +38,7 @@
 `;
 </script>
 
-### {m.badge_appearance_title()}
+### {m.global_appearance()}
 
 {m.badge_appearance_description()}
 
@@ -82,7 +82,7 @@
   <Badge size={36} color="success">S</Badge>
 </Showcase>
 
-### {m.badge_icon_title()}
+### {m.global_icon()}
 
 {m.badge_icon_description()}
 

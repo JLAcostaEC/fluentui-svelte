@@ -21,7 +21,7 @@
   const requiredCode = `<Label label="Email" required={{ message: 'Required field' }} />`;
 </script>
 
-### {m.label_size_title()}
+### {m.global_size()}
 
 {m.label_size_description()}
 

@@ -2,7 +2,7 @@
   import { m } from '$i18n/messages.js';
 </script>
 
-## {m.tswitch_component_props_title()}
+## {m.global_component_props()}
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:ToggleSwitchProps -->

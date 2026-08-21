@@ -14,7 +14,7 @@
   let range = $state({ start: null, end: null });
 </script>
 
-### {m.cv_multiple_title()}
+### {m.global_multiple_selection()}
 
 {m.cv_multiple_description()}
 

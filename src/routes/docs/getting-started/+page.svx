@@ -2,7 +2,7 @@
   import { m } from '$i18n/messages.js';
 </script>
 
-# {m.gs_title()}
+# {m.global_getting_started()}
 
 {m.gs_description()}
 

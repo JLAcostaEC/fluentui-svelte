@@ -34,6 +34,14 @@ export interface CalendarDateRange {
 /** Where a day sits in the painted range: its two ends, or somewhere in between. */
 export type RangePosition = 'start' | 'between' | 'end';
 
+/** Anchors the calendar to a reference element and positions it with floating-ui. */
+export interface CalendarViewFloating {
+	/** The ref element to which the calendar is anchored */
+	ref?: HTMLElement | VirtualElement | null;
+	/** The floating UI configuration object of the calendar */
+	positionConfig?: Partial<ComputePositionConfig>;
+}
+
 /** Shape of one rendered calendar page, as seen by keyboard navigation. */
 export interface CalendarGrid {
 	/** Cells per row. */
@@ -59,35 +67,61 @@ export interface CalendarNavigationOptions {
 	updatePage: (amount: number, direction: AnimationDirection) => void;
 }
 
+/** @propsmith CalendarViewProps */
 export type CalendarViewProps = {
-	element?: HTMLElement;
-	/** How many dates the grid hands out, and in what shape. Default: `'single'`. */
-	selectionMode?: CalendarSelectionMode;
-	locale?: string;
+	/** The DOM reference of the calendar element.
+	 * @bindable
+	 */
+	ref?: HTMLDivElement;
+	/** The selected date, or an array of dates when `selectionMode` is `'multiple'`. Unused by `'range'`.
+	 * @default null
+	 * @bindable
+	 */
 	value?: Date | Date[] | null;
-	/** The picked range. Only read and written when `selectionMode` is `'range'`. */
+	/** How many dates the grid hands out, and in what shape.
+	 * @default 'single'
+	 */
+	selectionMode?: CalendarSelectionMode;
+	/** The picked range. Only read and written when `selectionMode` is `'range'`, and `end` stays `null` until the range is closed.
+	 * @default { start: null, end: null }
+	 * @bindable
+	 */
 	range?: CalendarDateRange;
-	/**
-	 * Stop a range from spanning a blacked-out date. Off by default
+	/** Stop a range from spanning a blacked-out date.
+	 * @default false
 	 */
 	blackoutBreaksRange?: boolean;
+	/** Dates that are rendered but cannot be selected. */
 	blackoutDates?: Date[];
+	/** Labels the first cell of a month or a year with its name. */
 	headers?: boolean;
+	/** The earliest selectable date. */
 	minDate?: Date;
+	/** The latest selectable date. */
 	maxDate?: Date;
+	/** The calendar page the view opens on.
+	 * @default 'days'
+	 */
 	view?: View;
+	/** The locale used to format weekday and month names.
+	 * @default 'en-US'
+	 */
+	locale?: string;
+	/** The first day of the week, where 0 is Sunday.
+	 * @default 1
+	 */
 	weekStart?: number;
-	floating?: {
-		/** The ref element to which the menu is anchored */
-		ref?: HTMLElement | VirtualElement | null;
-		/** The floating UI configuration object of the menu */
-		positionConfig?: Partial<ComputePositionConfig>;
-	};
+	/** Renders the calendar as a popup anchored to a reference element instead of inline.
+	 * @type CalendarViewFloating
+	 */
+	floating?: CalendarViewFloating;
+	/** Called whenever the selection changes. Not called in `'range'` mode. */
 	onChange?: (event: Event, value: Date | Date[] | null) => void;
 	/** Fired on every step of a range, including the one that leaves `end` null. */
 	onRangeChange?: (event: Event, range: CalendarDateRange) => void;
+	/** Called whenever the active calendar page changes. */
 	onViewChange?: (event: Event, view: View) => void;
-};
+} & HTMLAttributes<HTMLDivElement>;
 
 export type CalendarViewContext = FSContext<
 	{
@@ -126,16 +160,32 @@ export type CalendarViewState = {
 	pageAnimationDirection: AnimationDirection;
 };
 
+/** @propsmith CalendarViewItemProps */
 export type CalendarViewItemProps = {
+	/** Renders the cell as the selected one. */
 	selected?: boolean;
+	/** Disables the user interaction. */
 	disabled?: boolean;
+	/** Marks the cell as the current date. */
 	current?: boolean;
+	/** Renders the cell as belonging to a neighbouring page. */
 	outOfRange?: boolean;
+	/** Renders the cell as blacked out, so it reads as unavailable rather than disabled. */
 	blackout?: boolean;
 	/** Set on the days a range covers, which paints the band behind them. */
 	rangePosition?: RangePosition;
+	/** A small label rendered above the cell content. */
 	header?: string;
-	variant?: string;
+	/** Which shape the cell takes: a circle for a day, a rounded rectangle for a month or a year.
+	 * @default 'day'
+	 */
+	variant?: 'day' | 'monthYear';
+	/** The content of the cell.
+	 * @type Snippet
+	 */
 	children?: Snippet;
+	/** The attributes to spread on the inner button element.
+	 * @type HTMLButtonAttributes
+	 */
 	buttonAttributes?: HTMLButtonAttributes;
 } & HTMLAttributes<HTMLDivElement>;

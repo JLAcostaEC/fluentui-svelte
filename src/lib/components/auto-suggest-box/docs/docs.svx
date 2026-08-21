@@ -21,7 +21,7 @@
   </AutoSuggestBox>
 </Showcase>
 
-## {m.asb_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

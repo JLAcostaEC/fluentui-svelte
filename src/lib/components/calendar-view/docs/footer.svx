@@ -2,23 +2,50 @@
   import { m } from '$i18n/messages.js';
 </script>
 
-## {m.cv_component_props_title()}
+## {m.cv_calendarview_props_title()}
 
-| **Name**              | **Type**                                  | **Description**                                 |
-| --------------------- | ----------------------------------------- | ----------------------------------------------- |
-| `value`               | bindable `Date` \| `Date[]` \| `null`     | {m.cv_props_value_description()}                |
-| `selectionMode`       | `single` \| `multiple` \| `range`         | {m.cv_props_selectionmode_description()}        |
-| `range`               | bindable `{ start, end: Date \| null }`   | {m.cv_props_range_description()}                |
-| `blackoutBreaksRange` | `boolean`                                 | {m.cv_props_blackoutbreaksrange_description()}  |
-| `view`                | `days` \| `months` \| `years`             | {m.cv_props_view_description()}                 |
-| `minDate`             | `Date`                                    | {m.cv_props_mindate_description()}              |
-| `maxDate`             | `Date`                                    | {m.cv_props_maxdate_description()}              |
-| `locale`              | `string`                                  | {m.cv_props_locale_description()}               |
-| `weekStart`           | `number`                                  | {m.cv_props_weekstart_description()}            |
-| `blackoutDates`       | `Date[]`                                  | {m.cv_props_blackoutdates_description()}        |
-| `headers`             | `object`                                  | {m.cv_props_headers_description()}              |
-| `floating`            | `object`                                  | {m.cv_props_floating_description()}             |
-| `onChange`            | `(e: Event, selection) => void`           | {m.cv_props_onchange_description()}             |
-| `onRangeChange`       | `(e: Event, range) => void`               | {m.cv_props_onrangechange_description()}        |
-| `onViewChange`        | `(view) => void`                          | {m.cv_props_onviewchange_description()}         |
-| `element`             | bindable `HTMLElement`                    | {m.cv_props_element_description()}              |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:CalendarViewProps -->
+
+| Name                       | Type                                                                | Default                      | Description                                                        |
+| -------------------------- | ------------------------------------------------------------------- | ---------------------------- | ------------------------------------------------------------------ |
+| `ref` _bindable_           | `HTMLDivElement`                                                    |                              | {m.generated_fs_calendar_view_props_props_ref()}                   |
+| `value` _bindable_         | `Date` &#124; `Date[]` &#124; `null`                                | `null`                       | {m.generated_fs_calendar_view_props_props_value()}                 |
+| `selectionMode`            | `'single'` &#124; `'multiple'` &#124; `'range'`                     | `'single'`                   | {m.generated_fs_calendar_view_props_props_selection_mode()}        |
+| `range` _bindable_         | `{ start: Date` &#124; `null; end: Date` &#124; `null; }`           | `{ start: null, end: null }` | {m.generated_fs_calendar_view_props_props_range()}                 |
+| `blackoutBreaksRange`      | `boolean`                                                           | `false`                      | {m.generated_fs_calendar_view_props_props_blackout_breaks_range()} |
+| `blackoutDates`            | `Date[]`                                                            |                              | {m.generated_fs_calendar_view_props_props_blackout_dates()}        |
+| `headers`                  | `boolean`                                                           |                              | {m.generated_fs_calendar_view_props_props_headers()}               |
+| `minDate`                  | `Date`                                                              |                              | {m.generated_fs_calendar_view_props_props_min_date()}              |
+| `maxDate`                  | `Date`                                                              |                              | {m.generated_fs_calendar_view_props_props_max_date()}              |
+| `view`                     | `'days'` &#124; `'months'` &#124; `'years'`                         | `'days'`                     | {m.generated_fs_calendar_view_props_props_view()}                  |
+| `locale`                   | `string`                                                            | `'en-US'`                    | {m.generated_fs_calendar_view_props_props_locale()}                |
+| `weekStart`                | `number`                                                            | `1`                          | {m.generated_fs_calendar_view_props_props_week_start()}            |
+| `floating`                 | `CalendarViewFloating`                                              |                              | {m.generated_fs_calendar_view_props_props_floating()}              |
+| `onChange`                 | `(event: Event, value: Date` &#124; `Date[]` &#124; `null) => void` |                              | {m.generated_fs_calendar_view_props_props_on_change()}             |
+| `onRangeChange`            | `(event: Event, range: CalendarDateRange) => void`                  |                              | {m.generated_fs_calendar_view_props_props_on_range_change()}       |
+| `onViewChange`             | `(event: Event, view: View) => void`                                |                              | {m.generated_fs_calendar_view_props_props_on_view_change()}        |
+| Element Attributes (`div`) |                                                                     |                              |                                                                    |
+
+<!-- /props:CalendarViewProps -->
+
+## {m.cv_calendarviewitem_props_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:CalendarViewItemProps -->
+
+| Name                       | Type                                        | Default | Description                                                         |
+| -------------------------- | ------------------------------------------- | ------- | ------------------------------------------------------------------- |
+| `selected`                 | `boolean`                                   |         | {m.generated_fs_calendar_view_item_props_props_selected()}          |
+| `disabled`                 | `boolean`                                   |         | {m.generated_fs_calendar_view_item_props_props_disabled()}          |
+| `current`                  | `boolean`                                   |         | {m.generated_fs_calendar_view_item_props_props_current()}           |
+| `outOfRange`               | `boolean`                                   |         | {m.generated_fs_calendar_view_item_props_props_out_of_range()}      |
+| `blackout`                 | `boolean`                                   |         | {m.generated_fs_calendar_view_item_props_props_blackout()}          |
+| `rangePosition`            | `'start'` &#124; `'between'` &#124; `'end'` |         | {m.generated_fs_calendar_view_item_props_props_range_position()}    |
+| `header`                   | `string`                                    |         | {m.generated_fs_calendar_view_item_props_props_header()}            |
+| `variant`                  | `'day'` &#124; `'monthYear'`                | `'day'` | {m.generated_fs_calendar_view_item_props_props_variant()}           |
+| `children`                 | `Snippet`                                   |         | {m.generated_fs_calendar_view_item_props_props_children()}          |
+| `buttonAttributes`         | `HTMLButtonAttributes`                      |         | {m.generated_fs_calendar_view_item_props_props_button_attributes()} |
+| Element Attributes (`div`) |                                             |         |                                                                     |
+
+<!-- /props:CalendarViewItemProps -->

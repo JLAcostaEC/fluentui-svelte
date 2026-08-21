@@ -16,7 +16,7 @@
   <Checkbox wrapperAs="label" checked disabled>Checked & Disabled</Checkbox>
 </Showcase>
 
-## {m.cb_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

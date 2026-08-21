@@ -1,26 +1,43 @@
 import type { SVGAttributes } from 'svelte/elements';
 import type { ProgressStatus } from '$types';
 
+/** @propsmith ProgressRingProps */
 export type ProgressRingProps = {
-	/** The current value of the progress ring. */
+	/** The current value of the progress ring.
+	 * @default 0
+	 * @bindable
+	 */
 	value?: number;
-	/** The minimum value of the progress ring. */
+	/** The minimum value of the progress ring.
+	 * @default 0
+	 */
 	min?: number;
-	/** The maximum value of the progress ring. */
+	/** The maximum value of the progress ring.
+	 * @default 100
+	 */
 	max?: number;
-	/** Whether the progress ring is indeterminate. */
+	/** Spins the ring continuously instead of reporting a value. */
 	indeterminate?: boolean;
-	/** Whether to display the rail. */
+	/** Whether to hide the rail element. */
 	hideRail?: boolean;
-	/** The size of the progress ring. */
+	/** The size of the progress ring in pixels.
+	 * @default 32
+	 */
 	size?: number;
-	/** Get the DOM reference of the progress ring element. */
+	/** The DOM reference of the progress ring element.
+	 * @bindable
+	 */
 	ref?: SVGElement;
-	/** Get the DOM reference of the rail element. */
+	/** The DOM reference of the rail element.
+	 * @bindable
+	 */
 	railElement?: SVGCircleElement;
-	/** Get the DOM reference of the track element. */
+	/** The DOM reference of the track element.
+	 * @bindable
+	 */
 	trackElement?: SVGCircleElement;
-	/** The current status of the progress ring. */
+	/** The current status of the progress ring, which recolors the track. */
 	status?: ProgressStatus;
+	/** The class to apply to the progress ring. */
 	class?: string;
 } & SVGAttributes<SVGElement>;

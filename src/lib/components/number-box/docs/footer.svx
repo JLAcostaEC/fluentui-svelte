@@ -2,11 +2,15 @@
   import { m } from '$i18n/messages.js';
 </script>
 
-## {m.nb_component_props_title()}
+## {m.global_component_props()}
 
-| **Name**                    | **Type**                | **Description**                          |
-| --------------------------- | ----------------------- | ---------------------------------------- |
-| `value`                     | `number`                | {m.nb_props_value_description()}         |
-| `variant`                   | `'inline' \| 'compact'` | {m.nb_props_variant_description()}       |
-| `ref`                       | `HTMLInputElement`      | {m.nb_props_ref_description()}           |
-| [TextBox Props](./text-box) |                         | {m.nb_props_textboxprops_description()}  |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:NumberBoxProps -->
+
+| Name                          | Type                          | Default    | Description                                       |
+| ----------------------------- | ----------------------------- | ---------- | ------------------------------------------------- |
+| `value` _bindable_            | `number`                      |            | {m.generated_fs_number_box_props_props_value()}   |
+| `variant`                     | `'inline'` &#124; `'compact'` | `'inline'` | {m.generated_fs_number_box_props_props_variant()} |
+| `TextBoxProps` without `type` |                               |            |                                                   |
+
+<!-- /props:NumberBoxProps -->

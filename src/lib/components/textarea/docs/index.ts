@@ -25,25 +25,7 @@ export const META: Meta = {
 		title: 'Textarea — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte multiline text input for entering and editing free-form text.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'Textarea is a Fluent UI Svelte multiline text input. It supports a placeholder, configurable resize behavior (none, both, horizontal, vertical), and an onChange handler for reacting to input in real time.',
-		topics: ['forms', 'text input', 'multiline', 'inputs'],
-		entities: ['TextArea', 'placeholder', 'resize', 'onChange'],
-		category: 'Inputs',
-		faq: [
-			{
-				question: 'How do I control whether a Textarea can be resized?',
-				answer: "Use the resize prop, which accepts 'none', 'both', 'horizontal', or 'vertical'."
-			},
-			{
-				question: 'How do I react to changes in a Textarea?',
-				answer: 'Provide an onChange handler; it fires whenever the content of the textarea changes.'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'textarea',
 	status: '',
 	icon: SlideTextRegular

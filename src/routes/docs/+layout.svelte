@@ -9,12 +9,12 @@
 
 	const primaryNavigation = [
 		{
-			label: m.docs_primary_nav_overview(),
+			label: m.global_overview(),
 			url: '/docs',
 			status: ''
 		},
 		{
-			label: m.docs_primary_nav_getting_started(),
+			label: m.global_getting_started(),
 			url: '/docs/getting-started',
 			status: ''
 		}

@@ -40,11 +40,6 @@
 	<meta name="twitter:title" content={meta.twitter?.title ?? meta.title} />
 	<meta name="twitter:description" content={meta.twitter?.description ?? meta.description} />
 	{#if meta.twitter?.image}<meta name="twitter:image" content={meta.twitter.image} />{/if}
-
-	{#if meta.geo}
-		<!-- eslint-disable-next-line svelte/no-at-html-tags eslint-disable-next-line no-useless-escape -->
-		{@html `<script type="application/ld+json">${stringifiedGEO}<\/script>`}
-	{/if}
 </svelte:head>
 
 <Docs />

@@ -2,13 +2,18 @@
   import { m } from '$i18n/messages.js';
 </script>
 
-## {m.rb_component_props_title()}
+## {m.global_component_props()}
 
-| **Name**           | **Type**           | **Description**                              |
-| ------------------ | ------------------ | -------------------------------------------- |
-| `label`            | `string`           | {m.rb_props_label_description()}             |
-| `group`            | `unknown`          | {m.rb_props_group_description()}             |
-| `checked`          | `boolean`          | {m.rb_props_checked_description()}           |
-| `disabled`         | `boolean`          | {m.rb_props_disabled_description()}          |
-| `ref`              | `HTMLInputElement` | {m.rb_props_ref_description()}               |
-| Element Attributes |                    | {m.rb_props_elementattributes_description()} |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:RadioButtonProps -->
+
+| Name                         | Type               | Default | Description                                                  |
+| ---------------------------- | ------------------ | ------- | ------------------------------------------------------------ |
+| `label`                      | `string`           |         | {m.generated_fs_radio_button_props_props_label()}            |
+| `group` _bindable_           | `unknown`          |         | {m.generated_fs_radio_button_props_props_group()}            |
+| `checked` _bindable_         | `boolean`          | `false` | {m.generated_fs_radio_button_props_props_checked()}          |
+| `ref` _bindable_             | `HTMLInputElement` |         | {m.generated_fs_radio_button_props_props_ref()}              |
+| `labelAttributes`            | `PolymorphicProps` |         | {m.generated_fs_radio_button_props_props_label_attributes()} |
+| Element Attributes (`input`) |                    |         |                                                              |
+
+<!-- /props:RadioButtonProps -->

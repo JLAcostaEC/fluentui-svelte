@@ -25,27 +25,7 @@ export const META: Meta = {
 		title: 'List View — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte list of stacked, selectable items with keyboard navigation.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'ListView is a Fluent UI Svelte component for rendering a set of vertically stacked ListViewItem children. Items can be focusable and selectable (single, multiselect, or extended), have a primary action and secondary actions, and support keyboard navigation and accessibility. It can render as ul, ol, or div, and offers items or composite navigation modes.',
-		topics: ['lists', 'selection', 'keyboard navigation', 'data display'],
-		entities: ['ListView', 'ListViewItem', 'selectionMode', 'navigationMode', 'selectedItems', 'onAction'],
-		category: 'Data Display',
-		faq: [
-			{
-				question: 'How do I make ListView items selectable?',
-				answer:
-					"Set selectionMode ('single', 'multiselect', or 'extended') and bind selectedItems / handle onSelectionChange."
-			},
-			{
-				question: 'How do I handle items with multiple actionable elements?',
-				answer:
-					"Set navigationMode to 'composite' so nested buttons and menus are keyboard-navigable; call e.stopPropagation() in their handlers."
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'list-view',
 	status: 'Beta',
 	icon: TaskListSquareLtrRegular

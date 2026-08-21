@@ -1,18 +1,34 @@
 import type { HTMLAttributes, SvelteHTMLElements } from 'svelte/elements';
 
+/** @propsmith TextAreaProps */
 export type TextAreaProps = {
-	/** Get the DOM reference of the input element. */
+	/** The current value of the textarea.
+	 * @default ''
+	 * @bindable
+	 */
+	value?: string;
+	/** The DOM reference of the textarea element.
+	 * @bindable
+	 */
 	ref?: HTMLElement;
-	/** The placeholder text for the input. */
+	/** The placeholder text for the textarea. */
 	placeholder?: string;
-	/** Configures the resize behavior of the textarea. */
+	/** Configures the resize behavior of the textarea.
+	 * @default 'vertical'
+	 */
 	resize?: 'none' | 'both' | 'horizontal' | 'vertical';
 	/** Callback function for the change event. */
 	onChange?: (e: Event) => void;
-	/** Whether the textarea is disabled. */
+	/** Disables the user interaction.
+	 * @default false
+	 */
 	disabled?: boolean;
-	/** Attributes to be spread on the wrapper element. */
+	/** The attributes to spread on the wrapper element.
+	 * @type HTMLAttributes
+	 */
 	wrapperAttributes?: HTMLAttributes<HTMLDivElement>;
-	/** Get DOM reference of the wrapper element. */
+	/** The DOM reference of the wrapper element.
+	 * @bindable
+	 */
 	wrapperRef?: HTMLDivElement;
 } & SvelteHTMLElements['textarea'];

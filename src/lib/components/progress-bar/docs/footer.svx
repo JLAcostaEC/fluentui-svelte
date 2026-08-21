@@ -2,15 +2,23 @@
   import { m } from '$i18n/messages.js';
 </script>
 
-## {m.pbar_component_props_title()}
+## {m.global_component_props()}
 
-| **Name**                | **Type**                           | **Description**                                               |
-| ----------------------- | ---------------------------------- | ------------------------------------------------------------- |
-| `value`                 | bindable `number &vert; undefined` | {m.pbar_props_value_description()} |
-| `indeterminate`         | `boolean`                          | {m.pbar_props_indeterminate_description()} |
-| `hideRail`              | `boolean`                          | {m.pbar_props_hiderail_description()} |
-| `status`                | `'paused' &vert; 'error'`          | {m.pbar_props_status_description()} |
-| `element`               | bindable `SVGElement`              | {m.pbar_props_element_description()} |
-| `railElement`           | bindable `SVGRectElement`          | {m.pbar_props_railelement_description()} |
-| `trackElement`          | bindable `SVGRectElement`          | {m.pbar_props_trackelement_description()} |
-| `secondaryTrackElement` | bindable `SVGRectElement`          | {m.pbar_props_secondarytrackelement_description()} |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:ProgressBarProps -->
+
+| Name                               | Type                        | Default | Description                                                         |
+| ---------------------------------- | --------------------------- | ------- | ------------------------------------------------------------------- |
+| `value` _bindable_                 | `number` &#124; `null`      |         | {m.generated_fs_progress_bar_props_props_value()}                   |
+| `class`                            | `string`                    |         | {m.generated_fs_progress_bar_props_props_class()}                   |
+| `ref` _bindable_                   | `SVGElement`                |         | {m.generated_fs_progress_bar_props_props_ref()}                     |
+| `min`                              | `number`                    | `0`     | {m.generated_fs_progress_bar_props_props_min()}                     |
+| `max`                              | `number`                    | `100`   | {m.generated_fs_progress_bar_props_props_max()}                     |
+| `hideRail`                         | `boolean`                   |         | {m.generated_fs_progress_bar_props_props_hide_rail()}               |
+| `railElement` _bindable_           | `SVGRectElement`            |         | {m.generated_fs_progress_bar_props_props_rail_element()}            |
+| `secondaryTrackElement` _bindable_ | `SVGRectElement`            |         | {m.generated_fs_progress_bar_props_props_secondary_track_element()} |
+| `trackElement` _bindable_          | `SVGRectElement`            |         | {m.generated_fs_progress_bar_props_props_track_element()}           |
+| `status`                           | `'paused'` &#124; `'error'` |         | {m.generated_fs_progress_bar_props_props_status()}                  |
+| Element Attributes                 |                             |         |                                                                     |
+
+<!-- /props:ProgressBarProps -->

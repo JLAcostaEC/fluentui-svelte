@@ -2,15 +2,20 @@
   import { m } from '$i18n/messages.js';
 </script>
 
-## {m.tp_component_props_title()}
+## {m.global_component_props()}
 
-| **Name**       | **Type**                    | **Description**                          |
-| -------------- | --------------------------- | ---------------------------------------- |
-| `value`        | bindable `string`           | {m.tp_props_value_description()}         |
-| `format`       | `12` \| `24`                | {m.tp_props_format_description()}        |
-| `open`         | bindable `boolean`          | {m.tp_props_open_description()}          |
-| `hideHours`    | `boolean`                   | {m.tp_props_hidehours_description()}     |
-| `hideMinutes`  | `boolean`                   | {m.tp_props_hideminutes_description()}   |
-| `hideSeconds`  | `boolean`                   | {m.tp_props_hideseconds_description()}   |
-| `element`      | bindable `HTMLElement`      | {m.tp_props_element_description()}       |
-| `inputElement` | bindable `HTMLInputElement` | {m.tp_props_inputelement_description()}  |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TimePickerProps -->
+
+| Name                      | Type               | Default | Description                                              |
+| ------------------------- | ------------------ | ------- | -------------------------------------------------------- |
+| `value` _bindable_        | `string`           | `''`    | {m.generated_fs_time_picker_props_props_value()}         |
+| `format`                  | `12` &#124; `24`   | `24`    | {m.generated_fs_time_picker_props_props_format()}        |
+| `open` _bindable_         | `boolean`          | `false` | {m.generated_fs_time_picker_props_props_open()}          |
+| `hideHours`               | `boolean`          | `false` | {m.generated_fs_time_picker_props_props_hide_hours()}    |
+| `hideMinutes`             | `boolean`          | `false` | {m.generated_fs_time_picker_props_props_hide_minutes()}  |
+| `hideSeconds`             | `boolean`          | `false` | {m.generated_fs_time_picker_props_props_hide_seconds()}  |
+| `element` _bindable_      | `HTMLElement`      |         | {m.generated_fs_time_picker_props_props_element()}       |
+| `inputElement` _bindable_ | `HTMLInputElement` |         | {m.generated_fs_time_picker_props_props_input_element()} |
+
+<!-- /props:TimePickerProps -->

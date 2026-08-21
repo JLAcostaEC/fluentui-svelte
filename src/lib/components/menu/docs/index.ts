@@ -26,36 +26,7 @@ export const META: Meta = {
 		title: 'Menu — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte menu with groups, submenus, checkable items, and context-menu support.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'Menu is a Fluent UI Svelte component for displaying a list of actions or options in a dropdown. It relies on Floating UI for positioning and is composed of Menu, MenuTrigger (or ContextMenuTrigger), MenuPopover, MenuList, and MenuItem, plus optional MenuGroup, MenuDivider, and MenuItemCheckbox / MenuItemSwitch / MenuItemRadio. It supports nested submenus, checkable items, and right-click context menus.',
-		topics: ['menus', 'navigation', 'context menus', 'overlays'],
-		entities: [
-			'Menu',
-			'MenuTrigger',
-			'ContextMenuTrigger',
-			'MenuPopover',
-			'MenuList',
-			'MenuItem',
-			'MenuItemCheckbox',
-			'MenuItemRadio'
-		],
-		category: 'Navigation',
-		faq: [
-			{
-				question: 'How do I attach a menu to a trigger element?',
-				answer:
-					'Wrap the trigger with MenuTrigger and use its children snippet to bind state.ref and spread menuTriggerProps onto your Button or SplitButton.'
-			},
-			{
-				question: 'How do I create a context (right-click) menu?',
-				answer:
-					'Use ContextMenuTrigger with a ref to the target element; if no ref is provided it attaches to document.body.'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'menu',
 	status: '',
 	icon: TextboxMoreRegular

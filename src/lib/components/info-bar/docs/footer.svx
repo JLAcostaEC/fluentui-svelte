@@ -2,14 +2,20 @@
   import { m } from '$i18n/messages.js';
 </script>
 
-## {m.ib_component_props_title()}
+## {m.global_component_props()}
 
-| **Name**          | **Type**                     | **Description**                            |
-| ----------------- | ---------------------------- | ------------------------------------------ |
-| `status`          | `string`                     | {m.ib_props_status_description()}          |
-| `style`           | `string`                     | {m.ib_props_style_description()}           |
-| `title`           | `string`                     | {m.ib_props_title_description()}           |
-| `icon`            | `Snippet` &vert; `Component` | {m.ib_props_icon_description()}            |
-| `iconSize`        | `number`                     | {m.ib_props_iconsize_description()}        |
-| `hideCloseButton` | `boolean`                    | {m.ib_props_hideclosebutton_description()} |
-| `children`        | `Snippet`                    | {m.ib_props_children_description()}        |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:InfoBarProps -->
+
+| Name                       | Type                                                                                           | Default         | Description                                               |
+| -------------------------- | ---------------------------------------------------------------------------------------------- | --------------- | --------------------------------------------------------- |
+| `status`                   | `'information'` &#124; `'attention'` &#124; `'warning'` &#124; `'critical'` &#124; `'success'` | `'information'` | {m.generated_fs_info_bar_props_props_status()}            |
+| `style`                    | `'inline'` &#124; `'multiline'`                                                                | `'inline'`      | {m.generated_fs_info_bar_props_props_style()}             |
+| `title`                    | `string`                                                                                       |                 | {m.generated_fs_info_bar_props_props_title()}             |
+| `icon`                     | `Snippet` &#124; `Component`                                                                   |                 | {m.generated_fs_info_bar_props_props_icon()}              |
+| `iconSize`                 | `number`                                                                                       | `20`            | {m.generated_fs_info_bar_props_props_icon_size()}         |
+| `hideCloseButton`          | `boolean`                                                                                      |                 | {m.generated_fs_info_bar_props_props_hide_close_button()} |
+| `children`                 | `Snippet`                                                                                      |                 | {m.generated_fs_info_bar_props_props_children()}          |
+| Element Attributes (`div`) |                                                                                                |                 |                                                           |
+
+<!-- /props:InfoBarProps -->

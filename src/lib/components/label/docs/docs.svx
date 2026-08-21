@@ -12,7 +12,7 @@
   <Label label="Label" />
 </Showcase>
 
-## {m.label_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

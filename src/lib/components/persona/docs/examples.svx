@@ -56,7 +56,7 @@ const presenceCode = `
   <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="top" textAlign="center" />
 </Showcase>
 
-### {m.persona_size_title()}
+### {m.global_size()}
 
 {m.persona_size_description()}
 

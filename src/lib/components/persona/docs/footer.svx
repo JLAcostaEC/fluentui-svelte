@@ -2,19 +2,24 @@
   import { m } from '$i18n/messages.js';
 </script>
 
-## {m.persona_component_props_title()}
+## {m.global_component_props()}
 
-| **Name**        | **Type**         | **Description**                                |
-| --------------- | ---------------- | ---------------------------------------------- |
-| `name`          | `string`         | {m.persona_props_name_description()}           |
-| `primaryText`   | `string`         | {m.persona_props_primarytext_description()}    |
-| `secondaryText` | `string`         | {m.persona_props_secondarytext_description()}  |
-| `tertiaryText`  | `string`         | {m.persona_props_tertiarytext_description()}   |
-| `size`          | `number`         | {m.persona_props_size_description()}           |
-| `textAlign`     | `string`         | {m.persona_props_textalign_description()}      |
-| `textPosition`  | `string`         | {m.persona_props_textposition_description()}   |
-| `avatarAlign`   | `string`         | {m.persona_props_avataralign_description()}    |
-| `avatar`        | `object`         | {m.persona_props_avatar_description()}         |
-| `presence`      | `object`         | {m.persona_props_presence_description()}       |
-| `presenceOnly`  | `boolean`        | {m.persona_props_presenceonly_description()}   |
-| `element`       | `HTMLDivElement` | {m.persona_props_element_description()}        |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:PersonaProps -->
+
+| Name                 | Type                                                       | Default    | Description                                           |
+| -------------------- | ---------------------------------------------------------- | ---------- | ----------------------------------------------------- |
+| `name`               | `string`                                                   |            | {m.generated_fs_persona_props_props_name()}           |
+| `size`               | `number`                                                   | `42`       | {m.generated_fs_persona_props_props_size()}           |
+| `primaryText`        | `string`                                                   |            | {m.generated_fs_persona_props_props_primary_text()}   |
+| `secondaryText`      | `string`                                                   |            | {m.generated_fs_persona_props_props_secondary_text()} |
+| `tertiaryText`       | `string`                                                   |            | {m.generated_fs_persona_props_props_tertiary_text()}  |
+| `textAlign`          | `'left'` &#124; `'center'` &#124; `'right'`                | `'left'`   | {m.generated_fs_persona_props_props_text_align()}     |
+| `textPosition`       | `'top'` &#124; `'bottom'` &#124; `'left'` &#124; `'right'` | `'right'`  | {m.generated_fs_persona_props_props_text_position()}  |
+| `presenceOnly`       | `boolean`                                                  |            | {m.generated_fs_persona_props_props_presence_only()}  |
+| `avatarAlign`        | `'start'` &#124; `'center'` &#124; `'end'`                 | `'center'` | {m.generated_fs_persona_props_props_avatar_align()}   |
+| `element` _bindable_ | `HTMLDivElement`                                           |            | {m.generated_fs_persona_props_props_element()}        |
+| `avatar`             | `AvatarProps`                                              |            | {m.generated_fs_persona_props_props_avatar()}         |
+| `presence`           | `BadgePresence`                                            |            | {m.generated_fs_persona_props_props_presence()}       |
+
+<!-- /props:PersonaProps -->

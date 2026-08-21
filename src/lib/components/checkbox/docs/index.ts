@@ -25,25 +25,7 @@ export const META: Meta = {
 		title: 'Checkbox — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte checkbox that supports checked, unchecked, and indeterminate states.'
 	},
-	geo: {
-		summary:
-			'Checkbox is a Fluent UI Svelte control that a user can select (check) or clear (uncheck), and that can also report an indeterminate state for mixed selections. Set wrapperAs="label" to render a visible label wrapping the input.',
-		topics: ['forms', 'selection', 'inputs', 'indeterminate state'],
-		entities: ['Checkbox', 'checked', 'indeterminate', 'disabled', 'value', 'wrapperAs'],
-		category: 'Inputs',
-		faq: [
-			{
-				question: 'How do I add a visible label to a Checkbox?',
-				answer:
-					'Set wrapperAs="label" and pass the label text as children; the wrapper then renders as a <label> that wraps the input.'
-			},
-			{
-				question: 'How do I show an indeterminate Checkbox?',
-				answer: 'Set the indeterminate prop, which is useful for representing a mixed selection across a group.'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'checkbox',
 	status: '',
 	icon: CheckboxCheckedRegular

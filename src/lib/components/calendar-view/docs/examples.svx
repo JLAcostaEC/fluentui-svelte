@@ -3,16 +3,31 @@
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { m } from '$i18n/messages.js';
 
-  const multipleCode = `<CalendarView multiple />`;
+  const multipleCode = `<CalendarView selectionMode="multiple" />`;
+  const rangeCode = `<script>
+	let range = $state({ start: null, end: null });
+<\/script>
+
+<CalendarView selectionMode="range" bind:range />`;
   const weekStartCode = `<CalendarView weekStart={3} />`;
+
+  let range = $state({ start: null, end: null });
 </script>
 
-### {m.cv_multiple_title()}
+### {m.global_multiple_selection()}
 
 {m.cv_multiple_description()}
 
 <Showcase columns={1} code={multipleCode} minHeight="450px">
-  <CalendarView multiple />
+  <CalendarView selectionMode="multiple" />
+</Showcase>
+
+### {m.cv_range_title()}
+
+{m.cv_range_description()}
+
+<Showcase columns={1} code={rangeCode} minHeight="450px">
+  <CalendarView selectionMode="range" bind:range />
 </Showcase>
 
 ### {m.cv_week_start_title()}

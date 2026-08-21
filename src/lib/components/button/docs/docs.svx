@@ -17,7 +17,7 @@
   <Button appearance="subtle" disabled />
 </Showcase>
 
-## {m.btn_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

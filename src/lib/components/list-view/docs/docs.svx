@@ -19,7 +19,7 @@
   </ListView>
 </Showcase>
 
-## {m.lv_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

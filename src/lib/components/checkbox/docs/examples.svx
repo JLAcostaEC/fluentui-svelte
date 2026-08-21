@@ -32,7 +32,7 @@
 <Checkbox>I'm Unlabeled</Checkbox>
 ```
 
-### {m.cb_indeterminate_title()}
+### {m.global_indeterminate()}
 
 {m.cb_indeterminate_description()}
 
@@ -40,7 +40,7 @@
   <Checkbox wrapperAs="label" indeterminate>Indeterminate</Checkbox>
 </Showcase>
 
-### {m.cb_disabled_title()}
+### {m.global_disabled()}
 
 {m.cb_disabled_description()}
 

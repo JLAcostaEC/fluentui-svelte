@@ -2,12 +2,21 @@
   import { m } from '$i18n/messages.js';
 </script>
 
-## {m.ta_component_props_title()}
+## {m.global_component_props()}
 
-| **Name**           | **Type**   | **Description**                              |
-| ------------------ | ---------- | -------------------------------------------- |
-| `placeholder`      | `string`   | {m.ta_props_placeholder_description()}       |
-| `resize`           | `string`   | {m.ta_props_resize_description()}            |
-| `onChange`         | `function` | {m.ta_props_onchange_description()}          |
-| `element`          |            | {m.ta_props_element_description()}           |
-| Element Attributes |            | {m.ta_props_elementattributes_description()} |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TextAreaProps -->
+
+| Name                             | Type                                                               | Default      | Description                                                 |
+| -------------------------------- | ------------------------------------------------------------------ | ------------ | ----------------------------------------------------------- |
+| `value` _bindable_               | `string`                                                           | `''`         | {m.generated_fs_text_area_props_props_value()}              |
+| `ref` _bindable_                 | `HTMLElement`                                                      |              | {m.generated_fs_text_area_props_props_ref()}                |
+| `placeholder`                    | `string`                                                           |              | {m.generated_fs_text_area_props_props_placeholder()}        |
+| `resize`                         | `'none'` &#124; `'both'` &#124; `'horizontal'` &#124; `'vertical'` | `'vertical'` | {m.generated_fs_text_area_props_props_resize()}             |
+| `onChange`                       | `(e: Event) => void`                                               |              | {m.generated_fs_text_area_props_props_on_change()}          |
+| `disabled`                       | `boolean`                                                          | `false`      | {m.generated_fs_text_area_props_props_disabled()}           |
+| `wrapperAttributes`              | `HTMLAttributes`                                                   |              | {m.generated_fs_text_area_props_props_wrapper_attributes()} |
+| `wrapperRef` _bindable_          | `HTMLDivElement`                                                   |              | {m.generated_fs_text_area_props_props_wrapper_ref()}        |
+| `SvelteHTMLElements['textarea']` |                                                                    |              |                                                             |
+
+<!-- /props:TextAreaProps -->

@@ -26,32 +26,7 @@ export const META: Meta = {
 		title: 'Avatar — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte avatar that displays an image, icon, or initials with optional presence status.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'Avatar is a Fluent UI Svelte component that gives a graphical representation of a user, team, or entity. It can display an image, an icon, or initials derived from a name, and supports different sizes, shapes, colors, activity indicators, and a presence badge.',
-		topics: ['user representation', 'profile images', 'initials', 'presence status', 'data display'],
-		entities: ['Avatar', 'PresenceBadge', 'name', 'image', 'icon', 'badge', 'shape', 'color', 'idForColor'],
-		category: 'Data Display',
-		faq: [
-			{
-				question: 'What does an Avatar display when no image is provided?',
-				answer:
-					'When there is no image, the Avatar shows the initials derived from the name prop. If neither an image nor initials are available, it can display an icon instead.'
-			},
-			{
-				question: 'How does the colorful color option pick a color?',
-				answer:
-					'Setting color to "colorful" automatically picks a color based on the name prop. When a name is unavailable, idForColor can be used to determine the color from another unique identifier.'
-			},
-			{
-				question: 'How do I show a presence status on an Avatar?',
-				answer:
-					'Pass a badge object such as badge={{ status: "available" }} to display a presence badge. See the PresenceBadge component for the available statuses.'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'avatar',
 	status: '',
 	icon: PersonRegular

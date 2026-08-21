@@ -26,7 +26,7 @@
   <RadioButton label="Option 3" name="group1" value="$3" disabled bind:group={groupValue} />
 </Showcase>
 
-### {m.rb_disabled_title()}
+### {m.global_disabled()}
 
 {m.rb_disabled_description()}
 

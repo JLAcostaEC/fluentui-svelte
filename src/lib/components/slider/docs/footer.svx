@@ -2,26 +2,38 @@
   import { m } from '$i18n/messages.js';
 </script>
 
-## {m.slider_component_props_title()}
+## {m.global_component_props()}
 
-| **Name**           | **Type**                                  | **Description**                                |
-| ------------------ | ----------------------------------------- | ---------------------------------------------- |
-| `value`            | `number`                                  | {m.slider_props_value_description()}           |
-| `min`              | `number`                                  | {m.slider_props_min_description()}             |
-| `max`              | `number`                                  | {m.slider_props_max_description()}             |
-| `step`             | `number`                                  | {m.slider_props_step_description()}            |
-| `ticks`            | `number[]`                                | {m.slider_props_ticks_description()}           |
-| `tickPlacement`    | `'around' &#124; 'before' &#124; 'after'` | {m.slider_props_tickplacement_description()}   |
-| `prefix`           | `string`                                  | {m.slider_props_prefix_description()}          |
-| `suffix`           | `string`                                  | {m.slider_props_suffix_description()}          |
-| `track`            | `boolean`                                 | {m.slider_props_track_description()}           |
-| `orientation`      | `'horizontal' &#124; 'vertical'`          | {m.slider_props_orientation_description()}     |
-| `reverse`          | `boolean`                                 | {m.slider_props_reverse_description()}         |
-| `disabled`         | `boolean`                                 | {m.slider_props_disabled_description()}        |
-| `sync`             | `boolean`                                 | {m.slider_props_sync_description()}            |
-| `tooltip`          | `boolean`                                 | {m.slider_props_tooltip_description()}         |
-| `tooltipPlacement` | `Placement`                               | {m.slider_props_tooltipplacement_description()} |
-| `tooltipContent`   | `string &#124; Snippet &#124; Component`  | {m.slider_props_tooltipcontent_description()}  |
-| `onChange`         | `(value: number) => void`                 | {m.slider_props_onchange_description()}        |
-| `class`            | `string`                                  | {m.slider_props_class_description()}           |
-| `ref`              | `HTMLElement`                             | {m.slider_props_ref_description()}             |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:SliderProps -->
+
+| Name                       | Type                                          | Default        | Description                                             |
+| -------------------------- | --------------------------------------------- | -------------- | ------------------------------------------------------- |
+| `value` _bindable_         | `number`                                      | `0`            | {m.generated_fs_slider_props_props_value()}             |
+| `min`                      | `number`                                      | `0`            | {m.generated_fs_slider_props_props_min()}               |
+| `max`                      | `number`                                      | `100`          | {m.generated_fs_slider_props_props_max()}               |
+| `step`                     | `number`                                      | `1`            | {m.generated_fs_slider_props_props_step()}              |
+| `ticks`                    | `number[]`                                    | `[]`           | {m.generated_fs_slider_props_props_ticks()}             |
+| `tickPlacement`            | `'around'` &#124; `'before'` &#124; `'after'` | `'around'`     | {m.generated_fs_slider_props_props_tick_placement()}    |
+| `prefix`                   | `string`                                      | `''`           | {m.generated_fs_slider_props_props_prefix()}            |
+| `suffix`                   | `string`                                      | `''`           | {m.generated_fs_slider_props_props_suffix()}            |
+| `track`                    | `boolean`                                     | `true`         | {m.generated_fs_slider_props_props_track()}             |
+| `orientation`              | `'horizontal'` &#124; `'vertical'`            | `'horizontal'` | {m.generated_fs_slider_props_props_orientation()}       |
+| `reverse`                  | `boolean`                                     | `false`        | {m.generated_fs_slider_props_props_reverse()}           |
+| `disabled`                 | `boolean`                                     | `false`        | {m.generated_fs_slider_props_props_disabled()}          |
+| `sync`                     | `boolean`                                     |                | {m.generated_fs_slider_props_props_sync()}              |
+| `tooltip`                  | `boolean`                                     | `true`         | {m.generated_fs_slider_props_props_tooltip()}           |
+| `tooltipPlacement`         | `Placement`                                   | `'top'`        | {m.generated_fs_slider_props_props_tooltip_placement()} |
+| `tooltipContent`           | `string` &#124; `Snippet` &#124; `Component`  |                | {m.generated_fs_slider_props_props_tooltip_content()}   |
+| `onChange`                 | `(value: number) => void`                     |                | {m.generated_fs_slider_props_props_on_change()}         |
+| `class`                    | `string`                                      |                | {m.generated_fs_slider_props_props_class()}             |
+| `ref` _bindable_           | `HTMLElement`                                 |                | {m.generated_fs_slider_props_props_ref()}               |
+| `inputRef` _bindable_      | `HTMLInputElement`                            |                | {m.generated_fs_slider_props_props_input_ref()}         |
+| `thumbRef` _bindable_      | `HTMLElement`                                 |                | {m.generated_fs_slider_props_props_thumb_ref()}         |
+| `tooltipRef` _bindable_    | `HTMLElement`                                 |                | {m.generated_fs_slider_props_props_tooltip_ref()}       |
+| `railRef` _bindable_       | `HTMLElement`                                 |                | {m.generated_fs_slider_props_props_rail_ref()}          |
+| `trackRef` _bindable_      | `HTMLElement`                                 |                | {m.generated_fs_slider_props_props_track_ref()}         |
+| `tickBarRef` _bindable_    | `HTMLElement`                                 |                | {m.generated_fs_slider_props_props_tick_bar_ref()}      |
+| Element Attributes (`div`) |                                               |                |                                                         |
+
+<!-- /props:SliderProps -->

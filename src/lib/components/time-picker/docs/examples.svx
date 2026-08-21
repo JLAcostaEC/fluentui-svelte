@@ -19,7 +19,7 @@
   <TimePicker format={12} />
 </Showcase>
 
-### {m.tp_hiding_columns_title()}
+### {m.global_hiding_columns()}
 
 {m.tp_hiding_columns_description()}
 

@@ -4,12 +4,17 @@
 
 ## {m.divider_divider_props_title()}
 
-| **Name**       | **Type**            | **Description**                                                                                |
-| -------------- | ------------------- | ------------------------------------------------------------------------------------------------ |
-| `as`           | `string`            | {m.divider_props_as_description()}           |
-| `vertical`     | `boolean`           | {m.divider_props_vertical_description()}                              |
-| `alignContent` | `string`            | {m.divider_props_aligncontent_description()} |
-| `appearance`   | `string`            | {m.divider_props_appearance_description()} |
-| `inset`        | `boolean`           | {m.divider_props_inset_description()}                                                  |
-| `ref`          | `HTMLDivElement` &vert; `HTMLHRElement` &vert; `HTMLSpanElement` | {m.divider_props_ref_description()} |
-| `children`     | `Snippet`           | {m.divider_props_children_description()}                                             |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DividerProps -->
+
+| Name             | Type                                                                | Default     | Description                                          |
+| ---------------- | ------------------------------------------------------------------- | ----------- | ---------------------------------------------------- |
+| `as`             | `'div'` &#124; `'hr'` &#124; `'span'`                               | `'div'`     | {m.generated_fs_divider_props_props_as()}            |
+| `ref` _bindable_ | `HTMLDivElement` &#124; `HTMLHRElement` &#124; `HTMLSpanElement`    |             | {m.generated_fs_divider_props_props_ref()}           |
+| `vertical`       | `boolean`                                                           |             | {m.generated_fs_divider_props_props_vertical()}      |
+| `alignContent`   | `'start'` &#124; `'center'` &#124; `'end'`                          | `'center'`  | {m.generated_fs_divider_props_props_align_content()} |
+| `inset`          | `boolean`                                                           |             | {m.generated_fs_divider_props_props_inset()}         |
+| `appearance`     | `'accent'` &#124; `'standard'` &#124; `'subtle'` &#124; `'default'` | `'default'` | {m.generated_fs_divider_props_props_appearance()}    |
+| HTML Attributes  |                                                                     |             |                                                      |
+
+<!-- /props:DividerProps -->

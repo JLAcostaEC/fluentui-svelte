@@ -28,26 +28,7 @@ export const META: Meta = {
 		description:
 			'A Fluent UI Svelte label that captions form controls, with size, weight, position, and required options.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'Label is a Fluent UI Svelte component that renders an accessible <label> caption for a form control. It supports small/medium/large sizes, regular/semibold weights, four label positions (before, after, above, below), a required indicator, and a disabled state.',
-		topics: ['forms', 'labels', 'accessibility', 'inputs'],
-		entities: ['Label', 'label', 'size', 'weight', 'labelPosition', 'required'],
-		category: 'Inputs',
-		faq: [
-			{
-				question: 'How do I mark a Label as required?',
-				answer:
-					'Pass a required object (e.g. required={{ message: "Required" }}); it renders a required indicator, defaulting to an asterisk.'
-			},
-			{
-				question: 'How do I position the label text relative to a control?',
-				answer: "Use the labelPosition prop with 'before', 'after', 'above', or 'below'."
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'label',
 	status: '',
 	icon: BookmarkRegular

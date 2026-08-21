@@ -2,16 +2,20 @@
   import { m } from '$i18n/messages.js';
 </script>
 
-## {m.label_component_props_title()}
+## {m.global_component_props()}
 
-| **Name**        | **Type**                                    | **Description**                              |
-| --------------- | ------------------------------------------- | -------------------------------------------- |
-| `label`         | `string`                                    | {m.label_props_label_description()}          |
-| `size`          | `'small' \| 'medium' \| 'large'`            | {m.label_props_size_description()}           |
-| `weight`        | `'regular' \| 'semibold'`                   | {m.label_props_weight_description()}         |
-| `labelPosition` | `'before' \| 'after' \| 'above' \| 'below'` | {m.label_props_labelposition_description()}  |
-| `required`      | `{ message?: string; abbr?: string }`       | {m.label_props_required_description()}       |
-| `disabled`      | `boolean`                                   | {m.label_props_disabled_description()}       |
-| `class`         | `string`                                    | {m.label_props_class_description()}          |
-| `ref`           | bindable `HTMLLabelElement`                 | {m.label_props_ref_description()}            |
-| `children`      | `Snippet`                                   | {m.label_props_children_description()}       |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:LabelProps -->
+
+| Name                         | Type                                                          | Default           | Description                                         |
+| ---------------------------- | ------------------------------------------------------------- | ----------------- | --------------------------------------------------- |
+| `label`                      | `string`                                                      | `'Label Element'` | {m.generated_fs_label_props_props_label()}          |
+| `size`                       | `'small'` &#124; `'medium'` &#124; `'large'`                  | `'medium'`        | {m.generated_fs_label_props_props_size()}           |
+| `weight`                     | `'regular'` &#124; `'semibold'`                               | `'regular'`       | {m.generated_fs_label_props_props_weight()}         |
+| `labelPosition`              | `'before'` &#124; `'after'` &#124; `'above'` &#124; `'below'` | `'after'`         | {m.generated_fs_label_props_props_label_position()} |
+| `required`                   | `{ abbr?: string; message: string; }`                         |                   | {m.generated_fs_label_props_props_required()}       |
+| `disabled`                   | `boolean`                                                     |                   | {m.generated_fs_label_props_props_disabled()}       |
+| `ref` _bindable_             | `HTMLLabelElement`                                            |                   | {m.generated_fs_label_props_props_ref()}            |
+| Element Attributes (`label`) |                                                               |                   |                                                     |
+
+<!-- /props:LabelProps -->

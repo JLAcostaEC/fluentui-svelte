@@ -14,7 +14,7 @@
   <ToggleSwitch label="I'm disabled" disabled />
 </Showcase>
 
-## {m.tswitch_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

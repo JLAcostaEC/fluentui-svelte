@@ -14,7 +14,7 @@
   </div>
 </Showcase>
 
-## {m.divider_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

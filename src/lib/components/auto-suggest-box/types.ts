@@ -1,5 +1,5 @@
 import type { FSContext } from '$internal';
-import type { FSInput } from '../text-box/types.ts';
+import type { TextBoxProps } from '../text-box/types.ts';
 import type { ListViewItemProps } from '../list-view/types.ts';
 import type { FlyoutProps } from '../flyout/types.ts';
 import type { HTMLAttributes } from 'svelte/elements';
@@ -27,12 +27,12 @@ export type FSAutoSuggestBox = {
 	virtualizer?: AutoSuggestVirtualizer;
 	maxItemsInView?: number;
 	textBoxRef?: HTMLInputElement;
-	textBoxProps?: Omit<FSInput, 'type' | 'ref' | 'placeholder' | 'hideActionButtons' | 'textChanged'>;
+	textBoxProps?: Omit<TextBoxProps, 'type' | 'ref' | 'placeholder' | 'hideActionButtons' | 'textChanged'>;
 	flyoutRef?: HTMLElement;
 	flyoutProps?: Omit<FlyoutProps, 'children' | 'ref'>;
 	listViewRef?: HTMLUListElement;
 	listViewProps?: Omit<ListViewItemProps, 'as' | 'role' | 'ref' | 'navigationMode' | 'selectedItems'>;
-} & Pick<FSInput, 'type' | 'placeholder' | 'hideActionButtons' | 'textChanged'> &
+} & Pick<TextBoxProps, 'type' | 'placeholder' | 'hideActionButtons' | 'textChanged'> &
 	HTMLAttributes<HTMLDivElement>;
 
 /**

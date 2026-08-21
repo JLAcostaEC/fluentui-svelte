@@ -17,7 +17,7 @@
   <ProgressRing value={75} indeterminate hideRail />
 </Showcase>
 
-## {m.pring_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

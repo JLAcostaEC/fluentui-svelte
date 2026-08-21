@@ -46,7 +46,7 @@
   </div>
 </Showcase>
 
-### {m.slider_disabled_title()}
+### {m.global_disabled()}
 
 {m.slider_disabled_description()}
 

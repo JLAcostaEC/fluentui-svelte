@@ -2,16 +2,29 @@
   import { m } from '$i18n/messages.js';
 </script>
 
-## {m.tooltip_component_props_title()}
+## {m.global_component_props()}
 
-| **Name**           | **Type**                                   | **Description**                                   |
-| ------------------ | ------------------------------------------ | ------------------------------------------------- |
-| `content`          | `string` \| `Snippet` \| `Component`       | {m.tooltip_props_content_description()}           |
-| `positionConfig`   | `Partial<ComputePositionConfig>`           | {m.tooltip_props_positionconfig_description()}    |
-| `withArrow`        | `boolean`                                  | {m.tooltip_props_witharrow_description()}         |
-| `openDelay`        | `number`                                   | {m.tooltip_props_opendelay_description()}         |
-| `hideDelay`        | `number`                                   | {m.tooltip_props_hidedelay_description()}         |
-| `onVisibleChange`  | `(visible: boolean) => void`               | {m.tooltip_props_onvisiblechange_description()}   |
-| `element`          | `HTMLElement`                              | {m.tooltip_props_element_description()}           |
-| `relationship`     | `label` \| `description` \| `inaccessible` | {m.tooltip_relationship_description()}            |
-| Element Attributes |                                            | {m.tooltip_props_elementattributes_description()} |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TooltipProps -->
+
+| Name                                                | Type                                                     | Default            | Description                                              |
+| --------------------------------------------------- | -------------------------------------------------------- | ------------------ | -------------------------------------------------------- |
+| `content`                                           | `string` &#124; `Snippet` &#124; `Component`             | `'I am a tooltip'` | {m.generated_fs_tooltip_props_props_content()}           |
+| `class`                                             | `string`                                                 |                    | {m.generated_fs_tooltip_props_props_class()}             |
+| `ref` _bindable_                                    | `HTMLElement`                                            |                    | {m.generated_fs_tooltip_props_props_ref()}               |
+| `target`                                            | `HTMLElement`                                            |                    | {m.generated_fs_tooltip_props_props_target()}            |
+| `open` _bindable_                                   | `boolean`                                                | `false`            | {m.generated_fs_tooltip_props_props_open()}              |
+| `withArrow`                                         | `boolean`                                                | `false`            | {m.generated_fs_tooltip_props_props_with_arrow()}        |
+| `positionConfig`                                    | `ComputePositionConfig`                                  |                    | {m.generated_fs_tooltip_props_props_position_config()}   |
+| `openDelay`                                         | `number`                                                 | `100`              | {m.generated_fs_tooltip_props_props_open_delay()}        |
+| `hideDelay`                                         | `number`                                                 | `300`              | {m.generated_fs_tooltip_props_props_hide_delay()}        |
+| `onVisibleChange`                                   | `(visible: boolean) => void`                             |                    | {m.generated_fs_tooltip_props_props_on_visible_change()} |
+| `relationship`                                      | `'label'` &#124; `'description'` &#124; `'inaccessible'` | `'label'`          | {m.generated_fs_tooltip_props_props_relationship()}      |
+| `placement`                                         | `Placement`                                              |                    | {m.generated_fs_tooltip_props_props_placement()}         |
+| `id`                                                | `string`                                                 |                    | {m.generated_fs_tooltip_props_props_id()}                |
+| `preventClose` _bindable_                           | `boolean`                                                | `false`            | {m.generated_fs_tooltip_props_props_prevent_close()}     |
+| `animationFrame`                                    | `boolean`                                                | `false`            | {m.generated_fs_tooltip_props_props_animation_frame()}   |
+| `children`                                          | `Snippet`                                                |                    | {m.generated_fs_tooltip_props_props_children()}          |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                                                          |                    |                                                          |
+
+<!-- /props:TooltipProps -->

@@ -25,26 +25,7 @@ export const META: Meta = {
 		title: 'Skeleton — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte loading placeholder that shows where content will appear.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'Skeleton is a Fluent UI Svelte placeholder for content that is loading. It sizes itself via standard HTML/CSS (style, class, width, height, or the justify prop) and supports wave or pulse animation, circle/rounded/square shapes, and rendering as a div or span.',
-		topics: ['loading states', 'placeholders', 'status & feedback'],
-		entities: ['Skeleton', 'animation', 'shape', 'justify', 'as'],
-		category: 'Status & Feedback',
-		faq: [
-			{
-				question: 'How do I size a Skeleton?',
-				answer:
-					'Use standard HTML/CSS via the style, class, width and height attributes, or the justify prop to fill the container width.'
-			},
-			{
-				question: 'What animations does Skeleton support?',
-				answer: "The animation prop accepts 'wave' (default) or 'pulse'."
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'skeleton',
 	status: '',
 	icon: LineStyleRegular

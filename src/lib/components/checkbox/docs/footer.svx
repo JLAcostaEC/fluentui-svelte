@@ -4,15 +4,21 @@
 
 ## {m.cb_checkbox_props_title()}
 
-| **Name**            | **Type**                                 | **Description**                                                                 |
-| ------------------- | ---------------------------------------- | ------------------------------------------------------------------------------- |
-| `wrapperAs`         | `'div' \| 'label'`                       | {m.cb_props_wrapperas_description()} |
-| `children`          | `Snippet`                                | {m.cb_props_children_description()} |
-| `checked`           | `boolean`                                | {m.cb_props_checked_description()} |
-| `indeterminate`     | `boolean`                                | {m.cb_props_indeterminate_description()} |
-| `disabled`          | `boolean`                                | {m.cb_props_disabled_description()} |
-| `value`             | `string`                                 | {m.cb_props_value_description()} |
-| `wrapperAttributes` | `object`                                 | {m.cb_props_wrapperattributes_description()} |
-| `ref`               | bindable `HTMLInputElement`              | {m.cb_props_ref_description()} |
-| `wrapperRef`        | bindable `HTMLDivElement \| HTMLLabelElement` | {m.cb_props_wrapperref_description()} |
-| Input Attributes    |                                          | {m.cb_props_inputattributes_description()} |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:CheckboxProps -->
+
+| Name                                            | Type                                       | Default | Description                                                |
+| ----------------------------------------------- | ------------------------------------------ | ------- | ---------------------------------------------------------- |
+| `ref` _bindable_                                | `HTMLInputElement`                         |         | {m.generated_fs_checkbox_props_props_ref()}                |
+| `wrapperAs`                                     | `'div'` &#124; `'label'`                   | `'div'` | {m.generated_fs_checkbox_props_props_wrapper_as()}         |
+| `wrapperRef` _bindable_                         | `HTMLDivElement` &#124; `HTMLLabelElement` |         | {m.generated_fs_checkbox_props_props_wrapper_ref()}        |
+| `wrapperAttributes`                             | `PolymorphicProps`                         |         | {m.generated_fs_checkbox_props_props_wrapper_attributes()} |
+| `indeterminate` _bindable_                      | `boolean`                                  |         | {m.generated_fs_checkbox_props_props_indeterminate()}      |
+| `name`                                          | `string` &#124; `null`                     | `id`    | {m.generated_fs_checkbox_props_props_name()}               |
+| `group`                                         | `string` &#124; `null`                     |         | {m.generated_fs_checkbox_props_props_group()}              |
+| `checked` _bindable_                            | `boolean`                                  |         | {m.generated_fs_checkbox_props_props_checked()}            |
+| `disabled`                                      | `boolean`                                  |         | {m.generated_fs_checkbox_props_props_disabled()}           |
+| `children`                                      | `Snippet`                                  |         | {m.generated_fs_checkbox_props_props_children()}           |
+| `HTMLInputAttributes` without `on:`, `children` |                                            |         |                                                            |
+
+<!-- /props:CheckboxProps -->

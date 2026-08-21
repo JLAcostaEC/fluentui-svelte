@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { DatePickerProps } from './types.ts';
 	import { Flyout, Button, Divider } from '$lib/index.js';
 	import { floating } from '$internal';
 	import { flip, hide, offset, shift } from '@floating-ui/dom';
@@ -13,31 +14,15 @@
 		hideMonths = false,
 		hideDays = false,
 		minYear = new Date().getFullYear() - 100,
-		maxYear = new Date().getFullYear(),
+		maxYear = new Date().getFullYear() + 100,
 		disabledDates = [],
 		disabledMonths = [],
 		disabledYears = [],
-		element = $bindable(),
-		inputElement = $bindable()
-	}: {
-		format?: 'MM/dd/yyyy' | 'dd/MM/yyyy';
-		/** Selected date as `YYYY-MM-DD` (matches the underlying `<input type="date">`). */
-		value?: string;
-		open?: boolean;
-		hideYears?: boolean;
-		hideMonths?: boolean;
-		hideDays?: boolean;
-		minYear?: number;
-		maxYear?: number;
-		/** Specific days (year-month-day) that cannot be selected. */
-		disabledDates?: Date[];
-		/** Specific months (by month + year) that cannot be selected. */
-		disabledMonths?: Date[];
-		/** Specific years (by year) that cannot be selected. */
-		disabledYears?: Date[];
-		element?: HTMLElement;
-		inputElement?: HTMLInputElement;
-	} = $props();
+		ref = $bindable(),
+		inputElement = $bindable(),
+		inputProps,
+		...attributes
+	}: DatePickerProps = $props();
 
 	type Column = 'month' | 'day' | 'year';
 
@@ -163,7 +148,8 @@
 			open = !open;
 		}
 	}}
-	bind:this={element}
+	bind:this={ref}
+	{...attributes}
 >
 	{#each columns as col, idx (col)}
 		{#if idx > 0}
@@ -171,12 +157,12 @@
 		{/if}
 		<span class="picker-content">{display(col)}</span>
 	{/each}
-	<input type="date" class="date-picker-input" {value} bind:this={inputElement} />
+	<input type="date" class="date-picker-input" {value} bind:this={inputElement} {...inputProps} />
 </div>
 
 {#if open}
 	<Flyout
-		{@attach floating(element, {
+		{@attach floating(ref, {
 			placement: 'bottom',
 			middleware: [
 				offset(({ rects }) => {
@@ -188,7 +174,7 @@
 			],
 			strategy: 'fixed'
 		})}
-		reference={element}
+		reference={ref}
 		class="date-picker-flyout"
 	>
 		<div class="carousel-wrapper">
@@ -307,6 +293,7 @@
 		left: 0;
 		max-width: min-content;
 		padding: 0 !important;
+		z-index: 10;
 		& .wrapper {
 			gap: 0 !important;
 		}

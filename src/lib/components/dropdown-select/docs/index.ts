@@ -25,27 +25,7 @@ export const META: Meta = {
 		title: 'Dropdown Select — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte native-select dropdown for choosing one or more options.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'DropdownSelect is a Fluent UI Svelte dropdown built on the native <select> element. It lets users choose one option (or several with the multiple prop) from DropdownSelectOption children, supports rich option content, and is currently an early-access prototype.',
-		topics: ['selection', 'native select', 'dropdowns', 'forms'],
-		entities: ['DropdownSelect', 'DropdownSelectOption', 'value', 'multiple', 'placeholder'],
-		category: 'Inputs',
-		faq: [
-			{
-				question: 'Is DropdownSelect production-ready?',
-				answer:
-					'No. It is an early-access prototype and will be rebuilt on FloatingUI Svelte, so its API may change significantly.'
-			},
-			{
-				question: 'How is DropdownSelect different from Dropdown?',
-				answer:
-					'DropdownSelect is built on the native <select> element, whereas Dropdown is a fully custom flyout-based control.'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'dropdown-select',
 	status: 'Prototype',
 	icon: ArrowAutofitDownRegular

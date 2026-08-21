@@ -16,7 +16,7 @@
   </div>
 </Showcase>
 
-## {m.flyout_usage_title()}
+## {m.global_usage()}
 
 {m.flyout_usage_description()}
 

@@ -27,7 +27,7 @@
 
 <Skeleton style="height: 120px;" justify />
 
-### {m.skeleton_shape_title()}
+### {m.global_shape()}
 
 {m.skeleton_shape_description()}
 

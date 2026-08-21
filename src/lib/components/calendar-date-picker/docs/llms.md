@@ -20,16 +20,14 @@ The `CalendarDatePicker` combines a button trigger with a `CalendarView` popup. 
 
 ## Component Props
 
-| Name               | Type                         | Description                                                                      |
-| ------------------ | ---------------------------- | -------------------------------------------------------------------------------- |
-| `value`            | bindable `Date \| null`      | The selected date. Bind to it to read or set the current selection.              |
-| `locale`           | `string`                     | Locale used to format the displayed date. Default: `'en-US'`.                    |
-| `format`           | `Intl.DateTimeFormatOptions` | Formatting options for the displayed date. Default: numeric year, month and day. |
-| `calendarPosition` | `object`                     | Positioning configuration forwarded to the calendar popup.                       |
-| `blackoutDates`    | `Date[]`                     | Dates that cannot be selected. Forwarded to the underlying `CalendarView`.       |
-| `minDate`          | `Date`                       | Earliest selectable date. Forwarded to the underlying `CalendarView`.            |
-| `maxDate`          | `Date`                       | Latest selectable date. Forwarded to the underlying `CalendarView`.              |
-| `weekStart`        | `number`                     | The first day of the week. Forwarded to the underlying `CalendarView`.           |
-| `headers`          | `object`                     | Header configuration forwarded to the underlying `CalendarView`.                 |
-| `onChange`         | `(value: Date) => void`      | Callback fired when the selected date changes.                                   |
-| `element`          | bindable `HTMLDivElement`    | The DOM reference of the calendar date picker root element.                      |
+| Name               | Type                             | Default                                                 | Description                                               |
+| ------------------ | -------------------------------- | ------------------------------------------------------- | --------------------------------------------------------- |
+| `ref`              | bindable `HTMLDivElement`        |                                                         | The DOM reference of the picker element.                  |
+| `value`            | bindable `Date \| null`          | `null`                                                  | The selected date.                                        |
+| `format`           | `Intl.DateTimeFormatOptions`     | `{ year: 'numeric', month: 'numeric', day: 'numeric' }` | The options used to format the date shown on the trigger. |
+| `calendarPosition` | `Partial<ComputePositionConfig>` |                                                         | The floating UI configuration object of the popup.        |
+| `onChange`         | `(event, value) => void`         |                                                         | Called whenever the selected date changes.                |
+
+`locale`, `blackoutDates`, `headers`, `minDate`, `maxDate` and `weekStart` are forwarded
+straight to the underlying `CalendarView`. All `div` HTML attributes are forwarded to the
+root element.

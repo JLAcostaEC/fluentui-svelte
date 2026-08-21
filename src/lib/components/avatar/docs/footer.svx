@@ -2,19 +2,25 @@
   import { m } from '$i18n/messages.js';
 </script>
 
-## {m.avatar_component_props_title()}
+## {m.global_component_props()}
 
-| **Name**           | **Type**                     | **Description**                                 |
-| ------------------ | ---------------------------- | ----------------------------------------------- |
-| `name`             | `string`                     | {m.avatar_props_name_description()}             |
-| `image`            | `{ src: string }`            | {m.avatar_props_image_description()}            |
-| `ref`              | `HTMLDivElement`             | {m.avatar_props_ref_description()}              |
-| `size`             | `number`                     | {m.avatar_props_size_description()}             |
-| `shape`            | `string`                     | {m.avatar_props_shape_description()}            |
-| `color`            | `string`                     | {m.avatar_props_color_description()}            |
-| `active`           | `string`                     | {m.avatar_props_active_description()}           |
-| `activeAppearance` | `string`                     | {m.avatar_props_activeappearance_description()} |
-| `initials`         | `string`                     | {m.avatar_props_initials_description()}         |
-| `idForColor`       | `string`                     | {m.avatar_props_idforcolor_description()}       |
-| `icon`             | `Snippet` &vert; `Component` | {m.avatar_props_icon_description()}             |
-| `badge`            | `object`                     | {m.avatar_props_badge_description()}            |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:AvatarProps -->
+
+| Name               | Type                                                | Default       | Description                                             |
+| ------------------ | --------------------------------------------------- | ------------- | ------------------------------------------------------- |
+| `name`             | `string`                                            | `'Avatar'`    | {m.generated_fs_avatar_props_props_name()}              |
+| `image`            | `{ src: string; }`                                  |               | {m.generated_fs_avatar_props_props_image()}             |
+| `ref` _bindable_   | `HTMLDivElement`                                    |               | {m.generated_fs_avatar_props_props_ref()}               |
+| `size`             | `number`                                            | `48`          | {m.generated_fs_avatar_props_props_size()}              |
+| `shape`            | `'circular'` &#124; `'rounded'` &#124; `'square'`   | `'circular'`  | {m.generated_fs_avatar_props_props_shape()}             |
+| `color`            | [`Colors`](/docs/types/#colors) &#124; `'colorful'` | `'attention'` | {m.generated_fs_avatar_props_props_color()}             |
+| `active`           | `'active'` &#124; `'inactive'`                      |               | {m.generated_fs_avatar_props_props_active()}            |
+| `activeAppearance` | `'ring'` &#124; `'shadow'` &#124; `'ring-shadow'`   | `'ring'`      | {m.generated_fs_avatar_props_props_active_appearance()} |
+| `initials`         | `string`                                            | `name`        | {m.generated_fs_avatar_props_props_initials()}          |
+| `idForColor`       | `string`                                            |               | {m.generated_fs_avatar_props_props_id_for_color()}      |
+| `icon`             | `Snippet` &#124; `Component`                        |               | {m.generated_fs_avatar_props_props_icon()}              |
+| `badge`            | `BadgePresence`                                     |               | {m.generated_fs_avatar_props_props_badge()}             |
+| HTML Attributes    |                                                     |               |                                                         |
+
+<!-- /props:AvatarProps -->

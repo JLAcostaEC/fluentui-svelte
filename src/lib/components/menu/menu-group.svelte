@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { PREFIX } from '$constants';
-	import type { Snippet } from 'svelte';
+	import type { MenuGroupProps } from './types.ts';
 
 	const FALLBACK_ID = $props.id();
 	const COMPONENT_NAME = 'menu-group';
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
-	let { ref = $bindable(), header, children }: { ref?: HTMLDivElement; header?: string; children: Snippet } = $props();
+	let { ref = $bindable(), header, children }: MenuGroupProps = $props();
 </script>
 
 <div class="fs-menu-group" role="group" aria-labelledby="group-name-{ID}" bind:this={ref}>

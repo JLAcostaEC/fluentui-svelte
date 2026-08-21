@@ -7,8 +7,9 @@ export const load = async ({ params }) => {
 
 	try {
 		docs = (await import(`$site/pages/${slug}.svx`)).default;
-	} catch (error) {
-		// console.log(error);
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	} catch (_error) {
+		// console.log(_error);
 	}
 
 	if (!docs) error(404, { message: 'Not found' });

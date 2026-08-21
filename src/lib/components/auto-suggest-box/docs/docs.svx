@@ -3,6 +3,18 @@
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { m } from '$i18n/messages.js';
   import { ParaglideMessage } from "@inlang/paraglide-js-svelte";
+
+  	import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
+	import { fake } from '$constants';
+
+	// Disabled is a property of the person, not of where they land once the list is
+	// filtered — otherwise every search result would start with a disabled row.
+	const people = fake.map((person, i) => ({ ...person, disabled: i % 10 === 0 }));
+
+	let items = $state(people);
+	let listRef = $state<ReturnType<typeof SvelteVirtualList> | null>(null);
+	let selection = $state<{ id: string; value: string }[]>([]);
+
 </script>
 
 # AutoSuggestBox <Badge appearance="tint" color="attention">Beta</Badge>
@@ -15,7 +27,7 @@
     suggestionChosen={(e, item) => console.log('Suggestion chosen:', item)}
     querySubmitted={(e, query) => console.log('Query submitted:', query)}
   >
-    <AutoSuggestBoxOption index={0} value="Apple">Apple</AutoSuggestBoxOption>
+    <AutoSuggestBoxOption index={0} value="Apple" disabled>Apple</AutoSuggestBoxOption>
     <AutoSuggestBoxOption index={1} value="Banana">Banana</AutoSuggestBoxOption>
     <AutoSuggestBoxOption index={2} value="Cherry">Cherry</AutoSuggestBoxOption>
   </AutoSuggestBox>
@@ -48,3 +60,30 @@
 <InfoBar status="attention" title={m.asb_keyboard_navigation_title()} style="multiline" hideCloseButton>
   <p>{m.asb_keyboard_navigation_description()}</p>
 </InfoBar>
+
+
+<AutoSuggestBox
+	multiselect
+	showTextualMultiselect
+	bind:selectedOptions={selection}
+	placeholder="Type a name..."
+	virtualizer={{
+		size: items?.length,
+		scrollToTop: () => listRef!.scroll({ index: 0, align: 'top', smoothScroll: false }),
+		scrollToBottom: () => listRef!.scroll({ index: items.length - 1, align: 'bottom', smoothScroll: false }),
+		scrollToIndex: (index: number) => listRef!.scroll({ index, align: 'auto', smoothScroll: false })
+	}}
+	textChanged={(e, val) => {
+		items = people.filter((item) => item.name.toLowerCase().includes(val.toLowerCase()));
+	}}
+	suggestionChosen={(e, item) => console.log('Suggestion chosen:', item)}
+	querySubmitted={(e, query) => console.log('Query submitted:', query)}
+>
+	<SvelteVirtualList {items} bind:this={listRef as any} defaultEstimatedItemHeight={30}>
+		{#snippet renderItem(item, index)}
+			<AutoSuggestBoxOption {index} id={item.id} value={item.name} text={item.name} disabled={item.disabled}>
+				{item.name}
+			</AutoSuggestBoxOption>
+		{/snippet}
+	</SvelteVirtualList>
+</AutoSuggestBox>

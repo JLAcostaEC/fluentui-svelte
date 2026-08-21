@@ -26,7 +26,7 @@ describe('element type', () => {
 
 	it('throws an error when as is set to an unsupported value', async () => {
 		// @ts-expect-error forcing 'as' to an unsupported value
-		expect(() => render(Button, { as: 'span' })).toThrow(
+		await expect(render(Button, { as: 'span' })).rejects.toThrow(
 			"Invalid 'as' prop value: span. Expected 'button', 'a', or 'div'."
 		);
 	});

@@ -134,10 +134,10 @@
 					root: {
 						manageSpecialKeys: true
 					},
-					mover: { axis: 'vertical', items: '.fs-tree-view-item:not([aria-disabled="true"])' }
+					mover: { axis: 'vertical', items: '.fs-tree-view-item', skip: '[aria-disabled="true"]' }
 				})
 			: getTabspotAttributes({
-					mover: { axis: 'vertical', items: '.fs-tree-view-item:not([aria-disabled="true"])' },
+					mover: { axis: 'vertical', items: '.fs-tree-view-item', skip: '[aria-disabled="true"]' },
 					grouper: { enterDirection: 'right', exitDirection: 'left' }
 				})
 	);

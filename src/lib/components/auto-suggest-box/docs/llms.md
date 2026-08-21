@@ -16,57 +16,46 @@ The AutoSuggestBox component provides an input field with dynamic suggestions as
 </AutoSuggestBox>
 ```
 
-## Component API
-
-A brief explanation of the props that really need explaining. You can see the rest of the props in the Component Props table below.
-
-### Suggestions
-
-Suggestions are provided as `AutoSuggestBoxOption`, a child of the `AutoSuggestBox`. As the user types, matching options will be shown.
-
-> **Keyboard Navigation:** Users can navigate through suggestions using the Up and Down arrow keys. Pressing Enter selects the highlighted suggestion.
-
 ## Examples
 
-### Max Items In View
+### Virtualized Suggestions
 
-The `maxItemsInView` prop sets how many suggestions are visible before the flyout scrolls. If the number of options exceeds this value, a scrollbar will appear.
+Long lists can be windowed. Pass a `virtualizer` describing the _whole_ list — `size` is the
+total number of suggestions, not the number rendered — and the box drives your list component
+when the cursor walks past what is on screen. Options keep their real `index`, which is what
+ties a rendered row back to the data.
 
 ```svelte
-<AutoSuggestBox placeholder="Type a fruit..." maxItemsInView={3}>
-	<AutoSuggestBoxOption index={0} value="Apple">Apple</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={1} value="Banana">Banana</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={2} value="Cherry">Cherry</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={3} value="Date">Date</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={4} value="Elderberry">Elderberry</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={5} value="Fig">Fig</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={6} value="Grape">Grape</AutoSuggestBoxOption>
+<script>
+	import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
+
+	let items = $state(fruits);
+	let listRef;
+</script>
+
+<AutoSuggestBox
+	placeholder="Type a fruit..."
+	virtualizer={{
+		size: items.length,
+		scrollToTop: () => listRef.scroll({ index: 0, align: 'top', smoothScroll: false }),
+		scrollToBottom: () => listRef.scroll({ index: items.length - 1, align: 'bottom', smoothScroll: false }),
+		scrollToIndex: (index) => listRef.scroll({ index, align: 'auto', smoothScroll: false })
+	}}
+	textChanged={(e, val) => (items = fruits.filter((item) => item.name.toLowerCase().includes(val.toLowerCase())))}
+>
+	<SvelteVirtualList {items} bind:this={listRef} defaultEstimatedItemHeight={30}>
+		{#snippet renderItem(item, index)}
+			<AutoSuggestBoxOption {index} id={item.id} value={item.name} text={item.name}>
+				{item.name}
+			</AutoSuggestBoxOption>
+		{/snippet}
+	</SvelteVirtualList>
 </AutoSuggestBox>
 ```
 
-### Suggestion Chosen Event
+Filtering is yours to do in `textChanged`: a windowed list renders from your data, so the
+built-in filter that a plain option list applies is skipped.
 
-The `suggestionChosen` event is triggered when a user selects a suggestion from the list. The chosen suggestion value is passed as the second argument.
-
-```svelte
-<AutoSuggestBox placeholder="Type a fruit..." suggestionChosen={(e, item) => console.log('Suggestion chosen:', item)}>
-	<AutoSuggestBoxOption index={0} value="Apple">Apple</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={1} value="Banana">Banana</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={2} value="Cherry">Cherry</AutoSuggestBoxOption>
-</AutoSuggestBox>
-```
-
-### Query Submitted Event
-
-The `querySubmitted` event is triggered when the user submits a query through the Search Button or typically by pressing Enter. This event can be used to handle the submission of the current input value.
-
-```svelte
-<AutoSuggestBox placeholder="Type a fruit..." querySubmitted={(e, query) => console.log('Query submitted:', query)}>
-	<AutoSuggestBoxOption index={0} value="Apple">Apple</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={1} value="Banana">Banana</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={2} value="Cherry">Cherry</AutoSuggestBoxOption>
-</AutoSuggestBox>
-```
 
 ## Component Props
 
@@ -82,3 +71,4 @@ The `querySubmitted` event is triggered when the user submits a query through th
 | `ref`              | `HTMLElement`                                             | The DOM reference of the auto-suggest box element.                     |
 | `suggestionChosen` | `(e: Event, selection: string) => void`                   | Event triggered when a suggestion is chosen.                           |
 | `querySubmitted`   | `(e: MouseEvent \| KeyboardEvent, query: string) => void` | Event triggered when a query is submitted.                             |
+| `virtualizer`      | `{ size, scrollToIndex?, scrollToTop?, scrollToBottom? }` | Bridge to a windowed list. `size` is the total suggestion count.       |

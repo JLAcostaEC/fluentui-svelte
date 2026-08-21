@@ -10,7 +10,8 @@ export default defineConfig({
 			project: './project.inlang',
 			outdir: './src/i18n',
 			strategy: ['url', 'cookie', 'baseLocale'],
-			emitGitIgnore: true
+			emitGitIgnore: true,
+			emitTsDeclarations: true
 		})
 	],
 	test: {

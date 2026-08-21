@@ -4,24 +4,6 @@ import { compareDates } from './calendar-view.svelte.js';
 import type { TabspotEventListener, TabspotNavigationEvent, TabspotNodeOptions } from 'tabspot';
 import type { CalendarGrid, CalendarNavigationOptions, DateComparisonPrecision, View } from './types.js';
 
-/**
- * Tabspot configuration shared by the three calendar grids.
- *
- * Rows are the `<tr>` elements, so a vertical move keeps its column, and
- * `flow: 'linear'` makes a horizontal move continue into the next (or previous)
- * row the way a run of dates does.
- *
- * `items` keeps *every* cell in the matrix — disabled ones included — so a month
- * clipped by `minDate`/`maxDate` still has square rows. Focusing a disabled
- * button is a no-op, which is exactly the "you cannot go there" behaviour we
- * want. The selector also drops the outgoing page while its transition plays,
- * since Svelte marks a transitioning-out element `inert`.
- *
- * Roving is off because each view authors its own tab stop: with roving on, the
- * first cell of the grid becomes the only tab stop, and that cell can be
- * disabled (a `minDate` late in the month) — which would leave the calendar
- * unreachable by <kbd>Tab</kbd>.
- */
 export const CALENDAR_GRID_CONFIG: TabspotNodeOptions = {
 	root: { manageSpecialKeys: { Home: true, End: true } },
 	mover: {
@@ -29,6 +11,7 @@ export const CALENDAR_GRID_CONFIG: TabspotNodeOptions = {
 		flow: 'linear',
 		rows: { by: 'selector', row: '[role="row"]' },
 		items: '[data-calendar-page]:not([inert]) button',
+		skip: '.blackout',
 		activation: { mode: 'focus', roving: false }
 	}
 };
@@ -172,8 +155,10 @@ export function createCalendarNavigation({
 			return;
 		}
 
+		// Tabspot steps over blacked-out cells itself, so the only landing left to
+		// answer for is one on a date this page does not own.
 		const landed = cellDate(event.to);
-		if (!landed || (!blackout(landed) && onPage(landed))) return;
+		if (!landed || onPage(landed)) return;
 
 		event.preventDefault();
 		focusDate(landed, amount);

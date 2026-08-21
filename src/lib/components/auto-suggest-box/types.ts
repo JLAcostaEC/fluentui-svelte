@@ -24,12 +24,7 @@ export type FSAutoSuggestBox = {
 	 * The QuerySubmitted event occurs when:
 	 * 1. While the focus is in the text box, press Enter and no item is available to select or click the query icon (when input type is search) with/without item selected */
 	querySubmitted?: (e: MouseEvent | KeyboardEvent, query: string) => void;
-	virtualizer?: {
-		size: number;
-		scrollToTop?: () => Promise<void>;
-		scrollToIndex?: (index: number) => Promise<void>;
-		scrollToBottom?: () => Promise<void>;
-	};
+	virtualizer?: AutoSuggestVirtualizer;
 	maxItemsInView?: number;
 	textBoxRef?: HTMLInputElement;
 	textBoxProps?: Omit<TextBoxProps, 'type' | 'ref' | 'placeholder' | 'hideActionButtons' | 'textChanged'>;
@@ -40,17 +35,22 @@ export type FSAutoSuggestBox = {
 } & Pick<TextBoxProps, 'type' | 'placeholder' | 'hideActionButtons' | 'textChanged'> &
 	HTMLAttributes<HTMLDivElement>;
 
+/**
+ * Bridge to a windowed list. `size` is the total number of suggestions, not the
+ * number currently rendered — it is how the box knows where the list really ends
+ * and which index to scroll to when the cursor walks past the rendered window.
+ */
+export type AutoSuggestVirtualizer = {
+	size: number;
+	scrollToIndex?: (index: number) => void | Promise<void>;
+	scrollToTop?: () => void | Promise<void>;
+	scrollToBottom?: () => void | Promise<void>;
+};
+
 export type AutoSuggestBoxContext = FSContext<
 	{
 		readonly selectOnFocus?: boolean;
-		readonly virtualized?: {
-			containerRef?: HTMLElement;
-			containerSelector?: string;
-			scrollToTop?: () => Promise<void>;
-			scrollToIndex?: (index: number) => Promise<void>;
-			scrollToBottom?: () => Promise<void>;
-		};
-		readonly disableEnhancedKeyboardNavigation?: boolean;
+		readonly virtualized?: AutoSuggestVirtualizer;
 		multiselect?: boolean;
 	},
 	{

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AutoSuggestBox, AutoSuggestBoxOption } from '$lib/index.js';
+	import { AutoSuggestBox, AutoSuggestBoxOption, FluentUISvelte } from '$lib/index.js';
 
 	type Option = { value: string; text: string; disabled?: boolean };
 
@@ -12,22 +12,42 @@
 		value = $bindable(''),
 		open = $bindable(false),
 		multiselect,
+		showTextualMultiselect,
+		selectedOptions = $bindable([]),
 		selectOnFocus,
-		placeholder
+		placeholder,
+		querySubmitted,
+		suggestionChosen
 	}: {
 		options?: Option[];
 		value?: string;
 		open?: boolean;
 		multiselect?: boolean;
+		showTextualMultiselect?: boolean;
+		selectedOptions?: { id: string; value: string }[];
 		selectOnFocus?: boolean;
 		placeholder?: string;
+		querySubmitted?: (e: Event, query: string) => void;
+		suggestionChosen?: (e: Event, selection: string) => void;
 	} = $props();
 </script>
 
-<AutoSuggestBox bind:value bind:open {multiselect} {selectOnFocus} {placeholder}>
-	{#each options as opt, i (opt.value)}
-		<AutoSuggestBoxOption value={opt.value} text={opt.text} index={i} disabled={opt.disabled}>
-			{opt.text}
-		</AutoSuggestBoxOption>
-	{/each}
-</AutoSuggestBox>
+<FluentUISvelte>
+	<AutoSuggestBox
+		bind:value
+		bind:open
+		bind:selectedOptions
+		{multiselect}
+		{showTextualMultiselect}
+		{selectOnFocus}
+		{placeholder}
+		{querySubmitted}
+		{suggestionChosen}
+	>
+		{#each options as opt, i (opt.value)}
+			<AutoSuggestBoxOption id={opt.value} value={opt.value} text={opt.text} index={i} disabled={opt.disabled}>
+				{opt.text}
+			</AutoSuggestBoxOption>
+		{/each}
+	</AutoSuggestBox>
+</FluentUISvelte>

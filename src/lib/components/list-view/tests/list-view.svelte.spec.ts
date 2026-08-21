@@ -25,7 +25,7 @@ describe('ListView', () => {
 
 	it('throws for invalid tag', async () => {
 		// @ts-expect-error incorrect tag type
-		expect(() => render(ListViewTestWrapper, { listProps: { as: 'span' } })).toThrow('Invalid tag: span');
+		await expect(render(ListViewTestWrapper, { listProps: { as: 'span' } })).rejects.toThrow('Invalid tag: span');
 	});
 
 	it('applies role="list" when as="div" and selectionMode="none"', async () => {
@@ -200,6 +200,8 @@ describe('ListViewItem', () => {
 	});
 
 	it('throws when used outside ListView', async () => {
-		expect(() => render(ListViewItem, { value: 'orphan' })).toThrow('ListViewItem must be used within a ListView');
+		await expect(render(ListViewItem, { value: 'orphan' })).rejects.toThrow(
+			'ListViewItem must be used within a ListView'
+		);
 	});
 });

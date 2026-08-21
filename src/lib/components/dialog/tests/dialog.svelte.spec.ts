@@ -18,7 +18,7 @@ describe('DialogTrigger', () => {
 	});
 
 	it('throws when used outside a Dialog', async () => {
-		expect(() => render(DialogTrigger)).toThrow('DialogTrigger must be used within a Dialog component');
+		await expect(render(DialogTrigger)).rejects.toThrow('DialogTrigger must be used within a Dialog component');
 	});
 });
 
@@ -30,7 +30,7 @@ describe('DialogSurface', () => {
 	});
 
 	it('throws when used outside a Dialog', async () => {
-		expect(() => render(DialogSurface)).toThrow('DialogSurface must be used within a Dialog component');
+		await expect(render(DialogSurface)).rejects.toThrow('DialogSurface must be used within a Dialog component');
 	});
 
 	it('renders a close button for non-modal dialogs', async () => {

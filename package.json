@@ -29,7 +29,7 @@
 	"scripts": {
 		"dev": "pnpm urls && vite dev",
 		"build:site": "pnpm urls && vite build && pnpm prepare",
-		"build": "vite build && npm run prepack",
+		"build": "pnpm urls && vite build && npm run prepack",
 		"preview": "pnpm run build && wrangler pages dev",
 		"prepare": "svelte-kit sync || echo ''",
 		"prepack": "svelte-kit sync && svelte-package && publint",

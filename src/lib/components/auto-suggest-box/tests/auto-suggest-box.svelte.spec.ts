@@ -301,6 +301,19 @@ describe('filtering', () => {
 		await vi.waitFor(() => expect(activeOption()).toBe('banana'));
 	});
 
+	it('walks the highlight on when the option the query names is disabled', async () => {
+		render(AutoSuggestBoxTestWrapper, {
+			options: [
+				{ value: 'apple', text: 'Apple', disabled: true },
+				{ value: 'apricot', text: 'Apricot' },
+				{ value: 'banana', text: 'Banana' }
+			]
+		});
+		await combobox().fill('Ap');
+
+		await vi.waitFor(() => expect(activeOption()).toBe('apricot'));
+	});
+
 	it('chooses the highlighted option on Enter after typing', async () => {
 		const querySubmitted = vi.fn();
 		const suggestionChosen = vi.fn();

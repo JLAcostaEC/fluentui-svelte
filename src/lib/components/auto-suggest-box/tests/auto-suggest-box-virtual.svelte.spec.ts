@@ -255,7 +255,8 @@ describe('a disabled match', () => {
 		const suggestionChosen = vi.fn();
 		const querySubmitted = vi.fn();
 		// Disabling by filtered index means the single match of a full-name query
-		// always lands on index 0 — and is therefore always disabled.
+		// always lands on index 0 — and is therefore always disabled. With no other
+		// match to walk on to, the cursor stays where it was: at home.
 		render(AutoSuggestBoxVirtualTestWrapper, { disabledEvery: 10, suggestionChosen, querySubmitted });
 		await combobox().fill('Item 42');
 		await expect.element(page.getByRole('option', { name: 'Item 42' })).toBeInTheDocument();

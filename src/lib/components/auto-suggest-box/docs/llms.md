@@ -16,52 +16,7 @@ The AutoSuggestBox component provides an input field with dynamic suggestions as
 </AutoSuggestBox>
 ```
 
-## Component API
-
-A brief explanation of the props that really need explaining. You can see the rest of the props in the Component Props table below.
-
-### Suggestions
-
-Suggestions are provided as `AutoSuggestBoxOption`, a child of the `AutoSuggestBox`. As the user types, matching options will be shown.
-
-### Keyboard
-
-The suggestion list is driven by [Tabspot](https://github.com/JLAcostaEC/tabspot): focus stays
-in the text box and the list is walked with `aria-activedescendant`, the ARIA combobox pattern.
-
-| Key         | Action                                                                          |
-| ----------- | ------------------------------------------------------------------------------- |
-| `ArrowDown` | Open the list, then walk down it.                                               |
-| `ArrowUp`   | Open the list on its last suggestion, then walk up it.                          |
-| `Enter`     | Choose the suggestion under the cursor, or submit the query when there is none. |
-| `Escape`    | Close the list.                                                                 |
-
-Typing selects automatically: the first suggestion the query is a prefix of is put under the
-cursor, so `Enter` accepts it without arrowing. When nothing matches — or there are no
-suggestions at all — the cursor sits on the text box instead and `Enter` raises
-`querySubmitted`, which is where you fetch a fresh set of suggestions. The search button raises
-it too.
-
-The text box is part of the ring: arrowing past the last suggestion — or back past the first —
-returns the cursor to it and restores what you typed. Disabled options are stepped over.
-
 ## Examples
-
-### Max Items In View
-
-The `maxItemsInView` prop sets how many suggestions are visible before the flyout scrolls. If the number of options exceeds this value, a scrollbar will appear.
-
-```svelte
-<AutoSuggestBox placeholder="Type a fruit..." maxItemsInView={3}>
-	<AutoSuggestBoxOption index={0} value="Apple">Apple</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={1} value="Banana">Banana</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={2} value="Cherry">Cherry</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={3} value="Date">Date</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={4} value="Elderberry">Elderberry</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={5} value="Fig">Fig</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={6} value="Grape">Grape</AutoSuggestBoxOption>
-</AutoSuggestBox>
-```
 
 ### Virtualized Suggestions
 
@@ -101,29 +56,6 @@ ties a rendered row back to the data.
 Filtering is yours to do in `textChanged`: a windowed list renders from your data, so the
 built-in filter that a plain option list applies is skipped.
 
-### Suggestion Chosen Event
-
-The `suggestionChosen` event is triggered when a user selects a suggestion from the list. The chosen suggestion value is passed as the second argument.
-
-```svelte
-<AutoSuggestBox placeholder="Type a fruit..." suggestionChosen={(e, item) => console.log('Suggestion chosen:', item)}>
-	<AutoSuggestBoxOption index={0} value="Apple">Apple</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={1} value="Banana">Banana</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={2} value="Cherry">Cherry</AutoSuggestBoxOption>
-</AutoSuggestBox>
-```
-
-### Query Submitted Event
-
-The `querySubmitted` event is triggered when the user submits a query through the Search Button or typically by pressing Enter. This event can be used to handle the submission of the current input value.
-
-```svelte
-<AutoSuggestBox placeholder="Type a fruit..." querySubmitted={(e, query) => console.log('Query submitted:', query)}>
-	<AutoSuggestBoxOption index={0} value="Apple">Apple</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={1} value="Banana">Banana</AutoSuggestBoxOption>
-	<AutoSuggestBoxOption index={2} value="Cherry">Cherry</AutoSuggestBoxOption>
-</AutoSuggestBox>
-```
 
 ## Component Props
 

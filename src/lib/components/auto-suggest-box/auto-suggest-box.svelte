@@ -9,6 +9,7 @@
 	import { Flyout, TextBox, ListView, ListViewItem } from '$lib/index.js';
 	import {
 		clearTabspotActive,
+		setTabspotActive,
 		setTabspotAttributes,
 		tabspotVirtual,
 		type TabspotNavigationEvent,
@@ -63,25 +64,24 @@
 
 	let activeOption: OptionType | null = $state(null);
 
+	/** The arrow key behind the move Tabspot is reporting, for `selectOnFocus` to hand on. */
 	let cursorKey: KeyboardEvent | undefined;
 
 	const OPTIONS = '.fs-autosuggest-option';
 
-	function navigationOver(items: string): TabspotNodeOptions {
-		return {
-			root: {},
-			mover: {
-				axis: 'vertical',
-				items,
-				skip: "[aria-disabled='true']",
-				activation: {
-					mode: 'activedescendant',
-					controller: `#${INPUT_ID}`,
-					mark: { attribute: 'data-active' }
-				}
+	const NAVIGATION: TabspotNodeOptions = {
+		root: {},
+		mover: {
+			axis: 'vertical',
+			items: OPTIONS,
+			skip: "[aria-disabled='true']",
+			activation: {
+				mode: 'activedescendant',
+				controller: `#${INPUT_ID}`,
+				mark: { attribute: 'data-active' }
 			}
-		};
-	}
+		}
+	};
 
 	let _state: AutoSuggestBoxContext['state'] = defineState([
 		(o) => defineProperty(o, 'lastTypedValue', () => lastTypedValue),
@@ -135,37 +135,30 @@
 	// svelte-ignore state_referenced_locally
 	setAutoSuggestBoxContext({ config, state: _state, methods, events: null });
 
-	function applyNavigation() {
-		if (listViewRef) setTabspotAttributes({ element: listViewRef, config: navigationOver(OPTIONS) });
-	}
-
 	/**
-	 * Put the cursor on `option`, or send it home when there is none.
-	 *
+	 * Put the cursor on `option`, or send it home when there is none. `nearest`
+	 * covers a match nothing can land on: the cursor walks to the closest option
+	 * that can be, and only a list without one at all sends it home.
 	 */
 	function pointCursorAt(option: OptionType | null) {
-		if (!listViewRef || option?.id === activeOption?.id) return;
+		if (!listViewRef) return;
+
+		const element = option && listViewRef.querySelector<HTMLElement>(`#${CSS.escape(option.id)}`);
+		const pointed = element && setTabspotActive(element, { nearest: true }).ok;
+
+		// Tabspot reports the move it made through `navigate`; the empty cursor is
+		// the only one this box writes itself.
+		if (pointed) return;
 
 		clearTabspotActive(listViewRef);
-
-		if (!option) {
-			readCursor(null);
-			return;
-		}
-
-		setTabspotAttributes({ element: listViewRef, config: navigationOver(`#${CSS.escape(option.id)}`) });
-		inputRef?.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, cancelable: true }));
-
-		applyNavigation();
+		readCursor(null, false);
 	}
 
-	/** The option a query selects on its own: the first one it is a prefix of. */
 	function bestMatch(query: string): OptionType | null {
 		const needle = query.toLowerCase();
 		let best: OptionType | null = null;
 
 		for (const option of items.values()) {
-			if (option.disabled) continue;
 			if (!option.value.toLowerCase().startsWith(needle) && !option.text?.toLowerCase().startsWith(needle)) continue;
 			if (!best || option.index < best.index) best = option;
 		}
@@ -173,21 +166,18 @@
 		return best;
 	}
 
-	/** Take in where Tabspot has just put its cursor. `null` means it sits at home. */
-	function readCursor(element: HTMLElement | null) {
+	function readCursor(element: HTMLElement | null, keyed: boolean) {
 		const option = element ? (items.get(element.id) ?? null) : null;
 
 		if (option?.id === activeOption?.id) return;
 
 		activeOption = option;
 
-		// Tabspot only scrolls when a move runs off the *rendered* window; inside it
-		// the option can still be out of sight, buffered below the fold.
 		if (option) document.getElementById(option.id)?.scrollIntoView({ block: 'nearest' });
 
 		// selectOnFocus mirrors the option into the text box, which must not happen
 		// while the user is the one typing in it.
-		if (!selectOnFocus || !cursorKey) return;
+		if (!selectOnFocus || !keyed || !cursorKey) return;
 
 		if (option) {
 			methods.toggleSelection(cursorKey, option.id);
@@ -199,20 +189,19 @@
 
 	/** `atEdge` means the list ran out of options: hand the query back. */
 	function navigate(event: TabspotNavigationEvent) {
+		const keyed = event.direction !== 'programmatic';
+
 		if (!event.atEdge) {
-			readCursor(event.to);
+			readCursor(event.to, keyed);
 			return;
 		}
 
+		// The list ran out: send the cursor home and give the user their query back.
 		event.preventDefault();
-		leaveList();
-	}
 
-	/** Send the cursor home and give the user their query back. */
-	function leaveList() {
 		if (listViewRef) clearTabspotActive(listViewRef);
 
-		readCursor(null);
+		readCursor(null, keyed);
 	}
 
 	/** The two keys that are the box's own business rather than the list's. */
@@ -253,6 +242,9 @@
 		await (key === 'ArrowUp' ? virtualizer?.scrollToBottom?.() : virtualizer?.scrollToTop?.());
 		await tick();
 
+		// The key is replayed rather than turned into a `setTabspotActive` call on the
+		// end of the list: a second arrow pressed while this one is still in flight is
+		// a second move, and two cursor sets onto the same option would be one.
 		// Untrusted, so it passes straight through to Tabspot this time.
 		inputRef?.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
 	}
@@ -264,9 +256,8 @@
 
 		await tick();
 
-		// Automatic selection, per the WAI-ARIA combobox pattern: 
-		// hook for fetching a fresh set of suggestions.
-		cursorKey = undefined;
+		// Automatic selection, per the WAI-ARIA combobox pattern: the query points the
+		// cursor at the suggestion Enter would choose.
 		pointCursorAt(val ? bestMatch(val) : null);
 	}
 
@@ -336,7 +327,7 @@
 	$effect(() => {
 		if (!open || !listViewRef) return;
 
-		applyNavigation();
+		setTabspotAttributes({ element: listViewRef, config: NAVIGATION });
 
 		const instance = globalContext?.state.tabspotInstance;
 		const detach = instance?.subscribe(listViewRef, navigate);

@@ -48,7 +48,7 @@
 - `MenuItemSwitch`: {m.menu_component_menuitemswitch_description()}
 - `MenuItemRadio`: {m.menu_component_menuitemradio_description()}
 
-## {m.menu_usage_title()}
+## {m.global_usage()}
 
 {m.menu_usage_description_prefix()} `children()` `snippet` {m.menu_usage_description_suffix()}
 

@@ -14,7 +14,7 @@
   <Skeleton style="width: 72px;" />
 </Showcase>
 
-## {m.skeleton_usage_title()}
+## {m.global_usage()}
 
 {m.skeleton_usage_description()}
 

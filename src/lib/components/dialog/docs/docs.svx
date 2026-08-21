@@ -29,7 +29,7 @@
 - `DialogContent`: {m.dialog_composition_dialogcontent_description()}
 - `DialogActions`: {m.dialog_composition_dialogactions_description()}
 
-## {m.dialog_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

@@ -2,18 +2,19 @@
   import { m } from '$i18n/messages.js';
 </script>
 
-## {m.cdp_component_props_title()}
+## {m.global_component_props()}
 
-| **Name**           | **Type**                     | **Description**                              |
-| ------------------ | ---------------------------- | -------------------------------------------- |
-| `value`            | bindable `Date \| null`      | {m.cdp_props_value_description()}            |
-| `locale`           | `string`                     | {m.cdp_props_locale_description()}           |
-| `format`           | `Intl.DateTimeFormatOptions` | {m.cdp_props_format_description()}           |
-| `calendarPosition` | `object`                     | {m.cdp_props_calendarposition_description()} |
-| `blackoutDates`    | `Date[]`                     | {m.cdp_props_blackoutdates_description()}    |
-| `minDate`          | `Date`                       | {m.cdp_props_mindate_description()}          |
-| `maxDate`          | `Date`                       | {m.cdp_props_maxdate_description()}          |
-| `weekStart`        | `number`                     | {m.cdp_props_weekstart_description()}        |
-| `headers`          | `object`                     | {m.cdp_props_headers_description()}          |
-| `onChange`         | `(value: Date) => void`      | {m.cdp_props_onchange_description()}         |
-| `element`          | bindable `HTMLDivElement`    | {m.cdp_props_element_description()}          |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:CalendarDatePickerProps -->
+
+| Name                                                                                             | Type                                                | Default                                                 | Description                                                           |
+| ------------------------------------------------------------------------------------------------ | --------------------------------------------------- | ------------------------------------------------------- | --------------------------------------------------------------------- |
+| `ref` _bindable_                                                                                 | `HTMLDivElement`                                    |                                                         | {m.generated_fs_calendar_date_picker_props_props_ref()}               |
+| `value` _bindable_                                                                               | `Date` &#124; `null`                                | `null`                                                  | {m.generated_fs_calendar_date_picker_props_props_value()}             |
+| `format`                                                                                         | `Intl.DateTimeFormatOptions`                        | `{ year: 'numeric', month: 'numeric', day: 'numeric' }` | {m.generated_fs_calendar_date_picker_props_props_format()}            |
+| `calendarPosition`                                                                               | `Partial<ComputePositionConfig>`                    |                                                         | {m.generated_fs_calendar_date_picker_props_props_calendar_position()} |
+| `onChange`                                                                                       | `(event: Event, value: Date` &#124; `null) => void` |                                                         | {m.generated_fs_calendar_date_picker_props_props_on_change()}         |
+| `locale`, `blackoutDates`, `headers`, `minDate`, `maxDate`, `weekStart` from `CalendarViewProps` |                                                     |                                                         |                                                                       |
+| Element Attributes (`div`)                                                                       |                                                     |                                                         |                                                                       |
+
+<!-- /props:CalendarDatePickerProps -->

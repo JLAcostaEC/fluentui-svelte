@@ -20,7 +20,7 @@
   </InfoBar>
 </Showcase>
 
-## {m.ib_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script lang="ts">

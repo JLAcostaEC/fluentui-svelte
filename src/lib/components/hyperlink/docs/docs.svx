@@ -13,7 +13,7 @@
   <Hyperlink href="/" disabled>Disabled Link</Hyperlink>
 </Showcase>
 
-## {m.hl_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

@@ -19,7 +19,7 @@
 <ProgressBar value={50} status="error" />`;
 </script>
 
-### {m.pbar_value_title()}
+### {m.global_value()}
 
 {m.pbar_value_description()}
 
@@ -29,7 +29,7 @@
   <ProgressBar value={70} />
 </Showcase>
 
-### {m.pbar_indeterminate_title()}
+### {m.global_indeterminate()}
 
 {m.pbar_indeterminate_description()}
 
@@ -37,7 +37,7 @@
   <ProgressBar indeterminate />
 </Showcase>
 
-### {m.pbar_hide_rail_title()}
+### {m.global_hide_rail()}
 
 {m.pbar_hide_rail_description()}
 
@@ -45,7 +45,7 @@
   <ProgressBar value={50} hideRail />
 </Showcase>
 
-### {m.pbar_status_title()}
+### {m.global_status()}
 
 {m.pbar_status_description()}
 

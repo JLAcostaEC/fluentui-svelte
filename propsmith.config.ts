@@ -53,8 +53,8 @@ export default defineConfig({
 		links: {},
 		extras: {
 			origins: {
-      	PolymorphicProps: "HTML Attributes",
-    	}
+				PolymorphicProps: 'HTML Attributes'
+			}
 		}
 	},
 

@@ -26,7 +26,7 @@
 <ProgressRing value={75} status="error" />`;
 </script>
 
-### {m.pring_value_title()}
+### {m.global_value()}
 
 {m.pring_value_description()}
 
@@ -38,7 +38,7 @@
   <ProgressRing value={100} />
 </Showcase>
 
-### {m.pring_indeterminate_title()}
+### {m.global_indeterminate()}
 
 {m.pring_indeterminate_description()}
 
@@ -48,7 +48,7 @@
   <ProgressRing indeterminate status="error" />
 </Showcase>
 
-### {m.pring_hide_rail_title()}
+### {m.global_hide_rail()}
 
 {m.pring_hide_rail_description()}
 
@@ -58,7 +58,7 @@
   <ProgressRing value={100} hideRail />
 </Showcase>
 
-### {m.pring_status_title()}
+### {m.global_status()}
 
 {m.pring_status_description()}
 

@@ -170,6 +170,161 @@
       "locales": {},
       "source": "src/lib/components/button/types.ts#ButtonProps.shape"
     },
+    "generated_fs_calendar_date_picker_props_props_calendar_position": {
+      "en": "c90e432f",
+      "locales": {},
+      "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.calendarPosition"
+    },
+    "generated_fs_calendar_date_picker_props_props_format": {
+      "en": "7aa28633",
+      "locales": {},
+      "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.format"
+    },
+    "generated_fs_calendar_date_picker_props_props_on_change": {
+      "en": "f99d00bc",
+      "locales": {},
+      "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.onChange"
+    },
+    "generated_fs_calendar_date_picker_props_props_ref": {
+      "en": "5f67da99",
+      "locales": {},
+      "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.ref"
+    },
+    "generated_fs_calendar_date_picker_props_props_value": {
+      "en": "5e97aa09",
+      "locales": {},
+      "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.value"
+    },
+    "generated_fs_calendar_view_item_props_props_blackout": {
+      "en": "3b6140cf",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewItemProps.blackout"
+    },
+    "generated_fs_calendar_view_item_props_props_button_attributes": {
+      "en": "802ccb3d",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewItemProps.buttonAttributes"
+    },
+    "generated_fs_calendar_view_item_props_props_children": {
+      "en": "2fe21c4f",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewItemProps.children"
+    },
+    "generated_fs_calendar_view_item_props_props_current": {
+      "en": "f9dda642",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewItemProps.current"
+    },
+    "generated_fs_calendar_view_item_props_props_disabled": {
+      "en": "b99cb72f",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewItemProps.disabled"
+    },
+    "generated_fs_calendar_view_item_props_props_header": {
+      "en": "3069aac0",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewItemProps.header"
+    },
+    "generated_fs_calendar_view_item_props_props_out_of_range": {
+      "en": "a36d4993",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewItemProps.outOfRange"
+    },
+    "generated_fs_calendar_view_item_props_props_range_position": {
+      "en": "cfe3e269",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewItemProps.rangePosition"
+    },
+    "generated_fs_calendar_view_item_props_props_selected": {
+      "en": "a8f9dcf8",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewItemProps.selected"
+    },
+    "generated_fs_calendar_view_item_props_props_variant": {
+      "en": "5b888aa7",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewItemProps.variant"
+    },
+    "generated_fs_calendar_view_props_props_blackout_breaks_range": {
+      "en": "ff9a4a65",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.blackoutBreaksRange"
+    },
+    "generated_fs_calendar_view_props_props_blackout_dates": {
+      "en": "6f0cf746",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.blackoutDates"
+    },
+    "generated_fs_calendar_view_props_props_floating": {
+      "en": "8f81966e",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.floating"
+    },
+    "generated_fs_calendar_view_props_props_headers": {
+      "en": "d38d0b44",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.headers"
+    },
+    "generated_fs_calendar_view_props_props_locale": {
+      "en": "33b25f81",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.locale"
+    },
+    "generated_fs_calendar_view_props_props_max_date": {
+      "en": "7b8f0c43",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.maxDate"
+    },
+    "generated_fs_calendar_view_props_props_min_date": {
+      "en": "1fecb331",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.minDate"
+    },
+    "generated_fs_calendar_view_props_props_on_change": {
+      "en": "29759083",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.onChange"
+    },
+    "generated_fs_calendar_view_props_props_on_range_change": {
+      "en": "33d6e66d",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.onRangeChange"
+    },
+    "generated_fs_calendar_view_props_props_on_view_change": {
+      "en": "34e40f09",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.onViewChange"
+    },
+    "generated_fs_calendar_view_props_props_range": {
+      "en": "07728af3",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.range"
+    },
+    "generated_fs_calendar_view_props_props_ref": {
+      "en": "1702eac5",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.ref"
+    },
+    "generated_fs_calendar_view_props_props_selection_mode": {
+      "en": "742e5e01",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.selectionMode"
+    },
+    "generated_fs_calendar_view_props_props_value": {
+      "en": "7bc52610",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.value"
+    },
+    "generated_fs_calendar_view_props_props_view": {
+      "en": "e9dcc4f0",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.view"
+    },
+    "generated_fs_calendar_view_props_props_week_start": {
+      "en": "abb35281",
+      "locales": {},
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.weekStart"
+    },
     "generated_fs_checkbox_props_props_checked": {
       "en": "7cc6d504",
       "locales": {},

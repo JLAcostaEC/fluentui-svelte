@@ -16,7 +16,7 @@
   <TextBox type="number" placeholder="Number input" />
 </Showcase>
 
-## {m.tb_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

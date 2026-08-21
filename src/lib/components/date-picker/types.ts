@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from "svelte/elements";
+import type { HTMLAttributes } from 'svelte/elements';
 
 /** @propsmith DatePickerProps */
 export type DatePickerProps = {
@@ -58,4 +58,4 @@ export type DatePickerProps = {
 	inputElement?: HTMLInputElement;
 	/** HTML attributes for the underlying input element. */
 	inputProps?: HTMLAttributes<HTMLInputElement>;
-}& HTMLAttributes<HTMLDivElement>;
+} & HTMLAttributes<HTMLDivElement>;

@@ -12,9 +12,9 @@ import { DropdownSelect } from 'fluentui-svelte';
 
 {m.ds_description()}
 
-<InfoBar status="critical" style="multiline" title={m.ds_early_access_title()} hideCloseButton>
+<InfoBar status="critical" style="multiline" title={m.global_early_access_title()} hideCloseButton>
   <p>
-    {m.ds_early_access_description()}
+    {m.global_early_access_description()}
   </p>
 </InfoBar>
 

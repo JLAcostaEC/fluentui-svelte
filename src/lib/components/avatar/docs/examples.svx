@@ -48,7 +48,7 @@
   />
 </Showcase>
 
-### {m.avatar_icon_title()}
+### {m.global_icon()}
 
 {m.avatar_icon_description()}
 
@@ -64,7 +64,7 @@
   <Avatar active="active" size={56} name="FluentUI Svelte" badge={{ status: 'available' }} />
 </Showcase>
 
-### {m.avatar_shape_title()}
+### {m.global_shape()}
 
 {m.avatar_shape_description()}
 

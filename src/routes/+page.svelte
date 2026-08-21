@@ -36,7 +36,7 @@
 	</picture>
 	<h1 class="title">{m.home_title()}</h1>
 	<p>
-		{m.home_description()}
+		{m.global_library_description()}
 	</p>
 	<div class="buttons">
 		<Button as="a" href="/docs">{m.home_view_docs_button()}</Button>

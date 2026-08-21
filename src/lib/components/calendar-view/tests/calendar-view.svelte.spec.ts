@@ -21,22 +21,32 @@ const JANUARY_2026 = new Date(2026, 0, 15);
 const jan = (day: number) => 2 + day;
 
 /** Cells of the live page. The outgoing page keeps rendering until its transition ends. */
-const cells = () => page.selector('tbody:not([inert]) button');
+const cells = () => page.selector('[data-calendar-page]:not([inert]) button');
 
 const cell = (index: number) => cells().nth(index);
 
 function focusCell(index: number) {
-	const buttons = document.querySelectorAll<HTMLButtonElement>('tbody:not([inert]) button');
+	const buttons = document.querySelectorAll<HTMLButtonElement>('[data-calendar-page]:not([inert]) button');
 	buttons[index].focus();
 }
 
+/** Cells of the live page as gridcells, which is where the range band is painted. */
+const gridCell = (index: number) => page.selector('[data-calendar-page]:not([inert]) [role="gridcell"]').nth(index);
+
+const banded = (position?: string) =>
+	document.querySelectorAll(`[data-calendar-page]:not([inert]) .${position ? `range-${position}` : 'in-range'}`);
+
 const periodLabel = () => page.selector('.fs-calendar-controls .period-selector');
+
+const clearButton = () => page.getByRole('button', { name: 'Clear the selected dates' });
+
+const liveRegion = () => page.selector('.fs-calendar-live-region');
 
 describe('CalendarView rendering', () => {
 	it('renders a 42 cell day grid', async () => {
 		render(CalendarViewTestWrapper, { value: JANUARY_2026 });
 		await expect.element(cell(41)).toBeInTheDocument();
-		expect(document.querySelectorAll('tbody:not([inert]) button')).toHaveLength(42);
+		expect(document.querySelectorAll('[data-calendar-page]:not([inert]) button')).toHaveLength(42);
 	});
 
 	it('opens on the month of the current value', async () => {
@@ -314,7 +324,7 @@ describe('CalendarView grid edges', () => {
 describe('CalendarView tabspot integration', () => {
 	it('drives the grid through a tabspot root', async () => {
 		render(CalendarViewTestWrapper, { value: JANUARY_2026 });
-		await expect.element(page.selector('table.calendar-table')).toHaveAttribute('data-tabspot');
+		await expect.element(page.selector('[data-calendar-grid]')).toHaveAttribute('data-tabspot');
 	});
 
 	it('moves to the start and end of the week with Home and End', async () => {
@@ -339,7 +349,7 @@ describe('CalendarView focus', () => {
 
 	it("falls back to today's cell when there is no selection", async () => {
 		render(CalendarViewTestWrapper, { value: null, popup: true });
-		await expect.element(page.selector('tbody:not([inert]) button.current')).toHaveFocus();
+		await expect.element(page.selector('[data-calendar-page]:not([inert]) button.current')).toHaveFocus();
 	});
 
 	it('does not steal focus when rendered inline', async () => {
@@ -403,7 +413,7 @@ describe('CalendarView focus', () => {
 		await periodLabel().click();
 
 		await expect.element(page.selector('.fs-calendar-view-months')).toBeInTheDocument();
-		expect(document.activeElement?.closest('tbody')).toBeNull();
+		expect(document.activeElement?.closest('[data-calendar-page]')).toBeNull();
 	});
 });
 
@@ -423,9 +433,9 @@ describe('CalendarView selection', () => {
 		await expect.element(cell(jan(15))).toHaveClass(/selected/);
 	});
 
-	it('collects several days when multiple is set', async () => {
+	it('collects several days in multiple mode', async () => {
 		const onChange = vi.fn();
-		render(CalendarViewTestWrapper, { value: JANUARY_2026, multiple: true, onChange });
+		render(CalendarViewTestWrapper, { value: JANUARY_2026, selectionMode: 'multiple', onChange });
 
 		await cell(jan(20)).click();
 		await cell(jan(21)).click();
@@ -433,6 +443,263 @@ describe('CalendarView selection', () => {
 		await expect.element(cell(jan(20))).toHaveClass(/selected/);
 		await expect.element(cell(jan(21))).toHaveClass(/selected/);
 		expect(onChange).toHaveBeenCalledTimes(2);
+	});
+});
+
+/**
+ * `value` still seeds the page in range mode, and nothing else: the range has its own
+ * binding, so passing a date here pins the grid to January 2026 without selecting it.
+ */
+const RANGE = { selectionMode: 'range' as const, value: JANUARY_2026 };
+
+describe('CalendarView range selection', () => {
+	const inJanuary = RANGE;
+
+	it('opens a range on the first click and waits for the end', async () => {
+		const onRangeChange = vi.fn();
+		render(CalendarViewTestWrapper, { ...inJanuary, onRangeChange });
+
+		await cell(jan(20)).click();
+
+		expect(onRangeChange).toHaveBeenCalledTimes(1);
+		expect(onRangeChange.mock.calls[0][1].start).toEqual(new Date(2026, 0, 20));
+		expect(onRangeChange.mock.calls[0][1].end).toBeNull();
+	});
+
+	it('closes the range on the second click', async () => {
+		const onRangeChange = vi.fn();
+		render(CalendarViewTestWrapper, { ...inJanuary, onRangeChange });
+
+		await cell(jan(20)).click();
+		await cell(jan(23)).click();
+
+		expect(onRangeChange).toHaveBeenCalledTimes(2);
+		expect(onRangeChange.mock.calls[1][1].start).toEqual(new Date(2026, 0, 20));
+		expect(onRangeChange.mock.calls[1][1].end).toEqual(new Date(2026, 0, 23));
+	});
+
+	it('closes a range of one day when the start is picked twice', async () => {
+		const onRangeChange = vi.fn();
+		render(CalendarViewTestWrapper, { ...inJanuary, onRangeChange });
+
+		await cell(jan(20)).click();
+		await cell(jan(20)).click();
+
+		expect(onRangeChange.mock.calls[1][1].start).toEqual(new Date(2026, 0, 20));
+		expect(onRangeChange.mock.calls[1][1].end).toEqual(new Date(2026, 0, 20));
+	});
+
+	it('starts over on the click after a finished range', async () => {
+		const onRangeChange = vi.fn();
+		render(CalendarViewTestWrapper, { ...inJanuary, onRangeChange });
+
+		await cell(jan(20)).click();
+		await cell(jan(23)).click();
+		await cell(jan(26)).click();
+
+		expect(onRangeChange.mock.calls[2][1].start).toEqual(new Date(2026, 0, 26));
+		expect(onRangeChange.mock.calls[2][1].end).toBeNull();
+	});
+
+	it('restarts rather than inverting when the second click lands before the start', async () => {
+		const onRangeChange = vi.fn();
+		render(CalendarViewTestWrapper, { ...inJanuary, onRangeChange });
+
+		await cell(jan(20)).click();
+		await cell(jan(12)).click();
+
+		expect(onRangeChange.mock.calls[1][1].start).toEqual(new Date(2026, 0, 12));
+		expect(onRangeChange.mock.calls[1][1].end).toBeNull();
+	});
+
+	it('paints a band across the days the range covers', async () => {
+		render(CalendarViewTestWrapper, inJanuary);
+
+		await cell(jan(20)).click();
+		await cell(jan(23)).click();
+
+		await expect.element(gridCell(jan(21))).toHaveClass(/range-between/);
+		expect(banded()).toHaveLength(4);
+		expect(banded('start')).toHaveLength(1);
+		expect(banded('end')).toHaveLength(1);
+	});
+
+	it('paints no band for a range of a single day', async () => {
+		render(CalendarViewTestWrapper, inJanuary);
+
+		await cell(jan(20)).click();
+		await cell(jan(20)).click();
+
+		await expect.element(cell(jan(20))).toHaveClass(/selected/);
+		expect(banded()).toHaveLength(0);
+	});
+
+	it('previews the range under the pointer before it is closed', async () => {
+		render(CalendarViewTestWrapper, inJanuary);
+
+		await cell(jan(20)).click();
+		await cell(jan(23)).hover();
+
+		await expect.element(gridCell(jan(22))).toHaveClass(/range-between/);
+		expect(banded()).toHaveLength(4);
+	});
+
+	it('previews nothing while the pointer is before the start', async () => {
+		render(CalendarViewTestWrapper, inJanuary);
+
+		await cell(jan(20)).click();
+		await cell(jan(12)).hover();
+
+		expect(banded()).toHaveLength(0);
+	});
+
+	it('previews the range as the keyboard moves through it', async () => {
+		render(CalendarViewTestWrapper, inJanuary);
+		await expect.element(cell(jan(20))).toBeInTheDocument();
+
+		// Park the pointer outside the grid: where both are offering a day, the pointer wins.
+		await periodLabel().hover();
+
+		focusCell(jan(20));
+		await userEvent.keyboard('{Enter}');
+		await userEvent.keyboard('{ArrowRight}{ArrowRight}');
+
+		await expect.element(cell(jan(22))).toHaveFocus();
+		await expect.element(gridCell(jan(22))).toHaveClass(/range-end/);
+		expect(banded()).toHaveLength(3);
+	});
+
+	it('spans a blacked-out day by default', async () => {
+		render(CalendarViewTestWrapper, { ...inJanuary, blackoutDates: [new Date(2026, 0, 22)] });
+
+		await cell(jan(20)).click();
+		await cell(jan(25)).click();
+
+		await expect.element(cell(jan(22))).toHaveClass(/blackout/);
+		await expect.element(gridCell(jan(22))).toHaveClass(/range-between/);
+		expect(banded()).toHaveLength(6);
+	});
+
+	it('starts a new range instead of spanning a blackout when blackoutBreaksRange is set', async () => {
+		const onRangeChange = vi.fn();
+		render(CalendarViewTestWrapper, {
+			...inJanuary,
+			blackoutBreaksRange: true,
+			blackoutDates: [new Date(2026, 0, 22)],
+			onRangeChange
+		});
+
+		await cell(jan(20)).click();
+		await cell(jan(25)).click();
+
+		expect(onRangeChange.mock.calls[1][1].start).toEqual(new Date(2026, 0, 25));
+		expect(onRangeChange.mock.calls[1][1].end).toBeNull();
+		expect(banded()).toHaveLength(0);
+	});
+
+	it('still closes a range that stops short of the blackout', async () => {
+		const onRangeChange = vi.fn();
+		render(CalendarViewTestWrapper, {
+			...inJanuary,
+			blackoutBreaksRange: true,
+			blackoutDates: [new Date(2026, 0, 22)],
+			onRangeChange
+		});
+
+		await cell(jan(20)).click();
+		await cell(jan(21)).click();
+
+		expect(onRangeChange.mock.calls[1][1].end).toEqual(new Date(2026, 0, 21));
+	});
+});
+
+describe('CalendarView clearing a range', () => {
+	const inJanuary = RANGE;
+
+	it('offers no clear control outside range mode', async () => {
+		render(CalendarViewTestWrapper, { value: JANUARY_2026 });
+		await expect.element(cell(jan(15))).toBeInTheDocument();
+
+		expect(document.querySelectorAll('[aria-label="Clear the selected dates"]')).toHaveLength(0);
+	});
+
+	it('disables the clear control while there is nothing to clear', async () => {
+		render(CalendarViewTestWrapper, inJanuary);
+		await expect.element(clearButton()).toBeDisabled();
+	});
+
+	it('empties the range from the clear control', async () => {
+		const onRangeChange = vi.fn();
+		render(CalendarViewTestWrapper, { ...inJanuary, onRangeChange });
+
+		await cell(jan(20)).click();
+		await cell(jan(23)).click();
+		await clearButton().click();
+
+		expect(onRangeChange.mock.calls[2][1]).toEqual({ start: null, end: null });
+		expect(banded()).toHaveLength(0);
+		await expect.element(clearButton()).toBeDisabled();
+	});
+
+	it('empties the range with Delete from inside the grid', async () => {
+		const onRangeChange = vi.fn();
+		render(CalendarViewTestWrapper, { ...inJanuary, onRangeChange });
+
+		await cell(jan(20)).click();
+		await cell(jan(23)).click();
+
+		focusCell(jan(23));
+		await userEvent.keyboard('{Delete}');
+
+		expect(onRangeChange.mock.calls[2][1]).toEqual({ start: null, end: null });
+	});
+});
+
+describe('CalendarView range accessibility', () => {
+	const inJanuary = RANGE;
+
+	it('marks every day of the range as selected', async () => {
+		render(CalendarViewTestWrapper, inJanuary);
+
+		await cell(jan(20)).click();
+		await cell(jan(23)).click();
+
+		expect(document.querySelectorAll('[role="gridcell"][aria-selected="true"]')).toHaveLength(4);
+	});
+
+	it('advertises the grid as multiselectable', async () => {
+		render(CalendarViewTestWrapper, inJanuary);
+		await expect.element(page.selector('[data-calendar-page]')).toHaveAttribute('aria-multiselectable', 'true');
+	});
+
+	it('announces each step of the range', async () => {
+		render(CalendarViewTestWrapper, inJanuary);
+
+		await expect.element(liveRegion()).toHaveAttribute('aria-live', 'polite');
+
+		await cell(jan(20)).click();
+		await expect.element(liveRegion()).toHaveTextContent('Choose the end date');
+
+		await cell(jan(23)).click();
+		await expect.element(liveRegion()).toHaveTextContent('4 days');
+
+		await clearButton().click();
+		await expect.element(liveRegion()).toHaveTextContent('Date range cleared');
+	});
+
+	it('marks every month the range passes through', async () => {
+		render(CalendarViewTestWrapper, inJanuary);
+
+		await cell(jan(20)).click();
+		// Index 41 is Feb 8 2026, the last trailing day of the January page.
+		await cell(41).click();
+
+		await periodLabel().click();
+		await expect.element(page.getByRole('grid', { name: '2026' })).toBeInTheDocument();
+
+		// A month cell stands for the whole month, so the range only has to touch it.
+		const monthGrid = document.querySelector('[role="grid"][aria-label="2026"]')!;
+		expect(monthGrid.querySelectorAll('.calendar-item-button.selected')).toHaveLength(2);
 	});
 });
 
@@ -575,5 +842,60 @@ describe('CalendarView year navigation', () => {
 
 		await expect.element(page.selector('.fs-calendar-view-months')).toBeInTheDocument();
 		await expect.element(periodLabel()).toHaveTextContent('2022');
+	});
+});
+
+describe('CalendarView accessibility', () => {
+	it('exposes the page as a labelled grid of rows and cells', async () => {
+		render(CalendarViewTestWrapper, { value: JANUARY_2026 });
+
+		await expect.element(page.getByRole('grid', { name: 'January 2026' })).toBeInTheDocument();
+		expect(document.querySelectorAll('[role="row"]')).toHaveLength(6);
+		expect(document.querySelectorAll('[role="gridcell"]')).toHaveLength(42);
+	});
+
+	it('names every cell with its full date, weekday first', async () => {
+		render(CalendarViewTestWrapper, { value: JANUARY_2026 });
+
+		// Jan 15 2026 is a Thursday. The weekday is why the header row can stay decorative.
+		await expect.element(page.getByRole('button', { name: 'Thursday, January 15, 2026' })).toBeInTheDocument();
+	});
+
+	it('names cells in the requested locale', async () => {
+		render(CalendarViewTestWrapper, { value: JANUARY_2026, locale: 'es-ES' });
+
+		await expect.element(page.getByRole('button', { name: 'jueves, 15 de enero de 2026' })).toBeInTheDocument();
+	});
+
+	it('marks the selected cell with aria-selected', async () => {
+		render(CalendarViewTestWrapper, { value: JANUARY_2026 });
+
+		await expect.element(cell(jan(15))).toHaveAttribute('aria-label', 'Thursday, January 15, 2026');
+		expect(document.querySelectorAll('[role="gridcell"][aria-selected="true"]')).toHaveLength(1);
+	});
+
+	it('keeps the weekday row out of the accessibility tree', async () => {
+		render(CalendarViewTestWrapper, { value: JANUARY_2026 });
+		await expect.element(page.selector('.fs-calendar-view-header')).toHaveAttribute('aria-hidden', 'true');
+	});
+
+	it('names the month grid by its year and the year grid by its decade', async () => {
+		render(CalendarViewTestWrapper, { value: JANUARY_2026, view: 'months' });
+		await expect.element(page.getByRole('grid', { name: '2026' })).toBeInTheDocument();
+		await expect.element(page.getByRole('button', { name: 'January 2026' })).toBeInTheDocument();
+	});
+
+	it('leaves the weekday names outside the clipped viewport', async () => {
+		render(CalendarViewTestWrapper, { value: JANUARY_2026 });
+		await expect.element(cell(jan(15))).toBeInTheDocument();
+
+		// The page slides inside .page-viewport; if the header lived in there too, a
+		// flying month would cross the weekday names — the bug this markup fixes.
+		const header = document.querySelector('.fs-calendar-view-header')!;
+		const viewport = document.querySelector('.page-viewport')!;
+
+		expect(viewport.contains(header)).toBe(false);
+		expect(viewport.contains(document.querySelector('[data-calendar-page]'))).toBe(true);
+		expect(getComputedStyle(viewport).overflow).toBe('hidden');
 	});
 });

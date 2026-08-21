@@ -5,7 +5,7 @@
 </script>
 
 
-# {m.docs_overview_title()}
+# {m.global_overview()}
 
 {m.docs_overview_description()}
 
@@ -18,7 +18,7 @@
 
 ## {m.docs_overview_what_is_title()}
 
-{m.docs_overview_what_is_description()}
+{m.global_library_description()}
 
 ## {m.docs_overview_features_title()}
 

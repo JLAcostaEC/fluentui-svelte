@@ -2,13 +2,101 @@ import { createFSContext } from '$internal';
 import type {
 	View,
 	MonthLocaleOptions,
+	CalendarDateRange,
 	CalendarViewContext,
 	WeekdayLocaleOptions,
-	DateComparisonPrecision
+	DateComparisonPrecision,
+	RangePosition
 } from './types.js';
 import { SvelteDate } from 'svelte/reactivity';
 
 export const [getCalendarViewContext, setCalendarViewContext] = createFSContext<CalendarViewContext>();
+
+/** Milliseconds in a day. Only ever used with `Math.round`, so DST cannot skew it. */
+const DAY_MS = 86_400_000;
+
+/**
+ * Midnight of `date`.
+ *
+ * Every date the grid renders is already at midnight, but a consumer can hand us a
+ * `range` or a `value` carrying a time, and a range must not change meaning because
+ * one of its ends happens to be half past two.
+ */
+export function startOfDay(date: Date) {
+	return new SvelteDate(date.getFullYear(), date.getMonth(), date.getDate());
+}
+
+/** Whether a blacked-out date sits strictly inside the interval. Its ends do not count. */
+export function hasBlackoutBetween(from: Date, to: Date, blackoutDates?: Date[]) {
+	if (!blackoutDates?.length) return false;
+
+	const min = startOfDay(from).getTime();
+	const max = startOfDay(to).getTime();
+
+	return blackoutDates.some((date) => {
+		const time = startOfDay(date).getTime();
+		return time > min && time < max;
+	});
+}
+
+/**
+ * Where `day` sits in a finished range, or `undefined` when it sits outside one.
+ *
+ * A range of a single day returns `undefined` too: there is no band to paint
+ * across one cell, and the day already reads as selected.
+ */
+export function rangePositionOf(day: Date, range: CalendarDateRange): RangePosition | undefined {
+	if (!range.start || !range.end) return undefined;
+
+	const time = startOfDay(day).getTime();
+	const start = startOfDay(range.start).getTime();
+	const end = startOfDay(range.end).getTime();
+
+	if (start === end) return undefined;
+	if (time === start) return 'start';
+	if (time === end) return 'end';
+
+	return time > start && time < end ? 'between' : undefined;
+}
+
+/** The first and last day of the cell `date` stands for. */
+function cellSpan(date: Date, precision: DateComparisonPrecision): [Date, Date] {
+	switch (precision) {
+		case 'month':
+			return [
+				new SvelteDate(date.getFullYear(), date.getMonth(), 1),
+				new SvelteDate(date.getFullYear(), date.getMonth() + 1, 0)
+			];
+		case 'year':
+			return [new SvelteDate(date.getFullYear(), 0, 1), new SvelteDate(date.getFullYear(), 11, 31)];
+		default:
+			return [startOfDay(date), startOfDay(date)];
+	}
+}
+
+/**
+ * Whether the range touches the cell `date` stands for.
+ *
+ * A month or a year is one cell standing for many days, so it counts as covered the
+ * moment the range overlaps it at all — not only when an end of the range lands on it.
+ */
+export function rangeCovers(date: Date, range: CalendarDateRange, precision: DateComparisonPrecision) {
+	if (!range.start) return false;
+
+	const [from, to] = cellSpan(date, precision);
+	const start = startOfDay(range.start).getTime();
+	// Half-built, the range is just its start.
+	const end = startOfDay(range.end ?? range.start).getTime();
+
+	return start <= to.getTime() && end >= from.getTime();
+}
+
+/** How many days a finished range spans, both ends included. */
+export function rangeLength(range: CalendarDateRange) {
+	if (!range.start || !range.end) return 0;
+
+	return Math.round((startOfDay(range.end).getTime() - startOfDay(range.start).getTime()) / DAY_MS) + 1;
+}
 
 export function indexOfDate(array: Date[], date: Date, precision: DateComparisonPrecision = 'time') {
 	return array.findIndex((d) => compareDates(d, date, precision));

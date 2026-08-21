@@ -19,7 +19,15 @@
 		fadeScale,
 		reactiveBoundingRect
 	} from '$internal';
-	import { getPageByOffset, indexOfDate, setCalendarViewContext } from './calendar-view.svelte.js';
+	import {
+		compareDates,
+		getPageByOffset,
+		hasBlackoutBetween,
+		indexOfDate,
+		rangeLength,
+		setCalendarViewContext,
+		startOfDay
+	} from './calendar-view.svelte.js';
 	import { CALENDAR_GRID_CONFIG, VIEW_PRECISION, cellDate, focusCalendarView } from './calendar-view-grid.js';
 	import { on } from 'svelte/events';
 	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
@@ -32,10 +40,12 @@
 	} from './types.js';
 
 	let {
-		element = $bindable(),
+		ref = $bindable(),
 		value = $bindable(null),
+		range = $bindable({ start: null, end: null }),
 		view = 'days',
-		multiple,
+		selectionMode = 'single',
+		blackoutBreaksRange,
 		minDate,
 		maxDate,
 		locale = 'en-US',
@@ -44,6 +54,7 @@
 		headers,
 		floating,
 		onChange,
+		onRangeChange,
 		onViewChange,
 		...attributes
 	}: CalendarViewProps = $props();
@@ -69,12 +80,19 @@
 
 	let boundingElement = reactiveBoundingRect();
 
-	let tableElement: HTMLTableElement | undefined = $state();
+	let gridElement: HTMLElement | undefined = $state();
 
 	// Set when a view change starts from a grid cell, so the new grid can pick focus
 	// up where the old one left it. A change started from the header leaves it null:
 	// focus belongs to the button that is still there.
 	let pendingFocus: { date: Date; precision: DateComparisonPrecision } | null = null;
+
+	// live region is only announced when its text changes.
+	let liveMessage = $state('');
+
+	let dayFormat = $derived(new Intl.DateTimeFormat(locale, { dateStyle: 'long' }));
+
+	let dayRangeFormat = $derived(new Intl.DateTimeFormat(locale, { dateStyle: 'medium' }));
 
 	function updatePage(amount: number = 0, directionOverride: AnimationDirection | undefined = undefined) {
 		page = getPageByOffset(amount, page, view);
@@ -108,28 +126,66 @@
 	}
 
 	function selectDay(e: Event, day: Date) {
-		if (multiple) {
-			if (!Array.isArray(value)) {
-				if (value !== null) {
-					value = [value];
-				} else {
-					value = [day];
-					return;
-				}
-			}
-			if (indexOfDate(value, day) == -1) {
-				value.push(day);
-			} else {
-				value = value.slice(0, indexOfDate(value, day)).concat(value.slice(indexOfDate(value, day) + 1));
-			}
-		} else {
-			if (Array.isArray(value)) value = null;
-			if (day.getTime() === (<Date>value)?.getTime()) {
-				value = null;
-			} else {
-				value = day;
-			}
+		if (selectionMode === 'range') {
+			selectRangeDay(e, day);
+			return;
 		}
+
+		if (selectionMode === 'multiple') {
+			const days = Array.isArray(value) ? value : value ? [value] : [];
+			const index = indexOfDate(days, day);
+
+			value = index === -1 ? [...days, day] : days.filter((_, i) => i !== index);
+		} else {
+			const single = Array.isArray(value) ? null : value;
+
+			value = single && compareDates(single, day) ? null : day;
+		}
+
+		onChange?.(e, value);
+	}
+
+	/**
+	 * One click of a range.
+	 *
+	 * The range is only ever built forwards: a click before the start, or one that
+	 * lands on a finished range, opens a new range on that day rather than stretching
+	 * or inverting the current one. Clicking the start again closes a range of a
+	 * single day
+	 */
+	function selectRangeDay(e: Event, day: Date) {
+		const start = range.start;
+		const restart =
+			!start ||
+			range.end !== null ||
+			startOfDay(day) < startOfDay(start) ||
+			// The consumer asked for ranges that claim every day they span, so a
+			// blocked day in the way makes this click a new start instead of an end.
+			(!!blackoutBreaksRange && hasBlackoutBetween(start, day, blackoutDates));
+
+		range = restart ? { start: day, end: null } : { start, end: day };
+
+		if (range.end) {
+			const days = rangeLength(range);
+			liveMessage = `${dayRangeFormat.formatRange(range.start!, range.end)} selected, ${days} ${days === 1 ? 'day' : 'days'}.`;
+		} else {
+			liveMessage = `${dayFormat.format(day)} selected as the start date. Choose the end date.`;
+		}
+
+		onRangeChange?.(e, range);
+	}
+
+	function clearSelection(e: Event) {
+		if (selectionMode === 'range') {
+			if (!range.start && !range.end) return;
+
+			range = { start: null, end: null };
+			liveMessage = 'Date range cleared.';
+			onRangeChange?.(e, range);
+			return;
+		}
+
+		value = selectionMode === 'multiple' ? [] : null;
 		onChange?.(e, value);
 	}
 
@@ -150,6 +206,13 @@
 				'value',
 				() => value,
 				(v) => (value = v)
+			),
+		(o) =>
+			defineProperty(
+				o,
+				'range',
+				() => range,
+				(v) => (range = v)
 			),
 		(o) =>
 			defineProperty(
@@ -189,7 +252,8 @@
 			locale,
 			weekStart,
 			blackoutDates,
-			multiple,
+			selectionMode,
+			blackoutBreaksRange,
 			headers
 		},
 		get state() {
@@ -204,7 +268,8 @@
 			updatePage,
 			selectDay,
 			selectMonth,
-			selectYear
+			selectYear,
+			clearSelection
 		}
 	});
 	$effect.pre(() => {
@@ -221,12 +286,19 @@
 	};
 
 	/**
-	 * `Ctrl` + arrow moves between views. That is a calendar shortcut rather than a
-	 * move inside the grid, so Tabspot never reports it — one delegated listener on
-	 * the table covers all three views and every cell.
+	 * Keys the calendar owns rather than the grid: `Ctrl` + arrow moves between views,
+	 * and `Delete` drops a range that can no longer be undone by clicking. Tabspot
+	 * never reports either, so one delegated listener on the grid covers all three
+	 * views and every cell.
 	 */
-	function zoomShortcut(node: HTMLElement) {
+	function calendarShortcuts(node: HTMLElement) {
 		return on(node, 'keydown', (event) => {
+			if (selectionMode === 'range' && (event.key === 'Delete' || event.key === 'Backspace')) {
+				event.preventDefault();
+				clearSelection(event);
+				return;
+			}
+
 			const zoom = ZOOM[view];
 
 			if (!event.ctrlKey || event.key !== zoom.key) return;
@@ -238,19 +310,19 @@
 	// Opening as a popup: hand focus to the grid so the arrows work straight away.
 	// An inline calendar is just part of the page and must not steal focus.
 	onMount(() => {
-		if (floating && tableElement) focusCalendarView(tableElement, null, VIEW_PRECISION[view]);
+		if (floating && gridElement) focusCalendarView(gridElement, null, VIEW_PRECISION[view]);
 	});
 
-	// The table is rebuilt on every view change, so the root is registered again
+	// The grid is rebuilt on every view change, so the root is registered again
 	// each time. This is necessary for tabspot to work correctly.
 	$effect(() => {
-		if (!tableElement) return;
+		if (!gridElement) return;
 
-		setTabspotAttributes({ element: tableElement, config: CALENDAR_GRID_CONFIG });
+		setTabspotAttributes({ element: gridElement, config: CALENDAR_GRID_CONFIG });
 
 		if (!pendingFocus) return;
 
-		focusCalendarView(tableElement, pendingFocus.date, pendingFocus.precision);
+		focusCalendarView(gridElement, pendingFocus.date, pendingFocus.precision);
 		pendingFocus = null;
 	});
 </script>
@@ -263,7 +335,7 @@ This implementation is originally made by Tropix126 in his FluentSvelte library,
 -->
 <div
 	class={['fs-calendar-view', { floating }]}
-	bind:this={element}
+	bind:this={ref}
 	in:flyToOffset={floating && floating.ref
 		? {
 				y: -floating.ref.getBoundingClientRect().height / 2,
@@ -284,10 +356,11 @@ This implementation is originally made by Tropix126 in his FluentSvelte library,
 		<CalendarViewControls />
 		<div class="calendar-wrapper">
 			{#key view}
-				<table
-					bind:this={tableElement}
-					class="calendar-table"
-					{@attach zoomShortcut}
+				<div
+					bind:this={gridElement}
+					class="calendar-view-stack"
+					data-calendar-grid
+					{@attach calendarShortcuts}
 					in:fadeScale={{
 						duration: viewAnimationDirection !== 'neutral' ? 500 : 0,
 						easing: circOut,
@@ -305,15 +378,29 @@ This implementation is originally made by Tropix126 in his FluentSvelte library,
 				>
 					{#if view === 'days'}
 						<CalendarViewHeader />
-						<CalendarViewDays />
-					{:else if view === 'months'}
-						<CalendarViewMonths />
-					{:else if view === 'years'}
-						<CalendarViewYears />
 					{/if}
-				</table>
+
+					<!--
+						The page slides in and out of here. Clipping it at the viewport is what
+						keeps a flying month from crossing the weekday names: on a translucent
+						surface you cannot mask, only clip.
+					-->
+					<div class="page-viewport">
+						{#if view === 'days'}
+							<CalendarViewDays />
+						{:else if view === 'months'}
+							<CalendarViewMonths />
+						{:else if view === 'years'}
+							<CalendarViewYears />
+						{/if}
+					</div>
+				</div>
 			{/key}
 		</div>
+		{#if selectionMode === 'range'}
+			<!-- Building a range moves no focus and changes no label: this is the only thing that reports it. -->
+			<div class="fs-calendar-live-region" role="status" aria-live="polite">{liveMessage}</div>
+		{/if}
 	</Flyout>
 </div>
 
@@ -331,20 +418,33 @@ This implementation is originally made by Tropix126 in his FluentSvelte library,
 			position: relative;
 			width: 100%;
 			aspect-ratio: 1;
-			display: grid;
-			grid-template-rows: auto 1fr;
-			gap: 0.5rem;
-			& table {
+			& .calendar-view-stack {
 				padding: 0 0.5rem;
 				position: absolute;
-				width: 100%;
-				display: block;
 				inset: 0;
+				display: flex;
+				flex-direction: column;
 				background: var(--fs-layer-on-acrylic-default);
-				& :global(tbody[inert]) {
+				& .page-viewport {
+					position: relative;
+					overflow: hidden;
+					flex: 1;
+				}
+				& :global([data-calendar-page][inert]) {
 					z-index: -1;
 				}
 			}
+		}
+		& .fs-calendar-live-region {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			margin: -1px;
+			padding: 0;
+			overflow: hidden;
+			clip-path: inset(50%);
+			white-space: nowrap;
+			border: 0;
 		}
 		& :global(.fs-flyout) {
 			padding: 0;

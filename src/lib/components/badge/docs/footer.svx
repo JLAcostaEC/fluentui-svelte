@@ -31,7 +31,7 @@
   <BadgeIcon size={96} icon={AccessibilityRegular} />
 </Showcase>
 
-### {m.badge_badgeicon_usage_title()}
+### {m.global_usage()}
 
 ```svelte
 <script>

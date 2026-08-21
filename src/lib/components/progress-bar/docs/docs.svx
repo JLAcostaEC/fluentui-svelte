@@ -14,7 +14,7 @@
   <ProgressBar value={70} />
 </Showcase>
 
-## {m.pbar_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

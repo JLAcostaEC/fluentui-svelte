@@ -31,7 +31,7 @@
   />
 </Showcase>
 
-## {m.avatar_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

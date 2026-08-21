@@ -24,13 +24,13 @@
   </TreeViewItem>
 </TreeView>
 
-<InfoBar status="critical" style="multiline" title={m.tv_early_access_title()} hideCloseButton>
+<InfoBar status="critical" style="multiline" title={m.global_early_access_title()} hideCloseButton>
   <p>
-    {m.tv_early_access_description()}
+    {m.global_early_access_description()}
   </p>
 </InfoBar>
 
-## {m.tv_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

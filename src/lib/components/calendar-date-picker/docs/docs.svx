@@ -12,7 +12,7 @@
   <CalendarDatePicker />
 </Showcase>
 
-## {m.cdp_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>
@@ -24,6 +24,6 @@
 <CalendarDatePicker bind:value />
 ```
 
-## {m.cdp_component_api_title()}
+## {m.global_component_api()}
 
 {m.cdp_component_api_description()}

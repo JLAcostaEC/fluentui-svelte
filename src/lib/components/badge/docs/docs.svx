@@ -24,7 +24,7 @@
   <Badge color="attention" size={96} icon={AccessibilityRegular} />
 </Showcase>
 
-## {m.badge_usage_title()}
+## {m.global_usage()}
 
 ```svelte
 <script>

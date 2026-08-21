@@ -30,7 +30,7 @@
 <Divider as="hr" />`;
 </script>
 
-### {m.divider_appearance_title()}
+### {m.global_appearance()}
 
 {m.divider_appearance_description()}
 

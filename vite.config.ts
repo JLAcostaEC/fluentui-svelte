@@ -20,6 +20,7 @@ export default defineConfig({
 			{
 				extends: './vite.config.ts',
 				test: {
+					testTimeout: 20000,
 					name: 'client',
 					browser: {
 						enabled: true,

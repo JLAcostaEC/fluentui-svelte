@@ -42,7 +42,9 @@
 		"test:e2e": "playwright install && playwright test",
 		"deploy": "pnpm run build:site && wrangler pages deploy",
 		"urls": "node scripts/gen-urls.js",
-		"cf-typegen": "wrangler types src/worker-configuration.d.ts"
+		"cf-typegen": "wrangler types src/worker-configuration.d.ts",
+		"changeset:version": "changeset version && git add --all",
+		"changeset:publish": "changeset publish"
 	},
 	"files": [
 		"dist",
@@ -95,6 +97,8 @@
 		"svelte": "^5.0.0"
 	},
 	"devDependencies": {
+		"@changesets/changelog-github": "^1.0.0",
+		"@changesets/cli": "^3.0.1",
 		"@eslint/js": "^10.0.1",
 		"@humanspeak/svelte-virtual-list": "^0.5.14",
 		"@inlang/paraglide-js": "^2.24.1",

@@ -5,6 +5,7 @@
 	import { on } from 'svelte/events';
 	import { m } from '$i18n/messages.js';
 	import { mode } from 'mode-watcher';
+	import { localizeHref } from '../i18n/runtime.js';
 
 	$effect(() => {
 		let off: () => void;
@@ -39,7 +40,7 @@
 		{m.global_library_description()}
 	</p>
 	<div class="buttons">
-		<Button as="a" href="/docs">{m.home_view_docs_button()}</Button>
+		<Button as="a" href={localizeHref('/docs')}>{m.home_view_docs_button()}</Button>
 		<Button
 			as="a"
 			href="https://github.com/JLAcostaEC/fluentui-svelte"

@@ -434,12 +434,29 @@
       },
       "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.onChange"
     },
+    "generated_fs_calendar_date_picker_props_props_popup_label": {
+      "en": "7ab2ddee",
+      "locales": {
+        "es": "7ab2ddee"
+      },
+      "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.popupLabel"
+    },
+    "generated_fs_calendar_date_picker_props_props_popup_ref": {
+      "en": "35cfbb07",
+      "locales": {},
+      "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.popupRef"
+    },
     "generated_fs_calendar_date_picker_props_props_ref": {
       "en": "5f67da99",
       "locales": {
         "es": "5f67da99"
       },
       "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.ref"
+    },
+    "generated_fs_calendar_date_picker_props_props_trigger_ref": {
+      "en": "e44e1de5",
+      "locales": {},
+      "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.triggerRef"
     },
     "generated_fs_calendar_date_picker_props_props_value": {
       "en": "5e97aa09",
@@ -680,9 +697,9 @@
       "source": "src/lib/components/checkbox/types.ts#CheckboxProps.ref"
     },
     "generated_fs_checkbox_props_props_wrapper_as": {
-      "en": "d029e4cd",
+      "en": "f799a424",
       "locales": {
-        "es": "d029e4cd"
+        "es": "f799a424"
       },
       "source": "src/lib/components/checkbox/types.ts#CheckboxProps.wrapperAs"
     },
@@ -757,9 +774,9 @@
       "source": "src/lib/components/date-picker/types.ts#DatePickerProps.inputElement"
     },
     "generated_fs_date_picker_props_props_input_props": {
-      "en": "3481191d",
+      "en": "972f171b",
       "locales": {
-        "es": "3481191d"
+        "es": "972f171b"
       },
       "source": "src/lib/components/date-picker/types.ts#DatePickerProps.inputProps"
     },
@@ -784,10 +801,17 @@
       },
       "source": "src/lib/components/date-picker/types.ts#DatePickerProps.open"
     },
-    "generated_fs_date_picker_props_props_ref": {
-      "en": "5f67da99",
+    "generated_fs_date_picker_props_props_popup_label": {
+      "en": "d7ca890e",
       "locales": {
-        "es": "5f67da99"
+        "es": "d7ca890e"
+      },
+      "source": "src/lib/components/date-picker/types.ts#DatePickerProps.popupLabel"
+    },
+    "generated_fs_date_picker_props_props_ref": {
+      "en": "e44e1de5",
+      "locales": {
+        "es": "e44e1de5"
       },
       "source": "src/lib/components/date-picker/types.ts#DatePickerProps.ref"
     },
@@ -797,6 +821,20 @@
         "es": "20cb14d1"
       },
       "source": "src/lib/components/date-picker/types.ts#DatePickerProps.value"
+    },
+    "generated_fs_date_picker_props_props_wrapper_attributes": {
+      "en": "0a0dad7a",
+      "locales": {
+        "es": "0a0dad7a"
+      },
+      "source": "src/lib/components/date-picker/types.ts#DatePickerProps.wrapperAttributes"
+    },
+    "generated_fs_date_picker_props_props_wrapper_ref": {
+      "en": "c2151f6b",
+      "locales": {
+        "es": "c2151f6b"
+      },
+      "source": "src/lib/components/date-picker/types.ts#DatePickerProps.wrapperRef"
     },
     "generated_fs_dialog_actions_props_props_fluid": {
       "en": "04e02697",
@@ -2402,9 +2440,9 @@
       "source": "src/lib/components/text-box/types.ts#TextBoxProps.wrapperRef"
     },
     "generated_fs_time_picker_props_props_element": {
-      "en": "5f67da99",
+      "en": "e44e1de5",
       "locales": {
-        "es": "5f67da99"
+        "es": "e44e1de5"
       },
       "source": "src/lib/components/time-picker/types.ts#TimePickerProps.element"
     },
@@ -2443,6 +2481,13 @@
       },
       "source": "src/lib/components/time-picker/types.ts#TimePickerProps.inputElement"
     },
+    "generated_fs_time_picker_props_props_input_props": {
+      "en": "972f171b",
+      "locales": {
+        "es": "972f171b"
+      },
+      "source": "src/lib/components/time-picker/types.ts#TimePickerProps.inputProps"
+    },
     "generated_fs_time_picker_props_props_open": {
       "en": "a59eb303",
       "locales": {
@@ -2450,12 +2495,33 @@
       },
       "source": "src/lib/components/time-picker/types.ts#TimePickerProps.open"
     },
+    "generated_fs_time_picker_props_props_popup_label": {
+      "en": "d7ca890e",
+      "locales": {
+        "es": "d7ca890e"
+      },
+      "source": "src/lib/components/time-picker/types.ts#TimePickerProps.popupLabel"
+    },
     "generated_fs_time_picker_props_props_value": {
       "en": "e3ea6a49",
       "locales": {
         "es": "e3ea6a49"
       },
       "source": "src/lib/components/time-picker/types.ts#TimePickerProps.value"
+    },
+    "generated_fs_time_picker_props_props_wrapper_attributes": {
+      "en": "0a0dad7a",
+      "locales": {
+        "es": "0a0dad7a"
+      },
+      "source": "src/lib/components/time-picker/types.ts#TimePickerProps.wrapperAttributes"
+    },
+    "generated_fs_time_picker_props_props_wrapper_ref": {
+      "en": "c2151f6b",
+      "locales": {
+        "es": "c2151f6b"
+      },
+      "source": "src/lib/components/time-picker/types.ts#TimePickerProps.wrapperRef"
     },
     "generated_fs_toggle_switch_props_props_checked": {
       "en": "c46675ba",

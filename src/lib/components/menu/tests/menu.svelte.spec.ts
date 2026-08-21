@@ -24,7 +24,7 @@ describe('MenuTrigger', () => {
 	});
 
 	it('throws when used outside a Menu', async () => {
-		expect(() => render(MenuTrigger)).toThrow('No MenuContext found for fs-menu-.');
+		await expect(render(MenuTrigger)).rejects.toThrow('No MenuContext found for fs-menu-.');
 	});
 });
 
@@ -58,7 +58,7 @@ describe('MenuItem', () => {
 	});
 
 	it('throws when used outside a Menu', async () => {
-		expect(() => render(MenuItem)).toThrow('No MenuContext found for fs-menu-.');
+		await expect(render(MenuItem)).rejects.toThrow('No MenuContext found for fs-menu-.');
 	});
 });
 

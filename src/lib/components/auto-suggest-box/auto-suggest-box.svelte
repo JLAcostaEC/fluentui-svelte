@@ -73,6 +73,7 @@
 			mover: {
 				axis: 'vertical',
 				items,
+				skip: "[aria-disabled='true']",
 				activation: {
 					mode: 'activedescendant',
 					controller: `#${INPUT_ID}`,
@@ -139,31 +140,21 @@
 	}
 
 	/**
-	 * True while we are driving Tabspot ourselves, so the key we synthesise to do it
-	 * is not mistaken for one the user pressed.
-	 */
-	let seeding = false;
-
-	/**
 	 * Put the cursor on `option`, or send it home when there is none.
 	 *
-	 * Landing on a* *particular* option still has no public API in Tabspot
 	 */
 	function pointCursorAt(option: OptionType | null) {
 		if (!listViewRef || option?.id === activeOption?.id) return;
 
+		clearTabspotActive(listViewRef);
+
 		if (!option) {
-			clearTabspotActive(listViewRef);
 			readCursor(null);
 			return;
 		}
 
-		clearTabspotActive(listViewRef);
 		setTabspotAttributes({ element: listViewRef, config: navigationOver(`#${CSS.escape(option.id)}`) });
-
-		seeding = true;
 		inputRef?.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, cancelable: true }));
-		seeding = false;
 
 		applyNavigation();
 	}
@@ -206,42 +197,15 @@
 		}
 	}
 
-	/**
-	 * `atEdge` indicates that the list ran out of options.
-	 * Landing on a disabled option is a waypoint rather
-	 * than a destination — see `stepOver`.
-	 */
+	/** `atEdge` means the list ran out of options: hand the query back. */
 	function navigate(event: TabspotNavigationEvent) {
-		if (event.atEdge) {
-			event.preventDefault();
-			leaveList();
+		if (!event.atEdge) {
+			readCursor(event.to);
 			return;
 		}
 
-		const landed = event.to ? (items.get(event.to.id) ?? null) : null;
-
-		if (landed?.disabled) {
-			stepOver(event.direction);
-			return;
-		}
-
-		readCursor(event.to);
-	}
-
-	/**
-	 * Carry on past a disabled option in the direction the user was going.
-	 *
-	 * Every option is navigable as far as Tabspot is concerned — see `OPTIONS`
-	 * TODO: Open a feature request at Tabspot repo about this.  
-	 */
-	function stepOver(direction: TabspotNavigationEvent['direction']) {
-		const key = direction === 'up' ? 'ArrowUp' : direction === 'down' ? 'ArrowDown' : null;
-
-		if (!key) return;
-
-		queueMicrotask(() =>
-			inputRef?.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }))
-		);
+		event.preventDefault();
+		leaveList();
 	}
 
 	/** Send the cursor home and give the user their query back. */
@@ -251,32 +215,26 @@
 		readCursor(null);
 	}
 
+	/** The two keys that are the box's own business rather than the list's. */
 	function handleKeyDown(e: KeyboardEvent) {
-		if (e.target !== inputRef || seeding) return;
+		if (e.target !== inputRef) return;
 
-		const { key } = e;
-
-		if (key === 'Escape') {
+		if (e.key === 'Escape') {
 			e.preventDefault();
 			open = false;
 			return;
 		}
 
-		if (key === 'Enter') {
-			e.preventDefault();
+		if (e.key !== 'Enter') return;
 
-			if (activeOption) {
-				methods.toggleSelection(e, activeOption.id);
-				open = false;
-			} else {
-				querySubmitted?.(e, value);
-			}
-			return;
+		e.preventDefault();
+
+		if (activeOption) {
+			methods.toggleSelection(e, activeOption.id);
+			open = false;
+		} else {
+			querySubmitted?.(e, value);
 		}
-
-		// Tabspot has already moved the cursor by the time this runs; all that is
-		// left is to keep the arrow from scrolling the page.
-		if (key === 'ArrowUp' || key === 'ArrowDown') e.preventDefault();
 	}
 
 	/**
@@ -306,10 +264,8 @@
 
 		await tick();
 
-		// Automatic selection, per the WAI-ARIA combobox pattern: the option
-		// query is a prefix under the cursor as you type, so Enter accepts
-		// it. With nothing to match, the cursor goes "input" and Enter submits the query
-		// instead — the hook for fetching a fresh set of suggestions.
+		// Automatic selection, per the WAI-ARIA combobox pattern: 
+		// hook for fetching a fresh set of suggestions.
 		cursorKey = undefined;
 		pointCursorAt(val ? bestMatch(val) : null);
 	}
@@ -317,7 +273,6 @@
 	function handleClear() {
 		value = '';
 		lastTypedValue = '';
-		activeOption = null;
 		open = false;
 	}
 

@@ -25,29 +25,7 @@ export const META: Meta = {
 		title: 'Calendar View — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte inline calendar for browsing dates and selecting one or more days.'
 	},
-	geo: {
-		summary:
-			'CalendarView is a Fluent UI Svelte inline calendar that lets users browse days, months, and years and select one date, several dates, or a range. It supports single, multiple and range selection, min/max dates, blackout dates, a configurable week start and locale, and can be rendered as a popup via the floating prop.',
-		topics: ['calendars', 'date selection', 'date ranges', 'inputs'],
-		entities: ['CalendarView', 'value', 'selectionMode', 'range', 'minDate', 'maxDate', 'weekStart', 'blackoutDates'],
-		category: 'Inputs',
-		faq: [
-			{
-				question: 'How do I allow selecting multiple dates in CalendarView?',
-				answer: 'Set selectionMode to multiple; value then becomes an array of the selected dates.'
-			},
-			{
-				question: 'How do I select a date range in CalendarView?',
-				answer:
-					'Set selectionMode to range and bind the range prop. The first click sets start and leaves end null; the second click closes the range.'
-			},
-			{
-				question: 'How do I change the first day of the week?',
-				answer: 'Use the weekStart prop (0 = Sunday, 1 = Monday). The default is 1.'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'calendar-view',
 	status: '',
 	icon: CalendarLtrRegular

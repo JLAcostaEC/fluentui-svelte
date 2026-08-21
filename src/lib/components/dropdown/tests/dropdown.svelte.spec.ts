@@ -109,6 +109,8 @@ describe('disabled state', () => {
 
 describe('DropdownOption', () => {
 	it('throws when used outside a Dropdown', async () => {
-		expect(() => render(DropdownOption, { value: 'x' })).toThrow('DropdownOption must be used within a Dropdown');
+		await expect(render(DropdownOption, { value: 'x' })).rejects.toThrow(
+			'DropdownOption must be used within a Dropdown'
+		);
 	});
 });

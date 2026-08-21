@@ -370,7 +370,7 @@ describe('filtering', () => {
 
 describe('validation', () => {
 	it('throws when selectOnFocus and multiselect are both enabled', async () => {
-		expect(() => render(AutoSuggestBoxTestWrapper, { selectOnFocus: true, multiselect: true })).toThrow(
+		await expect(render(AutoSuggestBoxTestWrapper, { selectOnFocus: true, multiselect: true })).rejects.toThrow(
 			'selectOnFocus is not supported when multiselect is true'
 		);
 	});
@@ -378,7 +378,7 @@ describe('validation', () => {
 
 describe('AutoSuggestBoxOption', () => {
 	it('throws when used outside an AutoSuggestBox', async () => {
-		expect(() => render(AutoSuggestBoxOption, { index: 0 })).toThrow(
+		await expect(render(AutoSuggestBoxOption, { index: 0 })).rejects.toThrow(
 			'AutoSuggestOption must be used within an AutoSuggestBox'
 		);
 	});

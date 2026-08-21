@@ -24,31 +24,7 @@ export const META: Meta = {
 		title: 'Auto Suggest Box — Fluent UI Svelte',
 		description: 'A Fluent UI Svelte input that surfaces dynamic suggestions as you type.'
 	},
-	// GEO
-	geo: {
-		summary:
-			'AutoSuggestBox is a Fluent UI Svelte input component that displays a filtered list of AutoSuggestBoxOption children as the user types, with keyboard navigation, single/multi select, and suggestionChosen / querySubmitted events.',
-		topics: ['autocomplete', 'search', 'form inputs', 'combobox', 'keyboard navigation'],
-		entities: ['AutoSuggestBox', 'AutoSuggestBoxOption', 'suggestionChosen', 'querySubmitted', 'maxItemsInView'],
-		category: 'Inputs',
-		faq: [
-			{
-				question: 'How do I provide suggestions to an AutoSuggestBox?',
-				answer:
-					'Render AutoSuggestBoxOption components as children of AutoSuggestBox. As the user types, matching options are shown.'
-			},
-			{
-				question: 'How do I handle when a suggestion is chosen?',
-				answer:
-					'Use the suggestionChosen callback; it receives the event and the chosen suggestion value as its second argument.'
-			},
-			{
-				question: 'How do I limit how many suggestions are visible?',
-				answer: 'Set the maxItemsInView prop. When the option count exceeds it, the flyout scrolls. Default is 6.'
-			}
-		]
-	},
-	// Library-only (not SEO/GEO)
+	// Library-only
 	slug: 'auto-suggest-box',
 	status: 'Beta',
 	icon: AutofitContentRegular

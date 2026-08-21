@@ -140,7 +140,7 @@ describe('keyboard interaction', () => {
 
 describe('validation', () => {
 	it('throws when step is larger than the range', async () => {
-		expect(() => render(Slider, { min: 0, max: 100, step: 200 })).toThrow(
+		await expect(render(Slider, { min: 0, max: 100, step: 200 })).rejects.toThrow(
 			'Step must be less than or equal to the difference between max and min'
 		);
 	});

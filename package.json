@@ -89,7 +89,7 @@
 		"fluentui-icons-svelte": "^1.1.1",
 		"mode-watcher": "^1.1.0",
 		"runed": "^0.37.1",
-		"tabspot": "^0.6.0"
+		"tabspot": "^0.7.0"
 	},
 	"peerDependencies": {
 		"svelte": "^5.0.0"

@@ -80,7 +80,7 @@ describe('TreeViewItem', () => {
 	});
 
 	it('throws when used outside a TreeView', async () => {
-		expect(() => render(TreeViewItem)).toThrow('TreeViewItem must be used within a TreeView');
+		await expect(render(TreeViewItem)).rejects.toThrow('TreeViewItem must be used within a TreeView');
 	});
 });
 
@@ -104,7 +104,7 @@ describe('TreeViewItemContent', () => {
 	});
 
 	it('throws when used outside a TreeView', async () => {
-		expect(() => render(TreeViewItemContent)).toThrow('TreeViewItemLayout must be used within a TreeView');
+		await expect(render(TreeViewItemContent)).rejects.toThrow('TreeViewItemLayout must be used within a TreeView');
 	});
 });
 

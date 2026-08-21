@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { ConfigDocs } from '$types';
-	import { toJsonLd } from '$site/utils/json-ld.js';
 	import { getLocale } from '../../../../i18n/runtime.js';
 	import { page } from '$app/state';
 
@@ -14,7 +13,6 @@
 			locale: _locale
 		};
 	});
-	const stringifiedGEO = $derived(JSON.stringify(toJsonLd(meta)));
 
 	const Docs = $derived(data.docs);
 	const Footer = $derived(data.footer);

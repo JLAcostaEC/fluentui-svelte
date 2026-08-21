@@ -22,7 +22,7 @@ export type MenuContext = FSContext<
 >;
 
 export type MenuState = {
-	open: boolean;
+	open: boolean | undefined;
 	ref: HTMLElement | VirtualElement | null | undefined;
 	locked: boolean;
 	checkedValues: MenuProps['checkedValues'];

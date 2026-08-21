@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { defineProperty, defineState } from '$internal';
 	import { tabspot, type TabspotInstance } from 'tabspot';
 	import { setGlobalFSContext, type FSProviderContext } from './fluentui-svelte.ts';
 	import { onMount, type Snippet } from 'svelte';
@@ -20,13 +19,18 @@
 
 	// Syncing
 	let reducedMotion = $derived(userReducedMotion.current ?? prefersReducedMotion.current);
-	let themeMode = new PersistedState('fluentui-svelte-theme-mode', mode);
 
-	let _state: FSProviderContext['state'] = defineState([
-		(o) => defineProperty(o, 'tabspotInstance', () => tabspotInstance),
-		(o) => defineProperty(o, 'reducedMotion', () => reducedMotion),
-		(o) => defineProperty(o, 'theme', () => themeMode)
-	]);
+	const _state: FSProviderContext['state'] = {
+		get tabspotInstance() {
+			return tabspotInstance;
+		},
+		get reducedMotion() {
+			return reducedMotion;
+		},
+		get theme() {
+			return mode.current;
+		}
+	};
 
 	setGlobalFSContext({
 		config: null,

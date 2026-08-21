@@ -1,5 +1,4 @@
 <script lang="ts" generics="Tag extends 'ul' | 'ol' | 'div' = 'ul'">
-	import { defineProperty, defineState } from '$internal';
 	import type { ListViewContext, ListViewProps, ListViewDOM } from './types.ts';
 	import { getRole, TAG, setListViewContext } from './utils.ts';
 	import { getTabspotAttributes } from 'tabspot';
@@ -49,22 +48,20 @@
 		shape
 	});
 
-	let _state = defineState<ListViewContext['state']>([
-		(o) =>
-			defineProperty(
-				o,
-				'selectedItems',
-				() => selectedItems,
-				(v) => (selectedItems = v)
-			),
-		(o) =>
-			defineProperty(
-				o,
-				'anchorIndex',
-				() => anchorIndex,
-				(v) => (anchorIndex = v)
-			)
-	]);
+	const _state: ListViewContext['state'] = {
+		get selectedItems() {
+			return selectedItems;
+		},
+		set selectedItems(v) {
+			selectedItems = v;
+		},
+		get anchorIndex() {
+			return anchorIndex;
+		},
+		set anchorIndex(v) {
+			anchorIndex = v;
+		}
+	};
 
 	let methods: ListViewContext['methods'] = {
 		handleSelection: (e: MouseEvent, value: string) => {

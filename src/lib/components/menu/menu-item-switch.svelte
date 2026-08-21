@@ -60,7 +60,6 @@
     ```
 -->
 <Button
-	as="div"
 	{disabled}
 	{id}
 	appearance="subtle"

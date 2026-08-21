@@ -72,7 +72,7 @@
 			);
 		}
 
-		return value && (Array.isArray(value) ? indexOfDate(value, day, 'day') > -1 : compareDates(value, day, 'day'));
+		return !!value && (Array.isArray(value) ? indexOfDate(value, day, 'day') > -1 : compareDates(value, day, 'day'));
 	};
 
 	const isDisabled = (day: Date) => (minDate && minDate > day) || (maxDate && maxDate < day);

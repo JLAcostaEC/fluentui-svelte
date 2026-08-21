@@ -4,7 +4,6 @@
 	import { on } from 'svelte/events';
 	import { onClickOutside } from 'runed';
 	import { PREFIX } from '$constants';
-	import { defineProperty, defineState } from '$internal';
 	import { setAutoSuggestBoxContext } from './auto-suggest-box.ts';
 	import { Flyout, TextBox, ListView, ListViewItem } from '$lib/index.js';
 	import {
@@ -16,7 +15,7 @@
 		type TabspotNodeOptions
 	} from 'tabspot';
 	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
-	import type { AutoSuggestBoxContext, FSAutoSuggestBox, OptionType } from './types.ts';
+	import type { AutoSuggestBoxContext, AutoSuggestBoxProps, OptionType } from './types.ts';
 
 	const FALLBACK_ID = $props.id();
 	const ID = `${PREFIX}autosuggestbox-${FALLBACK_ID}`;
@@ -45,7 +44,7 @@
 		querySubmitted,
 		suggestionChosen,
 		children
-	}: FSAutoSuggestBox = $props();
+	}: AutoSuggestBoxProps = $props();
 
 	// svelte-ignore state_referenced_locally
 	if (selectOnFocus && multiselect) throw new Error('selectOnFocus is not supported when multiselect is true');
@@ -83,24 +82,26 @@
 		}
 	};
 
-	let _state: AutoSuggestBoxContext['state'] = defineState([
-		(o) => defineProperty(o, 'lastTypedValue', () => lastTypedValue),
-		(o) =>
-			defineProperty(
-				o,
-				'open',
-				() => open,
-				(v) => (open = v)
-			),
-		(o) => defineProperty(o, 'textBoxRef', () => inputRef),
-		(o) =>
-			defineProperty(
-				o,
-				'activeOption',
-				() => activeOption,
-				(v) => (activeOption = v)
-			)
-	]);
+	const _state: AutoSuggestBoxContext['state'] = {
+		get lastTypedValue() {
+			return lastTypedValue;
+		},
+		get open() {
+			return open;
+		},
+		set open(v) {
+			open = v;
+		},
+		get textBoxRef() {
+			return inputRef;
+		},
+		get activeOption() {
+			return activeOption;
+		},
+		set activeOption(v) {
+			activeOption = v;
+		}
+	};
 
 	let methods: AutoSuggestBoxContext['methods'] = {
 		setOption: ({ id, index, value, text, disabled }) => {

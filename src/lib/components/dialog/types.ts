@@ -92,8 +92,8 @@ export type DialogContext = FSContext<
 		type: DialogType;
 	},
 	{
-		dialogRef: HTMLDialogElement;
-		readonly open: boolean;
+		dialogRef: HTMLDialogElement | undefined;
+		readonly open: boolean | undefined;
 	},
 	null,
 	{

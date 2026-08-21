@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { defineProperty, defineState } from '$internal';
 	import { setDialogContext } from './dialog.svelte.ts';
 	import type { DialogContext, DialogProps } from './types.ts';
 
@@ -11,16 +10,17 @@
 		type
 	});
 
-	const _state: DialogContext['state'] = defineState([
-		(o) => defineProperty(o, 'open', () => open),
-		(o) =>
-			defineProperty(
-				o,
-				'dialogRef',
-				() => dialogRef,
-				(v) => (dialogRef = v)
-			)
-	]);
+	const _state: DialogContext['state'] = {
+		get open() {
+			return open;
+		},
+		get dialogRef() {
+			return dialogRef;
+		},
+		set dialogRef(v) {
+			dialogRef = v;
+		}
+	};
 
 	const methods: DialogContext['methods'] = $derived({
 		openDialog: () => {

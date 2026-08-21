@@ -25,8 +25,6 @@
 	if (as !== 'button' && as !== 'a' && as !== 'div') {
 		throw new Error(`Invalid 'as' prop value: ${as}. Expected 'button', 'a', or 'div'.`);
 	}
-
-	const tabIndex = $derived(as === 'div' ? 0 : undefined);
 </script>
 
 <!-- 
@@ -49,8 +47,8 @@
 	disabled={disabled && as !== 'div' ? true : undefined}
 	aria-disabled={disabled && as !== 'div' ? true : undefined}
 	class={['fs-button', shape, appearance, classes]}
-	tabindex={_tabIndex ?? (as !== 'div' ? (disabledFocusable || disabled ? -1 : tabIndex) : undefined)}
-	onclick={(e: MouseEvent) => invokeHandlers(e, disabled, [onclick])}
+	tabindex={_tabIndex ?? (as !== 'div' && (disabledFocusable || disabled) ? -1 : undefined)}
+	onclick={(e: MouseEvent) => invokeHandlers(e, [as === 'div', disabled], [onclick])}
 	onkeydown={(e: KeyboardEvent) => invokeHandlers(e, [as === 'div', disabled], [onkeydown])}
 	{...attributes}
 >

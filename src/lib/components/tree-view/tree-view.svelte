@@ -2,7 +2,6 @@
 	import { onMount, tick } from 'svelte';
 	import { SvelteMap, SvelteSet } from 'svelte/reactivity';
 	import { getTabspotAttributes, tabspotVirtual } from 'tabspot';
-	import { defineProperty, defineState } from '$internal';
 	import {
 		getTreeViewContext,
 		getTreeViewDepth,
@@ -45,27 +44,30 @@
 
 	let forceVirtualRender = $state(false);
 
-	const _state: TreeViewContext['state'] = $state(
-		defineState<TreeViewContext['state']>([
-			(o) => defineProperty(o, 'openItems', () => openItems),
-			(o) => defineProperty(o, 'checkedItems', () => checkedItems),
-			(o) => defineProperty(o, 'selectionMode', () => selectionMode),
-			(o) => defineProperty(o, 'TREE_NODES', () => CONTEXT?.state.TREE_NODES ?? TREE_NODES),
-			(o) =>
-				defineProperty(
-					o,
-					'forceVirtualRender',
-					() => CONTEXT?.state.forceVirtualRender ?? forceVirtualRender,
-					(v) => {
-						if (CONTEXT?.state.forceVirtualRender) {
-							CONTEXT.state.forceVirtualRender = v;
-						} else {
-							forceVirtualRender = v;
-						}
-					}
-				)
-		])
-	);
+	const _state: TreeViewContext['state'] = {
+		get openItems() {
+			return openItems;
+		},
+		get checkedItems() {
+			return checkedItems;
+		},
+		get selectionMode() {
+			return selectionMode;
+		},
+		get TREE_NODES() {
+			return CONTEXT?.state.TREE_NODES ?? TREE_NODES;
+		},
+		get forceVirtualRender() {
+			return CONTEXT?.state.forceVirtualRender ?? forceVirtualRender;
+		},
+		set forceVirtualRender(v) {
+			if (CONTEXT?.state.forceVirtualRender) {
+				CONTEXT.state.forceVirtualRender = v;
+			} else {
+				forceVirtualRender = v;
+			}
+		}
+	};
 
 	const events: TreeViewContext['events'] = $derived({
 		onCheckedChange: CONTEXT?.events.onCheckedChange ?? ((e, data) => onCheckedChange?.(e, data)),
@@ -119,12 +121,20 @@
 		}
 	};
 
-	const treeViewContext = defineState<TreeViewContext>([
-		(o) => defineProperty(o, 'config', () => config),
-		(o) => defineProperty(o, 'state', () => _state),
-		(o) => defineProperty(o, 'events', () => events),
-		(o) => defineProperty(o, 'methods', () => methods)
-	]);
+	const treeViewContext: TreeViewContext = {
+		get config() {
+			return config;
+		},
+		get state() {
+			return _state;
+		},
+		get events() {
+			return events;
+		},
+		get methods() {
+			return methods;
+		}
+	};
 
 	setTreeViewContext(treeViewContext);
 

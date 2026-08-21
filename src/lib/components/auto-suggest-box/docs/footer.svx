@@ -4,15 +4,48 @@
 
 ## {m.global_component_props()}
 
-| **Name**           | **Type**                                                  | **Description**                                                   |
-| ------------------ | --------------------------------------------------------- | ---------------------------------------------------------------- |
-| `placeholder`      | `string`                                                  | {m.asb_props_placeholder_description()}                             |
-| `value`            | `string`                                                  | {m.asb_props_value_description()}                            |
-| `open`             | `boolean`                                                 | {m.asb_props_open_description()}         |
-| `multiselect`      | `boolean`                                                 | {m.asb_props_multiselect_description()}                            |
-| `selectOnFocus`    | `boolean`                                                 | {m.asb_props_selectonfocus_description()} |
-| `notFoundText`     | `string`                                                  | {m.asb_props_notfoundtext_description()} |
-| `maxItemsInView`   | `number`                                                  | {m.asb_props_maxitemsinview_description()} |
-| `ref`              | `HTMLElement`                                             | {m.asb_props_ref_description()}               |
-| `suggestionChosen` | `(e: Event, selection: string) => void`                   | {m.asb_props_suggestionchosen_description()}                     |
-| `querySubmitted`   | `(e: MouseEvent &#124; KeyboardEvent, query: string) => void` | {m.asb_props_querysubmitted_description()}                       |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:AutoSuggestBoxProps -->
+
+| Name                                                                          | Type                                                            | Default              | Description                                                              |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------- | -------------------- | ------------------------------------------------------------------------ |
+| `ref` _bindable_                                                              | `HTMLElement`                                                   |                      | {m.generated_fs_auto_suggest_box_props_props_ref()}                      |
+| `inputRef` _bindable_                                                         | `HTMLInputElement`                                              |                      | {m.generated_fs_auto_suggest_box_props_props_input_ref()}                |
+| `value` _bindable_                                                            | `string`                                                        | `''`                 | {m.generated_fs_auto_suggest_box_props_props_value()}                    |
+| `open` _bindable_                                                             | `boolean`                                                       | `false`              | {m.generated_fs_auto_suggest_box_props_props_open()}                     |
+| `multiselect`                                                                 | `boolean`                                                       |                      | {m.generated_fs_auto_suggest_box_props_props_multiselect()}              |
+| `selectOnFocus`                                                               | `boolean`                                                       |                      | {m.generated_fs_auto_suggest_box_props_props_select_on_focus()}          |
+| `showTextualMultiselect`                                                      | `boolean`                                                       |                      | {m.generated_fs_auto_suggest_box_props_props_show_textual_multiselect()} |
+| `notFoundText`                                                                | `string`                                                        | `'No results found'` | {m.generated_fs_auto_suggest_box_props_props_not_found_text()}           |
+| `selectedOptions` _bindable_                                                  | `{ id: string; value: string }[]`                               | `[]`                 | {m.generated_fs_auto_suggest_box_props_props_selected_options()}         |
+| `suggestionChosen`                                                            | `(e: Event, selection: string) => void`                         |                      | {m.generated_fs_auto_suggest_box_props_props_suggestion_chosen()}        |
+| `querySubmitted`                                                              | `(e: MouseEvent` &#124; `KeyboardEvent, query: string) => void` |                      | {m.generated_fs_auto_suggest_box_props_props_query_submitted()}          |
+| `virtualizer`                                                                 | `AutoSuggestVirtualizer`                                        |                      | {m.generated_fs_auto_suggest_box_props_props_virtualizer()}              |
+| `maxItemsInView`                                                              | `number`                                                        | `6`                  | {m.generated_fs_auto_suggest_box_props_props_max_items_in_view()}        |
+| `textBoxRef` _bindable_                                                       | `HTMLInputElement`                                              |                      | {m.generated_fs_auto_suggest_box_props_props_text_box_ref()}             |
+| `textBoxProps`                                                                | `TextBoxProps`                                                  |                      | {m.generated_fs_auto_suggest_box_props_props_text_box_props()}           |
+| `flyoutRef` _bindable_                                                        | `HTMLElement`                                                   |                      | {m.generated_fs_auto_suggest_box_props_props_flyout_ref()}               |
+| `flyoutProps`                                                                 | `FlyoutProps`                                                   |                      | {m.generated_fs_auto_suggest_box_props_props_flyout_props()}             |
+| `listViewRef` _bindable_                                                      | `HTMLUListElement`                                              |                      | {m.generated_fs_auto_suggest_box_props_props_list_view_ref()}            |
+| `listViewProps`                                                               | `ListViewItemProps`                                             |                      | {m.generated_fs_auto_suggest_box_props_props_list_view_props()}          |
+| `type`, `placeholder`, `hideActionButtons`, `textChanged` from `TextBoxProps` |                                                                 |                      |                                                                          |
+| Element Attributes (`div`)                                                    |                                                                 |                      |                                                                          |
+
+<!-- /props:AutoSuggestBoxProps -->
+
+## {m.asb_autosuggestboxoption_props_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:AutoSuggestOptionProps -->
+
+| Name                                            | Type            | Default | Description                                                 |
+| ----------------------------------------------- | --------------- | ------- | ----------------------------------------------------------- |
+| `value`                                         | `string`        |         | {m.generated_fs_auto_suggest_option_props_props_value()}    |
+| `text`                                          | `string`        |         | {m.generated_fs_auto_suggest_option_props_props_text()}     |
+| `id`                                            | `string`        |         | {m.generated_fs_auto_suggest_option_props_props_id()}       |
+| `ref` _bindable_                                | `HTMLLIElement` |         | {m.generated_fs_auto_suggest_option_props_props_ref()}      |
+| `disabled`                                      | `boolean`       |         | {m.generated_fs_auto_suggest_option_props_props_disabled()} |
+| `index`                                         | `number`        |         | {m.generated_fs_auto_suggest_option_props_props_index()}    |
+| `ListViewItemProps<'li'>` without `as`, `value` |                 |         |                                                             |
+
+<!-- /props:AutoSuggestOptionProps -->

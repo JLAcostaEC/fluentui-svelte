@@ -4,12 +4,15 @@
 
 	let { ref = $bindable(), position = 'end', fluid, children }: DialogActionsProps = $props();
 
+	// The bar is one tab stop holding a row of buttons: without the mover the root would
+	// take the tab stop and then offer no way to reach the rest of the buttons.
 	const tabspotAttributes = getTabspotAttributes({
-		root: {}
+		root: {},
+		mover: { axis: 'horizontal' }
 	});
 </script>
 
-<div class={['dialog-actions', `justify-${position}`, { fluid }]} bind:this={ref}>
+<div class={['dialog-actions', `justify-${position}`, { fluid }]} bind:this={ref} {...tabspotAttributes}>
 	{@render children?.()}
 </div>
 

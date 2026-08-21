@@ -130,5 +130,9 @@
 		"vitest": "^4.1.11",
 		"vitest-browser-svelte": "^3.0.0",
 		"wrangler": "^4.124.0"
-	}
+	},
+	"engines": {
+		"node": ">=24"
+	},
+	"packageManager": "pnpm@11.4.0"
 }

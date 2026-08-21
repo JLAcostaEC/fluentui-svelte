@@ -40,6 +40,7 @@
 	<textarea
 		{name}
 		{id}
+		{disabled}
 		onchange={(e) => invokeHandlers(e, [disabled], [onchange])}
 		style="resize: {resize}; {style}"
 		bind:this={ref}

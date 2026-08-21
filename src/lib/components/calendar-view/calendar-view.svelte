@@ -10,8 +10,6 @@
 	import CalendarViewHeader from './calendar-view-header.svelte';
 	import CalendarViewControls from './calendar-view-controls.svelte';
 	import {
-		defineState,
-		defineProperty,
 		floating as _floating,
 		getCSSDuration,
 		flyToOffset,
@@ -61,9 +59,9 @@
 
 	const reducedMotion = getReducedMotion();
 
-	let viewAnimationDirection = $state('neutral');
+	let viewAnimationDirection: AnimationDirection = $state('neutral');
 
-	let pageAnimationDirection = $state('neutral');
+	let pageAnimationDirection: AnimationDirection = $state('neutral');
 
 	let pageAnimationDuration = $state(333);
 
@@ -199,50 +197,44 @@
 		updateView(e, 'months', year);
 	}
 
-	const CALENDAR_STATE = defineState<CalendarViewState>([
-		(o) =>
-			defineProperty(
-				o,
-				'value',
-				() => value,
-				(v) => (value = v)
-			),
-		(o) =>
-			defineProperty(
-				o,
-				'range',
-				() => range,
-				(v) => (range = v)
-			),
-		(o) =>
-			defineProperty(
-				o,
-				'view',
-				() => view,
-				(v) => (view = v)
-			),
-		(o) =>
-			defineProperty(
-				o,
-				'page',
-				() => page,
-				(v) => (page = v)
-			),
-		(o) =>
-			defineProperty(
-				o,
-				'viewAnimationDirection',
-				() => viewAnimationDirection,
-				(v) => (viewAnimationDirection = v)
-			),
-		(o) =>
-			defineProperty(
-				o,
-				'pageAnimationDirection',
-				() => pageAnimationDirection,
-				(v) => (pageAnimationDirection = v)
-			)
-	]);
+	const CALENDAR_STATE: CalendarViewState = {
+		get value() {
+			return value;
+		},
+		set value(v) {
+			value = v;
+		},
+		get range() {
+			return range;
+		},
+		set range(v) {
+			range = v;
+		},
+		get view() {
+			return view;
+		},
+		set view(v) {
+			view = v;
+		},
+		get page() {
+			return page;
+		},
+		set page(v) {
+			page = v;
+		},
+		get viewAnimationDirection() {
+			return viewAnimationDirection;
+		},
+		set viewAnimationDirection(v) {
+			viewAnimationDirection = v;
+		},
+		get pageAnimationDirection() {
+			return pageAnimationDirection;
+		},
+		set pageAnimationDirection(v) {
+			pageAnimationDirection = v;
+		}
+	};
 
 	// svelte-ignore state_referenced_locally
 	setCalendarViewContext({

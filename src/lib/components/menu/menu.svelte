@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { defineProperty, defineState } from '$internal';
 	import { getMenuContext, setMenuContext } from './menu.svelte.ts';
 	import type { MenuContext, MenuProps, MenuState } from './types.ts';
 
@@ -53,38 +52,32 @@
 		}
 	});
 
-	let _state: MenuState = $derived(
-		defineState<MenuState>([
-			(o) =>
-				defineProperty(
-					o,
-					'open',
-					() => open,
-					(v) => (open = v)
-				),
-			(o) =>
-				defineProperty(
-					o,
-					'ref',
-					() => ref,
-					(v) => (ref = v)
-				),
-			(o) =>
-				defineProperty(
-					o,
-					'locked',
-					() => locked,
-					(v) => (locked = v)
-				),
-			(o) =>
-				defineProperty(
-					o,
-					'checkedValues',
-					() => checkedValues,
-					(v) => (checkedValues = v)
-				)
-		])
-	);
+	const _state: MenuState = {
+		get open() {
+			return open;
+		},
+		set open(v) {
+			open = v;
+		},
+		get ref() {
+			return ref;
+		},
+		set ref(v) {
+			ref = v;
+		},
+		get locked() {
+			return locked;
+		},
+		set locked(v) {
+			locked = v;
+		},
+		get checkedValues() {
+			return checkedValues;
+		},
+		set checkedValues(v) {
+			checkedValues = v;
+		}
+	};
 
 	let events: MenuContext['events'] = $derived.by(() => {
 		if (!PARENT_CONTEXT) {

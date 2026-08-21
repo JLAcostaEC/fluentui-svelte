@@ -38,15 +38,17 @@
 
 	let active = $derived(_state.selectedItems.includes(value));
 
-	const tabsterAttrs = $derived(
-		role === 'row'
+	// A row is a level of its own: right enters the cells, left comes back out. Anything
+	// that is not a row navigates as a plain item of the list above it.
+	const tabspotAttrs = $derived(
+		(role === 'row'
 			? getTabspotAttributes({
 					mover: {
 						axis: 'vertical'
 					},
 					grouper: { enterDirection: 'right', exitDirection: 'left' }
 				})
-			: undefined
+			: null) ?? {}
 	);
 
 	onMount(() => {
@@ -70,6 +72,7 @@
 		(_active || active) && 'active',
 		!disabled && role && 'interactive'
 	]}
+	{...tabspotAttrs}
 	onfocus={(e: FocusEvent) => invokeHandlers(e, disabled, [(event: FocusEvent) => onfocus?.(event, value || '')])}
 	onclick={(e: MouseEvent) => {
 		invokeHandlers(

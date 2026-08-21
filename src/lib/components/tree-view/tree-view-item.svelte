@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
 	import { PREFIX } from '$constants';
-	import { defineProperty, defineState } from '$internal';
 	import {
 		getTreeViewDepth,
 		getTreeViewContext,
@@ -43,35 +42,44 @@
 
 	const { size } = config;
 
-	const itemState = defineState<TreeViewItemContext>([
-		(o) => defineProperty(o, 'disabled', () => itemContext?.disabled ?? disabled),
-		(o) => defineProperty(o, 'depth', () => depth),
-		(o) => defineProperty(o, 'value', () => value),
-		(o) => defineProperty(o, 'id', () => id),
-		(o) => defineProperty(o, 'type', () => type),
-		(o) => defineProperty(o, 'parentId', () => itemContext?.id),
-		(o) =>
-			defineProperty(
-				o,
-				'open',
-				() => open,
-				(v) => (open = v)
-			),
-		(o) =>
-			defineProperty(
-				o,
-				'checked',
-				() => checked,
-				(v) => (checked = v)
-			),
-		(o) =>
-			defineProperty(
-				o,
-				'indeterminate',
-				() => indeterminate,
-				(v) => (indeterminate = v)
-			)
-	]);
+	const itemState: TreeViewItemContext = {
+		get disabled() {
+			return itemContext?.disabled ?? disabled;
+		},
+		get depth() {
+			return depth;
+		},
+		get value() {
+			return value;
+		},
+		get id() {
+			return id;
+		},
+		get type() {
+			return type;
+		},
+		get parentId() {
+			return itemContext?.id;
+		},
+		get open() {
+			return open;
+		},
+		set open(v) {
+			open = v;
+		},
+		get checked() {
+			return checked;
+		},
+		set checked(v) {
+			checked = v;
+		},
+		get indeterminate() {
+			return indeterminate;
+		},
+		set indeterminate(v) {
+			indeterminate = v;
+		}
+	};
 
 	setTreeViewItemContext(itemState);
 

@@ -152,7 +152,7 @@ export type CalendarViewContext = FSContext<
 >;
 
 export type CalendarViewState = {
-	value: Date | Date[];
+	value: Date | Date[] | null;
 	range: CalendarDateRange;
 	view: View;
 	page: Date;

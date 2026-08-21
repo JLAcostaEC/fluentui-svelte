@@ -35,6 +35,7 @@
 		railRef = $bindable(),
 		trackRef = $bindable(),
 		tickBarRef = $bindable(),
+		'aria-label': ariaLabel = '',
 		...attributes
 	}: SliderProps = $props();
 

@@ -59,7 +59,6 @@
     ```
 -->
 <Button
-	as="div"
 	{disabled}
 	appearance="subtle"
 	onclick={(e: MouseEvent) =>

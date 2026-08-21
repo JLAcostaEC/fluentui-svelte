@@ -6,9 +6,9 @@ import type { TabspotInstance } from 'tabspot';
 export type FSProviderContext = FSContext<
 	null,
 	{
-		readonly tabspotInstance: TabspotInstance;
+		readonly tabspotInstance: TabspotInstance | undefined;
 		readonly reducedMotion: boolean;
-		readonly theme: Omit<THEME, 'system'> | undefined;
+		readonly theme: Exclude<THEME, 'system'> | undefined;
 	},
 	null,
 	{

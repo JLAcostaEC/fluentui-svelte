@@ -14,3 +14,7 @@ src/worker-configuration.d.ts
 # Skills & AI
 .github/skills/*
 .github/agents/*
+
+# Generated files
+propsmith.lock.json
+messages/*.json

@@ -37,8 +37,12 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
         timeout-minutes: 5
 
+      - name: Generate URLs
+        run: pnpm urls 
+
       - name: Test
-        run: pnpm urls && pnpm test run
+        run: pnpm test:unit run
+
 
   Lint:
     if: github.repository == 'JLAcostaEC/fluentui-svelte'

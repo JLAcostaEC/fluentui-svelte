@@ -43,5 +43,42 @@ export default defineConfig({
 				}
 			}
 		]
+	},
+	// Optimize deps to avoid issues with vitest on Github Actions
+	optimizeDeps: {
+		include: [
+			'@floating-ui/dom',
+			'fluentui-icons-svelte',
+			'fluentui-icons-svelte/ArrowCircleLeftRegular.svelte',
+			'fluentui-icons-svelte/CaretDownFilled.svelte',
+			'fluentui-icons-svelte/CaretUpFilled.svelte',
+			'fluentui-icons-svelte/CheckmarkCircleFilled.svelte',
+			'fluentui-icons-svelte/CheckmarkCircleRegular.svelte',
+			'fluentui-icons-svelte/CheckmarkFilled.svelte',
+			'fluentui-icons-svelte/ChevronDownFilled.svelte',
+			'fluentui-icons-svelte/ChevronRightFilled.svelte',
+			'fluentui-icons-svelte/ChevronRightRegular.svelte',
+			'fluentui-icons-svelte/ChevronUpFilled.svelte',
+			'fluentui-icons-svelte/CircleFilled.svelte',
+			'fluentui-icons-svelte/CircleRegular.svelte',
+			'fluentui-icons-svelte/ClockFilled.svelte',
+			'fluentui-icons-svelte/DismissCircleFilled.svelte',
+			'fluentui-icons-svelte/DismissCircleRegular.svelte',
+			'fluentui-icons-svelte/DismissFilled.svelte',
+			'fluentui-icons-svelte/ErrorCircleFilled.svelte',
+			'fluentui-icons-svelte/EyeHideFilled.svelte',
+			'fluentui-icons-svelte/EyeShowFilled.svelte',
+			'fluentui-icons-svelte/InfoFilled.svelte',
+			'fluentui-icons-svelte/ProhibitedFilled.svelte',
+			'fluentui-icons-svelte/SearchFilled.svelte',
+			'fluentui-icons-svelte/SubtractCircleFilled.svelte',
+			'fluentui-icons-svelte/SubtractCircleRegular.svelte',
+			'fluentui-icons-svelte/SubtractFilled.svelte',
+			'fluentui-icons-svelte/WarningFilled.svelte',
+			'mode-watcher',
+			'runed',
+			'tabspot',
+			'@humanspeak/svelte-virtual-list'
+		]
 	}
 });

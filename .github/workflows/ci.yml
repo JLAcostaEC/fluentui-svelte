@@ -38,7 +38,7 @@ jobs:
         timeout-minutes: 5
 
       - name: Test
-        run: pnpm test:unit run
+        run: pnpm urls && pnpm test run
 
   Lint:
     if: github.repository == 'JLAcostaEC/fluentui-svelte'

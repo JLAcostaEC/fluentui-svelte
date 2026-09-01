@@ -2,6 +2,7 @@
 	import panzoom from 'panzoom';
 	import ToggleSwitch from '$components/toggle-switch/toggle-switch.svelte';
 	import RenderShiki from '$site/components/render-shiki/render-shiki.svelte';
+	import { m } from '$i18n/messages.js';
 	import type { Snippet } from 'svelte';
 	import type { PanZoomOptions } from 'panzoom';
 	import type { Attachment } from 'svelte/attachments';
@@ -50,7 +51,7 @@
 <div class={['showcase-wrapper', code && 'has-code']}>
 	{#if code}
 		<ToggleSwitch
-			label="View Code"
+			label={m.showcase_view_code()}
 			bind:checked={showCode}
 			labelAttributes={{ class: `switch-view ${showCode ? 'show' : ''}` }}
 		/>

@@ -1,11 +1,16 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
+	import { m } from '$i18n/messages.js';
+	import { localizeHref } from '$i18n/runtime.js';
+	import type { Pathname } from '$app/types';
 </script>
 
 <section>
 	<h1>{page.status} - <span>{page.error?.message}</span></h1>
-	<p>Go back to <a href={resolve('/')}>home</a></p>
+	<p>
+		{m.error_go_back_before_link()} <a href={resolve(localizeHref('/') as Pathname)}>{m.error_go_back_link_text()}</a>
+	</p>
 </section>
 
 <style>

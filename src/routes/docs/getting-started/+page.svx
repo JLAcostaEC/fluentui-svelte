@@ -45,6 +45,28 @@ import 'fluentui-svelte/typography.css';
 import 'fluentui-svelte/media-darkmode.css'; /* Or:  import 'fluentui-svelte/class-darkmode.css' */
 ```
 
+## {m.gs_provider_title()}
+
+{m.gs_provider_description_before_code()} `+layout.svelte` {m.gs_provider_description_after_code()}
+
+```svelte
+<script>
+  import { FluentUISvelte } from 'fluentui-svelte';
+
+  let { children } = $props();
+</script>
+
+<FluentUISvelte>
+  {@render children?.()}
+</FluentUISvelte>
+```
+
+{m.gs_provider_optional_note()}
+
+- {m.gs_provider_bullet_theme()}
+- {m.gs_provider_bullet_motion()}
+- {m.gs_provider_bullet_keyboard()}
+
 ## {m.gs_import_components_title()}
 
 {m.gs_import_components_description()}

@@ -71,35 +71,34 @@
 				return {
 					appearance: 'tint',
 					color: 'success',
-					message: 'More than 50% of this component has been built using AI tools'
+					message: m.docs_status_ai()
 				};
 			case 'Experimental':
 				return {
 					appearance: 'tint',
 					color: 'warning',
-					message: 'This component is experimental and may change in future releases'
+					message: m.docs_status_experimental()
 				};
 			case 'New':
-				return { appearance: 'filled', color: 'attention', message: 'New fully implemented component' };
+				return { appearance: 'filled', color: 'attention', message: m.docs_status_new() };
 			case 'Beta':
 			case 'WIP':
 				return {
 					appearance: 'tint',
 					color: 'attention',
-					message: 'This component is a work in progress and may not be fully implemented yet, bugs may be present'
+					message: m.docs_status_wip()
 				};
 			case 'Empty':
 				return {
 					appearance: 'tint',
 					color: 'information',
-					message: 'This component is not yet implemented, but the documentation is available'
+					message: m.docs_status_empty()
 				};
 			case 'Prototype':
 				return {
 					appearance: 'tint',
 					color: 'critical',
-					message:
-						'This component is a prototype and may not be fully implemented yet (or may not be implemented at all), bugs may be present'
+					message: m.docs_status_prototype()
 				};
 			default:
 				return { appearance: 'tint', color: 'critical', message: '' };
@@ -110,7 +109,7 @@
 <section class="container">
 	<aside id="navigation">
 		<div id="search-box" style="width: 100%; max-width: 100%; display: flex; flex-grow: 0;">
-			<AutoSuggestBox suggestionChosen={(e, item) => handleNav(item)} placeholder="Search docs...">
+			<AutoSuggestBox suggestionChosen={(e, item) => handleNav(item)} placeholder={m.docs_search_placeholder()}>
 				{#each suggestions as suggestion, index (suggestion)}
 					<AutoSuggestBoxOption {index} value={suggestion}>{suggestion}</AutoSuggestBoxOption>
 				{/each}
@@ -190,7 +189,7 @@
 	<aside id="table-of-contents">
 		<Button as="a" href={editUrl} target="_blank" rel="noopener noreferrer" appearance="subtle">
 			<EditRegular />
-			Edit this Doc
+			{m.docs_edit_button()}
 		</Button>
 		<Toc selector="#docs > div" />
 	</aside>
@@ -302,6 +301,10 @@
 				padding: 1rem 0;
 				& > :global(h1) {
 					font-size: 2rem;
+				}
+				/* Props tables: drop the Description column so the rest of the table fits. */
+				& :global(table.fs-docs :is(th, td):nth-child(4)) {
+					display: none;
 				}
 			}
 		}

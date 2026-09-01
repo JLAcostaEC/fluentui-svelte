@@ -1,16 +1,18 @@
 <script>
 	import { Button } from '$lib/index.js';
+	import { m } from '$i18n/messages.js';
+	import { localizeHref } from '$i18n/runtime.js';
 </script>
 
 <footer id="footer">
 	<section class="container">
 		<div class="info">
-			<p>Design System by Microsoft</p>
-			<p>Open-Source Components by Jorge Acosta</p>
+			<p>{m.footer_copyright_design_system()}</p>
+			<p>{m.footer_copyright_components()}</p>
 		</div>
 		<nav>
-			<Button as="a" appearance="subtle" href="/about">About</Button>
-			<Button as="a" appearance="subtle" href="https://jorgelacosta.com">Contact</Button>
+			<Button as="a" appearance="subtle" href={localizeHref('/about')}>{m.global_about()}</Button>
+			<Button as="a" appearance="subtle" href="https://jorgelacosta.com">{m.global_contact()}</Button>
 		</nav>
 	</section>
 </footer>

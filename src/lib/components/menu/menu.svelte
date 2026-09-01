@@ -112,6 +112,7 @@
 		toggleRadio: (e: Event, value: string, name: string) => {
 			if (!_state.checkedValues?.[name]?.includes(value)) {
 				_state.checkedValues = { ..._state.checkedValues, [name]: [value] };
+				methods.close?.(e);
 				events.onCheckedValueChange?.(e, _state.checkedValues!);
 			}
 		}

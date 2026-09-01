@@ -2,12 +2,23 @@
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
 	import { toggleMode, mode } from 'mode-watcher';
-	import { SettingsRegular } from 'fluentui-icons-svelte';
+	import { SettingsRegular, TextAlignRightRegular } from 'fluentui-icons-svelte';
 	import { m } from '$i18n/messages.js';
 	import { getLocale, locales, localizeHref, deLocalizeUrl } from '$i18n/runtime.js';
 	import PageLoader from '$site/components/page-loader/page-loader.svelte';
-	import { Button, Menu, MenuItem, MenuItemSwitch, MenuList, MenuPopover, MenuTrigger, Tooltip } from '$lib/index.js';
+	import {
+		Button,
+		Menu,
+		MenuItem,
+		MenuItemSwitch,
+		MenuList,
+		MenuPopover,
+		MenuTrigger,
+		MenuDivider,
+		Tooltip
+	} from '$lib/index.js';
 	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { GITHUB_REPO_URL } from '$site/constants.js';
 	import type { Pathname } from '$app/types';
 
 	const globalContext = getGlobalFSContext();
@@ -85,7 +96,7 @@
 				<Button as="a" appearance={path === '/' ? 'accent' : 'subtle'} href={localizeHref('/')}
 					>{m.global_home()}</Button
 				>
-				<Button as="a" appearance={path === '/docs' ? 'accent' : 'subtle'} href={localizeHref('/docs')}
+				<Button as="a" appearance={path.includes('/docs') ? 'accent' : 'subtle'} href={localizeHref('/docs')}
 					>{m.global_docs()}</Button
 				>
 				<Button as="a" appearance={path === '/about' ? 'accent' : 'subtle'} href={localizeHref('/about')}
@@ -97,20 +108,15 @@
 			<Menu>
 				<MenuTrigger>
 					{#snippet children({ state, menuTriggerProps })}
-						<Tooltip withArrow content={m.header_nav_menu_tooltip()}>
-							{#snippet children(attrs)}
 								<Button
 									bind:ref={state.ref as HTMLButtonElement}
 									{...menuTriggerProps}
-									appearance="subtle"
+									appearance="standard"
 									aria-label={m.header_nav_menu_tooltip()}
 									class="mobile-nav-menu-button"
-									{...attrs}
 								>
-									...
+									<TextAlignRightRegular width="1em" height="1em" />
 								</Button>
-							{/snippet}
-						</Tooltip>
 					{/snippet}
 				</MenuTrigger>
 				<MenuPopover placement="bottom-end">
@@ -118,6 +124,11 @@
 						<MenuItem as="a" href={localizeHref('/')}>{m.global_home()}</MenuItem>
 						<MenuItem as="a" href={localizeHref('/docs')}>{m.global_docs()}</MenuItem>
 						<MenuItem as="a" href={localizeHref('/about')}>{m.global_about()}</MenuItem>
+						<MenuDivider />
+						<MenuItem as="a" href={localizeHref('/docs/getting-started')}>{m.global_getting_started()}</MenuItem>
+						<MenuItem as="a" href={GITHUB_REPO_URL} target="_blank" rel="noopener noreferrer"
+							>{m.header_view_on_github()}</MenuItem
+						>
 					</MenuList>
 				</MenuPopover>
 			</Menu>
@@ -230,6 +241,7 @@
 				& nav {
 					flex-wrap: wrap;
 					justify-content: space-between;
+					margin-left: auto;
 					& .nav-links {
 						display: none;
 					}

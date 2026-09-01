@@ -12,6 +12,7 @@
 	import type { Meta } from '$types';
 	import { GITHUB_REPO_URL } from '$site/constants.js';
 	import { m } from '$i18n/messages.js';
+	import { statusBadge } from '$site/utils/status.js';
 	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 
 	const globalContext = getGlobalFSContext();
@@ -64,46 +65,6 @@
 			goto(resolve(localizeHref(navItem.url) as any));
 		}
 	};
-
-	const badgeStyle = (item: string) => {
-		switch (item) {
-			case 'AI':
-				return {
-					appearance: 'tint',
-					color: 'success',
-					message: m.docs_status_ai()
-				};
-			case 'Experimental':
-				return {
-					appearance: 'tint',
-					color: 'warning',
-					message: m.docs_status_experimental()
-				};
-			case 'New':
-				return { appearance: 'filled', color: 'attention', message: m.docs_status_new() };
-			case 'Beta':
-			case 'WIP':
-				return {
-					appearance: 'tint',
-					color: 'attention',
-					message: m.docs_status_wip()
-				};
-			case 'Empty':
-				return {
-					appearance: 'tint',
-					color: 'information',
-					message: m.docs_status_empty()
-				};
-			case 'Prototype':
-				return {
-					appearance: 'tint',
-					color: 'critical',
-					message: m.docs_status_prototype()
-				};
-			default:
-				return { appearance: 'tint', color: 'critical', message: '' };
-		}
-	};
 </script>
 
 <section class="container">
@@ -151,7 +112,7 @@
 								{/if}
 								{doc.label}
 								{#if doc.status}
-									{@const bagdeData = badgeStyle(doc.status)}
+									{@const bagdeData = statusBadge(doc.status)}
 									{let tooltipTarget: HTMLElement | null = $state(null)}
 
 									<Badge bind:ref={tooltipTarget} {...bagdeData as any}>
@@ -245,6 +206,15 @@
 					font-size: 3rem;
 					line-height: var(--fs-title-large-line-height);
 					font-weight: 600;
+					/* Keeps a component's status badge beside the title: the heading text wraps
+					   inside its own flex item instead of pushing the badge onto its own row. */
+					display: flex;
+					align-items: center;
+					flex-wrap: nowrap;
+					gap: 0.5rem;
+					& :global(.fs-badge) {
+						flex-shrink: 0;
+					}
 				}
 				& > :global(h2) {
 					font-size: var(--fs-title2-font-size);

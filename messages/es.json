@@ -627,6 +627,7 @@
   "header_nav_menu_tooltip": "Ir a otra página",
   "header_reduce_motion": "Reducir Movimiento",
   "header_settings_label": "Mostrar Opciones de Configuración",
+  "header_view_on_github": "Ver en Github",
   "hl_description": "El componente Hyperlink se usa para crear enlaces interactivos que navegan a una URL especificada. Sigue los principios de diseño de Fluent UI y garantiza accesibilidad e interacciones fluidas.",
   "hl_props_title": "Propiedades",
   "home_github_repo_button": "Repositorio de Github",

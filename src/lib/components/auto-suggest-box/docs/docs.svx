@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { AutoSuggestBox, AutoSuggestBoxOption, InfoBar, Badge } from '$lib/index.js';
+  import { AutoSuggestBox, AutoSuggestBoxOption, InfoBar } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
+  import StatusBadge from '$site/components/status-badge/status-badge.svelte';
   import { m } from '$i18n/messages.js';
   import { ParaglideMessage } from "@inlang/paraglide-js-svelte";
 
@@ -17,7 +18,7 @@
 
 </script>
 
-# AutoSuggestBox <Badge appearance="tint" color="attention">Beta</Badge>
+# AutoSuggestBox <StatusBadge />
 
 {m.asb_description()}
 

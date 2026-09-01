@@ -101,11 +101,25 @@ describe('MenuItemRadio', () => {
 	});
 
 	it('checks the selected radio when clicked', async () => {
-		render(MenuTestWrapper, { open: true, variant: 'radio' });
+		let checkedValues: Record<string, string[]> = {};
+		render(MenuTestWrapper, {
+			open: true,
+			variant: 'radio',
+			onCheckedValueChange: (e, values) => (checkedValues = values)
+		});
 		const radios = page.getByRole('menuitemradio');
 		await expect.element(radios.nth(0)).toHaveAttribute('aria-checked', 'false');
 		await radios.nth(0).click();
-		await expect.element(radios.nth(0)).toHaveAttribute('aria-checked', 'true');
+		// Now because radio item closes the menu after click we need to verify through the onCheckedValueChange callback
+		expect(checkedValues).toEqual({ pick: ['x'] });
+	});
+
+	it('Menu closes when a radio is selected', async () => {
+		render(MenuTestWrapper, { open: true, variant: 'radio' });
+		const radios = page.getByRole('menuitemradio');
+		await radios.nth(0).click();
+		// Assuming the menu closes by removing it from the DOM
+		await expect.element(page.getByRole('menu')).not.toBeInTheDocument();
 	});
 });
 

@@ -2,6 +2,7 @@
 	import panzoom from 'panzoom';
 	import ToggleSwitch from '$components/toggle-switch/toggle-switch.svelte';
 	import RenderShiki from '$site/components/render-shiki/render-shiki.svelte';
+	import { m } from '$i18n/messages.js';
 	import type { Snippet } from 'svelte';
 	import type { PanZoomOptions } from 'panzoom';
 	import type { Attachment } from 'svelte/attachments';
@@ -34,9 +35,20 @@
 		children: Snippet;
 	} = $props();
 
+	// Panzoom swallows touch events so a drag pans instead of scrolling the page. That also
+	// eats taps on anything interactive, so those targets opt out of the preventDefault.
+	const INTERACTIVE =
+		'a, button, input, select, textarea, label, summary, [role="button"], [role="option"], [role="menuitem"], [contenteditable="true"], [tabindex]:not([tabindex="-1"])';
+
+	const isInteractive = (target: EventTarget | null) => target instanceof Element && !!target.closest(INTERACTIVE);
+
 	const _panzoom = (options: PanZoomOptions): Attachment<HTMLElement> => {
 		return (element) => {
-			const instance = panzoom(element, options);
+			const instance = panzoom(element, {
+				...options,
+				// returning false leaves the touch alone, so the tap reaches the control
+				onTouch: (event: TouchEvent) => !isInteractive(event.target)
+			});
 
 			return () => {
 				instance.dispose();
@@ -50,7 +62,7 @@
 <div class={['showcase-wrapper', code && 'has-code']}>
 	{#if code}
 		<ToggleSwitch
-			label="View Code"
+			label={m.showcase_view_code()}
 			bind:checked={showCode}
 			labelAttributes={{ class: `switch-view ${showCode ? 'show' : ''}` }}
 		/>
@@ -148,6 +160,12 @@
 		position: relative;
 		display: grid;
 		place-items: center;
+
+		/* A 3rem gutter costs 96px of a phone's width, which is enough to push
+		   fixed-width components past the edge of the card. */
+		@media (max-width: 768px) {
+			margin: 1.5rem 0.5rem;
+		}
 	}
 	.showcase-backdrop {
 		width: 600%;

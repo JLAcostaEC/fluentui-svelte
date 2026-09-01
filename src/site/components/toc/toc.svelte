@@ -4,6 +4,7 @@
 	import { useIntersectionObserver } from 'runed';
 	import { ListView, ListViewItem } from '$lib/index.js';
 	import { getLinks, type TocLink, type TocProps } from './toc.ts';
+	import { m } from '$i18n/messages.js';
 	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 
 	const globalContext = getGlobalFSContext();
@@ -54,7 +55,7 @@
 </script>
 
 <div class="toc">
-	<h3>On this page:</h3>
+	<h3>{m.docs_toc_title()}</h3>
 	{#key key}
 		<div
 			in:blur={!globalState.reducedMotion ? { amount: 20, delay: 500 } : { duration: 0 }}

@@ -76,7 +76,7 @@ pre button.copy {
 	position: absolute;
 	top: 0.5rem;
 	right: 0.5rem;
-	z-index: 1;
+	z-index: 0;
 	aspect-ratio: 1;
 	&:focus-visible {
 		outline: 0.125rem solid var(--fs-focus-stroke-outer);

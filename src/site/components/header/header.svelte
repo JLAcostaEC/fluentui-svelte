@@ -2,11 +2,23 @@
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
 	import { toggleMode, mode } from 'mode-watcher';
-	import { SettingsRegular } from 'fluentui-icons-svelte';
-	import { getLocale, locales, localizeHref } from '$i18n/runtime.js';
+	import { SettingsRegular, TextAlignRightRegular } from 'fluentui-icons-svelte';
+	import { m } from '$i18n/messages.js';
+	import { getLocale, locales, localizeHref, deLocalizeUrl } from '$i18n/runtime.js';
 	import PageLoader from '$site/components/page-loader/page-loader.svelte';
-	import { Button, Menu, MenuItem, MenuItemSwitch, MenuList, MenuPopover, MenuTrigger, Tooltip } from '$lib/index.js';
+	import {
+		Button,
+		Menu,
+		MenuItem,
+		MenuItemSwitch,
+		MenuList,
+		MenuPopover,
+		MenuTrigger,
+		MenuDivider,
+		Tooltip
+	} from '$lib/index.js';
 	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { GITHUB_REPO_URL } from '$site/constants.js';
 	import type { Pathname } from '$app/types';
 
 	const globalContext = getGlobalFSContext();
@@ -14,6 +26,7 @@
 	const { state: globalState, methods } = globalContext!;
 
 	let locale = $derived(page.url.pathname && getLocale());
+	let path = $derived(deLocalizeUrl(page.url).pathname);
 </script>
 
 {#snippet flag(value: 'en' | 'es' = 'en')}
@@ -80,14 +93,14 @@
 		</a>
 		<nav>
 			<div class="nav-links">
-				<Button as="a" appearance={page.url.pathname === '/' ? 'accent' : 'subtle'} href={localizeHref('/')}
-					>Home</Button
+				<Button as="a" appearance={path === '/' ? 'accent' : 'subtle'} href={localizeHref('/')}
+					>{m.global_home()}</Button
 				>
-				<Button as="a" appearance={page.url.pathname === '/docs' ? 'accent' : 'subtle'} href={localizeHref('/docs')}
-					>Docs</Button
+				<Button as="a" appearance={path.includes('/docs') ? 'accent' : 'subtle'} href={localizeHref('/docs')}
+					>{m.global_docs()}</Button
 				>
-				<Button as="a" appearance={page.url.pathname === '/about' ? 'accent' : 'subtle'} href={localizeHref('/about')}
-					>About</Button
+				<Button as="a" appearance={path === '/about' ? 'accent' : 'subtle'} href={localizeHref('/about')}
+					>{m.global_about()}</Button
 				>
 			</div>
 
@@ -95,27 +108,27 @@
 			<Menu>
 				<MenuTrigger>
 					{#snippet children({ state, menuTriggerProps })}
-						<Tooltip withArrow content="Navigate to a different page">
-							{#snippet children(attrs)}
 								<Button
 									bind:ref={state.ref as HTMLButtonElement}
 									{...menuTriggerProps}
-									appearance="subtle"
-									aria-label="Navigate to a different page"
+									appearance="standard"
+									aria-label={m.header_nav_menu_tooltip()}
 									class="mobile-nav-menu-button"
-									{...attrs}
 								>
-									...
+									<TextAlignRightRegular width="1em" height="1em" />
 								</Button>
-							{/snippet}
-						</Tooltip>
 					{/snippet}
 				</MenuTrigger>
 				<MenuPopover placement="bottom-end">
 					<MenuList>
-						<MenuItem as="a" href="/">Home</MenuItem>
-						<MenuItem as="a" href="/docs">Docs</MenuItem>
-						<MenuItem as="a" href="/about">About</MenuItem>
+						<MenuItem as="a" href={localizeHref('/')}>{m.global_home()}</MenuItem>
+						<MenuItem as="a" href={localizeHref('/docs')}>{m.global_docs()}</MenuItem>
+						<MenuItem as="a" href={localizeHref('/about')}>{m.global_about()}</MenuItem>
+						<MenuDivider />
+						<MenuItem as="a" href={localizeHref('/docs/getting-started')}>{m.global_getting_started()}</MenuItem>
+						<MenuItem as="a" href={GITHUB_REPO_URL} target="_blank" rel="noopener noreferrer"
+							>{m.header_view_on_github()}</MenuItem
+						>
 					</MenuList>
 				</MenuPopover>
 			</Menu>
@@ -128,7 +141,7 @@
 						bind:ref={state.ref}
 						{...menuTriggerProps as any}
 						appearance="standard"
-						aria-label="Show Configuration Options"
+						aria-label={m.header_settings_label()}
 					>
 						<SettingsRegular width="1em" height="1em" />
 					</Button>
@@ -138,15 +151,16 @@
 				<MenuList>
 					<MenuItemSwitch
 						bind:checked={() => globalState.reducedMotion, () => null}
-						onclick={() => methods.setReducedMotion(!globalState.reducedMotion)}>Reduce Motion</MenuItemSwitch
+						onclick={() => methods.setReducedMotion(!globalState.reducedMotion)}
+						>{m.header_reduce_motion()}</MenuItemSwitch
 					>
 					<MenuItemSwitch bind:checked={() => mode.current === 'dark', () => null} onclick={toggleMode}>
-						Dark Mode
+						{m.header_dark_mode()}
 					</MenuItemSwitch>
 					<Menu>
 						<MenuTrigger>
 							{#snippet children({ state, menuTriggerProps })}
-								<Button bind:ref={state.ref} {...menuTriggerProps as any}>Change Language</Button>
+								<Button bind:ref={state.ref} {...menuTriggerProps as any}>{m.header_change_language()}</Button>
 							{/snippet}
 						</MenuTrigger>
 						<MenuPopover placement="left-start">
@@ -227,6 +241,7 @@
 				& nav {
 					flex-wrap: wrap;
 					justify-content: space-between;
+					margin-left: auto;
 					& .nav-links {
 						display: none;
 					}

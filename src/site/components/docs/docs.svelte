@@ -12,6 +12,7 @@
 	import type { Meta } from '$types';
 	import { GITHUB_REPO_URL } from '$site/constants.js';
 	import { m } from '$i18n/messages.js';
+	import { statusBadge } from '$site/utils/status.js';
 	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 
 	const globalContext = getGlobalFSContext();
@@ -64,53 +65,12 @@
 			goto(resolve(localizeHref(navItem.url) as any));
 		}
 	};
-
-	const badgeStyle = (item: string) => {
-		switch (item) {
-			case 'AI':
-				return {
-					appearance: 'tint',
-					color: 'success',
-					message: 'More than 50% of this component has been built using AI tools'
-				};
-			case 'Experimental':
-				return {
-					appearance: 'tint',
-					color: 'warning',
-					message: 'This component is experimental and may change in future releases'
-				};
-			case 'New':
-				return { appearance: 'filled', color: 'attention', message: 'New fully implemented component' };
-			case 'Beta':
-			case 'WIP':
-				return {
-					appearance: 'tint',
-					color: 'attention',
-					message: 'This component is a work in progress and may not be fully implemented yet, bugs may be present'
-				};
-			case 'Empty':
-				return {
-					appearance: 'tint',
-					color: 'information',
-					message: 'This component is not yet implemented, but the documentation is available'
-				};
-			case 'Prototype':
-				return {
-					appearance: 'tint',
-					color: 'critical',
-					message:
-						'This component is a prototype and may not be fully implemented yet (or may not be implemented at all), bugs may be present'
-				};
-			default:
-				return { appearance: 'tint', color: 'critical', message: '' };
-		}
-	};
 </script>
 
 <section class="container">
 	<aside id="navigation">
 		<div id="search-box" style="width: 100%; max-width: 100%; display: flex; flex-grow: 0;">
-			<AutoSuggestBox suggestionChosen={(e, item) => handleNav(item)} placeholder="Search docs...">
+			<AutoSuggestBox suggestionChosen={(e, item) => handleNav(item)} placeholder={m.docs_search_placeholder()}>
 				{#each suggestions as suggestion, index (suggestion)}
 					<AutoSuggestBoxOption {index} value={suggestion}>{suggestion}</AutoSuggestBoxOption>
 				{/each}
@@ -152,7 +112,7 @@
 								{/if}
 								{doc.label}
 								{#if doc.status}
-									{@const bagdeData = badgeStyle(doc.status)}
+									{@const bagdeData = statusBadge(doc.status)}
 									{let tooltipTarget: HTMLElement | null = $state(null)}
 
 									<Badge bind:ref={tooltipTarget} {...bagdeData as any}>
@@ -190,7 +150,7 @@
 	<aside id="table-of-contents">
 		<Button as="a" href={editUrl} target="_blank" rel="noopener noreferrer" appearance="subtle">
 			<EditRegular />
-			Edit this Doc
+			{m.docs_edit_button()}
 		</Button>
 		<Toc selector="#docs > div" />
 	</aside>
@@ -246,6 +206,15 @@
 					font-size: 3rem;
 					line-height: var(--fs-title-large-line-height);
 					font-weight: 600;
+					/* Keeps a component's status badge beside the title: the heading text wraps
+					   inside its own flex item instead of pushing the badge onto its own row. */
+					display: flex;
+					align-items: center;
+					flex-wrap: nowrap;
+					gap: 0.5rem;
+					& :global(.fs-badge) {
+						flex-shrink: 0;
+					}
 				}
 				& > :global(h2) {
 					font-size: var(--fs-title2-font-size);
@@ -302,6 +271,10 @@
 				padding: 1rem 0;
 				& > :global(h1) {
 					font-size: 2rem;
+				}
+				/* Props tables: drop the Description column so the rest of the table fits. */
+				& :global(table.fs-docs :is(th, td):nth-child(4)) {
+					display: none;
 				}
 			}
 		}

@@ -1,5 +1,15 @@
 # fluentui-svelte
 
+## 0.1.2
+
+### Patch Changes
+
+- fix: remove unnecesary styles declarations for flyout ([#15](https://github.com/JLAcostaEC/fluentui-svelte/pull/15))
+
+- fix: add z-index 2 when flyout is floating ([#13](https://github.com/JLAcostaEC/fluentui-svelte/pull/13))
+
+- fix: close menu when menu item radio is clicked ([#12](https://github.com/JLAcostaEC/fluentui-svelte/pull/12))
+
 ## 0.1.1
 
 ### Patch Changes

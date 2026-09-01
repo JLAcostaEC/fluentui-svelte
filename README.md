@@ -44,12 +44,6 @@ pnpm add fluentui-svelte
 # yarn add fluentui-svelte
 ```
 
-Svelte 5 is the only peer dependency:
-
-```sh
-pnpm add -D svelte@^5
-```
-
 ## Setup
 
 ### 1. Import the stylesheets

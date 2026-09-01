@@ -104,6 +104,7 @@ A contextual popup that displays a set of actions or options. It appears when us
 			position: absolute;
 			top: 0;
 			left: 0;
+			z-index: 2;
 		}
 		&::before {
 			content: '';

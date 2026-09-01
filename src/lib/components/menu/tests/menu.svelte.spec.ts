@@ -102,7 +102,11 @@ describe('MenuItemRadio', () => {
 
 	it('checks the selected radio when clicked', async () => {
 		let checkedValues: Record<string, string[]> = {};
-		render(MenuTestWrapper, { open: true, variant: 'radio', onCheckedValueChange: (e, values) => (checkedValues = values) });
+		render(MenuTestWrapper, {
+			open: true,
+			variant: 'radio',
+			onCheckedValueChange: (e, values) => (checkedValues = values)
+		});
 		const radios = page.getByRole('menuitemradio');
 		await expect.element(radios.nth(0)).toHaveAttribute('aria-checked', 'false');
 		await radios.nth(0).click();

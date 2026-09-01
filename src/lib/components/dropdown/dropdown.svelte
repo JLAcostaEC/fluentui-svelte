@@ -287,7 +287,6 @@
 		& :global(.fs-flyout) {
 			padding: 0 5px;
 			width: calc(100% + 2px);
-			z-index: 1;
 			&:global(.top-shadow) {
 				box-shadow: 0 -0.5rem 0.8rem #00000024;
 			}

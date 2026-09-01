@@ -4,14 +4,19 @@ on:
   push:
     branches:
       - main
-  pull_request:
+  issue_comment:
+    types: [created]
 
 permissions:
   contents: read # to fetch code (actions/checkout)
 
 jobs:
   Test:
-    if: github.repository == 'JLAcostaEC/fluentui-svelte'
+    # push to main, or a /run-ci comment on a PR
+    if: >-
+      github.repository == 'JLAcostaEC/fluentui-svelte' &&
+      (github.event_name == 'push' ||
+      (github.event.issue.pull_request && startsWith(github.event.comment.body, '/run-ci')))
     strategy:
       matrix:
         version: [24, 26]
@@ -20,6 +25,8 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v6
         with:
+          # issue_comment runs against the default branch, so point checkout at the PR
+          ref: ${{ github.event_name == 'issue_comment' && format('refs/pull/{0}/merge', github.event.issue.number) || github.sha }}
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
           persist-credentials: false
@@ -44,12 +51,18 @@ jobs:
         run: pnpm test:unit run
 
   Lint:
-    if: github.repository == 'JLAcostaEC/fluentui-svelte'
+    # push to main, or a /run-ci comment on a PR
+    if: >-
+      github.repository == 'JLAcostaEC/fluentui-svelte' &&
+      (github.event_name == 'push' ||
+      (github.event.issue.pull_request && startsWith(github.event.comment.body, '/run-ci')))
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v6
         with:
+          # issue_comment runs against the default branch, so point checkout at the PR
+          ref: ${{ github.event_name == 'issue_comment' && format('refs/pull/{0}/merge', github.event.issue.number) || github.sha }}
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
           persist-credentials: false

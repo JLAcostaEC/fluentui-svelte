@@ -405,9 +405,7 @@
 		position: relative;
 		width: 100%;
 		& :global(.fs-flyout) {
-			position: absolute;
 			padding: 0;
-			top: 0;
 			left: -1px;
 			width: calc(100% + 2px);
 		}

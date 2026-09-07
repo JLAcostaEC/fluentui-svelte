@@ -14,8 +14,7 @@
 		MenuList,
 		MenuPopover,
 		MenuTrigger,
-		MenuDivider,
-		Tooltip
+		MenuDivider
 	} from '$lib/index.js';
 	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { GITHUB_REPO_URL } from '$site/constants.js';

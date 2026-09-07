@@ -108,15 +108,15 @@
 			<Menu>
 				<MenuTrigger>
 					{#snippet children({ state, menuTriggerProps })}
-								<Button
-									bind:ref={state.ref as HTMLButtonElement}
-									{...menuTriggerProps}
-									appearance="standard"
-									aria-label={m.header_nav_menu_tooltip()}
-									class="mobile-nav-menu-button"
-								>
-									<TextAlignRightRegular width="1em" height="1em" />
-								</Button>
+						<Button
+							bind:ref={state.ref as HTMLButtonElement}
+							{...menuTriggerProps}
+							appearance="standard"
+							aria-label={m.header_nav_menu_tooltip()}
+							class="mobile-nav-menu-button"
+						>
+							<TextAlignRightRegular width="1em" height="1em" />
+						</Button>
 					{/snippet}
 				</MenuTrigger>
 				<MenuPopover placement="bottom-end">

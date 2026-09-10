@@ -17,6 +17,13 @@ export { default as Button } from './components/button/button.svelte';
 export { default as SplitButton } from './components/button/split-button.svelte';
 // End Button Component
 
+// Start Card Component
+export { default as Card } from './components/card/card.svelte';
+export { default as CardHeader } from './components/card/card-header.svelte';
+export { default as CardFooter } from './components/card/card-footer.svelte';
+export { default as CardPreview } from './components/card/card-preview.svelte';
+// End Card Component
+
 // Start CalendarView Component
 export { default as CalendarView } from './components/calendar-view/calendar-view.svelte';
 export { default as CalendarViewHeader } from './components/calendar-view/calendar-view-header.svelte';

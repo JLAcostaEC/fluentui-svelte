@@ -80,7 +80,7 @@
 	<span class="label" aria-label="{secondaryContent}, Use {secondaryContent}">
 		<CheckmarkFilled class="indicator" />
 		{#if Icon}
-			<RenderSoC SoC={Icon} class="menu-item-icon" args={[{ class: 'menu-item-icon' }]} />
+			<RenderSoC SoC={Icon} args={{ class: 'menu-item-icon' }} />
 		{/if}
 		{#if subText}
 			<span class="sub-text">

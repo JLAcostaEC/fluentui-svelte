@@ -42,7 +42,7 @@ export type ButtonProps<T extends ButtonGenerics = 'button'> = {
 	/** The icon used to indicate the button triggers a menu.
 	 * @type Snippet | Component
 	 */
-	indicatorIcon?: Snippet<unknown[]> | Component<Record<string, unknown>>;
+	indicatorIcon?: Snippet<[{ class: string }]> | Component<{ class: string }>;
 } & PolymorphicProps<T>;
 
 export type ButtonElementDOMType = {

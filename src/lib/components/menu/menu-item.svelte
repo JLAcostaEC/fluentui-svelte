@@ -66,7 +66,7 @@
 >
 	<span class="label" aria-label={secondaryContent ? `${secondaryContent}, Use ${secondaryContent}` : undefined}>
 		{#if Icon}
-			<RenderSoC SoC={Icon} args={[{ class: 'menu-item-icon' }]} class="menu-item-icon" />
+			<RenderSoC SoC={Icon} args={{ class: 'menu-item-icon' }} />
 		{/if}
 		{#if subText}
 			<span class="sub-text">

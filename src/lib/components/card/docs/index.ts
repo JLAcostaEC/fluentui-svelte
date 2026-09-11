@@ -27,7 +27,7 @@ export const META: Meta = {
 	},
 	// Library-only
 	slug: 'card',
-	status: 'WIP',
+	status: '',
 	icon: TextboxAlignCenterRegular
 };
 

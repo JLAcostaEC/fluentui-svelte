@@ -54,7 +54,7 @@
 >
 	{#if isMenuButton && indicatorPosition === 'before'}
 		{#if indicatorIcon}
-			<RenderSoC SoC={indicatorIcon} class="indicator" args={[{ class: 'indicator' }]} />
+			<RenderSoC SoC={indicatorIcon} args={{ class: 'indicator' }} />
 		{:else}
 			<ChevronDownFilled class="indicator" />
 		{/if}
@@ -68,7 +68,7 @@
 
 	{#if isMenuButton && indicatorPosition === 'after'}
 		{#if indicatorIcon}
-			<RenderSoC SoC={indicatorIcon} class="indicator" args={[{ class: 'indicator' }]} />
+			<RenderSoC SoC={indicatorIcon} args={{ class: 'indicator' }} />
 		{:else}
 			<ChevronDownFilled class="indicator" />
 		{/if}

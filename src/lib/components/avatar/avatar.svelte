@@ -76,7 +76,7 @@
 			/>
 		{/if}
 		{#if Icon}
-			<RenderSoC SoC={Icon} args={[{ width: badgeSize, height: badgeSize }]} width={badgeSize} height={badgeSize} />
+			<RenderSoC SoC={Icon} args={{ width: badgeSize, height: badgeSize }} />
 		{:else}
 			{initials}
 		{/if}

@@ -49,15 +49,12 @@
 	{...attributes}
 >
 	{#if Icon}
-		<RenderSoC
-			SoC={Icon}
-			args={[{ 'aria-hidden': true, width: size, height: size }]}
-			aria-hidden="true"
-			width="{size}px"
-			height="{size}px"
-		/>
+		<RenderSoC SoC={Icon} args={{ 'aria-hidden': true, width: `${size}px`, height: `${size}px` }} />
 	{:else}
-		<RenderSoC SoC={getIconBadge(outOfOffice, status)} aria-hidden="true" width="{size}px" height="{size}px" />
+		{@const statusIcon = getIconBadge(outOfOffice, status)}
+		{#if statusIcon}
+			<RenderSoC SoC={statusIcon} args={{ 'aria-hidden': true, width: `${size}px`, height: `${size}px` }} />
+		{/if}
 	{/if}
 </span>
 

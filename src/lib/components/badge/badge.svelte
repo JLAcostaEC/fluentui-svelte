@@ -43,9 +43,13 @@
 >
 	{#if iconPosition === 'after'}
 		{@render children?.()}
-		<RenderSoC SoC={Icon} />
+		{#if Icon}
+			<RenderSoC SoC={Icon} />
+		{/if}
 	{:else}
-		<RenderSoC SoC={Icon} />
+		{#if Icon}
+			<RenderSoC SoC={Icon} />
+		{/if}
 		{@render children?.()}
 	{/if}
 </span>

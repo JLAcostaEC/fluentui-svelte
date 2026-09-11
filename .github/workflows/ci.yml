@@ -4,19 +4,15 @@ on:
   push:
     branches:
       - main
-  issue_comment:
-    types: [created]
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
 
 permissions:
   contents: read # to fetch code (actions/checkout)
 
 jobs:
   Test:
-    # push to main, or a /run-ci comment on a PR
-    if: >-
-      github.repository == 'JLAcostaEC/fluentui-svelte' &&
-      (github.event_name == 'push' ||
-      (github.event.issue.pull_request && startsWith(github.event.comment.body, '/run-ci')))
+    if: github.repository == 'JLAcostaEC/fluentui-svelte'
     strategy:
       matrix:
         version: [24, 26]
@@ -25,8 +21,6 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v6
         with:
-          # issue_comment runs against the default branch, so point checkout at the PR
-          ref: ${{ github.event_name == 'issue_comment' && format('refs/pull/{0}/merge', github.event.issue.number) || github.sha }}
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
           persist-credentials: false
@@ -51,18 +45,12 @@ jobs:
         run: pnpm test:unit run
 
   Lint:
-    # push to main, or a /run-ci comment on a PR
-    if: >-
-      github.repository == 'JLAcostaEC/fluentui-svelte' &&
-      (github.event_name == 'push' ||
-      (github.event.issue.pull_request && startsWith(github.event.comment.body, '/run-ci')))
+    if: github.repository == 'JLAcostaEC/fluentui-svelte'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v6
         with:
-          # issue_comment runs against the default branch, so point checkout at the PR
-          ref: ${{ github.event_name == 'issue_comment' && format('refs/pull/{0}/merge', github.event.issue.number) || github.sha }}
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
           persist-credentials: false

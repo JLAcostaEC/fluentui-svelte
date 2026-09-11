@@ -1,6 +1,6 @@
 {
 	"name": "fluentui-svelte",
-	"version": "0.1.2",
+	"version": "0.2.0",
 	"description": "Modern Fluent UI 2 Components for Svelte 5",
 	"author": {
 		"name": "Jorge Acosta",

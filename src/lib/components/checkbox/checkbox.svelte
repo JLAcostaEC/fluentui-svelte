@@ -101,8 +101,8 @@
 			-moz-appearance: none;
 			&:indeterminate + div :global(svg.indeterminate),
 			&:checked + div :global(svg.checked) {
-				clip-path: ellipse(60px 60px at 0% 50%);
-				transition: var(--fs-slower-duration, 1s) cubic-bezier(0.55, 0, 0, 1) clip-path;
+				mask-size: 100% 100%;
+				transition: var(--fs-slower-duration, 1s) cubic-bezier(0.55, 0, 0, 1) mask-size;
 			}
 			&:is(:checked, :indeterminate) {
 				& + div {
@@ -148,7 +148,9 @@
 				width: 0;
 				fill: var(--fs-text-on-accent-primary);
 				transform-origin: 80% 20%;
-				clip-path: ellipse(0 0 at 0% 90%);
+				mask-image: linear-gradient(black, black);
+				mask-repeat: no-repeat;
+				mask-size: 0% 100%;
 			}
 		}
 		&:has(input:disabled) {

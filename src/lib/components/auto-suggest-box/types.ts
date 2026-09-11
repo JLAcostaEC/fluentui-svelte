@@ -30,6 +30,11 @@ export type AutoSuggestBoxProps = {
 	 * Not supported together with `multiselect`.
 	 */
 	selectOnFocus?: boolean;
+	/** Opens the suggestion list as soon as the text box takes focus, instead of waiting for the
+	 * first keystroke. Useful on touch devices, which have no arrow key to open the list with.
+	 * @default false
+	 */
+	openOnFocus?: boolean;
 	/** Lists every chosen suggestion in the text box, comma separated. Multiselect only. */
 	showTextualMultiselect?: boolean;
 	/** The message shown in place of the list when nothing matches.

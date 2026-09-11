@@ -14,6 +14,7 @@
 	import { m } from '$i18n/messages.js';
 	import { statusBadge } from '$site/utils/status.js';
 	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { MediaQuery } from 'svelte/reactivity';
 
 	const globalContext = getGlobalFSContext();
 
@@ -65,12 +66,18 @@
 			goto(resolve(localizeHref(navItem.url) as any));
 		}
 	};
+
+	const isMobile = new MediaQuery('pointer: coarse');
 </script>
 
 <section class="container">
 	<aside id="navigation">
 		<div id="search-box" style="width: 100%; max-width: 100%; display: flex; flex-grow: 0;">
-			<AutoSuggestBox suggestionChosen={(e, item) => handleNav(item)} placeholder={m.docs_search_placeholder()}>
+			<AutoSuggestBox
+				openOnFocus={isMobile.current}
+				suggestionChosen={(e, item) => handleNav(item)}
+				placeholder={m.docs_search_placeholder()}
+			>
 				{#each suggestions as suggestion, index (suggestion)}
 					<AutoSuggestBoxOption {index} value={suggestion}>{suggestion}</AutoSuggestBoxOption>
 				{/each}

@@ -31,6 +31,7 @@
 		value = $bindable(''),
 		inputRef = $bindable(),
 		selectOnFocus,
+		openOnFocus = false,
 		virtualizer,
 		flyoutRef = $bindable(),
 		flyoutProps,
@@ -250,6 +251,10 @@
 		inputRef?.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
 	}
 
+	function handleFocus() {
+		if (openOnFocus) open = true;
+	}
+
 	async function handleTextChanged(e: InputEvent, val: string) {
 		if (val.length > 0 && !open) open = true;
 		lastTypedValue = val;
@@ -363,6 +368,7 @@
 		querySubmitted={(e) => querySubmitted?.(e, value)}
 		textChanged={(e) => handleTextChanged(e, value)}
 		onClear={handleClear}
+		onfocus={handleFocus}
 		role="combobox"
 		aria-expanded={open}
 		aria-autocomplete="list"

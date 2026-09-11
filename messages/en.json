@@ -172,6 +172,7 @@
   "generated_fs_auto_suggest_box_props_props_multiselect": "Lets more than one suggestion be chosen, and keeps the list open after each one.",
   "generated_fs_auto_suggest_box_props_props_not_found_text": "The message shown in place of the list when nothing matches.",
   "generated_fs_auto_suggest_box_props_props_open": "Controls the open state of the suggestion list.",
+  "generated_fs_auto_suggest_box_props_props_open_on_focus": "Opens the suggestion list as soon as the text box takes focus, instead of waiting for the first keystroke. Useful on touch devices, which have no arrow key to open the list with.",
   "generated_fs_auto_suggest_box_props_props_query_submitted": "Called when Enter is pressed with no suggestion under the cursor, or when the search button is clicked. This is where a fresh set of suggestions is fetched.",
   "generated_fs_auto_suggest_box_props_props_ref": "The DOM reference of the wrapper element.",
   "generated_fs_auto_suggest_box_props_props_select_on_focus": "Mirrors the suggestion under the cursor into the text box as it is walked over. Not supported together with `multiselect`.",

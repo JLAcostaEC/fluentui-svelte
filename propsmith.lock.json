@@ -63,6 +63,13 @@
       },
       "source": "src/lib/components/auto-suggest-box/types.ts#AutoSuggestBoxProps.open"
     },
+    "generated_fs_auto_suggest_box_props_props_open_on_focus": {
+      "en": "67cde17a",
+      "locales": {
+        "es": "67cde17a"
+      },
+      "source": "src/lib/components/auto-suggest-box/types.ts#AutoSuggestBoxProps.openOnFocus"
+    },
     "generated_fs_auto_suggest_box_props_props_query_submitted": {
       "en": "82f2472c",
       "locales": {
@@ -443,7 +450,9 @@
     },
     "generated_fs_calendar_date_picker_props_props_popup_ref": {
       "en": "35cfbb07",
-      "locales": {},
+      "locales": {
+        "es": "35cfbb07"
+      },
       "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.popupRef"
     },
     "generated_fs_calendar_date_picker_props_props_ref": {
@@ -455,7 +464,9 @@
     },
     "generated_fs_calendar_date_picker_props_props_trigger_ref": {
       "en": "e44e1de5",
-      "locales": {},
+      "locales": {
+        "es": "e44e1de5"
+      },
       "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.triggerRef"
     },
     "generated_fs_calendar_date_picker_props_props_value": {

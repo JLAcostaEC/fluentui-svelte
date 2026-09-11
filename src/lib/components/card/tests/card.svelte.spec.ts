@@ -214,6 +214,38 @@ describe('keyboard selection', () => {
 	});
 });
 
+describe('accessible name', () => {
+	it('names a selectable card after the title of the header', async () => {
+		render(CardTestWrapper, { selectable: true, id: 'my-card', part: 'header' });
+		const el = page.getByRole('checkbox');
+		await expect.element(el).toHaveAttribute('aria-labelledby', 'my-card-title');
+	});
+
+	it('resolves the name from the header title', async () => {
+		render(CardTestWrapper, { selectable: true, id: 'my-card', part: 'header', title: 'My title' });
+		const el = page.getByRole('checkbox', { name: 'My title' });
+		await expect.element(el).toBeInTheDocument();
+	});
+
+	it('leaves the name to a caller that passes aria-label', async () => {
+		render(CardTestWrapper, { selectable: true, part: 'header', 'aria-label': 'My card' });
+		const el = page.getByRole('checkbox');
+		await expect.element(el).not.toHaveAttribute('aria-labelledby');
+	});
+
+	it('leaves the name to a caller that passes aria-labelledby', async () => {
+		render(CardTestWrapper, { selectable: true, part: 'header', 'aria-labelledby': 'somewhere-else' });
+		const el = page.getByRole('checkbox');
+		await expect.element(el).toHaveAttribute('aria-labelledby', 'somewhere-else');
+	});
+
+	it('does not label a card that is not a control', async () => {
+		render(CardTestWrapper, { part: 'header' });
+		const el = page.getByRole('group');
+		await expect.element(el).not.toHaveAttribute('aria-labelledby');
+	});
+});
+
 describe('disabled state', () => {
 	it('applies the disabled class', async () => {
 		render(CardTestWrapper, { disabled: true });

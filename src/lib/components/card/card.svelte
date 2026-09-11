@@ -97,6 +97,14 @@
 	/** The root carries the selection semantics itself when no floating checkbox is there to carry them. */
 	let isRootControl = $derived(selectable && !isLink && !_card.showFloatingAction);
 
+	/**
+	 * A focusable root needs an accessible name. The title of the header provides it, unless the
+	 * consumer named the card itself.
+	 */
+	let rootLabelledBy = $derived(
+		isRootControl && !attributes['aria-label'] && !attributes['aria-labelledby'] ? `${id}-title` : undefined
+	);
+
 	/** Enter and Space toggle the selection, the same way a pointer click does. */
 	const handleKeydown = (e: KeyboardEvent) => {
 		if (e.key !== 'Enter' && e.key !== ' ') return;
@@ -127,6 +135,7 @@
 	{id}
 	role={isLink ? undefined : isRootControl ? 'checkbox' : 'group'}
 	aria-checked={isRootControl ? _card.selected : undefined}
+	aria-labelledby={rootLabelledBy}
 	aria-disabled={disabled || undefined}
 	tabindex={isRootControl && !disabled ? 0 : undefined}
 	onclick={(e: MouseEvent) => invokeHandlers(e, [disabled], [context.methods.handleAction])}

@@ -8,6 +8,7 @@
 		class: classes,
 		title,
 		image,
+		imageAlt = '',
 		description,
 		action,
 		...attributes
@@ -19,16 +20,20 @@
 
 	const { config } = context;
 
-	const { showFloatingAction, selectable, id } = config;
+	const showFloatingAction = $derived(config.showFloatingAction);
+	const selectable = $derived(config.selectable);
+	const id = $derived(config.id);
 
-	$effect.pre(() => {
+	// Rendered through `_action`, so the invariant is enforced during SSR and on every prop update.
+	const _action = $derived.by(() => {
 		if (action && selectable) throw new Error('Action cannot be used with selectable cards.');
+		return action;
 	});
 </script>
 
 <div bind:this={ref} class={['fs-card-header', showFloatingAction && 'with-action', classes]} {...attributes}>
 	{#if typeof image === 'string'}
-		<img src={image} alt="alt" />
+		<img src={image} alt={imageAlt} />
 	{:else if image}
 		<RenderSoC SoC={image} />
 	{/if}
@@ -37,7 +42,7 @@
 			{#if typeof title === 'string'}
 				<h4 class="body" id={`${id}-title`}>{title}</h4>
 			{:else if title}
-				<RenderSoC SoC={title} args={{ id: `${id}-title` }} />
+				<RenderSoC SoC={title} id={`${id}-title`} />
 			{/if}
 			{#if typeof description === 'string'}
 				<p class="caption">{description}</p>
@@ -45,15 +50,13 @@
 				<RenderSoC SoC={description} />
 			{/if}
 		</div>
-	{:else}
-		{#if typeof title === 'string'}
-			{title}
-		{:else if title}
-			<RenderSoC SoC={title} args={{ id: `${id}-title` }} />
-		{/if}
+	{:else if typeof title === 'string'}
+		<h4 class="body" id={`${id}-title`}>{title}</h4>
+	{:else if title}
+		<RenderSoC SoC={title} id={`${id}-title`} />
 	{/if}
-	{#if action}
-		<RenderSoC SoC={action} />
+	{#if _action}
+		<RenderSoC SoC={_action} />
 	{/if}
 </div>
 

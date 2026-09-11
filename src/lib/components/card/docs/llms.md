@@ -9,6 +9,11 @@ A card is a container that groups content and actions about a single topic, and 
 	import { Card, CardPreview, CardHeader, CardFooter, Button } from 'fluentui-svelte';
 </script>
 
+{#snippet footerActions()}
+	<Button>Like</Button>
+	<Button appearance="standard">Share</Button>
+{/snippet}
+
 <Card orientation="vertical">
 	<CardPreview logoSrc="/logo.png">
 		<img src="/preview.png" alt="Preview" />
@@ -91,12 +96,17 @@ The header takes a `title`, and optionally an `image`, a `description` and an `a
 a heading; a snippet or a component receives the id the floating checkbox is labelled by.
 
 ```svelte
+<script>
+	import { Card, CardHeader, Button } from 'fluentui-svelte';
+	import { MoreHorizontalRegular } from 'fluentui-icons-svelte';
+</script>
+
 {#snippet title(attrs)}
 	<h4 class="body" {...attrs}><b>FluentUI Svelte</b> mentioned you</h4>
 {/snippet}
 
 {#snippet action()}
-	<Button appearance="subtle"><MoreHorizontalRegular width="1em" height="1em" /></Button>
+	<Button appearance="subtle" aria-label="More actions"><MoreHorizontalRegular width="1em" height="1em" /></Button>
 {/snippet}
 
 <Card>
@@ -122,6 +132,10 @@ the bottom left corner.
 The footer renders the actions of the card at the bottom, spread across the available width.
 
 ```svelte
+<script>
+	import { Card, CardHeader, CardFooter, Button } from 'fluentui-svelte';
+</script>
+
 {#snippet action()}
 	<Button>Like</Button>
 	<Button appearance="standard">Share</Button>
@@ -155,12 +169,13 @@ The media shown at one edge of the card, with an optional logo overlaid on it.
 
 ### Component Props
 
-| Name               | Type                   | Description                                                            |
-| ------------------ | ---------------------- | ---------------------------------------------------------------------- |
-| `ref`              | `HTMLDivElement`       | The DOM reference of the preview element.                              |
-| `logoSrc`          | `string`               | The URL of the logo overlaid on the bottom left corner of the preview. |
-| `children`         | `Snippet`              | The media to preview, usually an image.                                |
-| Element Attributes | HTMLElement Attributes | All other attributes can be applied to the preview element.            |
+| Name               | Type                   | Description                                                                    |
+| ------------------ | ---------------------- | ------------------------------------------------------------------------------ |
+| `ref`              | `HTMLDivElement`       | The DOM reference of the preview element.                                      |
+| `logoSrc`          | `string`               | The URL of the logo overlaid on the bottom left corner of the preview.         |
+| `logoAlt`          | `string`               | The alternative text of the logo. Empty by default, so the logo is decorative. |
+| `children`         | `Snippet`              | The media to preview, usually an image.                                        |
+| Element Attributes | HTMLElement Attributes | All other attributes can be applied to the preview element.                    |
 
 ## CardHeader
 
@@ -168,14 +183,15 @@ The title of the card, with an optional image, description and action.
 
 ### Component Props
 
-| Name               | Type                             | Description                                                                       |
-| ------------------ | -------------------------------- | --------------------------------------------------------------------------------- |
-| `ref`              | `HTMLDivElement`                 | The DOM reference of the header element.                                          |
-| `title`            | `Snippet \| Component \| string` | The title of the card. A snippet or a component receives the id of the title.     |
-| `image`            | `Snippet \| Component \| string` | The image rendered before the title. A string is used as the `src` of an `<img>`. |
-| `description`      | `Snippet \| Component \| string` | A second line of text below the title.                                            |
-| `action`           | `Snippet \| Component`           | The action rendered at the end of the header. Not available on selectable cards.  |
-| Element Attributes | HTMLElement Attributes           | All other attributes can be applied to the header element.                        |
+| Name               | Type                             | Description                                                                           |
+| ------------------ | -------------------------------- | ------------------------------------------------------------------------------------- |
+| `ref`              | `HTMLDivElement`                 | The DOM reference of the header element.                                              |
+| `title`            | `Snippet \| Component \| string` | The title of the card. A snippet or a component receives the id of the title.         |
+| `image`            | `Snippet \| Component \| string` | The image rendered before the title. A string is used as the `src` of an `<img>`.     |
+| `imageAlt`         | `string`                         | The alternative text of a string image. Empty by default, so the image is decorative. |
+| `description`      | `Snippet \| Component \| string` | A second line of text below the title.                                                |
+| `action`           | `Snippet \| Component`           | The action rendered at the end of the header. Not available on selectable cards.      |
+| Element Attributes | HTMLElement Attributes           | All other attributes can be applied to the header element.                            |
 
 ## CardFooter
 

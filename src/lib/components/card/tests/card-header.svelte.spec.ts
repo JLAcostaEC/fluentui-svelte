@@ -31,6 +31,18 @@ describe('rendering', () => {
 		await expect.element(el).toHaveAttribute('src', PIXEL);
 	});
 
+	it('renders a string image as decorative by default', async () => {
+		render(CardTestWrapper, { part: 'header', image: PIXEL });
+		const el = page.selector('.fs-card-header img');
+		await expect.element(el).toHaveAttribute('alt', '');
+	});
+
+	it('labels a string image from imageAlt', async () => {
+		render(CardTestWrapper, { part: 'header', image: PIXEL, imageAlt: 'FluentUI Svelte' });
+		const el = page.selector('.fs-card-header img');
+		await expect.element(el).toHaveAttribute('alt', 'FluentUI Svelte');
+	});
+
 	it('renders the description below the title', async () => {
 		render(CardTestWrapper, { part: 'header', description: 'A description' });
 		const el = page.selector('.fs-card-header-content p.caption');
@@ -46,6 +58,12 @@ describe('rendering', () => {
 	it('gives the string title the id the floating checkbox is labelled by', async () => {
 		render(CardTestWrapper, { part: 'header', title: 'My title', description: 'A description', id: 'my-card' });
 		const el = page.selector('.fs-card-header-content h4.body');
+		await expect.element(el).toHaveAttribute('id', 'my-card-title');
+	});
+
+	it('gives the string title the id even without a description', async () => {
+		render(CardTestWrapper, { part: 'header', title: 'My title', id: 'my-card' });
+		const el = page.selector('.fs-card-header h4.body');
 		await expect.element(el).toHaveAttribute('id', 'my-card-title');
 	});
 

@@ -5,7 +5,6 @@
 	import Checkbox from '../checkbox/checkbox.svelte';
 	import type { CardContext, CardProps, CardTagTypes } from './types.js';
 	import { PREFIX } from '../../internal/constants.ts';
-	import { onMount } from 'svelte';
 
 	const _ID = $props.id();
 	const FALLBACK_ID = PREFIX + '-card-' + _ID;
@@ -26,13 +25,6 @@
 		onSelectionChange,
 		...attributes
 	}: CardProps<Tag> = $props();
-
-	onMount(() => {
-		if (showFloatingAction && !selectable)
-			throw new Error('Floating action can only be shown if the card is selectable.');
-		if (selected && !selectable) throw new Error('A card cannot be selected if it is not selectable.');
-		if (as === 'a' && selectable) throw new Error('A card cannot be both a link and selectable.');
-	});
 
 	const context: CardContext = $state({
 		config: {
@@ -87,6 +79,30 @@
 	setCardContext(context);
 
 	let actionable = $derived(!disabled && (selectable || as === 'a'));
+
+	/**
+	 * The props the invariants rule over. The markup renders them through here, so reading any of
+	 * them validates the whole set during SSR and on every prop update.
+	 */
+	const _card = $derived.by(() => {
+		if (showFloatingAction && !selectable)
+			throw new Error('Floating action can only be shown if the card is selectable.');
+		if (selected && !selectable) throw new Error('A card cannot be selected if it is not selectable.');
+		if (as === 'a' && selectable) throw new Error('A card cannot be both a link and selectable.');
+		return { as, selected, showFloatingAction };
+	});
+
+	let isLink = $derived(as === 'a');
+
+	/** The root carries the selection semantics itself when no floating checkbox is there to carry them. */
+	let isRootControl = $derived(selectable && !isLink && !_card.showFloatingAction);
+
+	/** Enter and Space toggle the selection, the same way a pointer click does. */
+	const handleKeydown = (e: KeyboardEvent) => {
+		if (e.key !== 'Enter' && e.key !== ' ') return;
+		e.preventDefault();
+		if (e.currentTarget instanceof HTMLElement) e.currentTarget.click();
+	};
 </script>
 
 <!--
@@ -105,21 +121,26 @@
     ```
  -->
 <svelte:element
-	this={as}
-	class={['fs-card', { actionable, disabled, selected }, orientation, appearance, classes]}
+	this={_card.as}
+	class={['fs-card', { actionable, disabled, selected: _card.selected }, orientation, appearance, classes]}
 	bind:this={ref}
 	{id}
-	role="group"
-	onclick={(e: MouseEvent) => invokeHandlers(e, [disabled, !selectable], [context.methods.handleAction])}
+	role={isLink ? undefined : isRootControl ? 'checkbox' : 'group'}
+	aria-checked={isRootControl ? _card.selected : undefined}
+	aria-disabled={disabled || undefined}
+	tabindex={isRootControl && !disabled ? 0 : undefined}
+	onclick={(e: MouseEvent) => invokeHandlers(e, [disabled], [context.methods.handleAction])}
+	onkeydown={isRootControl ? handleKeydown : undefined}
 	{...attributes}
 >
-	{#if selectable && showFloatingAction && as !== 'a'}
+	{#if selectable && _card.showFloatingAction && as !== 'a'}
 		<Checkbox
 			wrapperAs="div"
 			aria-labelledby={`${id}-title`}
 			bind:checked={selected}
 			{disabled}
 			onclick={(e) => e.stopPropagation()}
+			onchange={(e) => onSelectionChange?.(id, e.currentTarget.checked)}
 		/>
 	{/if}
 	{@render children?.()}
@@ -134,6 +155,9 @@
 		color: var(--fs-text-primary);
 		transition: box-shadow var(--fs-fast-duration) var(--fs-point-to-point);
 		text-decoration: none;
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
+		}
 		&.filled {
 			background: var(--fs-card-background-default);
 			box-shadow: var(--fs-shadow-card);

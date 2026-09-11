@@ -42,6 +42,11 @@
 	import { Card, CardPreview, CardHeader, CardFooter, Button } from 'fluentui-svelte';
 </script>
 
+{#snippet footerActions()}
+	<Button>Like</Button>
+	<Button appearance="standard">Share</Button>
+{/snippet}
+
 <Card orientation="vertical">
 	<CardPreview logoSrc="/logo.png">
 		<img src="/preview.png" alt="Preview" />

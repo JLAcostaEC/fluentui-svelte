@@ -88,6 +88,10 @@ export type CardPreviewProps = {
 	ref?: HTMLDivElement;
 	/** The URL of the logo overlaid on the bottom left corner of the preview. */
 	logoSrc: string;
+	/** The alternative text of the logo. Empty by default, which marks the logo as decorative.
+	 * @default ''
+	 */
+	logoAlt?: string;
 	/** The media to preview, usually an image. */
 	children?: Snippet;
 } & Omit<HTMLAttributes<HTMLDivElement>, 'children'>;
@@ -106,6 +110,10 @@ export type CardHeaderProps = {
 	 * @type Snippet | Component | string
 	 */
 	image?: Snippet | Component | string;
+	/** The alternative text of a string image. Empty by default, which marks the image as decorative.
+	 * @default ''
+	 */
+	imageAlt?: string;
 	/** A second line of text below the title.
 	 * @type Snippet | Component | string
 	 */

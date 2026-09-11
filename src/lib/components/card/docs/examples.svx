@@ -41,7 +41,7 @@
 {/snippet}
 
 {#snippet action()}
-  <Button appearance="subtle"><MoreHorizontalRegular width="1em" height="1em" /></Button>
+  <Button appearance="subtle" aria-label="More actions"><MoreHorizontalRegular width="1em" height="1em" /></Button>
 {/snippet}
 
 <Card>
@@ -72,7 +72,7 @@
 {/snippet}
 
 {#snippet headerAction()}
-  <Button appearance="subtle">
+  <Button appearance="subtle" aria-label="More actions">
     <MoreHorizontalRegular width="1em" height="1em" />
   </Button>
 {/snippet}

@@ -686,6 +686,11 @@
       },
       "source": "src/lib/components/card/types.ts#CardHeaderProps.image"
     },
+    "generated_fs_card_header_props_props_image_alt": {
+      "en": "61667c77",
+      "locales": {},
+      "source": "src/lib/components/card/types.ts#CardHeaderProps.imageAlt"
+    },
     "generated_fs_card_header_props_props_ref": {
       "en": "02f56faa",
       "locales": {
@@ -706,6 +711,11 @@
         "es": "d268bc41"
       },
       "source": "src/lib/components/card/types.ts#CardPreviewProps.children"
+    },
+    "generated_fs_card_preview_props_props_logo_alt": {
+      "en": "6367f68c",
+      "locales": {},
+      "source": "src/lib/components/card/types.ts#CardPreviewProps.logoAlt"
     },
     "generated_fs_card_preview_props_props_logo_src": {
       "en": "f20c0d1a",

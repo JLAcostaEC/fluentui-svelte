@@ -11,16 +11,19 @@
 
 	const { config } = context;
 
-	const { showFloatingAction, selectable } = config;
+	const showFloatingAction = $derived(config.showFloatingAction);
+	const selectable = $derived(config.selectable);
 
-	$effect.pre(() => {
+	// Rendered through `_action`, so the invariant is enforced during SSR and on every prop update.
+	const _action = $derived.by(() => {
 		if (action && selectable) throw new Error('Action cannot be used with selectable cards.');
+		return action;
 	});
 </script>
 
 <div bind:this={ref} class={['fs-card-footer', showFloatingAction && 'with-action', classes]} {...attributes}>
-	{#if action}
-		<RenderSoC SoC={action} />
+	{#if _action}
+		<RenderSoC SoC={_action} />
 	{/if}
 </div>
 

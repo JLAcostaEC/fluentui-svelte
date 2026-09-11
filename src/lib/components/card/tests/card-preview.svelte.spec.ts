@@ -25,10 +25,16 @@ describe('rendering', () => {
 		await expect.element(el).toHaveAttribute('src', PIXEL);
 	});
 
-	it('labels the logo', async () => {
+	it('renders the logo as decorative by default', async () => {
 		render(CardTestWrapper, { part: 'preview' });
 		const el = page.selector('img.fs-card-preview-logo');
-		await expect.element(el).toHaveAttribute('alt', 'Logo');
+		await expect.element(el).toHaveAttribute('alt', '');
+	});
+
+	it('labels the logo from logoAlt', async () => {
+		render(CardTestWrapper, { part: 'preview', logoAlt: 'FluentUI Svelte' });
+		const el = page.selector('img.fs-card-preview-logo');
+		await expect.element(el).toHaveAttribute('alt', 'FluentUI Svelte');
 	});
 });
 

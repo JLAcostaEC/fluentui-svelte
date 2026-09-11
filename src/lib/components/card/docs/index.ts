@@ -15,7 +15,7 @@ export const META: Meta = {
 	locale: 'en_US',
 	openGraph: {
 		title: 'Card — Fluent UI Svelte',
-		description: 'A Fluent UI Svelte card that displays content and actions on a single topic`.',
+		description: 'A Fluent UI Svelte card that displays content and actions on a single topic.',
 		type: 'article',
 		url: '/docs/components/card',
 		siteName: 'Fluent UI Svelte'
@@ -27,7 +27,7 @@ export const META: Meta = {
 	},
 	// Library-only
 	slug: 'card',
-	status: '',
+	status: 'WIP',
 	icon: TextboxAlignCenterRegular
 };
 

@@ -32,6 +32,7 @@
 | --------------------------------------------------- | ---------------- | ------- | ---------------------------------------------------- |
 | `ref` _bindable_                                    | `HTMLDivElement` |         | {m.generated_fs_card_preview_props_props_ref()}      |
 | `logoSrc`                                           | `string`         |         | {m.generated_fs_card_preview_props_props_logo_src()} |
+| `logoAlt`                                           | `string`         | `''`    | {m.generated_fs_card_preview_props_props_logo_alt()} |
 | `children`                                          | `Snippet`        |         | {m.generated_fs_card_preview_props_props_children()} |
 | `HTMLAttributes<HTMLDivElement>` without `children` |                  |         |                                                      |
 
@@ -47,6 +48,7 @@
 | `ref` _bindable_                                             | `HTMLDivElement`                             |         | {m.generated_fs_card_header_props_props_ref()}         |
 | `title`                                                      | `Snippet` &#124; `Component` &#124; `string` |         | {m.generated_fs_card_header_props_props_title()}       |
 | `image`                                                      | `Snippet` &#124; `Component` &#124; `string` |         | {m.generated_fs_card_header_props_props_image()}       |
+| `imageAlt`                                                   | `string`                                     | `''`    | {m.generated_fs_card_header_props_props_image_alt()}   |
 | `description`                                                | `Snippet` &#124; `Component` &#124; `string` |         | {m.generated_fs_card_header_props_props_description()} |
 | `action`                                                     | `Snippet` &#124; `Component`                 |         | {m.generated_fs_card_header_props_props_action()}      |
 | `HTMLAttributes<HTMLDivElement>` without `children`, `title` |                                              |         |                                                        |

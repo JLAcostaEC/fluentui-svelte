@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Card, CardPreview, CardHeader, CardFooter } from '$lib/index.js';
-	import type { CardHeaderProps, CardProps } from '$lib/components/card/types.js';
+	import type { CardHeaderProps, CardPreviewProps, CardProps } from '$lib/components/card/types.js';
 
 	const PIXEL = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
@@ -8,13 +8,16 @@
 		part = 'content',
 		title = 'Card title',
 		image,
+		imageAlt,
 		description,
 		logoSrc = PIXEL,
+		logoAlt,
 		snippetTitle = false,
 		withAction = false,
 		...props
 	}: Partial<CardProps<'div'>> &
-		Partial<Pick<CardHeaderProps, 'title' | 'image' | 'description'>> & {
+		Partial<Pick<CardHeaderProps, 'title' | 'image' | 'imageAlt' | 'description'>> &
+		Partial<Pick<CardPreviewProps, 'logoAlt'>> & {
 			part?: 'content' | 'header' | 'preview' | 'footer' | 'full';
 			logoSrc?: string;
 			/** Renders the title of the header as a snippet instead of a string. */
@@ -34,7 +37,7 @@
 
 <Card {...props}>
 	{#if part === 'preview' || part === 'full'}
-		<CardPreview {logoSrc} data-testid="card-preview">
+		<CardPreview {logoSrc} {logoAlt} data-testid="card-preview">
 			<img src={PIXEL} alt="Preview" />
 		</CardPreview>
 	{/if}
@@ -42,6 +45,7 @@
 		<CardHeader
 			title={snippetTitle ? titleSnippet : title}
 			{image}
+			{imageAlt}
 			{description}
 			action={withAction && part === 'header' ? actionSnippet : undefined}
 			data-testid="card-header"

@@ -1,4 +1,4 @@
-import { page } from 'vitest/browser';
+import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { Card } from '$lib/index.js';
@@ -32,6 +32,12 @@ describe('element type', () => {
 	it('renders as an <a> when as="a"', async () => {
 		render(Card, { as: 'a', href: '#' });
 		const el = page.selector('a.fs-card');
+		await expect.element(el).toBeInTheDocument();
+	});
+
+	it('keeps the native link role when as="a"', async () => {
+		render(Card, { as: 'a', href: '#' });
+		const el = page.getByRole('link');
 		await expect.element(el).toBeInTheDocument();
 	});
 
@@ -99,26 +105,26 @@ describe('selection', () => {
 
 	it('is actionable when it is selectable', async () => {
 		render(CardTestWrapper, { selectable: true });
-		const el = page.getByRole('group');
+		const el = page.getByRole('checkbox');
 		await expect.element(el).toHaveClass('actionable');
 	});
 
 	it('is actionable when it renders as a link', async () => {
 		render(Card, { as: 'a', href: '#' });
-		const el = page.getByRole('group');
+		const el = page.getByRole('link');
 		await expect.element(el).toHaveClass('actionable');
 	});
 
 	it('selects the card when clicked', async () => {
 		render(CardTestWrapper, { selectable: true });
-		const el = page.getByRole('group');
+		const el = page.getByRole('checkbox');
 		await el.click();
 		await expect.element(el).toHaveClass('selected');
 	});
 
 	it('deselects the card when clicked again', async () => {
 		render(CardTestWrapper, { selectable: true });
-		const el = page.getByRole('group');
+		const el = page.getByRole('checkbox');
 		await el.click();
 		await el.click();
 		await expect.element(el).not.toHaveClass('selected');
@@ -127,7 +133,7 @@ describe('selection', () => {
 	it('calls onSelectionChange with the id and the new selection', async () => {
 		const onSelectionChange = vi.fn();
 		render(CardTestWrapper, { selectable: true, id: 'my-card', onSelectionChange });
-		await page.getByRole('group').click();
+		await page.getByRole('checkbox').click();
 		expect(onSelectionChange).toHaveBeenCalledWith('my-card', true);
 	});
 
@@ -143,8 +149,68 @@ describe('selection', () => {
 	it('calls onclick when a selectable card is clicked', async () => {
 		const onclick = vi.fn();
 		render(CardTestWrapper, { selectable: true, onclick });
+		await page.getByRole('checkbox').click();
+		expect(onclick).toHaveBeenCalledOnce();
+	});
+
+	it('calls onclick when a card that is not selectable is clicked', async () => {
+		const onclick = vi.fn();
+		render(CardTestWrapper, { onclick });
 		await page.getByRole('group').click();
 		expect(onclick).toHaveBeenCalledOnce();
+	});
+});
+
+describe('keyboard selection', () => {
+	it('exposes a selectable card as a checkbox', async () => {
+		render(CardTestWrapper, { selectable: true });
+		const el = page.getByRole('checkbox');
+		await expect.element(el).toHaveAttribute('aria-checked', 'false');
+	});
+
+	it('reflects the selection through aria-checked', async () => {
+		render(CardTestWrapper, { selectable: true });
+		const el = page.getByRole('checkbox');
+		await el.click();
+		await expect.element(el).toHaveAttribute('aria-checked', 'true');
+	});
+
+	it('is reachable with the keyboard', async () => {
+		render(CardTestWrapper, { selectable: true });
+		const el = page.getByRole('checkbox');
+		await expect.element(el).toHaveAttribute('tabindex', '0');
+	});
+
+	it('is not reachable with the keyboard when disabled', async () => {
+		render(CardTestWrapper, { selectable: true, disabled: true });
+		const el = page.getByRole('checkbox');
+		await expect.element(el).not.toHaveAttribute('tabindex');
+	});
+
+	it('toggles the selection with Enter', async () => {
+		const onSelectionChange = vi.fn();
+		render(CardTestWrapper, { selectable: true, id: 'my-card', onSelectionChange });
+		const el = page.getByRole('checkbox');
+		await userEvent.tab();
+		await expect.element(el).toHaveFocus();
+		await userEvent.keyboard('{Enter}');
+		await expect.element(el).toHaveClass('selected');
+		expect(onSelectionChange).toHaveBeenCalledWith('my-card', true);
+	});
+
+	it('toggles the selection with Space', async () => {
+		render(CardTestWrapper, { selectable: true });
+		const el = page.getByRole('checkbox');
+		await userEvent.tab();
+		await userEvent.keyboard(' ');
+		await expect.element(el).toHaveClass('selected');
+	});
+
+	it('leaves the selection semantics to the floating checkbox', async () => {
+		render(CardTestWrapper, { selectable: true, showFloatingAction: true });
+		const el = page.getByRole('group');
+		await expect.element(el).not.toHaveAttribute('tabindex');
+		await expect.element(el).not.toHaveAttribute('aria-checked');
 	});
 });
 
@@ -155,19 +221,41 @@ describe('disabled state', () => {
 		await expect.element(el).toHaveClass('disabled');
 	});
 
+	it('exposes the disabled state to assistive technology', async () => {
+		render(CardTestWrapper, { disabled: true });
+		const el = page.getByRole('group');
+		await expect.element(el).toHaveAttribute('aria-disabled', 'true');
+	});
+
 	it('is not actionable when disabled', async () => {
 		render(CardTestWrapper, { selectable: true, disabled: true });
-		const el = page.getByRole('group');
+		const el = page.getByRole('checkbox');
 		await expect.element(el).not.toHaveClass('actionable');
 	});
 
 	it('does not select the card when disabled', async () => {
 		const onSelectionChange = vi.fn();
 		render(CardTestWrapper, { selectable: true, disabled: true, onSelectionChange });
-		const el = page.getByRole('group');
+		const el = page.getByRole('checkbox');
 		await el.click({ force: true });
 		await expect.element(el).not.toHaveClass('selected');
 		expect(onSelectionChange).not.toHaveBeenCalled();
+	});
+
+	it('keeps a disabled link inert', async () => {
+		render(Card, { as: 'a', href: '#card', disabled: true, style: 'width: 6rem; height: 3rem;' });
+		let defaultPrevented: boolean | undefined;
+		document.addEventListener('click', (e) => (defaultPrevented = e.defaultPrevented), { once: true });
+		await page.getByRole('link').click({ force: true });
+		expect(defaultPrevented).toBe(true);
+	});
+
+	it('lets an enabled link navigate', async () => {
+		render(Card, { as: 'a', href: '#card', style: 'width: 6rem; height: 3rem;' });
+		let defaultPrevented: boolean | undefined;
+		document.addEventListener('click', (e) => (defaultPrevented = e.defaultPrevented), { once: true });
+		await page.getByRole('link').click();
+		expect(defaultPrevented).toBe(false);
 	});
 });
 
@@ -178,9 +266,9 @@ describe('floating action', () => {
 		await expect.element(el).toBeInTheDocument();
 	});
 
-	it('does not render a checkbox when only selectable', async () => {
+	it('does not render a checkbox input when only selectable', async () => {
 		render(CardTestWrapper, { selectable: true });
-		const el = page.getByRole('checkbox');
+		const el = page.selector('input[type="checkbox"]');
 		await expect.element(el).not.toBeInTheDocument();
 	});
 
@@ -194,6 +282,13 @@ describe('floating action', () => {
 		render(CardTestWrapper, { selectable: true, showFloatingAction: true });
 		await page.getByRole('checkbox').click();
 		await expect.element(page.getByRole('group')).toHaveClass('selected');
+	});
+
+	it('calls onSelectionChange when the checkbox is clicked', async () => {
+		const onSelectionChange = vi.fn();
+		render(CardTestWrapper, { selectable: true, showFloatingAction: true, id: 'my-card', onSelectionChange });
+		await page.getByRole('checkbox').click();
+		expect(onSelectionChange).toHaveBeenCalledWith('my-card', true);
 	});
 
 	it('reflects the selection on the checkbox', async () => {

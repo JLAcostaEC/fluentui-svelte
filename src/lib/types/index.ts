@@ -25,6 +25,7 @@ export type ActiveOrInactive = 'active' | 'inactive';
 export type Statuses =
 	'available' | 'busy' | 'offline' | 'away' | 'do-not-disturb' | 'out-of-office' | 'unknown' | 'blocked';
 export type ProgressStatus = 'paused' | 'error';
+export type Horientation = 'horizontal' | 'vertical';
 export type YAxis = 'top' | 'bottom';
 export type XAxis = 'left' | 'right';
 export type YDirection = 'up' | 'middle' | 'down';

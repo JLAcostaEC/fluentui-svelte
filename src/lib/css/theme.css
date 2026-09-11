@@ -129,6 +129,7 @@
 	/* Card Background */
 	--fs-card-background-default: #ffffffb3;
 	--fs-card-background-secondary: #f6f6f680;
+	--fs-card-background-tertiary: #ffffff;
 
 	/* Smoke Background */
 	--fs-smoke-background-default: #0000004d;
@@ -179,7 +180,7 @@
 	/* Border Radius */
 	--fs-control-border-radius: 0.25rem;
 	--fs-control-inner-border-radius: 0.188rem;
-	--fs-control-overlay-border-radius: 0.5rem;
+	--fs-control-overlay-border-radius: 0.4375rem;
 
 	/* Durations */
 	--fs-fast-duration: 167ms;
@@ -232,6 +233,7 @@
 
 	/* Shadows */
 	--fs-shadow-card: 0 0.125rem 0.25rem #0000000a; /* 4% opacity */
+	--fs-shadow-card-hover: 0 0.125rem 0.25rem #0000001a; /* 10% opacity */
 	--fs-shadow-tooltip: 0 0.25rem 0.5rem #00000024; /* 14% opacity */
 	--fs-shadow-flyout: 0 0.5rem 1rem #00000024; /* 14% opacity */
 	--fs-shadow-dialog: 0 2rem 4rem #00000030, 0 1.125rem 1.313rem #00000026; /* 19% and 15% opacity respectively */

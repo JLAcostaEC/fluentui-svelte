@@ -443,7 +443,9 @@
     },
     "generated_fs_calendar_date_picker_props_props_popup_ref": {
       "en": "35cfbb07",
-      "locales": {},
+      "locales": {
+        "es": "35cfbb07"
+      },
       "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.popupRef"
     },
     "generated_fs_calendar_date_picker_props_props_ref": {
@@ -455,7 +457,9 @@
     },
     "generated_fs_calendar_date_picker_props_props_trigger_ref": {
       "en": "e44e1de5",
-      "locales": {},
+      "locales": {
+        "es": "e44e1de5"
+      },
       "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.triggerRef"
     },
     "generated_fs_calendar_date_picker_props_props_value": {
@@ -646,6 +650,156 @@
         "es": "abb35281"
       },
       "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.weekStart"
+    },
+    "generated_fs_card_footer_props_props_action": {
+      "en": "740c8b0d",
+      "locales": {
+        "es": "740c8b0d"
+      },
+      "source": "src/lib/components/card/types.ts#CardFooterProps.action"
+    },
+    "generated_fs_card_footer_props_props_ref": {
+      "en": "b77ced29",
+      "locales": {
+        "es": "b77ced29"
+      },
+      "source": "src/lib/components/card/types.ts#CardFooterProps.ref"
+    },
+    "generated_fs_card_header_props_props_action": {
+      "en": "131d7a6e",
+      "locales": {
+        "es": "131d7a6e"
+      },
+      "source": "src/lib/components/card/types.ts#CardHeaderProps.action"
+    },
+    "generated_fs_card_header_props_props_description": {
+      "en": "15d85b99",
+      "locales": {
+        "es": "15d85b99"
+      },
+      "source": "src/lib/components/card/types.ts#CardHeaderProps.description"
+    },
+    "generated_fs_card_header_props_props_image": {
+      "en": "6685b00d",
+      "locales": {
+        "es": "6685b00d"
+      },
+      "source": "src/lib/components/card/types.ts#CardHeaderProps.image"
+    },
+    "generated_fs_card_header_props_props_image_alt": {
+      "en": "61667c77",
+      "locales": {},
+      "source": "src/lib/components/card/types.ts#CardHeaderProps.imageAlt"
+    },
+    "generated_fs_card_header_props_props_ref": {
+      "en": "02f56faa",
+      "locales": {
+        "es": "02f56faa"
+      },
+      "source": "src/lib/components/card/types.ts#CardHeaderProps.ref"
+    },
+    "generated_fs_card_header_props_props_title": {
+      "en": "81ef86f6",
+      "locales": {
+        "es": "81ef86f6"
+      },
+      "source": "src/lib/components/card/types.ts#CardHeaderProps.title"
+    },
+    "generated_fs_card_preview_props_props_children": {
+      "en": "d268bc41",
+      "locales": {
+        "es": "d268bc41"
+      },
+      "source": "src/lib/components/card/types.ts#CardPreviewProps.children"
+    },
+    "generated_fs_card_preview_props_props_logo_alt": {
+      "en": "6367f68c",
+      "locales": {},
+      "source": "src/lib/components/card/types.ts#CardPreviewProps.logoAlt"
+    },
+    "generated_fs_card_preview_props_props_logo_src": {
+      "en": "f20c0d1a",
+      "locales": {
+        "es": "f20c0d1a"
+      },
+      "source": "src/lib/components/card/types.ts#CardPreviewProps.logoSrc"
+    },
+    "generated_fs_card_preview_props_props_ref": {
+      "en": "cfdad65c",
+      "locales": {
+        "es": "cfdad65c"
+      },
+      "source": "src/lib/components/card/types.ts#CardPreviewProps.ref"
+    },
+    "generated_fs_card_props_props_appearance": {
+      "en": "a0fed55c",
+      "locales": {
+        "es": "a0fed55c"
+      },
+      "source": "src/lib/components/card/types.ts#CardProps.appearance"
+    },
+    "generated_fs_card_props_props_as": {
+      "en": "0bc47903",
+      "locales": {
+        "es": "0bc47903"
+      },
+      "source": "src/lib/components/card/types.ts#CardProps.as"
+    },
+    "generated_fs_card_props_props_disabled": {
+      "en": "b99cb72f",
+      "locales": {
+        "es": "b99cb72f"
+      },
+      "source": "src/lib/components/card/types.ts#CardProps.disabled"
+    },
+    "generated_fs_card_props_props_id": {
+      "en": "5d7bbee7",
+      "locales": {
+        "es": "5d7bbee7"
+      },
+      "source": "src/lib/components/card/types.ts#CardProps.id"
+    },
+    "generated_fs_card_props_props_on_selection_change": {
+      "en": "8f3f5525",
+      "locales": {
+        "es": "8f3f5525"
+      },
+      "source": "src/lib/components/card/types.ts#CardProps.onSelectionChange"
+    },
+    "generated_fs_card_props_props_orientation": {
+      "en": "db6642ed",
+      "locales": {
+        "es": "db6642ed"
+      },
+      "source": "src/lib/components/card/types.ts#CardProps.orientation"
+    },
+    "generated_fs_card_props_props_ref": {
+      "en": "44af1a6d",
+      "locales": {
+        "es": "44af1a6d"
+      },
+      "source": "src/lib/components/card/types.ts#CardProps.ref"
+    },
+    "generated_fs_card_props_props_selectable": {
+      "en": "41b0181d",
+      "locales": {
+        "es": "41b0181d"
+      },
+      "source": "src/lib/components/card/types.ts#CardProps.selectable"
+    },
+    "generated_fs_card_props_props_selected": {
+      "en": "da94819a",
+      "locales": {
+        "es": "da94819a"
+      },
+      "source": "src/lib/components/card/types.ts#CardProps.selected"
+    },
+    "generated_fs_card_props_props_show_floating_action": {
+      "en": "db199ce4",
+      "locales": {
+        "es": "db199ce4"
+      },
+      "source": "src/lib/components/card/types.ts#CardProps.showFloatingAction"
     },
     "generated_fs_checkbox_props_props_checked": {
       "en": "7cc6d504",

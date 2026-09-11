@@ -1,0 +1,69 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.card_card_props_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:CardProps -->
+
+| Name                  | Type                                                       | Default        | Description                                              |
+| --------------------- | ---------------------------------------------------------- | -------------- | -------------------------------------------------------- |
+| `ref` _bindable_      | `CardElementDOMType[Tag]`                                  |                | {m.generated_fs_card_props_props_ref()}                  |
+| `as`                  | `'div'` &#124; `'article'` &#124; `'section'` &#124; `'a'` | `'div'`        | {m.generated_fs_card_props_props_as()}                   |
+| `orientation`         | `'horizontal'` &#124; `'vertical'`                         | `'horizontal'` | {m.generated_fs_card_props_props_orientation()}          |
+| `selectable`          | `boolean`                                                  | `false`        | {m.generated_fs_card_props_props_selectable()}           |
+| `showFloatingAction`  | `boolean`                                                  | `false`        | {m.generated_fs_card_props_props_show_floating_action()} |
+| `id`                  | `string`                                                   |                | {m.generated_fs_card_props_props_id()}                   |
+| `selected` _bindable_ | `boolean`                                                  | `false`        | {m.generated_fs_card_props_props_selected()}             |
+| `disabled`            | `boolean`                                                  | `false`        | {m.generated_fs_card_props_props_disabled()}             |
+| `appearance`          | `'filled'` &#124; `'outlined'` &#124; `'subtle'`           | `'filled'`     | {m.generated_fs_card_props_props_appearance()}           |
+| `onSelectionChange`   | `(id: string, selected: boolean) => void`                  |                | {m.generated_fs_card_props_props_on_selection_change()}  |
+| HTML Attributes       |                                                            |                |                                                          |
+
+<!-- /props:CardProps -->
+
+## {m.card_cardpreview_props_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:CardPreviewProps -->
+
+| Name                                                | Type             | Default | Description                                          |
+| --------------------------------------------------- | ---------------- | ------- | ---------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLDivElement` |         | {m.generated_fs_card_preview_props_props_ref()}      |
+| `logoSrc`                                           | `string`         |         | {m.generated_fs_card_preview_props_props_logo_src()} |
+| `logoAlt`                                           | `string`         | `''`    | {m.generated_fs_card_preview_props_props_logo_alt()} |
+| `children`                                          | `Snippet`        |         | {m.generated_fs_card_preview_props_props_children()} |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                  |         |                                                      |
+
+<!-- /props:CardPreviewProps -->
+
+## {m.card_cardheader_props_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:CardHeaderProps -->
+
+| Name                                                         | Type                                         | Default | Description                                            |
+| ------------------------------------------------------------ | -------------------------------------------- | ------- | ------------------------------------------------------ |
+| `ref` _bindable_                                             | `HTMLDivElement`                             |         | {m.generated_fs_card_header_props_props_ref()}         |
+| `title`                                                      | `Snippet` &#124; `Component` &#124; `string` |         | {m.generated_fs_card_header_props_props_title()}       |
+| `image`                                                      | `Snippet` &#124; `Component` &#124; `string` |         | {m.generated_fs_card_header_props_props_image()}       |
+| `imageAlt`                                                   | `string`                                     | `''`    | {m.generated_fs_card_header_props_props_image_alt()}   |
+| `description`                                                | `Snippet` &#124; `Component` &#124; `string` |         | {m.generated_fs_card_header_props_props_description()} |
+| `action`                                                     | `Snippet` &#124; `Component`                 |         | {m.generated_fs_card_header_props_props_action()}      |
+| `HTMLAttributes<HTMLDivElement>` without `children`, `title` |                                              |         |                                                        |
+
+<!-- /props:CardHeaderProps -->
+
+## {m.card_cardfooter_props_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:CardFooterProps -->
+
+| Name                                                | Type                         | Default | Description                                       |
+| --------------------------------------------------- | ---------------------------- | ------- | ------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLDivElement`             |         | {m.generated_fs_card_footer_props_props_ref()}    |
+| `action`                                            | `Snippet` &#124; `Component` |         | {m.generated_fs_card_footer_props_props_action()} |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                              |         |                                                   |
+
+<!-- /props:CardFooterProps -->

@@ -1,0 +1,58 @@
+<script lang="ts">
+  import { Card, CardPreview, CardHeader, CardFooter, Button } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Card
+
+{m.card_description()}
+
+{#snippet footerActions()}
+  <Button>Like</Button>
+  <Button appearance="standard">Share</Button>
+{/snippet}
+
+<Showcase columns={1} minHeight="420px" columnWidth="360px" autoCenter>
+  <Card orientation="vertical">
+    <CardPreview logoSrc="https://placehold.co/32x32?text=FS">
+      <img src="https://placehold.co/360x180?text=Preview" alt="Preview" />
+    </CardPreview>
+    <CardHeader
+      image="https://placehold.co/48x48?text=FS"
+      title="FluentUI Svelte"
+      description="5h ago · About us - Overview"
+    />
+    <p style="padding: 0.5rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    <CardFooter action={footerActions} />
+  </Card>
+</Showcase>
+
+{m.card_composition_description()}
+
+- `Card`: {m.card_composition_card_description()}
+- `CardPreview`: {m.card_composition_cardpreview_description()}
+- `CardHeader`: {m.card_composition_cardheader_description()}
+- `CardFooter`: {m.card_composition_cardfooter_description()}
+
+## {m.global_usage()}
+
+```svelte
+<script>
+	import { Card, CardPreview, CardHeader, CardFooter, Button } from 'fluentui-svelte';
+</script>
+
+{#snippet footerActions()}
+	<Button>Like</Button>
+	<Button appearance="standard">Share</Button>
+{/snippet}
+
+<Card orientation="vertical">
+	<CardPreview logoSrc="/logo.png">
+		<img src="/preview.png" alt="Preview" />
+	</CardPreview>
+	<CardHeader title="FluentUI Svelte" description="5h ago · About us - Overview" />
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+	<CardFooter action={footerActions} />
+</Card>
+```

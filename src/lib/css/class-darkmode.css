@@ -91,7 +91,7 @@
 	--fs-control-stroke-on-accent-tertiary: #00000037;
 	--fs-control-stroke-on-accent-disabled: #00000033;
 	--fs-control-stroke-on-image: #0000006b;
-	--fs-card-stroke-default: #00000019;
+	--fs-card-stroke-default: #0000001a;
 	--fs-card-stroke-solid: #1c1c1c;
 
 	/* Control Strong Stroke */
@@ -112,6 +112,7 @@
 	/* Card Background */
 	--fs-card-background-default: #ffffff0d;
 	--fs-card-background-secondary: #ffffff08;
+	--fs-card-background-tertiary: #ffffff1c; /* 6.98% opacity */
 
 	/* Smoke Background */
 	/* --fs-smoke-background-default: #0000004d; <- Same on light/dark */
@@ -159,6 +160,7 @@
 
 	/* Shadows */
 	--fs-shadow-card: 0 0.125rem 0.25rem #00000021; /* 13% opacity */
+	--fs-shadow-card-hover: 0 0.125rem 0.25rem #00000042; /* 26% opacity */
 	--fs-shadow-tooltip: 0 0.25rem 0.5rem #00000042; /* 26% opacity */
 	--fs-shadow-flyout: 0 0.5rem 1rem #00000042; /* 26% opacity */
 	--fs-shadow-dialog: 0 2rem 4rem #0000005e, 0 1.125rem 1.313rem #0000005e; /* 37% opacity */

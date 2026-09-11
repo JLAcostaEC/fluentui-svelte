@@ -3,13 +3,13 @@
 	import { RenderSoC } from '$internal';
 	import { getCardContext } from './card-context.svelte.ts';
 
-	let { ref = $bindable(), class: classes, action }: CardFooterProps = $props();
+	let { ref = $bindable(), class: classes, action, ...attributes }: CardFooterProps = $props();
 
 	const context = getCardContext();
 
 	if (!context) throw new Error('Card context is not available. Make sure this component is used within a Card.');
 
-	const { config, state } = context;
+	const { config } = context;
 
 	const { showFloatingAction, selectable } = config;
 
@@ -18,7 +18,7 @@
 	});
 </script>
 
-<div bind:this={ref} class={['fs-card-footer', showFloatingAction && 'with-action', classes]}>
+<div bind:this={ref} class={['fs-card-footer', showFloatingAction && 'with-action', classes]} {...attributes}>
 	{#if action}
 		<RenderSoC SoC={action} />
 	{/if}

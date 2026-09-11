@@ -3,13 +3,21 @@
 	import { RenderSoC } from '$internal';
 	import { getCardContext } from './card-context.svelte.ts';
 
-	let { ref = $bindable(), class: classes, title, image, description, action }: CardHeaderProps = $props();
+	let {
+		ref = $bindable(),
+		class: classes,
+		title,
+		image,
+		description,
+		action,
+		...attributes
+	}: CardHeaderProps = $props();
 
 	const context = getCardContext();
 
 	if (!context) throw new Error('Card context is not available. Make sure this component is used within a Card.');
 
-	const { config, state } = context;
+	const { config } = context;
 
 	const { showFloatingAction, selectable, id } = config;
 
@@ -18,7 +26,7 @@
 	});
 </script>
 
-<div bind:this={ref} class={['fs-card-header', showFloatingAction && 'with-action', classes]}>
+<div bind:this={ref} class={['fs-card-header', showFloatingAction && 'with-action', classes]} {...attributes}>
 	{#if typeof image === 'string'}
 		<img src={image} alt="alt" />
 	{:else if image}
@@ -27,7 +35,7 @@
 	{#if description}
 		<div class="fs-card-header-content">
 			{#if typeof title === 'string'}
-				<h4 class="body" aria-labelledby={`${id}-title`}>{title}</h4>
+				<h4 class="body" id={`${id}-title`}>{title}</h4>
 			{:else if title}
 				<RenderSoC SoC={title} args={{ id: `${id}-title` }} />
 			{/if}

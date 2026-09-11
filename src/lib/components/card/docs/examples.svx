@@ -1,0 +1,166 @@
+<script lang="ts">
+  import { Card, CardPreview, CardHeader, CardFooter, Button } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+  import { MoreHorizontalRegular } from 'fluentui-icons-svelte';
+
+  let selected = $state(false);
+
+  const appearanceCode = `
+<Card appearance="filled">Filled</Card>
+<Card appearance="outlined">Outlined</Card>
+<Card appearance="subtle">Subtle</Card>`;
+
+  const orientationCode = `
+<Card orientation="horizontal">
+  <CardPreview logoSrc="/logo.png">
+    <img src="/preview.png" alt="Preview" />
+  </CardPreview>
+  <CardHeader title="Horizontal" description="The default orientation" />
+</Card>
+
+<Card orientation="vertical">
+  <CardPreview logoSrc="/logo.png">
+    <img src="/preview.png" alt="Preview" />
+  </CardPreview>
+  <CardHeader title="Vertical" description="Stacks every part" />
+</Card>`;
+
+  const selectableCode = `
+<script>
+  let selected = $state(false);
+<\/script>
+
+<Card selectable showFloatingAction bind:selected onSelectionChange={(id, selected) => console.log(id, selected)}>
+  <CardHeader title="Selectable card" description={selected ? 'Selected' : 'Not selected'} />
+</Card>`;
+
+  const headerCode = `
+{#snippet title(attrs)}
+  <h4 class="body" {...attrs}><b>FluentUI Svelte</b> mentioned you</h4>
+{/snippet}
+
+{#snippet action()}
+  <Button appearance="subtle"><MoreHorizontalRegular width="1em" height="1em" /></Button>
+{/snippet}
+
+<Card>
+  <CardHeader image="/logo.png" {title} description="5h ago · About us - Overview" {action} />
+</Card>`;
+
+  const previewCode = `
+<Card orientation="vertical">
+  <CardPreview logoSrc="/logo.png">
+    <img src="/preview.png" alt="Preview" />
+  </CardPreview>
+</Card>`;
+
+  const footerCode = `
+{#snippet action()}
+  <Button>Like</Button>
+  <Button appearance="standard">Share</Button>
+{/snippet}
+
+<Card orientation="vertical">
+  <CardHeader title="FluentUI Svelte" description="5h ago · About us - Overview" />
+  <CardFooter {action} />
+</Card>`;
+</script>
+
+{#snippet headerTitle(attrs)}
+  <h4 class="body" style="font-weight: normal;" {...attrs}><b>FluentUI Svelte</b> mentioned you</h4>
+{/snippet}
+
+{#snippet headerAction()}
+  <Button appearance="subtle">
+    <MoreHorizontalRegular width="1em" height="1em" />
+  </Button>
+{/snippet}
+
+{#snippet footerActions()}
+  <Button>Like</Button>
+  <Button appearance="standard">Share</Button>
+{/snippet}
+
+### {m.global_appearance()}
+
+{m.card_appearance_description()}
+
+<Showcase columns={1} columnWidth="320px" minHeight="260px" minZoom={1} code={appearanceCode} autoCenter>
+  <Card appearance="filled">
+    <p style="padding: 0.5rem;">Filled</p>
+  </Card>
+  <Card appearance="outlined">
+    <p style="padding: 0.5rem;">Outlined</p>
+  </Card>
+  <Card appearance="subtle">
+    <p style="padding: 0.5rem;">Subtle</p>
+  </Card>
+</Showcase>
+
+### {m.card_orientation_title()}
+
+{m.card_orientation_description()}
+
+<Showcase columns={1} columnWidth="360px" minHeight="420px" code={orientationCode} autoCenter>
+  <Card orientation="horizontal">
+    <CardPreview logoSrc="https://placehold.co/32x32?text=FS">
+      <img src="https://placehold.co/120x120?text=Preview" alt="Preview" />
+    </CardPreview>
+    <CardHeader title="Horizontal" description="The default orientation" />
+  </Card>
+  <Card orientation="vertical">
+    <CardPreview logoSrc="https://placehold.co/32x32?text=FS">
+      <img src="https://placehold.co/360x160?text=Preview" alt="Preview" />
+    </CardPreview>
+    <CardHeader title="Vertical" description="Stacks every part" />
+  </Card>
+</Showcase>
+
+### {m.card_selectable_title()}
+
+{m.card_selectable_description()}
+
+<Showcase columns={1} columnWidth="320px" minHeight="200px" minZoom={1} code={selectableCode} autoCenter>
+  <Card selectable showFloatingAction bind:selected>
+    <CardHeader title="Selectable card" description={selected ? 'Selected' : 'Not selected'} />
+  </Card>
+</Showcase>
+
+### {m.card_header_title()}
+
+{m.card_header_description()}
+
+<Showcase columns={1} columnWidth="360px" minHeight="200px" minZoom={1} code={headerCode} autoCenter>
+  <Card>
+    <CardHeader
+      image="https://placehold.co/48x48?text=FS"
+      title={headerTitle}
+      description="5h ago · About us - Overview"
+      action={headerAction}
+    />
+  </Card>
+</Showcase>
+
+### {m.card_preview_title()}
+
+{m.card_preview_description()}
+
+<Showcase columns={1} columnWidth="360px" minHeight="260px" code={previewCode} autoCenter>
+  <Card orientation="vertical">
+    <CardPreview logoSrc="https://placehold.co/32x32?text=FS">
+      <img src="https://placehold.co/360x180?text=Preview" alt="Preview" />
+    </CardPreview>
+  </Card>
+</Showcase>
+
+### {m.card_footer_title()}
+
+{m.card_footer_description()}
+
+<Showcase columns={1} columnWidth="360px" minHeight="220px" minZoom={1} code={footerCode} autoCenter>
+  <Card orientation="vertical">
+    <CardHeader title="FluentUI Svelte" description="5h ago · About us - Overview" />
+    <CardFooter action={footerActions} />
+  </Card>
+</Showcase>

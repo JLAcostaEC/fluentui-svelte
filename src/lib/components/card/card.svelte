@@ -90,20 +90,20 @@
 </script>
 
 <!--
-@component
-A card is a container that displays content and actions on a single topic.
+	@component
+	A card is a container that displays content and actions on a single topic.
+	- Usage:
+    ```tsx
+    <script>
+      import { Card, CardHeader } from 'fluentui-svelte';
+    </script>
 
-- Usage:
-  ```tsx
-  <script>
-  <Card>
-  </script>
-  </Card>
-    <p>Content goes here</p>
-    <Button>Close Flyout</Button>
-  </Card>
+    <Card>
+      <CardHeader title="Card title" />
+      <p>Content goes here</p>
+    </Card>
     ```
--->
+ -->
 <svelte:element
 	this={as}
 	class={['fs-card', { actionable, disabled, selected }, orientation, appearance, classes]}

@@ -193,6 +193,7 @@
   "generated_fs_auto_suggest_box_props_props_multiselect": "Permite elegir más de una sugerencia, y mantiene la lista abierta después de cada una.",
   "generated_fs_auto_suggest_box_props_props_not_found_text": "El mensaje que se muestra en lugar de la lista cuando no hay coincidencias.",
   "generated_fs_auto_suggest_box_props_props_open": "Controla el estado de apertura de la lista de sugerencias.",
+  "generated_fs_auto_suggest_box_props_props_open_on_focus": "Abre la lista de sugerencias en cuanto la caja de texto recibe el foco, en vez de esperar a la primera pulsación. Útil en dispositivos táctiles, que no tienen flechas con las que abrir la lista.",
   "generated_fs_auto_suggest_box_props_props_query_submitted": "Se llama al pulsar Enter sin ninguna sugerencia bajo el cursor, o al hacer clic en el botón de búsqueda. Aquí es donde se obtiene un nuevo conjunto de sugerencias.",
   "generated_fs_auto_suggest_box_props_props_ref": "La referencia DOM del elemento contenedor.",
   "generated_fs_auto_suggest_box_props_props_select_on_focus": "Refleja en el text box la sugerencia sobre la que está el cursor a medida que se recorre. No es compatible con `multiselect`.",

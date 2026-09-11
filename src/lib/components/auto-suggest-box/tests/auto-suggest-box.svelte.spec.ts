@@ -83,6 +83,27 @@ describe('open state', () => {
 	});
 });
 
+describe('opening on focus', () => {
+	it('opens the list on focus when openOnFocus is set', async () => {
+		render(AutoSuggestBoxTestWrapper, { openOnFocus: true });
+		focusInput();
+		await expect.element(combobox()).toHaveAttribute('aria-expanded', 'true');
+		await expect.element(page.getByRole('option', { name: 'Apple' })).toBeInTheDocument();
+	});
+
+	it('leaves the list closed on focus by default', async () => {
+		render(AutoSuggestBoxTestWrapper);
+		focusInput();
+		await expect.element(combobox()).toHaveAttribute('aria-expanded', 'false');
+	});
+
+	it('still opens the list on typing when openOnFocus is not set', async () => {
+		render(AutoSuggestBoxTestWrapper);
+		await combobox().fill('App');
+		await expect.element(combobox()).toHaveAttribute('aria-expanded', 'true');
+	});
+});
+
 describe('selection', () => {
 	it('sets the input value and closes when an option is clicked', async () => {
 		render(AutoSuggestBoxTestWrapper, { open: true });

@@ -15,6 +15,7 @@
 		showTextualMultiselect,
 		selectedOptions = $bindable([]),
 		selectOnFocus,
+		openOnFocus,
 		placeholder,
 		querySubmitted,
 		suggestionChosen
@@ -26,6 +27,7 @@
 		showTextualMultiselect?: boolean;
 		selectedOptions?: { id: string; value: string }[];
 		selectOnFocus?: boolean;
+		openOnFocus?: boolean;
 		placeholder?: string;
 		querySubmitted?: (e: Event, query: string) => void;
 		suggestionChosen?: (e: Event, selection: string) => void;
@@ -40,6 +42,7 @@
 		{multiselect}
 		{showTextualMultiselect}
 		{selectOnFocus}
+		{openOnFocus}
 		{placeholder}
 		{querySubmitted}
 		{suggestionChosen}

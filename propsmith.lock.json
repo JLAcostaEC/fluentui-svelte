@@ -63,6 +63,13 @@
       },
       "source": "src/lib/components/auto-suggest-box/types.ts#AutoSuggestBoxProps.open"
     },
+    "generated_fs_auto_suggest_box_props_props_open_on_focus": {
+      "en": "67cde17a",
+      "locales": {
+        "es": "67cde17a"
+      },
+      "source": "src/lib/components/auto-suggest-box/types.ts#AutoSuggestBoxProps.openOnFocus"
+    },
     "generated_fs_auto_suggest_box_props_props_query_submitted": {
       "en": "82f2472c",
       "locales": {

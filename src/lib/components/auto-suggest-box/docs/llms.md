@@ -58,16 +58,17 @@ built-in filter that a plain option list applies is skipped.
 
 ## Component Props
 
-| Name               | Type                                                      | Description                                                            |
-| ------------------ | --------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `placeholder`      | `string`                                                  | Placeholder text shown in the input.                                   |
-| `value`            | `string`                                                  | The current value of the input field.                                  |
-| `open`             | `boolean`                                                 | Whether the suggestion flyout is open. Default: `false`.               |
-| `multiselect`      | `boolean`                                                 | Allow selecting multiple suggestions.                                  |
-| `selectOnFocus`    | `boolean`                                                 | Select a suggestion as it is focused during keyboard navigation.       |
-| `notFoundText`     | `string`                                                  | Text shown when no suggestions match. Default: `No results found`.     |
-| `maxItemsInView`   | `number`                                                  | Number of suggestions visible before the flyout scrolls. Default: `6`. |
-| `ref`              | `HTMLElement`                                             | The DOM reference of the auto-suggest box element.                     |
-| `suggestionChosen` | `(e: Event, selection: string) => void`                   | Event triggered when a suggestion is chosen.                           |
-| `querySubmitted`   | `(e: MouseEvent \| KeyboardEvent, query: string) => void` | Event triggered when a query is submitted.                             |
-| `virtualizer`      | `{ size, scrollToIndex?, scrollToTop?, scrollToBottom? }` | Bridge to a windowed list. `size` is the total suggestion count.       |
+| Name               | Type                                                      | Description                                                                  |
+| ------------------ | --------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `placeholder`      | `string`                                                  | Placeholder text shown in the input.                                         |
+| `value`            | `string`                                                  | The current value of the input field.                                        |
+| `open`             | `boolean`                                                 | Whether the suggestion flyout is open. Default: `false`.                     |
+| `multiselect`      | `boolean`                                                 | Allow selecting multiple suggestions.                                        |
+| `selectOnFocus`    | `boolean`                                                 | Select a suggestion as it is focused during keyboard navigation.             |
+| `openOnFocus`      | `boolean`                                                 | Open the suggestion list as soon as the input takes focus. Default: `false`. |
+| `notFoundText`     | `string`                                                  | Text shown when no suggestions match. Default: `No results found`.           |
+| `maxItemsInView`   | `number`                                                  | Number of suggestions visible before the flyout scrolls. Default: `6`.       |
+| `ref`              | `HTMLElement`                                             | The DOM reference of the auto-suggest box element.                           |
+| `suggestionChosen` | `(e: Event, selection: string) => void`                   | Event triggered when a suggestion is chosen.                                 |
+| `querySubmitted`   | `(e: MouseEvent \| KeyboardEvent, query: string) => void` | Event triggered when a query is submitted.                                   |
+| `virtualizer`      | `{ size, scrollToIndex?, scrollToTop?, scrollToBottom? }` | Bridge to a windowed list. `size` is the total suggestion count.             |

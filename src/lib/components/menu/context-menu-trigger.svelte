@@ -24,52 +24,57 @@
 
 	const { toggle, close } = context.methods;
 
-	const { id, openingDelay } = context.config;
+	const id = $derived(context.config.id);
+
+	const openingDelay = $derived(context.config.openingDelay);
 
 	let offClick: (() => void) | null = $state(null);
 
-	const debounced = useDebounce(async (e: MouseEvent) => {
-		if (disabled) return;
+	const debounced = useDebounce(
+		async (e: MouseEvent) => {
+			if (disabled) return;
 
-		const { clientX, clientY } = e;
+			const { clientX, clientY } = e;
 
-		_state.ref = {
-			getBoundingClientRect() {
-				return {
-					width: 0,
-					height: 0,
-					x: clientX,
-					y: clientY,
-					top: clientY,
-					right: clientX,
-					bottom: clientY,
-					left: clientX
-				};
-			}
-		};
+			_state.ref = {
+				getBoundingClientRect() {
+					return {
+						width: 0,
+						height: 0,
+						x: clientX,
+						y: clientY,
+						top: clientY,
+						right: clientX,
+						bottom: clientY,
+						left: clientX
+					};
+				}
+			};
 
-		// Add event to check if user click outside the menu to close it
-		offClick ??= on(document, 'click', (e) => {
-			const clickTarget = e.target as HTMLElement;
+			// Add event to check if user click outside the menu to close it
+			offClick ??= on(document, 'click', (e) => {
+				const clickTarget = e.target as HTMLElement;
 
-			if (!clickTarget.closest(`#fs-menu-popover-${id}`)) {
-				_state.locked = false;
-				close(e);
-				offClick?.();
-				offClick = null;
-			}
-		});
+				if (!clickTarget.closest(`#fs-menu-popover-${id}`)) {
+					_state.locked = false;
+					close(e);
+					offClick?.();
+					offClick = null;
+				}
+			});
 
-		_state.locked = !_state.locked;
-		toggle(e);
-
-		// When requesting to open the context menu when is already open, we need to wait for the toggle to finish before allowing it to be toggled again
-		if (!_state.open) {
-			await tick();
 			_state.locked = !_state.locked;
 			toggle(e);
-		}
-	}, openingDelay || 0);
+
+			// When requesting to open the context menu when is already open, we need to wait for the toggle to finish before allowing it to be toggled again
+			if (!_state.open) {
+				await tick();
+				_state.locked = !_state.locked;
+				toggle(e);
+			}
+		},
+		() => openingDelay || 0
+	);
 
 	onMount(() => {
 		_state.ref ??= VIRTUAL_ELEMENT;

@@ -31,7 +31,9 @@
 
 	if (!context) throw new Error(`No MenuContext found for ${MENU_COMPONENT_NAME}.`);
 
-	const { hasIcons, persistOnItemActivation } = context.config;
+	const hasIcons = $derived(context.config.hasIcons);
+
+	const persistOnItemActivation = $derived(context.config.persistOnItemActivation);
 
 	const { toggleRadio, toggle } = context.methods;
 

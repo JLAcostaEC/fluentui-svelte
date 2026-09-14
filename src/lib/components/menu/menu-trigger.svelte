@@ -19,20 +19,33 @@
 
 	const { toggle, open, close } = context.methods;
 
-	const { id, isSubMenu, openOnHover, openingDelay, parentHasCheckmarks, parentHasIcons } = context.config;
+	const id = $derived(context.config.id);
+
+	const isSubMenu = $derived(context.config.isSubMenu);
+
+	const openOnHover = $derived(context.config.openOnHover);
+
+	const openingDelay = $derived(context.config.openingDelay);
+
+	const parentHasCheckmarks = $derived(context.config.parentHasCheckmarks);
+
+	const parentHasIcons = $derived(context.config.parentHasIcons);
 
 	const paddingLeft = $derived(1.25 * (+!!(parentHasIcons && !Icon) + +!!parentHasCheckmarks) + 0.9);
 
-	const debounced = useDebounce((e: MouseEvent) => {
-		if (e.type === 'mouseover' && !_state.open) {
-			return open(e);
-		}
+	const debounced = useDebounce(
+		(e: MouseEvent) => {
+			if (e.type === 'mouseover' && !_state.open) {
+				return open(e);
+			}
 
-		// Where the mouse is moving to
-		const to = e.relatedTarget as HTMLElement | null;
+			// Where the mouse is moving to
+			const to = e.relatedTarget as HTMLElement | null;
 
-		if (to && !to.closest(`#fs-menu-popover-${id}`) && to.parentElement !== _state.ref && !_state.locked) close(e);
-	}, openingDelay || 0);
+			if (to && !to.closest(`#fs-menu-popover-${id}`) && to.parentElement !== _state.ref && !_state.locked) close(e);
+		},
+		() => openingDelay || 0
+	);
 
 	onMount(() => {
 		const off = on(document, 'click', async (e: MouseEvent) => {

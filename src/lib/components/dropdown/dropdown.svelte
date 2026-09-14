@@ -2,7 +2,7 @@
 	import { onClickOutside } from 'runed';
 	import ChevronDownFilled from 'fluentui-icons-svelte/ChevronDownFilled.svelte';
 	import { Flyout, ListView, ListViewItem } from '$lib/index.js';
-	import type { DropdownProps } from './types.ts';
+	import type { DropdownContext, DropdownProps } from './types.ts';
 	import { tick } from 'svelte';
 	import { SvelteMap } from 'svelte/reactivity';
 	import { setTabspotAttributes, unsetTabspotSection } from 'tabspot';
@@ -45,7 +45,7 @@
 	// for every value here to keep rendering the selection once the list is closed.
 	const optionLabels = new SvelteMap<string, string>();
 
-	setDropdownContext({
+	const context: DropdownContext = $state({
 		config: null,
 		state: null,
 		events: null,
@@ -53,6 +53,8 @@
 			registerOption: (optionValue: string, text: string) => optionLabels.set(optionValue, text)
 		}
 	});
+
+	setDropdownContext(context);
 
 	const selectedValues = $derived(multiple ? (Array.isArray(value) ? value : []) : value ? [value as string] : []);
 

@@ -39,16 +39,18 @@
 		...attributes
 	}: SliderProps = $props();
 
-	watch(
-		() => step,
-		() => {
-			if (step > max - min) {
-				throw new Error('Step must be less than or equal to the difference between max and min');
-			} else if (min >= max) {
-				throw new Error('Min must be less than max');
-			}
+	/**
+	 * The props the invariants rule over. The markup renders them through here, so reading any of
+	 * them validates the whole set during SSR and on every prop update.
+	 */
+	const _range = $derived.by(() => {
+		if (step > max - min) {
+			throw new Error('Step must be less than or equal to the difference between max and min');
+		} else if (min >= max) {
+			throw new Error('Min must be less than max');
 		}
-	);
+		return { min, max, step };
+	});
 
 	watch(
 		() => value,
@@ -208,8 +210,8 @@
 	role="slider"
 	aria-label={ariaLabel}
 	aria-orientation={orientation}
-	aria-valuemin={min}
-	aria-valuemax={max}
+	aria-valuemin={_range.min}
+	aria-valuemax={_range.max}
 	aria-valuenow={value}
 	aria-valuetext={prefix || suffix ? `${prefix}${value}${suffix}` : undefined}
 	aria-disabled={disabled || undefined}

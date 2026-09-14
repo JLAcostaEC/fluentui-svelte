@@ -22,7 +22,7 @@
 
 	const { selectMonth, updatePage } = CalendarContext.methods;
 
-	let { locale, minDate, headers, maxDate, selectionMode } = CalendarContext.config;
+	let { locale, minDate, headers, maxDate, selectionMode } = $derived(CalendarContext.config);
 
 	let { value, range, page, pageAnimationDirection } = $derived(CalendarContext.state);
 

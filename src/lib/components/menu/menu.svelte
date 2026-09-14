@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getMenuContext, setMenuContext } from './menu.svelte.ts';
-	import type { MenuContext, MenuProps, MenuState } from './types.ts';
+	import type { MenuContext, MenuProps } from './types.ts';
 
 	let {
 		checkedValues = {} as Record<string, string[]>,
@@ -25,101 +25,112 @@
 
 	let locked = $state(false);
 
-	let config: MenuContext['config'] = $derived.by(() => {
-		if (!PARENT_CONTEXT) {
-			return {
-				id,
-				isSubMenu: false,
-				hasCheckmarks,
-				hasIcons,
-				openingDelay,
-				openOnHover,
-				persistOnItemActivation,
-				positionConfig,
-				parentHasCheckmarks: false,
-				parentHasIcons: false
-			};
-		} else {
-			return {
-				...PARENT_CONTEXT.config,
-				isSubMenu: true,
-				id,
-				hasCheckmarks,
-				hasIcons,
-				parentHasCheckmarks: !!PARENT_CONTEXT.config.hasCheckmarks,
-				parentHasIcons: !!PARENT_CONTEXT.config.hasIcons
-			};
-		}
-	});
+	const context: MenuContext = $state({
+		// A submenu carries its own id, icons and checkmarks, and inherits the opening behaviour
+		// and placement of the menu it hangs off.
+		config: {
+			get id() {
+				return id;
+			},
+			get isSubMenu() {
+				return !!PARENT_CONTEXT;
+			},
+			get hasCheckmarks() {
+				return hasCheckmarks;
+			},
+			get hasIcons() {
+				return hasIcons;
+			},
+			get parentHasCheckmarks() {
+				return !!PARENT_CONTEXT?.config.hasCheckmarks;
+			},
+			get parentHasIcons() {
+				return !!PARENT_CONTEXT?.config.hasIcons;
+			},
+			get openingDelay() {
+				return PARENT_CONTEXT ? PARENT_CONTEXT.config.openingDelay : openingDelay;
+			},
+			get openOnHover() {
+				return PARENT_CONTEXT ? PARENT_CONTEXT.config.openOnHover : openOnHover;
+			},
+			get persistOnItemActivation() {
+				return PARENT_CONTEXT ? PARENT_CONTEXT.config.persistOnItemActivation : persistOnItemActivation;
+			},
+			get positionConfig() {
+				return PARENT_CONTEXT ? PARENT_CONTEXT.config.positionConfig : positionConfig;
+			}
+		},
+		state: {
+			get open() {
+				return open;
+			},
+			set open(v) {
+				open = v;
+			},
+			get ref() {
+				return ref;
+			},
+			set ref(v) {
+				ref = v;
+			},
+			get locked() {
+				return locked;
+			},
+			set locked(v) {
+				locked = v;
+			},
+			get checkedValues() {
+				return checkedValues;
+			},
+			set checkedValues(v) {
+				checkedValues = v;
+			}
+		},
+		// A submenu reports to the root menu, so its own callbacks are never the ones invoked.
+		events: PARENT_CONTEXT?.events ?? {
+			onCheckedValueChange: (e, value) => onCheckedValueChange?.(e, value),
+			onOpenChange: (e, opened) => onOpenChange?.(e, opened)
+		},
+		methods: {
+			toggle: (e: Event) => {
+				const { state, events } = context;
 
-	const _state: MenuState = {
-		get open() {
-			return open;
-		},
-		set open(v) {
-			open = v;
-		},
-		get ref() {
-			return ref;
-		},
-		set ref(v) {
-			ref = v;
-		},
-		get locked() {
-			return locked;
-		},
-		set locked(v) {
-			locked = v;
-		},
-		get checkedValues() {
-			return checkedValues;
-		},
-		set checkedValues(v) {
-			checkedValues = v;
-		}
-	};
+				state.open = !state.open;
+				events.onOpenChange?.(e, state.open);
+			},
+			open: (e: Event) => {
+				const { state, events } = context;
 
-	let events: MenuContext['events'] = $derived.by(() => {
-		if (!PARENT_CONTEXT) {
-			return {
-				onCheckedValueChange: (e, value) => onCheckedValueChange?.(e, value),
-				onOpenChange: (e, opened) => onOpenChange?.(e, opened)
-			};
-		} else {
-			return PARENT_CONTEXT.events;
-		}
-	});
+				state.open = true;
+				events.onOpenChange?.(e, state.open);
+			},
+			close: (e: Event) => {
+				const { state, events } = context;
 
-	let methods: MenuContext['methods'] = $derived({
-		toggle: (e: Event) => {
-			_state.open = !_state.open;
-			events.onOpenChange?.(e, _state.open);
-		},
-		open: (e: Event) => {
-			_state.open = true;
-			events.onOpenChange?.(e, _state.open);
-		},
-		close: (e: Event) => {
-			_state.open = false;
-			events.onOpenChange?.(e, _state.open);
-		},
-		toggleCheckbox: (e: Event, value: string, name: string) => {
-			const current = _state.checkedValues?.[name] ?? [];
-			const updated = current.includes(value) ? current.filter((v) => v !== value) : [...current, value];
-			_state.checkedValues = { ..._state.checkedValues, [name]: updated };
-			events.onCheckedValueChange?.(e, _state.checkedValues!);
-		},
-		toggleRadio: (e: Event, value: string, name: string) => {
-			if (!_state.checkedValues?.[name]?.includes(value)) {
-				_state.checkedValues = { ..._state.checkedValues, [name]: [value] };
-				methods.close?.(e);
-				events.onCheckedValueChange?.(e, _state.checkedValues!);
+				state.open = false;
+				events.onOpenChange?.(e, state.open);
+			},
+			toggleCheckbox: (e: Event, value: string, name: string) => {
+				const { state, events } = context;
+
+				const current = state.checkedValues?.[name] ?? [];
+				const updated = current.includes(value) ? current.filter((v) => v !== value) : [...current, value];
+				state.checkedValues = { ...state.checkedValues, [name]: updated };
+				events.onCheckedValueChange?.(e, state.checkedValues!);
+			},
+			toggleRadio: (e: Event, value: string, name: string) => {
+				const { state, events, methods } = context;
+
+				if (!state.checkedValues?.[name]?.includes(value)) {
+					state.checkedValues = { ...state.checkedValues, [name]: [value] };
+					methods.close?.(e);
+					events.onCheckedValueChange?.(e, state.checkedValues!);
+				}
 			}
 		}
 	});
 
-	// svelte-ignore state_referenced_locally
-	setMenuContext({ config, state: _state, events, methods });
+	setMenuContext(context);
 </script>
 
 {@render children?.()}

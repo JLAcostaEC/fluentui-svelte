@@ -16,7 +16,7 @@
 
 	const { config, methods } = TREE_VIEW_CONTEXT;
 
-	const { size } = config;
+	const size = $derived(config.size);
 
 	const { handleCheck } = methods;
 </script>

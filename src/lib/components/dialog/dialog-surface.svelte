@@ -17,14 +17,14 @@
 
 	const { closeDialog } = methods;
 
-	const { type } = config;
-
-	if (type !== 'alert') {
-		onClickOutside(
-			() => ref,
-			() => closeDialog()
-		);
-	}
+	// Registered unconditionally and guarded from inside, so switching `type` after mount is honored.
+	onClickOutside(
+		() => ref,
+		() => {
+			if (config.type === 'alert') return;
+			closeDialog();
+		}
+	);
 
 	$effect(() => {
 		if (!ref) return;

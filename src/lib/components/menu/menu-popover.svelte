@@ -33,7 +33,15 @@
 
 	const reducedMotion = getReducedMotion();
 
-	const { positionConfig, id, isSubMenu, openOnHover, openingDelay } = context.config;
+	const positionConfig = $derived(context.config.positionConfig);
+
+	const id = $derived(context.config.id);
+
+	const isSubMenu = $derived(context.config.isSubMenu);
+
+	const openOnHover = $derived(context.config.openOnHover);
+
+	const openingDelay = $derived(context.config.openingDelay);
 
 	const { close } = context.methods;
 
@@ -56,16 +64,19 @@
 
 	let element: HTMLElement | null = $state(null);
 
-	const debounced = useDebounce((e: MouseEvent) => {
-		// Where the mouse is moving to
-		const to = e.relatedTarget as HTMLElement | null;
-		const isPopover = to?.id === `fs-menu-popover-${id}` || to?.closest(`#fs-menu-popover-${id}`);
-		const isTrigger =
-			to?.id === `fs-${isSubMenu ? 'submenu' : 'menu'}-trigger-${id}` ||
-			to?.closest(`#fs-${isSubMenu ? 'submenu' : 'menu'}-trigger-${id}`);
+	const debounced = useDebounce(
+		(e: MouseEvent) => {
+			// Where the mouse is moving to
+			const to = e.relatedTarget as HTMLElement | null;
+			const isPopover = to?.id === `fs-menu-popover-${id}` || to?.closest(`#fs-menu-popover-${id}`);
+			const isTrigger =
+				to?.id === `fs-${isSubMenu ? 'submenu' : 'menu'}-trigger-${id}` ||
+				to?.closest(`#fs-${isSubMenu ? 'submenu' : 'menu'}-trigger-${id}`);
 
-		if (to && !isPopover && !isTrigger && !_state.locked) close(e);
-	}, openingDelay || 0);
+			if (to && !isPopover && !isTrigger && !_state.locked) close(e);
+		},
+		() => openingDelay || 0
+	);
 
 	$effect.pre(() => {
 		duration = getCSSDuration('--fs-normal-duration') || 333;

@@ -74,44 +74,62 @@ Use the bindable `openItems` and `checkedItems` props on the root `TreeView` to 
 
 ## Component Props (TreeView)
 
-| Name              | Type                                         | Description                                                                                                     |
-| ----------------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `ref`             | `HTMLUListElement`                           | Bindable DOM reference of the root ul element.                                                                  |
-| `size`            | `'small' \| 'medium' \| 'large'`             | Visual size of the tree. Default is 'medium'.                                                                   |
-| `navigationMode`  | `'tree' \| 'treegrid'`                       | Keyboard navigation mode. Default is 'tree'.                                                                    |
-| `selectionMode`   | `'single' \| 'multiple'`                     | Selection mode for checkable items. Default is 'multiple'.                                                      |
-| `openItems`       | `string[] \| SvelteSet<string>`              | Bindable list or set of open item ids. Uses SvelteSet when a virtualizer is provided.                           |
-| `checkedItems`    | `string[] \| SvelteSet<string>`              | Bindable list or set of checked item ids. Uses SvelteSet when a virtualizer is provided.                        |
-| `onOpenChange`    | `(e: Event, openItems: string[]) => void`    | Callback fired when an item is expanded or collapsed.                                                           |
-| `onCheckedChange` | `(e: Event, checkedItems: string[]) => void` | Callback fired when an item is checked or unchecked.                                                            |
-| `virtualizer`     | `TreeViewVirtualizer`                        | Optional adapter for windowing or virtual list libraries. When provided, only the rendered slice is in the DOM. |
-| `children`        | `Snippet`                                    | The TreeViewItem children of the tree.                                                                          |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TreeViewProps -->
+
+| Name                                                | Type                                         | Default      | Description                                                                          |
+| --------------------------------------------------- | -------------------------------------------- | ------------ | ------------------------------------------------------------------------------------ |
+| `ref` _bindable_                                    | `HTMLUListElement`                           |              | The DOM reference of the tree element.                                               |
+| `size`                                              | `'small'` &#124; `'medium'` &#124; `'large'` | `'medium'`   | The size of every item in the tree.                                                  |
+| `navigationMode`                                    | `'tree'` &#124; `'treegrid'`                 | `'tree'`     | Whether the tree takes a single tab stop, or every row is reachable on its own.      |
+| `onOpenChange`                                      | `(e: Event, openItems: string[]) => void`    |              | Called whenever a branch opens or closes.                                            |
+| `selectionMode`                                     | `'single'` &#124; `'multiple'`               | `'multiple'` | How many items can be checked at a time.                                             |
+| `onCheckedChange`                                   | `(e: Event, checkedItems: string[]) => void` |              | Called whenever an item is checked or unchecked.                                     |
+| `virtualizer`                                       | `TreeViewVirtualizer`                        |              | Bridge to a windowing library. Only the rendered slice of items lives in the DOM.    |
+| `openItems` _bindable_                              | `string[]` &#124; `SvelteSet<string>`        |              | The ids of the open branches. A `SvelteSet` is required when a `virtualizer` is set. |
+| `checkedItems` _bindable_                           | `string[]` &#124; `SvelteSet<string>`        |              | The ids of the checked items. A `SvelteSet` is required when a `virtualizer` is set. |
+| `children`                                          | `Snippet`                                    |              | The items of the tree.                                                               |
+| `TreeViewVirtualProps` &#124; `TreeViewStaticProps` |                                              |              |                                                                                      |
+| Element Attributes (`ul`)                           |                                              |              |                                                                                      |
+
+<!-- /props:TreeViewProps -->
 
 ## Component Props (TreeViewItem)
 
-| Name              | Type                                                         | Description                                                                         |
-| ----------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
-| `id`              | `string`                                                     | Unique identifier of the item. Required for open and checked state tracking.        |
-| `type`            | `'item' \| 'branch'`                                         | Whether the item is a leaf ('item') or a branch that can contain a nested TreeView. |
-| `ref`             | `HTMLLIElement`                                              | Bindable DOM reference of the li element.                                           |
-| `value`           | `string \| number`                                           | Optional value associated with the item.                                            |
-| `text`            | `string`                                                     | Optional accessible text label used by the tree.                                    |
-| `open`            | `boolean`                                                    | Bindable open state for type='branch' items.                                        |
-| `checked`         | `boolean`                                                    | Bindable checked state for selectable items.                                        |
-| `indeterminate`   | `boolean`                                                    | Whether the item is in an indeterminate check state.                                |
-| `disabled`        | `boolean`                                                    | Disables the item.                                                                  |
-| `index`           | `number`                                                     | Explicit index — used with a virtualizer to keep keyboard navigation in sync.       |
-| `onOpenChange`    | `(e: Event, data: { id: string; open: boolean }) => void`    | Callback fired when this item is expanded or collapsed.                             |
-| `onCheckedChange` | `(e: Event, data: { id: string; checked: boolean }) => void` | Callback fired when this item is checked or unchecked.                              |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TreeViewItemProps -->
+
+| Name                      | Type                                                         | Default  | Description                                                                            |
+| ------------------------- | ------------------------------------------------------------ | -------- | -------------------------------------------------------------------------------------- |
+| `id`                      | `string`                                                     |          | The id of the item, used by the tree to track its state. Falls back to a generated id. |
+| `type`                    | `'item'` &#124; `'branch'`                                   | `'item'` | Whether the item holds children, and can therefore be opened.                          |
+| `ref`                     | `HTMLLIElement`                                              |          | The DOM reference of the item element.                                                 |
+| `value`                   | `string` &#124; `number`                                     | `id`     | The value reported by the tree events. Falls back to the id of the item.               |
+| `text`                    | `string`                                                     |          | The label of the item, used by the type-ahead navigation.                              |
+| `open`                    | `boolean`                                                    |          | Whether the branch is open.                                                            |
+| `checked`                 | `boolean`                                                    |          | Whether the item is checked.                                                           |
+| `indeterminate`           | `boolean`                                                    |          | Renders the checkbox in its mixed state, when only some children are checked.          |
+| `disabled`                | `boolean`                                                    |          | Disables the user interaction.                                                         |
+| `index`                   | `number`                                                     |          | The real index of the item in the data set. Required when the tree is virtualized.     |
+| `onOpenChange`            | `(e: Event, data: { id: string; open: boolean }) => void`    |          | Called when this branch opens or closes.                                               |
+| `onCheckedChange`         | `(e: Event, data: { id: string; checked: boolean }) => void` |          | Called when this item is checked or unchecked.                                         |
+| Element Attributes (`li`) |                                                              |          |                                                                                        |
+
+<!-- /props:TreeViewItemProps -->
 
 ## Component Props (TreeViewItemContent)
 
-| Name         | Type                   | Description                                                 |
-| ------------ | ---------------------- | ----------------------------------------------------------- |
-| `ref`        | `HTMLDivElement`       | Bindable DOM reference of the layout element.               |
-| `expandIcon` | `Snippet \| Component` | Custom icon rendered for the expand or collapse affordance. |
-| `iconBefore` | `Snippet \| Component` | Icon rendered before the item text.                         |
-| `iconAfter`  | `Snippet \| Component` | Icon rendered after the item text.                          |
-| `aside`      | `Snippet \| Component` | Content rendered on the trailing side of the row.           |
-| `actions`    | `Snippet \| Component` | Interactive actions rendered on hover or focus.             |
-| `children`   | `Snippet`              | The item label content.                                     |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TreeViewItemLayoutProps -->
+
+| Name                       | Type                         | Default | Description                                                           |
+| -------------------------- | ---------------------------- | ------- | --------------------------------------------------------------------- |
+| `ref`                      | `HTMLDivElement`             |         | The DOM reference of the layout element.                              |
+| `expandIcon`               | `Snippet` &#124; `Component` |         | Custom icon for the control that opens a branch.                      |
+| `iconBefore`               | `Snippet` &#124; `Component` |         | Content rendered before the label.                                    |
+| `iconAfter`                | `Snippet` &#124; `Component` |         | Content rendered after the label.                                     |
+| `aside`                    | `Snippet` &#124; `Component` |         | Content pinned to the end of the row.                                 |
+| `actions`                  | `Snippet` &#124; `Component` |         | Content pinned to the end of the row, revealed on hover and on focus. |
+| Element Attributes (`div`) |                              |         |                                                                       |
+
+<!-- /props:TreeViewItemLayoutProps -->

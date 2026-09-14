@@ -64,15 +64,21 @@ The `value` prop sets the value of the checkbox input. It is useful when the che
 
 ## Checkbox Props
 
-| Name                | Type                                          | Description                                                                                    |
-| ------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `wrapperAs`         | `'div' \| 'label'`                            | The element the wrapper renders as. Set to `label` to show a visible label. Defaults to `div`. |
-| `children`          | `Snippet`                                     | Label content rendered next to the input. Only allowed when `wrapperAs="label"`.               |
-| `checked`           | `boolean`                                     | Determines if the checkbox is checked.                                                         |
-| `indeterminate`     | `boolean`                                     | Sets the checkbox to an indeterminate state.                                                   |
-| `disabled`          | `boolean`                                     | Disables the checkbox, preventing user interaction.                                            |
-| `value`             | `string`                                      | The value of the checkbox input, useful for form submissions.                                  |
-| `wrapperAttributes` | `object`                                      | Additional attributes for the wrapper element.                                                 |
-| `ref`               | bindable `HTMLInputElement`                   | The DOM reference of the checkbox input element.                                               |
-| `wrapperRef`        | bindable `HTMLDivElement \| HTMLLabelElement` | The DOM reference of the checkbox wrapper element.                                             |
-| Input Attributes    |                                               | Additional attributes for the checkbox input element.                                          |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:CheckboxProps -->
+
+| Name                                            | Type                                       | Default   | Description                                                                                                                                                     |
+| ----------------------------------------------- | ------------------------------------------ | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                | `HTMLInputElement`                         |           | The DOM reference of the checkbox element.                                                                                                                      |
+| `wrapperAs`                                     | `'div'` &#124; `'label'`                   | `'label'` | The DOM element used to wrap the checkbox. `label` associates the children with the input; switch to `div` when the field is wrapped in a `<Label>` of its own. |
+| `wrapperRef` _bindable_                         | `HTMLDivElement` &#124; `HTMLLabelElement` |           | The DOM reference of the checkbox wrapper element.                                                                                                              |
+| `wrapperAttributes`                             | `PolymorphicProps`                         |           | The attributes to spread on the wrapper element.                                                                                                                |
+| `indeterminate` _bindable_                      | `boolean`                                  |           | Renders the checkbox in its mixed state, neither checked nor unchecked.                                                                                         |
+| `name`                                          | `string` &#124; `null`                     | `id`      | The name submitted with the form. Falls back to the id of the checkbox.                                                                                         |
+| `group`                                         | `string` &#124; `null`                     |           | The value of the group of checkboxes this input belongs to.                                                                                                     |
+| `checked` _bindable_                            | `boolean`                                  |           | Whether the checkbox is checked.                                                                                                                                |
+| `disabled`                                      | `boolean`                                  |           | Disables the user interaction.                                                                                                                                  |
+| `children`                                      | `Snippet`                                  |           | The content of the label. Only rendered when wrapperAs is set to label.                                                                                         |
+| `HTMLInputAttributes` without `on:`, `children` |                                            |           |                                                                                                                                                                 |
+
+<!-- /props:CheckboxProps -->

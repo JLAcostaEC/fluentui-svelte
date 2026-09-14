@@ -28,12 +28,16 @@ A toggle switch can be labeled, checked, or disabled.
 
 ## Component Props
 
-| Name               | Type                  | Description                                                  |
-| ------------------ | --------------------- | ------------------------------------------------------------ |
-| `ref`              | `HTMLInputElement`    | Get the DOM reference of the input element.                  |
-| `label`            | `string`              | The label for the toggle switch.                             |
-| `labelAttributes`  | `HTMLLabelAttributes` | Attributes to be spread on the label wrapper element.        |
-| `labelElement`     | `HTMLLabelElement`    | Get the DOM reference of the label element.                  |
-| `disabled`         | `boolean`             | Whether the toggle switch is disabled.                       |
-| `checked`          | `boolean`             | Whether the toggle switch is checked (on).                   |
-| Element Attributes | `object`              | Additional attributes to apply to the toggle switch element. |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:ToggleSwitchProps -->
+
+| Name                          | Type                  | Default | Description                                                |
+| ----------------------------- | --------------------- | ------- | ---------------------------------------------------------- |
+| `checked` _bindable_          | `boolean`             |         | Whether the switch is on.                                  |
+| `ref` _bindable_              | `HTMLInputElement`    |         | The DOM reference of the input element.                    |
+| `label`                       | `string`              |         | The label displayed next to the input element.             |
+| `labelAttributes`             | `HTMLLabelAttributes` |         | The attributes to spread on the label wrapping the switch. |
+| `labelElement`                | `HTMLLabelElement`    |         | The DOM reference of the label element.                    |
+| `SvelteHTMLElements['input']` |                       |         |                                                            |
+
+<!-- /props:ToggleSwitchProps -->

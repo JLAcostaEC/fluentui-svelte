@@ -91,17 +91,22 @@ A Persona can display presence information, such as online status or availabilit
 
 ## Component Props
 
-| Name            | Type             | Description                                                                                                                                                                  |
-| --------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`          | `string`         | The full name of the person.                                                                                                                                                 |
-| `primaryText`   | `string`         | Main text, usually the person's role or title.                                                                                                                               |
-| `secondaryText` | `string`         | Secondary text, for example location or status.                                                                                                                              |
-| `tertiaryText`  | `string`         | Tertiary text, for example team or department.                                                                                                                               |
-| `size`          | `number`         | Size in pixels for the avatar and text.                                                                                                                                      |
-| `textAlign`     | `string`         | Alignment of the text. Possible values are 'left', 'center', and 'right'.                                                                                                    |
-| `textPosition`  | `string`         | Position of the text relative to the avatar. Possible values are 'top', 'bottom', 'left', and 'right'.                                                                       |
-| `avatarAlign`   | `string`         | Cross-axis alignment of the avatar relative to the text. Possible values are 'start', 'center', and 'end'.                                                                   |
-| `avatar`        | `object`         | Avatar props object. See the Avatar component for details.                                                                                                                   |
-| `presence`      | `object`         | Presence object, for example { status: 'available' }. Status values are 'available', 'away', 'busy', 'do-not-disturb', 'offline', 'out-of-office', 'blocked', and 'unknown'. |
-| `presenceOnly`  | `boolean`        | Shows only the presence indicator, with no avatar or text.                                                                                                                   |
-| `element`       | `HTMLDivElement` | The DOM reference of the persona root element.                                                                                                                               |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:PersonaProps -->
+
+| Name                 | Type                                                       | Default    | Description                                                                                                   |
+| -------------------- | ---------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------- |
+| `name`               | `string`                                                   |            | The name of the person or entity represented by this Persona. It is also used by the avatar for its initials. |
+| `size`               | `number`                                                   | `42`       | The size of the avatar in pixels. The text scales with it.                                                    |
+| `primaryText`        | `string`                                                   |            | Text to display below the name.                                                                               |
+| `secondaryText`      | `string`                                                   |            | Text to display below the primary text.                                                                       |
+| `tertiaryText`       | `string`                                                   |            | Text to display below the secondary text.                                                                     |
+| `textAlign`          | `'left'` &#124; `'center'` &#124; `'right'`                | `'left'`   | How the text block is aligned.                                                                                |
+| `textPosition`       | `'top'` &#124; `'bottom'` &#124; `'left'` &#124; `'right'` | `'right'`  | Where the text block sits relative to the avatar.                                                             |
+| `presenceOnly`       | `boolean`                                                  |            | Renders the presence badge on its own, without the avatar behind it.                                          |
+| `avatarAlign`        | `'start'` &#124; `'center'` &#124; `'end'`                 | `'center'` | How the avatar is aligned against the text block.                                                             |
+| `element` _bindable_ | `HTMLDivElement`                                           |            | The DOM reference of the persona element.                                                                     |
+| `avatar`             | `AvatarProps`                                              |            | The props to spread on the avatar.                                                                            |
+| `presence`           | `BadgePresence`                                            |            | The presence badge to display as a status indicator.                                                          |
+
+<!-- /props:PersonaProps -->

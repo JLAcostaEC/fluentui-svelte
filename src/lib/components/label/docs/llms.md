@@ -54,14 +54,18 @@ Pass a `required` object to mark the label as required and render a required ind
 
 ## Component Props
 
-| Name            | Type                                        | Description                                                                     |
-| --------------- | ------------------------------------------- | ------------------------------------------------------------------------------- |
-| `label`         | `string`                                    | The text content of the label. Default: `'Label Element'`.                      |
-| `size`          | `'small' \| 'medium' \| 'large'`            | The size of the label text. Default: `'medium'`.                                |
-| `weight`        | `'regular' \| 'semibold'`                   | The font weight of the label. Default: `'regular'`.                             |
-| `labelPosition` | `'before' \| 'after' \| 'above' \| 'below'` | Position of the label text relative to the wrapped content. Default: `'after'`. |
-| `required`      | `{ message?: string; abbr?: string }`       | Marks the label as required and renders a required indicator (default `*`).     |
-| `disabled`      | `boolean`                                   | Renders the label in a disabled style and disables pointer events.              |
-| `class`         | `string`                                    | Additional classes applied to the label element.                                |
-| `ref`           | bindable `HTMLLabelElement`                 | The DOM reference of the label element.                                         |
-| `children`      | `Snippet`                                   | The content wrapped by the label (typically a form control).                    |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:LabelProps -->
+
+| Name                         | Type                                                          | Default           | Description                                                               |
+| ---------------------------- | ------------------------------------------------------------- | ----------------- | ------------------------------------------------------------------------- |
+| `label`                      | `string`                                                      | `'Label Element'` | The text of the label. Falls back to the rendered children.               |
+| `size`                       | `'small'` &#124; `'medium'` &#124; `'large'`                  | `'medium'`        | The size of the label text.                                               |
+| `weight`                     | `'regular'` &#124; `'semibold'`                               | `'regular'`       | The weight of the label text.                                             |
+| `labelPosition`              | `'before'` &#124; `'after'` &#124; `'above'` &#124; `'below'` | `'after'`         | Where the label sits relative to the field it describes.                  |
+| `required`                   | `{ abbr?: string; message: string; }`                         |                   | Marks the field as required, and describes why through the given message. |
+| `disabled`                   | `boolean`                                                     |                   | Renders the label as disabled, to match the field it describes.           |
+| `ref` _bindable_             | `HTMLLabelElement`                                            |                   | The DOM reference of the label element.                                   |
+| Element Attributes (`label`) |                                                               |                   |                                                                           |
+
+<!-- /props:LabelProps -->

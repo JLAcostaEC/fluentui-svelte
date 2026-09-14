@@ -54,11 +54,16 @@ The checked prop allows you to control the checked state of the radio button. Th
 
 ## Component Props
 
-| Name               | Type               | Description                                                                          |
-| ------------------ | ------------------ | ------------------------------------------------------------------------------------ |
-| `label`            | `string`           | The label text for the radio button.                                                 |
-| `group`            | `unknown`          | Bindable value representing a group of radio inputs that the input will be bound to. |
-| `checked`          | `boolean`          | Indicates whether the radio button is checked.                                       |
-| `disabled`         | `boolean`          | Indicates whether the radio button is disabled.                                      |
-| `ref`              | `HTMLInputElement` | Gets the DOM reference of the radio button element.                                  |
-| Element Attributes |                    | All standard HTML attributes for input elements can be applied.                      |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:RadioButtonProps -->
+
+| Name                         | Type               | Default | Description                                                                          |
+| ---------------------------- | ------------------ | ------- | ------------------------------------------------------------------------------------ |
+| `label`                      | `string`           |         | The label displayed next to the radio button.                                        |
+| `group` _bindable_           | `unknown`          |         | Bindable value representing a group of radio inputs that the input will be bound to. |
+| `checked` _bindable_         | `boolean`          | `false` | Whether the radio button is selected.                                                |
+| `ref` _bindable_             | `HTMLInputElement` |         | The DOM reference of the radio button element.                                       |
+| `labelAttributes`            | `PolymorphicProps` |         | The attributes to spread on the label wrapping the radio button.                     |
+| Element Attributes (`input`) |                    |         |                                                                                      |
+
+<!-- /props:RadioButtonProps -->

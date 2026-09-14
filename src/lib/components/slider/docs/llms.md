@@ -52,24 +52,36 @@ Set the `disabled` prop to prevent interaction with the slider.
 
 ## Component Props
 
-| Name               | Type                              | Description                                                                |
-| ------------------ | --------------------------------- | -------------------------------------------------------------------------- |
-| `value`            | `number`                          | The current value of the slider. Bindable. Default: `0`.                   |
-| `min`              | `number`                          | The minimum value of the range. Default: `0`.                              |
-| `max`              | `number`                          | The maximum value of the range. Default: `100`.                            |
-| `step`             | `number`                          | The increment between selectable values. Default: `1`.                     |
-| `ticks`            | `number[]`                        | An array of values at which to render tick marks. Default: `[]`.           |
-| `tickPlacement`    | `'around' \| 'before' \| 'after'` | Where tick marks are placed relative to the rail. Default: `around`.       |
-| `prefix`           | `string`                          | Text prepended to the value shown in the tooltip. Default: `''`.           |
-| `suffix`           | `string`                          | Text appended to the value shown in the tooltip. Default: `''`.            |
-| `track`            | `boolean`                         | Whether the filled track is shown. Default: `true`.                        |
-| `orientation`      | `'horizontal' \| 'vertical'`      | The layout direction of the slider. Default: `horizontal`.                 |
-| `reverse`          | `boolean`                         | Reverses the direction of the slider. Default: `false`.                    |
-| `disabled`         | `boolean`                         | Whether the slider is disabled. Default: `false`.                          |
-| `sync`             | `boolean`                         | Snaps the initial value to the nearest step on initialization.             |
-| `tooltip`          | `boolean`                         | Whether the value tooltip is shown while interacting. Default: `true`.     |
-| `tooltipPlacement` | `Placement`                       | The placement of the tooltip relative to the thumb. Default: `top`.        |
-| `tooltipContent`   | `string \| Snippet \| Component`  | Custom content for the tooltip. Defaults to `prefix` + `value` + `suffix`. |
-| `onChange`         | `(value: number) => void`         | Callback fired when the value changes.                                     |
-| `class`            | `string`                          | Additional CSS classes applied to the slider.                              |
-| `ref`              | `HTMLElement`                     | The DOM reference of the slider element. Bindable.                         |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:SliderProps -->
+
+| Name                       | Type                                          | Default        | Description                                                                              |
+| -------------------------- | --------------------------------------------- | -------------- | ---------------------------------------------------------------------------------------- |
+| `value` _bindable_         | `number`                                      | `0`            | The current value of the slider.                                                         |
+| `min`                      | `number`                                      | `0`            | The minimum value of the slider.                                                         |
+| `max`                      | `number`                                      | `100`          | The maximum value of the slider.                                                         |
+| `step`                     | `number`                                      | `1`            | How much the value moves on every step.                                                  |
+| `ticks`                    | `number[]`                                    | `[]`           | The values the tick marks are drawn at.                                                  |
+| `tickPlacement`            | `'around'` &#124; `'before'` &#124; `'after'` | `'around'`     | Where the tick marks sit relative to the rail.                                           |
+| `prefix`                   | `string`                                      | `''`           | Text prepended to the value in the tooltip.                                              |
+| `suffix`                   | `string`                                      | `''`           | Text appended to the value in the tooltip.                                               |
+| `track`                    | `boolean`                                     | `true`         | Whether to fill the rail up to the current value.                                        |
+| `orientation`              | `'horizontal'` &#124; `'vertical'`            | `'horizontal'` | The direction the slider runs in.                                                        |
+| `reverse`                  | `boolean`                                     | `false`        | Runs the slider from the maximum to the minimum instead.                                 |
+| `disabled`                 | `boolean`                                     | `false`        | Disables the user interaction.                                                           |
+| `sync`                     | `boolean`                                     |                | Snaps the thumb to the pointer as soon as it is pressed, instead of stepping towards it. |
+| `tooltip`                  | `boolean`                                     | `true`         | Whether to show the value in a tooltip while dragging.                                   |
+| `tooltipPlacement`         | `Placement`                                   | `'top'`        | Where the tooltip is placed relative to the thumb.                                       |
+| `tooltipContent`           | `string` &#124; `Snippet` &#124; `Component`  |                | Custom content for the tooltip, replacing the plain value.                               |
+| `onChange`                 | `(value: number) => void`                     |                | Called whenever the value changes.                                                       |
+| `class`                    | `string`                                      |                | The class to apply to the slider.                                                        |
+| `ref` _bindable_           | `HTMLElement`                                 |                | The DOM reference of the slider element.                                                 |
+| `inputRef` _bindable_      | `HTMLInputElement`                            |                | The DOM reference of the underlying input element.                                       |
+| `thumbRef` _bindable_      | `HTMLElement`                                 |                | The DOM reference of the thumb element.                                                  |
+| `tooltipRef` _bindable_    | `HTMLElement`                                 |                | The DOM reference of the tooltip element.                                                |
+| `railRef` _bindable_       | `HTMLElement`                                 |                | The DOM reference of the rail element.                                                   |
+| `trackRef` _bindable_      | `HTMLElement`                                 |                | The DOM reference of the track element.                                                  |
+| `tickBarRef` _bindable_    | `HTMLElement`                                 |                | The DOM reference of the tick bar element.                                               |
+| Element Attributes (`div`) |                                               |                |                                                                                          |
+
+<!-- /props:SliderProps -->

@@ -149,19 +149,24 @@ The footer renders the actions of the card at the bottom, spread across the avai
 
 ## Component Props
 
-| Name                 | Type                                      | Description                                                                                       |
-| -------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `ref`                | `HTMLElement`                             | The DOM reference of the card element.                                                            |
-| `as`                 | `string`                                  | The DOM element to render. Possible values: 'div', 'article', 'section', 'a'.                     |
-| `orientation`        | `string`                                  | The axis the card lays its parts out on. Possible values: 'horizontal', 'vertical'.               |
-| `selectable`         | `boolean`                                 | Lets the user select the card by clicking anywhere on it.                                         |
-| `showFloatingAction` | `boolean`                                 | Floats the selection checkbox over the top right corner of the card. Requires `selectable`.       |
-| `id`                 | `string`                                  | The id of the card element. Falls back to a generated one.                                        |
-| `selected`           | `boolean`                                 | Whether the card is selected. Requires `selectable`.                                              |
-| `disabled`           | `boolean`                                 | Disables user interaction.                                                                        |
-| `appearance`         | `string`                                  | The appearance of the card. Possible values: 'filled', 'outlined', 'subtle'.                      |
-| `onSelectionChange`  | `(id: string, selected: boolean) => void` | Called with the id of the card whenever its selection changes.                                    |
-| Element Attributes   |                                           | Based on the chosen component tag, you will get autocomplete for all HTML attributes of that tag. |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:CardProps -->
+
+| Name                  | Type                                                       | Default        | Description                                                                             |
+| --------------------- | ---------------------------------------------------------- | -------------- | --------------------------------------------------------------------------------------- |
+| `ref` _bindable_      | `CardElementDOMType[Tag]`                                  |                | The DOM reference of the card element.                                                  |
+| `as`                  | `'div'` &#124; `'article'` &#124; `'section'` &#124; `'a'` | `'div'`        | The DOM element to render.                                                              |
+| `orientation`         | `'horizontal'` &#124; `'vertical'`                         | `'horizontal'` | The axis the card lays its parts out on.                                                |
+| `selectable`          | `boolean`                                                  | `false`        | Lets the user select the card by clicking anywhere on it.                               |
+| `showFloatingAction`  | `boolean`                                                  | `false`        | Floats the selection checkbox over the top right corner of the card.                    |
+| `id`                  | `string`                                                   |                | The id of the card element. Falls back to a generated one.                              |
+| `selected` _bindable_ | `boolean`                                                  | `false`        | Whether the card is selected. Only available on selectable cards.                       |
+| `disabled`            | `boolean`                                                  | `false`        | Disables the user interaction.                                                          |
+| `appearance`          | `'filled'` &#124; `'outlined'` &#124; `'subtle'`           | `'filled'`     | A card can have its background and borders styled for greater emphasis or to be subtle. |
+| `onSelectionChange`   | `(id: string, selected: boolean) => void`                  |                | Called with the id of the card whenever its selection changes.                          |
+| HTML Attributes       |                                                            |                |                                                                                         |
+
+<!-- /props:CardProps -->
 
 ## CardPreview
 
@@ -169,13 +174,18 @@ The media shown at one edge of the card, with an optional logo overlaid on it.
 
 ### Component Props
 
-| Name               | Type                   | Description                                                                    |
-| ------------------ | ---------------------- | ------------------------------------------------------------------------------ |
-| `ref`              | `HTMLDivElement`       | The DOM reference of the preview element.                                      |
-| `logoSrc`          | `string`               | The URL of the logo overlaid on the bottom left corner of the preview.         |
-| `logoAlt`          | `string`               | The alternative text of the logo. Empty by default, so the logo is decorative. |
-| `children`         | `Snippet`              | The media to preview, usually an image.                                        |
-| Element Attributes | HTMLElement Attributes | All other attributes can be applied to the preview element.                    |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:CardPreviewProps -->
+
+| Name                                                | Type             | Default | Description                                                                             |
+| --------------------------------------------------- | ---------------- | ------- | --------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLDivElement` |         | The DOM reference of the preview element.                                               |
+| `logoSrc`                                           | `string`         |         | The URL of the logo overlaid on the bottom left corner of the preview.                  |
+| `logoAlt`                                           | `string`         | `''`    | The alternative text of the logo. Empty by default, which marks the logo as decorative. |
+| `children`                                          | `Snippet`        |         | The media to preview, usually an image.                                                 |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                  |         |                                                                                         |
+
+<!-- /props:CardPreviewProps -->
 
 ## CardHeader
 
@@ -183,15 +193,20 @@ The title of the card, with an optional image, description and action.
 
 ### Component Props
 
-| Name               | Type                             | Description                                                                           |
-| ------------------ | -------------------------------- | ------------------------------------------------------------------------------------- |
-| `ref`              | `HTMLDivElement`                 | The DOM reference of the header element.                                              |
-| `title`            | `Snippet \| Component \| string` | The title of the card. A snippet or a component receives the id of the title.         |
-| `image`            | `Snippet \| Component \| string` | The image rendered before the title. A string is used as the `src` of an `<img>`.     |
-| `imageAlt`         | `string`                         | The alternative text of a string image. Empty by default, so the image is decorative. |
-| `description`      | `Snippet \| Component \| string` | A second line of text below the title.                                                |
-| `action`           | `Snippet \| Component`           | The action rendered at the end of the header. Not available on selectable cards.      |
-| Element Attributes | HTMLElement Attributes           | All other attributes can be applied to the header element.                            |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:CardHeaderProps -->
+
+| Name                                                         | Type                                         | Default | Description                                                                                           |
+| ------------------------------------------------------------ | -------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                             | `HTMLDivElement`                             |         | The DOM reference of the header element.                                                              |
+| `title`                                                      | `Snippet` &#124; `Component` &#124; `string` |         | The title of the card. A snippet or a component receives the id the floating checkbox is labelled by. |
+| `image`                                                      | `Snippet` &#124; `Component` &#124; `string` |         | The image rendered before the title. A string is used as the `src` of an `<img>`.                     |
+| `imageAlt`                                                   | `string`                                     | `''`    | The alternative text of a string image. Empty by default, which marks the image as decorative.        |
+| `description`                                                | `Snippet` &#124; `Component` &#124; `string` |         | A second line of text below the title.                                                                |
+| `action`                                                     | `Snippet` &#124; `Component`                 |         | The action rendered at the end of the header. Not available on selectable cards.                      |
+| `HTMLAttributes<HTMLDivElement>` without `children`, `title` |                                              |         |                                                                                                       |
+
+<!-- /props:CardHeaderProps -->
 
 ## CardFooter
 
@@ -199,8 +214,13 @@ The actions shown at the bottom of the card.
 
 ### Component Props
 
-| Name               | Type                   | Description                                                                |
-| ------------------ | ---------------------- | -------------------------------------------------------------------------- |
-| `ref`              | `HTMLDivElement`       | The DOM reference of the footer element.                                   |
-| `action`           | `Snippet \| Component` | The actions rendered inside the footer. Not available on selectable cards. |
-| Element Attributes | HTMLElement Attributes | All other attributes can be applied to the footer element.                 |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:CardFooterProps -->
+
+| Name                                                | Type                         | Default | Description                                                                |
+| --------------------------------------------------- | ---------------------------- | ------- | -------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLDivElement`             |         | The DOM reference of the footer element.                                   |
+| `action`                                            | `Snippet` &#124; `Component` |         | The actions rendered inside the footer. Not available on selectable cards. |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                              |         |                                                                            |
+
+<!-- /props:CardFooterProps -->

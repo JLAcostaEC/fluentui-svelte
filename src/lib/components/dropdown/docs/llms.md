@@ -50,21 +50,40 @@ Set the `multiple` prop to allow selecting more than one option.
 
 ## Component Props
 
-| Name              | Type                          | Description                                                           |
-| ----------------- | ----------------------------- | --------------------------------------------------------------------- |
-| `value`           | bindable `string \| string[]` | The selected value, or an array of values when `multiple` is set.     |
-| `multiple`        | `boolean`                     | Allow selecting more than one option.                                 |
-| `placeholder`     | `string`                      | Text shown when no option is selected. Default: `'Select an option'`. |
-| `disabled`        | `boolean`                     | Disables user interaction.                                            |
-| `flyoutMaxHeight` | `number`                      | Maximum height of the options flyout before it scrolls.               |
-| `name`            | `string`                      | Name of the underlying form control.                                  |
-| `ref`             | bindable `HTMLElement`        | The DOM reference of the dropdown element.                            |
-| `children`        | `Snippet`                     | The `DropdownOption` items to render.                                 |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DropdownProps -->
+
+| Name                                                 | Type                       | Default              | Description                                                             |
+| ---------------------------------------------------- | -------------------------- | -------------------- | ----------------------------------------------------------------------- |
+| `value` _bindable_                                   | `string` &#124; `string[]` | `multiple ? [] : ''` | The selected value. An array of values when `multiple` is set.          |
+| `multiple`                                           | `boolean`                  |                      | Allows more than one option to be selected at a time.                   |
+| `placeholder`                                        | `string`                   | `'Select an option'` | The text shown by the trigger while no option is selected.              |
+| `disabled`                                           | `boolean`                  |                      | Disables the user interaction.                                          |
+| `name`                                               | `string` &#124; `null`     | `id`                 | The name submitted with the form. Falls back to the id of the dropdown. |
+| `ref` _bindable_                                     | `HTMLDivElement`           |                      | The DOM reference of the dropdown element.                              |
+| `onclick`                                            | `(e: MouseEvent) => void`  |                      | Called when the dropdown is clicked.                                    |
+| `wrapperProps`                                       | `HTMLAttributes`           |                      | The attributes to spread on the wrapper element.                        |
+| `buttonRef` _bindable_                               | `HTMLButtonElement`        |                      | The DOM reference of the button that opens the dropdown.                |
+| `buttonProps`                                        | `HTMLButtonAttributes`     |                      | The attributes to spread on the button that opens the dropdown.         |
+| `inputRef`                                           | `HTMLInputElement`         |                      | The DOM reference of the hidden input holding the value.                |
+| `flyoutRef` _bindable_                               | `HTMLDivElement`           |                      | The DOM reference of the flyout element.                                |
+| `flyoutProps`                                        | `FlyoutProps`              |                      | The props to spread on the flyout.                                      |
+| `flyoutMaxHeight`                                    | `string`                   |                      | The maximum height of the flyout, as a CSS length.                      |
+| `listboxRef` _bindable_                              | `HTMLUListElement`         |                      | The DOM reference of the listbox element.                               |
+| `listboxProps`                                       | `ListViewProps`            |                      | The props to spread on the listbox rendered inside the flyout.          |
+| `DropdownMultipleValue` &#124; `DropdownSingleValue` |                            |                      |                                                                         |
+| `HTMLInputAttributes` without `value`, `onclick`     |                            |                      |                                                                         |
+
+<!-- /props:DropdownProps -->
 
 ## DropdownOption Props
 
-| Name       | Type      | Description                                                                    |
-| ---------- | --------- | ------------------------------------------------------------------------------ |
-| `value`    | `string`  | The value of the option, used for selection.                                   |
-| `text`     | `string`  | Plain-text label used to display the selection when the flyout is closed.      |
-| `children` | `Snippet` | The content rendered for the option (can be rich content such as a `Persona`). |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DropdownOptionProps -->
+
+| Name                      | Type     | Default | Description                                                                                      |
+| ------------------------- | -------- | ------- | ------------------------------------------------------------------------------------------------ |
+| `text`                    | `string` |         | The text shown by the dropdown once the option is selected. Falls back to the rendered children. |
+| `ListViewItemProps<'li'>` |          |         |                                                                                                  |
+
+<!-- /props:DropdownOptionProps -->

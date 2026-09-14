@@ -50,18 +50,23 @@ A button can have its content and borders styled for greater emphasis or to be s
 
 ## Component Props
 
-| Name                | Type                   | Description                                                                                       |
-| ------------------- | ---------------------- | ------------------------------------------------------------------------------------------------- |
-| `ref`               | `HTMLElement`          | The DOM reference of the button element.                                                          |
-| `as`                | `string`               | The DOM element to render. Possible values: 'button', 'a', 'div'.                                 |
-| `disabled`          | `boolean`              | Disables user interaction.                                                                        |
-| `shape`             | `string`               | The shape of the button or buttons. Possible values: 'circular', 'rounded', 'square'.             |
-| `appearance`        | `string`               | The appearance of the button or buttons. Possible values: 'accent', 'standard', 'subtle'.         |
-| `disabledFocusable` | `boolean`              | Allows the button to be focusable even when disabled.                                             |
-| `isMenuButton`      | `boolean`              | Adds an icon that indicates the button triggers a menu.                                           |
-| `indicatorPosition` | `'before' \| 'after'`  | The position of the icon. Possible values: 'before', 'after'.                                     |
-| `indicatorIcon`     | `Snippet \| Component` | The icon used as the menu indicator. Defaults to a chevron-down icon.                             |
-| Element Attributes  |                        | Based on the chosen component tag, you will get autocomplete for all HTML attributes of that tag. |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:ButtonProps -->
+
+| Name                | Type                                              | Default     | Description                                                                            |
+| ------------------- | ------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------- |
+| `ref` _bindable_    | `ButtonElementDOMType[T]`                         |             | The DOM reference of the button element.                                               |
+| `as`                | `'button'` &#124; `'a'` &#124; `'div'`            | `'button'`  | The DOM element to render.                                                             |
+| `disabled`          | `boolean`                                         |             | Disables the user interaction.                                                         |
+| `shape`             | `'circular'` &#124; `'rounded'` &#124; `'square'` | `'rounded'` | A button can be rounded, circular, or square.                                          |
+| `appearance`        | `'accent'` &#124; `'standard'` &#124; `'subtle'`  | `'accent'`  | A button can have its content and borders styled for greater emphasis or to be subtle. |
+| `disabledFocusable` | `boolean`                                         | `false`     | When set, allows the button to be focusable even when it has been disabled.            |
+| `isMenuButton`      | `boolean`                                         |             | Add an icon that indicates the button triggers a menu.                                 |
+| `indicatorPosition` | `'before'` &#124; `'after'`                       | `'after'`   | Position of the menu indicator relative to the button content.                         |
+| `indicatorIcon`     | `Snippet` &#124; `Component`                      |             | The icon used to indicate the button triggers a menu.                                  |
+| HTML Attributes     |                                                   |             |                                                                                        |
+
+<!-- /props:ButtonProps -->
 
 ## Split Button
 
@@ -88,15 +93,19 @@ To add a menu to the split button, please refer to the Menu documentation for de
 
 ### Component Props
 
-| Name                      | Type                    | Description                                                                               |
-| ------------------------- | ----------------------- | ----------------------------------------------------------------------------------------- |
-| `wrapperRef`              | `HTMLDivElement`        | The DOM reference of the split button wrapper element.                                    |
-| `primaryButtonRef`        | `HTMLButtonElement`     | The DOM reference of the primary button element.                                          |
-| `primaryButtonProps`      | `ButtonProps<'button'>` | Additional props to pass to the primary button.                                           |
-| `menuTriggerRef`          | `HTMLButtonElement`     | The DOM reference of the menu trigger button element.                                     |
-| `menuTriggerProps`        | `ButtonProps<'button'>` | Additional props to pass to the menu trigger button.                                      |
-| `class`                   | `string`                | Additional classes to add to the split button wrapper element.                            |
-| `shape`                   | `string`                | The shape of the button or buttons. Possible values: 'circular', 'rounded', 'square'.     |
-| `appearance`              | `string`                | The appearance of the button or buttons. Possible values: 'accent', 'standard', 'subtle'. |
-| `disabled`                | `boolean`               | Disables user interaction.                                                                |
-| WrapperElement Attributes | HTMLElement Attributes  | All other attributes can be applied to the split button wrapper element.                  |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:SplitButtonProps -->
+
+| Name                          | Type                                              | Default     | Description                                                                                  |
+| ----------------------------- | ------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------- |
+| `appearance`                  | `'accent'` &#124; `'standard'` &#124; `'subtle'`  | `'accent'`  | Both buttons can have their content and borders styled for greater emphasis or to be subtle. |
+| `shape`                       | `'circular'` &#124; `'rounded'` &#124; `'square'` | `'rounded'` | Both buttons can be rounded, circular, or square.                                            |
+| `disabled`                    | `boolean`                                         | `false`     | Disables the user interaction on both buttons.                                               |
+| `primaryButtonProps`          | `ButtonProps`                                     |             | The props to spread on the primary button.                                                   |
+| `menuTriggerProps`            | `ButtonProps`                                     |             | The props to spread on the button that opens the menu.                                       |
+| `wrapperRef` _bindable_       | `HTMLDivElement`                                  |             | The DOM reference of the element wrapping both buttons.                                      |
+| `primaryButtonRef` _bindable_ | `HTMLButtonElement`                               |             | The DOM reference of the primary button.                                                     |
+| `menuTriggerRef` _bindable_   | `HTMLButtonElement`                               |             | The DOM reference of the button that opens the menu.                                         |
+| HTML Attributes               |                                                   |             |                                                                                              |
+
+<!-- /props:SplitButtonProps -->

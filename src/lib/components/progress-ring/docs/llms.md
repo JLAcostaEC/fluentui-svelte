@@ -62,15 +62,22 @@ The status prop allows you to set the status of the progress ring for visual fee
 
 ## Component Props
 
-| Name            | Type                  | Description                                                       |
-| --------------- | --------------------- | ----------------------------------------------------------------- |
-| `value`         | `number`              | The percentage of the progress ring that is filled.               |
-| `min`           | `number`              | The minimum value of the progress ring. Default is 0.             |
-| `max`           | `number`              | The maximum value of the progress ring. Default is 100.           |
-| `size`          | `number`              | The size of the progress ring in pixels. Default is 32.           |
-| `indeterminate` | `boolean`             | If true, the progress ring displays an indeterminate state.       |
-| `hideRail`      | `boolean`             | If true, the progress ring hides the rail.                        |
-| `status`        | `'paused' \| 'error'` | The status of the progress ring, for example 'paused' or 'error'. |
-| `ref`           | `SVGElement`          | The DOM reference to the SVG element.                             |
-| `railElement`   | `SVGCircleElement`    | The DOM reference to the rail element.                            |
-| `trackElement`  | `SVGCircleElement`    | The DOM reference to the track element.                           |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:ProgressRingProps -->
+
+| Name                      | Type                        | Default | Description                                                        |
+| ------------------------- | --------------------------- | ------- | ------------------------------------------------------------------ |
+| `value` _bindable_        | `number`                    | `0`     | The current value of the progress ring.                            |
+| `min`                     | `number`                    | `0`     | The minimum value of the progress ring.                            |
+| `max`                     | `number`                    | `100`   | The maximum value of the progress ring.                            |
+| `indeterminate`           | `boolean`                   |         | Spins the ring continuously instead of reporting a value.          |
+| `hideRail`                | `boolean`                   |         | Whether to hide the rail element.                                  |
+| `size`                    | `number`                    | `32`    | The size of the progress ring in pixels.                           |
+| `ref` _bindable_          | `SVGElement`                |         | The DOM reference of the progress ring element.                    |
+| `railElement` _bindable_  | `SVGCircleElement`          |         | The DOM reference of the rail element.                             |
+| `trackElement` _bindable_ | `SVGCircleElement`          |         | The DOM reference of the track element.                            |
+| `status`                  | `'paused'` &#124; `'error'` |         | The current status of the progress ring, which recolors the track. |
+| `class`                   | `string`                    |         | The class to apply to the progress ring.                           |
+| Element Attributes        |                             |         |                                                                    |
+
+<!-- /props:ProgressRingProps -->

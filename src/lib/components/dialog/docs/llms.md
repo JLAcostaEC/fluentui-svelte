@@ -80,52 +80,77 @@ Add a `DialogActions` region to render action buttons in the dialog footer. Use 
 
 ## Dialog Props
 
-| Name           | Type                                | Description                                        |
-| -------------- | ----------------------------------- | -------------------------------------------------- |
-| `type`         | `'modal' \| 'non-modal' \| 'alert'` | The behavior type of the dialog. Default: `modal`. |
-| `open`         | bindable `boolean`                  | Whether the dialog is open.                        |
-| `onOpenChange` | `(open: boolean) => void`           | Callback fired when the dialog opens or closes.    |
-| `children`     | `Snippet`                           | The dialog sub-components to render.               |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DialogProps -->
+
+| Name              | Type                                            | Default   | Description                                       |
+| ----------------- | ----------------------------------------------- | --------- | ------------------------------------------------- |
+| `type`            | `'modal'` &#124; `'non-modal'` &#124; `'alert'` | `'modal'` | How the dialog behaves once open.                 |
+| `open` _bindable_ | `boolean`                                       |           | Controls the open state of the dialog.            |
+| `onOpenChange`    | `(open: boolean) => void`                       |           | Called whenever the dialog opens or closes.       |
+| `children`        | `Snippet`                                       |           | The parts of the dialog: a trigger and a surface. |
+
+<!-- /props:DialogProps -->
 
 ## DialogTrigger Props
 
-| Name           | Type                    | Description                              |
-| -------------- | ----------------------- | ---------------------------------------- |
-| `ref`          | `HTMLButtonElement`     | The DOM reference of the trigger button. |
-| `children`     | `Snippet`               | The content of the trigger button.       |
-| ...ButtonProps | `ButtonProps<'button'>` | Inherits all `Button` props.             |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DialogTriggerProps -->
+
+| Name                    | Type                | Default | Description                               |
+| ----------------------- | ------------------- | ------- | ----------------------------------------- |
+| `ref`                   | `HTMLButtonElement` |         | The DOM reference of the trigger element. |
+| `ButtonProps<'button'>` |                     |         |                                           |
+
+<!-- /props:DialogTriggerProps -->
 
 ## DialogSurface Props
 
-| Name          | Type                                | Description                                      |
-| ------------- | ----------------------------------- | ------------------------------------------------ |
-| `ref`         | bindable `HTMLDialogElement`        | The DOM reference of the dialog element.         |
-| `children`    | `Snippet`                           | The content to render inside the dialog surface. |
-| ...Attributes | `HTMLAttributes<HTMLDialogElement>` | All native `<dialog>` attributes are forwarded.  |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DialogSurfaceProps -->
+
+| Name                          | Type                | Default | Description                              |
+| ----------------------------- | ------------------- | ------- | ---------------------------------------- |
+| `ref` _bindable_              | `HTMLDialogElement` |         | The DOM reference of the dialog element. |
+| Element Attributes (`dialog`) |                     |         |                                          |
+
+<!-- /props:DialogSurfaceProps -->
 
 ## DialogTitle Props
 
-| Name          | Type                   | Description                                                   |
-| ------------- | ---------------------- | ------------------------------------------------------------- |
-| `as`          | `'div' \| 'h1'`–`'h6'` | The element to render the title as. Default: `h3`.            |
-| `ref`         | bindable element       | The DOM reference of the title element.                       |
-| `children`    | `Snippet`              | The title content.                                            |
-| ...Attributes | Polymorphic            | All HTML attributes of the chosen `as` element are forwarded. |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DialogTitleProps -->
+
+| Name             | Type                                         | Default | Description                              |
+| ---------------- | -------------------------------------------- | ------- | ---------------------------------------- |
+| `ref` _bindable_ | `HTMLDivElement` &#124; `HTMLHeadingElement` |         | The DOM reference of the title element.  |
+| `as`             | `DialogTitleTag`                             | `'h3'`  | The HTML element to render the title as. |
+| HTML Attributes  |                                              |         |                                          |
+
+<!-- /props:DialogTitleProps -->
 
 ## DialogContent Props
 
-| Name          | Type                             | Description                                   |
-| ------------- | -------------------------------- | --------------------------------------------- |
-| `ref`         | `HTMLDivElement`                 | The DOM reference of the content element.     |
-| `children`    | `Snippet`                        | The content to render inside the dialog body. |
-| ...Attributes | `HTMLAttributes<HTMLDivElement>` | All native `<div>` attributes are forwarded.  |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DialogContentProps -->
+
+| Name                       | Type             | Default | Description                               |
+| -------------------------- | ---------------- | ------- | ----------------------------------------- |
+| `ref`                      | `HTMLDivElement` |         | The DOM reference of the content element. |
+| Element Attributes (`div`) |                  |         |                                           |
+
+<!-- /props:DialogContentProps -->
 
 ## DialogActions Props
 
-| Name          | Type                             | Description                                             |
-| ------------- | -------------------------------- | ------------------------------------------------------- |
-| `ref`         | bindable `HTMLDivElement`        | The DOM reference of the actions element.               |
-| `position`    | `'start' \| 'center' \| 'end'`   | Horizontal alignment of the actions. Default: `end`.    |
-| `fluid`       | `boolean`                        | Whether the actions container uses a full-width layout. |
-| `children`    | `Snippet`                        | The action elements to render, typically buttons.       |
-| ...Attributes | `HTMLAttributes<HTMLDivElement>` | All native `<div>` attributes are forwarded.            |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DialogActionsProps -->
+
+| Name                       | Type                                       | Default | Description                                                 |
+| -------------------------- | ------------------------------------------ | ------- | ----------------------------------------------------------- |
+| `ref` _bindable_           | `HTMLDivElement`                           |         | The DOM reference of the actions element.                   |
+| `fluid`                    | `boolean`                                  |         | Stretches every action to share the available width evenly. |
+| `position`                 | `'start'` &#124; `'center'` &#124; `'end'` | `'end'` | Where the actions sit along the main axis.                  |
+| Element Attributes (`div`) |                                            |         |                                                             |
+
+<!-- /props:DialogActionsProps -->

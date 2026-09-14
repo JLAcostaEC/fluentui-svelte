@@ -42,6 +42,15 @@ export default defineConfig({
 			description: 'i18n'
 		},
 		{
+			name: 'llms',
+			files: ['src/lib/components/**/docs/llms.md'],
+			columns: ['name', 'type', 'default', 'description'],
+			// The machine lane: plain English, and absolute glossary links, because an `llms.md`
+			// is read away from the site that would resolve a root-relative one.
+			description: 'text',
+			glossary: 'https://fluentui-svelte.dev/docs/types/'
+		},
+		{
 			name: 'types',
 			files: ['src/routes/docs/types/+page.svx']
 		}

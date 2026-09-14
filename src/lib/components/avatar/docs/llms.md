@@ -76,17 +76,23 @@ An avatar can have its color automatically picked based on the name prop, or idF
 
 ## Component Props
 
-| Name               | Type                     | Description                                                                                                                                                                              |
-| ------------------ | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`             | `string`                 | The name of the person or entity represented by this Avatar. Used to determine initials and for accessibility tools.                                                                     |
-| `image`            | `{ src: string }`        | The Avatar image. It can only be a single image URL.                                                                                                                                     |
-| `ref`              | `HTMLDivElement`         | The DOM reference of the avatar element.                                                                                                                                                 |
-| `size`             | `number`                 | Size of the avatar in pixels.                                                                                                                                                            |
-| `shape`            | `string`                 | The shape of the avatar. Possible values: 'circular', 'rounded', 'square'.                                                                                                               |
-| `color`            | `string`                 | The color used when displaying either an icon or initials. Supports system colors. Possible values: 'information', 'attention', 'warning', 'success', 'critical', 'colorful'.            |
-| `active`           | `string`                 | Optional activity indicator. Possible values: 'active', 'inactive'. Active decorates the avatar according to activeAppearance. Inactive reduces size and makes it partially transparent. |
-| `activeAppearance` | `string`                 | The appearance used when active is set to active. Possible values: 'ring', 'shadow', 'ring-shadow'.                                                                                      |
-| `initials`         | `string`                 | Custom initials. By default, initials are derived from the name prop using the getInitials function. They are displayed when there is no image.                                          |
-| `idForColor`       | `string`                 | A string used instead of the name to determine the color when color is set to colorful. Useful when a name is unavailable but another unique identifier exists.                          |
-| `icon`             | `Snippet` \| `Component` | The icon to display when the avatar does not have an image or initials.                                                                                                                  |
-| `badge`            | `object`                 | The badge to display as a status indicator. It can include a custom icon.                                                                                                                |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:AvatarProps -->
+
+| Name               | Type                                                                           | Default       | Description                                                                                                     |
+| ------------------ | ------------------------------------------------------------------------------ | ------------- | --------------------------------------------------------------------------------------------------------------- |
+| `name`             | `string`                                                                       | `'Avatar'`    | The name of the person or entity represented by this Avatar. This should always be provided if it is available. |
+| `image`            | `{ src: string; }`                                                             |               | The Avatar's image                                                                                              |
+| `ref` _bindable_   | `HTMLDivElement`                                                               |               | The DOM reference of the avatar element.                                                                        |
+| `size`             | `number`                                                                       | `48`          | Size of the avatar in pixels.                                                                                   |
+| `shape`            | `'circular'` &#124; `'rounded'` &#124; `'square'`                              | `'circular'`  | The avatar can have a circular, rounded or square shape.                                                        |
+| `color`            | [`Colors`](https://fluentui-svelte.dev/docs/types/#colors) &#124; `'colorful'` | `'attention'` | The color when displaying either an icon or initials. For now it only supports system colors (plus colorful).   |
+| `active`           | `'active'` &#124; `'inactive'`                                                 |               | Optional activity indicator                                                                                     |
+| `activeAppearance` | `'ring'` &#124; `'shadow'` &#124; `'ring-shadow'`                              | `'ring'`      | The appearance when `active="active"`                                                                           |
+| `initials`         | `string`                                                                       | `name`        | Custom initials by default they will be derived from the `name` prop.                                           |
+| `idForColor`       | `string`                                                                       |               | Specify a string to be used instead of the name, to determine which color to use when color="colorful".         |
+| `icon`             | `Snippet` &#124; `Component`                                                   |               | Icon to be displayed when the avatar doesn't have an image or initials.                                         |
+| `badge`            | `BadgePresence`                                                                |               | The badge to display as a status indicator. (you can use with a custom icon)                                    |
+| HTML Attributes    |                                                                                |               |                                                                                                                 |
+
+<!-- /props:AvatarProps -->

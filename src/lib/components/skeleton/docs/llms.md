@@ -57,11 +57,16 @@ The `as` prop lets you choose the HTML tag used to render the skeleton. Possible
 
 ## Component Props
 
-| Name               | Type                                | Description                                                                                                               |
-| ------------------ | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `as`               | `'div' \| 'span'`                   | The HTML element used to render the skeleton. Default: `'div'`.                                                           |
-| `animation`        | `'wave' \| 'pulse'`                 | The animation type for the skeleton. Default: `'wave'`.                                                                   |
-| `shape`            | `'circle' \| 'rounded' \| 'square'` | The shape of the skeleton. Default: `'rounded'`.                                                                          |
-| `justify`          | `boolean`                           | If `true` the skeleton fills the full width of its container; otherwise it keeps a `1:1` aspect ratio based on its width. |
-| `element`          | `HTMLElement`                       | The DOM reference of the skeleton element (`bind:element`).                                                               |
-| Element Attributes |                                     | All other attributes are passed to the root element of the skeleton.                                                      |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:SkeletonProps -->
+
+| Name             | Type                                              | Default     | Description                                                   |
+| ---------------- | ------------------------------------------------- | ----------- | ------------------------------------------------------------- |
+| `as`             | `'div'` &#124; `'span'`                           | `'div'`     | The HTML element to render the skeleton as.                   |
+| `animation`      | `'wave'` &#124; `'pulse'`                         | `'wave'`    | The animation played while the content is loading.            |
+| `shape`          | `'circular'` &#124; `'rounded'` &#124; `'square'` | `'rounded'` | The skeleton can have a circular, rounded or square shape.    |
+| `justify`        | `boolean`                                         |             | The skeleton is justified to the full width of the container. |
+| `ref` _bindable_ | `HTMLElement`                                     |             | The DOM reference of the skeleton element.                    |
+| HTML Attributes  |                                                   |             |                                                               |
+
+<!-- /props:SkeletonProps -->

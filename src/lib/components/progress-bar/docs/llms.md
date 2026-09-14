@@ -55,13 +55,21 @@ The status prop allows you to set the status of the progress bar to 'paused' or 
 
 ## Component Props
 
-| Name                    | Type                           | Description                                               |
-| ----------------------- | ------------------------------ | --------------------------------------------------------- |
-| `value`                 | bindable `number \| undefined` | The current progress value of the bar, between 0 and 100. |
-| `indeterminate`         | `boolean`                      | If true, the progress bar enters an indeterminate state.  |
-| `hideRail`              | `boolean`                      | If true, the progress bar rail is hidden.                 |
-| `status`                | `'paused' \| 'error'`          | The current status of the progress bar.                   |
-| `element`               | bindable `SVGElement`          | The DOM reference of the progress bar element.            |
-| `railElement`           | bindable `SVGRectElement`      | The DOM reference of the rail element.                    |
-| `trackElement`          | bindable `SVGRectElement`      | The DOM reference of the track element.                   |
-| `secondaryTrackElement` | bindable `SVGRectElement`      | The DOM reference of the secondary track element.         |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:ProgressBarProps -->
+
+| Name                               | Type                        | Default | Description                                                                     |
+| ---------------------------------- | --------------------------- | ------- | ------------------------------------------------------------------------------- |
+| `value` _bindable_                 | `number` &#124; `null`      |         | The current value of the progress bar. Leave it unset for an indeterminate bar. |
+| `class`                            | `string`                    |         | The class to apply to the progress bar.                                         |
+| `ref` _bindable_                   | `SVGElement`                |         | The DOM reference of the progress bar element.                                  |
+| `min`                              | `number`                    | `0`     | The minimum value of the progress bar.                                          |
+| `max`                              | `number`                    | `100`   | The maximum value of the progress bar.                                          |
+| `hideRail`                         | `boolean`                   |         | Whether to hide the rail element.                                               |
+| `railElement` _bindable_           | `SVGRectElement`            |         | The DOM reference of the rail element.                                          |
+| `secondaryTrackElement` _bindable_ | `SVGRectElement`            |         | The DOM reference of the secondary track element, used while indeterminate.     |
+| `trackElement` _bindable_          | `SVGRectElement`            |         | The DOM reference of the track element.                                         |
+| `status`                           | `'paused'` &#124; `'error'` |         | The current status of the progress bar, which recolors the track.               |
+| Element Attributes                 |                             |         |                                                                                 |
+
+<!-- /props:ProgressBarProps -->

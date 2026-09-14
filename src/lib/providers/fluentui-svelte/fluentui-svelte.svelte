@@ -20,21 +20,19 @@
 	// Syncing
 	let reducedMotion = $derived(userReducedMotion.current ?? prefersReducedMotion.current);
 
-	const _state: FSProviderContext['state'] = {
-		get tabspotInstance() {
-			return tabspotInstance;
-		},
-		get reducedMotion() {
-			return reducedMotion;
-		},
-		get theme() {
-			return mode.current;
-		}
-	};
-
-	setGlobalFSContext({
+	const context: FSProviderContext = $state({
 		config: null,
-		state: _state,
+		state: {
+			get tabspotInstance() {
+				return tabspotInstance;
+			},
+			get reducedMotion() {
+				return reducedMotion;
+			},
+			get theme() {
+				return mode.current;
+			}
+		},
 		events: null,
 		methods: {
 			setReducedMotion: (value) => {
@@ -45,6 +43,8 @@
 			}
 		}
 	});
+
+	setGlobalFSContext(context);
 
 	onMount(() => {
 		tabspotInstance ??= tabspot();
@@ -57,7 +57,7 @@
 	$effect(() => {
 		const root = document.documentElement;
 
-		root.dataset.fsReducedMotion = String(_state.reducedMotion);
+		root.dataset.fsReducedMotion = String(context.state.reducedMotion);
 
 		return () => {
 			delete root.dataset.fsReducedMotion;

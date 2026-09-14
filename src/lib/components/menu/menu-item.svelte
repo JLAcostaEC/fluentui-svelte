@@ -29,7 +29,11 @@
 
 	if (!context) throw new Error(`No MenuContext found for ${MENU_COMPONENT_NAME}.`);
 
-	const { hasIcons, hasCheckmarks, persistOnItemActivation } = context.config;
+	const hasIcons = $derived(context.config.hasIcons);
+
+	const hasCheckmarks = $derived(context.config.hasCheckmarks);
+
+	const persistOnItemActivation = $derived(context.config.persistOnItemActivation);
 
 	const { toggle } = context.methods;
 

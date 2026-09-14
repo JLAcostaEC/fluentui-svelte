@@ -47,20 +47,20 @@
 		children
 	}: AutoSuggestBoxProps = $props();
 
-	// svelte-ignore state_referenced_locally
-	if (selectOnFocus && multiselect) throw new Error('selectOnFocus is not supported when multiselect is true');
+	/**
+	 * The props the invariant rules over. The markup and the context read them through here, so
+	 * reading either of them validates the pair during SSR and on every prop update.
+	 */
+	const _box = $derived.by(() => {
+		if (selectOnFocus && multiselect) throw new Error('selectOnFocus is not supported when multiselect is true');
+		return { selectOnFocus, multiselect };
+	});
 
 	let items = new SvelteMap<string, OptionType>();
 
 	let lastTypedValue: string = $state('');
 
 	let roundClass = $state('bottom');
-
-	let config: AutoSuggestBoxContext['config'] = $derived({
-		selectOnFocus,
-		virtualized: virtualizer,
-		multiselect
-	});
 
 	let activeOption: OptionType | null = $state(null);
 
@@ -83,59 +83,71 @@
 		}
 	};
 
-	const _state: AutoSuggestBoxContext['state'] = {
-		get lastTypedValue() {
-			return lastTypedValue;
+	const context: AutoSuggestBoxContext = $state({
+		config: {
+			get selectOnFocus() {
+				return _box.selectOnFocus;
+			},
+			get virtualized() {
+				return virtualizer;
+			},
+			get multiselect() {
+				return _box.multiselect;
+			}
 		},
-		get open() {
-			return open;
+		state: {
+			get lastTypedValue() {
+				return lastTypedValue;
+			},
+			get open() {
+				return open;
+			},
+			set open(v) {
+				open = v;
+			},
+			get textBoxRef() {
+				return inputRef;
+			},
+			get activeOption() {
+				return activeOption;
+			},
+			set activeOption(v) {
+				activeOption = v;
+			}
 		},
-		set open(v) {
-			open = v;
-		},
-		get textBoxRef() {
-			return inputRef;
-		},
-		get activeOption() {
-			return activeOption;
-		},
-		set activeOption(v) {
-			activeOption = v;
-		}
-	};
+		events: null,
+		methods: {
+			setOption: ({ id, index, value, text, disabled }) => {
+				items.set(id, { id, index, value, text, disabled });
+			},
+			deleteOption: (id: string) => {
+				items.delete(id);
+			},
+			toggleSelection: (e, id) => {
+				const item = items.get(id);
 
-	let methods: AutoSuggestBoxContext['methods'] = {
-		setOption: ({ id, index, value, text, disabled }) => {
-			items.set(id, { id, index, value, text, disabled });
-		},
-		deleteOption: (id: string) => {
-			items.delete(id);
-		},
-		toggleSelection: (e, id) => {
-			const item = items.get(id);
+				if (item) {
+					if (_box.multiselect) {
+						if (selectedOptions?.some((opt) => opt.id === id)) {
+							selectedOptions = selectedOptions.filter((opt) => opt.id !== id);
+						} else {
+							selectedOptions = [...selectedOptions, { id, value: item.value }];
+						}
 
-			if (item) {
-				if (multiselect) {
-					if (selectedOptions?.some((opt) => opt.id === id)) {
-						selectedOptions = selectedOptions.filter((opt) => opt.id !== id);
+						if (showTextualMultiselect) value = selectedOptions.map((opt) => opt.value).join(', ');
 					} else {
-						selectedOptions = [...selectedOptions, { id, value: item.value }];
+						selectedOptions = [item];
+
+						value = item.text || item.value;
 					}
 
-					if (showTextualMultiselect) value = selectedOptions.map((opt) => opt.value).join(', ');
-				} else {
-					selectedOptions = [item];
-
-					value = item.text || item.value;
+					suggestionChosen?.(e, item.value);
 				}
-
-				suggestionChosen?.(e, item.value);
 			}
 		}
-	};
+	});
 
-	// svelte-ignore state_referenced_locally
-	setAutoSuggestBoxContext({ config, state: _state, methods, events: null });
+	setAutoSuggestBoxContext(context);
 
 	/**
 	 * Put the cursor on `option`, or send it home when there is none. `nearest`
@@ -179,10 +191,10 @@
 
 		// selectOnFocus mirrors the option into the text box, which must not happen
 		// while the user is the one typing in it.
-		if (!selectOnFocus || !keyed || !cursorKey) return;
+		if (!_box.selectOnFocus || !keyed || !cursorKey) return;
 
 		if (option) {
-			methods.toggleSelection(cursorKey, option.id);
+			context.methods.toggleSelection(cursorKey, option.id);
 			value = option.text || option.value;
 		} else {
 			value = lastTypedValue;
@@ -221,7 +233,7 @@
 		e.preventDefault();
 
 		if (activeOption) {
-			methods.toggleSelection(e, activeOption.id);
+			context.methods.toggleSelection(e, activeOption.id);
 			open = false;
 		} else {
 			querySubmitted?.(e, value);
@@ -354,7 +366,7 @@
 </script>
 
 <div
-	class={['fs-autosuggestbox', { open }]}
+	class={['fs-autosuggestbox', { open, multiselect: _box.multiselect }]}
 	style="--max-items: {maxItemsInView}; --current-items: {items.size};"
 	bind:this={ref}
 >

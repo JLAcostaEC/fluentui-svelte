@@ -24,14 +24,20 @@
 		...attributes
 	}: ListViewItemProps<T> = $props();
 
-	// svelte-ignore state_referenced_locally
-	if (!ITEM_TAG.includes(as)) throw new Error(`Invalid tag: ${as}. Must be one of ${ITEM_TAG.join(', ')}`);
+	/**
+	 * The tag the invariant rules over. The markup renders it through here, so it is checked
+	 * during SSR and on every prop update rather than only once on mount.
+	 */
+	const _as = $derived.by(() => {
+		if (!ITEM_TAG.includes(as)) throw new Error(`Invalid tag: ${as}. Must be one of ${ITEM_TAG.join(', ')}`);
+		return as;
+	});
 
 	const CONTEXT = getListViewContext();
 
 	if (!CONTEXT) throw new Error('ListViewItem must be used within a ListView');
 
-	const { shape: _shape } = CONTEXT.config;
+	const _shape = $derived(CONTEXT.config.shape);
 	const { state: _state } = CONTEXT;
 	const { handleSelection, registerItem, unregisterItem, getChildrenRole } = CONTEXT.methods;
 	const role = $derived(_role || getChildrenRole(as));
@@ -58,7 +64,7 @@
 </script>
 
 <svelte:element
-	this={as}
+	this={_as}
 	{role}
 	data-value={value}
 	aria-selected={role === 'option' ? active : undefined}

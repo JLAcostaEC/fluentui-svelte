@@ -40,9 +40,9 @@
 
 	const { config, methods } = context;
 
-	const { size } = config;
+	const size = $derived(config.size);
 
-	const itemState: TreeViewItemContext = {
+	const itemState: TreeViewItemContext = $state({
 		get disabled() {
 			return itemContext?.disabled ?? disabled;
 		},
@@ -79,7 +79,7 @@
 		set indeterminate(v) {
 			indeterminate = v;
 		}
-	};
+	});
 
 	setTreeViewItemContext(itemState);
 

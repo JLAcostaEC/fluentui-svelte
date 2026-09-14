@@ -16,8 +16,14 @@
 		...attributes
 	}: ListViewProps<Tag> = $props();
 
-	// svelte-ignore state_referenced_locally
-	if (!TAG.includes(as)) throw new Error(`Invalid tag: ${as}. Must be one of ${TAG.join(', ')}`);
+	/**
+	 * The tag the invariant rules over. The markup renders it through here, so it is checked
+	 * during SSR and on every prop update rather than only once on mount.
+	 */
+	const _as = $derived.by(() => {
+		if (!TAG.includes(as)) throw new Error(`Invalid tag: ${as}. Must be one of ${TAG.join(', ')}`);
+		return as;
+	});
 
 	const ROLE = $derived(getRole(as, selectionMode, navigationMode));
 
@@ -44,76 +50,75 @@
 		disabled: boolean;
 	}[] = $state([]);
 
-	const config: ListViewContext['config'] = $derived({
-		shape
-	});
-
-	const _state: ListViewContext['state'] = {
-		get selectedItems() {
-			return selectedItems;
-		},
-		set selectedItems(v) {
-			selectedItems = v;
-		},
-		get anchorIndex() {
-			return anchorIndex;
-		},
-		set anchorIndex(v) {
-			anchorIndex = v;
-		}
-	};
-
-	let methods: ListViewContext['methods'] = {
-		handleSelection: (e: MouseEvent, value: string) => {
-			if (selectionMode === 'none') return;
-
-			const itemIndex = items.findIndex((item) => item.value === value);
-			if (itemIndex === -1) return;
-
-			const item = items[itemIndex];
-			if (item.disabled) return;
-
-			if (selectionMode === 'extended' && e.shiftKey && anchorIndex !== null) {
-				const start = Math.min(anchorIndex, itemIndex);
-				const end = Math.max(anchorIndex, itemIndex);
-				const rangeValues = items
-					.slice(start, end + 1)
-					.filter((i) => !i.disabled)
-					.map((i) => i.value);
-				const newSelectedItems = Array.from(new Set([..._state.selectedItems, ...rangeValues]));
-				_state.selectedItems = newSelectedItems;
-			} else if (MULTISELECTABLE && (e.ctrlKey || e.metaKey)) {
-				_state.selectedItems = _state.selectedItems.includes(value)
-					? _state.selectedItems.filter((v) => v !== value)
-					: [..._state.selectedItems, value];
-				_state.anchorIndex = itemIndex;
-			} else {
-				_state.selectedItems = [value];
-				_state.anchorIndex = itemIndex;
+	const CONTEXT: ListViewContext = $state({
+		config: {
+			get shape() {
+				return shape;
 			}
-			onSelectionChange?.(e, _state.selectedItems);
 		},
-		registerItem: (id: string, value: string, disabled: boolean) => {
-			items.push({ id, value, disabled });
+		state: {
+			get selectedItems() {
+				return selectedItems;
+			},
+			set selectedItems(v) {
+				selectedItems = v;
+			},
+			get anchorIndex() {
+				return anchorIndex;
+			},
+			set anchorIndex(v) {
+				anchorIndex = v;
+			}
 		},
-		unregisterItem: (id: string) => {
-			items = items.filter((item) => item.id !== id);
-		},
-		getChildrenRole: (_tag: 'li' | 'a' | 'div') => {
-			if (ROLE === 'grid') return 'row';
-			if (ROLE === 'listbox') return 'option';
-			return _tag !== 'li' ? 'listitem' : undefined;
-		}
-	};
+		events: null,
+		methods: {
+			handleSelection: (e: MouseEvent, value: string) => {
+				if (selectionMode === 'none') return;
 
-	// svelte-ignore state_referenced_locally
-	const CONTEXT: ListViewContext = { config, state: _state, events: null, methods };
+				const itemIndex = items.findIndex((item) => item.value === value);
+				if (itemIndex === -1) return;
+
+				const item = items[itemIndex];
+				if (item.disabled) return;
+
+				if (selectionMode === 'extended' && e.shiftKey && anchorIndex !== null) {
+					const start = Math.min(anchorIndex, itemIndex);
+					const end = Math.max(anchorIndex, itemIndex);
+					const rangeValues = items
+						.slice(start, end + 1)
+						.filter((i) => !i.disabled)
+						.map((i) => i.value);
+					selectedItems = Array.from(new Set([...selectedItems, ...rangeValues]));
+				} else if (MULTISELECTABLE && (e.ctrlKey || e.metaKey)) {
+					selectedItems = selectedItems.includes(value)
+						? selectedItems.filter((v) => v !== value)
+						: [...selectedItems, value];
+					anchorIndex = itemIndex;
+				} else {
+					selectedItems = [value];
+					anchorIndex = itemIndex;
+				}
+				onSelectionChange?.(e, selectedItems);
+			},
+			registerItem: (id: string, value: string, disabled: boolean) => {
+				items.push({ id, value, disabled });
+			},
+			unregisterItem: (id: string) => {
+				items = items.filter((item) => item.id !== id);
+			},
+			getChildrenRole: (_tag: 'li' | 'a' | 'div') => {
+				if (ROLE === 'grid') return 'row';
+				if (ROLE === 'listbox') return 'option';
+				return _tag !== 'li' ? 'listitem' : undefined;
+			}
+		}
+	});
 
 	setListViewContext(CONTEXT);
 </script>
 
 <svelte:element
-	this={as}
+	this={_as}
 	bind:this={ref as ListViewDOM[Tag]}
 	class="fs-list-view"
 	role={ROLE}

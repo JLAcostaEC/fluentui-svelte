@@ -7,9 +7,9 @@
 		throw new Error('CalendarViewHeader must be used within a CalendarView');
 	}
 
-	let locale = context.config.locale;
+	let locale = $derived(context.config.locale);
 
-	let weekStart = context.config.weekStart;
+	let weekStart = $derived(context.config.weekStart);
 </script>
 
 <!--

@@ -31,8 +31,8 @@
 	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import type {
 		AnimationDirection,
+		CalendarViewContext,
 		CalendarViewProps,
-		CalendarViewState,
 		DateComparisonPrecision,
 		View
 	} from './types.js';
@@ -197,59 +197,70 @@
 		updateView(e, 'months', year);
 	}
 
-	const CALENDAR_STATE: CalendarViewState = {
-		get value() {
-			return value;
-		},
-		set value(v) {
-			value = v;
-		},
-		get range() {
-			return range;
-		},
-		set range(v) {
-			range = v;
-		},
-		get view() {
-			return view;
-		},
-		set view(v) {
-			view = v;
-		},
-		get page() {
-			return page;
-		},
-		set page(v) {
-			page = v;
-		},
-		get viewAnimationDirection() {
-			return viewAnimationDirection;
-		},
-		set viewAnimationDirection(v) {
-			viewAnimationDirection = v;
-		},
-		get pageAnimationDirection() {
-			return pageAnimationDirection;
-		},
-		set pageAnimationDirection(v) {
-			pageAnimationDirection = v;
-		}
-	};
-
-	// svelte-ignore state_referenced_locally
-	setCalendarViewContext({
+	const context: CalendarViewContext = $state({
 		config: {
-			minDate,
-			maxDate,
-			locale,
-			weekStart,
-			blackoutDates,
-			selectionMode,
-			blackoutBreaksRange,
-			headers
+			get minDate() {
+				return minDate;
+			},
+			get maxDate() {
+				return maxDate;
+			},
+			get locale() {
+				return locale;
+			},
+			get weekStart() {
+				return weekStart;
+			},
+			get blackoutDates() {
+				return blackoutDates;
+			},
+			get selectionMode() {
+				return selectionMode;
+			},
+			get blackoutBreaksRange() {
+				return blackoutBreaksRange;
+			},
+			get headers() {
+				return headers;
+			}
 		},
-		get state() {
-			return CALENDAR_STATE;
+		state: {
+			get value() {
+				return value;
+			},
+			set value(v) {
+				value = v;
+			},
+			get range() {
+				return range;
+			},
+			set range(v) {
+				range = v;
+			},
+			get view() {
+				return view;
+			},
+			set view(v) {
+				view = v;
+			},
+			get page() {
+				return page;
+			},
+			set page(v) {
+				page = v;
+			},
+			get viewAnimationDirection() {
+				return viewAnimationDirection;
+			},
+			set viewAnimationDirection(v) {
+				viewAnimationDirection = v;
+			},
+			get pageAnimationDirection() {
+				return pageAnimationDirection;
+			},
+			set pageAnimationDirection(v) {
+				pageAnimationDirection = v;
+			}
 		},
 		events: {
 			onChange: (e, value) => onChange?.(e, value),
@@ -264,6 +275,9 @@
 			clearSelection
 		}
 	});
+
+	setCalendarViewContext(context);
+
 	$effect.pre(() => {
 		pageAnimationDuration = getCSSDuration('--fs-normal-duration') || 333;
 

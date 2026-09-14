@@ -21,7 +21,7 @@
 
 	const { selectYear, updatePage } = CalendarContext.methods;
 
-	let { locale, minDate, maxDate, selectionMode } = CalendarContext.config;
+	let { locale, minDate, maxDate, selectionMode } = $derived(CalendarContext.config);
 
 	let { value, range, page, pageAnimationDirection } = $derived(CalendarContext.state);
 

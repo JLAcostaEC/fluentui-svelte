@@ -23,7 +23,8 @@
 	if (!context) throw new Error('AutoSuggestOption must be used within an AutoSuggestBox');
 
 	const { config, state: _state, methods } = context;
-	const { selectOnFocus, virtualized } = config;
+	const selectOnFocus = $derived(config.selectOnFocus);
+	const virtualized = $derived(config.virtualized);
 	const { setOption, deleteOption, toggleSelection } = methods;
 
 	let isVisible = $derived(

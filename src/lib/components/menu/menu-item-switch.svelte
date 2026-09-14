@@ -30,7 +30,9 @@
 
 	if (!context) throw new Error(`No MenuContext found for ${MENU_COMPONENT_NAME}.`);
 
-	const { hasIcons, hasCheckmarks } = context.config;
+	const hasIcons = $derived(context.config.hasIcons);
+
+	const hasCheckmarks = $derived(context.config.hasCheckmarks);
 
 	const { toggleCheckbox } = context.methods;
 

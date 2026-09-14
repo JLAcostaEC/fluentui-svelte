@@ -35,106 +35,102 @@
 		...attributes
 	}: TreeViewProps = $props();
 
-	const config: TreeViewContext['config'] = $derived({
-		navigationMode: CONTEXT?.config.navigationMode || navigationMode,
-		size: CONTEXT?.config.size || size,
-		virtualized: CONTEXT?.config.virtualized ?? !!virtualizer,
-		virtualCount: CONTEXT?.config.virtualCount ?? virtualizer?.size
-	});
-
 	let forceVirtualRender = $state(false);
 
-	const _state: TreeViewContext['state'] = {
-		get openItems() {
-			return openItems;
+	const treeViewContext: TreeViewContext = $state({
+		config: {
+			get navigationMode() {
+				return CONTEXT?.config.navigationMode || navigationMode;
+			},
+			get size() {
+				return CONTEXT?.config.size || size;
+			},
+			get virtualized() {
+				return CONTEXT?.config.virtualized ?? !!virtualizer;
+			},
+			get virtualCount() {
+				return CONTEXT?.config.virtualCount ?? virtualizer?.size;
+			}
 		},
-		get checkedItems() {
-			return checkedItems;
+		state: {
+			get openItems() {
+				return openItems;
+			},
+			get checkedItems() {
+				return checkedItems;
+			},
+			get selectionMode() {
+				return selectionMode;
+			},
+			get TREE_NODES() {
+				return CONTEXT?.state.TREE_NODES ?? TREE_NODES;
+			},
+			get forceVirtualRender() {
+				return CONTEXT?.state.forceVirtualRender ?? forceVirtualRender;
+			},
+			set forceVirtualRender(v) {
+				if (CONTEXT?.state.forceVirtualRender) {
+					CONTEXT.state.forceVirtualRender = v;
+				} else {
+					forceVirtualRender = v;
+				}
+			}
 		},
-		get selectionMode() {
-			return selectionMode;
+		events: {
+			onCheckedChange: CONTEXT?.events.onCheckedChange ?? ((e, data) => onCheckedChange?.(e, data)),
+			onOpenChange: CONTEXT?.events.onOpenChange ?? ((e, data) => onOpenChange?.(e, data))
 		},
-		get TREE_NODES() {
-			return CONTEXT?.state.TREE_NODES ?? TREE_NODES;
-		},
-		get forceVirtualRender() {
-			return CONTEXT?.state.forceVirtualRender ?? forceVirtualRender;
-		},
-		set forceVirtualRender(v) {
-			if (CONTEXT?.state.forceVirtualRender) {
-				CONTEXT.state.forceVirtualRender = v;
-			} else {
-				forceVirtualRender = v;
+		methods: {
+			handleCheck: async (e, id, checked) => {
+				const { state } = treeViewContext;
+
+				if (virtualizer) {
+					state.forceVirtualRender = true;
+					await tick();
+				}
+
+				if (selectionMode === 'single') {
+					traversalSyncSingleSelection(id, state.TREE_NODES, checkedItems);
+					return;
+				}
+
+				traversalSync(id, state.TREE_NODES, checkedItems, checked);
+			},
+			openItem: (e, id) => {
+				if (openItems instanceof SvelteSet) {
+					openItems.add(id);
+				} else {
+					openItems = [...openItems, id];
+				}
+				const node = treeViewContext.state.TREE_NODES.get(id)!;
+
+				node.open = true;
+			},
+			closeItem: (e, id) => {
+				const { state } = treeViewContext;
+
+				if (openItems instanceof SvelteSet) {
+					openItems.delete(id);
+				} else {
+					openItems = openItems.filter((itemId) => itemId !== id);
+				}
+				const node = state.TREE_NODES.get(id)!;
+
+				node.open = false;
+
+				// If
+				if (virtualizer && state.forceVirtualRender) {
+					state.forceVirtualRender = false;
+				}
+			},
+			registerItem: (node) => {
+				treeViewContext.state.TREE_NODES.set(node.id, node);
+			},
+			unregisterItem: (id) => {
+				treeViewContext.state.TREE_NODES.delete(id);
 			}
 		}
-	};
-
-	const events: TreeViewContext['events'] = $derived({
-		onCheckedChange: CONTEXT?.events.onCheckedChange ?? ((e, data) => onCheckedChange?.(e, data)),
-		onOpenChange: CONTEXT?.events.onOpenChange ?? ((e, data) => onOpenChange?.(e, data))
 	});
-
-	const methods: TreeViewContext['methods'] = {
-		handleCheck: async (e, id, checked) => {
-			if (virtualizer) {
-				_state.forceVirtualRender = true;
-				await tick();
-			}
-
-			if (_state.selectionMode === 'single') {
-				traversalSyncSingleSelection(id, _state.TREE_NODES, checkedItems);
-				return;
-			}
-
-			traversalSync(id, _state.TREE_NODES, checkedItems, checked);
-		},
-		openItem: (e, id) => {
-			if (openItems instanceof SvelteSet) {
-				openItems.add(id);
-			} else {
-				openItems = [...openItems, id];
-			}
-			const node = _state.TREE_NODES.get(id)!;
-
-			node.open = true;
-		},
-		closeItem: (e, id) => {
-			if (openItems instanceof SvelteSet) {
-				openItems.delete(id);
-			} else {
-				openItems = openItems.filter((itemId) => itemId !== id);
-			}
-			const node = _state.TREE_NODES.get(id)!;
-
-			node.open = false;
-
-			// If
-			if (virtualizer && _state.forceVirtualRender) {
-				_state.forceVirtualRender = false;
-			}
-		},
-		registerItem: (node) => {
-			_state.TREE_NODES.set(node.id, node);
-		},
-		unregisterItem: (id) => {
-			_state.TREE_NODES.delete(id);
-		}
-	};
-
-	const treeViewContext: TreeViewContext = {
-		get config() {
-			return config;
-		},
-		get state() {
-			return _state;
-		},
-		get events() {
-			return events;
-		},
-		get methods() {
-			return methods;
-		}
-	};
 
 	setTreeViewContext(treeViewContext);
 
@@ -194,7 +190,7 @@
 </script>
 
 <!-- Render only when necessary (virtualizer perf) -->
-{#if _state.forceVirtualRender || (config.virtualized && (!IS_SUB_TREE || ITEM_CONTEXT?.open)) || !config.virtualized}
+{#if treeViewContext.state.forceVirtualRender || (treeViewContext.config.virtualized && (!IS_SUB_TREE || ITEM_CONTEXT?.open)) || !treeViewContext.config.virtualized}
 	<ul
 		class="fs-tree-view"
 		role={IS_SUB_TREE ? 'group' : 'tree'}

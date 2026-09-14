@@ -21,10 +21,16 @@
 		...attributes
 	}: ButtonProps<T> = $props();
 
-	// svelte-ignore state_referenced_locally
-	if (as !== 'button' && as !== 'a' && as !== 'div') {
-		throw new Error(`Invalid 'as' prop value: ${as}. Expected 'button', 'a', or 'div'.`);
-	}
+	/**
+	 * The tag the invariant rules over. The markup renders it through here, so it is checked
+	 * during SSR and on every prop update rather than only once on mount.
+	 */
+	const _as = $derived.by(() => {
+		if (as !== 'button' && as !== 'a' && as !== 'div') {
+			throw new Error(`Invalid 'as' prop value: ${as}. Expected 'button', 'a', or 'div'.`);
+		}
+		return as;
+	});
 </script>
 
 <!-- 
@@ -42,7 +48,7 @@
     ```
  -->
 <svelte:element
-	this={as}
+	this={_as}
 	bind:this={ref}
 	disabled={disabled && as !== 'div' ? true : undefined}
 	aria-disabled={disabled && as !== 'div' ? true : undefined}

@@ -1,5 +1,13 @@
 # fluentui-svelte
 
+## 0.2.1
+
+### Patch Changes
+
+- fix: make component contexts and constraints fully reactive ([#26](https://github.com/JLAcostaEC/fluentui-svelte/pull/26))
+
+- docs: generate every `llms.md` props table with propsmith ([#29](https://github.com/JLAcostaEC/fluentui-svelte/pull/29))
+
 ## 0.2.0
 
 ### Minor Changes

@@ -69,7 +69,7 @@
 				return CONTEXT?.state.forceVirtualRender ?? forceVirtualRender;
 			},
 			set forceVirtualRender(v) {
-				if (CONTEXT?.state.forceVirtualRender) {
+				if (CONTEXT) {
 					CONTEXT.state.forceVirtualRender = v;
 				} else {
 					forceVirtualRender = v;

@@ -121,49 +121,78 @@ This variant of the `MenuTrigger` component allows you to create context menus t
 
 ## Component Props (Menu)
 
-| Name                      | Type                                                          | Description                                                                               |
-| ------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `checkedValues`           | `Record<string, string[]>`                                    | Map-like object of checked values, keyed by group name.                                   |
-| `onCheckedValueChange`    | `(e: Event, checkedValues: Record<string, string[]>) => void` | Callback fired when checked values change.                                                |
-| `hasCheckmarks`           | `boolean`                                                     | States that menu items can contain selectable items and reserve slots for item alignment. |
-| `hasIcons`                | `boolean`                                                     | States that menu items can contain icons and reserve slots for item alignment.            |
-| `openingDelay`            | `number`                                                      | The delay in milliseconds before opening a submenu on hover. Default is 0.                |
-| `open`                    | `boolean`                                                     | Controls the open state of the menu.                                                      |
-| `onOpenChange`            | `(e: Event, open: boolean) => void`                           | Callback fired when the open state of the menu changes.                                   |
-| `openOnHover`             | `boolean`                                                     | If true, the menu will open when the trigger is hovered.                                  |
-| `persistOnItemActivation` | `boolean`                                                     | If true, the menu will not close when a menu item is activated.                           |
-| `positionConfig`          | `Partial<ComputePositionConfig>`                              | Configuration for the Floating UI positioning. It will be passed down to MenuPopover.     |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:MenuProps -->
+
+| Name                      | Type                                                          | Default | Description                                                                |
+| ------------------------- | ------------------------------------------------------------- | ------- | -------------------------------------------------------------------------- |
+| `positionConfig`          | `ComputePositionConfig`                                       |         | The position configuration handed over to floating-ui.                     |
+| `hasIcons`                | `boolean`                                                     |         | Reserves the room every item needs for an icon, so the labels line up.     |
+| `hasCheckmarks`           | `boolean`                                                     |         | Reserves the room every item needs for a checkmark, so the labels line up. |
+| `open`                    | `boolean`                                                     |         | Controls the open state of the menu.                                       |
+| `onOpenChange`            | `(e: Event, open: boolean) => void`                           |         | Called whenever the menu opens or closes.                                  |
+| `checkedValues`           | `Record<string, string[]>`                                    | `{}`    | The checked values of the menu, grouped by the `name` of each item.        |
+| `onCheckedValueChange`    | `(e: Event, checkedValues: Record<string, string[]>) => void` |         | Called whenever a checkbox or radio item changes.                          |
+| `openOnHover`             | `boolean`                                                     | `false` | Opens the menu on hover instead of on click.                               |
+| `openingDelay`            | `number`                                                      | `0`     | How long to wait, in milliseconds, before opening the menu.                |
+| `persistOnItemActivation` | `boolean`                                                     | `false` | Keeps the menu open after an item is activated.                            |
+| `children`                | `Snippet`                                                     |         | The parts of the menu: a trigger and a popover.                            |
+
+<!-- /props:MenuProps -->
 
 ## Component Props (MenuTrigger)
 
-| Name       | Type                            | Description                                             |
-| ---------- | ------------------------------- | ------------------------------------------------------- |
-| `shape`    | `rounded \| circular \| square` | The shape of the trigger element. Default is 'rounded'. |
-| `icon`     | `Snippet \| Component`          | An optional icon to display in the trigger element.     |
-| `disabled` | `boolean`                       | If true, the trigger element will be disabled.          |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:MenuTriggerProps -->
+
+| Name       | Type                                              | Default | Description                                                                               |
+| ---------- | ------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------- |
+| `disabled` | `boolean`                                         |         | Disables the user interaction.                                                            |
+| `shape`    | `'circular'` &#124; `'rounded'` &#124; `'square'` |         | The trigger can be rounded, circular, or square.                                          |
+| `icon`     | `Snippet` &#124; `Component`                      |         | An optional icon for the trigger.                                                         |
+| `children` | `Snippet`                                         |         | A custom trigger. It receives the menu state and the props to spread on your own buttons. |
+
+<!-- /props:MenuTriggerProps -->
 
 ## Component Props (MenuItem)
 
-| Name               | Type                   | Description                                                          |
-| ------------------ | ---------------------- | -------------------------------------------------------------------- |
-| `icon`             | `Snippet \| Component` | An optional icon to display in the menu item.                        |
-| `subText`          | `string`               | Optional subtext to display below the main content of the menu item. |
-| `secondaryContent` | `string`               | Optional secondary content to display like a hint text.              |
-| `href`             | `string`               | If provided, the menu item will render as an anchor element.         |
-| `disabled`         | `boolean`              | If true, the menu item will be disabled.                             |
-| `onClick`          | `(e: Event) => void`   | Callback fired when the menu item is clicked.                        |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:MenuItemProps -->
+
+| Name               | Type                         | Default | Description                                      |
+| ------------------ | ---------------------------- | ------- | ------------------------------------------------ |
+| `icon`             | `Snippet` &#124; `Component` |         | The icon to display before the label.            |
+| `secondaryContent` | `string`                     |         | Right aligned text, usually a keyboard shortcut. |
+| `disabled`         | `boolean`                    |         | Disables the user interaction.                   |
+| `subText`          | `string`                     |         | A second line of text below the label.           |
+| `href`             | `string`                     |         | Renders the item as a link pointing to this URL. |
+
+<!-- /props:MenuItemProps -->
 
 ## Component Props (MenuItemCheckbox/Switch/Radio)
 
-| Name                 | Type      | Description                                                                    |
-| -------------------- | --------- | ------------------------------------------------------------------------------ |
-| All `MenuItem` props |           | All props from the MenuItem component are compatible.                          |
-| `value`              | `string`  | The value of the checkbox item. This is required for the item to be checkable. |
-| `checked`            | `boolean` | Controls the checked state of the checkbox item. (Bindable)                    |
-| `name`               | `string`  | The name of the checkbox item, used for grouping related checkboxes.           |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:MenuItemActionableProps -->
+
+| Name                                   | Type      | Default | Description                                                                                |
+| -------------------------------------- | --------- | ------- | ------------------------------------------------------------------------------------------ |
+| `checked` _bindable_                   | `boolean` |         | Whether the item is checked.                                                               |
+| `value`                                | `string`  | `id`    | The value reported to the menu when the item is checked. Falls back to the id of the item. |
+| `name`                                 | `string`  | `id`    | The group of items this one belongs to. Falls back to the id of the item.                  |
+| `MenuItemProps` without `href`         |           |         |                                                                                            |
+| `ComponentProps<typeof Button<'div'>>` |           |         |                                                                                            |
+
+<!-- /props:MenuItemActionableProps -->
 
 ## Component Props (MenuGroup)
 
-| Name     | Type     | Description                                      |
-| -------- | -------- | ------------------------------------------------ |
-| `header` | `string` | Optional header text to display above the group. |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:MenuGroupProps -->
+
+| Name             | Type             | Default | Description                             |
+| ---------------- | ---------------- | ------- | --------------------------------------- |
+| `ref` _bindable_ | `HTMLDivElement` |         | The DOM reference of the group element. |
+| `header`         | `string`         |         | The label of the group.                 |
+| `children`       | `Snippet`        |         | The items of the group.                 |
+
+<!-- /props:MenuGroupProps -->

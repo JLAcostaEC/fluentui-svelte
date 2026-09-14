@@ -24,10 +24,14 @@ Disables the hyperlink and prevents navigation.
 
 ## Component Props
 
-| Name               | Type                | Description                                                             |
-| ------------------ | ------------------- | ----------------------------------------------------------------------- |
-| `href`             | `string`            | The URL to navigate to when the link is clicked.                        |
-| `disabled`         | `boolean`           | Disables the hyperlink and prevents navigation.                         |
-| `children`         | `Snippet`           | The content of the hyperlink.                                           |
-| `ref`              | `HTMLAnchorElement` | A bindable reference to the underlying anchor element.                  |
-| Element Attributes |                     | You can use any valid HTML anchor attributes (e.g., target, rel, etc.). |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:HyperlinkProps -->
+
+| Name                     | Type                | Default | Description                              |
+| ------------------------ | ------------------- | ------- | ---------------------------------------- |
+| `href`                   | `string`            | `'#'`   | The URL the hyperlink points to.         |
+| `disabled`               | `boolean`           |         | Disables the user interaction.           |
+| `ref` _bindable_         | `HTMLAnchorElement` |         | The DOM reference of the anchor element. |
+| Element Attributes (`a`) |                     |         |                                          |
+
+<!-- /props:HyperlinkProps -->

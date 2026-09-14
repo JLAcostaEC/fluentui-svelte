@@ -81,30 +81,40 @@ Add and configure a checkbox for the element. You can use the same props for the
 
 ## ListView Props
 
-| Name                | Type                        | Description                                                                                   |
-| ------------------- | --------------------------- | --------------------------------------------------------------------------------------------- |
-| `as`                | `string`                    | The HTML tag to use for the list container. Possible values: ul, ol, div.                     |
-| `selectionMode`     | `string`                    | Selection mode for the list. Possible values: single, multiselect, extended.                  |
-| `navigationMode`    | `string`                    | Navigation mode for keyboard navigation. Possible values: items, composite.                   |
-| `selectedItems`     | `string[]`                  | The currently selected item values.                                                           |
-| `shape`             | `string`                    | The shape of the list items. Possible values: rounded, circular, square.                      |
-| `onSelectionChange` | `(Event, string[]) => void` | Callback fired when the selection changes.                                                    |
-| `element`           | Dynamic                     | Reference to the list DOM element. Depends on the selected as value.                          |
-| `children`          | Only `ListViewItem`         | The ListViewItem children of the list.                                                        |
-| Element Attributes  | Dynamic                     | Based on the chosen as value, you will have autocomplete for all HTML attributes of that tag. |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:ListViewProps -->
+
+| Name                       | Type                                                                  | Default     | Description                                                                   |
+| -------------------------- | --------------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------- |
+| `selectionMode`            | `'none'` &#124; `'single'` &#124; `'multiselect'` &#124; `'extended'` | `'none'`    | How many items can be selected, and how the selection is made.                |
+| `navigationMode`           | `'items'` &#124; `'composite'`                                        | `'items'`   | Whether the list itself takes a single tab stop, or every item takes its own. |
+| `selectedItems` _bindable_ | `string[]`                                                            |             | The values of the selected items.                                             |
+| `shape`                    | `'circular'` &#124; `'rounded'` &#124; `'square'`                     | `'rounded'` | The items can have a circular, rounded or square shape.                       |
+| `onSelectionChange`        | `(e: Event, selectedItems: string[]` &#124; `[]) => void`             |             | Called whenever the selection changes.                                        |
+| `as`                       | `'ul'` &#124; `'ol'` &#124; `'div'`                                   | `'ul'`      | The HTML element to render the list as.                                       |
+| `ref` _bindable_           | `HTMLUListElement` &#124; `HTMLOListElement` &#124; `HTMLDivElement`  |             | The DOM reference of the list element.                                        |
+| `disableTabspot`           | `boolean`                                                             | `false`     | Opts the list out of the tabspot focus management, to wire your own.          |
+| HTML Attributes            |                                                                       |             |                                                                               |
+
+<!-- /props:ListViewProps -->
 
 ## ListViewItem Props
 
-| Name               | Type                           | Description                                                                                   |
-| ------------------ | ------------------------------ | --------------------------------------------------------------------------------------------- |
-| `as`               | `string`                       | The HTML tag to use for the item container. Possible values: li, a, div.                      |
-| `active`           | `boolean`                      | Whether the item is currently active or selected.                                             |
-| `shape`            | `string`                       | The shape of the item. Possible values: rounded, circular, square.                            |
-| `value`            | `string`                       | The value of the item used for selection.                                                     |
-| `onAction`         | `(MouseEvent, string) => void` | Callback fired when the item is activated.                                                    |
-| `onFocus`          | `(Event, string) => void`      | Callback fired when the item receives focus.                                                  |
-| `role`             | `string`                       | ARIA role for the item. Possible values: treeitem, menuitem, option, row.                     |
-| `disabled`         | `boolean`                      | Whether the item is disabled.                                                                 |
-| `checkmark`        | `object`                       | Props for the checkmark or checkbox.                                                          |
-| `children`         | `Snippet`                      | The content of the item.                                                                      |
-| Element Attributes | Dynamic                        | Based on the chosen as value, you will have autocomplete for all HTML attributes of that tag. |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:ListViewItemProps -->
+
+| Name             | Type                                                               | Default | Description                                                                                |
+| ---------------- | ------------------------------------------------------------------ | ------- | ------------------------------------------------------------------------------------------ |
+| `as`             | `'li'` &#124; `'a'` &#124; `'div'`                                 | `'li'`  | The HTML element to render the item as.                                                    |
+| `shape`          | `'circular'` &#124; `'rounded'` &#124; `'square'`                  |         | The item can have a circular, rounded or square shape. Inherited from the list by default. |
+| `value`          | `string`                                                           |         | The value reported to the list when the item is selected. Falls back to a generated id.    |
+| `active`         | `boolean`                                                          |         | Renders the item in its pressed state.                                                     |
+| `role`           | `'treeitem'` &#124; `'menuitem'` &#124; `'option'` &#124; `'row'`  |         | The ARIA role of the item. Derived from the list by default.                               |
+| `disabled`       | `boolean`                                                          |         | Disables the user interaction.                                                             |
+| `checkmark`      | `CheckboxProps`                                                    |         | The props to spread on the checkbox rendered when the list is multiselect.                 |
+| `onAction`       | `(e: MouseEvent, value: string) => void`                           |         | Called when the item is clicked or activated with the keyboard.                            |
+| `onfocus`        | `(e: Event, value: string) => void`                                |         | Called when the item receives the focus.                                                   |
+| `ref` _bindable_ | `HTMLLIElement` &#124; `HTMLAnchorElement` &#124; `HTMLDivElement` |         | The DOM reference of the item element.                                                     |
+| HTML Attributes  |                                                                    |         |                                                                                            |
+
+<!-- /props:ListViewItemProps -->

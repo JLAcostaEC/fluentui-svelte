@@ -79,16 +79,21 @@ Use the icon prop to render an icon inside the badge. You can pass the icon as a
 
 ## Badge Props
 
-| Name           | Type                     | Description                                                                                            |
-| -------------- | ------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `size`         | `number`                 | The size of the badge in pixels.                                                                       |
-| `shape`        | `string`                 | The shape of the badge. Possible values: 'circular', 'rounded', 'square'.                              |
-| `appearance`   | `string`                 | The appearance of the badge. Possible values: 'filled', 'outline', 'ghost', 'tint'.                    |
-| `iconPosition` | `string`                 | The position of the icon inside the badge. Possible values: 'before', 'after'.                         |
-| `color`        | `string`                 | The color of the badge. Possible values: 'information', 'attention', 'warning', 'success', 'critical'. |
-| `icon`         | `Snippet` \| `Component` | The icon to display inside the badge.                                                                  |
-| `ref`          | `HTMLSpanElement`        | The DOM reference of the badge element.                                                                |
-| `children`     | `Snippet`                | The children elements to render inside the badge.                                                      |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:BadgeProps -->
+
+| Name             | Type                                                           | Default         | Description                                                                               |
+| ---------------- | -------------------------------------------------------------- | --------------- | ----------------------------------------------------------------------------------------- |
+| `size`           | `number`                                                       | `20`            | The size of the badge in pixels.                                                          |
+| `shape`          | `'circular'` &#124; `'rounded'` &#124; `'square'`              | `'circular'`    | The badge can have a circular, rounded or square shape.                                   |
+| `appearance`     | `'filled'` &#124; `'outline'` &#124; `'ghost'` &#124; `'tint'` | `'filled'`      | The badge can have its background and border styled for greater emphasis or to be subtle. |
+| `iconPosition`   | `'before'` &#124; `'after'`                                    | `'before'`      | The position of the icon relative to the badge content.                                   |
+| `color`          | [`Colors`](https://fluentui-svelte.dev/docs/types/#colors)     | `'information'` | The color of the badge. For now it only supports system colors.                           |
+| `icon`           | `Snippet` &#124; `Component`                                   |                 | Icon to render inside the badge.                                                          |
+| `ref` _bindable_ | `HTMLSpanElement`                                              |                 | The DOM reference of the badge element.                                                   |
+| HTML Attributes  |                                                                |                 |                                                                                           |
+
+<!-- /props:BadgeProps -->
 
 ## BadgeIcon API
 
@@ -125,9 +130,17 @@ By default, Avatar uses an instance of BadgeIcon. As you can see, the first exam
 
 ### BadgeIcon Props
 
-| Name    | Type                     | Description                                                                                            |
-| ------- | ------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `size`  | `number`                 | The size of the badge in pixels.                                                                       |
-| `color` | `string`                 | The color of the badge. Possible values: 'information', 'attention', 'warning', 'success', 'critical'. |
-| `icon`  | `Snippet` \| `Component` | The icon to display inside the badge.                                                                  |
-| `ref`   | `HTMLSpanElement`        | The DOM reference of the badge element.                                                                |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:BadgeIconProps -->
+
+| Name             | Type                                                           | Default       | Description                                                                        |
+| ---------------- | -------------------------------------------------------------- | ------------- | ---------------------------------------------------------------------------------- |
+| `status`         | [`Statuses`](https://fluentui-svelte.dev/docs/types/#statuses) | `'available'` | The presence status to display. It picks both the icon and the color of the badge. |
+| `outOfOffice`    | `boolean`                                                      | `false`       | Decorates the presence icon to signal that the person is out of office.            |
+| `size`           | `number`                                                       | `20`          | The size of the badge in pixels.                                                   |
+| `color`          | [`Colors`](https://fluentui-svelte.dev/docs/types/#colors)     |               | Overrides the color the status would pick on its own.                              |
+| `icon`           | `Snippet` &#124; `Component`                                   |               | Custom icon, rendered instead of the one the status would pick on its own.         |
+| `ref` _bindable_ | `HTMLSpanElement`                                              |               | The DOM reference of the badge element.                                            |
+| HTML Attributes  |                                                                |               |                                                                                    |
+
+<!-- /props:BadgeIconProps -->

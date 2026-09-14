@@ -695,7 +695,9 @@
     },
     "generated_fs_card_header_props_props_image_alt": {
       "en": "61667c77",
-      "locales": {},
+      "locales": {
+        "es": "61667c77"
+      },
       "source": "src/lib/components/card/types.ts#CardHeaderProps.imageAlt"
     },
     "generated_fs_card_header_props_props_ref": {
@@ -721,7 +723,9 @@
     },
     "generated_fs_card_preview_props_props_logo_alt": {
       "en": "6367f68c",
-      "locales": {},
+      "locales": {
+        "es": "6367f68c"
+      },
       "source": "src/lib/components/card/types.ts#CardPreviewProps.logoAlt"
     },
     "generated_fs_card_preview_props_props_logo_src": {

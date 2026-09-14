@@ -82,40 +82,52 @@ changing it from the header button leaves focus on the button.
 
 ## CalendarView Props
 
-| Name                  | Type                                                  | Default                      | Description                                                                    |
-| --------------------- | ----------------------------------------------------- | ---------------------------- | ------------------------------------------------------------------------------ |
-| `ref`                 | bindable `HTMLDivElement`                             |                              | The DOM reference of the calendar element.                                     |
-| `value`               | bindable `Date \| Date[] \| null`                     | `null`                       | The selected date, or an array of dates in `multiple` mode. Unused by `range`. |
-| `selectionMode`       | `'single' \| 'multiple' \| 'range'`                   | `'single'`                   | How many dates the grid hands out, and in what shape.                          |
-| `range`               | bindable `{ start: Date \| null; end: Date \| null }` | `{ start: null, end: null }` | The picked range. `end` is `null` until the range is closed.                   |
-| `blackoutBreaksRange` | `boolean`                                             | `false`                      | Stop a range from spanning a blacked-out date.                                 |
-| `blackoutDates`       | `Date[]`                                              |                              | Dates that are rendered but cannot be selected.                                |
-| `headers`             | `boolean`                                             |                              | Labels the first cell of a month or a year with its name.                      |
-| `minDate`             | `Date`                                                |                              | The earliest selectable date.                                                  |
-| `maxDate`             | `Date`                                                |                              | The latest selectable date.                                                    |
-| `view`                | `'days' \| 'months' \| 'years'`                       | `'days'`                     | The calendar page the view opens on.                                           |
-| `locale`              | `string`                                              | `'en-US'`                    | The locale used to format weekday and month names.                             |
-| `weekStart`           | `number`                                              | `1`                          | The first day of the week, where 0 is Sunday.                                  |
-| `floating`            | `CalendarViewFloating`                                |                              | Renders the calendar as a popup anchored to a reference element.               |
-| `onChange`            | `(event, value) => void`                              |                              | Called whenever the selection changes. Not called in `range` mode.             |
-| `onRangeChange`       | `(event, range) => void`                              |                              | Fired on every step of a range, including the one that leaves `end` null.      |
-| `onViewChange`        | `(event, view) => void`                               |                              | Called whenever the active calendar page changes.                              |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:CalendarViewProps -->
+
+| Name                       | Type                                                                | Default                      | Description                                                                                                                  |
+| -------------------------- | ------------------------------------------------------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `ref` _bindable_           | `HTMLDivElement`                                                    |                              | The DOM reference of the calendar element.                                                                                   |
+| `value` _bindable_         | `Date` &#124; `Date[]` &#124; `null`                                | `null`                       | The selected date, or an array of dates when `selectionMode` is `'multiple'`. Unused by `'range'`.                           |
+| `selectionMode`            | `'single'` &#124; `'multiple'` &#124; `'range'`                     | `'single'`                   | How many dates the grid hands out, and in what shape.                                                                        |
+| `range` _bindable_         | `{ start: Date` &#124; `null; end: Date` &#124; `null; }`           | `{ start: null, end: null }` | The picked range. Only read and written when `selectionMode` is `'range'`, and `end` stays `null` until the range is closed. |
+| `blackoutBreaksRange`      | `boolean`                                                           | `false`                      | Stop a range from spanning a blacked-out date.                                                                               |
+| `blackoutDates`            | `Date[]`                                                            |                              | Dates that are rendered but cannot be selected.                                                                              |
+| `headers`                  | `boolean`                                                           |                              | Labels the first cell of a month or a year with its name.                                                                    |
+| `minDate`                  | `Date`                                                              |                              | The earliest selectable date.                                                                                                |
+| `maxDate`                  | `Date`                                                              |                              | The latest selectable date.                                                                                                  |
+| `view`                     | `'days'` &#124; `'months'` &#124; `'years'`                         | `'days'`                     | The calendar page the view opens on.                                                                                         |
+| `locale`                   | `string`                                                            | `'en-US'`                    | The locale used to format weekday and month names.                                                                           |
+| `weekStart`                | `number`                                                            | `1`                          | The first day of the week, where 0 is Sunday.                                                                                |
+| `floating`                 | `CalendarViewFloating`                                              |                              | Renders the calendar as a popup anchored to a reference element instead of inline.                                           |
+| `onChange`                 | `(event: Event, value: Date` &#124; `Date[]` &#124; `null) => void` |                              | Called whenever the selection changes. Not called in `'range'` mode.                                                         |
+| `onRangeChange`            | `(event: Event, range: CalendarDateRange) => void`                  |                              | Fired on every step of a range, including the one that leaves `end` null.                                                    |
+| `onViewChange`             | `(event: Event, view: View) => void`                                |                              | Called whenever the active calendar page changes.                                                                            |
+| Element Attributes (`div`) |                                                                     |                              |                                                                                                                              |
+
+<!-- /props:CalendarViewProps -->
 
 All `div` HTML attributes are forwarded to the root element.
 
 ## CalendarViewItem Props
 
-| Name               | Type                            | Default | Description                                                                       |
-| ------------------ | ------------------------------- | ------- | --------------------------------------------------------------------------------- |
-| `selected`         | `boolean`                       |         | Renders the cell as the selected one.                                             |
-| `disabled`         | `boolean`                       |         | Disables the user interaction.                                                    |
-| `current`          | `boolean`                       |         | Marks the cell as the current date.                                               |
-| `outOfRange`       | `boolean`                       |         | Renders the cell as belonging to a neighbouring page.                             |
-| `blackout`         | `boolean`                       |         | Renders the cell as blacked out, so it reads as unavailable rather than disabled. |
-| `rangePosition`    | `'start' \| 'between' \| 'end'` |         | Set on the days a range covers, which paints the band behind them.                |
-| `header`           | `string`                        |         | A small label rendered above the cell content.                                    |
-| `variant`          | `'day' \| 'monthYear'`          | `'day'` | Which shape the cell takes: a circle for a day, a rounded rectangle otherwise.    |
-| `children`         | `Snippet`                       |         | The content of the cell.                                                          |
-| `buttonAttributes` | `HTMLButtonAttributes`          |         | The attributes to spread on the inner button element.                             |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:CalendarViewItemProps -->
+
+| Name                       | Type                                        | Default | Description                                                                                |
+| -------------------------- | ------------------------------------------- | ------- | ------------------------------------------------------------------------------------------ |
+| `selected`                 | `boolean`                                   |         | Renders the cell as the selected one.                                                      |
+| `disabled`                 | `boolean`                                   |         | Disables the user interaction.                                                             |
+| `current`                  | `boolean`                                   |         | Marks the cell as the current date.                                                        |
+| `outOfRange`               | `boolean`                                   |         | Renders the cell as belonging to a neighbouring page.                                      |
+| `blackout`                 | `boolean`                                   |         | Renders the cell as blacked out, so it reads as unavailable rather than disabled.          |
+| `rangePosition`            | `'start'` &#124; `'between'` &#124; `'end'` |         | Set on the days a range covers, which paints the band behind them.                         |
+| `header`                   | `string`                                    |         | A small label rendered above the cell content.                                             |
+| `variant`                  | `'day'` &#124; `'monthYear'`                | `'day'` | Which shape the cell takes: a circle for a day, a rounded rectangle for a month or a year. |
+| `children`                 | `Snippet`                                   |         | The content of the cell.                                                                   |
+| `buttonAttributes`         | `HTMLButtonAttributes`                      |         | The attributes to spread on the inner button element.                                      |
+| Element Attributes (`div`) |                                             |         |                                                                                            |
+
+<!-- /props:CalendarViewItemProps -->
 
 All `div` HTML attributes are forwarded to the cell element.

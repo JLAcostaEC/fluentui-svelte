@@ -35,13 +35,23 @@ Use `hideHours`, `hideMinutes`, or `hideSeconds` to hide individual columns. By 
 
 ## Component Props
 
-| Name           | Type                        | Description                                                                     |
-| -------------- | --------------------------- | ------------------------------------------------------------------------------- |
-| `value`        | bindable `string`           | Selected time as 24h `HH:mm` or `HH:mm:ss` (matches `<input type="time">`).     |
-| `format`       | `12 \| 24`                  | Clock format: `24` (00–23) or `12` (01–12 with an AM/PM column). Default: `24`. |
-| `open`         | bindable `boolean`          | Whether the picker flyout is open.                                              |
-| `hideHours`    | `boolean`                   | Hide the hours column.                                                          |
-| `hideMinutes`  | `boolean`                   | Hide the minutes column.                                                        |
-| `hideSeconds`  | `boolean`                   | Hide the seconds column.                                                        |
-| `element`      | bindable `HTMLElement`      | The DOM reference of the time picker root element.                              |
-| `inputElement` | bindable `HTMLInputElement` | The DOM reference of the underlying input element.                              |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TimePickerProps -->
+
+| Name                          | Type                  | Default           | Description                                                                                         |
+| ----------------------------- | --------------------- | ----------------- | --------------------------------------------------------------------------------------------------- |
+| `value` _bindable_            | `string`              | `''`              | Selected time as 24h `HH:mm` or `HH:mm:ss` (matches `<input type="time">`).                         |
+| `format`                      | `12` &#124; `24`      | `24`              | Clock format: `24` (00-23) or `12` (01-12 with an AM/PM column).                                    |
+| `open` _bindable_             | `boolean`             | `false`           | Controls the open state of the picker.                                                              |
+| `hideHours`                   | `boolean`             | `false`           | Removes the hour column.                                                                            |
+| `hideMinutes`                 | `boolean`             | `false`           | Removes the minute column.                                                                          |
+| `hideSeconds`                 | `boolean`             | `false`           | Removes the second column.                                                                          |
+| `element` _bindable_          | `HTMLButtonElement`   |                   | The DOM reference of the trigger button.                                                            |
+| `wrapperRef` _bindable_       | `HTMLDivElement`      |                   | The DOM reference of the element wrapping the trigger and its input.                                |
+| `wrapperAttributes`           | `HTMLAttributes`      |                   | The attributes to spread on the wrapper element.                                                    |
+| `inputElement` _bindable_     | `HTMLInputElement`    |                   | The DOM reference of the underlying input element.                                                  |
+| `inputProps`                  | `HTMLInputAttributes` |                   | HTML attributes for the underlying input element. Give it a `name` to submit the value with a form. |
+| `popupLabel`                  | `string`              | `'Choose a time'` | The accessible name of the popup, which is announced as a dialog.                                   |
+| Element Attributes (`button`) |                       |                   |                                                                                                     |
+
+<!-- /props:TimePickerProps -->

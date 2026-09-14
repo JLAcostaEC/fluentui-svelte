@@ -29,9 +29,13 @@ The variant prop determines the visual style of the NumberBox.
 
 ## Component Props
 
-| Name          | Type                    | Description                                                   |
-| ------------- | ----------------------- | ------------------------------------------------------------- |
-| `value`       | `number`                | The current value of the NumberBox.                           |
-| `variant`     | `'inline' \| 'compact'` | The visual style of the NumberBox, e.g., 'inline', 'compact'. |
-| `ref`         | `HTMLInputElement`      | The DOM reference to the input element.                       |
-| TextBox Props |                         | Additional props inherited from the TextBox component.        |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:NumberBoxProps -->
+
+| Name                          | Type                          | Default    | Description                                           |
+| ----------------------------- | ----------------------------- | ---------- | ----------------------------------------------------- |
+| `value` _bindable_            | `number`                      |            | The current value of the input.                       |
+| `variant`                     | `'inline'` &#124; `'compact'` | `'inline'` | How the increment and decrement buttons are laid out. |
+| `TextBoxProps` without `type` |                               |            |                                                       |
+
+<!-- /props:NumberBoxProps -->

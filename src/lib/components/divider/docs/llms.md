@@ -72,12 +72,17 @@ The `as` prop lets you change the underlying HTML element rendered by the divide
 
 ## Divider Props
 
-| Name           | Type                                                 | Description                                                                                        |
-| -------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `as`           | `string`                                             | The HTML element to render the divider as. Possible values: `'div'`, `'hr'`, `'span'`.             |
-| `vertical`     | `boolean`                                            | Whether the divider is rendered vertically instead of horizontally.                                |
-| `alignContent` | `string`                                             | The alignment of the content within the divider. Possible values: `'start'`, `'center'`, `'end'`.  |
-| `appearance`   | `string`                                             | The appearance of the divider. Possible values: `'default'`, `'accent'`, `'standard'`, `'subtle'`. |
-| `inset`        | `boolean`                                            | Whether the divider has inline padding applied.                                                    |
-| `ref`          | `HTMLDivElement \| HTMLHRElement \| HTMLSpanElement` | The DOM reference of the divider element, its type depends on the `as` prop.                       |
-| `children`     | `Snippet`                                            | The content to render as a label within the divider.                                               |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:DividerProps -->
+
+| Name             | Type                                                                | Default     | Description                                                          |
+| ---------------- | ------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------- |
+| `as`             | `'div'` &#124; `'hr'` &#124; `'span'`                               | `'div'`     | The HTML element to render the divider as.                           |
+| `ref` _bindable_ | `HTMLDivElement` &#124; `HTMLHRElement` &#124; `HTMLSpanElement`    |             | The DOM reference of the divider element.                            |
+| `vertical`       | `boolean`                                                           |             | Renders the divider vertically instead of horizontally.              |
+| `alignContent`   | `'start'` &#124; `'center'` &#124; `'end'`                          | `'center'`  | Where the content of the divider sits along the line.                |
+| `inset`          | `boolean`                                                           |             | Removes the padding around the divider line.                         |
+| `appearance`     | `'accent'` &#124; `'standard'` &#124; `'subtle'` &#124; `'default'` | `'default'` | The divider line can be styled for greater emphasis or to be subtle. |
+| HTML Attributes  |                                                                     |             |                                                                      |
+
+<!-- /props:DividerProps -->

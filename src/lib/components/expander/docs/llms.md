@@ -74,15 +74,22 @@ You can easily add an icon to an expander's header using the `Icon` prop. You ca
 
 ## Component Props
 
-| Name          | Type                   | Description                                                               |
-| ------------- | ---------------------- | ------------------------------------------------------------------------- |
-| `header`      | `string`               | Label of the expander.                                                    |
-| `description` | `string`               | Description to render below the header.                                   |
-| `direction`   | `string`               | The opening direction of the expander. Possible values: `'down'`, `'up'`. |
-| `justify`     | `boolean`              | Whether the expander is justified to the full width of the container.     |
-| `disabled`    | `boolean`              | Disables the user interaction.                                            |
-| `animation`   | `object`               | The animation configuration.                                              |
-| `expanded`    | `boolean`              | Controls the opening state of the expander.                               |
-| `element`     | `HTMLDetailsElement`   | The DOM reference of the expander element.                                |
-| `Icon`        | `Snippet \| Component` | The icon to display before the label.                                     |
-| `children`    | `Snippet`              | The children elements to render inside the expander.                      |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:ExpanderProps -->
+
+| Name                           | Type                                    | Default  | Description                                                               |
+| ------------------------------ | --------------------------------------- | -------- | ------------------------------------------------------------------------- |
+| `header`                       | `string`                                |          | Label of the expander.                                                    |
+| `description`                  | `string`                                |          | Description to render below the header.                                   |
+| `direction`                    | `'down'` &#124; `'up'`                  | `'down'` | Set the opening direction of the expander.                                |
+| `justify`                      | `boolean`                               | `false`  | The expander is justified to the full width of the container.             |
+| `disabled`                     | `boolean`                               | `false`  | Disables the user interaction.                                            |
+| `animation`                    | `{ duration: number; easing: string; }` |          | The animation configuration. Reduced motion is always honoured over this. |
+| `expanded` _bindable_          | `boolean`                               | `false`  | Control the opening state of the expander.                                |
+| `ref` _bindable_               | `HTMLDetailsElement`                    |          | The DOM reference of the expander element.                                |
+| `Icon`                         | `Snippet` &#124; `Component`            |          | The icon to display before the label.                                     |
+| `summaryRef` _bindable_        | `HTMLElement`                           |          | The DOM reference of the summary element.                                 |
+| `summaryProps`                 | `HTMLAttributes`                        |          | The props to spread on the summary element.                               |
+| Element Attributes (`details`) |                                         |          |                                                                           |
+
+<!-- /props:ExpanderProps -->

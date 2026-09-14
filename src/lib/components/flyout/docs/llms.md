@@ -18,14 +18,20 @@ The Flyout.
 
 ## Component Props
 
-| Name                | Type                                              | Description                                                     |
-| ------------------- | ------------------------------------------------- | --------------------------------------------------------------- |
-| `ref`               | Bindable `HTMLElement`                            | The DOM reference to the flyout element.                        |
-| `children`          | `Snippet`                                         | The content to be displayed inside the flyout.                  |
-| `floating`          | `boolean`                                         | Whether to use Floating UI for positioning. Default: false.     |
-| `reference`         | `HTMLElement`                                     | The reference element for Floating UI.                          |
-| `placement`         | `Placement`                                       | The placement for Floating UI positioning. Default: 'bottom'.   |
-| `onPlacementChange` | `(placement: Placement) => void`                  | A callback that is called when the placement changes.           |
-| `roundCorners`      | `'all' \| 'top' \| 'bottom' \| 'left' \| 'right'` | Which corners to round. Default: 'all'.                         |
-| `offset`            | `number`                                          | The offset for Floating UI positioning. Default: 8.             |
-| Element Attributes  |                                                   | All other attributes that can be applied to the flyout element. |
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:FlyoutProps -->
+
+| Name                       | Type                                                                      | Default    | Description                                                                     |
+| -------------------------- | ------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------- |
+| `ref` _bindable_           | `HTMLElement`                                                             |            | The DOM reference of the flyout element.                                        |
+| `children`                 | `Snippet`                                                                 |            | The content of the flyout.                                                      |
+| `floating`                 | `boolean`                                                                 | `false`    | Positions the flyout with floating-ui instead of leaving it in the normal flow. |
+| `reference`                | `HTMLElement`                                                             |            | The element the flyout is positioned against when `floating` is set.            |
+| `placement`                | `Placement`                                                               | `'bottom'` | Where the flyout is placed relative to its reference.                           |
+| `onPlacementChange`        | `(placement: Placement) => void`                                          |            | Called whenever floating-ui settles on a different placement.                   |
+| `roundCorners`             | `'all'` &#124; `'top'` &#124; `'bottom'` &#124; `'left'` &#124; `'right'` | `'all'`    | Which corners of the flyout are rounded.                                        |
+| `offset`                   | `number`                                                                  | `8`        | The distance in pixels between the flyout and its reference.                    |
+| `placementConfig`          | `AutoPlacementOptions`                                                    |            | The auto placement configuration handed over to floating-ui.                    |
+| Element Attributes (`div`) |                                                                           |            |                                                                                 |
+
+<!-- /props:FlyoutProps -->

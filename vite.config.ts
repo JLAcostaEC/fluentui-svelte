@@ -50,6 +50,7 @@ export default defineConfig({
 			'@floating-ui/dom',
 			'fluentui-icons-svelte',
 			'fluentui-icons-svelte/ArrowCircleLeftRegular.svelte',
+			'fluentui-icons-svelte/ArrowUpRegular.svelte',
 			'fluentui-icons-svelte/CaretDownFilled.svelte',
 			'fluentui-icons-svelte/CaretUpFilled.svelte',
 			'fluentui-icons-svelte/CheckmarkCircleFilled.svelte',

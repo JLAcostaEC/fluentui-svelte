@@ -136,6 +136,18 @@ export { default as Skeleton } from './components/skeleton/skeleton.svelte';
 export { default as Slider } from './components/slider/slider.svelte';
 // End Slider Component
 
+// Start Table Component
+export { default as Table } from './components/table/table.svelte';
+export { default as TableHeader } from './components/table/table-header.svelte';
+export { default as TableHeaderCell } from './components/table/table-header-cell.svelte';
+export { default as TableBody } from './components/table/table-body.svelte';
+export { default as TableRow } from './components/table/table-row.svelte';
+export { default as TableCell } from './components/table/table-cell.svelte';
+export { default as TableSelectionCell } from './components/table/table-selection-cell.svelte';
+export { default as TableCellLayout } from './components/table/table-cell-layout.svelte';
+export { default as TableCellActions } from './components/table/table-cell-actions.svelte';
+// End Table Component
+
 // Start TextArea Component
 export { default as TextArea } from './components/textarea/textarea.svelte';
 // End TextArea Component

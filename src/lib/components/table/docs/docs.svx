@@ -1,0 +1,88 @@
+<script lang="ts">
+  import { Table, TableHeader, TableHeaderCell, TableBody, TableRow, TableCell, TableCellLayout } from '$lib/index.js';
+  import { DocumentRegular, FolderRegular, VideoRegular, DocumentPdfRegular } from 'fluentui-icons-svelte';
+  import { m } from '$i18n/messages.js';
+
+  const columns = ['File', 'Author', 'Last updated'];
+
+  const items = [
+    { file: 'Meeting notes', icon: DocumentRegular, author: 'Max Mustermann', lastUpdated: '7h ago' },
+    { file: 'Thursday presentation', icon: FolderRegular, author: 'Erika Mustermann', lastUpdated: 'Yesterday at 1:45 PM' },
+    { file: 'Training recording', icon: VideoRegular, author: 'John Doe', lastUpdated: 'Yesterday at 1:45 PM' },
+    { file: 'Purchase order', icon: DocumentPdfRegular, author: 'Jane Doe', lastUpdated: 'Tue at 9:30 AM' }
+  ];
+</script>
+
+# Table
+
+{m.table_description()}
+
+<Table aria-label="Default table">
+  <TableHeader>
+    <TableRow>
+      {#each columns as column (column)}
+        <TableHeaderCell>{column}</TableHeaderCell>
+      {/each}
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {#each items as item (item.file)}
+      <TableRow>
+        <TableCell>
+          <TableCellLayout media={item.icon}>{item.file}</TableCellLayout>
+        </TableCell>
+        <TableCell>{item.author}</TableCell>
+        <TableCell>{item.lastUpdated}</TableCell>
+      </TableRow>
+    {/each}
+  </TableBody>
+</Table>
+
+{m.table_low_level_description()}
+
+{m.table_required_components_description()}
+
+- `Table`: {m.table_component_table_description()}
+- `TableHeader`: {m.table_component_tableheader_description()}
+- `TableHeaderCell`: {m.table_component_tableheadercell_description()}
+- `TableBody`: {m.table_component_tablebody_description()}
+- `TableRow`: {m.table_component_tablerow_description()}
+- `TableCell`: {m.table_component_tablecell_description()}
+
+{m.table_optional_components_description()}
+
+- `TableCellLayout`: {m.table_component_tablecelllayout_description()}
+- `TableSelectionCell`: {m.table_component_tableselectioncell_description()}
+- `TableCellActions`: {m.table_component_tablecellactions_description()}
+
+## {m.global_usage()}
+
+{m.table_usage_description()}
+
+```svelte
+<script>
+	import { Table, TableHeader, TableHeaderCell, TableBody, TableRow, TableCell } from 'fluentui-svelte';
+
+	const columns = ['File', 'Author', 'Last updated'];
+	const items = [{ file: 'Meeting notes', author: 'Max Mustermann', lastUpdated: '7h ago' }];
+</script>
+
+<Table aria-label="Files">
+	<TableHeader>
+		<TableRow>
+			{#each columns as column (column)}
+				<TableHeaderCell>{column}</TableHeaderCell>
+			{/each}
+		</TableRow>
+	</TableHeader>
+	<TableBody>
+		{#each items as item (item.file)}
+			<TableRow>
+				<TableCell>{item.file}</TableCell>
+				<TableCell>{item.author}</TableCell>
+				<TableCell>{item.lastUpdated}</TableCell>
+			</TableRow>
+		{/each}
+	</TableBody>
+</Table>
+```

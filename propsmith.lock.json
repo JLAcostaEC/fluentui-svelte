@@ -2443,6 +2443,326 @@
       },
       "source": "src/lib/components/button/types.ts#SplitButtonProps.wrapperRef"
     },
+    "generated_fs_table_body_props_props_as": {
+      "en": "47e07425",
+      "locales": {
+        "es": "47e07425"
+      },
+      "source": "src/lib/components/table/types.ts#TableBodyProps.as"
+    },
+    "generated_fs_table_body_props_props_ref": {
+      "en": "7edf05d1",
+      "locales": {
+        "es": "7edf05d1"
+      },
+      "source": "src/lib/components/table/types.ts#TableBodyProps.ref"
+    },
+    "generated_fs_table_cell_actions_props_props_ref": {
+      "en": "c6df85d5",
+      "locales": {
+        "es": "c6df85d5"
+      },
+      "source": "src/lib/components/table/types.ts#TableCellActionsProps.ref"
+    },
+    "generated_fs_table_cell_actions_props_props_visible": {
+      "en": "7b9b38e5",
+      "locales": {
+        "es": "7b9b38e5"
+      },
+      "source": "src/lib/components/table/types.ts#TableCellActionsProps.visible"
+    },
+    "generated_fs_table_cell_layout_props_props_appearance": {
+      "en": "c5586926",
+      "locales": {
+        "es": "c5586926"
+      },
+      "source": "src/lib/components/table/types.ts#TableCellLayoutProps.appearance"
+    },
+    "generated_fs_table_cell_layout_props_props_description": {
+      "en": "59190e12",
+      "locales": {
+        "es": "59190e12"
+      },
+      "source": "src/lib/components/table/types.ts#TableCellLayoutProps.description"
+    },
+    "generated_fs_table_cell_layout_props_props_media": {
+      "en": "00de8d3d",
+      "locales": {
+        "es": "00de8d3d"
+      },
+      "source": "src/lib/components/table/types.ts#TableCellLayoutProps.media"
+    },
+    "generated_fs_table_cell_layout_props_props_ref": {
+      "en": "69be0b33",
+      "locales": {
+        "es": "69be0b33"
+      },
+      "source": "src/lib/components/table/types.ts#TableCellLayoutProps.ref"
+    },
+    "generated_fs_table_cell_layout_props_props_truncate": {
+      "en": "06298601",
+      "locales": {
+        "es": "06298601"
+      },
+      "source": "src/lib/components/table/types.ts#TableCellLayoutProps.truncate"
+    },
+    "generated_fs_table_cell_props_props_as": {
+      "en": "6ff13925",
+      "locales": {
+        "es": "6ff13925"
+      },
+      "source": "src/lib/components/table/types.ts#TableCellProps.as"
+    },
+    "generated_fs_table_cell_props_props_focus_mode": {
+      "en": "c211be36",
+      "locales": {
+        "es": "c211be36"
+      },
+      "source": "src/lib/components/table/types.ts#TableCellProps.focusMode"
+    },
+    "generated_fs_table_cell_props_props_ref": {
+      "en": "05e28df9",
+      "locales": {
+        "es": "05e28df9"
+      },
+      "source": "src/lib/components/table/types.ts#TableCellProps.ref"
+    },
+    "generated_fs_table_header_cell_props_props_as": {
+      "en": "92737fc7",
+      "locales": {
+        "es": "92737fc7"
+      },
+      "source": "src/lib/components/table/types.ts#TableHeaderCellProps.as"
+    },
+    "generated_fs_table_header_cell_props_props_aside": {
+      "en": "3af200a2",
+      "locales": {
+        "es": "3af200a2"
+      },
+      "source": "src/lib/components/table/types.ts#TableHeaderCellProps.aside"
+    },
+    "generated_fs_table_header_cell_props_props_focus_mode": {
+      "en": "957e4323",
+      "locales": {
+        "es": "957e4323"
+      },
+      "source": "src/lib/components/table/types.ts#TableHeaderCellProps.focusMode"
+    },
+    "generated_fs_table_header_cell_props_props_ref": {
+      "en": "16dec23f",
+      "locales": {
+        "es": "16dec23f"
+      },
+      "source": "src/lib/components/table/types.ts#TableHeaderCellProps.ref"
+    },
+    "generated_fs_table_header_cell_props_props_resizable": {
+      "en": "e364e11e",
+      "locales": {
+        "es": "e364e11e"
+      },
+      "source": "src/lib/components/table/types.ts#TableHeaderCellProps.resizable"
+    },
+    "generated_fs_table_header_cell_props_props_resize_label": {
+      "en": "4506a073",
+      "locales": {},
+      "source": "src/lib/components/table/types.ts#TableHeaderCellProps.resizeLabel"
+    },
+    "generated_fs_table_header_cell_props_props_sort_direction": {
+      "en": "55364419",
+      "locales": {
+        "es": "55364419"
+      },
+      "source": "src/lib/components/table/types.ts#TableHeaderCellProps.sortDirection"
+    },
+    "generated_fs_table_header_cell_props_props_sort_icon": {
+      "en": "c79f7716",
+      "locales": {
+        "es": "c79f7716"
+      },
+      "source": "src/lib/components/table/types.ts#TableHeaderCellProps.sortIcon"
+    },
+    "generated_fs_table_header_cell_props_props_sortable": {
+      "en": "f9985db9",
+      "locales": {
+        "es": "f9985db9"
+      },
+      "source": "src/lib/components/table/types.ts#TableHeaderCellProps.sortable"
+    },
+    "generated_fs_table_header_props_props_as": {
+      "en": "e3e93f3a",
+      "locales": {
+        "es": "e3e93f3a"
+      },
+      "source": "src/lib/components/table/types.ts#TableHeaderProps.as"
+    },
+    "generated_fs_table_header_props_props_ref": {
+      "en": "02f56faa",
+      "locales": {
+        "es": "02f56faa"
+      },
+      "source": "src/lib/components/table/types.ts#TableHeaderProps.ref"
+    },
+    "generated_fs_table_props_props_as": {
+      "en": "2d4ac03e",
+      "locales": {
+        "es": "2d4ac03e"
+      },
+      "source": "src/lib/components/table/types.ts#TableProps.as"
+    },
+    "generated_fs_table_props_props_column_sizing": {
+      "en": "1fd42d5f",
+      "locales": {
+        "es": "1fd42d5f"
+      },
+      "source": "src/lib/components/table/types.ts#TableProps.columnSizing"
+    },
+    "generated_fs_table_props_props_column_widths": {
+      "en": "aa12c9b5",
+      "locales": {
+        "es": "aa12c9b5"
+      },
+      "source": "src/lib/components/table/types.ts#TableProps.columnWidths"
+    },
+    "generated_fs_table_props_props_enable_tabspot": {
+      "en": "5afe9f92",
+      "locales": {
+        "es": "5afe9f92"
+      },
+      "source": "src/lib/components/table/types.ts#TableProps.enableTabspot"
+    },
+    "generated_fs_table_props_props_no_native_elements": {
+      "en": "a882b650",
+      "locales": {
+        "es": "a882b650"
+      },
+      "source": "src/lib/components/table/types.ts#TableProps.noNativeElements"
+    },
+    "generated_fs_table_props_props_no_row_borders": {
+      "en": "24c0acb3",
+      "locales": {
+        "es": "24c0acb3"
+      },
+      "source": "src/lib/components/table/types.ts#TableProps.noRowBorders"
+    },
+    "generated_fs_table_props_props_on_column_resize": {
+      "en": "cd3abbda",
+      "locales": {
+        "es": "cd3abbda"
+      },
+      "source": "src/lib/components/table/types.ts#TableProps.onColumnResize"
+    },
+    "generated_fs_table_props_props_ref": {
+      "en": "5ce18418",
+      "locales": {
+        "es": "5ce18418"
+      },
+      "source": "src/lib/components/table/types.ts#TableProps.ref"
+    },
+    "generated_fs_table_props_props_resizable_columns": {
+      "en": "8c1036d5",
+      "locales": {
+        "es": "8c1036d5"
+      },
+      "source": "src/lib/components/table/types.ts#TableProps.resizableColumns"
+    },
+    "generated_fs_table_props_props_size": {
+      "en": "36f24f6f",
+      "locales": {
+        "es": "36f24f6f"
+      },
+      "source": "src/lib/components/table/types.ts#TableProps.size"
+    },
+    "generated_fs_table_props_props_sortable": {
+      "en": "632a2a0a",
+      "locales": {
+        "es": "632a2a0a"
+      },
+      "source": "src/lib/components/table/types.ts#TableProps.sortable"
+    },
+    "generated_fs_table_props_props_virtualizer": {
+      "en": "77886845",
+      "locales": {
+        "es": "77886845"
+      },
+      "source": "src/lib/components/table/types.ts#TableProps.virtualizer"
+    },
+    "generated_fs_table_row_props_props_appearance": {
+      "en": "bc4eb0e9",
+      "locales": {
+        "es": "bc4eb0e9"
+      },
+      "source": "src/lib/components/table/types.ts#TableRowProps.appearance"
+    },
+    "generated_fs_table_row_props_props_as": {
+      "en": "337665a5",
+      "locales": {
+        "es": "337665a5"
+      },
+      "source": "src/lib/components/table/types.ts#TableRowProps.as"
+    },
+    "generated_fs_table_row_props_props_ref": {
+      "en": "a3ebebd7",
+      "locales": {
+        "es": "a3ebebd7"
+      },
+      "source": "src/lib/components/table/types.ts#TableRowProps.ref"
+    },
+    "generated_fs_table_selection_cell_props_props_as": {
+      "en": "6ff13925",
+      "locales": {
+        "es": "6ff13925"
+      },
+      "source": "src/lib/components/table/types.ts#TableSelectionCellProps.as"
+    },
+    "generated_fs_table_selection_cell_props_props_checkbox_indicator": {
+      "en": "de47e3a0",
+      "locales": {
+        "es": "de47e3a0"
+      },
+      "source": "src/lib/components/table/types.ts#TableSelectionCellProps.checkboxIndicator"
+    },
+    "generated_fs_table_selection_cell_props_props_checked": {
+      "en": "19b563fe",
+      "locales": {
+        "es": "19b563fe"
+      },
+      "source": "src/lib/components/table/types.ts#TableSelectionCellProps.checked"
+    },
+    "generated_fs_table_selection_cell_props_props_invisible": {
+      "en": "6cf09d72",
+      "locales": {
+        "es": "6cf09d72"
+      },
+      "source": "src/lib/components/table/types.ts#TableSelectionCellProps.invisible"
+    },
+    "generated_fs_table_selection_cell_props_props_radio_indicator": {
+      "en": "7734a7bd",
+      "locales": {
+        "es": "7734a7bd"
+      },
+      "source": "src/lib/components/table/types.ts#TableSelectionCellProps.radioIndicator"
+    },
+    "generated_fs_table_selection_cell_props_props_ref": {
+      "en": "05e28df9",
+      "locales": {
+        "es": "05e28df9"
+      },
+      "source": "src/lib/components/table/types.ts#TableSelectionCellProps.ref"
+    },
+    "generated_fs_table_selection_cell_props_props_subtle": {
+      "en": "9e407027",
+      "locales": {
+        "es": "9e407027"
+      },
+      "source": "src/lib/components/table/types.ts#TableSelectionCellProps.subtle"
+    },
+    "generated_fs_table_selection_cell_props_props_type": {
+      "en": "d8c2e21b",
+      "locales": {
+        "es": "d8c2e21b"
+      },
+      "source": "src/lib/components/table/types.ts#TableSelectionCellProps.type"
+    },
     "generated_fs_text_area_props_props_disabled": {
       "en": "b99cb72f",
       "locales": {

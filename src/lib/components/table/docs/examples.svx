@@ -1,0 +1,721 @@
+<script lang="ts">
+  import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
+  import { SvelteSet } from 'svelte/reactivity';
+  import { Button, Table, TableHeader, TableHeaderCell, TableBody, TableRow, TableCell, TableCellLayout, TableCellActions, TableSelectionCell } from '$lib/index.js';
+  import { DocumentRegular, FolderRegular, VideoRegular, DocumentPdfRegular, EditRegular, MoreHorizontalRegular } from 'fluentui-icons-svelte';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+  import type { SortDirection, TableSize } from '../types.ts';
+
+  const items = [
+    { file: 'Meeting notes', icon: DocumentRegular, author: 'Max Mustermann', lastUpdated: '7h ago' },
+    { file: 'Thursday presentation', icon: FolderRegular, author: 'Erika Mustermann', lastUpdated: 'Yesterday at 1:45 PM' },
+    { file: 'Training recording', icon: VideoRegular, author: 'John Doe', lastUpdated: 'Yesterday at 1:45 PM' },
+    { file: 'Purchase order', icon: DocumentPdfRegular, author: 'Jane Doe', lastUpdated: 'Tue at 9:30 AM' }
+  ];
+
+  const SIZES: TableSize[] = ['medium', 'small', 'extra-small'];
+
+  const sizeCode = `
+<Table size="extra-small">
+  <TableHeader>
+    <TableRow>
+      <TableHeaderCell>File</TableHeaderCell>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>Meeting notes</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>`;
+
+  // --- Sort ---
+  let sortColumn = $state<'file' | 'author'>('file');
+  let sortDirection = $state<SortDirection>('ascending');
+
+  const sorted = $derived(
+    [...items].sort((a, b) => (sortDirection === 'ascending' ? 1 : -1) * a[sortColumn].localeCompare(b[sortColumn]))
+  );
+
+  const toggleSort = (column: 'file' | 'author') => {
+    if (sortColumn === column) {
+      sortDirection = sortDirection === 'ascending' ? 'descending' : 'ascending';
+    } else {
+      sortColumn = column;
+      sortDirection = 'ascending';
+    }
+  };
+
+  const sortCode = `
+<script>
+  let sortColumn = $state('file');
+  let sortDirection = $state('ascending');
+
+  const sorted = $derived(
+    [...items].sort((a, b) =>
+      (sortDirection === 'ascending' ? 1 : -1) * a[sortColumn].localeCompare(b[sortColumn])
+    )
+  );
+
+  const toggleSort = (column) => {
+    if (sortColumn === column) {
+      sortDirection = sortDirection === 'ascending' ? 'descending' : 'ascending';
+    } else {
+      sortColumn = column;
+      sortDirection = 'ascending';
+    }
+  };
+<\/script>
+
+<Table sortable aria-label="Table with sort">
+  <TableHeader>
+    <TableRow>
+      <TableHeaderCell
+        sortDirection={sortColumn === 'file' ? sortDirection : undefined}
+        onclick={() => toggleSort('file')}
+      >
+        File
+      </TableHeaderCell>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {#each sorted as item (item.file)}
+      <TableRow>
+        <TableCell>{item.file}</TableCell>
+      </TableRow>
+    {/each}
+  </TableBody>
+</Table>`;
+
+  // --- Multiple selection ---
+  let selected = $state<string[]>([items[0].file]);
+
+  const allSelected = $derived(selected.length === items.length);
+  const someSelected = $derived(selected.length > 0 && !allSelected);
+
+  const toggleRow = (file: string) => {
+    selected = selected.includes(file) ? selected.filter((f) => f !== file) : [...selected, file];
+  };
+
+  const toggleAll = () => {
+    selected = allSelected ? [] : items.map((item) => item.file);
+  };
+
+  const selectionCode = `
+<script>
+  let selected = $state([items[0].file]);
+
+  const allSelected = $derived(selected.length === items.length);
+  const someSelected = $derived(selected.length > 0 && !allSelected);
+
+  const toggleRow = (file) => {
+    selected = selected.includes(file) ? selected.filter((f) => f !== file) : [...selected, file];
+  };
+<\/script>
+
+<Table aria-label="Table with multiselect">
+  <TableHeader>
+    <TableRow>
+      <TableSelectionCell
+        checked={allSelected ? true : someSelected ? 'mixed' : false}
+        checkboxIndicator={{ 'aria-label': 'Select all rows' }}
+        onclick={() => (selected = allSelected ? [] : items.map((item) => item.file))}
+      />
+      <TableHeaderCell>File</TableHeaderCell>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {#each items as item (item.file)}
+      {@const isSelected = selected.includes(item.file)}
+      <TableRow
+        aria-selected={isSelected}
+        appearance={isSelected ? 'brand' : 'none'}
+        onclick={() => toggleRow(item.file)}
+      >
+        <TableSelectionCell checked={isSelected} checkboxIndicator={{ 'aria-label': 'Select row' }} />
+        <TableCell>{item.file}</TableCell>
+      </TableRow>
+    {/each}
+  </TableBody>
+</Table>`;
+
+  // --- Single selection ---
+  let picked = $state(items[0].file);
+
+  const singleSelectCode = `
+<script>
+  let picked = $state(items[0].file);
+<\/script>
+
+<Table aria-label="Table with single select">
+  <TableHeader>
+    <TableRow>
+      <TableSelectionCell type="radio" invisible />
+      <TableHeaderCell>File</TableHeaderCell>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {#each items as item (item.file)}
+      {@const isPicked = picked === item.file}
+      <TableRow
+        aria-selected={isPicked}
+        appearance={isPicked ? 'brand' : 'none'}
+        onclick={() => (picked = item.file)}
+      >
+        <TableSelectionCell
+          type="radio"
+          checked={isPicked}
+          radioIndicator={{ name: 'file', 'aria-label': 'Select row' }}
+        />
+        <TableCell>{item.file}</TableCell>
+      </TableRow>
+    {/each}
+  </TableBody>
+</Table>`;
+
+  // --- Subtle selection ---
+  let subtlySelected = $state<string[]>([items[1].file]);
+
+  const toggleSubtle = (file: string) => {
+    subtlySelected = subtlySelected.includes(file)
+      ? subtlySelected.filter((f) => f !== file)
+      : [...subtlySelected, file];
+  };
+
+  const subtleCode = `
+<TableRow aria-selected={isSelected} appearance={isSelected ? 'brand' : 'none'} onclick={() => toggleSubtle(item.file)}>
+  <TableSelectionCell subtle checked={isSelected} checkboxIndicator={{ 'aria-label': 'Select row' }} />
+  <TableCell>{item.file}</TableCell>
+</TableRow>`;
+
+  const cellActionsCode = `
+<TableCell>
+  <TableCellLayout media={item.icon}>{item.file}</TableCellLayout>
+  <TableCellActions>
+    <Button appearance="subtle" shape="circular" aria-label="Edit">
+      <EditRegular />
+    </Button>
+    <Button appearance="subtle" shape="circular" aria-label="More actions">
+      <MoreHorizontalRegular />
+    </Button>
+  </TableCellActions>
+</TableCell>`;
+
+  const tabspotCode = `
+<Table enableTabspot aria-label="Table with keyboard navigation">
+  <TableHeader>
+    <TableRow>
+      <TableHeaderCell>File</TableHeaderCell>
+      <TableHeaderCell>Actions</TableHeaderCell>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {#each items as item (item.file)}
+      <TableRow>
+        <TableCell>{item.file}</TableCell>
+
+        <!-- Enter steps into the cell to reach the buttons, Escape steps back out. -->
+        <TableCell focusMode="group">
+          <TableCellActions visible>
+            <Button appearance="subtle" shape="circular" aria-label="Edit {item.file}">
+              <EditRegular />
+            </Button>
+          </TableCellActions>
+        </TableCell>
+      </TableRow>
+    {/each}
+  </TableBody>
+</Table>`;
+
+  // --- Resizable columns ---
+  let columnWidths = $state<number[]>([200, 180, 160]);
+
+  const resizeCode = `
+<script>
+  // Bind only if you want to read the widths back, or restore them later.
+  let columnWidths = $state([200, 180, 160]);
+<\/script>
+
+<Table
+  resizableColumns
+  bind:columnWidths
+  columnSizing={[{ minWidth: 120 }, { minWidth: 100 }, { minWidth: 100 }]}
+  onColumnResize={(e, { index, width }) => console.log(index, width)}
+  aria-label="Table with resizable columns"
+>
+  <TableHeader>
+    <TableRow>
+      <TableHeaderCell>File</TableHeaderCell>
+      <TableHeaderCell>Author</TableHeaderCell>
+      <TableHeaderCell>Last updated</TableHeaderCell>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {#each items as item (item.file)}
+      <TableRow>
+        <TableCell>{item.file}</TableCell>
+        <TableCell>{item.author}</TableCell>
+        <TableCell>{item.lastUpdated}</TableCell>
+      </TableRow>
+    {/each}
+  </TableBody>
+</Table>`;
+
+  const noRowBordersCode = `
+<Table noRowBorders aria-label="Table without row borders">
+  <TableHeader>
+    <TableRow>
+      <TableHeaderCell>File</TableHeaderCell>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>Meeting notes</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>`;
+
+  const layoutCode = `
+<TableCell>
+  <TableCellLayout media={DocumentRegular} description="7h ago" appearance="primary" truncate>
+    Meeting notes
+  </TableCellLayout>
+</TableCell>`;
+
+  const nonNativeCode = `
+<Table noNativeElements aria-label="Table rendered with divs">
+  <TableHeader>
+    <TableRow>
+      <TableHeaderCell>File</TableHeaderCell>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>Meeting notes</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>`;
+
+  // --- Virtualization ---
+  const rows = Array.from({ length: 2000 }, (_, i) => ({
+    id: i,
+    file: `Document ${i + 1}`,
+    author: items[i % items.length].author,
+    lastUpdated: items[i % items.length].lastUpdated
+  }));
+
+  // A Set, because a windowed list asks "is this row selected?" on every render.
+  let virtualSelected = $state(new SvelteSet<number>([0]));
+
+  let virtualListRef = $state<ReturnType<typeof SvelteVirtualList> | null>(null);
+
+  const toggleVirtualRow = (id: number) => {
+    if (virtualSelected.has(id)) virtualSelected.delete(id);
+    else virtualSelected.add(id);
+  };
+
+  const virtualCode = `
+<script>
+  import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
+  import { SvelteSet } from 'svelte/reactivity';
+
+  const rows = Array.from({ length: 2000 }, (_, i) => ({ id: i, file: \`Document \${i + 1}\` }));
+
+  // A Set, because a windowed list asks "is this row selected?" on every render.
+  let selected = $state(new SvelteSet([0]));
+  let listRef = $state(null);
+
+  const toggleRow = (id) => (selected.has(id) ? selected.delete(id) : selected.add(id));
+<\/script>
+
+<!--
+  A semantic table is laid out by the browser in one pass, so virtualization needs the div layout.
+  Only a window of rows exists, so nothing inside can size the columns: give the table a min-width.
+  The virtualizer is what lets the arrow keys reach a row the list has not rendered yet.
+-->
+<Table
+  noNativeElements
+  enableTabspot
+  style="min-width: 520px;"
+  aria-label="Virtualized table"
+  aria-rowcount={rows.length + 1}
+  virtualizer={{
+    size: rows.length,
+    scrollToIndex: (index) => listRef?.scroll({ index, align: 'auto', smoothScroll: false })
+  }}
+>
+  <TableHeader>
+    <TableRow aria-rowindex={1}>
+      <TableSelectionCell invisible />
+      <TableHeaderCell>File</TableHeaderCell>
+    </TableRow>
+  </TableHeader>
+  <TableBody style="height: 320px;">
+    <SvelteVirtualList items={rows} bind:this={listRef} defaultEstimatedItemHeight={44}>
+      {#snippet renderItem(row, index)}
+        {@const isSelected = selected.has(row.id)}
+        <TableRow
+          aria-rowindex={index + 2}
+          aria-selected={isSelected}
+          appearance={isSelected ? 'brand' : 'none'}
+          onclick={() => toggleRow(row.id)}
+        >
+          <TableSelectionCell checked={isSelected} checkboxIndicator={{ 'aria-label': \`Select \${row.file}\` }} />
+          <TableCell>{row.file}</TableCell>
+        </TableRow>
+      {/snippet}
+    </SvelteVirtualList>
+  </TableBody>
+</Table>`;
+</script>
+
+### {m.global_size()}
+
+{m.table_size_description()}
+
+<Showcase columns={1} minHeight="480px" code={sizeCode}>
+  {#each SIZES as size (size)}
+    <Table {size} aria-label="{size} table">
+      <TableHeader>
+        <TableRow>
+          <TableHeaderCell>File</TableHeaderCell>
+          <TableHeaderCell>Author</TableHeaderCell>
+          <TableHeaderCell>Last updated</TableHeaderCell>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {#each items.slice(0, 2) as item (item.file)}
+          <TableRow>
+            <TableCell>
+              <TableCellLayout media={item.icon}>{item.file}</TableCellLayout>
+            </TableCell>
+            <TableCell>{item.author}</TableCell>
+            <TableCell>{item.lastUpdated}</TableCell>
+          </TableRow>
+        {/each}
+      </TableBody>
+    </Table>
+  {/each}
+</Showcase>
+
+### {m.table_sort_title()}
+
+{m.table_sort_description()}
+
+<Showcase columns={1} minHeight="260px" code={sortCode}>
+  <Table sortable aria-label="Table with sort">
+    <TableHeader>
+      <TableRow>
+        <TableHeaderCell sortDirection={sortColumn === 'file' ? sortDirection : undefined} onclick={() => toggleSort('file')}>File</TableHeaderCell>
+        <TableHeaderCell sortDirection={sortColumn === 'author' ? sortDirection : undefined} onclick={() => toggleSort('author')}>Author</TableHeaderCell>
+        <TableHeaderCell sortable={false}>Last updated</TableHeaderCell>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {#each sorted as item (item.file)}
+        <TableRow>
+          <TableCell>
+            <TableCellLayout media={item.icon}>{item.file}</TableCellLayout>
+          </TableCell>
+          <TableCell>{item.author}</TableCell>
+          <TableCell>{item.lastUpdated}</TableCell>
+        </TableRow>
+      {/each}
+    </TableBody>
+  </Table>
+</Showcase>
+
+### {m.global_multiple_selection()}
+
+{m.table_selection_description()}
+
+<Showcase columns={1} minHeight="260px" code={selectionCode}>
+  <Table aria-label="Table with multiselect">
+    <TableHeader>
+      <TableRow>
+        <TableSelectionCell checked={allSelected ? true : someSelected ? 'mixed' : false} checkboxIndicator={{ 'aria-label': 'Select all rows' }} onclick={toggleAll} />
+        <TableHeaderCell>File</TableHeaderCell>
+        <TableHeaderCell>Author</TableHeaderCell>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {#each items as item (item.file)}
+        {@const isSelected = selected.includes(item.file)}
+        <TableRow aria-selected={isSelected} appearance={isSelected ? 'brand' : 'none'} onclick={() => toggleRow(item.file)}>
+          <TableSelectionCell checked={isSelected} checkboxIndicator={{ 'aria-label': 'Select row' }} />
+          <TableCell>
+            <TableCellLayout media={item.icon}>{item.file}</TableCellLayout>
+          </TableCell>
+          <TableCell>{item.author}</TableCell>
+        </TableRow>
+      {/each}
+    </TableBody>
+  </Table>
+</Showcase>
+
+### {m.table_single_selection_title()}
+
+{m.table_single_selection_description()}
+
+<Showcase columns={1} minHeight="260px" code={singleSelectCode}>
+  <Table aria-label="Table with single select">
+    <TableHeader>
+      <TableRow>
+        <TableSelectionCell type="radio" invisible />
+        <TableHeaderCell>File</TableHeaderCell>
+        <TableHeaderCell>Author</TableHeaderCell>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {#each items as item (item.file)}
+        {@const isPicked = picked === item.file}
+        <TableRow aria-selected={isPicked} appearance={isPicked ? 'brand' : 'none'} onclick={() => (picked = item.file)}>
+          <TableSelectionCell type="radio" checked={isPicked} radioIndicator={{ name: 'picked-file', 'aria-label': 'Select row' }} />
+          <TableCell>
+            <TableCellLayout media={item.icon}>{item.file}</TableCellLayout>
+          </TableCell>
+          <TableCell>{item.author}</TableCell>
+        </TableRow>
+      {/each}
+    </TableBody>
+  </Table>
+</Showcase>
+
+### {m.table_subtle_selection_title()}
+
+{m.table_subtle_selection_description()}
+
+<Showcase columns={1} minHeight="260px" code={subtleCode}>
+  <Table aria-label="Table with subtle selection">
+    <TableHeader>
+      <TableRow>
+        <TableSelectionCell subtle invisible />
+        <TableHeaderCell>File</TableHeaderCell>
+        <TableHeaderCell>Author</TableHeaderCell>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {#each items as item (item.file)}
+        {@const isSelected = subtlySelected.includes(item.file)}
+        <TableRow aria-selected={isSelected} appearance={isSelected ? 'brand' : 'none'} onclick={() => toggleSubtle(item.file)}>
+          <TableSelectionCell subtle checked={isSelected} checkboxIndicator={{ 'aria-label': 'Select row' }} />
+          <TableCell>
+            <TableCellLayout media={item.icon}>{item.file}</TableCellLayout>
+          </TableCell>
+          <TableCell>{item.author}</TableCell>
+        </TableRow>
+      {/each}
+    </TableBody>
+  </Table>
+</Showcase>
+
+### {m.table_cell_layout_title()}
+
+{m.table_cell_layout_description()}
+
+<Showcase columns={1} minHeight="260px" code={layoutCode}>
+  <Table aria-label="Table with cell layouts">
+    <TableHeader>
+      <TableRow>
+        <TableHeaderCell>File</TableHeaderCell>
+        <TableHeaderCell>Author</TableHeaderCell>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {#each items as item (item.file)}
+        <TableRow>
+          <TableCell>
+            <TableCellLayout media={item.icon} description={item.lastUpdated} appearance="primary" truncate>{item.file}</TableCellLayout>
+          </TableCell>
+          <TableCell>
+            <TableCellLayout>{item.author}</TableCellLayout>
+          </TableCell>
+        </TableRow>
+      {/each}
+    </TableBody>
+  </Table>
+</Showcase>
+
+### {m.table_cell_actions_title()}
+
+{m.table_cell_actions_description()}
+
+<Showcase columns={1} minHeight="260px" code={cellActionsCode}>
+  <Table aria-label="Table with cell actions">
+    <TableHeader>
+      <TableRow>
+        <TableHeaderCell>File</TableHeaderCell>
+        <TableHeaderCell>Author</TableHeaderCell>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {#each items as item (item.file)}
+        <TableRow>
+          <TableCell>
+            <TableCellLayout media={item.icon}>{item.file}</TableCellLayout>
+            <TableCellActions>
+              <Button appearance="subtle" shape="circular" aria-label="Edit {item.file}"><EditRegular /></Button>
+              <Button appearance="subtle" shape="circular" aria-label="More actions for {item.file}"><MoreHorizontalRegular /></Button>
+            </TableCellActions>
+          </TableCell>
+          <TableCell>{item.author}</TableCell>
+        </TableRow>
+      {/each}
+    </TableBody>
+  </Table>
+</Showcase>
+
+### {m.table_keyboard_navigation_title()}
+
+{m.table_keyboard_navigation_description()}
+
+<Showcase columns={1} minHeight="260px" code={tabspotCode}>
+  <Table enableTabspot aria-label="Table with keyboard navigation">
+    <TableHeader>
+      <TableRow>
+        <TableHeaderCell>File</TableHeaderCell>
+        <TableHeaderCell>Author</TableHeaderCell>
+        <TableHeaderCell>Actions</TableHeaderCell>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {#each items as item (item.file)}
+        <TableRow>
+          <TableCell>
+            <TableCellLayout media={item.icon}>{item.file}</TableCellLayout>
+          </TableCell>
+          <TableCell>{item.author}</TableCell>
+          <TableCell focusMode="group">
+            <TableCellActions visible>
+              <Button appearance="subtle" shape="circular" aria-label="Edit {item.file}"><EditRegular /></Button>
+              <Button appearance="subtle" shape="circular" aria-label="More actions for {item.file}"><MoreHorizontalRegular /></Button>
+            </TableCellActions>
+          </TableCell>
+        </TableRow>
+      {/each}
+    </TableBody>
+  </Table>
+</Showcase>
+
+### {m.table_resizable_columns_title()}
+
+{m.table_resizable_columns_description()}
+
+<!-- Panzoom binds the arrow keys to pan its canvas, which would swallow the resize handle's own. -->
+<Showcase columns={1} minHeight="300px" disablePanZoom code={resizeCode}>
+  <Table resizableColumns bind:columnWidths columnSizing={[{ minWidth: 120 }, { minWidth: 100 }, { minWidth: 100 }]} aria-label="Table with resizable columns">
+    <TableHeader>
+      <TableRow>
+        <TableHeaderCell>File</TableHeaderCell>
+        <TableHeaderCell>Author</TableHeaderCell>
+        <TableHeaderCell>Last updated</TableHeaderCell>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {#each items as item (item.file)}
+        <TableRow>
+          <TableCell>
+            <TableCellLayout media={item.icon} truncate>{item.file}</TableCellLayout>
+          </TableCell>
+          <TableCell>{item.author}</TableCell>
+          <TableCell>{item.lastUpdated}</TableCell>
+        </TableRow>
+      {/each}
+    </TableBody>
+  </Table>
+</Showcase>
+
+### {m.table_no_row_borders_title()}
+
+{m.table_no_row_borders_description()}
+
+<Showcase columns={1} minHeight="260px" code={noRowBordersCode}>
+  <Table noRowBorders aria-label="Table without row borders">
+    <TableHeader>
+      <TableRow>
+        <TableHeaderCell>File</TableHeaderCell>
+        <TableHeaderCell>Author</TableHeaderCell>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {#each items as item (item.file)}
+        <TableRow>
+          <TableCell>
+            <TableCellLayout media={item.icon}>{item.file}</TableCellLayout>
+          </TableCell>
+          <TableCell>{item.author}</TableCell>
+        </TableRow>
+      {/each}
+    </TableBody>
+  </Table>
+</Showcase>
+
+### {m.table_non_native_elements_title()}
+
+{m.table_non_native_elements_description()}
+
+<Showcase columns={1} minHeight="260px" code={nonNativeCode}>
+  <Table noNativeElements aria-label="Table rendered with divs">
+    <TableHeader>
+      <TableRow>
+        <TableHeaderCell>File</TableHeaderCell>
+        <TableHeaderCell>Author</TableHeaderCell>
+        <TableHeaderCell>Last updated</TableHeaderCell>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {#each items as item (item.file)}
+        <TableRow>
+          <TableCell>
+            <TableCellLayout media={item.icon}>{item.file}</TableCellLayout>
+          </TableCell>
+          <TableCell>{item.author}</TableCell>
+          <TableCell>{item.lastUpdated}</TableCell>
+        </TableRow>
+      {/each}
+    </TableBody>
+  </Table>
+</Showcase>
+
+### {m.table_virtualization_title()}
+
+{m.table_virtualization_description()}
+
+<Showcase columns={1} minHeight="420px" disablePanZoom code={virtualCode}>
+  <Table
+    noNativeElements
+    enableTabspot
+    style="min-width: 520px;"
+    aria-label="Virtualized table"
+    aria-rowcount={rows.length + 1}
+    virtualizer={{
+      size: rows.length,
+      scrollToIndex: (index: number) => virtualListRef?.scroll({ index, align: 'auto', smoothScroll: false })
+    }}
+  >
+    <TableHeader>
+      <TableRow aria-rowindex={1}>
+        <TableSelectionCell invisible />
+        <TableHeaderCell>File</TableHeaderCell>
+        <TableHeaderCell>Author</TableHeaderCell>
+        <TableHeaderCell>Last updated</TableHeaderCell>
+      </TableRow>
+    </TableHeader>
+    <TableBody style="height: 320px;">
+      <SvelteVirtualList items={rows} bind:this={virtualListRef as any} defaultEstimatedItemHeight={44}>
+        {#snippet renderItem(row: (typeof rows)[number], index: number)}
+          {@const isSelected = virtualSelected.has(row.id)}
+          <TableRow aria-rowindex={index + 2} aria-selected={isSelected} appearance={isSelected ? 'brand' : 'none'} onclick={() => toggleVirtualRow(row.id)}>
+            <TableSelectionCell checked={isSelected} checkboxIndicator={{ 'aria-label': `Select ${row.file}` }} />
+            <TableCell>
+              <TableCellLayout media={DocumentRegular}>{row.file}</TableCellLayout>
+            </TableCell>
+            <TableCell>{row.author}</TableCell>
+            <TableCell>{row.lastUpdated}</TableCell>
+          </TableRow>
+        {/snippet}
+      </SvelteVirtualList>
+    </TableBody>
+  </Table>
+</Showcase>

@@ -1,5 +1,6 @@
 <script lang="ts" generics="Tag extends 'th' | 'div' = 'th'">
 	import ArrowUpRegular from 'fluentui-icons-svelte/ArrowUpRegular.svelte';
+	import { on } from 'svelte/events';
 	import { RenderSoC } from '$internal';
 	import { colIndex, focusGroup, getTag, requireTableContext } from './table.svelte.ts';
 	import type { TableDOM, TableHeaderCellProps } from './types.ts';
@@ -13,6 +14,7 @@
 		aside,
 		focusMode,
 		resizable,
+		resizeLabel = 'Resize column',
 		class: classes,
 		children,
 		...attributes
@@ -57,16 +59,16 @@
 
 		handle.setPointerCapture(e.pointerId);
 
+		/** Filled right below, so ending the drag can unhook every listener it started. */
+		let stop: (() => void)[] = [];
+
 		const onmove = (move: PointerEvent) => resizeTo(move, start + move.clientX - origin);
 		const onup = () => {
-			handle.removeEventListener('pointermove', onmove);
-			handle.removeEventListener('pointerup', onup);
-			handle.removeEventListener('pointercancel', onup);
+			for (const off of stop) off();
+			stop = [];
 		};
 
-		handle.addEventListener('pointermove', onmove);
-		handle.addEventListener('pointerup', onup);
-		handle.addEventListener('pointercancel', onup);
+		stop = [on(handle, 'pointermove', onmove), on(handle, 'pointerup', onup), on(handle, 'pointercancel', onup)];
 	};
 
 	/** One nudge per press, the way the WAI window splitter pattern describes. */
@@ -124,7 +126,7 @@
 			class="resize-handle"
 			role="separator"
 			aria-orientation="vertical"
-			aria-label="Resize column"
+			aria-label={resizeLabel}
 			aria-valuenow={width}
 			tabindex="0"
 			onpointerdown={startDrag}

@@ -1,5 +1,5 @@
 <script lang="ts" generics="Tag extends 'table' | 'div' = 'table'">
-	import { onMount, tick } from 'svelte';
+	import { tick } from 'svelte';
 	import { getTabspotAttributes, tabspotVirtual } from 'tabspot';
 	import { getTag, setTableContext, TABSPOT_ITEMS, TABSPOT_SKIP } from './table.svelte.ts';
 	import type { TableContext, TableDOM, TableProps } from './types.ts';
@@ -94,7 +94,7 @@
 	 * lets a move aim at a row that is not there yet: it scrolls the row in, then waits for Svelte to
 	 * flush before looking for it.
 	 */
-	onMount(() => {
+	$effect(() => {
 		if (!enableTabspot || !virtualizer || !ref) return;
 		return tabspotVirtual(ref as HTMLElement, {
 			scrollToIndex: (index) => virtualizer.scrollToIndex?.(index),

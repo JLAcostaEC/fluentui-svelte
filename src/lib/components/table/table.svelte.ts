@@ -1,5 +1,6 @@
 import { PREFIX } from '$constants';
 import { createFSContext } from '$internal';
+import { on } from 'svelte/events';
 import type { Attachment } from 'svelte/attachments';
 import type { TableContext } from './types.ts';
 
@@ -13,8 +14,12 @@ export const TABSPOT_ITEMS = '.fs-table-header-cell, .fs-table-cell, .fs-table-s
 /** Cells the cursor passes over instead of landing on, which is what `focusMode: 'none'` asks for. */
 export const TABSPOT_SKIP = '[data-fs-focus-mode="none"]';
 
-/** Everything that would answer the Tab key on its own. */
-const FOCUSABLE = 'a[href], button, input, select, textarea, [tabindex], [contenteditable="true"]';
+/**
+ * Everything that would answer the Tab key on its own. A disabled control takes no focus, so
+ * holding it would be pointless and entering the cell would land on something that cannot be left.
+ */
+const FOCUSABLE =
+	'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex], [contenteditable="true"]';
 
 /** Controls that spend `Space` themselves, so a row must not take it from under them. */
 const SPACE_CONSUMERS = 'a[href], button, input, select, textarea, [contenteditable="true"]';
@@ -33,8 +38,7 @@ export const selectOnSpace: Attachment<HTMLElement> = (node) => {
 		node.click();
 	};
 
-	node.addEventListener('keydown', onkeydown);
-	return () => node.removeEventListener('keydown', onkeydown);
+	return on(node, 'keydown', onkeydown);
 };
 
 /**
@@ -108,17 +112,18 @@ export const focusGroup: Attachment<HTMLElement> = (node) => {
 	hold();
 	// Content that arrives later — a menu opening, a row re-rendering — has to be held too.
 	const observer = new MutationObserver(() => {
-		if (!node.contains(document.activeElement)) hold();
+		// The node's own document, so a table inside an iframe reads the focus that belongs to it.
+		if (!node.contains(node.ownerDocument.activeElement)) hold();
 	});
 	observer.observe(node, { childList: true, subtree: true });
 
-	node.addEventListener('keydown', onkeydown);
-	node.addEventListener('focusout', onfocusout);
+	const offKeydown = on(node, 'keydown', onkeydown);
+	const offFocusout = on(node, 'focusout', onfocusout);
 
 	return () => {
 		observer.disconnect();
-		node.removeEventListener('keydown', onkeydown);
-		node.removeEventListener('focusout', onfocusout);
+		offKeydown();
+		offFocusout();
 		release();
 	};
 };

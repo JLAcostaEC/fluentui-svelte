@@ -31,7 +31,7 @@ export type TableProps<Tag extends 'table' | 'div' = 'table'> = {
 	 * @type HTMLTableElement | HTMLDivElement
 	 * @bindable
 	 */
-	ref?: TableDOM[Tag];
+	ref?: TableDOM[Tag] | HTMLDivElement;
 	/** Affects the sizes of all table subcomponents.
 	 * @default 'medium'
 	 */
@@ -105,7 +105,7 @@ export type TableHeaderProps<Tag extends 'thead' | 'div' = 'thead'> = {
 	 * @type HTMLTableSectionElement | HTMLDivElement
 	 * @bindable
 	 */
-	ref?: TableDOM[Tag];
+	ref?: TableDOM[Tag] | HTMLDivElement;
 } & PolymorphicProps<Tag>;
 
 /** @propsmith TableHeaderCellProps */
@@ -119,7 +119,7 @@ export type TableHeaderCellProps<Tag extends 'th' | 'div' = 'th'> = {
 	 * @type HTMLTableCellElement | HTMLDivElement
 	 * @bindable
 	 */
-	ref?: TableDOM[Tag];
+	ref?: TableDOM[Tag] | HTMLDivElement;
 	/** Whether the column is sortable. Inherited from the table by default. */
 	sortable?: boolean;
 	/** The direction the column is currently sorted in. Also sets `aria-sort`. */
@@ -141,6 +141,11 @@ export type TableHeaderCellProps<Tag extends 'th' | 'div' = 'th'> = {
 	focusMode?: CellFocusMode;
 	/** Whether the column can be resized. Inherited from the table by default. */
 	resizable?: boolean;
+	/** The accessible name of the resize handle. Give it a translated, and ideally per column, string
+	 * — the attributes of the cell reach the cell, never the handle inside it.
+	 * @default 'Resize column'
+	 */
+	resizeLabel?: string;
 } & PolymorphicProps<Tag>;
 
 /** @propsmith TableBodyProps */
@@ -154,7 +159,7 @@ export type TableBodyProps<Tag extends 'tbody' | 'div' = 'tbody'> = {
 	 * @type HTMLTableSectionElement | HTMLDivElement
 	 * @bindable
 	 */
-	ref?: TableDOM[Tag];
+	ref?: TableDOM[Tag] | HTMLDivElement;
 } & PolymorphicProps<Tag>;
 
 /** @propsmith TableRowProps */
@@ -168,7 +173,7 @@ export type TableRowProps<Tag extends 'tr' | 'div' = 'tr'> = {
 	 * @type HTMLTableRowElement | HTMLDivElement
 	 * @bindable
 	 */
-	ref?: TableDOM[Tag];
+	ref?: TableDOM[Tag] | HTMLDivElement;
 	/** How the row is filled. Intended to mark a selected row.
 	 * @default 'none'
 	 */
@@ -186,7 +191,7 @@ export type TableCellProps<Tag extends 'td' | 'div' = 'td'> = {
 	 * @type HTMLTableCellElement | HTMLDivElement
 	 * @bindable
 	 */
-	ref?: TableDOM[Tag];
+	ref?: TableDOM[Tag] | HTMLDivElement;
 	/** How the arrow keys treat the cell. `'group'` holds the focusable content of the cell out of
 	 * the tab order until `Enter` steps in, and `Escape` steps back out. `'none'` skips the cell
 	 * altogether. Only read when the table sets `enableTabspot`.
@@ -206,7 +211,7 @@ export type TableSelectionCellProps<Tag extends 'td' | 'div' = 'td'> = {
 	 * @type HTMLTableCellElement | HTMLDivElement
 	 * @bindable
 	 */
-	ref?: TableDOM[Tag];
+	ref?: TableDOM[Tag] | HTMLDivElement;
 	/** A table can have two kinds of selection modes.
 	 * @default 'checkbox'
 	 */

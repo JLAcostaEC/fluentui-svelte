@@ -2543,7 +2543,9 @@
     },
     "generated_fs_table_header_cell_props_props_focus_mode": {
       "en": "957e4323",
-      "locales": {},
+      "locales": {
+        "es": "957e4323"
+      },
       "source": "src/lib/components/table/types.ts#TableHeaderCellProps.focusMode"
     },
     "generated_fs_table_header_cell_props_props_ref": {
@@ -2555,8 +2557,15 @@
     },
     "generated_fs_table_header_cell_props_props_resizable": {
       "en": "e364e11e",
-      "locales": {},
+      "locales": {
+        "es": "e364e11e"
+      },
       "source": "src/lib/components/table/types.ts#TableHeaderCellProps.resizable"
+    },
+    "generated_fs_table_header_cell_props_props_resize_label": {
+      "en": "4506a073",
+      "locales": {},
+      "source": "src/lib/components/table/types.ts#TableHeaderCellProps.resizeLabel"
     },
     "generated_fs_table_header_cell_props_props_sort_direction": {
       "en": "55364419",
@@ -2602,12 +2611,16 @@
     },
     "generated_fs_table_props_props_column_sizing": {
       "en": "1fd42d5f",
-      "locales": {},
+      "locales": {
+        "es": "1fd42d5f"
+      },
       "source": "src/lib/components/table/types.ts#TableProps.columnSizing"
     },
     "generated_fs_table_props_props_column_widths": {
       "en": "aa12c9b5",
-      "locales": {},
+      "locales": {
+        "es": "aa12c9b5"
+      },
       "source": "src/lib/components/table/types.ts#TableProps.columnWidths"
     },
     "generated_fs_table_props_props_enable_tabspot": {
@@ -2633,7 +2646,9 @@
     },
     "generated_fs_table_props_props_on_column_resize": {
       "en": "cd3abbda",
-      "locales": {},
+      "locales": {
+        "es": "cd3abbda"
+      },
       "source": "src/lib/components/table/types.ts#TableProps.onColumnResize"
     },
     "generated_fs_table_props_props_ref": {
@@ -2645,7 +2660,9 @@
     },
     "generated_fs_table_props_props_resizable_columns": {
       "en": "8c1036d5",
-      "locales": {},
+      "locales": {
+        "es": "8c1036d5"
+      },
       "source": "src/lib/components/table/types.ts#TableProps.resizableColumns"
     },
     "generated_fs_table_props_props_size": {

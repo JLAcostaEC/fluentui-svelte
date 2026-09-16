@@ -43,17 +43,18 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableHeaderCellProps -->
 
-| Name             | Type                                           | Default  | Description                                                     |
-| ---------------- | ---------------------------------------------- | -------- | --------------------------------------------------------------- |
-| `as`             | `'th'` &#124; `'div'`                          | `'th'`   | {m.generated_fs_table_header_cell_props_props_as()}             |
-| `ref` _bindable_ | `HTMLTableCellElement` &#124; `HTMLDivElement` |          | {m.generated_fs_table_header_cell_props_props_ref()}            |
-| `sortable`       | `boolean`                                      |          | {m.generated_fs_table_header_cell_props_props_sortable()}       |
-| `sortDirection`  | `'ascending'` &#124; `'descending'`            |          | {m.generated_fs_table_header_cell_props_props_sort_direction()} |
-| `sortIcon`       | `Snippet` &#124; `Component`                   |          | {m.generated_fs_table_header_cell_props_props_sort_icon()}      |
-| `aside`          | `Snippet` &#124; `Component`                   |          | {m.generated_fs_table_header_cell_props_props_aside()}          |
-| `focusMode`      | `'cell'` &#124; `'group'` &#124; `'none'`      | `'cell'` | {m.generated_fs_table_header_cell_props_props_focus_mode()}     |
-| `resizable`      | `boolean`                                      |          | {m.generated_fs_table_header_cell_props_props_resizable()}      |
-| HTML Attributes  |                                                |          |                                                                 |
+| Name             | Type                                           | Default           | Description                                                     |
+| ---------------- | ---------------------------------------------- | ----------------- | --------------------------------------------------------------- |
+| `as`             | `'th'` &#124; `'div'`                          | `'th'`            | {m.generated_fs_table_header_cell_props_props_as()}             |
+| `ref` _bindable_ | `HTMLTableCellElement` &#124; `HTMLDivElement` |                   | {m.generated_fs_table_header_cell_props_props_ref()}            |
+| `sortable`       | `boolean`                                      |                   | {m.generated_fs_table_header_cell_props_props_sortable()}       |
+| `sortDirection`  | `'ascending'` &#124; `'descending'`            |                   | {m.generated_fs_table_header_cell_props_props_sort_direction()} |
+| `sortIcon`       | `Snippet` &#124; `Component`                   |                   | {m.generated_fs_table_header_cell_props_props_sort_icon()}      |
+| `aside`          | `Snippet` &#124; `Component`                   |                   | {m.generated_fs_table_header_cell_props_props_aside()}          |
+| `focusMode`      | `'cell'` &#124; `'group'` &#124; `'none'`      | `'cell'`          | {m.generated_fs_table_header_cell_props_props_focus_mode()}     |
+| `resizable`      | `boolean`                                      |                   | {m.generated_fs_table_header_cell_props_props_resizable()}      |
+| `resizeLabel`    | `string`                                       | `'Resize column'` | {m.generated_fs_table_header_cell_props_props_resize_label()}   |
+| HTML Attributes  |                                                |                   |                                                                 |
 
 <!-- /props:TableHeaderCellProps -->
 

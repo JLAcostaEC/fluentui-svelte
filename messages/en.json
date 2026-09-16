@@ -550,6 +550,7 @@
   "generated_fs_table_header_cell_props_props_focus_mode": "How the arrow keys treat the cell. `'group'` holds the focusable content of the cell out of the tab order until `Enter` steps in, and `Escape` steps back out. `'none'` skips the cell altogether. Only read when the table sets `enableTabspot`. A resizable header cell defaults to `'group'`, so the arrows reach its handle instead of leaving the column behind.",
   "generated_fs_table_header_cell_props_props_ref": "The DOM reference of the header cell element.",
   "generated_fs_table_header_cell_props_props_resizable": "Whether the column can be resized. Inherited from the table by default.",
+  "generated_fs_table_header_cell_props_props_resize_label": "The accessible name of the resize handle. Give it a translated, and ideally per column, string — the attributes of the cell reach the cell, never the handle inside it.",
   "generated_fs_table_header_cell_props_props_sort_direction": "The direction the column is currently sorted in. Also sets `aria-sort`.",
   "generated_fs_table_header_cell_props_props_sort_icon": "The indicator rendered next to the label of a sortable column.",
   "generated_fs_table_header_cell_props_props_sortable": "Whether the column is sortable. Inherited from the table by default.",

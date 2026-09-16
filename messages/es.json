@@ -550,6 +550,7 @@
   "generated_fs_table_header_cell_props_props_focus_mode": "Cómo tratan las flechas a la celda. `'group'` mantiene el contenido focusable de la celda fuera del orden de tabulación hasta que `Enter` entra, y `Escape` vuelve a salir. `'none'` omite la celda por completo. Solo se lee cuando la tabla activa `enableTabspot`. Una celda de encabezado redimensionable usa `'group'` por defecto, para que las flechas alcancen su tirador en lugar de abandonar la columna.",
   "generated_fs_table_header_cell_props_props_ref": "La referencia DOM del elemento de la celda de encabezado.",
   "generated_fs_table_header_cell_props_props_resizable": "Si la columna se puede redimensionar. Se hereda de la tabla por defecto.",
+  "generated_fs_table_header_cell_props_props_resize_label": "El nombre accesible del tirador de redimensionado. Dale una cadena traducida, e idealmente propia de cada columna: los atributos de la celda llegan a la celda, nunca al tirador que hay dentro.",
   "generated_fs_table_header_cell_props_props_sort_direction": "La dirección en la que está ordenada la columna actualmente. También establece `aria-sort`.",
   "generated_fs_table_header_cell_props_props_sort_icon": "El indicador que se renderiza junto a la etiqueta de una columna ordenable.",
   "generated_fs_table_header_cell_props_props_sortable": "Si la columna es ordenable. Se hereda de la tabla por defecto.",

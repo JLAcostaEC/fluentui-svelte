@@ -184,7 +184,7 @@
   };
 
   const subtleCode = `
-<TableRow aria-selected={isSelected} appearance={isSelected ? 'brand' : 'none'} onclick={...}>
+<TableRow aria-selected={isSelected} appearance={isSelected ? 'brand' : 'none'} onclick={() => toggleSubtle(item.file)}>
   <TableSelectionCell subtle checked={isSelected} checkboxIndicator={{ 'aria-label': 'Select row' }} />
   <TableCell>{item.file}</TableCell>
 </TableRow>`;

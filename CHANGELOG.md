@@ -1,5 +1,11 @@
 # fluentui-svelte
 
+## 0.3.0
+
+### Minor Changes
+
+- feat: add table component ([#31](https://github.com/JLAcostaEC/fluentui-svelte/pull/31))
+
 ## 0.2.1
 
 ### Patch Changes

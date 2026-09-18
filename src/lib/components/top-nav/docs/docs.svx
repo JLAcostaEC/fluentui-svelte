@@ -1,0 +1,63 @@
+<script lang="ts">
+  import { TopNav, TopNavItem } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { AirplaneRegular, AirplaneTakeOffRegular, CalendarMonthRegular } from 'fluentui-icons-svelte';
+  import { m } from '$i18n/messages.js';
+
+  let selectedValue = $state('arrivals');
+</script>
+
+# TopNav
+
+{m.top_nav_description()}
+
+<Showcase columns={1} disablePanZoom>
+  <div>
+    <TopNav bind:selectedValue aria-label="Flights">
+      <TopNavItem value="arrivals" icon={AirplaneRegular}>Arrivals</TopNavItem>
+      <TopNavItem value="departures" icon={AirplaneTakeOffRegular}>Departures</TopNavItem>
+      <TopNavItem value="schedule" icon={CalendarMonthRegular}>Schedule</TopNavItem>
+    </TopNav>
+    <div role="tabpanel" style="padding: 1rem 0.625rem">
+      {#if selectedValue === 'arrivals'}
+        Everything landing in the next hour.
+      {:else if selectedValue === 'departures'}
+        Everything leaving in the next hour.
+      {:else}
+        The rest of the week.
+      {/if}
+    </div>
+  </div>
+</Showcase>
+
+{m.top_nav_indicator_description()}
+
+{m.top_nav_headless_description()}
+
+{m.top_nav_required_components_description()}
+
+- `TopNav`: {m.top_nav_component_topnav_description()}
+- `TopNavItem`: {m.top_nav_component_topnavitem_description()}
+
+## {m.global_usage()}
+
+{m.top_nav_usage_description()}
+
+```svelte
+<script>
+	import { TopNav, TopNavItem } from 'fluentui-svelte';
+
+	let selectedValue = $state('arrivals');
+</script>
+
+<TopNav bind:selectedValue aria-label="Flights">
+	<TopNavItem id="tab-arrivals" value="arrivals">Arrivals</TopNavItem>
+	<TopNavItem id="tab-departures" value="departures">Departures</TopNavItem>
+</TopNav>
+
+{#if selectedValue === 'arrivals'}
+	<div role="tabpanel" aria-labelledby="tab-arrivals">Everything landing in the next hour.</div>
+{:else}
+	<div role="tabpanel" aria-labelledby="tab-departures">Everything leaving in the next hour.</div>
+{/if}
+```

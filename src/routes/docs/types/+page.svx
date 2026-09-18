@@ -15,4 +15,8 @@
 
 `'text'` &#124; `'search'` &#124; `'email'` &#124; `'url'` &#124; `'tel'` &#124; `'password'` &#124; `'number'`
 
+### TopNavAppearance
+
+`'transparent'` &#124; `'subtle'` &#124; `'subtle-circular'` &#124; `'filled-circular'`
+
 <!-- /props:@types -->

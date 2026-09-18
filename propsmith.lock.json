@@ -3345,6 +3345,109 @@
       },
       "source": "src/lib/components/tooltip/types.ts#TooltipProps.withArrow"
     },
+    "generated_fs_top_nav_item_props_props_as": {
+      "en": "2fe14e10",
+      "locales": {},
+      "source": "src/lib/components/top-nav/types.ts#TopNavItemProps.as"
+    },
+    "generated_fs_top_nav_item_props_props_disabled": {
+      "en": "b99cb72f",
+      "locales": {
+        "es": "b99cb72f"
+      },
+      "source": "src/lib/components/top-nav/types.ts#TopNavItemProps.disabled"
+    },
+    "generated_fs_top_nav_item_props_props_icon": {
+      "en": "b30f7f32",
+      "locales": {
+        "es": "b30f7f32"
+      },
+      "source": "src/lib/components/top-nav/types.ts#TopNavItemProps.icon"
+    },
+    "generated_fs_top_nav_item_props_props_ref": {
+      "en": "13e98d0a",
+      "locales": {
+        "es": "13e98d0a"
+      },
+      "source": "src/lib/components/top-nav/types.ts#TopNavItemProps.ref"
+    },
+    "generated_fs_top_nav_item_props_props_value": {
+      "en": "db5d1f05",
+      "locales": {
+        "es": "db5d1f05"
+      },
+      "source": "src/lib/components/top-nav/types.ts#TopNavItemProps.value"
+    },
+    "generated_fs_top_nav_props_props_appearance": {
+      "en": "f964e80d",
+      "locales": {
+        "es": "f964e80d"
+      },
+      "source": "src/lib/components/top-nav/types.ts#TopNavProps.appearance"
+    },
+    "generated_fs_top_nav_props_props_disable_tabspot": {
+      "en": "deab05a0",
+      "locales": {
+        "es": "deab05a0"
+      },
+      "source": "src/lib/components/top-nav/types.ts#TopNavProps.disableTabspot"
+    },
+    "generated_fs_top_nav_props_props_disabled": {
+      "en": "f560bdec",
+      "locales": {
+        "es": "f560bdec"
+      },
+      "source": "src/lib/components/top-nav/types.ts#TopNavProps.disabled"
+    },
+    "generated_fs_top_nav_props_props_on_tab_select": {
+      "en": "a99386aa",
+      "locales": {
+        "es": "a99386aa"
+      },
+      "source": "src/lib/components/top-nav/types.ts#TopNavProps.onTabSelect"
+    },
+    "generated_fs_top_nav_props_props_ref": {
+      "en": "3b58db42",
+      "locales": {
+        "es": "3b58db42"
+      },
+      "source": "src/lib/components/top-nav/types.ts#TopNavProps.ref"
+    },
+    "generated_fs_top_nav_props_props_reserve_selected_tab_space": {
+      "en": "e0283689",
+      "locales": {
+        "es": "e0283689"
+      },
+      "source": "src/lib/components/top-nav/types.ts#TopNavProps.reserveSelectedTabSpace"
+    },
+    "generated_fs_top_nav_props_props_select_tab_on_focus": {
+      "en": "e1a3102a",
+      "locales": {
+        "es": "e1a3102a"
+      },
+      "source": "src/lib/components/top-nav/types.ts#TopNavProps.selectTabOnFocus"
+    },
+    "generated_fs_top_nav_props_props_selected_value": {
+      "en": "2b9f0cd6",
+      "locales": {
+        "es": "2b9f0cd6"
+      },
+      "source": "src/lib/components/top-nav/types.ts#TopNavProps.selectedValue"
+    },
+    "generated_fs_top_nav_props_props_size": {
+      "en": "442328df",
+      "locales": {
+        "es": "442328df"
+      },
+      "source": "src/lib/components/top-nav/types.ts#TopNavProps.size"
+    },
+    "generated_fs_top_nav_props_props_vertical": {
+      "en": "a26c1cc1",
+      "locales": {
+        "es": "a26c1cc1"
+      },
+      "source": "src/lib/components/top-nav/types.ts#TopNavProps.vertical"
+    },
     "generated_fs_tree_view_item_layout_props_props_actions": {
       "en": "762f3f35",
       "locales": {

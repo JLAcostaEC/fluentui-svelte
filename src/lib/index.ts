@@ -12,6 +12,13 @@ export { default as Badge } from './components/badge/badge.svelte';
 export { default as BadgeIcon } from './components/badge/badge-icon.svelte';
 // End Badge Component
 
+// Start Breadcrumb Component
+export { default as Breadcrumb } from './components/breadcrumb/breadcrumb.svelte';
+export { default as BreadcrumbItem } from './components/breadcrumb/breadcrumb-item.svelte';
+export { default as BreadcrumbButton } from './components/breadcrumb/breadcrumb-button.svelte';
+export { default as BreadcrumbDivider } from './components/breadcrumb/breadcrumb-divider.svelte';
+// End Breadcrumb Component
+
 // Start Button Component
 export { default as Button } from './components/button/button.svelte';
 export { default as SplitButton } from './components/button/split-button.svelte';

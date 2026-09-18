@@ -130,7 +130,6 @@
 	.showcase {
 		position: relative;
 		outline: none;
-		contain: layout;
 		min-height: 280px;
 		width: 100%;
 		border-radius: var(--fs-control-overlay-border-radius);

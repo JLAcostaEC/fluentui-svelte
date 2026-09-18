@@ -1,0 +1,58 @@
+<script lang="ts">
+  import { Breadcrumb, BreadcrumbItem, BreadcrumbButton, BreadcrumbDivider } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# Breadcrumb
+
+{m.breadcrumb_description()}
+
+<Showcase columns={1} disablePanZoom minHeight="100px">
+  <Breadcrumb>
+    <BreadcrumbItem>
+      <BreadcrumbButton as="a" href="#home">Home</BreadcrumbButton>
+    </BreadcrumbItem>
+    <BreadcrumbDivider />
+    <BreadcrumbItem>
+      <BreadcrumbButton as="a" href="#files">Files</BreadcrumbButton>
+    </BreadcrumbItem>
+    <BreadcrumbDivider />
+    <BreadcrumbItem>
+      <BreadcrumbButton current>Quarterly report</BreadcrumbButton>
+    </BreadcrumbItem>
+  </Breadcrumb>
+</Showcase>
+
+{m.breadcrumb_accessibility_description()}
+
+{m.breadcrumb_required_components_description()}
+
+- `Breadcrumb`: {m.breadcrumb_component_breadcrumb_description()}
+- `BreadcrumbItem`: {m.breadcrumb_component_breadcrumbitem_description()}
+- `BreadcrumbButton`: {m.breadcrumb_component_breadcrumbbutton_description()}
+- `BreadcrumbDivider`: {m.breadcrumb_component_breadcrumbdivider_description()}
+
+## {m.global_usage()}
+
+{m.breadcrumb_usage_description()}
+
+```svelte
+<script>
+	import { Breadcrumb, BreadcrumbItem, BreadcrumbButton, BreadcrumbDivider } from 'fluentui-svelte';
+</script>
+
+<Breadcrumb>
+	<BreadcrumbItem>
+		<BreadcrumbButton as="a" href="/">Home</BreadcrumbButton>
+	</BreadcrumbItem>
+	<BreadcrumbDivider />
+	<BreadcrumbItem>
+		<BreadcrumbButton as="a" href="/files">Files</BreadcrumbButton>
+	</BreadcrumbItem>
+	<BreadcrumbDivider />
+	<BreadcrumbItem>
+		<BreadcrumbButton current>Quarterly report</BreadcrumbButton>
+	</BreadcrumbItem>
+</Breadcrumb>
+```

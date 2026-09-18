@@ -1,0 +1,65 @@
+<script lang="ts">
+  import { TabView, TabViewTab } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { DocumentRegular, MailRegular, CalendarLtrRegular } from 'fluentui-icons-svelte';
+  import { m } from '$i18n/messages.js';
+
+  let activeTab = $state('document');
+
+  // The panel shares the surface of the selected tab, which is what its feet curve out into.
+  const panelStyle =
+    'background: var(--fs-solid-background-quaternary); border: 1px solid var(--fs-card-stroke-default); border-radius: 0.4375rem; padding: 1rem; margin: 0;';
+</script>
+
+# TabView
+
+{m.tab_view_description()}
+
+<Showcase columns={1} columnWidth="680px" >
+  <div style="width: 100%">
+    <TabView bind:activeTab closable listProps={{ 'aria-label': 'Workspaces' }} showNewTabButton>
+      <TabViewTab value="document" icon={DocumentRegular}>Document</TabViewTab>
+      <TabViewTab value="mail" icon={MailRegular}>Mail</TabViewTab>
+      <TabViewTab value="calendar" icon={CalendarLtrRegular}>Calendar</TabViewTab>
+    </TabView>
+    <div role="tabpanel" style={panelStyle}>
+      {#if activeTab === 'document'}
+        The document you are working on.
+      {:else if activeTab === 'mail'}
+        Everything that landed in your inbox.
+      {:else}
+        What the rest of the week looks like.
+      {/if}
+    </div>
+  </div>
+</Showcase>
+
+{m.tab_view_headless_description()}
+
+{m.tab_view_required_components_description()}
+
+- `TabView`: {m.tab_view_component_tabview_description()}
+- `TabViewTab`: {m.tab_view_component_tabviewtab_description()}
+
+## {m.global_usage()}
+
+{m.tab_view_usage_description()}
+
+```svelte
+<script>
+	import { TabView, TabViewTab } from 'fluentui-svelte';
+
+	let activeTab = $state('document');
+</script>
+
+<TabView bind:activeTab listProps={{ 'aria-label': 'Workspaces' }}>
+	<TabViewTab id="tab-document" value="document">Document</TabViewTab>
+	<TabViewTab id="tab-mail" value="mail">Mail</TabViewTab>
+</TabView>
+
+{#if activeTab === 'document'}
+	<div role="tabpanel" aria-labelledby="tab-document">The document you are working on.</div>
+{:else}
+	<div role="tabpanel" aria-labelledby="tab-mail">Everything that landed in your inbox.</div>
+{/if}
+```

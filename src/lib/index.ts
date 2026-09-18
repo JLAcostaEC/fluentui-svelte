@@ -148,6 +148,11 @@ export { default as TableCellLayout } from './components/table/table-cell-layout
 export { default as TableCellActions } from './components/table/table-cell-actions.svelte';
 // End Table Component
 
+// Start TabView Component
+export { default as TabView } from './components/tab-view/tab-view.svelte';
+export { default as TabViewTab } from './components/tab-view/tab-view-tab.svelte';
+// End TabView Component
+
 // Start TextArea Component
 export { default as TextArea } from './components/textarea/textarea.svelte';
 // End TextArea Component

@@ -1,0 +1,51 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.tab_view_component_props_tabview_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TabViewProps -->
+
+| Name                       | Type                                                    | Default   | Description                                                  |
+| -------------------------- | ------------------------------------------------------- | --------- | ------------------------------------------------------------ |
+| `ref` _bindable_           | `HTMLDivElement`                                        |           | {m.generated_fs_tab_view_props_props_ref()}                  |
+| `listRef` _bindable_       | `HTMLDivElement`                                        |           | {m.generated_fs_tab_view_props_props_list_ref()}             |
+| `listProps`                | `HTMLAttributes`                                        |           | {m.generated_fs_tab_view_props_props_list_props()}           |
+| `activeTab` _bindable_     | `string`                                                |           | {m.generated_fs_tab_view_props_props_active_tab()}           |
+| `onTabChange`              | `(event: Event, value: string) => void`                 |           | {m.generated_fs_tab_view_props_props_on_tab_change()}        |
+| `closable`                 | `boolean`                                               | `false`   | {m.generated_fs_tab_view_props_props_closable()}             |
+| `onTabClose`               | `(event: Event, value: string) => void`                 |           | {m.generated_fs_tab_view_props_props_on_tab_close()}         |
+| `showNewTabButton`         | `boolean`                                               | `false`   | {m.generated_fs_tab_view_props_props_show_new_tab_button()}  |
+| `onNewTab`                 | `(event: MouseEvent) => void`                           |           | {m.generated_fs_tab_view_props_props_on_new_tab()}           |
+| `newTabButtonProps`        | `HTMLButtonAttributes`                                  |           | {m.generated_fs_tab_view_props_props_new_tab_button_props()} |
+| `tabWidthMode`             | `'equal'` &#124; `'size-to-content'` &#124; `'compact'` | `'equal'` | {m.generated_fs_tab_view_props_props_tab_width_mode()}       |
+| `disableTabspot`           | `boolean`                                               | `false`   | {m.generated_fs_tab_view_props_props_disable_tabspot()}      |
+| Element Attributes (`div`) |                                                         |           |                                                              |
+
+<!-- /props:TabViewProps -->
+
+## {m.tab_view_component_props_tabviewtab_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TabViewTabProps -->
+
+| Name                       | Type                                    | Default | Description                                          |
+| -------------------------- | --------------------------------------- | ------- | ---------------------------------------------------- |
+| `ref` _bindable_           | `HTMLDivElement`                        |         | {m.generated_fs_tab_view_tab_props_props_ref()}      |
+| `value`                    | `string`                                |         | {m.generated_fs_tab_view_tab_props_props_value()}    |
+| `icon`                     | `Snippet` &#124; `Component`            |         | {m.generated_fs_tab_view_tab_props_props_icon()}     |
+| `closable`                 | `boolean`                               |         | {m.generated_fs_tab_view_tab_props_props_closable()} |
+| `disabled`                 | `boolean`                               |         | {m.generated_fs_tab_view_tab_props_props_disabled()} |
+| `onClose`                  | `(event: Event, value: string) => void` |         | {m.generated_fs_tab_view_tab_props_props_on_close()} |
+| Element Attributes (`div`) |                                         |         |                                                      |
+
+<!-- /props:TabViewTabProps -->
+
+## {m.tab_view_keyboard_navigation_title()}
+
+{m.tab_view_keyboard_navigation_description()}
+
+## {m.tab_view_accessibility_title()}
+
+{m.tab_view_accessibility_description()}

@@ -49,6 +49,7 @@ export default defineConfig({
 		include: [
 			'@floating-ui/dom',
 			'fluentui-icons-svelte',
+			'fluentui-icons-svelte/AddRegular.svelte',
 			'fluentui-icons-svelte/ArrowCircleLeftRegular.svelte',
 			'fluentui-icons-svelte/ArrowUpRegular.svelte',
 			'fluentui-icons-svelte/CaretDownFilled.svelte',
@@ -66,6 +67,7 @@ export default defineConfig({
 			'fluentui-icons-svelte/DismissCircleFilled.svelte',
 			'fluentui-icons-svelte/DismissCircleRegular.svelte',
 			'fluentui-icons-svelte/DismissFilled.svelte',
+			'fluentui-icons-svelte/DismissRegular.svelte',
 			'fluentui-icons-svelte/ErrorCircleFilled.svelte',
 			'fluentui-icons-svelte/EyeHideFilled.svelte',
 			'fluentui-icons-svelte/EyeShowFilled.svelte',

@@ -1,0 +1,155 @@
+<script lang="ts">
+  import { TabView, TabViewTab } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { DocumentRegular, MailRegular, CalendarLtrRegular } from 'fluentui-icons-svelte';
+  import { m } from '$i18n/messages.js';
+
+  let closableTabs = $state([
+    { value: 'notes', label: 'Notes' },
+    { value: 'draft', label: 'Draft' },
+    { value: 'archive', label: 'Archive' }
+  ]);
+  let closableActive = $state('notes');
+
+  const closeTab = (_event: Event, value: string) => {
+    const index = closableTabs.findIndex((tab) => tab.value === value);
+    closableTabs = closableTabs.filter((tab) => tab.value !== value);
+    if (closableActive !== value) return;
+    closableActive = closableTabs[Math.min(index, closableTabs.length - 1)]?.value ?? '';
+  };
+
+  let openTabs = $state([{ value: 'tab-1', label: 'Tab 1' }]);
+  let openActive = $state('tab-1');
+
+  const addTab = () => {
+    const value = `tab-${openTabs.length + 1}`;
+    openTabs.push({ value, label: `Tab ${openTabs.length + 1}` });
+    openActive = value;
+  };
+
+  let widthActive = $state('document');
+  let disabledActive = $state('mail');
+
+  const closableCode = `
+<script>
+  import { TabView, TabViewTab } from 'fluentui-svelte';
+
+  let tabs = $state([
+    { value: 'notes', label: 'Notes' },
+    { value: 'draft', label: 'Draft' }
+  ]);
+  let activeTab = $state('notes');
+
+  // The strip never removes a tab on its own: the tabs are your markup.
+  const closeTab = (event, value) => {
+    const index = tabs.findIndex((tab) => tab.value === value);
+    tabs = tabs.filter((tab) => tab.value !== value);
+    if (activeTab !== value) return;
+    activeTab = tabs[Math.min(index, tabs.length - 1)]?.value ?? '';
+  };
+<\/script>
+
+<TabView bind:activeTab closable onTabClose={closeTab}>
+  {#each tabs as tab (tab.value)}
+    <TabViewTab value={tab.value}>{tab.label}</TabViewTab>
+  {/each}
+</TabView>`;
+
+  const newTabCode = `
+<script>
+  import { TabView, TabViewTab } from 'fluentui-svelte';
+
+  let tabs = $state([{ value: 'tab-1', label: 'Tab 1' }]);
+  let activeTab = $state('tab-1');
+
+  const addTab = () => {
+    const value = \`tab-\${tabs.length + 1}\`;
+    tabs.push({ value, label: \`Tab \${tabs.length + 1}\` });
+    activeTab = value;
+  };
+<\/script>
+
+<TabView bind:activeTab showNewTabButton onNewTab={addTab}>
+  {#each tabs as tab (tab.value)}
+    <TabViewTab value={tab.value}>{tab.label}</TabViewTab>
+  {/each}
+</TabView>`;
+
+  const widthModeCode = `
+<TabView tabWidthMode="equal">...</TabView>
+<TabView tabWidthMode="size-to-content">...</TabView>
+<TabView tabWidthMode="compact">...</TabView>`;
+
+  const disabledCode = `
+<TabView activeTab="mail">
+  <TabViewTab value="document">Document</TabViewTab>
+  <TabViewTab value="mail">Mail</TabViewTab>
+  <TabViewTab value="calendar" disabled>Calendar</TabViewTab>
+</TabView>`;
+</script>
+
+### {m.tab_view_closing_tabs_title()}
+
+{m.tab_view_closing_tabs_description()}
+
+<Showcase columns={1} columnWidth="680px" code={closableCode} >
+  <div style="width: 100%">
+    <TabView bind:activeTab={closableActive} closable onTabClose={closeTab} listProps={{ 'aria-label': 'Closable tabs' }}>
+      {#each closableTabs as tab (tab.value)}
+        <TabViewTab value={tab.value}>{tab.label}</TabViewTab>
+      {/each}
+    </TabView>
+  </div>
+</Showcase>
+
+### {m.tab_view_new_tab_button_title()}
+
+{m.tab_view_new_tab_button_description()}
+
+<Showcase columns={1} columnWidth="680px" code={newTabCode} disablePanZoom>
+  <div style="width: 100%">
+    <TabView bind:activeTab={openActive} showNewTabButton onNewTab={addTab} listProps={{ 'aria-label': 'Open tabs' }}>
+      {#each openTabs as tab (tab.value)}
+        <TabViewTab value={tab.value}>{tab.label}</TabViewTab>
+      {/each}
+    </TabView>
+  </div>
+</Showcase>
+
+### {m.tab_view_tab_width_mode_title()}
+
+{m.tab_view_tab_width_mode_description()}
+
+<Showcase columns={1} columnWidth="680px" code={widthModeCode} disablePanZoom>
+  <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%">
+    <TabView bind:activeTab={widthActive} tabWidthMode="equal" listProps={{ 'aria-label': 'Equal' }}>
+      <TabViewTab value="document" icon={DocumentRegular}>Document</TabViewTab>
+      <TabViewTab value="mail" icon={MailRegular}>Mail</TabViewTab>
+      <TabViewTab value="calendar" icon={CalendarLtrRegular}>Calendar</TabViewTab>
+    </TabView>
+    <TabView bind:activeTab={widthActive} tabWidthMode="size-to-content" listProps={{ 'aria-label': 'Size to content' }}>
+      <TabViewTab value="document" icon={DocumentRegular}>Document</TabViewTab>
+      <TabViewTab value="mail" icon={MailRegular}>Mail</TabViewTab>
+      <TabViewTab value="calendar" icon={CalendarLtrRegular}>Calendar</TabViewTab>
+    </TabView>
+    <TabView bind:activeTab={widthActive} tabWidthMode="compact" listProps={{ 'aria-label': 'Compact' }}>
+      <TabViewTab value="document" icon={DocumentRegular}>Document</TabViewTab>
+      <TabViewTab value="mail" icon={MailRegular}>Mail</TabViewTab>
+      <TabViewTab value="calendar" icon={CalendarLtrRegular}>Calendar</TabViewTab>
+    </TabView>
+  </div>
+</Showcase>
+
+### {m.global_disabled()}
+
+{m.tab_view_disabled_description()}
+
+<Showcase columns={1} columnWidth="680px" code={disabledCode} disablePanZoom>
+  <div style="width: 100%">
+    <TabView bind:activeTab={disabledActive} listProps={{ 'aria-label': 'Disabled tab' }}>
+      <TabViewTab value="document" icon={DocumentRegular}>Document</TabViewTab>
+      <TabViewTab value="mail" icon={MailRegular}>Mail</TabViewTab>
+      <TabViewTab value="calendar" icon={CalendarLtrRegular} disabled>Calendar</TabViewTab>
+    </TabView>
+  </div>
+</Showcase>

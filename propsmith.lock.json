@@ -2443,6 +2443,96 @@
       },
       "source": "src/lib/components/button/types.ts#SplitButtonProps.wrapperRef"
     },
+    "generated_fs_tab_view_props_props_active_tab": {
+      "en": "a0ef8871",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewProps.activeTab"
+    },
+    "generated_fs_tab_view_props_props_closable": {
+      "en": "a76bb39f",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewProps.closable"
+    },
+    "generated_fs_tab_view_props_props_disable_tabspot": {
+      "en": "deab05a0",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewProps.disableTabspot"
+    },
+    "generated_fs_tab_view_props_props_list_props": {
+      "en": "e7621614",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewProps.listProps"
+    },
+    "generated_fs_tab_view_props_props_list_ref": {
+      "en": "7d3e6960",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewProps.listRef"
+    },
+    "generated_fs_tab_view_props_props_new_tab_button_props": {
+      "en": "01739f45",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewProps.newTabButtonProps"
+    },
+    "generated_fs_tab_view_props_props_on_new_tab": {
+      "en": "16d54eef",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewProps.onNewTab"
+    },
+    "generated_fs_tab_view_props_props_on_tab_change": {
+      "en": "77b0bb85",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewProps.onTabChange"
+    },
+    "generated_fs_tab_view_props_props_on_tab_close": {
+      "en": "f68bd2da",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewProps.onTabClose"
+    },
+    "generated_fs_tab_view_props_props_ref": {
+      "en": "10e082ea",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewProps.ref"
+    },
+    "generated_fs_tab_view_props_props_show_new_tab_button": {
+      "en": "4caeb589",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewProps.showNewTabButton"
+    },
+    "generated_fs_tab_view_props_props_tab_width_mode": {
+      "en": "3976f1f0",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewProps.tabWidthMode"
+    },
+    "generated_fs_tab_view_tab_props_props_closable": {
+      "en": "f7b5b11d",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewTabProps.closable"
+    },
+    "generated_fs_tab_view_tab_props_props_disabled": {
+      "en": "b99cb72f",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewTabProps.disabled"
+    },
+    "generated_fs_tab_view_tab_props_props_icon": {
+      "en": "b30f7f32",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewTabProps.icon"
+    },
+    "generated_fs_tab_view_tab_props_props_on_close": {
+      "en": "abbacf16",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewTabProps.onClose"
+    },
+    "generated_fs_tab_view_tab_props_props_ref": {
+      "en": "27893c9b",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewTabProps.ref"
+    },
+    "generated_fs_tab_view_tab_props_props_value": {
+      "en": "b555697d",
+      "locales": {},
+      "source": "src/lib/components/tab-view/types.ts#TabViewTabProps.value"
+    },
     "generated_fs_table_body_props_props_as": {
       "en": "47e07425",
       "locales": {
@@ -2564,7 +2654,9 @@
     },
     "generated_fs_table_header_cell_props_props_resize_label": {
       "en": "4506a073",
-      "locales": {},
+      "locales": {
+        "es": "4506a073"
+      },
       "source": "src/lib/components/table/types.ts#TableHeaderCellProps.resizeLabel"
     },
     "generated_fs_table_header_cell_props_props_sort_direction": {

@@ -165,6 +165,11 @@ export { default as TimePicker } from './components/time-picker/time-picker.svel
 export { default as ToggleSwitch } from './components/toggle-switch/toggle-switch.svelte';
 // End ToggleSwitch Component
 
+// Start TopNav Component
+export { default as TopNav } from './components/top-nav/top-nav.svelte';
+export { default as TopNavItem } from './components/top-nav/top-nav-item.svelte';
+// End TopNav Component
+
 // Start Tooltip Component
 export { default as Tooltip } from './components/tooltip/tooltip.svelte';
 // End Tooltip Component

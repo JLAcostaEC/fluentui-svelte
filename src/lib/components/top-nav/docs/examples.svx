@@ -1,0 +1,202 @@
+<script lang="ts">
+  import { TopNav, TopNavItem } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { AirplaneRegular, AirplaneTakeOffRegular, CalendarMonthRegular } from 'fluentui-icons-svelte';
+  import { m } from '$i18n/messages.js';
+
+  let appearanceValue = $state('tab2');
+  let sizeValue = $state('tab2');
+  let verticalValue = $state('tab2');
+  let iconValue = $state('arrivals');
+  let anchorValue = $state('arrivals');
+  let disabledValue = $state('tab2');
+  let focusValue = $state('tab2');
+  let reserveValue = $state('tab2');
+
+  const appearanceCode = `
+<TopNav appearance="transparent">...</TopNav>
+<TopNav appearance="subtle">...</TopNav>
+<TopNav appearance="subtle-circular">...</TopNav>
+<TopNav appearance="filled-circular">...</TopNav>`;
+
+  const sizeCode = `
+<TopNav size="small">...</TopNav>
+<TopNav size="medium">...</TopNav>
+<TopNav size="large">...</TopNav>`;
+
+  const verticalCode = `
+<TopNav bind:selectedValue vertical>
+  <TopNavItem value="tab1">First Tab</TopNavItem>
+  <TopNavItem value="tab2">Second Tab</TopNavItem>
+  <TopNavItem value="tab3">Third Tab</TopNavItem>
+</TopNav>`;
+
+  const iconCode = `
+<script>
+  import { TopNav, TopNavItem } from 'fluentui-svelte';
+  import { AirplaneRegular, AirplaneTakeOffRegular } from 'fluentui-icons-svelte';
+<\/script>
+
+<TopNav bind:selectedValue>
+  <TopNavItem value="arrivals" icon={AirplaneRegular}>Arrivals</TopNavItem>
+  <TopNavItem value="departures" icon={AirplaneTakeOffRegular}>Departures</TopNavItem>
+</TopNav>`;
+
+  const anchorCode = `
+<TopNav bind:selectedValue>
+  <TopNavItem as="a" href="#arrivals" value="arrivals">Arrivals</TopNavItem>
+  <TopNavItem as="a" href="#departures" value="departures">Departures</TopNavItem>
+</TopNav>`;
+
+  const disabledCode = `
+<TopNav disabled>...</TopNav>
+
+<TopNav>
+  <TopNavItem value="tab1">First Tab</TopNavItem>
+  <TopNavItem value="tab2" disabled>Second Tab</TopNavItem>
+</TopNav>`;
+
+  const focusCode = `
+<TopNav bind:selectedValue selectTabOnFocus>
+  <TopNavItem value="tab1">First Tab</TopNavItem>
+  <TopNavItem value="tab2">Second Tab</TopNavItem>
+</TopNav>`;
+
+  const reserveCode = `
+<TopNav bind:selectedValue reserveSelectedTabSpace={false}>
+  <TopNavItem value="tab1">First Tab</TopNavItem>
+  <TopNavItem value="tab2">Second Tab</TopNavItem>
+</TopNav>`;
+</script>
+
+### {m.global_appearance()}
+
+{m.top_nav_appearance_description()}
+
+<Showcase columns={1} code={appearanceCode} disablePanZoom>
+  <div style="display: flex; flex-direction: column; gap: 1.5rem; align-items: flex-start">
+    <TopNav bind:selectedValue={appearanceValue} appearance="transparent" aria-label="Transparent">
+      <TopNavItem value="tab1">First Tab</TopNavItem>
+      <TopNavItem value="tab2">Second Tab</TopNavItem>
+      <TopNavItem value="tab3">Third Tab</TopNavItem>
+    </TopNav>
+    <TopNav bind:selectedValue={appearanceValue} appearance="subtle" aria-label="Subtle">
+      <TopNavItem value="tab1">First Tab</TopNavItem>
+      <TopNavItem value="tab2">Second Tab</TopNavItem>
+      <TopNavItem value="tab3">Third Tab</TopNavItem>
+    </TopNav>
+    <TopNav bind:selectedValue={appearanceValue} appearance="subtle-circular" aria-label="Subtle circular">
+      <TopNavItem value="tab1">First Tab</TopNavItem>
+      <TopNavItem value="tab2">Second Tab</TopNavItem>
+      <TopNavItem value="tab3">Third Tab</TopNavItem>
+    </TopNav>
+    <TopNav bind:selectedValue={appearanceValue} appearance="filled-circular" aria-label="Filled circular">
+      <TopNavItem value="tab1">First Tab</TopNavItem>
+      <TopNavItem value="tab2">Second Tab</TopNavItem>
+      <TopNavItem value="tab3">Third Tab</TopNavItem>
+    </TopNav>
+  </div>
+</Showcase>
+
+### {m.global_size()}
+
+{m.top_nav_size_description()}
+
+<Showcase columns={1} code={sizeCode} disablePanZoom>
+  <div style="display: flex; flex-direction: column; gap: 1.5rem; align-items: flex-start">
+    <TopNav bind:selectedValue={sizeValue} size="small" aria-label="Small">
+      <TopNavItem value="tab1">First Tab</TopNavItem>
+      <TopNavItem value="tab2">Second Tab</TopNavItem>
+      <TopNavItem value="tab3">Third Tab</TopNavItem>
+    </TopNav>
+    <TopNav bind:selectedValue={sizeValue} size="medium" aria-label="Medium">
+      <TopNavItem value="tab1">First Tab</TopNavItem>
+      <TopNavItem value="tab2">Second Tab</TopNavItem>
+      <TopNavItem value="tab3">Third Tab</TopNavItem>
+    </TopNav>
+    <TopNav bind:selectedValue={sizeValue} size="large" aria-label="Large">
+      <TopNavItem value="tab1">First Tab</TopNavItem>
+      <TopNavItem value="tab2">Second Tab</TopNavItem>
+      <TopNavItem value="tab3">Third Tab</TopNavItem>
+    </TopNav>
+  </div>
+</Showcase>
+
+### {m.top_nav_vertical_title()}
+
+{m.top_nav_vertical_description()}
+
+<Showcase columns={1} code={verticalCode} disablePanZoom>
+  <TopNav bind:selectedValue={verticalValue} vertical aria-label="Vertical">
+    <TopNavItem value="tab1">First Tab</TopNavItem>
+    <TopNavItem value="tab2">Second Tab</TopNavItem>
+    <TopNavItem value="tab3">Third Tab</TopNavItem>
+  </TopNav>
+</Showcase>
+
+### {m.global_icon()}
+
+{m.top_nav_icons_description()}
+
+<Showcase columns={1} code={iconCode} disablePanZoom>
+  <TopNav bind:selectedValue={iconValue} aria-label="With icons">
+    <TopNavItem value="arrivals" icon={AirplaneRegular}>Arrivals</TopNavItem>
+    <TopNavItem value="departures" icon={AirplaneTakeOffRegular}>Departures</TopNavItem>
+    <TopNavItem value="schedule" icon={CalendarMonthRegular}>Schedule</TopNavItem>
+  </TopNav>
+</Showcase>
+
+### {m.top_nav_as_anchor_title()}
+
+{m.top_nav_as_anchor_description()}
+
+<Showcase columns={1} code={anchorCode} disablePanZoom>
+  <TopNav bind:selectedValue={anchorValue} aria-label="As anchors">
+    <TopNavItem as="a" href="#arrivals" value="arrivals">Arrivals</TopNavItem>
+    <TopNavItem as="a" href="#departures" value="departures">Departures</TopNavItem>
+    <TopNavItem as="a" href="#schedule" value="schedule">Schedule</TopNavItem>
+  </TopNav>
+</Showcase>
+
+### {m.global_disabled()}
+
+{m.top_nav_disabled_description()}
+
+<Showcase columns={1} code={disabledCode} disablePanZoom>
+  <div style="display: flex; flex-direction: column; gap: 1.5rem; align-items: flex-start">
+    <TopNav bind:selectedValue={disabledValue} disabled aria-label="Disabled strip">
+      <TopNavItem value="tab1">First Tab</TopNavItem>
+      <TopNavItem value="tab2">Second Tab</TopNavItem>
+      <TopNavItem value="tab3">Third Tab</TopNavItem>
+    </TopNav>
+    <TopNav bind:selectedValue={disabledValue} aria-label="Disabled item">
+      <TopNavItem value="tab1">First Tab</TopNavItem>
+      <TopNavItem value="tab2">Second Tab</TopNavItem>
+      <TopNavItem value="tab3" disabled>Third Tab</TopNavItem>
+    </TopNav>
+  </div>
+</Showcase>
+
+### {m.top_nav_select_on_focus_title()}
+
+{m.top_nav_select_on_focus_description()}
+
+<Showcase columns={1} code={focusCode} disablePanZoom>
+  <TopNav bind:selectedValue={focusValue} selectTabOnFocus aria-label="Select on focus">
+    <TopNavItem value="tab1">First Tab</TopNavItem>
+    <TopNavItem value="tab2">Second Tab</TopNavItem>
+    <TopNavItem value="tab3">Third Tab</TopNavItem>
+  </TopNav>
+</Showcase>
+
+### {m.top_nav_reserve_space_title()}
+
+{m.top_nav_reserve_space_description()}
+
+<Showcase columns={1} code={reserveCode} disablePanZoom>
+  <TopNav bind:selectedValue={reserveValue} reserveSelectedTabSpace={false} aria-label="No reserved space">
+    <TopNavItem value="tab1">First Tab</TopNavItem>
+    <TopNavItem value="tab2">Second Tab</TopNavItem>
+    <TopNavItem value="tab3">Third Tab</TopNavItem>
+  </TopNav>
+</Showcase>

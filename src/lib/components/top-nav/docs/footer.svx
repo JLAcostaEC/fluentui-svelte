@@ -1,0 +1,48 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.top_nav_component_props_topnav_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TopNavProps -->
+
+| Name                       | Type                                                | Default         | Description                                                       |
+| -------------------------- | --------------------------------------------------- | --------------- | ----------------------------------------------------------------- |
+| `ref` _bindable_           | `HTMLDivElement`                                    |                 | {m.generated_fs_top_nav_props_props_ref()}                        |
+| `selectedValue` _bindable_ | `string`                                            |                 | {m.generated_fs_top_nav_props_props_selected_value()}             |
+| `onTabSelect`              | `(event: Event, value: string) => void`             |                 | {m.generated_fs_top_nav_props_props_on_tab_select()}              |
+| `appearance`               | [`TopNavAppearance`](/docs/types/#topnavappearance) | `'transparent'` | {m.generated_fs_top_nav_props_props_appearance()}                 |
+| `size`                     | `'small'` &#124; `'medium'` &#124; `'large'`        | `'medium'`      | {m.generated_fs_top_nav_props_props_size()}                       |
+| `vertical`                 | `boolean`                                           | `false`         | {m.generated_fs_top_nav_props_props_vertical()}                   |
+| `disabled`                 | `boolean`                                           | `false`         | {m.generated_fs_top_nav_props_props_disabled()}                   |
+| `selectTabOnFocus`         | `boolean`                                           | `false`         | {m.generated_fs_top_nav_props_props_select_tab_on_focus()}        |
+| `reserveSelectedTabSpace`  | `boolean`                                           | `true`          | {m.generated_fs_top_nav_props_props_reserve_selected_tab_space()} |
+| `disableTabspot`           | `boolean`                                           | `false`         | {m.generated_fs_top_nav_props_props_disable_tabspot()}            |
+| Element Attributes (`div`) |                                                     |                 |                                                                   |
+
+<!-- /props:TopNavProps -->
+
+## {m.top_nav_component_props_topnavitem_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TopNavItemProps -->
+
+| Name             | Type                          | Default    | Description                                          |
+| ---------------- | ----------------------------- | ---------- | ---------------------------------------------------- |
+| `ref` _bindable_ | `TopNavItemElementDOMType[T]` |            | {m.generated_fs_top_nav_item_props_props_ref()}      |
+| `as`             | `'button'` &#124; `'a'`       | `'button'` | {m.generated_fs_top_nav_item_props_props_as()}       |
+| `value`          | `string`                      |            | {m.generated_fs_top_nav_item_props_props_value()}    |
+| `icon`           | `Snippet` &#124; `Component`  |            | {m.generated_fs_top_nav_item_props_props_icon()}     |
+| `disabled`       | `boolean`                     |            | {m.generated_fs_top_nav_item_props_props_disabled()} |
+| HTML Attributes  |                               |            |                                                      |
+
+<!-- /props:TopNavItemProps -->
+
+## {m.top_nav_keyboard_navigation_title()}
+
+{m.top_nav_keyboard_navigation_description()}
+
+## {m.top_nav_accessibility_title()}
+
+{m.top_nav_accessibility_description()}

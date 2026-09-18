@@ -141,7 +141,7 @@
 
 		/* System */
 		--fs-system-attention: rgb(var(--fs-accent-light-3));
-		--fs-system-attetion-bg: #f6f6f608;
+		--fs-system-attention-bg: #f6f6f608;
 		--fs-system-attention-solid-bg: #2e2e2e;
 
 		--fs-system-success: #6ccb5f;

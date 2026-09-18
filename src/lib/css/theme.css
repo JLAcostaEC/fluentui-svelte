@@ -158,7 +158,7 @@
 	/* System */
 	--fs-system-attention: rgb(var(--fs-accent-base));
 	/* 👇 changed from original #f6f6f608 to color mix with 75% white */
-	--fs-system-attetion-bg: color-mix(in srgb, rgb(var(--fs-accent-base)), white 75%);
+	--fs-system-attention-bg: color-mix(in srgb, rgb(var(--fs-accent-base)), white 85%);
 	--fs-system-attention-solid-bg: #f7f7f7;
 
 	--fs-system-success: #0f7b0f;

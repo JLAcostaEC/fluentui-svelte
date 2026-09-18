@@ -1,5 +1,19 @@
 # fluentui-svelte
 
+## 0.4.0
+
+### Minor Changes
+
+- feat: add the Breadcrumb component. ([#34](https://github.com/JLAcostaEC/fluentui-svelte/pull/34))
+
+- feat: add the TabView component. ([#35](https://github.com/JLAcostaEC/fluentui-svelte/pull/35))
+
+- feat: add the TopNav component. ([#35](https://github.com/JLAcostaEC/fluentui-svelte/pull/35))
+
+### Patch Changes
+
+- fix: correct the `--fs-system-attention-bg` token name. ([#37](https://github.com/JLAcostaEC/fluentui-svelte/pull/37))
+
 ## 0.3.0
 
 ### Minor Changes

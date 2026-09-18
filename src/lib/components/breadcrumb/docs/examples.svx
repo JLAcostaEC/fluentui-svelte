@@ -1,0 +1,212 @@
+<script lang="ts">
+  import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbButton,
+    BreadcrumbDivider,
+    Button,
+    Menu,
+    MenuTrigger,
+    MenuPopover,
+    MenuList,
+    MenuItem
+  } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { FolderRegular, MoreHorizontalRegular } from 'fluentui-icons-svelte';
+  import { m } from '$i18n/messages.js';
+
+  const trail = [
+    { name: 'Home', href: '#home' },
+    { name: 'Files', href: '#files' },
+    { name: 'Reports', href: '#reports' },
+    { name: '2026', href: '#2026' },
+    { name: 'Q1', href: '#q1' },
+    { name: 'Quarterly report' }
+  ];
+
+  // Keep the root and the last two steps; everything between them goes into the menu.
+  const head = trail.slice(0, 1);
+  const folded = trail.slice(1, -2);
+  const tail = trail.slice(-2);
+
+  const sizeCode = `
+<Breadcrumb size="small">...</Breadcrumb>
+<Breadcrumb size="medium">...</Breadcrumb>
+<Breadcrumb size="large">...</Breadcrumb>`;
+
+  const iconCode = `
+<BreadcrumbItem>
+  <BreadcrumbButton as="a" href="/files" icon={FolderRegular}>Files</BreadcrumbButton>
+</BreadcrumbItem>`;
+
+  const currentCode = `
+<BreadcrumbItem>
+  <BreadcrumbButton current>Quarterly report</BreadcrumbButton>
+</BreadcrumbItem>`;
+
+  const focusModeCode = `
+<Breadcrumb focusMode="arrow">...</Breadcrumb>`;
+
+  const overflowCode = `
+<script>
+  // Keep the root and the last two steps; everything between them goes into the menu.
+  const head = trail.slice(0, 1);
+  const folded = trail.slice(1, -2);
+  const tail = trail.slice(-2);
+<\/script>
+
+<Breadcrumb>
+  {#each head as item (item.name)}
+    <BreadcrumbItem>
+      <BreadcrumbButton as="a" href={item.href}>{item.name}</BreadcrumbButton>
+    </BreadcrumbItem>
+    <BreadcrumbDivider />
+  {/each}
+
+  <!-- A step takes whatever you put in it, so the menu is just another step. -->
+  <BreadcrumbItem>
+    <Menu>
+      <MenuTrigger>
+        {#snippet children({ state, menuTriggerProps })}
+          <Button bind:ref={state.ref} {...menuTriggerProps} appearance="subtle" aria-label={\`\${folded.length} more steps\`}>
+            <MoreHorizontalRegular />
+          </Button>
+        {/snippet}
+      </MenuTrigger>
+      <MenuPopover>
+        <MenuList>
+          <!-- A step that goes somewhere is a link, in the menu as much as in the trail. -->
+          {#each folded as item (item.name)}
+            <MenuItem href={item.href}>{item.name}</MenuItem>
+          {/each}
+        </MenuList>
+      </MenuPopover>
+    </Menu>
+  </BreadcrumbItem>
+  <BreadcrumbDivider />
+
+  {#each tail as item, index (item.name)}
+    <BreadcrumbItem>
+      {#if index === tail.length - 1}
+        <BreadcrumbButton current>{item.name}</BreadcrumbButton>
+      {:else}
+        <BreadcrumbButton as="a" href={item.href}>{item.name}</BreadcrumbButton>
+      {/if}
+    </BreadcrumbItem>
+    {#if index < tail.length - 1}
+      <BreadcrumbDivider />
+    {/if}
+  {/each}
+</Breadcrumb>`;
+</script>
+
+### {m.global_size()}
+
+{m.breadcrumb_size_description()}
+
+<Showcase columns={1} code={sizeCode} disablePanZoom>
+  <div style="display: flex; flex-direction: column; gap: 1rem; align-items: flex-start">
+    <Breadcrumb size="small" aria-label="Small">
+      <BreadcrumbItem><BreadcrumbButton as="a" href="#home">Home</BreadcrumbButton></BreadcrumbItem>
+      <BreadcrumbDivider />
+      <BreadcrumbItem><BreadcrumbButton current>Files</BreadcrumbButton></BreadcrumbItem>
+    </Breadcrumb>
+    <Breadcrumb size="medium" aria-label="Medium">
+      <BreadcrumbItem><BreadcrumbButton as="a" href="#home">Home</BreadcrumbButton></BreadcrumbItem>
+      <BreadcrumbDivider />
+      <BreadcrumbItem><BreadcrumbButton current>Files</BreadcrumbButton></BreadcrumbItem>
+    </Breadcrumb>
+    <Breadcrumb size="large" aria-label="Large">
+      <BreadcrumbItem><BreadcrumbButton as="a" href="#home">Home</BreadcrumbButton></BreadcrumbItem>
+      <BreadcrumbDivider />
+      <BreadcrumbItem><BreadcrumbButton current>Files</BreadcrumbButton></BreadcrumbItem>
+    </Breadcrumb>
+  </div>
+</Showcase>
+
+### {m.global_icon()}
+
+{m.breadcrumb_icons_description()}
+
+<Showcase columns={1} code={iconCode} disablePanZoom minHeight="100px">
+  <Breadcrumb aria-label="With icons">
+    <BreadcrumbItem><BreadcrumbButton as="a" href="#home" icon={FolderRegular}>Home</BreadcrumbButton></BreadcrumbItem>
+    <BreadcrumbDivider />
+    <BreadcrumbItem><BreadcrumbButton as="a" href="#files" icon={FolderRegular}>Files</BreadcrumbButton></BreadcrumbItem>
+    <BreadcrumbDivider />
+    <BreadcrumbItem><BreadcrumbButton current icon={FolderRegular}>Quarterly report</BreadcrumbButton></BreadcrumbItem>
+  </Breadcrumb>
+</Showcase>
+
+### {m.breadcrumb_current_title()}
+
+{m.breadcrumb_current_description()}
+
+<Showcase columns={1} code={currentCode} disablePanZoom minHeight="100px">
+  <Breadcrumb aria-label="Current step">
+    <BreadcrumbItem><BreadcrumbButton as="a" href="#home">Home</BreadcrumbButton></BreadcrumbItem>
+    <BreadcrumbDivider />
+    <BreadcrumbItem><BreadcrumbButton current>Quarterly report</BreadcrumbButton></BreadcrumbItem>
+  </Breadcrumb>
+</Showcase>
+
+### {m.breadcrumb_overflow_title()}
+
+{m.breadcrumb_overflow_description()}
+
+<Showcase columns={1} code={overflowCode} disablePanZoom>
+  <Breadcrumb aria-label="With an overflow menu">
+    {#each head as item (item.name)}
+      <BreadcrumbItem>
+        <BreadcrumbButton as="a" href={item.href}>{item.name}</BreadcrumbButton>
+      </BreadcrumbItem>
+      <BreadcrumbDivider />
+    {/each}
+    <BreadcrumbItem>
+      <Menu>
+        <MenuTrigger>
+          {#snippet children({ state, menuTriggerProps })}
+            <!-- After the spread: `menuTriggerProps` carries an undefined `appearance` of its own. -->
+            <Button bind:ref={state.ref} {...menuTriggerProps} appearance="subtle" aria-label={`${folded.length} more steps`}>
+              <MoreHorizontalRegular style="pointer-events: none;" />
+            </Button>
+          {/snippet}
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            {#each folded as item (item.name)}
+              <MenuItem href={item.href}>{item.name}</MenuItem>
+            {/each}
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </BreadcrumbItem>
+    <BreadcrumbDivider />
+    {#each tail as item, index (item.name)}
+      <BreadcrumbItem>
+        {#if index === tail.length - 1}
+          <BreadcrumbButton current>{item.name}</BreadcrumbButton>
+        {:else}
+          <BreadcrumbButton as="a" href={item.href}>{item.name}</BreadcrumbButton>
+        {/if}
+      </BreadcrumbItem>
+      {#if index < tail.length - 1}
+        <BreadcrumbDivider />
+      {/if}
+    {/each}
+  </Breadcrumb>
+</Showcase>
+
+### {m.breadcrumb_focus_mode_title()}
+
+{m.breadcrumb_focus_mode_description()}
+
+<Showcase columns={1} code={focusModeCode} disablePanZoom minHeight="100px">
+  <Breadcrumb focusMode="arrow" aria-label="Arrow focus mode">
+    <BreadcrumbItem><BreadcrumbButton as="a" href="#home">Home</BreadcrumbButton></BreadcrumbItem>
+    <BreadcrumbDivider />
+    <BreadcrumbItem><BreadcrumbButton as="a" href="#files">Files</BreadcrumbButton></BreadcrumbItem>
+    <BreadcrumbDivider />
+    <BreadcrumbItem><BreadcrumbButton current>Quarterly report</BreadcrumbButton></BreadcrumbItem>
+  </Breadcrumb>
+</Showcase>

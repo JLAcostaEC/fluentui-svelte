@@ -1,0 +1,65 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.breadcrumb_component_props_breadcrumb_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:BreadcrumbProps -->
+
+| Name                 | Type                                         | Default    | Description                                          |
+| -------------------- | -------------------------------------------- | ---------- | ---------------------------------------------------- |
+| `ref` _bindable_     | `HTMLElement`                                |            | {m.generated_fs_breadcrumb_props_props_ref()}        |
+| `listRef` _bindable_ | `HTMLOListElement`                           |            | {m.generated_fs_breadcrumb_props_props_list_ref()}   |
+| `listProps`          | `HTMLOlAttributes`                           |            | {m.generated_fs_breadcrumb_props_props_list_props()} |
+| `size`               | `'small'` &#124; `'medium'` &#124; `'large'` | `'medium'` | {m.generated_fs_breadcrumb_props_props_size()}       |
+| `focusMode`          | `'tab'` &#124; `'arrow'`                     | `'tab'`    | {m.generated_fs_breadcrumb_props_props_focus_mode()} |
+| Element Attributes   |                                              |            |                                                      |
+
+<!-- /props:BreadcrumbProps -->
+
+## {m.breadcrumb_component_props_breadcrumbitem_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:BreadcrumbItemProps -->
+
+| Name                      | Type            | Default | Description                                        |
+| ------------------------- | --------------- | ------- | -------------------------------------------------- |
+| `ref` _bindable_          | `HTMLLIElement` |         | {m.generated_fs_breadcrumb_item_props_props_ref()} |
+| Element Attributes (`li`) |                 |         |                                                    |
+
+<!-- /props:BreadcrumbItemProps -->
+
+## {m.breadcrumb_component_props_breadcrumbbutton_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:BreadcrumbButtonProps -->
+
+| Name                | Type                              | Default    | Description                                                         |
+| ------------------- | --------------------------------- | ---------- | ------------------------------------------------------------------- |
+| `ref` _bindable_    | `BreadcrumbItemElementDOMType[T]` |            | {m.generated_fs_breadcrumb_button_props_props_ref()}                |
+| `as`                | `'button'` &#124; `'a'`           | `'button'` | {m.generated_fs_breadcrumb_button_props_props_as()}                 |
+| `icon`              | `Snippet` &#124; `Component`      |            | {m.generated_fs_breadcrumb_button_props_props_icon()}               |
+| `iconPosition`      | `'before'` &#124; `'after'`       | `'before'` | {m.generated_fs_breadcrumb_button_props_props_icon_position()}      |
+| `current`           | `boolean`                         | `false`    | {m.generated_fs_breadcrumb_button_props_props_current()}            |
+| `disabled`          | `boolean`                         |            | {m.generated_fs_breadcrumb_button_props_props_disabled()}           |
+| `disabledFocusable` | `boolean`                         | `false`    | {m.generated_fs_breadcrumb_button_props_props_disabled_focusable()} |
+| HTML Attributes     |                                   |            |                                                                     |
+
+<!-- /props:BreadcrumbButtonProps -->
+
+## {m.breadcrumb_component_props_breadcrumbdivider_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:BreadcrumbDividerProps -->
+
+| Name                      | Type            | Default | Description                                           |
+| ------------------------- | --------------- | ------- | ----------------------------------------------------- |
+| `ref` _bindable_          | `HTMLLIElement` |         | {m.generated_fs_breadcrumb_divider_props_props_ref()} |
+| Element Attributes (`li`) |                 |         |                                                       |
+
+<!-- /props:BreadcrumbDividerProps -->
+
+## {m.breadcrumb_accessibility_title()}
+
+{m.breadcrumb_accessibility_notes()}

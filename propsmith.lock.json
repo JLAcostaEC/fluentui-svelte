@@ -357,6 +357,104 @@
       },
       "source": "src/lib/components/badge/types.ts#BadgeProps.size"
     },
+    "generated_fs_breadcrumb_button_props_props_as": {
+      "en": "c5ee727c",
+      "locales": {
+        "es": "c5ee727c"
+      },
+      "source": "src/lib/components/breadcrumb/types.ts#BreadcrumbButtonProps.as"
+    },
+    "generated_fs_breadcrumb_button_props_props_current": {
+      "en": "d0ddb23e",
+      "locales": {
+        "es": "d0ddb23e"
+      },
+      "source": "src/lib/components/breadcrumb/types.ts#BreadcrumbButtonProps.current"
+    },
+    "generated_fs_breadcrumb_button_props_props_disabled": {
+      "en": "b99cb72f",
+      "locales": {
+        "es": "b99cb72f"
+      },
+      "source": "src/lib/components/breadcrumb/types.ts#BreadcrumbButtonProps.disabled"
+    },
+    "generated_fs_breadcrumb_button_props_props_disabled_focusable": {
+      "en": "ff4d02aa",
+      "locales": {
+        "es": "ff4d02aa"
+      },
+      "source": "src/lib/components/breadcrumb/types.ts#BreadcrumbButtonProps.disabledFocusable"
+    },
+    "generated_fs_breadcrumb_button_props_props_icon": {
+      "en": "58882de0",
+      "locales": {
+        "es": "58882de0"
+      },
+      "source": "src/lib/components/breadcrumb/types.ts#BreadcrumbButtonProps.icon"
+    },
+    "generated_fs_breadcrumb_button_props_props_icon_position": {
+      "en": "62fefe78",
+      "locales": {
+        "es": "62fefe78"
+      },
+      "source": "src/lib/components/breadcrumb/types.ts#BreadcrumbButtonProps.iconPosition"
+    },
+    "generated_fs_breadcrumb_button_props_props_ref": {
+      "en": "a95dd59a",
+      "locales": {
+        "es": "a95dd59a"
+      },
+      "source": "src/lib/components/breadcrumb/types.ts#BreadcrumbButtonProps.ref"
+    },
+    "generated_fs_breadcrumb_divider_props_props_ref": {
+      "en": "55c8a29e",
+      "locales": {
+        "es": "55c8a29e"
+      },
+      "source": "src/lib/components/breadcrumb/types.ts#BreadcrumbDividerProps.ref"
+    },
+    "generated_fs_breadcrumb_item_props_props_ref": {
+      "en": "13e98d0a",
+      "locales": {
+        "es": "13e98d0a"
+      },
+      "source": "src/lib/components/breadcrumb/types.ts#BreadcrumbItemProps.ref"
+    },
+    "generated_fs_breadcrumb_props_props_focus_mode": {
+      "en": "327382a4",
+      "locales": {
+        "es": "327382a4"
+      },
+      "source": "src/lib/components/breadcrumb/types.ts#BreadcrumbProps.focusMode"
+    },
+    "generated_fs_breadcrumb_props_props_list_props": {
+      "en": "1ab07d64",
+      "locales": {
+        "es": "1ab07d64"
+      },
+      "source": "src/lib/components/breadcrumb/types.ts#BreadcrumbProps.listProps"
+    },
+    "generated_fs_breadcrumb_props_props_list_ref": {
+      "en": "9109ab63",
+      "locales": {
+        "es": "9109ab63"
+      },
+      "source": "src/lib/components/breadcrumb/types.ts#BreadcrumbProps.listRef"
+    },
+    "generated_fs_breadcrumb_props_props_ref": {
+      "en": "5d0dd2f1",
+      "locales": {
+        "es": "5d0dd2f1"
+      },
+      "source": "src/lib/components/breadcrumb/types.ts#BreadcrumbProps.ref"
+    },
+    "generated_fs_breadcrumb_props_props_size": {
+      "en": "55729dc9",
+      "locales": {
+        "es": "55729dc9"
+      },
+      "source": "src/lib/components/breadcrumb/types.ts#BreadcrumbProps.size"
+    },
     "generated_fs_button_props_props_appearance": {
       "en": "5a96c885",
       "locales": {
@@ -2564,7 +2662,9 @@
     },
     "generated_fs_table_header_cell_props_props_resize_label": {
       "en": "4506a073",
-      "locales": {},
+      "locales": {
+        "es": "4506a073"
+      },
       "source": "src/lib/components/table/types.ts#TableHeaderCellProps.resizeLabel"
     },
     "generated_fs_table_header_cell_props_props_sort_direction": {

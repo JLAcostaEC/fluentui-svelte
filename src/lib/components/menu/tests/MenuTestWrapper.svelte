@@ -14,6 +14,7 @@
 
 	let {
 		open,
+		keepMounted = false,
 		hasIcons,
 		hasCheckmarks,
 		checkedValues = {},
@@ -22,6 +23,7 @@
 		variant = 'items'
 	}: {
 		open?: boolean;
+		keepMounted?: boolean;
 		hasIcons?: boolean;
 		hasCheckmarks?: boolean;
 		checkedValues?: Record<string, string[]>;
@@ -37,7 +39,7 @@
 			<Button bind:ref={state.ref} {...menuTriggerProps as any}>Open Menu</Button>
 		{/snippet}
 	</MenuTrigger>
-	<MenuPopover>
+	<MenuPopover {keepMounted}>
 		<MenuList>
 			{#if variant === 'items'}
 				<MenuItem>New</MenuItem>

@@ -66,6 +66,28 @@ export type MenuProps = {
 	children?: Snippet;
 };
 
+/** @propsmith MenuPopoverProps */
+export type MenuPopoverProps = {
+	/** The element used to position the popover. */
+	ref?: HTMLElement;
+	/** Controls the open state of the popover.
+	 * @bindable
+	 */
+	open?: boolean;
+	/** Keeps the popover mounted in the DOM while it is closed.
+	 * @default false
+	 */
+	keepMounted?: boolean;
+	/** Where the popover is positioned relative to its trigger. */
+	placement?: ComputePositionConfig['placement'];
+	/** The position configuration handed over to floating-ui.
+	 * @type ComputePositionConfig
+	 */
+	positionConfig?: Partial<ComputePositionConfig>;
+	/** The content of the popover. */
+	children: Snippet;
+};
+
 /** @propsmith MenuTriggerProps */
 export type MenuTriggerProps = {
 	/** Disables the user interaction. */

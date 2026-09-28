@@ -140,6 +140,22 @@ This variant of the `MenuTrigger` component allows you to create context menus t
 
 <!-- /props:MenuProps -->
 
+## Component Props (MenuPopover)
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:MenuPopoverProps -->
+
+| Name              | Type                                 | Default | Description                                              |
+| ----------------- | ------------------------------------ | ------- | -------------------------------------------------------- |
+| `ref`             | `HTMLElement`                        |         | The element used to position the popover.                |
+| `open` _bindable_ | `boolean`                            |         | Controls the open state of the popover.                  |
+| `keepMounted`     | `boolean`                            | `false` | Keeps the popover mounted in the DOM while it is closed. |
+| `placement`       | `ComputePositionConfig['placement']` |         | Where the popover is positioned relative to its trigger. |
+| `positionConfig`  | `ComputePositionConfig`              |         | The position configuration handed over to floating-ui.   |
+| `children`        | `Snippet`                            |         | The content of the popover.                              |
+
+<!-- /props:MenuPopoverProps -->
+
 ## Component Props (MenuTrigger)
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->

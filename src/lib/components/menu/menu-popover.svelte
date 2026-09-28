@@ -6,12 +6,12 @@
 	import { useDebounce } from 'runed';
 	import { floating, flyToOffset, getCSSDuration, reactiveBoundingRect } from '$internal';
 	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
-	import type { Snippet } from 'svelte';
-	import type { ComputePositionConfig } from '@floating-ui/dom';
+	import type { MenuPopoverProps } from './types.ts';
 
 	let {
 		ref: _ref,
 		open: _open = $bindable(),
+		keepMounted = false,
 		placement,
 		positionConfig: floatingPosition = {
 			placement,
@@ -19,13 +19,7 @@
 			strategy: 'fixed'
 		},
 		children
-	}: {
-		ref?: HTMLElement;
-		open?: boolean;
-		placement?: ComputePositionConfig['placement'];
-		positionConfig?: Partial<ComputePositionConfig>;
-		children: Snippet;
-	} = $props();
+	}: MenuPopoverProps = $props();
 
 	const context = getMenuContext();
 
@@ -90,16 +84,17 @@
 	});
 </script>
 
-{#if opened && ref}
+{#if keepMounted || (opened && ref)}
 	{@const isRefAnElement = ref instanceof HTMLElement}
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div
 		bind:this={element}
 		class="fs-menu-popover"
+		hidden={!opened}
 		onmouseleave={openOnHover ? (e: MouseEvent) => debounced(e) : undefined}
-		{@attach ref ? floating(ref, config) : undefined}
+		{@attach opened && ref ? floating(ref, config) : undefined}
 		style={`--position=${isSubMenu ? 'absolute' : 'fixed'} --min-width=${isRefAnElement && !isSubMenu ? `${boundingElement.rect.width}px` : 'max-content'}`}
-		in:flyToOffset={isRefAnElement
+		in:flyToOffset={opened && isRefAnElement
 			? {
 					...getIntroTransition({ config, anchor: boundingElement.rect, element, ref, isSubMenu }),
 					duration: duration,

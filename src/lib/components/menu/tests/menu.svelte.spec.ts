@@ -41,6 +41,25 @@ describe('opening', () => {
 		const el = page.getByRole('menu');
 		await expect.element(el.first()).toBeInTheDocument();
 	});
+
+	it('keeps the popover mounted and hidden while closed when requested', async () => {
+		render(MenuTestWrapper, { keepMounted: true });
+		const trigger = page.getByRole('button', { name: 'Open Menu' });
+		const popover = page.selector('[id^="fs-menu-popover-"]');
+		const wrapper = page.selector('div.fs-menu-popover').first();
+
+		await expect.element(popover).toBeInTheDocument();
+		await expect.element(wrapper).toHaveAttribute('hidden');
+		const mountedPopover = popover.element();
+
+		await trigger.click();
+		await expect.element(wrapper).not.toHaveAttribute('hidden');
+
+		await trigger.click();
+		await expect.element(wrapper).toHaveAttribute('hidden');
+		await expect.element(popover).toBeInTheDocument();
+		expect(popover.element()).toBe(mountedPopover);
+	});
 });
 
 describe('MenuItem', () => {

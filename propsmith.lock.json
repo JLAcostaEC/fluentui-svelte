@@ -1895,6 +1895,36 @@
       },
       "source": "src/lib/components/menu/types.ts#MenuItemProps.subText"
     },
+    "generated_fs_menu_popover_props_props_children": {
+      "en": "4ffe9e42",
+      "locales": {},
+      "source": "src/lib/components/menu/types.ts#MenuPopoverProps.children"
+    },
+    "generated_fs_menu_popover_props_props_keep_mounted": {
+      "en": "e8f05e67",
+      "locales": {},
+      "source": "src/lib/components/menu/types.ts#MenuPopoverProps.keepMounted"
+    },
+    "generated_fs_menu_popover_props_props_open": {
+      "en": "d1d16ebb",
+      "locales": {},
+      "source": "src/lib/components/menu/types.ts#MenuPopoverProps.open"
+    },
+    "generated_fs_menu_popover_props_props_placement": {
+      "en": "dec1288b",
+      "locales": {},
+      "source": "src/lib/components/menu/types.ts#MenuPopoverProps.placement"
+    },
+    "generated_fs_menu_popover_props_props_position_config": {
+      "en": "6027941f",
+      "locales": {},
+      "source": "src/lib/components/menu/types.ts#MenuPopoverProps.positionConfig"
+    },
+    "generated_fs_menu_popover_props_props_ref": {
+      "en": "6fd933a9",
+      "locales": {},
+      "source": "src/lib/components/menu/types.ts#MenuPopoverProps.ref"
+    },
     "generated_fs_menu_props_props_checked_values": {
       "en": "214dfbbc",
       "locales": {

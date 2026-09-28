@@ -23,6 +23,22 @@
 
 <!-- /props:MenuProps -->
 
+## {m.menu_component_props_menupopover_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:MenuPopoverProps -->
+
+| Name              | Type                                 | Default | Description                                                 |
+| ----------------- | ------------------------------------ | ------- | ----------------------------------------------------------- |
+| `ref`             | `HTMLElement`                        |         | {m.generated_fs_menu_popover_props_props_ref()}             |
+| `open` _bindable_ | `boolean`                            |         | {m.generated_fs_menu_popover_props_props_open()}            |
+| `keepMounted`     | `boolean`                            | `false` | {m.generated_fs_menu_popover_props_props_keep_mounted()}    |
+| `placement`       | `ComputePositionConfig['placement']` |         | {m.generated_fs_menu_popover_props_props_placement()}       |
+| `positionConfig`  | `ComputePositionConfig`              |         | {m.generated_fs_menu_popover_props_props_position_config()} |
+| `children`        | `Snippet`                            |         | {m.generated_fs_menu_popover_props_props_children()}        |
+
+<!-- /props:MenuPopoverProps -->
+
 ## {m.menu_component_props_menutrigger_title()}
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->

@@ -195,6 +195,7 @@
 					}
 				}
 				selectionMode={multiple ? 'multiselect' : 'single'}
+				toggleOnClick={multiple}
 				onSelectionChange={() => {
 					if (!multiple) closeDropdown();
 				}}

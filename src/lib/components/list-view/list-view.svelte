@@ -12,6 +12,7 @@
 		selectedItems = $bindable([]),
 		onSelectionChange,
 		disableTabspot = false,
+		toggleOnClick = false,
 		children,
 		...attributes
 	}: ListViewProps<Tag> = $props();
@@ -89,7 +90,7 @@
 						.filter((i) => !i.disabled)
 						.map((i) => i.value);
 					selectedItems = Array.from(new Set([...selectedItems, ...rangeValues]));
-				} else if (MULTISELECTABLE && (e.ctrlKey || e.metaKey)) {
+				} else if (MULTISELECTABLE && (e.ctrlKey || e.metaKey || toggleOnClick)) {
 					selectedItems = selectedItems.includes(value)
 						? selectedItems.filter((v) => v !== value)
 						: [...selectedItems, value];

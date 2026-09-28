@@ -465,6 +465,7 @@
   "generated_fs_list_view_props_props_selected_items": "The values of the selected items.",
   "generated_fs_list_view_props_props_selection_mode": "How many items can be selected, and how the selection is made.",
   "generated_fs_list_view_props_props_shape": "The items can have a circular, rounded or square shape.",
+  "generated_fs_list_view_props_props_toggle_on_click": "When `selectionMode` is `'multiselect'`, clicking an item toggles its selection directly instead of requiring Ctrl/Cmd + click.",
   "generated_fs_menu_group_props_props_children": "The items of the group.",
   "generated_fs_menu_group_props_props_header": "The label of the group.",
   "generated_fs_menu_group_props_props_ref": "The DOM reference of the group element.",

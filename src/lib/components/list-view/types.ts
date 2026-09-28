@@ -25,6 +25,10 @@ export type ListViewProps<T extends 'ul' | 'ol' | 'div'> = {
 	shape?: Shapes;
 	/** Called whenever the selection changes. */
 	onSelectionChange?: (e: Event, selectedItems: string[] | []) => void;
+	/** When `selectionMode` is `'multiselect'`, clicking an item toggles its selection directly instead of requiring Ctrl/Cmd + click.
+	 * @default false
+	 */
+	toggleOnClick?: boolean;
 	/** The HTML element to render the list as.
 	 * @type 'ul' | 'ol' | 'div'
 	 * @default 'ul'

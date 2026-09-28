@@ -84,17 +84,18 @@ Add and configure a checkbox for the element. You can use the same props for the
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:ListViewProps -->
 
-| Name                       | Type                                                                  | Default     | Description                                                                   |
-| -------------------------- | --------------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------- |
-| `selectionMode`            | `'none'` &#124; `'single'` &#124; `'multiselect'` &#124; `'extended'` | `'none'`    | How many items can be selected, and how the selection is made.                |
-| `navigationMode`           | `'items'` &#124; `'composite'`                                        | `'items'`   | Whether the list itself takes a single tab stop, or every item takes its own. |
-| `selectedItems` _bindable_ | `string[]`                                                            |             | The values of the selected items.                                             |
-| `shape`                    | `'circular'` &#124; `'rounded'` &#124; `'square'`                     | `'rounded'` | The items can have a circular, rounded or square shape.                       |
-| `onSelectionChange`        | `(e: Event, selectedItems: string[]` &#124; `[]) => void`             |             | Called whenever the selection changes.                                        |
-| `as`                       | `'ul'` &#124; `'ol'` &#124; `'div'`                                   | `'ul'`      | The HTML element to render the list as.                                       |
-| `ref` _bindable_           | `HTMLUListElement` &#124; `HTMLOListElement` &#124; `HTMLDivElement`  |             | The DOM reference of the list element.                                        |
-| `disableTabspot`           | `boolean`                                                             | `false`     | Opts the list out of the tabspot focus management, to wire your own.          |
-| HTML Attributes            |                                                                       |             |                                                                               |
+| Name                       | Type                                                                  | Default     | Description                                                                                                                     |
+| -------------------------- | --------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `selectionMode`            | `'none'` &#124; `'single'` &#124; `'multiselect'` &#124; `'extended'` | `'none'`    | How many items can be selected, and how the selection is made.                                                                  |
+| `navigationMode`           | `'items'` &#124; `'composite'`                                        | `'items'`   | Whether the list itself takes a single tab stop, or every item takes its own.                                                   |
+| `selectedItems` _bindable_ | `string[]`                                                            |             | The values of the selected items.                                                                                               |
+| `shape`                    | `'circular'` &#124; `'rounded'` &#124; `'square'`                     | `'rounded'` | The items can have a circular, rounded or square shape.                                                                         |
+| `onSelectionChange`        | `(e: Event, selectedItems: string[]` &#124; `[]) => void`             |             | Called whenever the selection changes.                                                                                          |
+| `toggleOnClick`            | `boolean`                                                             | `false`     | When `selectionMode` is `'multiselect'`, clicking an item toggles its selection directly instead of requiring Ctrl/Cmd + click. |
+| `as`                       | `'ul'` &#124; `'ol'` &#124; `'div'`                                   | `'ul'`      | The HTML element to render the list as.                                                                                         |
+| `ref` _bindable_           | `HTMLUListElement` &#124; `HTMLOListElement` &#124; `HTMLDivElement`  |             | The DOM reference of the list element.                                                                                          |
+| `disableTabspot`           | `boolean`                                                             | `false`     | Opts the list out of the tabspot focus management, to wire your own.                                                            |
+| HTML Attributes            |                                                                       |             |                                                                                                                                 |
 
 <!-- /props:ListViewProps -->
 

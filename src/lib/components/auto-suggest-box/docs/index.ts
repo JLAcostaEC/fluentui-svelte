@@ -1,5 +1,6 @@
 import AutofitContentRegular from 'fluentui-icons-svelte/AutofitContentRegular.svelte';
 import Docs from './docs.svx';
+import Examples from './examples.svx';
 import Footer from './footer.svx';
 import LLMS from './llms.md?raw';
 import type { ConfigDocs, Meta } from '$types';
@@ -33,7 +34,7 @@ export const META: Meta = {
 export const DATA: ConfigDocs = {
 	meta: META,
 	docs: Docs,
-	examples: [],
+	examples: [Examples],
 	footer: Footer,
 	llms: LLMS
 };

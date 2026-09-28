@@ -18,43 +18,104 @@ The AutoSuggestBox component provides an input field with dynamic suggestions as
 
 ## Examples
 
-### Virtualized Suggestions
+### Open on focus
 
-Long lists can be windowed. Pass a `virtualizer` describing the _whole_ list — `size` is the
-total number of suggestions, not the number rendered — and the box drives your list component
-when the cursor walks past what is on screen. Options keep their real `index`, which is what
-ties a rendered row back to the data.
+Use `openOnFocus` to show suggestions as soon as the text box receives focus, before anything is typed.
+
+```svelte
+<AutoSuggestBox openOnFocus placeholder="Choose a fruit...">
+	{#each fruits as fruit, index (fruit.id)}
+		<AutoSuggestBoxOption {index} id={fruit.id} value={fruit.name}>
+			{fruit.name}
+		</AutoSuggestBoxOption>
+	{/each}
+</AutoSuggestBox>
+```
+
+### Virtualization
+
+Window large suggestion sets by connecting AutoSuggestBox to a virtual list through the `virtualizer` prop. Its `size` is the total number of suggestions, while each option keeps its real `index`.
 
 ```svelte
 <script>
 	import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
 
-	let items = $state(fruits);
 	let listRef;
 </script>
 
 <AutoSuggestBox
-	placeholder="Type a fruit..."
+	placeholder="Type a name..."
 	virtualizer={{
-		size: items.length,
+		size: people.length,
 		scrollToTop: () => listRef.scroll({ index: 0, align: 'top', smoothScroll: false }),
-		scrollToBottom: () => listRef.scroll({ index: items.length - 1, align: 'bottom', smoothScroll: false }),
+		scrollToBottom: () => listRef.scroll({ index: people.length - 1, align: 'bottom', smoothScroll: false }),
 		scrollToIndex: (index) => listRef.scroll({ index, align: 'auto', smoothScroll: false })
 	}}
-	textChanged={(e, val) => (items = fruits.filter((item) => item.name.toLowerCase().includes(val.toLowerCase())))}
 >
-	<SvelteVirtualList {items} bind:this={listRef} defaultEstimatedItemHeight={30}>
-		{#snippet renderItem(item, index)}
-			<AutoSuggestBoxOption {index} id={item.id} value={item.name} text={item.name}>
-				{item.name}
+	<SvelteVirtualList items={people} bind:this={listRef} defaultEstimatedItemHeight={30}>
+		{#snippet renderItem(person, index)}
+			<AutoSuggestBoxOption {index} id={person.id} value={person.name}>
+				{person.name}
 			</AutoSuggestBoxOption>
 		{/snippet}
 	</SvelteVirtualList>
 </AutoSuggestBox>
 ```
 
-Filtering is yours to do in `textChanged`: a windowed list renders from your data, so the
-built-in filter that a plain option list applies is skipped.
+### Multiselect
+
+Allow people to choose several suggestions and optionally show the selected values in the text box.
+
+```svelte
+<script>
+	let selectedOptions = $state([]);
+</script>
+
+<AutoSuggestBox multiselect showTextualMultiselect bind:selectedOptions placeholder="Choose fruits...">
+	{#each fruits as fruit, index (fruit.id)}
+		<AutoSuggestBoxOption {index} id={fruit.id} value={fruit.name}>
+			{fruit.name}
+		</AutoSuggestBoxOption>
+	{/each}
+</AutoSuggestBox>
+```
+
+### Virtualization with filtering
+
+A virtualized list must filter its source data itself and report the filtered length through `virtualizer.size`.
+
+```svelte
+<script>
+	import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
+
+	let items = $state(people);
+	let listRef;
+</script>
+
+<AutoSuggestBox
+	placeholder="Type a name..."
+	virtualizer={{
+		size: items.length,
+		scrollToTop: () => listRef.scroll({ index: 0, align: 'top', smoothScroll: false }),
+		scrollToBottom: () => {
+			if (items.length) listRef.scroll({ index: items.length - 1, align: 'bottom', smoothScroll: false });
+		},
+		scrollToIndex: (index) => listRef.scroll({ index, align: 'auto', smoothScroll: false })
+	}}
+	textChanged={(_, value) => {
+		const query = value.trim().toLowerCase();
+		items = people.filter(({ name }) => name.toLowerCase().includes(query));
+	}}
+>
+	<SvelteVirtualList {items} bind:this={listRef} defaultEstimatedItemHeight={30}>
+		{#snippet renderItem(person, index)}
+			<AutoSuggestBoxOption {index} id={person.id} value={person.name}>
+				{person.name}
+			</AutoSuggestBoxOption>
+		{/snippet}
+	</SvelteVirtualList>
+</AutoSuggestBox>
+```
 
 ## Component Props
 

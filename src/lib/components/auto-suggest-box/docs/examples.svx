@@ -1,0 +1,178 @@
+<script lang="ts">
+  import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
+  import { AutoSuggestBox, AutoSuggestBoxOption } from '$lib/index.js';
+  import { fake } from '$constants';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+
+  const fruits = [
+    { id: 'apple', name: 'Apple' },
+    { id: 'banana', name: 'Banana' },
+    { id: 'cherry', name: 'Cherry' }
+  ];
+  const people = fake.map((person, index) => ({ ...person, disabled: index % 10 === 0 }));
+
+  let virtualListRef = $state<ReturnType<typeof SvelteVirtualList> | null>(null);
+  let filteredListRef = $state<ReturnType<typeof SvelteVirtualList> | null>(null);
+  let filteredPeople = $state.raw(people);
+  let selectedOptions = $state<{ id: string; value: string }[]>([]);
+
+  const openOnFocusCode = `
+<AutoSuggestBox openOnFocus placeholder="Choose a fruit...">
+  {#each fruits as fruit, index (fruit.id)}
+    <AutoSuggestBoxOption {index} id={fruit.id} value={fruit.name}>
+      {fruit.name}
+    </AutoSuggestBoxOption>
+  {/each}
+</AutoSuggestBox>`;
+
+  const virtualizationCode = `
+<script lang="ts">
+  import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
+
+  let listRef = $state<ReturnType<typeof SvelteVirtualList> | null>(null);
+<\/script>
+
+<AutoSuggestBox
+  placeholder="Type a name..."
+  virtualizer={{
+    size: people.length,
+    scrollToTop: () => listRef?.scroll({ index: 0, align: 'top', smoothScroll: false }),
+    scrollToBottom: () => listRef?.scroll({ index: people.length - 1, align: 'bottom', smoothScroll: false }),
+    scrollToIndex: (index) => listRef?.scroll({ index, align: 'auto', smoothScroll: false })
+  }}
+>
+  <SvelteVirtualList items={people} bind:this={listRef} defaultEstimatedItemHeight={30}>
+    {#snippet renderItem(person, index)}
+      <AutoSuggestBoxOption {index} id={person.id} value={person.name}>
+        {person.name}
+      </AutoSuggestBoxOption>
+    {/snippet}
+  </SvelteVirtualList>
+</AutoSuggestBox>`;
+
+  const multiselectCode = `
+<script lang="ts">
+  let selectedOptions = $state<{ id: string; value: string }[]>([]);
+<\/script>
+
+<AutoSuggestBox multiselect showTextualMultiselect bind:selectedOptions placeholder="Choose fruits...">
+  {#each fruits as fruit, index (fruit.id)}
+    <AutoSuggestBoxOption {index} id={fruit.id} value={fruit.name}>
+      {fruit.name}
+    </AutoSuggestBoxOption>
+  {/each}
+</AutoSuggestBox>`;
+
+  const virtualizationFilteringCode = `
+<script lang="ts">
+  import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
+
+  let items = $state.raw(people);
+  let listRef = $state<ReturnType<typeof SvelteVirtualList> | null>(null);
+<\/script>
+
+<AutoSuggestBox
+  placeholder="Type a name..."
+  virtualizer={{
+    size: items.length,
+    scrollToTop: () => listRef?.scroll({ index: 0, align: 'top', smoothScroll: false }),
+    scrollToBottom: () => {
+      if (items.length) listRef?.scroll({ index: items.length - 1, align: 'bottom', smoothScroll: false });
+    },
+    scrollToIndex: (index) => listRef?.scroll({ index, align: 'auto', smoothScroll: false })
+  }}
+  textChanged={(_, value) => {
+    const query = value.trim().toLowerCase();
+    items = people.filter(({ name }) => name.toLowerCase().includes(query));
+  }}
+>
+  <SvelteVirtualList {items} bind:this={listRef} defaultEstimatedItemHeight={30}>
+    {#snippet renderItem(person, index)}
+      <AutoSuggestBoxOption {index} id={person.id} value={person.name}>
+        {person.name}
+      </AutoSuggestBoxOption>
+    {/snippet}
+  </SvelteVirtualList>
+</AutoSuggestBox>`;
+</script>
+
+### {m.asb_open_on_focus_title()}
+
+{m.asb_open_on_focus_description()}
+
+<Showcase columns={1} code={openOnFocusCode} minHeight="0" disablePanZoom showOverflow>
+  <AutoSuggestBox openOnFocus placeholder="Choose a fruit...">
+    {#each fruits as fruit, index (fruit.id)}
+      <AutoSuggestBoxOption {index} id={fruit.id} value={fruit.name}>{fruit.name}</AutoSuggestBoxOption>
+    {/each}
+  </AutoSuggestBox>
+</Showcase>
+
+### {m.asb_virtualization_title()}
+
+{m.asb_virtualization_description()}
+
+<Showcase columns={1} code={virtualizationCode} minHeight="0" disablePanZoom showOverflow>
+  <AutoSuggestBox
+    placeholder="Type a name..."
+    virtualizer={{
+      size: people.length,
+      scrollToTop: () => virtualListRef?.scroll({ index: 0, align: 'top', smoothScroll: false }),
+      scrollToBottom: () => virtualListRef?.scroll({ index: people.length - 1, align: 'bottom', smoothScroll: false }),
+      scrollToIndex: (index) => virtualListRef?.scroll({ index, align: 'auto', smoothScroll: false })
+    }}
+  >
+    <SvelteVirtualList items={people} bind:this={virtualListRef as any} defaultEstimatedItemHeight={30}>
+      {#snippet renderItem(person, index)}
+        <AutoSuggestBoxOption {index} id={person.id} value={person.name} disabled={person.disabled}>
+          {person.name}
+        </AutoSuggestBoxOption>
+      {/snippet}
+    </SvelteVirtualList>
+  </AutoSuggestBox>
+</Showcase>
+
+### {m.asb_multiselect_title()}
+
+{m.asb_multiselect_description()}
+
+<Showcase columns={1} code={multiselectCode} minHeight="0" disablePanZoom showOverflow>
+  <AutoSuggestBox multiselect showTextualMultiselect bind:selectedOptions placeholder="Choose fruits...">
+    {#each fruits as fruit, index (fruit.id)}
+      <AutoSuggestBoxOption {index} id={fruit.id} value={fruit.name}>{fruit.name}</AutoSuggestBoxOption>
+    {/each}
+  </AutoSuggestBox>
+</Showcase>
+
+### {m.asb_virtualization_filtering_title()}
+
+{m.asb_virtualization_filtering_description()}
+
+<Showcase columns={1} code={virtualizationFilteringCode} minHeight="0" disablePanZoom showOverflow>
+  <AutoSuggestBox
+    placeholder="Type a name..."
+    virtualizer={{
+      size: filteredPeople.length,
+      scrollToTop: () => filteredListRef?.scroll({ index: 0, align: 'top', smoothScroll: false }),
+      scrollToBottom: () => {
+        if (filteredPeople.length) {
+          filteredListRef?.scroll({ index: filteredPeople.length - 1, align: 'bottom', smoothScroll: false });
+        }
+      },
+      scrollToIndex: (index) => filteredListRef?.scroll({ index, align: 'auto', smoothScroll: false })
+    }}
+    textChanged={(_, value) => {
+      const query = value.trim().toLowerCase();
+      filteredPeople = people.filter(({ name }) => name.toLowerCase().includes(query));
+    }}
+  >
+    <SvelteVirtualList items={filteredPeople} bind:this={filteredListRef as any} defaultEstimatedItemHeight={30}>
+      {#snippet renderItem(person, index)}
+        <AutoSuggestBoxOption {index} id={person.id} value={person.name} disabled={person.disabled}>
+          {person.name}
+        </AutoSuggestBoxOption>
+      {/snippet}
+    </SvelteVirtualList>
+  </AutoSuggestBox>
+</Showcase>

@@ -73,7 +73,7 @@
 		},
 		events: null,
 		methods: {
-			handleSelection: (e: MouseEvent, value: string) => {
+			handleSelection: (e: MouseEvent, value: string, toggle = false) => {
 				if (selectionMode === 'none') return;
 
 				const itemIndex = items.findIndex((item) => item.value === value);
@@ -90,7 +90,7 @@
 						.filter((i) => !i.disabled)
 						.map((i) => i.value);
 					selectedItems = Array.from(new Set([...selectedItems, ...rangeValues]));
-				} else if (MULTISELECTABLE && (e.ctrlKey || e.metaKey || toggleOnClick)) {
+				} else if (MULTISELECTABLE && (toggle || e.ctrlKey || e.metaKey || toggleOnClick)) {
 					selectedItems = selectedItems.includes(value)
 						? selectedItems.filter((v) => v !== value)
 						: [...selectedItems, value];

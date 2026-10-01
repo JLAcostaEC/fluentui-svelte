@@ -1,9 +1,19 @@
 <script lang="ts">
-  import { ListView, ListViewItem, Button } from '$lib/index.js';
+  import { ListView, ListViewItem, Card, CardHeader, CardFooter, Button } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { m } from '$i18n/messages.js';
 
   const list = ['Apple', 'Banana', 'Cherry'];
+  const cards = [
+    { name: 'Fluent', description: 'Design system' },
+    { name: 'Svelte', description: 'UI framework' },
+    { name: 'Vite', description: 'Build tool' }
+  ];
+  const cardCheckmark = { wrapperAttributes: { style: 'position: absolute; top: 0.5rem; right: 0.5rem; z-index: 2;' } };
+
+  let selectedFruits = $state<string[]>(['Apple']);
+  let selectedCards = $state<string[]>([]);
+  let lastAction = $state('');
 
   const selectionCode = `
 <ListView selectionMode="multiselect" selectedItems={['Apple']}>
@@ -11,6 +21,65 @@
     <ListViewItem value={item}>{item}</ListViewItem>
   {/each}
 </ListView>`;
+
+  const toggleOnClickCode = `
+<ListView selectionMode="multiselect" toggleOnClick>
+  {#each ['Apple', 'Banana', 'Cherry'] as item (item)}
+    <ListViewItem value={item}>{item}</ListViewItem>
+  {/each}
+</ListView>`;
+
+  const checkmarkCode = `
+<script lang="ts">
+  let selected = $state<string[]>(['Apple']);
+<\/script>
+
+<ListView selectionMode="multiselect" bind:selectedItems={selected}>
+  {#each ['Apple', 'Banana', 'Cherry'] as item (item)}
+    <ListViewItem value={item} checkmark={{}}>{item}</ListViewItem>
+  {/each}
+</ListView>
+
+<p>Selected: {selected.join(', ')}</p>`;
+
+  const cardsCode = `
+<script lang="ts">
+  const cards = [
+    { name: 'Fluent', description: 'Design system' },
+    { name: 'Svelte', description: 'UI framework' },
+    { name: 'Vite', description: 'Build tool' }
+  ];
+
+  let selected = $state<string[]>([]);
+  let lastAction = $state('');
+<\/script>
+
+<ListView as="div" navigationMode="composite" selectionMode="multiselect" bind:selectedItems={selected}>
+  {#each cards as card (card.name)}
+    {#snippet install()}
+      <Button
+        onclick={(e) => {
+          e.stopPropagation();
+          lastAction = 'Installed ' + card.name;
+        }}>Install</Button
+      >
+    {/snippet}
+    <ListViewItem
+      value={card.name}
+      checkmark={{ wrapperAttributes: { style: 'position: absolute; top: 0.5rem; right: 0.5rem; z-index: 2;' } }}
+      style="padding: 0"
+      onAction={() => (lastAction = 'Opened ' + card.name)}
+    >
+      <Card orientation="vertical" style="width: 100%;">
+        <CardHeader title={card.name} description={card.description} />
+        <CardFooter action={install} />
+      </Card>
+    </ListViewItem>
+  {/each}
+</ListView>
+
+<p>Selected: {selected.join(', ')}</p>
+<p>Last action: {lastAction}</p>`;
 </script>
 
 ### Selection Mode
@@ -25,17 +94,57 @@ Use `selectionMode` (`single`, `multiselect`, or `extended`) to control how item
   </ListView>
 </Showcase>
 
+### {m.lv_toggle_on_click_title()}
+
+{m.lv_toggle_on_click_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom code={toggleOnClickCode}>
+  <ListView selectionMode="multiselect" toggleOnClick>
+    {#each list as item (item)}
+      <ListViewItem value={item}>{item}</ListViewItem>
+    {/each}
+  </ListView>
+</Showcase>
+
 ### {m.lv_listviewitem_checkmark_title()}
 
 {m.lv_listviewitem_checkmark_description_prefix()} [Checkbox](/docs/components/checkbox) {m.lv_listviewitem_checkmark_description_suffix()}
 
-<ListView as="div" navigationMode="composite">
-  <ListViewItem value="card" role="row" checkmark={{ style: 'position: absolute; top: 10px; left: 10px; z-index: 10;' }} style="padding: 0" onAction={() => alert('Triggered Primary Action')}>
-    <div style="width: 100%; height: 100px; border-radius: 8px; padding: 25px; background: var(--fs-card-background-default); display: flex; flex-direction: column; justify-content: center; align-items: center;">
-      Card Content Inside ListItem
-      <Button onclick={(e) => { e.stopPropagation(); alert('Installing'); }}>Install</Button>
-    </div>
-  </ListViewItem>
-</ListView>
+{m.lv_checkmark_selection_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom code={checkmarkCode}>
+  <div style="width: 240px; max-width: 100%;">
+    <ListView selectionMode="multiselect" bind:selectedItems={selectedFruits}>
+      {#each list as item (item)}
+        <ListViewItem value={item} checkmark={{}}>{item}</ListViewItem>
+      {/each}
+    </ListView>
+    <p style="margin: 8px 0 0;">Selected: {selectedFruits.join(', ')}</p>
+  </div>
+</Showcase>
+
+### {m.lv_cards_title()}
+
+{m.lv_cards_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom code={cardsCode}>
+  <div style="width: 320px; max-width: 100%;">
+    <ListView as="div" navigationMode="composite" selectionMode="multiselect" bind:selectedItems={selectedCards}>
+      {#each cards as card (card.name)}
+        {#snippet install()}
+          <Button onclick={(e) => { e.stopPropagation(); lastAction = 'Installed ' + card.name; }}>Install</Button>
+        {/snippet}
+        <ListViewItem value={card.name} checkmark={cardCheckmark} style="padding: 0" onAction={() => (lastAction = 'Opened ' + card.name)}>
+          <Card orientation="vertical" style="width: 100%;">
+            <CardHeader title={card.name} description={card.description} />
+            <CardFooter action={install} />
+          </Card>
+        </ListViewItem>
+      {/each}
+    </ListView>
+    <p style="margin: 8px 0 0;">Selected: {selectedCards.join(', ')}</p>
+    <p style="margin: 0;">Last action: {lastAction}</p>
+  </div>
+</Showcase>
 
 {m.lv_checkmark_example_note_description()}

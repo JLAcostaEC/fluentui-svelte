@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { Expander } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { InfoRegular } from 'fluentui-icons-svelte';
@@ -27,7 +28,7 @@
 
 ### {m.expander_controlling_expansion_title()}
 
-{m.expander_controlling_expansion_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.expander_controlling_expansion_description} /></p>
 
 <Showcase columns={1} code={controllingExpansionCode}>
   <Expander header="Expander Title" expanded>
@@ -37,7 +38,7 @@
 
 ### {m.expander_opening_direction_title()}
 
-{m.expander_opening_direction_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.expander_opening_direction_description} /></p>
 
 <Showcase columns={1} code={openingDirectionCode}>
   <Expander header="Expander Title" direction="up">
@@ -47,7 +48,7 @@
 
 ### {m.expander_adding_an_icon_title()}
 
-{m.expander_adding_an_icon_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.expander_adding_an_icon_description} /></p>
 
 <Showcase columns={1} code={addingIconCode}>
   <Expander header="Expander With Icon" Icon={InfoRegular}>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { TextArea } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { m } from '$i18n/messages.js';
@@ -15,7 +16,7 @@
 
 ### {m.ta_placeholder_title()}
 
-{m.ta_placeholder_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.ta_placeholder_description} /></p>
 
 <Showcase columns={1} code={placeholderCode} disablePanZoom showOverflow>
   <TextArea placeholder="Type your message here..." />
@@ -23,7 +24,7 @@
 
 ### {m.ta_resize_title()}
 
-{m.ta_resize_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.ta_resize_description} /></p>
 
 <Showcase columns={1} code={resizeCode} disablePanZoom showOverflow>
   <TextArea resize="none" placeholder="No resize" />
@@ -33,7 +34,7 @@
 
 ### {m.ta_on_change_title()}
 
-{m.ta_on_change_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.ta_on_change_description} /></p>
 
 <Showcase columns={1} code={onChangeCode} disablePanZoom showOverflow>
   <TextArea onChange={(e) => console.log(e)} placeholder="Type to see the change at console..." />

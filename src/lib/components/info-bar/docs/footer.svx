@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { m } from '$i18n/messages.js';
 </script>
 
@@ -7,15 +8,15 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:InfoBarProps -->
 
-| Name                       | Type                                                                                           | Default         | Description                                               |
-| -------------------------- | ---------------------------------------------------------------------------------------------- | --------------- | --------------------------------------------------------- |
-| `status`                   | `'information'` &#124; `'attention'` &#124; `'warning'` &#124; `'critical'` &#124; `'success'` | `'information'` | {m.generated_fs_info_bar_props_props_status()}            |
-| `style`                    | `'inline'` &#124; `'multiline'`                                                                | `'inline'`      | {m.generated_fs_info_bar_props_props_style()}             |
-| `title`                    | `string`                                                                                       |                 | {m.generated_fs_info_bar_props_props_title()}             |
-| `icon`                     | `Snippet` &#124; `Component`                                                                   |                 | {m.generated_fs_info_bar_props_props_icon()}              |
-| `iconSize`                 | `number`                                                                                       | `20`            | {m.generated_fs_info_bar_props_props_icon_size()}         |
-| `hideCloseButton`          | `boolean`                                                                                      |                 | {m.generated_fs_info_bar_props_props_hide_close_button()} |
-| `children`                 | `Snippet`                                                                                      |                 | {m.generated_fs_info_bar_props_props_children()}          |
-| Element Attributes (`div`) |                                                                                                |                 |                                                           |
+| Name                       | Type                                                                                           | Default         | Description                                                                             |
+| -------------------------- | ---------------------------------------------------------------------------------------------- | --------------- | --------------------------------------------------------------------------------------- |
+| `status`                   | `'information'` &#124; `'attention'` &#124; `'warning'` &#124; `'critical'` &#124; `'success'` | `'information'` | `<I18nMarkupMessage message={m.generated_fs_info_bar_props_props_status} />`            |
+| `style`                    | `'inline'` &#124; `'multiline'`                                                                | `'inline'`      | `<I18nMarkupMessage message={m.generated_fs_info_bar_props_props_style} />`             |
+| `title`                    | `string`                                                                                       |                 | `<I18nMarkupMessage message={m.generated_fs_info_bar_props_props_title} />`             |
+| `icon`                     | `Snippet` &#124; `Component`                                                                   |                 | `<I18nMarkupMessage message={m.generated_fs_info_bar_props_props_icon} />`              |
+| `iconSize`                 | `number`                                                                                       | `20`            | `<I18nMarkupMessage message={m.generated_fs_info_bar_props_props_icon_size} />`         |
+| `hideCloseButton`          | `boolean`                                                                                      |                 | `<I18nMarkupMessage message={m.generated_fs_info_bar_props_props_hide_close_button} />` |
+| `children`                 | `Snippet`                                                                                      |                 | `<I18nMarkupMessage message={m.generated_fs_info_bar_props_props_children} />`          |
+| Element Attributes (`div`) |                                                                                                |                 |                                                                                         |
 
 <!-- /props:InfoBarProps -->

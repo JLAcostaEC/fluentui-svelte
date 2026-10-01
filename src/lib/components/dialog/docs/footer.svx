@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { m } from '$i18n/messages.js';
 </script>
 
@@ -7,12 +8,12 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DialogProps -->
 
-| Name              | Type                                            | Default   | Description                                          |
-| ----------------- | ----------------------------------------------- | --------- | ---------------------------------------------------- |
-| `type`            | `'modal'` &#124; `'non-modal'` &#124; `'alert'` | `'modal'` | {m.generated_fs_dialog_props_props_type()}           |
-| `open` _bindable_ | `boolean`                                       |           | {m.generated_fs_dialog_props_props_open()}           |
-| `onOpenChange`    | `(open: boolean) => void`                       |           | {m.generated_fs_dialog_props_props_on_open_change()} |
-| `children`        | `Snippet`                                       |           | {m.generated_fs_dialog_props_props_children()}       |
+| Name              | Type                                            | Default   | Description                                                                        |
+| ----------------- | ----------------------------------------------- | --------- | ---------------------------------------------------------------------------------- |
+| `type`            | `'modal'` &#124; `'non-modal'` &#124; `'alert'` | `'modal'` | `<I18nMarkupMessage message={m.generated_fs_dialog_props_props_type} />`           |
+| `open` _bindable_ | `boolean`                                       |           | `<I18nMarkupMessage message={m.generated_fs_dialog_props_props_open} />`           |
+| `onOpenChange`    | `(open: boolean) => void`                       |           | `<I18nMarkupMessage message={m.generated_fs_dialog_props_props_on_open_change} />` |
+| `children`        | `Snippet`                                       |           | `<I18nMarkupMessage message={m.generated_fs_dialog_props_props_children} />`       |
 
 <!-- /props:DialogProps -->
 
@@ -21,10 +22,10 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DialogTriggerProps -->
 
-| Name                    | Type                | Default | Description                                       |
-| ----------------------- | ------------------- | ------- | ------------------------------------------------- |
-| `ref`                   | `HTMLButtonElement` |         | {m.generated_fs_dialog_trigger_props_props_ref()} |
-| `ButtonProps<'button'>` |                     |         |                                                   |
+| Name                    | Type                | Default | Description                                                                     |
+| ----------------------- | ------------------- | ------- | ------------------------------------------------------------------------------- |
+| `ref`                   | `HTMLButtonElement` |         | `<I18nMarkupMessage message={m.generated_fs_dialog_trigger_props_props_ref} />` |
+| `ButtonProps<'button'>` |                     |         |                                                                                 |
 
 <!-- /props:DialogTriggerProps -->
 
@@ -33,10 +34,10 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DialogSurfaceProps -->
 
-| Name                          | Type                | Default | Description                                       |
-| ----------------------------- | ------------------- | ------- | ------------------------------------------------- |
-| `ref` _bindable_              | `HTMLDialogElement` |         | {m.generated_fs_dialog_surface_props_props_ref()} |
-| Element Attributes (`dialog`) |                     |         |                                                   |
+| Name                          | Type                | Default | Description                                                                     |
+| ----------------------------- | ------------------- | ------- | ------------------------------------------------------------------------------- |
+| `ref` _bindable_              | `HTMLDialogElement` |         | `<I18nMarkupMessage message={m.generated_fs_dialog_surface_props_props_ref} />` |
+| Element Attributes (`dialog`) |                     |         |                                                                                 |
 
 <!-- /props:DialogSurfaceProps -->
 
@@ -45,11 +46,11 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DialogTitleProps -->
 
-| Name             | Type                                         | Default | Description                                     |
-| ---------------- | -------------------------------------------- | ------- | ----------------------------------------------- |
-| `ref` _bindable_ | `HTMLDivElement` &#124; `HTMLHeadingElement` |         | {m.generated_fs_dialog_title_props_props_ref()} |
-| `as`             | `DialogTitleTag`                             | `'h3'`  | {m.generated_fs_dialog_title_props_props_as()}  |
-| HTML Attributes  |                                              |         |                                                 |
+| Name             | Type                                         | Default | Description                                                                   |
+| ---------------- | -------------------------------------------- | ------- | ----------------------------------------------------------------------------- |
+| `ref` _bindable_ | `HTMLDivElement` &#124; `HTMLHeadingElement` |         | `<I18nMarkupMessage message={m.generated_fs_dialog_title_props_props_ref} />` |
+| `as`             | `DialogTitleTag`                             | `'h3'`  | `<I18nMarkupMessage message={m.generated_fs_dialog_title_props_props_as} />`  |
+| HTML Attributes  |                                              |         |                                                                               |
 
 <!-- /props:DialogTitleProps -->
 
@@ -58,10 +59,10 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DialogContentProps -->
 
-| Name                       | Type             | Default | Description                                       |
-| -------------------------- | ---------------- | ------- | ------------------------------------------------- |
-| `ref`                      | `HTMLDivElement` |         | {m.generated_fs_dialog_content_props_props_ref()} |
-| Element Attributes (`div`) |                  |         |                                                   |
+| Name                       | Type             | Default | Description                                                                     |
+| -------------------------- | ---------------- | ------- | ------------------------------------------------------------------------------- |
+| `ref`                      | `HTMLDivElement` |         | `<I18nMarkupMessage message={m.generated_fs_dialog_content_props_props_ref} />` |
+| Element Attributes (`div`) |                  |         |                                                                                 |
 
 <!-- /props:DialogContentProps -->
 
@@ -70,11 +71,11 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DialogActionsProps -->
 
-| Name                       | Type                                       | Default | Description                                            |
-| -------------------------- | ------------------------------------------ | ------- | ------------------------------------------------------ |
-| `ref` _bindable_           | `HTMLDivElement`                           |         | {m.generated_fs_dialog_actions_props_props_ref()}      |
-| `fluid`                    | `boolean`                                  |         | {m.generated_fs_dialog_actions_props_props_fluid()}    |
-| `position`                 | `'start'` &#124; `'center'` &#124; `'end'` | `'end'` | {m.generated_fs_dialog_actions_props_props_position()} |
-| Element Attributes (`div`) |                                            |         |                                                        |
+| Name                       | Type                                       | Default | Description                                                                          |
+| -------------------------- | ------------------------------------------ | ------- | ------------------------------------------------------------------------------------ |
+| `ref` _bindable_           | `HTMLDivElement`                           |         | `<I18nMarkupMessage message={m.generated_fs_dialog_actions_props_props_ref} />`      |
+| `fluid`                    | `boolean`                                  |         | `<I18nMarkupMessage message={m.generated_fs_dialog_actions_props_props_fluid} />`    |
+| `position`                 | `'start'` &#124; `'center'` &#124; `'end'` | `'end'` | `<I18nMarkupMessage message={m.generated_fs_dialog_actions_props_props_position} />` |
+| Element Attributes (`div`) |                                            |         |                                                                                      |
 
 <!-- /props:DialogActionsProps -->

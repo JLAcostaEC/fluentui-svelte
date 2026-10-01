@@ -3,7 +3,7 @@
   import Showcase from '$site/components/showcase/showcase.svelte';
   import StatusBadge from '$site/components/status-badge/status-badge.svelte';
   import { m } from '$i18n/messages.js';
-  import { ParaglideMessage } from "@inlang/paraglide-js-svelte";
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
 </script>
 
 # AutoSuggestBox <StatusBadge />
@@ -37,13 +37,7 @@
 ```
 
 <p class="fs-docs">
-  <ParaglideMessage message={m.asb_suggestions_description} inputs={{}}>
-    {#snippet code({ children, options })}
-		  <code>
-			  {@render children?.()}
-		  </code>
-	  {/snippet}
-  </ParaglideMessage>
+  <I18nMarkupMessage message={m.asb_suggestions_description} />
 </p>
 
 <InfoBar status="attention" title={m.asb_keyboard_navigation_title()} style="multiline" hideCloseButton>

@@ -13,6 +13,21 @@ const highlighter = await createHighlighter({
 	langs: langs
 });
 
+const PROPSMITH_I18N_MARKUP = /`<I18nMarkupMessage message=\{m\.([A-Za-z_$][\w$]*)\} \/>`/g;
+
+// propsmith can only write <I18nMarkupMessage /> inside backticks; unwrap them so mdsvex renders the component.
+const propsmithI18nMarkup = {
+	name: 'propsmith-i18n-markup',
+	markup: ({ content, filename }) => {
+		if (!filename?.endsWith('.svx') || !content.includes('`<I18nMarkupMessage message={m.')) return;
+
+		PROPSMITH_I18N_MARKUP.lastIndex = 0;
+		const code = content.replace(PROPSMITH_I18N_MARKUP, '<I18nMarkupMessage message={m.$1} />');
+
+		return { code };
+	}
+};
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	compilerOptions: {
@@ -20,6 +35,7 @@ const config = {
 		runes: ({ filename }) => (filename.split(/[/\\]/).includes('node_modules') ? undefined : true)
 	},
 	preprocess: [
+		propsmithI18nMarkup,
 		mdsvex({
 			rehypePlugins: [
 				/** @type {any} */ (rehypeSlug),

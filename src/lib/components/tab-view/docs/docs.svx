@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { TabView, TabViewTab } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { DocumentRegular, MailRegular, CalendarLtrRegular } from 'fluentui-icons-svelte';
@@ -38,12 +39,12 @@
 
 {m.tab_view_required_components_description()}
 
-- `TabView`: {m.tab_view_component_tabview_description()}
+- `TabView`: <I18nMarkupMessage message={m.tab_view_component_tabview_description} />
 - `TabViewTab`: {m.tab_view_component_tabviewtab_description()}
 
 ## {m.global_usage()}
 
-{m.tab_view_usage_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.tab_view_usage_description} /></p>
 
 ```svelte
 <script>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { TabView, TabViewTab } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { DocumentRegular, MailRegular, CalendarLtrRegular } from 'fluentui-icons-svelte';
@@ -90,7 +91,7 @@
 
 ### {m.tab_view_closing_tabs_title()}
 
-{m.tab_view_closing_tabs_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.tab_view_closing_tabs_description} /></p>
 
 <Showcase columns={1} columnWidth="680px" code={closableCode} >
   <div style="width: 100%">
@@ -104,7 +105,7 @@
 
 ### {m.tab_view_new_tab_button_title()}
 
-{m.tab_view_new_tab_button_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.tab_view_new_tab_button_description} /></p>
 
 <Showcase columns={1} columnWidth="680px" code={newTabCode} disablePanZoom>
   <div style="width: 100%">
@@ -118,7 +119,7 @@
 
 ### {m.tab_view_tab_width_mode_title()}
 
-{m.tab_view_tab_width_mode_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.tab_view_tab_width_mode_description} /></p>
 
 <Showcase columns={1} columnWidth="680px" code={widthModeCode} disablePanZoom>
   <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%">

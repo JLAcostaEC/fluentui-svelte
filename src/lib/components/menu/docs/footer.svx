@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { m } from '$i18n/messages.js';
 </script>
 
@@ -7,19 +8,19 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:MenuProps -->
 
-| Name                      | Type                                                          | Default | Description                                                    |
-| ------------------------- | ------------------------------------------------------------- | ------- | -------------------------------------------------------------- |
-| `positionConfig`          | `ComputePositionConfig`                                       |         | {m.generated_fs_menu_props_props_position_config()}            |
-| `hasIcons`                | `boolean`                                                     |         | {m.generated_fs_menu_props_props_has_icons()}                  |
-| `hasCheckmarks`           | `boolean`                                                     |         | {m.generated_fs_menu_props_props_has_checkmarks()}             |
-| `open`                    | `boolean`                                                     |         | {m.generated_fs_menu_props_props_open()}                       |
-| `onOpenChange`            | `(e: Event, open: boolean) => void`                           |         | {m.generated_fs_menu_props_props_on_open_change()}             |
-| `checkedValues`           | `Record<string, string[]>`                                    | `{}`    | {m.generated_fs_menu_props_props_checked_values()}             |
-| `onCheckedValueChange`    | `(e: Event, checkedValues: Record<string, string[]>) => void` |         | {m.generated_fs_menu_props_props_on_checked_value_change()}    |
-| `openOnHover`             | `boolean`                                                     | `false` | {m.generated_fs_menu_props_props_open_on_hover()}              |
-| `openingDelay`            | `number`                                                      | `0`     | {m.generated_fs_menu_props_props_opening_delay()}              |
-| `persistOnItemActivation` | `boolean`                                                     | `false` | {m.generated_fs_menu_props_props_persist_on_item_activation()} |
-| `children`                | `Snippet`                                                     |         | {m.generated_fs_menu_props_props_children()}                   |
+| Name                      | Type                                                          | Default | Description                                                                                  |
+| ------------------------- | ------------------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------- |
+| `positionConfig`          | `ComputePositionConfig`                                       |         | `<I18nMarkupMessage message={m.generated_fs_menu_props_props_position_config} />`            |
+| `hasIcons`                | `boolean`                                                     |         | `<I18nMarkupMessage message={m.generated_fs_menu_props_props_has_icons} />`                  |
+| `hasCheckmarks`           | `boolean`                                                     |         | `<I18nMarkupMessage message={m.generated_fs_menu_props_props_has_checkmarks} />`             |
+| `open`                    | `boolean`                                                     |         | `<I18nMarkupMessage message={m.generated_fs_menu_props_props_open} />`                       |
+| `onOpenChange`            | `(e: Event, open: boolean) => void`                           |         | `<I18nMarkupMessage message={m.generated_fs_menu_props_props_on_open_change} />`             |
+| `checkedValues`           | `Record<string, string[]>`                                    | `{}`    | `<I18nMarkupMessage message={m.generated_fs_menu_props_props_checked_values} />`             |
+| `onCheckedValueChange`    | `(e: Event, checkedValues: Record<string, string[]>) => void` |         | `<I18nMarkupMessage message={m.generated_fs_menu_props_props_on_checked_value_change} />`    |
+| `openOnHover`             | `boolean`                                                     | `false` | `<I18nMarkupMessage message={m.generated_fs_menu_props_props_open_on_hover} />`              |
+| `openingDelay`            | `number`                                                      | `0`     | `<I18nMarkupMessage message={m.generated_fs_menu_props_props_opening_delay} />`              |
+| `persistOnItemActivation` | `boolean`                                                     | `false` | `<I18nMarkupMessage message={m.generated_fs_menu_props_props_persist_on_item_activation} />` |
+| `children`                | `Snippet`                                                     |         | `<I18nMarkupMessage message={m.generated_fs_menu_props_props_children} />`                   |
 
 <!-- /props:MenuProps -->
 
@@ -28,14 +29,14 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:MenuPopoverProps -->
 
-| Name              | Type                                 | Default | Description                                                 |
-| ----------------- | ------------------------------------ | ------- | ----------------------------------------------------------- |
-| `ref`             | `HTMLElement`                        |         | {m.generated_fs_menu_popover_props_props_ref()}             |
-| `open` _bindable_ | `boolean`                            |         | {m.generated_fs_menu_popover_props_props_open()}            |
-| `keepMounted`     | `boolean`                            | `false` | {m.generated_fs_menu_popover_props_props_keep_mounted()}    |
-| `placement`       | `ComputePositionConfig['placement']` |         | {m.generated_fs_menu_popover_props_props_placement()}       |
-| `positionConfig`  | `ComputePositionConfig`              |         | {m.generated_fs_menu_popover_props_props_position_config()} |
-| `children`        | `Snippet`                            |         | {m.generated_fs_menu_popover_props_props_children()}        |
+| Name              | Type                                 | Default | Description                                                                               |
+| ----------------- | ------------------------------------ | ------- | ----------------------------------------------------------------------------------------- |
+| `ref`             | `HTMLElement`                        |         | `<I18nMarkupMessage message={m.generated_fs_menu_popover_props_props_ref} />`             |
+| `open` _bindable_ | `boolean`                            |         | `<I18nMarkupMessage message={m.generated_fs_menu_popover_props_props_open} />`            |
+| `keepMounted`     | `boolean`                            | `false` | `<I18nMarkupMessage message={m.generated_fs_menu_popover_props_props_keep_mounted} />`    |
+| `placement`       | `ComputePositionConfig['placement']` |         | `<I18nMarkupMessage message={m.generated_fs_menu_popover_props_props_placement} />`       |
+| `positionConfig`  | `ComputePositionConfig`              |         | `<I18nMarkupMessage message={m.generated_fs_menu_popover_props_props_position_config} />` |
+| `children`        | `Snippet`                            |         | `<I18nMarkupMessage message={m.generated_fs_menu_popover_props_props_children} />`        |
 
 <!-- /props:MenuPopoverProps -->
 
@@ -44,12 +45,12 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:MenuTriggerProps -->
 
-| Name       | Type                                              | Default | Description                                          |
-| ---------- | ------------------------------------------------- | ------- | ---------------------------------------------------- |
-| `disabled` | `boolean`                                         |         | {m.generated_fs_menu_trigger_props_props_disabled()} |
-| `shape`    | `'circular'` &#124; `'rounded'` &#124; `'square'` |         | {m.generated_fs_menu_trigger_props_props_shape()}    |
-| `icon`     | `Snippet` &#124; `Component`                      |         | {m.generated_fs_menu_trigger_props_props_icon()}     |
-| `children` | `Snippet`                                         |         | {m.generated_fs_menu_trigger_props_props_children()} |
+| Name       | Type                                              | Default | Description                                                                        |
+| ---------- | ------------------------------------------------- | ------- | ---------------------------------------------------------------------------------- |
+| `disabled` | `boolean`                                         |         | `<I18nMarkupMessage message={m.generated_fs_menu_trigger_props_props_disabled} />` |
+| `shape`    | `'circular'` &#124; `'rounded'` &#124; `'square'` |         | `<I18nMarkupMessage message={m.generated_fs_menu_trigger_props_props_shape} />`    |
+| `icon`     | `Snippet` &#124; `Component`                      |         | `<I18nMarkupMessage message={m.generated_fs_menu_trigger_props_props_icon} />`     |
+| `children` | `Snippet`                                         |         | `<I18nMarkupMessage message={m.generated_fs_menu_trigger_props_props_children} />` |
 
 <!-- /props:MenuTriggerProps -->
 
@@ -58,13 +59,13 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:MenuItemProps -->
 
-| Name               | Type                         | Default | Description                                                |
-| ------------------ | ---------------------------- | ------- | ---------------------------------------------------------- |
-| `icon`             | `Snippet` &#124; `Component` |         | {m.generated_fs_menu_item_props_props_icon()}              |
-| `secondaryContent` | `string`                     |         | {m.generated_fs_menu_item_props_props_secondary_content()} |
-| `disabled`         | `boolean`                    |         | {m.generated_fs_menu_item_props_props_disabled()}          |
-| `subText`          | `string`                     |         | {m.generated_fs_menu_item_props_props_sub_text()}          |
-| `href`             | `string`                     |         | {m.generated_fs_menu_item_props_props_href()}              |
+| Name               | Type                         | Default | Description                                                                              |
+| ------------------ | ---------------------------- | ------- | ---------------------------------------------------------------------------------------- |
+| `icon`             | `Snippet` &#124; `Component` |         | `<I18nMarkupMessage message={m.generated_fs_menu_item_props_props_icon} />`              |
+| `secondaryContent` | `string`                     |         | `<I18nMarkupMessage message={m.generated_fs_menu_item_props_props_secondary_content} />` |
+| `disabled`         | `boolean`                    |         | `<I18nMarkupMessage message={m.generated_fs_menu_item_props_props_disabled} />`          |
+| `subText`          | `string`                     |         | `<I18nMarkupMessage message={m.generated_fs_menu_item_props_props_sub_text} />`          |
+| `href`             | `string`                     |         | `<I18nMarkupMessage message={m.generated_fs_menu_item_props_props_href} />`              |
 
 <!-- /props:MenuItemProps -->
 
@@ -73,13 +74,13 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:MenuItemActionableProps -->
 
-| Name                                   | Type      | Default | Description                                                 |
-| -------------------------------------- | --------- | ------- | ----------------------------------------------------------- |
-| `checked` _bindable_                   | `boolean` |         | {m.generated_fs_menu_item_actionable_props_props_checked()} |
-| `value`                                | `string`  | `id`    | {m.generated_fs_menu_item_actionable_props_props_value()}   |
-| `name`                                 | `string`  | `id`    | {m.generated_fs_menu_item_actionable_props_props_name()}    |
-| `MenuItemProps` without `href`         |           |         |                                                             |
-| `ComponentProps<typeof Button<'div'>>` |           |         |                                                             |
+| Name                                   | Type      | Default | Description                                                                               |
+| -------------------------------------- | --------- | ------- | ----------------------------------------------------------------------------------------- |
+| `checked` _bindable_                   | `boolean` |         | `<I18nMarkupMessage message={m.generated_fs_menu_item_actionable_props_props_checked} />` |
+| `value`                                | `string`  | `id`    | `<I18nMarkupMessage message={m.generated_fs_menu_item_actionable_props_props_value} />`   |
+| `name`                                 | `string`  | `id`    | `<I18nMarkupMessage message={m.generated_fs_menu_item_actionable_props_props_name} />`    |
+| `MenuItemProps` without `href`         |           |         |                                                                                           |
+| `ComponentProps<typeof Button<'div'>>` |           |         |                                                                                           |
 
 <!-- /props:MenuItemActionableProps -->
 
@@ -88,10 +89,10 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:MenuGroupProps -->
 
-| Name             | Type             | Default | Description                                        |
-| ---------------- | ---------------- | ------- | -------------------------------------------------- |
-| `ref` _bindable_ | `HTMLDivElement` |         | {m.generated_fs_menu_group_props_props_ref()}      |
-| `header`         | `string`         |         | {m.generated_fs_menu_group_props_props_header()}   |
-| `children`       | `Snippet`        |         | {m.generated_fs_menu_group_props_props_children()} |
+| Name             | Type             | Default | Description                                                                      |
+| ---------------- | ---------------- | ------- | -------------------------------------------------------------------------------- |
+| `ref` _bindable_ | `HTMLDivElement` |         | `<I18nMarkupMessage message={m.generated_fs_menu_group_props_props_ref} />`      |
+| `header`         | `string`         |         | `<I18nMarkupMessage message={m.generated_fs_menu_group_props_props_header} />`   |
+| `children`       | `Snippet`        |         | `<I18nMarkupMessage message={m.generated_fs_menu_group_props_props_children} />` |
 
 <!-- /props:MenuGroupProps -->

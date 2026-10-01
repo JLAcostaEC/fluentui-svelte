@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { m } from '$i18n/messages.js';
 </script>
 
@@ -7,14 +8,14 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DividerProps -->
 
-| Name             | Type                                                                | Default     | Description                                          |
-| ---------------- | ------------------------------------------------------------------- | ----------- | ---------------------------------------------------- |
-| `as`             | `'div'` &#124; `'hr'` &#124; `'span'`                               | `'div'`     | {m.generated_fs_divider_props_props_as()}            |
-| `ref` _bindable_ | `HTMLDivElement` &#124; `HTMLHRElement` &#124; `HTMLSpanElement`    |             | {m.generated_fs_divider_props_props_ref()}           |
-| `vertical`       | `boolean`                                                           |             | {m.generated_fs_divider_props_props_vertical()}      |
-| `alignContent`   | `'start'` &#124; `'center'` &#124; `'end'`                          | `'center'`  | {m.generated_fs_divider_props_props_align_content()} |
-| `inset`          | `boolean`                                                           |             | {m.generated_fs_divider_props_props_inset()}         |
-| `appearance`     | `'accent'` &#124; `'standard'` &#124; `'subtle'` &#124; `'default'` | `'default'` | {m.generated_fs_divider_props_props_appearance()}    |
-| HTML Attributes  |                                                                     |             |                                                      |
+| Name             | Type                                                                | Default     | Description                                                                        |
+| ---------------- | ------------------------------------------------------------------- | ----------- | ---------------------------------------------------------------------------------- |
+| `as`             | `'div'` &#124; `'hr'` &#124; `'span'`                               | `'div'`     | `<I18nMarkupMessage message={m.generated_fs_divider_props_props_as} />`            |
+| `ref` _bindable_ | `HTMLDivElement` &#124; `HTMLHRElement` &#124; `HTMLSpanElement`    |             | `<I18nMarkupMessage message={m.generated_fs_divider_props_props_ref} />`           |
+| `vertical`       | `boolean`                                                           |             | `<I18nMarkupMessage message={m.generated_fs_divider_props_props_vertical} />`      |
+| `alignContent`   | `'start'` &#124; `'center'` &#124; `'end'`                          | `'center'`  | `<I18nMarkupMessage message={m.generated_fs_divider_props_props_align_content} />` |
+| `inset`          | `boolean`                                                           |             | `<I18nMarkupMessage message={m.generated_fs_divider_props_props_inset} />`         |
+| `appearance`     | `'accent'` &#124; `'standard'` &#124; `'subtle'` &#124; `'default'` | `'default'` | `<I18nMarkupMessage message={m.generated_fs_divider_props_props_appearance} />`    |
+| HTML Attributes  |                                                                     |             |                                                                                    |
 
 <!-- /props:DividerProps -->

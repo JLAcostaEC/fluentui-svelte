@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { m } from '$i18n/messages.js';
 </script>
 
@@ -7,19 +8,19 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:CardProps -->
 
-| Name                  | Type                                                       | Default        | Description                                              |
-| --------------------- | ---------------------------------------------------------- | -------------- | -------------------------------------------------------- |
-| `ref` _bindable_      | `CardElementDOMType[Tag]`                                  |                | {m.generated_fs_card_props_props_ref()}                  |
-| `as`                  | `'div'` &#124; `'article'` &#124; `'section'` &#124; `'a'` | `'div'`        | {m.generated_fs_card_props_props_as()}                   |
-| `orientation`         | `'horizontal'` &#124; `'vertical'`                         | `'horizontal'` | {m.generated_fs_card_props_props_orientation()}          |
-| `selectable`          | `boolean`                                                  | `false`        | {m.generated_fs_card_props_props_selectable()}           |
-| `showFloatingAction`  | `boolean`                                                  | `false`        | {m.generated_fs_card_props_props_show_floating_action()} |
-| `id`                  | `string`                                                   |                | {m.generated_fs_card_props_props_id()}                   |
-| `selected` _bindable_ | `boolean`                                                  | `false`        | {m.generated_fs_card_props_props_selected()}             |
-| `disabled`            | `boolean`                                                  | `false`        | {m.generated_fs_card_props_props_disabled()}             |
-| `appearance`          | `'filled'` &#124; `'outlined'` &#124; `'subtle'`           | `'filled'`     | {m.generated_fs_card_props_props_appearance()}           |
-| `onSelectionChange`   | `(id: string, selected: boolean) => void`                  |                | {m.generated_fs_card_props_props_on_selection_change()}  |
-| HTML Attributes       |                                                            |                |                                                          |
+| Name                  | Type                                                       | Default        | Description                                                                            |
+| --------------------- | ---------------------------------------------------------- | -------------- | -------------------------------------------------------------------------------------- |
+| `ref` _bindable_      | `CardElementDOMType[Tag]`                                  |                | `<I18nMarkupMessage message={m.generated_fs_card_props_props_ref} />`                  |
+| `as`                  | `'div'` &#124; `'article'` &#124; `'section'` &#124; `'a'` | `'div'`        | `<I18nMarkupMessage message={m.generated_fs_card_props_props_as} />`                   |
+| `orientation`         | `'horizontal'` &#124; `'vertical'`                         | `'horizontal'` | `<I18nMarkupMessage message={m.generated_fs_card_props_props_orientation} />`          |
+| `selectable`          | `boolean`                                                  | `false`        | `<I18nMarkupMessage message={m.generated_fs_card_props_props_selectable} />`           |
+| `showFloatingAction`  | `boolean`                                                  | `false`        | `<I18nMarkupMessage message={m.generated_fs_card_props_props_show_floating_action} />` |
+| `id`                  | `string`                                                   |                | `<I18nMarkupMessage message={m.generated_fs_card_props_props_id} />`                   |
+| `selected` _bindable_ | `boolean`                                                  | `false`        | `<I18nMarkupMessage message={m.generated_fs_card_props_props_selected} />`             |
+| `disabled`            | `boolean`                                                  | `false`        | `<I18nMarkupMessage message={m.generated_fs_card_props_props_disabled} />`             |
+| `appearance`          | `'filled'` &#124; `'outlined'` &#124; `'subtle'`           | `'filled'`     | `<I18nMarkupMessage message={m.generated_fs_card_props_props_appearance} />`           |
+| `onSelectionChange`   | `(id: string, selected: boolean) => void`                  |                | `<I18nMarkupMessage message={m.generated_fs_card_props_props_on_selection_change} />`  |
+| HTML Attributes       |                                                            |                |                                                                                        |
 
 <!-- /props:CardProps -->
 
@@ -28,13 +29,13 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:CardPreviewProps -->
 
-| Name                                                | Type             | Default | Description                                          |
-| --------------------------------------------------- | ---------------- | ------- | ---------------------------------------------------- |
-| `ref` _bindable_                                    | `HTMLDivElement` |         | {m.generated_fs_card_preview_props_props_ref()}      |
-| `logoSrc`                                           | `string`         |         | {m.generated_fs_card_preview_props_props_logo_src()} |
-| `logoAlt`                                           | `string`         | `''`    | {m.generated_fs_card_preview_props_props_logo_alt()} |
-| `children`                                          | `Snippet`        |         | {m.generated_fs_card_preview_props_props_children()} |
-| `HTMLAttributes<HTMLDivElement>` without `children` |                  |         |                                                      |
+| Name                                                | Type             | Default | Description                                                                        |
+| --------------------------------------------------- | ---------------- | ------- | ---------------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLDivElement` |         | `<I18nMarkupMessage message={m.generated_fs_card_preview_props_props_ref} />`      |
+| `logoSrc`                                           | `string`         |         | `<I18nMarkupMessage message={m.generated_fs_card_preview_props_props_logo_src} />` |
+| `logoAlt`                                           | `string`         | `''`    | `<I18nMarkupMessage message={m.generated_fs_card_preview_props_props_logo_alt} />` |
+| `children`                                          | `Snippet`        |         | `<I18nMarkupMessage message={m.generated_fs_card_preview_props_props_children} />` |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                  |         |                                                                                    |
 
 <!-- /props:CardPreviewProps -->
 
@@ -43,15 +44,15 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:CardHeaderProps -->
 
-| Name                                                         | Type                                         | Default | Description                                            |
-| ------------------------------------------------------------ | -------------------------------------------- | ------- | ------------------------------------------------------ |
-| `ref` _bindable_                                             | `HTMLDivElement`                             |         | {m.generated_fs_card_header_props_props_ref()}         |
-| `title`                                                      | `Snippet` &#124; `Component` &#124; `string` |         | {m.generated_fs_card_header_props_props_title()}       |
-| `image`                                                      | `Snippet` &#124; `Component` &#124; `string` |         | {m.generated_fs_card_header_props_props_image()}       |
-| `imageAlt`                                                   | `string`                                     | `''`    | {m.generated_fs_card_header_props_props_image_alt()}   |
-| `description`                                                | `Snippet` &#124; `Component` &#124; `string` |         | {m.generated_fs_card_header_props_props_description()} |
-| `action`                                                     | `Snippet` &#124; `Component`                 |         | {m.generated_fs_card_header_props_props_action()}      |
-| `HTMLAttributes<HTMLDivElement>` without `children`, `title` |                                              |         |                                                        |
+| Name                                                         | Type                                         | Default | Description                                                                          |
+| ------------------------------------------------------------ | -------------------------------------------- | ------- | ------------------------------------------------------------------------------------ |
+| `ref` _bindable_                                             | `HTMLDivElement`                             |         | `<I18nMarkupMessage message={m.generated_fs_card_header_props_props_ref} />`         |
+| `title`                                                      | `Snippet` &#124; `Component` &#124; `string` |         | `<I18nMarkupMessage message={m.generated_fs_card_header_props_props_title} />`       |
+| `image`                                                      | `Snippet` &#124; `Component` &#124; `string` |         | `<I18nMarkupMessage message={m.generated_fs_card_header_props_props_image} />`       |
+| `imageAlt`                                                   | `string`                                     | `''`    | `<I18nMarkupMessage message={m.generated_fs_card_header_props_props_image_alt} />`   |
+| `description`                                                | `Snippet` &#124; `Component` &#124; `string` |         | `<I18nMarkupMessage message={m.generated_fs_card_header_props_props_description} />` |
+| `action`                                                     | `Snippet` &#124; `Component`                 |         | `<I18nMarkupMessage message={m.generated_fs_card_header_props_props_action} />`      |
+| `HTMLAttributes<HTMLDivElement>` without `children`, `title` |                                              |         |                                                                                      |
 
 <!-- /props:CardHeaderProps -->
 
@@ -60,10 +61,10 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:CardFooterProps -->
 
-| Name                                                | Type                         | Default | Description                                       |
-| --------------------------------------------------- | ---------------------------- | ------- | ------------------------------------------------- |
-| `ref` _bindable_                                    | `HTMLDivElement`             |         | {m.generated_fs_card_footer_props_props_ref()}    |
-| `action`                                            | `Snippet` &#124; `Component` |         | {m.generated_fs_card_footer_props_props_action()} |
-| `HTMLAttributes<HTMLDivElement>` without `children` |                              |         |                                                   |
+| Name                                                | Type                         | Default | Description                                                                     |
+| --------------------------------------------------- | ---------------------------- | ------- | ------------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLDivElement`             |         | `<I18nMarkupMessage message={m.generated_fs_card_footer_props_props_ref} />`    |
+| `action`                                            | `Snippet` &#124; `Component` |         | `<I18nMarkupMessage message={m.generated_fs_card_footer_props_props_action} />` |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                              |         |                                                                                 |
 
 <!-- /props:CardFooterProps -->

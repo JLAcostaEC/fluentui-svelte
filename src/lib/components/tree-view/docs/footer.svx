@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { m } from '$i18n/messages.js';
 </script>
 
@@ -7,20 +8,20 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TreeViewProps -->
 
-| Name                                                | Type                                         | Default      | Description                                                |
-| --------------------------------------------------- | -------------------------------------------- | ------------ | ---------------------------------------------------------- |
-| `ref` _bindable_                                    | `HTMLUListElement`                           |              | {m.generated_fs_tree_view_props_props_ref()}               |
-| `size`                                              | `'small'` &#124; `'medium'` &#124; `'large'` | `'medium'`   | {m.generated_fs_tree_view_props_props_size()}              |
-| `navigationMode`                                    | `'tree'` &#124; `'treegrid'`                 | `'tree'`     | {m.generated_fs_tree_view_props_props_navigation_mode()}   |
-| `onOpenChange`                                      | `(e: Event, openItems: string[]) => void`    |              | {m.generated_fs_tree_view_props_props_on_open_change()}    |
-| `selectionMode`                                     | `'single'` &#124; `'multiple'`               | `'multiple'` | {m.generated_fs_tree_view_props_props_selection_mode()}    |
-| `onCheckedChange`                                   | `(e: Event, checkedItems: string[]) => void` |              | {m.generated_fs_tree_view_props_props_on_checked_change()} |
-| `virtualizer`                                       | `TreeViewVirtualizer`                        |              | {m.generated_fs_tree_view_props_props_virtualizer()}       |
-| `openItems` _bindable_                              | `string[]` &#124; `SvelteSet<string>`        |              | {m.generated_fs_tree_view_props_props_open_items()}        |
-| `checkedItems` _bindable_                           | `string[]` &#124; `SvelteSet<string>`        |              | {m.generated_fs_tree_view_props_props_checked_items()}     |
-| `children`                                          | `Snippet`                                    |              | {m.generated_fs_tree_view_props_props_children()}          |
-| `TreeViewVirtualProps` &#124; `TreeViewStaticProps` |                                              |              |                                                            |
-| Element Attributes (`ul`)                           |                                              |              |                                                            |
+| Name                                                | Type                                         | Default      | Description                                                                              |
+| --------------------------------------------------- | -------------------------------------------- | ------------ | ---------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLUListElement`                           |              | `<I18nMarkupMessage message={m.generated_fs_tree_view_props_props_ref} />`               |
+| `size`                                              | `'small'` &#124; `'medium'` &#124; `'large'` | `'medium'`   | `<I18nMarkupMessage message={m.generated_fs_tree_view_props_props_size} />`              |
+| `navigationMode`                                    | `'tree'` &#124; `'treegrid'`                 | `'tree'`     | `<I18nMarkupMessage message={m.generated_fs_tree_view_props_props_navigation_mode} />`   |
+| `onOpenChange`                                      | `(e: Event, openItems: string[]) => void`    |              | `<I18nMarkupMessage message={m.generated_fs_tree_view_props_props_on_open_change} />`    |
+| `selectionMode`                                     | `'single'` &#124; `'multiple'`               | `'multiple'` | `<I18nMarkupMessage message={m.generated_fs_tree_view_props_props_selection_mode} />`    |
+| `onCheckedChange`                                   | `(e: Event, checkedItems: string[]) => void` |              | `<I18nMarkupMessage message={m.generated_fs_tree_view_props_props_on_checked_change} />` |
+| `virtualizer`                                       | `TreeViewVirtualizer`                        |              | `<I18nMarkupMessage message={m.generated_fs_tree_view_props_props_virtualizer} />`       |
+| `openItems` _bindable_                              | `string[]` &#124; `SvelteSet<string>`        |              | `<I18nMarkupMessage message={m.generated_fs_tree_view_props_props_open_items} />`        |
+| `checkedItems` _bindable_                           | `string[]` &#124; `SvelteSet<string>`        |              | `<I18nMarkupMessage message={m.generated_fs_tree_view_props_props_checked_items} />`     |
+| `children`                                          | `Snippet`                                    |              | `<I18nMarkupMessage message={m.generated_fs_tree_view_props_props_children} />`          |
+| `TreeViewVirtualProps` &#124; `TreeViewStaticProps` |                                              |              |                                                                                          |
+| Element Attributes (`ul`)                           |                                              |              |                                                                                          |
 
 <!-- /props:TreeViewProps -->
 
@@ -29,21 +30,21 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TreeViewItemProps -->
 
-| Name                      | Type                                                         | Default  | Description                                                     |
-| ------------------------- | ------------------------------------------------------------ | -------- | --------------------------------------------------------------- |
-| `id`                      | `string`                                                     |          | {m.generated_fs_tree_view_item_props_props_id()}                |
-| `type`                    | `'item'` &#124; `'branch'`                                   | `'item'` | {m.generated_fs_tree_view_item_props_props_type()}              |
-| `ref`                     | `HTMLLIElement`                                              |          | {m.generated_fs_tree_view_item_props_props_ref()}               |
-| `value`                   | `string` &#124; `number`                                     | `id`     | {m.generated_fs_tree_view_item_props_props_value()}             |
-| `text`                    | `string`                                                     |          | {m.generated_fs_tree_view_item_props_props_text()}              |
-| `open`                    | `boolean`                                                    |          | {m.generated_fs_tree_view_item_props_props_open()}              |
-| `checked`                 | `boolean`                                                    |          | {m.generated_fs_tree_view_item_props_props_checked()}           |
-| `indeterminate`           | `boolean`                                                    |          | {m.generated_fs_tree_view_item_props_props_indeterminate()}     |
-| `disabled`                | `boolean`                                                    |          | {m.generated_fs_tree_view_item_props_props_disabled()}          |
-| `index`                   | `number`                                                     |          | {m.generated_fs_tree_view_item_props_props_index()}             |
-| `onOpenChange`            | `(e: Event, data: { id: string; open: boolean }) => void`    |          | {m.generated_fs_tree_view_item_props_props_on_open_change()}    |
-| `onCheckedChange`         | `(e: Event, data: { id: string; checked: boolean }) => void` |          | {m.generated_fs_tree_view_item_props_props_on_checked_change()} |
-| Element Attributes (`li`) |                                                              |          |                                                                 |
+| Name                      | Type                                                         | Default  | Description                                                                                   |
+| ------------------------- | ------------------------------------------------------------ | -------- | --------------------------------------------------------------------------------------------- |
+| `id`                      | `string`                                                     |          | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_id} />`                |
+| `type`                    | `'item'` &#124; `'branch'`                                   | `'item'` | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_type} />`              |
+| `ref`                     | `HTMLLIElement`                                              |          | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_ref} />`               |
+| `value`                   | `string` &#124; `number`                                     | `id`     | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_value} />`             |
+| `text`                    | `string`                                                     |          | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_text} />`              |
+| `open`                    | `boolean`                                                    |          | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_open} />`              |
+| `checked`                 | `boolean`                                                    |          | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_checked} />`           |
+| `indeterminate`           | `boolean`                                                    |          | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_indeterminate} />`     |
+| `disabled`                | `boolean`                                                    |          | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_disabled} />`          |
+| `index`                   | `number`                                                     |          | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_index} />`             |
+| `onOpenChange`            | `(e: Event, data: { id: string; open: boolean }) => void`    |          | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_on_open_change} />`    |
+| `onCheckedChange`         | `(e: Event, data: { id: string; checked: boolean }) => void` |          | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_on_checked_change} />` |
+| Element Attributes (`li`) |                                                              |          |                                                                                               |
 
 <!-- /props:TreeViewItemProps -->
 
@@ -52,14 +53,14 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TreeViewItemLayoutProps -->
 
-| Name                       | Type                         | Default | Description                                                      |
-| -------------------------- | ---------------------------- | ------- | ---------------------------------------------------------------- |
-| `ref`                      | `HTMLDivElement`             |         | {m.generated_fs_tree_view_item_layout_props_props_ref()}         |
-| `expandIcon`               | `Snippet` &#124; `Component` |         | {m.generated_fs_tree_view_item_layout_props_props_expand_icon()} |
-| `iconBefore`               | `Snippet` &#124; `Component` |         | {m.generated_fs_tree_view_item_layout_props_props_icon_before()} |
-| `iconAfter`                | `Snippet` &#124; `Component` |         | {m.generated_fs_tree_view_item_layout_props_props_icon_after()}  |
-| `aside`                    | `Snippet` &#124; `Component` |         | {m.generated_fs_tree_view_item_layout_props_props_aside()}       |
-| `actions`                  | `Snippet` &#124; `Component` |         | {m.generated_fs_tree_view_item_layout_props_props_actions()}     |
-| Element Attributes (`div`) |                              |         |                                                                  |
+| Name                       | Type                         | Default | Description                                                                                    |
+| -------------------------- | ---------------------------- | ------- | ---------------------------------------------------------------------------------------------- |
+| `ref`                      | `HTMLDivElement`             |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_ref} />`         |
+| `expandIcon`               | `Snippet` &#124; `Component` |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_expand_icon} />` |
+| `iconBefore`               | `Snippet` &#124; `Component` |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_icon_before} />` |
+| `iconAfter`                | `Snippet` &#124; `Component` |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_icon_after} />`  |
+| `aside`                    | `Snippet` &#124; `Component` |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_aside} />`       |
+| `actions`                  | `Snippet` &#124; `Component` |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_actions} />`     |
+| Element Attributes (`div`) |                              |         |                                                                                                |
 
 <!-- /props:TreeViewItemLayoutProps -->

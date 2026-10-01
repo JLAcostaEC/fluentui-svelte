@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { TopNav, TopNavItem } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { AirplaneRegular, AirplaneTakeOffRegular, CalendarMonthRegular } from 'fluentui-icons-svelte';
@@ -36,12 +37,12 @@
 
 {m.top_nav_required_components_description()}
 
-- `TopNav`: {m.top_nav_component_topnav_description()}
+- `TopNav`: <I18nMarkupMessage message={m.top_nav_component_topnav_description} />
 - `TopNavItem`: {m.top_nav_component_topnavitem_description()}
 
 ## {m.global_usage()}
 
-{m.top_nav_usage_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.top_nav_usage_description} /></p>
 
 ```svelte
 <script>

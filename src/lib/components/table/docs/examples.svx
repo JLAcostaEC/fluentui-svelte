@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
   import { SvelteSet } from 'svelte/reactivity';
   import { Button, Table, TableHeader, TableHeaderCell, TableBody, TableRow, TableCell, TableCellLayout, TableCellActions, TableSelectionCell } from '$lib/index.js';
@@ -372,7 +373,7 @@
 
 ### {m.global_size()}
 
-{m.table_size_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.table_size_description} /></p>
 
 <Showcase columns={1} minHeight="480px" code={sizeCode}>
   {#each SIZES as size (size)}
@@ -401,7 +402,7 @@
 
 ### {m.table_sort_title()}
 
-{m.table_sort_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.table_sort_description} /></p>
 
 <Showcase columns={1} minHeight="260px" code={sortCode}>
   <Table sortable aria-label="Table with sort">
@@ -428,7 +429,7 @@
 
 ### {m.global_multiple_selection()}
 
-{m.table_selection_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.table_selection_description} /></p>
 
 <Showcase columns={1} minHeight="260px" code={selectionCode}>
   <Table aria-label="Table with multiselect">
@@ -456,7 +457,7 @@
 
 ### {m.table_single_selection_title()}
 
-{m.table_single_selection_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.table_single_selection_description} /></p>
 
 <Showcase columns={1} minHeight="260px" code={singleSelectCode}>
   <Table aria-label="Table with single select">
@@ -484,7 +485,7 @@
 
 ### {m.table_subtle_selection_title()}
 
-{m.table_subtle_selection_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.table_subtle_selection_description} /></p>
 
 <Showcase columns={1} minHeight="260px" code={subtleCode}>
   <Table aria-label="Table with subtle selection">
@@ -512,7 +513,7 @@
 
 ### {m.table_cell_layout_title()}
 
-{m.table_cell_layout_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.table_cell_layout_description} /></p>
 
 <Showcase columns={1} minHeight="260px" code={layoutCode}>
   <Table aria-label="Table with cell layouts">
@@ -539,7 +540,7 @@
 
 ### {m.table_cell_actions_title()}
 
-{m.table_cell_actions_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.table_cell_actions_description} /></p>
 
 <Showcase columns={1} minHeight="260px" code={cellActionsCode}>
   <Table aria-label="Table with cell actions">
@@ -568,7 +569,7 @@
 
 ### {m.table_keyboard_navigation_title()}
 
-{m.table_keyboard_navigation_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.table_keyboard_navigation_description} /></p>
 
 <Showcase columns={1} minHeight="260px" code={tabspotCode}>
   <Table enableTabspot aria-label="Table with keyboard navigation">
@@ -600,7 +601,7 @@
 
 ### {m.table_resizable_columns_title()}
 
-{m.table_resizable_columns_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.table_resizable_columns_description} /></p>
 
 <!-- Panzoom binds the arrow keys to pan its canvas, which would swallow the resize handle's own. -->
 <Showcase columns={1} minHeight="300px" disablePanZoom code={resizeCode}>
@@ -628,7 +629,7 @@
 
 ### {m.table_no_row_borders_title()}
 
-{m.table_no_row_borders_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.table_no_row_borders_description} /></p>
 
 <Showcase columns={1} minHeight="260px" code={noRowBordersCode}>
   <Table noRowBorders aria-label="Table without row borders">
@@ -653,7 +654,7 @@
 
 ### {m.table_non_native_elements_title()}
 
-{m.table_non_native_elements_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.table_non_native_elements_description} /></p>
 
 <Showcase columns={1} minHeight="260px" code={nonNativeCode}>
   <Table noNativeElements aria-label="Table rendered with divs">
@@ -680,7 +681,7 @@
 
 ### {m.table_virtualization_title()}
 
-{m.table_virtualization_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.table_virtualization_description} /></p>
 
 <Showcase columns={1} minHeight="420px" disablePanZoom code={virtualCode}>
   <Table

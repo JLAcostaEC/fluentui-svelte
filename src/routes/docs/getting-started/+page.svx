@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { m } from '$i18n/messages.js';
 </script>
 
@@ -37,7 +38,7 @@ import 'fluentui-svelte/theme.css';
 
 ### {m.gs_optional_css_title()}
 
-{m.gs_optional_css_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.gs_optional_css_description} /></p>
 
 ```js
 import 'fluentui-svelte/reset.css'; /* Dont use if you already have a reset in your project. Ej: Using TailwindCSS */

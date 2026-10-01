@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { m } from '$i18n/messages.js';
 </script>
 
@@ -7,21 +8,21 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableProps -->
 
-| Name                      | Type                                                         | Default    | Description                                             |
-| ------------------------- | ------------------------------------------------------------ | ---------- | ------------------------------------------------------- |
-| `as`                      | `'table'` &#124; `'div'`                                     | `'table'`  | {m.generated_fs_table_props_props_as()}                 |
-| `ref` _bindable_          | `HTMLTableElement` &#124; `HTMLDivElement`                   |            | {m.generated_fs_table_props_props_ref()}                |
-| `size`                    | `'extra-small'` &#124; `'small'` &#124; `'medium'`           | `'medium'` | {m.generated_fs_table_props_props_size()}               |
-| `noNativeElements`        | `boolean`                                                    | `false`    | {m.generated_fs_table_props_props_no_native_elements()} |
-| `sortable`                | `boolean`                                                    | `false`    | {m.generated_fs_table_props_props_sortable()}           |
-| `noRowBorders`            | `boolean`                                                    | `false`    | {m.generated_fs_table_props_props_no_row_borders()}     |
-| `enableTabspot`           | `boolean`                                                    | `false`    | {m.generated_fs_table_props_props_enable_tabspot()}     |
-| `virtualizer`             | `TableVirtualizer`                                           |            | {m.generated_fs_table_props_props_virtualizer()}        |
-| `resizableColumns`        | `boolean`                                                    | `false`    | {m.generated_fs_table_props_props_resizable_columns()}  |
-| `columnWidths` _bindable_ | `number[]`                                                   |            | {m.generated_fs_table_props_props_column_widths()}      |
-| `columnSizing`            | `ColumnSizing[]`                                             |            | {m.generated_fs_table_props_props_column_sizing()}      |
-| `onColumnResize`          | `(e: Event, data: { index: number; width: number }) => void` |            | {m.generated_fs_table_props_props_on_column_resize()}   |
-| HTML Attributes           |                                                              |            |                                                         |
+| Name                      | Type                                                         | Default    | Description                                                                           |
+| ------------------------- | ------------------------------------------------------------ | ---------- | ------------------------------------------------------------------------------------- |
+| `as`                      | `'table'` &#124; `'div'`                                     | `'table'`  | `<I18nMarkupMessage message={m.generated_fs_table_props_props_as} />`                 |
+| `ref` _bindable_          | `HTMLTableElement` &#124; `HTMLDivElement`                   |            | `<I18nMarkupMessage message={m.generated_fs_table_props_props_ref} />`                |
+| `size`                    | `'extra-small'` &#124; `'small'` &#124; `'medium'`           | `'medium'` | `<I18nMarkupMessage message={m.generated_fs_table_props_props_size} />`               |
+| `noNativeElements`        | `boolean`                                                    | `false`    | `<I18nMarkupMessage message={m.generated_fs_table_props_props_no_native_elements} />` |
+| `sortable`                | `boolean`                                                    | `false`    | `<I18nMarkupMessage message={m.generated_fs_table_props_props_sortable} />`           |
+| `noRowBorders`            | `boolean`                                                    | `false`    | `<I18nMarkupMessage message={m.generated_fs_table_props_props_no_row_borders} />`     |
+| `enableTabspot`           | `boolean`                                                    | `false`    | `<I18nMarkupMessage message={m.generated_fs_table_props_props_enable_tabspot} />`     |
+| `virtualizer`             | `TableVirtualizer`                                           |            | `<I18nMarkupMessage message={m.generated_fs_table_props_props_virtualizer} />`        |
+| `resizableColumns`        | `boolean`                                                    | `false`    | `<I18nMarkupMessage message={m.generated_fs_table_props_props_resizable_columns} />`  |
+| `columnWidths` _bindable_ | `number[]`                                                   |            | `<I18nMarkupMessage message={m.generated_fs_table_props_props_column_widths} />`      |
+| `columnSizing`            | `ColumnSizing[]`                                             |            | `<I18nMarkupMessage message={m.generated_fs_table_props_props_column_sizing} />`      |
+| `onColumnResize`          | `(e: Event, data: { index: number; width: number }) => void` |            | `<I18nMarkupMessage message={m.generated_fs_table_props_props_on_column_resize} />`   |
+| HTML Attributes           |                                                              |            |                                                                                       |
 
 <!-- /props:TableProps -->
 
@@ -30,11 +31,11 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableHeaderProps -->
 
-| Name             | Type                                              | Default   | Description                                     |
-| ---------------- | ------------------------------------------------- | --------- | ----------------------------------------------- |
-| `as`             | `'thead'` &#124; `'div'`                          | `'thead'` | {m.generated_fs_table_header_props_props_as()}  |
-| `ref` _bindable_ | `HTMLTableSectionElement` &#124; `HTMLDivElement` |           | {m.generated_fs_table_header_props_props_ref()} |
-| HTML Attributes  |                                                   |           |                                                 |
+| Name             | Type                                              | Default   | Description                                                                   |
+| ---------------- | ------------------------------------------------- | --------- | ----------------------------------------------------------------------------- |
+| `as`             | `'thead'` &#124; `'div'`                          | `'thead'` | `<I18nMarkupMessage message={m.generated_fs_table_header_props_props_as} />`  |
+| `ref` _bindable_ | `HTMLTableSectionElement` &#124; `HTMLDivElement` |           | `<I18nMarkupMessage message={m.generated_fs_table_header_props_props_ref} />` |
+| HTML Attributes  |                                                   |           |                                                                               |
 
 <!-- /props:TableHeaderProps -->
 
@@ -43,18 +44,18 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableHeaderCellProps -->
 
-| Name             | Type                                           | Default           | Description                                                     |
-| ---------------- | ---------------------------------------------- | ----------------- | --------------------------------------------------------------- |
-| `as`             | `'th'` &#124; `'div'`                          | `'th'`            | {m.generated_fs_table_header_cell_props_props_as()}             |
-| `ref` _bindable_ | `HTMLTableCellElement` &#124; `HTMLDivElement` |                   | {m.generated_fs_table_header_cell_props_props_ref()}            |
-| `sortable`       | `boolean`                                      |                   | {m.generated_fs_table_header_cell_props_props_sortable()}       |
-| `sortDirection`  | `'ascending'` &#124; `'descending'`            |                   | {m.generated_fs_table_header_cell_props_props_sort_direction()} |
-| `sortIcon`       | `Snippet` &#124; `Component`                   |                   | {m.generated_fs_table_header_cell_props_props_sort_icon()}      |
-| `aside`          | `Snippet` &#124; `Component`                   |                   | {m.generated_fs_table_header_cell_props_props_aside()}          |
-| `focusMode`      | `'cell'` &#124; `'group'` &#124; `'none'`      | `'cell'`          | {m.generated_fs_table_header_cell_props_props_focus_mode()}     |
-| `resizable`      | `boolean`                                      |                   | {m.generated_fs_table_header_cell_props_props_resizable()}      |
-| `resizeLabel`    | `string`                                       | `'Resize column'` | {m.generated_fs_table_header_cell_props_props_resize_label()}   |
-| HTML Attributes  |                                                |                   |                                                                 |
+| Name             | Type                                           | Default           | Description                                                                                   |
+| ---------------- | ---------------------------------------------- | ----------------- | --------------------------------------------------------------------------------------------- |
+| `as`             | `'th'` &#124; `'div'`                          | `'th'`            | `<I18nMarkupMessage message={m.generated_fs_table_header_cell_props_props_as} />`             |
+| `ref` _bindable_ | `HTMLTableCellElement` &#124; `HTMLDivElement` |                   | `<I18nMarkupMessage message={m.generated_fs_table_header_cell_props_props_ref} />`            |
+| `sortable`       | `boolean`                                      |                   | `<I18nMarkupMessage message={m.generated_fs_table_header_cell_props_props_sortable} />`       |
+| `sortDirection`  | `'ascending'` &#124; `'descending'`            |                   | `<I18nMarkupMessage message={m.generated_fs_table_header_cell_props_props_sort_direction} />` |
+| `sortIcon`       | `Snippet` &#124; `Component`                   |                   | `<I18nMarkupMessage message={m.generated_fs_table_header_cell_props_props_sort_icon} />`      |
+| `aside`          | `Snippet` &#124; `Component`                   |                   | `<I18nMarkupMessage message={m.generated_fs_table_header_cell_props_props_aside} />`          |
+| `focusMode`      | `'cell'` &#124; `'group'` &#124; `'none'`      | `'cell'`          | `<I18nMarkupMessage message={m.generated_fs_table_header_cell_props_props_focus_mode} />`     |
+| `resizable`      | `boolean`                                      |                   | `<I18nMarkupMessage message={m.generated_fs_table_header_cell_props_props_resizable} />`      |
+| `resizeLabel`    | `string`                                       | `'Resize column'` | `<I18nMarkupMessage message={m.generated_fs_table_header_cell_props_props_resize_label} />`   |
+| HTML Attributes  |                                                |                   |                                                                                               |
 
 <!-- /props:TableHeaderCellProps -->
 
@@ -63,11 +64,11 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableBodyProps -->
 
-| Name             | Type                                              | Default   | Description                                   |
-| ---------------- | ------------------------------------------------- | --------- | --------------------------------------------- |
-| `as`             | `'tbody'` &#124; `'div'`                          | `'tbody'` | {m.generated_fs_table_body_props_props_as()}  |
-| `ref` _bindable_ | `HTMLTableSectionElement` &#124; `HTMLDivElement` |           | {m.generated_fs_table_body_props_props_ref()} |
-| HTML Attributes  |                                                   |           |                                               |
+| Name             | Type                                              | Default   | Description                                                                 |
+| ---------------- | ------------------------------------------------- | --------- | --------------------------------------------------------------------------- |
+| `as`             | `'tbody'` &#124; `'div'`                          | `'tbody'` | `<I18nMarkupMessage message={m.generated_fs_table_body_props_props_as} />`  |
+| `ref` _bindable_ | `HTMLTableSectionElement` &#124; `HTMLDivElement` |           | `<I18nMarkupMessage message={m.generated_fs_table_body_props_props_ref} />` |
+| HTML Attributes  |                                                   |           |                                                                             |
 
 <!-- /props:TableBodyProps -->
 
@@ -76,12 +77,12 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableRowProps -->
 
-| Name             | Type                                          | Default  | Description                                         |
-| ---------------- | --------------------------------------------- | -------- | --------------------------------------------------- |
-| `as`             | `'tr'` &#124; `'div'`                         | `'tr'`   | {m.generated_fs_table_row_props_props_as()}         |
-| `ref` _bindable_ | `HTMLTableRowElement` &#124; `HTMLDivElement` |          | {m.generated_fs_table_row_props_props_ref()}        |
-| `appearance`     | `'none'` &#124; `'brand'` &#124; `'neutral'`  | `'none'` | {m.generated_fs_table_row_props_props_appearance()} |
-| HTML Attributes  |                                               |          |                                                     |
+| Name             | Type                                          | Default  | Description                                                                       |
+| ---------------- | --------------------------------------------- | -------- | --------------------------------------------------------------------------------- |
+| `as`             | `'tr'` &#124; `'div'`                         | `'tr'`   | `<I18nMarkupMessage message={m.generated_fs_table_row_props_props_as} />`         |
+| `ref` _bindable_ | `HTMLTableRowElement` &#124; `HTMLDivElement` |          | `<I18nMarkupMessage message={m.generated_fs_table_row_props_props_ref} />`        |
+| `appearance`     | `'none'` &#124; `'brand'` &#124; `'neutral'`  | `'none'` | `<I18nMarkupMessage message={m.generated_fs_table_row_props_props_appearance} />` |
+| HTML Attributes  |                                               |          |                                                                                   |
 
 <!-- /props:TableRowProps -->
 
@@ -90,12 +91,12 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableCellProps -->
 
-| Name             | Type                                           | Default  | Description                                          |
-| ---------------- | ---------------------------------------------- | -------- | ---------------------------------------------------- |
-| `as`             | `'td'` &#124; `'div'`                          | `'td'`   | {m.generated_fs_table_cell_props_props_as()}         |
-| `ref` _bindable_ | `HTMLTableCellElement` &#124; `HTMLDivElement` |          | {m.generated_fs_table_cell_props_props_ref()}        |
-| `focusMode`      | `'cell'` &#124; `'group'` &#124; `'none'`      | `'cell'` | {m.generated_fs_table_cell_props_props_focus_mode()} |
-| HTML Attributes  |                                                |          |                                                      |
+| Name             | Type                                           | Default  | Description                                                                        |
+| ---------------- | ---------------------------------------------- | -------- | ---------------------------------------------------------------------------------- |
+| `as`             | `'td'` &#124; `'div'`                          | `'td'`   | `<I18nMarkupMessage message={m.generated_fs_table_cell_props_props_as} />`         |
+| `ref` _bindable_ | `HTMLTableCellElement` &#124; `HTMLDivElement` |          | `<I18nMarkupMessage message={m.generated_fs_table_cell_props_props_ref} />`        |
+| `focusMode`      | `'cell'` &#124; `'group'` &#124; `'none'`      | `'cell'` | `<I18nMarkupMessage message={m.generated_fs_table_cell_props_props_focus_mode} />` |
+| HTML Attributes  |                                                |          |                                                                                    |
 
 <!-- /props:TableCellProps -->
 
@@ -104,17 +105,17 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableSelectionCellProps -->
 
-| Name                | Type                                           | Default      | Description                                                            |
-| ------------------- | ---------------------------------------------- | ------------ | ---------------------------------------------------------------------- |
-| `as`                | `'td'` &#124; `'div'`                          | `'td'`       | {m.generated_fs_table_selection_cell_props_props_as()}                 |
-| `ref` _bindable_    | `HTMLTableCellElement` &#124; `HTMLDivElement` |              | {m.generated_fs_table_selection_cell_props_props_ref()}                |
-| `type`              | `'checkbox'` &#124; `'radio'`                  | `'checkbox'` | {m.generated_fs_table_selection_cell_props_props_type()}               |
-| `checked`           | `boolean` &#124; `'mixed'`                     | `false`      | {m.generated_fs_table_selection_cell_props_props_checked()}            |
-| `subtle`            | `boolean`                                      | `false`      | {m.generated_fs_table_selection_cell_props_props_subtle()}             |
-| `invisible`         | `boolean`                                      | `false`      | {m.generated_fs_table_selection_cell_props_props_invisible()}          |
-| `checkboxIndicator` | `CheckboxProps`                                |              | {m.generated_fs_table_selection_cell_props_props_checkbox_indicator()} |
-| `radioIndicator`    | `RadioButtonProps`                             |              | {m.generated_fs_table_selection_cell_props_props_radio_indicator()}    |
-| HTML Attributes     |                                                |              |                                                                        |
+| Name                | Type                                           | Default      | Description                                                                                          |
+| ------------------- | ---------------------------------------------- | ------------ | ---------------------------------------------------------------------------------------------------- |
+| `as`                | `'td'` &#124; `'div'`                          | `'td'`       | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_as} />`                 |
+| `ref` _bindable_    | `HTMLTableCellElement` &#124; `HTMLDivElement` |              | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_ref} />`                |
+| `type`              | `'checkbox'` &#124; `'radio'`                  | `'checkbox'` | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_type} />`               |
+| `checked`           | `boolean` &#124; `'mixed'`                     | `false`      | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_checked} />`            |
+| `subtle`            | `boolean`                                      | `false`      | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_subtle} />`             |
+| `invisible`         | `boolean`                                      | `false`      | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_invisible} />`          |
+| `checkboxIndicator` | `CheckboxProps`                                |              | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_checkbox_indicator} />` |
+| `radioIndicator`    | `RadioButtonProps`                             |              | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_radio_indicator} />`    |
+| HTML Attributes     |                                                |              |                                                                                                      |
 
 <!-- /props:TableSelectionCellProps -->
 
@@ -123,14 +124,14 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableCellLayoutProps -->
 
-| Name             | Type                         | Default | Description                                                  |
-| ---------------- | ---------------------------- | ------- | ------------------------------------------------------------ |
-| `ref` _bindable_ | `HTMLDivElement`             |         | {m.generated_fs_table_cell_layout_props_props_ref()}         |
-| `media`          | `Snippet` &#124; `Component` |         | {m.generated_fs_table_cell_layout_props_props_media()}       |
-| `description`    | `string`                     |         | {m.generated_fs_table_cell_layout_props_props_description()} |
-| `appearance`     | `'primary'`                  |         | {m.generated_fs_table_cell_layout_props_props_appearance()}  |
-| `truncate`       | `boolean`                    |         | {m.generated_fs_table_cell_layout_props_props_truncate()}    |
-| HTML Attributes  |                              |         |                                                              |
+| Name             | Type                         | Default | Description                                                                                |
+| ---------------- | ---------------------------- | ------- | ------------------------------------------------------------------------------------------ |
+| `ref` _bindable_ | `HTMLDivElement`             |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_layout_props_props_ref} />`         |
+| `media`          | `Snippet` &#124; `Component` |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_layout_props_props_media} />`       |
+| `description`    | `string`                     |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_layout_props_props_description} />` |
+| `appearance`     | `'primary'`                  |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_layout_props_props_appearance} />`  |
+| `truncate`       | `boolean`                    |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_layout_props_props_truncate} />`    |
+| HTML Attributes  |                              |         |                                                                                            |
 
 <!-- /props:TableCellLayoutProps -->
 
@@ -139,10 +140,10 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableCellActionsProps -->
 
-| Name             | Type             | Default | Description                                               |
-| ---------------- | ---------------- | ------- | --------------------------------------------------------- |
-| `ref` _bindable_ | `HTMLDivElement` |         | {m.generated_fs_table_cell_actions_props_props_ref()}     |
-| `visible`        | `boolean`        |         | {m.generated_fs_table_cell_actions_props_props_visible()} |
-| HTML Attributes  |                  |         |                                                           |
+| Name             | Type             | Default | Description                                                                             |
+| ---------------- | ---------------- | ------- | --------------------------------------------------------------------------------------- |
+| `ref` _bindable_ | `HTMLDivElement` |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_actions_props_props_ref} />`     |
+| `visible`        | `boolean`        |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_actions_props_props_visible} />` |
+| HTML Attributes  |                  |         |                                                                                         |
 
 <!-- /props:TableCellActionsProps -->

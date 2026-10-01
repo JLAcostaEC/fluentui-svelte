@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { m } from '$i18n/messages.js';
 </script>
 
@@ -7,19 +8,19 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:ExpanderProps -->
 
-| Name                           | Type                                    | Default  | Description                                           |
-| ------------------------------ | --------------------------------------- | -------- | ----------------------------------------------------- |
-| `header`                       | `string`                                |          | {m.generated_fs_expander_props_props_header()}        |
-| `description`                  | `string`                                |          | {m.generated_fs_expander_props_props_description()}   |
-| `direction`                    | `'down'` &#124; `'up'`                  | `'down'` | {m.generated_fs_expander_props_props_direction()}     |
-| `justify`                      | `boolean`                               | `false`  | {m.generated_fs_expander_props_props_justify()}       |
-| `disabled`                     | `boolean`                               | `false`  | {m.generated_fs_expander_props_props_disabled()}      |
-| `animation`                    | `{ duration: number; easing: string; }` |          | {m.generated_fs_expander_props_props_animation()}     |
-| `expanded` _bindable_          | `boolean`                               | `false`  | {m.generated_fs_expander_props_props_expanded()}      |
-| `ref` _bindable_               | `HTMLDetailsElement`                    |          | {m.generated_fs_expander_props_props_ref()}           |
-| `Icon`                         | `Snippet` &#124; `Component`            |          | {m.generated_fs_expander_props_props_icon()}          |
-| `summaryRef` _bindable_        | `HTMLElement`                           |          | {m.generated_fs_expander_props_props_summary_ref()}   |
-| `summaryProps`                 | `HTMLAttributes`                        |          | {m.generated_fs_expander_props_props_summary_props()} |
-| Element Attributes (`details`) |                                         |          |                                                       |
+| Name                           | Type                                    | Default  | Description                                                                         |
+| ------------------------------ | --------------------------------------- | -------- | ----------------------------------------------------------------------------------- |
+| `header`                       | `string`                                |          | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_header} />`        |
+| `description`                  | `string`                                |          | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_description} />`   |
+| `direction`                    | `'down'` &#124; `'up'`                  | `'down'` | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_direction} />`     |
+| `justify`                      | `boolean`                               | `false`  | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_justify} />`       |
+| `disabled`                     | `boolean`                               | `false`  | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_disabled} />`      |
+| `animation`                    | `{ duration: number; easing: string; }` |          | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_animation} />`     |
+| `expanded` _bindable_          | `boolean`                               | `false`  | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_expanded} />`      |
+| `ref` _bindable_               | `HTMLDetailsElement`                    |          | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_ref} />`           |
+| `Icon`                         | `Snippet` &#124; `Component`            |          | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_icon} />`          |
+| `summaryRef` _bindable_        | `HTMLElement`                           |          | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_summary_ref} />`   |
+| `summaryProps`                 | `HTMLAttributes`                        |          | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_summary_props} />` |
+| Element Attributes (`details`) |                                         |          |                                                                                     |
 
 <!-- /props:ExpanderProps -->

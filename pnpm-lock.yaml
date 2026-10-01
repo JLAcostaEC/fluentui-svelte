@@ -42,6 +42,9 @@ importers:
       '@inlang/paraglide-js-svelte':
         specifier: ^1.0.4
         version: 1.0.4(@inlang/paraglide-js@2.24.1(typescript@6.0.3)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(yaml@2.9.0)))(svelte@5.56.9(@typescript-eslint/types@8.67.0))
+      '@jlacostaec/paraglide-markup-svelte':
+        specifier: 0.1.0
+        version: 0.1.0(@inlang/paraglide-js-svelte@1.0.4(@inlang/paraglide-js@2.24.1(typescript@6.0.3)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(yaml@2.9.0)))(svelte@5.56.9(@typescript-eslint/types@8.67.0)))(@inlang/paraglide-js@2.24.1(typescript@6.0.3)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(yaml@2.9.0)))(svelte@5.56.9(@typescript-eslint/types@8.67.0))
       '@jlacostaec/propsmith':
         specifier: ^0.2.0
         version: 0.2.0
@@ -686,6 +689,14 @@ packages:
   '@inlang/sdk@3.0.2':
     resolution: {integrity: sha512-qBAzkOLRQ42hZBl2/AZFZD+/JkdjBAvwxWphdTs9UbikMsuLathOBOIl+rC/mzaq48ylD3zE8Je2nrx7tbm0pw==}
     engines: {node: '>=20.0.0'}
+
+  '@jlacostaec/paraglide-markup-svelte@0.1.0':
+    resolution: {integrity: sha512-3xyY0hkQ1uv1giG0tX0aLpTpmjeexhtuCj5E7lqq6uGBahKTltq4ml9onaCCrF8TJT2hiETVIvkOuKrgb1tRmQ==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      '@inlang/paraglide-js': '>=2.18.2 <3'
+      '@inlang/paraglide-js-svelte': 1.0.4
+      svelte: ^5.0.0
 
   '@jlacostaec/propsmith@0.2.0':
     resolution: {integrity: sha512-4zW6VQfHhOX3LtwztGsC2LvEAp9a52D1nwjkoomTx1gGk7o/8ojxUZQFmvQGdT/aBEIY5La8XcvEGoJsDM3pUA==}
@@ -2897,6 +2908,12 @@ snapshots:
       kysely: 0.28.17
       sqlite-wasm-kysely: 0.3.0(kysely@0.28.17)
       uuid: 14.0.2
+
+  '@jlacostaec/paraglide-markup-svelte@0.1.0(@inlang/paraglide-js-svelte@1.0.4(@inlang/paraglide-js@2.24.1(typescript@6.0.3)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(yaml@2.9.0)))(svelte@5.56.9(@typescript-eslint/types@8.67.0)))(@inlang/paraglide-js@2.24.1(typescript@6.0.3)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(yaml@2.9.0)))(svelte@5.56.9(@typescript-eslint/types@8.67.0))':
+    dependencies:
+      '@inlang/paraglide-js': 2.24.1(typescript@6.0.3)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(yaml@2.9.0))
+      '@inlang/paraglide-js-svelte': 1.0.4(@inlang/paraglide-js@2.24.1(typescript@6.0.3)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(yaml@2.9.0)))(svelte@5.56.9(@typescript-eslint/types@8.67.0))
+      svelte: 5.56.9(@typescript-eslint/types@8.67.0)
 
   '@jlacostaec/propsmith@0.2.0':
     dependencies:

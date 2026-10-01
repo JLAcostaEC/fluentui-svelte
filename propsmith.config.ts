@@ -1,4 +1,4 @@
-import { defineConfig, type KeyContext } from '@jlacostaec/propsmith';
+import { defineConfig, type Catalog, type I18nAdapter, type KeyContext } from '@jlacostaec/propsmith';
 import { svelteAdapter } from '@jlacostaec/propsmith/adapters';
 import { paraglide } from '@jlacostaec/propsmith/i18n/adapters';
 
@@ -27,6 +27,44 @@ const key = (ctx: KeyContext) => {
 		default:
 			return `generated_fs_${component}_props_${prop}`;
 	}
+};
+
+// The catalog stores code as `{#code}x{/code}` (rendered by <I18nMarkupMessage>); propsmith works in `x` backticks.
+// These helpers convert between the two for generated messages only.
+const GENERATED_KEY_PREFIX = 'generated_fs_';
+const INLINE_CODE = /`([^`\n]+)`/g;
+const MARKUP_CODE = /\{#code\}([\s\S]*?)\{\/code\}/g;
+
+const mapGeneratedMessages = (catalog: Catalog, transform: (message: string) => string): Catalog =>
+	Object.fromEntries(
+		Object.entries(catalog).map(([locale, messages]) => [
+			locale,
+			Object.fromEntries(
+				Object.entries(messages).map(([messageKey, message]) => [
+					messageKey,
+					messageKey.startsWith(GENERATED_KEY_PREFIX) ? transform(message) : message
+				])
+			)
+		])
+	);
+
+const codeMarkupToMarkdown = (message: string) =>
+	message.replace(MARKUP_CODE, (_, code: string) => `\`${code.replace(/\\([{}])/g, '$1')}\``);
+
+const markdownToCodeMarkup = (message: string) =>
+	message.replace(INLINE_CODE, (_, code: string) => `{#code}${code.replace(/[{}]/g, '\\$&')}{/code}`);
+
+const paraglideAdapter = paraglide({
+	project: './project.inlang',
+	key,
+	// Backticks get the tag past propsmith's no-HTML check; svelte.config.js strips them again.
+	expression: (messageKey) => `\`<I18nMarkupMessage message={m.${messageKey}} />\``
+});
+
+const i18n: I18nAdapter = {
+	...paraglideAdapter,
+	load: () => mapGeneratedMessages(paraglideAdapter.load(), codeMarkupToMarkdown),
+	save: (catalog) => paraglideAdapter.save(mapGeneratedMessages(catalog, markdownToCodeMarkup))
 };
 
 export default defineConfig({
@@ -67,5 +105,5 @@ export default defineConfig({
 		}
 	},
 
-	i18n: paraglide({ project: './project.inlang', key })
+	i18n
 });

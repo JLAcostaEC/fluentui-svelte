@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { Checkbox } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { m } from '$i18n/messages.js';
@@ -25,7 +26,7 @@
 
 ### {m.cb_label_title()}
 
-{m.cb_label_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.cb_label_description} /></p>
 
 ```svelte
 <Checkbox wrapperAs="label">I'm Labeled</Checkbox>
@@ -34,7 +35,7 @@
 
 ### {m.global_indeterminate()}
 
-{m.cb_indeterminate_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.cb_indeterminate_description} /></p>
 
 <Showcase minHeight="100px" columns={1} code={indeterminateCode}>
   <Checkbox wrapperAs="label" indeterminate>Indeterminate</Checkbox>
@@ -42,7 +43,7 @@
 
 ### {m.global_disabled()}
 
-{m.cb_disabled_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.cb_disabled_description} /></p>
 
 <Showcase minHeight="100px" code={disabledCode}>
   <Checkbox wrapperAs="label" disabled>Disabled</Checkbox>

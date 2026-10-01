@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import {
     Breadcrumb,
     BreadcrumbItem,
@@ -102,7 +103,7 @@
 
 ### {m.global_size()}
 
-{m.breadcrumb_size_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.breadcrumb_size_description} /></p>
 
 <Showcase columns={1} code={sizeCode} disablePanZoom>
   <div style="display: flex; flex-direction: column; gap: 1rem; align-items: flex-start">
@@ -126,7 +127,7 @@
 
 ### {m.global_icon()}
 
-{m.breadcrumb_icons_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.breadcrumb_icons_description} /></p>
 
 <Showcase columns={1} code={iconCode} disablePanZoom minHeight="100px">
   <Breadcrumb aria-label="With icons">
@@ -140,7 +141,7 @@
 
 ### {m.breadcrumb_current_title()}
 
-{m.breadcrumb_current_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.breadcrumb_current_description} /></p>
 
 <Showcase columns={1} code={currentCode} disablePanZoom minHeight="100px">
   <Breadcrumb aria-label="Current step">
@@ -199,7 +200,7 @@
 
 ### {m.breadcrumb_focus_mode_title()}
 
-{m.breadcrumb_focus_mode_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.breadcrumb_focus_mode_description} /></p>
 
 <Showcase columns={1} code={focusModeCode} disablePanZoom minHeight="100px">
   <Breadcrumb focusMode="arrow" aria-label="Arrow focus mode">

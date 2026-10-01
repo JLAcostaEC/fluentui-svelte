@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { m } from '$i18n/messages.js';
 </script>
 
@@ -7,18 +8,18 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:CheckboxProps -->
 
-| Name                                            | Type                                       | Default   | Description                                                |
-| ----------------------------------------------- | ------------------------------------------ | --------- | ---------------------------------------------------------- |
-| `ref` _bindable_                                | `HTMLInputElement`                         |           | {m.generated_fs_checkbox_props_props_ref()}                |
-| `wrapperAs`                                     | `'div'` &#124; `'label'`                   | `'label'` | {m.generated_fs_checkbox_props_props_wrapper_as()}         |
-| `wrapperRef` _bindable_                         | `HTMLDivElement` &#124; `HTMLLabelElement` |           | {m.generated_fs_checkbox_props_props_wrapper_ref()}        |
-| `wrapperAttributes`                             | `PolymorphicProps`                         |           | {m.generated_fs_checkbox_props_props_wrapper_attributes()} |
-| `indeterminate` _bindable_                      | `boolean`                                  |           | {m.generated_fs_checkbox_props_props_indeterminate()}      |
-| `name`                                          | `string` &#124; `null`                     | `id`      | {m.generated_fs_checkbox_props_props_name()}               |
-| `group`                                         | `string` &#124; `null`                     |           | {m.generated_fs_checkbox_props_props_group()}              |
-| `checked` _bindable_                            | `boolean`                                  |           | {m.generated_fs_checkbox_props_props_checked()}            |
-| `disabled`                                      | `boolean`                                  |           | {m.generated_fs_checkbox_props_props_disabled()}           |
-| `children`                                      | `Snippet`                                  |           | {m.generated_fs_checkbox_props_props_children()}           |
-| `HTMLInputAttributes` without `on:`, `children` |                                            |           |                                                            |
+| Name                                            | Type                                       | Default   | Description                                                                              |
+| ----------------------------------------------- | ------------------------------------------ | --------- | ---------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                | `HTMLInputElement`                         |           | `<I18nMarkupMessage message={m.generated_fs_checkbox_props_props_ref} />`                |
+| `wrapperAs`                                     | `'div'` &#124; `'label'`                   | `'label'` | `<I18nMarkupMessage message={m.generated_fs_checkbox_props_props_wrapper_as} />`         |
+| `wrapperRef` _bindable_                         | `HTMLDivElement` &#124; `HTMLLabelElement` |           | `<I18nMarkupMessage message={m.generated_fs_checkbox_props_props_wrapper_ref} />`        |
+| `wrapperAttributes`                             | `PolymorphicProps`                         |           | `<I18nMarkupMessage message={m.generated_fs_checkbox_props_props_wrapper_attributes} />` |
+| `indeterminate` _bindable_                      | `boolean`                                  |           | `<I18nMarkupMessage message={m.generated_fs_checkbox_props_props_indeterminate} />`      |
+| `name`                                          | `string` &#124; `null`                     | `id`      | `<I18nMarkupMessage message={m.generated_fs_checkbox_props_props_name} />`               |
+| `group`                                         | `string` &#124; `null`                     |           | `<I18nMarkupMessage message={m.generated_fs_checkbox_props_props_group} />`              |
+| `checked` _bindable_                            | `boolean`                                  |           | `<I18nMarkupMessage message={m.generated_fs_checkbox_props_props_checked} />`            |
+| `disabled`                                      | `boolean`                                  |           | `<I18nMarkupMessage message={m.generated_fs_checkbox_props_props_disabled} />`           |
+| `children`                                      | `Snippet`                                  |           | `<I18nMarkupMessage message={m.generated_fs_checkbox_props_props_children} />`           |
+| `HTMLInputAttributes` without `on:`, `children` |                                            |           |                                                                                          |
 
 <!-- /props:CheckboxProps -->

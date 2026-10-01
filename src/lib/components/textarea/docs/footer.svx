@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { m } from '$i18n/messages.js';
 </script>
 
@@ -7,16 +8,16 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TextAreaProps -->
 
-| Name                             | Type                                                               | Default      | Description                                                 |
-| -------------------------------- | ------------------------------------------------------------------ | ------------ | ----------------------------------------------------------- |
-| `value` _bindable_               | `string`                                                           | `''`         | {m.generated_fs_text_area_props_props_value()}              |
-| `ref` _bindable_                 | `HTMLElement`                                                      |              | {m.generated_fs_text_area_props_props_ref()}                |
-| `placeholder`                    | `string`                                                           |              | {m.generated_fs_text_area_props_props_placeholder()}        |
-| `resize`                         | `'none'` &#124; `'both'` &#124; `'horizontal'` &#124; `'vertical'` | `'vertical'` | {m.generated_fs_text_area_props_props_resize()}             |
-| `onChange`                       | `(e: Event) => void`                                               |              | {m.generated_fs_text_area_props_props_on_change()}          |
-| `disabled`                       | `boolean`                                                          | `false`      | {m.generated_fs_text_area_props_props_disabled()}           |
-| `wrapperAttributes`              | `HTMLAttributes`                                                   |              | {m.generated_fs_text_area_props_props_wrapper_attributes()} |
-| `wrapperRef` _bindable_          | `HTMLDivElement`                                                   |              | {m.generated_fs_text_area_props_props_wrapper_ref()}        |
-| `SvelteHTMLElements['textarea']` |                                                                    |              |                                                             |
+| Name                             | Type                                                               | Default      | Description                                                                               |
+| -------------------------------- | ------------------------------------------------------------------ | ------------ | ----------------------------------------------------------------------------------------- |
+| `value` _bindable_               | `string`                                                           | `''`         | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_value} />`              |
+| `ref` _bindable_                 | `HTMLElement`                                                      |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_ref} />`                |
+| `placeholder`                    | `string`                                                           |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_placeholder} />`        |
+| `resize`                         | `'none'` &#124; `'both'` &#124; `'horizontal'` &#124; `'vertical'` | `'vertical'` | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_resize} />`             |
+| `onChange`                       | `(e: Event) => void`                                               |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_on_change} />`          |
+| `disabled`                       | `boolean`                                                          | `false`      | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_disabled} />`           |
+| `wrapperAttributes`              | `HTMLAttributes`                                                   |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_wrapper_attributes} />` |
+| `wrapperRef` _bindable_          | `HTMLDivElement`                                                   |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_wrapper_ref} />`        |
+| `SvelteHTMLElements['textarea']` |                                                                    |              |                                                                                           |
 
 <!-- /props:TextAreaProps -->

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { Breadcrumb, BreadcrumbItem, BreadcrumbButton, BreadcrumbDivider } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { m } from '$i18n/messages.js';
@@ -6,7 +7,7 @@
 
 # Breadcrumb
 
-{m.breadcrumb_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.breadcrumb_description} /></p>
 
 <Showcase columns={1} disablePanZoom minHeight="100px">
   <Breadcrumb>
@@ -24,7 +25,7 @@
   </Breadcrumb>
 </Showcase>
 
-{m.breadcrumb_accessibility_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.breadcrumb_accessibility_description} /></p>
 
 {m.breadcrumb_required_components_description()}
 
@@ -35,7 +36,7 @@
 
 ## {m.global_usage()}
 
-{m.breadcrumb_usage_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.breadcrumb_usage_description} /></p>
 
 ```svelte
 <script>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { TopNav, TopNavItem } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { AirplaneRegular, AirplaneTakeOffRegular, CalendarMonthRegular } from 'fluentui-icons-svelte';
@@ -71,7 +72,7 @@
 
 ### {m.global_appearance()}
 
-{m.top_nav_appearance_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.top_nav_appearance_description} /></p>
 
 <Showcase columns={1} code={appearanceCode} disablePanZoom>
   <div style="display: flex; flex-direction: column; gap: 1.5rem; align-items: flex-start">
@@ -100,7 +101,7 @@
 
 ### {m.global_size()}
 
-{m.top_nav_size_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.top_nav_size_description} /></p>
 
 <Showcase columns={1} code={sizeCode} disablePanZoom>
   <div style="display: flex; flex-direction: column; gap: 1.5rem; align-items: flex-start">
@@ -124,7 +125,7 @@
 
 ### {m.top_nav_vertical_title()}
 
-{m.top_nav_vertical_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.top_nav_vertical_description} /></p>
 
 <Showcase columns={1} code={verticalCode} disablePanZoom>
   <TopNav bind:selectedValue={verticalValue} vertical aria-label="Vertical">
@@ -136,7 +137,7 @@
 
 ### {m.global_icon()}
 
-{m.top_nav_icons_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.top_nav_icons_description} /></p>
 
 <Showcase columns={1} code={iconCode} disablePanZoom>
   <TopNav bind:selectedValue={iconValue} aria-label="With icons">
@@ -148,7 +149,7 @@
 
 ### {m.top_nav_as_anchor_title()}
 
-{m.top_nav_as_anchor_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.top_nav_as_anchor_description} /></p>
 
 <Showcase columns={1} code={anchorCode} disablePanZoom>
   <TopNav bind:selectedValue={anchorValue} aria-label="As anchors">
@@ -160,7 +161,7 @@
 
 ### {m.global_disabled()}
 
-{m.top_nav_disabled_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.top_nav_disabled_description} /></p>
 
 <Showcase columns={1} code={disabledCode} disablePanZoom>
   <div style="display: flex; flex-direction: column; gap: 1.5rem; align-items: flex-start">
@@ -179,7 +180,7 @@
 
 ### {m.top_nav_select_on_focus_title()}
 
-{m.top_nav_select_on_focus_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.top_nav_select_on_focus_description} /></p>
 
 <Showcase columns={1} code={focusCode} disablePanZoom>
   <TopNav bind:selectedValue={focusValue} selectTabOnFocus aria-label="Select on focus">
@@ -191,7 +192,7 @@
 
 ### {m.top_nav_reserve_space_title()}
 
-{m.top_nav_reserve_space_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.top_nav_reserve_space_description} /></p>
 
 <Showcase columns={1} code={reserveCode} disablePanZoom>
   <TopNav bind:selectedValue={reserveValue} reserveSelectedTabSpace={false} aria-label="No reserved space">

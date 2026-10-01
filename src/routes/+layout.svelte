@@ -1,3 +1,11 @@
+<script module lang="ts">
+	import { configureI18nMarkup } from '@jlacostaec/paraglide-markup-svelte';
+	import { localizeHref as localizeMarkupHref } from '$i18n/runtime.js';
+
+	// Configure the I18nMarkup component to use the localized href function on anchor tags
+	configureI18nMarkup({ localizeHref: localizeMarkupHref });
+</script>
+
 <script lang="ts">
 	import '../app.css';
 	import '../shiki.css';

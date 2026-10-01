@@ -43,6 +43,7 @@
 	const role = $derived(_role || getChildrenRole(as));
 
 	let active = $derived(_state.selectedItems.includes(value));
+	let checkmarkRef = $state<HTMLDivElement>();
 
 	// A row is a level of its own: right enters the cells, left comes back out. Anything
 	// that is not a row navigates as a plain item of the list above it.
@@ -82,21 +83,23 @@
 	{...tabspotAttrs}
 	onfocus={(e: FocusEvent) => invokeHandlers(e, disabled, [(event: FocusEvent) => onfocus?.(event, value || '')])}
 	onclick={(e: MouseEvent) => {
-		invokeHandlers(
-			e,
-			disabled,
-			role !== 'row'
-				? [
-						(event: MouseEvent) => handleSelection?.(event, value),
-						(event: MouseEvent) => onAction?.(event, value || '')
-					]
-				: [(event: MouseEvent) => onAction?.(event, value || '')]
-		);
+		// The checkmark only toggles the selection, even on a row. The primary action is for the rest of the item.
+		const fromCheckmark = !!checkmarkRef?.contains(e.target as Node);
+		invokeHandlers(e, disabled, [
+			(role !== 'row' || fromCheckmark) && ((event: MouseEvent) => handleSelection?.(event, value, fromCheckmark)),
+			!fromCheckmark && ((event: MouseEvent) => onAction?.(event, value || ''))
+		]);
 	}}
 	{...attributes}
 >
 	{#if checkmark}
-		<Checkbox {disabled} bind:checked={active} tabindex={-1} {...!isObjectEmpty(checkmark) ? checkmark : {}} />
+		<Checkbox
+			{disabled}
+			bind:checked={active}
+			bind:wrapperRef={checkmarkRef}
+			tabindex={-1}
+			{...!isObjectEmpty(checkmark) ? checkmark : {}}
+		/>
 	{/if}
 	{@render children?.()}
 </svelte:element>

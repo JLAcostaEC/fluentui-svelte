@@ -99,7 +99,7 @@ export type ListViewContextState = {
 };
 
 export type ListViewContextMethods = {
-	handleSelection: (e: MouseEvent, value: string) => void;
+	handleSelection: (e: MouseEvent, value: string, toggle?: boolean) => void;
 	getChildrenRole: (tag: 'li' | 'a' | 'div') => 'listitem' | 'option' | 'row' | undefined;
 	registerItem: (id: string, value: string, disabled: boolean) => void;
 	unregisterItem: (id: string) => void;

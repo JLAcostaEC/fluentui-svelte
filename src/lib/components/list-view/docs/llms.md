@@ -56,27 +56,78 @@ Use `selectionMode` (`single`, `multiselect`, or `extended`) to control how item
 </ListView>
 ```
 
-### Checkmark
+### Toggle on click
 
-Add and configure a checkbox for the element. You can use the same props for the Checkbox component. Note: every actionable element inside this ListViewItem must call e.stopPropagation().
+In a multiselect list, a plain click selects only that item and Ctrl/Cmd + click toggles it. Set `toggleOnClick` to make a plain click toggle the item directly.
 
 ```svelte
-<ListViewItem
-	value="card"
-	role="row"
-	checkmark={{ style: 'position: absolute; top: 10px; left: 10px; z-index: 10;' }}
-	onAction={(e, d) => alert('Triggered Primary Action')}
->
-	<div style="...">
-		Card Content Inside ListItem
-		<Button
-			onclick={(e) => {
-				e.stopPropagation();
-				alert('Installing');
-			}}>Install</Button
+<ListView selectionMode="multiselect" toggleOnClick>
+	{#each ['Apple', 'Banana', 'Cherry'] as item (item)}
+		<ListViewItem value={item}>{item}</ListViewItem>
+	{/each}
+</ListView>
+```
+
+### Checkmark
+
+Add and configure a checkbox for the element. You can use the same props for the Checkbox component. The checkbox toggles the selection of its item without triggering `onAction`. Bind `selectedItems` to read or control the selection.
+
+```svelte
+<script>
+	let selected = $state(['Apple']);
+</script>
+
+<ListView selectionMode="multiselect" bind:selectedItems={selected}>
+	{#each ['Apple', 'Banana', 'Cherry'] as item (item)}
+		<ListViewItem value={item} checkmark={{}}>{item}</ListViewItem>
+	{/each}
+</ListView>
+
+<p>Selected: {selected.join(', ')}</p>
+```
+
+### Cards with a primary action
+
+With `navigationMode` set to `composite` and a `selectionMode`, every item is a row. Clicking it runs its primary action (`onAction`), the checkbox toggles its selection, and any button inside is a secondary action. Use `checkmark.wrapperAttributes.style` to place the checkbox where you need it, like the top-right corner of the card. Note: every actionable element inside this ListViewItem, except the checkbox, must call e.stopPropagation().
+
+```svelte
+<script>
+	const cards = [
+		{ name: 'Fluent', description: 'Design system' },
+		{ name: 'Svelte', description: 'UI framework' },
+		{ name: 'Vite', description: 'Build tool' }
+	];
+
+	let selected = $state([]);
+	let lastAction = $state('');
+</script>
+
+<ListView as="div" navigationMode="composite" selectionMode="multiselect" bind:selectedItems={selected}>
+	{#each cards as card (card.name)}
+		{#snippet install()}
+			<Button
+				onclick={(e) => {
+					e.stopPropagation();
+					lastAction = 'Installed ' + card.name;
+				}}>Install</Button
+			>
+		{/snippet}
+		<ListViewItem
+			value={card.name}
+			checkmark={{ wrapperAttributes: { style: 'position: absolute; top: 0.5rem; right: 0.5rem; z-index: 2;' } }}
+			style="padding: 0"
+			onAction={() => (lastAction = 'Opened ' + card.name)}
 		>
-	</div>
-</ListViewItem>
+			<Card orientation="vertical" style="width: 100%;">
+				<CardHeader title={card.name} description={card.description} />
+				<CardFooter action={install} />
+			</Card>
+		</ListViewItem>
+	{/each}
+</ListView>
+
+<p>Selected: {selected.join(', ')}</p>
+<p>Last action: {lastAction}</p>
 ```
 
 ## ListView Props

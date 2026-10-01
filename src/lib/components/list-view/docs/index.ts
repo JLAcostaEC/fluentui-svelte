@@ -27,7 +27,7 @@ export const META: Meta = {
 	},
 	// Library-only
 	slug: 'list-view',
-	status: 'Beta',
+	status: '',
 	icon: TaskListSquareLtrRegular
 };
 

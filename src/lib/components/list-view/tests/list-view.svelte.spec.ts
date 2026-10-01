@@ -205,3 +205,101 @@ describe('ListViewItem', () => {
 		);
 	});
 });
+
+describe('ListViewItem checkmark', () => {
+	const checkbox = (value: string) => page.selector(`[data-value="${value}"] input[type="checkbox"]`);
+
+	const renderCards = (listProps: Record<string, unknown> = {}, itemProps: Record<string, unknown> = {}) => {
+		const onAction = vi.fn();
+		const state = { selected: [] as string[] };
+		const onSelectionChange = vi.fn((_: Event, items: string[]) => {
+			state.selected = items;
+		});
+		render(ListViewTestWrapper, {
+			listProps: { selectionMode: 'multiselect', navigationMode: 'composite', onSelectionChange, ...listProps },
+			itemProps: { checkmark: {}, onAction, ...itemProps },
+			items: [{ value: 'a' }, { value: 'b' }]
+		});
+		return { onAction, onSelectionChange, state };
+	};
+
+	it('does not trigger onAction when the checkbox is clicked', async () => {
+		const { onAction } = renderCards();
+		await checkbox('a').click();
+		expect(onAction).not.toHaveBeenCalled();
+	});
+
+	it('still triggers onAction when the row itself is clicked', async () => {
+		const { onAction, onSelectionChange } = renderCards();
+		await page.selector('[data-value="a"]').click();
+		expect(onAction).toHaveBeenCalledOnce();
+		expect(onSelectionChange).not.toHaveBeenCalled();
+	});
+
+	it('toggles the selection of the row from its checkbox', async () => {
+		const { state } = renderCards();
+		await checkbox('a').click();
+		await expect.element(checkbox('a')).toBeChecked();
+		expect(state.selected).toEqual(['a']);
+
+		await checkbox('b').click();
+		await expect.element(checkbox('b')).toBeChecked();
+		expect(state.selected).toEqual(['a', 'b']);
+
+		await checkbox('a').click();
+		await expect.element(checkbox('a')).not.toBeChecked();
+		expect(state.selected).toEqual(['b']);
+	});
+
+	it('reflects the items that start selected', async () => {
+		renderCards({ selectedItems: ['b'] });
+		await expect.element(checkbox('a')).not.toBeChecked();
+		await expect.element(checkbox('b')).toBeChecked();
+	});
+
+	it('keeps a single selection when the list is selectionMode="single"', async () => {
+		const { state } = renderCards({ selectionMode: 'single' });
+		await checkbox('a').click();
+		await checkbox('b').click();
+		expect(state.selected).toEqual(['b']);
+		await expect.element(checkbox('a')).not.toBeChecked();
+		await expect.element(checkbox('b')).toBeChecked();
+	});
+
+	it('does not change the selection when selectionMode="none"', async () => {
+		const { onAction, onSelectionChange } = renderCards({ selectionMode: 'none' }, { role: 'row' });
+		await checkbox('a').click();
+		expect(onSelectionChange).not.toHaveBeenCalled();
+		expect(onAction).not.toHaveBeenCalled();
+	});
+
+	it('toggles without triggering onAction on selectable (non-row) items', async () => {
+		const { onAction, state } = renderCards({ navigationMode: 'items' });
+		await checkbox('a').click();
+		await checkbox('b').click();
+		expect(onAction).not.toHaveBeenCalled();
+		expect(state.selected).toEqual(['a', 'b']);
+		await checkbox('a').click();
+		expect(state.selected).toEqual(['b']);
+	});
+
+	it('positions the checkbox with checkmark.wrapperAttributes.style', async () => {
+		const style = 'position: absolute; top: 10px; left: 10px; z-index: 10;';
+		const { onAction, state } = renderCards({}, { checkmark: { wrapperAttributes: { style } } });
+		const wrapper = page.selector('[data-value="a"] .fs-checkbox');
+		await expect.element(wrapper).toHaveStyle({ position: 'absolute', top: '10px', left: '10px' });
+
+		await checkbox('a').click();
+		expect(onAction).not.toHaveBeenCalled();
+		expect(state.selected).toEqual(['a']);
+	});
+
+	it('disables the checkbox when the item is disabled', async () => {
+		render(ListViewTestWrapper, {
+			listProps: { selectionMode: 'multiselect' },
+			itemProps: { checkmark: {} },
+			items: [{ value: 'off', disabled: true }]
+		});
+		await expect.element(checkbox('off')).toBeDisabled();
+	});
+});

@@ -1,16 +1,31 @@
 <script lang="ts">
-  import { TreeView, TreeViewItem, TreeViewItemContent } from '$lib/index.js';
+  import { TreeView, TreeViewItem, TreeViewItemContent, Button } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import FolderRegular from 'fluentui-icons-svelte/FolderRegular.svelte';
+  import DocumentRegular from 'fluentui-icons-svelte/DocumentRegular.svelte';
+  import ImageRegular from 'fluentui-icons-svelte/ImageRegular.svelte';
+  import StarRegular from 'fluentui-icons-svelte/StarRegular.svelte';
+  import LockClosedRegular from 'fluentui-icons-svelte/LockClosedRegular.svelte';
+  import MoreHorizontalRegular from 'fluentui-icons-svelte/MoreHorizontalRegular.svelte';
 
-  let openItems = $state(['fruits']);
+  let openItems = $state(['controlled-fruits']);
   let checkedItems = $state<string[]>([]);
+  let singleChecked = $state<string[]>([]);
+  let treeEvent = $state('');
+  let itemEvent = $state('');
 
-  const selectionCode = `
+  const checkableCode = `
 <TreeView selectionMode="multiple">
   <TreeViewItem id="fruits" type="branch">
     <TreeViewItemContent>Fruits</TreeViewItemContent>
     <TreeView>
       <TreeViewItem id="apple">
         <TreeViewItemContent>Apple</TreeViewItemContent>
+      </TreeViewItem>
+      <TreeViewItem id="banana">
+        <TreeViewItemContent>Banana</TreeViewItemContent>
       </TreeViewItem>
     </TreeView>
   </TreeViewItem>
@@ -29,43 +44,330 @@
       <TreeViewItem id="apple">
         <TreeViewItemContent>Apple</TreeViewItemContent>
       </TreeViewItem>
+      <TreeViewItem id="banana">
+        <TreeViewItemContent>Banana</TreeViewItemContent>
+      </TreeViewItem>
+    </TreeView>
+  </TreeViewItem>
+</TreeView>
+
+<p>Open: {openItems.join(', ')}</p>
+<p>Checked: {checkedItems.join(', ')}</p>`;
+
+  const singleCode = `
+<script>
+  let checked = $state([]);
+<\/script>
+
+<TreeView selectionMode="single" bind:checkedItems={checked}>
+  <TreeViewItem id="fruits" type="branch" open>
+    <TreeViewItemContent>Fruits</TreeViewItemContent>
+    <TreeView>
+      <TreeViewItem id="apple">
+        <TreeViewItemContent>Apple</TreeViewItemContent>
+      </TreeViewItem>
+      <TreeViewItem id="banana">
+        <TreeViewItemContent>Banana</TreeViewItemContent>
+      </TreeViewItem>
+    </TreeView>
+  </TreeViewItem>
+  <TreeViewItem id="vegetables">
+    <TreeViewItemContent>Vegetables</TreeViewItemContent>
+  </TreeViewItem>
+</TreeView>
+
+<p>Checked: {checked.join(', ')}</p>`;
+
+  const iconsCode = `
+{#snippet folder()}<FolderRegular width="1.25rem" />{/snippet}
+{#snippet document()}<DocumentRegular width="1.25rem" />{/snippet}
+{#snippet image()}<ImageRegular width="1.25rem" />{/snippet}
+{#snippet star()}<StarRegular width="1rem" />{/snippet}
+{#snippet lock()}<LockClosedRegular width="1rem" />{/snippet}
+
+<TreeView selectionMode="multiple">
+  <TreeViewItem id="documents" type="branch" open>
+    <TreeViewItemContent iconBefore={folder}>Documents</TreeViewItemContent>
+    <TreeView>
+      <TreeViewItem id="report">
+        <TreeViewItemContent iconBefore={document} iconAfter={star}>Report</TreeViewItemContent>
+      </TreeViewItem>
+      <TreeViewItem id="photo">
+        <TreeViewItemContent iconBefore={image}>Photo</TreeViewItemContent>
+      </TreeViewItem>
+    </TreeView>
+  </TreeViewItem>
+  <TreeViewItem id="notes">
+    <TreeViewItemContent iconBefore={document} iconAfter={lock}>Notes</TreeViewItemContent>
+  </TreeViewItem>
+</TreeView>`;
+
+  const asideActionsCode = `
+{#snippet document()}<DocumentRegular width="1.25rem" />{/snippet}
+{#snippet fileSize()}<span>2 KB</span>{/snippet}
+{#snippet more()}
+  <Button appearance="subtle" aria-label="More actions"><MoreHorizontalRegular width="1rem" /></Button>
+{/snippet}
+
+<TreeView>
+  <TreeViewItem id="report">
+    <TreeViewItemContent iconBefore={document} aside={fileSize} actions={more}>Report</TreeViewItemContent>
+  </TreeViewItem>
+  <TreeViewItem id="annual-summary">
+    <TreeViewItemContent iconBefore={document} aside={fileSize} actions={more}>Annual summary</TreeViewItemContent>
+  </TreeViewItem>
+</TreeView>`;
+
+  const sizesCode = `
+<TreeView size="small">...</TreeView>
+<TreeView size="medium">...</TreeView>
+<TreeView size="large">...</TreeView>`;
+
+  const disabledCode = `
+<TreeView selectionMode="multiple">
+  <TreeViewItem id="fruits" type="branch" open>
+    <TreeViewItemContent>Fruits</TreeViewItemContent>
+    <TreeView>
+      <TreeViewItem id="apple">
+        <TreeViewItemContent>Apple</TreeViewItemContent>
+      </TreeViewItem>
+      <TreeViewItem id="banana" disabled>
+        <TreeViewItemContent>Banana</TreeViewItemContent>
+      </TreeViewItem>
     </TreeView>
   </TreeViewItem>
 </TreeView>`;
+
+  const eventsCode = `
+<script>
+  let treeEvent = $state('');
+  let itemEvent = $state('');
+<\/script>
+
+<TreeView
+  selectionMode="multiple"
+  onCheckedChange={(e, checkedItems) => (treeEvent = 'Checked: ' + checkedItems.join(', '))}
+  onOpenChange={(e, openItems) => (treeEvent = 'Open: ' + openItems.join(', '))}
+>
+  <TreeViewItem
+    id="fruits"
+    type="branch"
+    onOpenChange={(e, { id, open }) => (itemEvent = id + (open ? ' opened' : ' closed'))}
+  >
+    <TreeViewItemContent>Fruits</TreeViewItemContent>
+    <TreeView>
+      <TreeViewItem
+        id="apple"
+        onCheckedChange={(e, { id, checked }) => (itemEvent = id + (checked ? ' checked' : ' unchecked'))}
+      >
+        <TreeViewItemContent>Apple</TreeViewItemContent>
+      </TreeViewItem>
+    </TreeView>
+  </TreeViewItem>
+</TreeView>
+
+<p>Tree: {treeEvent}</p>
+<p>Item: {itemEvent}</p>`;
 </script>
 
-### Checkable Items
+{#snippet folder()}<FolderRegular width="1.25rem" />{/snippet}
+{#snippet document()}<DocumentRegular width="1.25rem" />{/snippet}
+{#snippet image()}<ImageRegular width="1.25rem" />{/snippet}
+{#snippet star()}<StarRegular width="1rem" />{/snippet}
+{#snippet lock()}<LockClosedRegular width="1rem" />{/snippet}
+{#snippet fileSize()}<span>2 KB</span>{/snippet}
+{#snippet more()}<Button appearance="subtle" onclick={(e) => e.stopPropagation()} aria-label="More actions"><MoreHorizontalRegular width="1rem" /></Button>{/snippet}
 
-Set `selectionMode="multiple"` to render checkboxes on selectable items.
+### {m.tv_checkable_title()}
 
-<TreeView selectionMode="multiple">
-  <TreeViewItem id="fruits" type="branch">
-    <TreeViewItemContent>Fruits</TreeViewItemContent>
-    <TreeView>
-      <TreeViewItem id="apple">
-        <TreeViewItemContent>Apple</TreeViewItemContent>
-      </TreeViewItem>
-      <TreeViewItem id="banana">
-        <TreeViewItemContent>Banana</TreeViewItemContent>
-      </TreeViewItem>
-    </TreeView>
-  </TreeViewItem>
-</TreeView>
+<p class="fs-docs"><I18nMarkupMessage message={m.tv_checkable_description} /></p>
 
-### Controlling Open and Checked State
-
-Use the bindable `openItems` and `checkedItems` props on the root `TreeView` to control state programmatically.
-
-<TreeView bind:openItems bind:checkedItems selectionMode="multiple">
-  <TreeViewItem id="fruits" type="branch">
-    <TreeViewItemContent>Fruits</TreeViewItemContent>
-    <TreeView>
-      <TreeViewItem id="apple">
-        <TreeViewItemContent>Apple</TreeViewItemContent>
-      </TreeViewItem>
-      <TreeViewItem id="banana">
-        <TreeViewItemContent>Banana</TreeViewItemContent>
+<Showcase columns={1} minHeight="200px" disablePanZoom code={checkableCode}>
+  <div style="width: 260px; max-width: 100%;">
+    <TreeView selectionMode="multiple">
+      <TreeViewItem id="checkable-fruits" type="branch">
+        <TreeViewItemContent>Fruits</TreeViewItemContent>
+        <TreeView>
+          <TreeViewItem id="checkable-apple">
+            <TreeViewItemContent>Apple</TreeViewItemContent>
+          </TreeViewItem>
+          <TreeViewItem id="checkable-banana">
+            <TreeViewItemContent>Banana</TreeViewItemContent>
+          </TreeViewItem>
+        </TreeView>
       </TreeViewItem>
     </TreeView>
-  </TreeViewItem>
-</TreeView>
+  </div>
+</Showcase>
+
+### {m.tv_single_selection_title()}
+
+{m.tv_single_selection_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom code={singleCode}>
+  <div style="width: 260px; max-width: 100%;">
+    <TreeView selectionMode="single" bind:checkedItems={singleChecked}>
+      <TreeViewItem id="single-fruits" type="branch" open>
+        <TreeViewItemContent>Fruits</TreeViewItemContent>
+        <TreeView>
+          <TreeViewItem id="single-apple">
+            <TreeViewItemContent>Apple</TreeViewItemContent>
+          </TreeViewItem>
+          <TreeViewItem id="single-banana">
+            <TreeViewItemContent>Banana</TreeViewItemContent>
+          </TreeViewItem>
+        </TreeView>
+      </TreeViewItem>
+      <TreeViewItem id="single-vegetables">
+        <TreeViewItemContent>Vegetables</TreeViewItemContent>
+      </TreeViewItem>
+    </TreeView>
+    <p style="margin: 8px 0 0;">Checked: {singleChecked.join(', ')}</p>
+  </div>
+</Showcase>
+
+### {m.tv_icons_title()}
+
+{m.tv_icons_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom code={iconsCode}>
+  <div style="width: 300px; max-width: 100%;">
+    <TreeView selectionMode="multiple">
+      <TreeViewItem id="documents" type="branch" open>
+        <TreeViewItemContent iconBefore={folder}>Documents</TreeViewItemContent>
+        <TreeView>
+          <TreeViewItem id="report">
+            <TreeViewItemContent iconBefore={document} iconAfter={star}>Report</TreeViewItemContent>
+          </TreeViewItem>
+          <TreeViewItem id="photo">
+            <TreeViewItemContent iconBefore={image}>Photo</TreeViewItemContent>
+          </TreeViewItem>
+        </TreeView>
+      </TreeViewItem>
+      <TreeViewItem id="notes">
+        <TreeViewItemContent iconBefore={document} iconAfter={lock}>Notes</TreeViewItemContent>
+      </TreeViewItem>
+    </TreeView>
+  </div>
+</Showcase>
+
+### {m.tv_aside_actions_title()}
+
+{m.tv_aside_actions_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom code={asideActionsCode}>
+  <div style="width: 360px; max-width: 100%;">
+    <TreeView>
+      <TreeViewItem id="aside-report">
+        <TreeViewItemContent iconBefore={document} aside={fileSize} actions={more}>Report</TreeViewItemContent>
+      </TreeViewItem>
+      <TreeViewItem id="aside-summary">
+        <TreeViewItemContent iconBefore={document} aside={fileSize} actions={more}>Annual summary</TreeViewItemContent>
+      </TreeViewItem>
+    </TreeView>
+  </div>
+</Showcase>
+
+### {m.tv_sizes_title()}
+
+{m.tv_sizes_description()}
+
+<Showcase columns={3} minHeight="0" disablePanZoom code={sizesCode}>
+  <TreeView size="small">
+    <TreeViewItem id="small-fruits" type="branch" open>
+      <TreeViewItemContent>Small</TreeViewItemContent>
+      <TreeView>
+        <TreeViewItem id="small-apple">
+          <TreeViewItemContent>Apple</TreeViewItemContent>
+        </TreeViewItem>
+      </TreeView>
+    </TreeViewItem>
+  </TreeView>
+  <TreeView size="medium">
+    <TreeViewItem id="medium-fruits" type="branch" open>
+      <TreeViewItemContent>Medium</TreeViewItemContent>
+      <TreeView>
+        <TreeViewItem id="medium-apple">
+          <TreeViewItemContent>Apple</TreeViewItemContent>
+        </TreeViewItem>
+      </TreeView>
+    </TreeViewItem>
+  </TreeView>
+  <TreeView size="large">
+    <TreeViewItem id="large-fruits" type="branch" open>
+      <TreeViewItemContent>Large</TreeViewItemContent>
+      <TreeView>
+        <TreeViewItem id="large-apple">
+          <TreeViewItemContent>Apple</TreeViewItemContent>
+        </TreeViewItem>
+      </TreeView>
+    </TreeViewItem>
+  </TreeView>
+</Showcase>
+
+### {m.tv_disabled_title()}
+
+{m.tv_disabled_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom code={disabledCode}>
+  <div style="width: 260px; max-width: 100%;">
+    <TreeView selectionMode="multiple">
+      <TreeViewItem id="disabled-fruits" type="branch" open>
+        <TreeViewItemContent>Fruits</TreeViewItemContent>
+        <TreeView>
+          <TreeViewItem id="disabled-apple">
+            <TreeViewItemContent>Apple</TreeViewItemContent>
+          </TreeViewItem>
+          <TreeViewItem id="disabled-banana" disabled>
+            <TreeViewItemContent>Banana</TreeViewItemContent>
+          </TreeViewItem>
+        </TreeView>
+      </TreeViewItem>
+    </TreeView>
+  </div>
+</Showcase>
+
+### {m.tv_controlling_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.tv_controlling_description} /></p>
+
+<Showcase columns={1} minHeight="200px" disablePanZoom code={controlledCode}>
+  <div style="width: 260px; max-width: 100%;">
+    <TreeView bind:openItems bind:checkedItems selectionMode="multiple">
+      <TreeViewItem id="controlled-fruits" type="branch">
+        <TreeViewItemContent>Fruits</TreeViewItemContent>
+        <TreeView>
+          <TreeViewItem id="controlled-apple">
+            <TreeViewItemContent>Apple</TreeViewItemContent>
+          </TreeViewItem>
+          <TreeViewItem id="controlled-banana">
+            <TreeViewItemContent>Banana</TreeViewItemContent>
+          </TreeViewItem>
+        </TreeView>
+      </TreeViewItem>
+    </TreeView>
+    <p style="margin: 8px 0 0;">Open: {openItems.join(', ')}</p>
+    <p style="margin: 0;">Checked: {checkedItems.join(', ')}</p>
+  </div>
+</Showcase>
+
+### {m.tv_events_title()}
+
+{m.tv_events_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom code={eventsCode}>
+  <div style="width: 260px; max-width: 100%;">
+    <TreeView selectionMode="multiple" onCheckedChange={(e, ids) => (treeEvent = 'Checked: ' + ids.join(', '))} onOpenChange={(e, ids) => (treeEvent = 'Open: ' + ids.join(', '))}>
+      <TreeViewItem id="events-fruits" type="branch" onOpenChange={(e, { id, open }) => (itemEvent = id + (open ? ' opened' : ' closed'))}>
+        <TreeViewItemContent>Fruits</TreeViewItemContent>
+        <TreeView>
+          <TreeViewItem id="events-apple" onCheckedChange={(e, { id, checked }) => (itemEvent = id + (checked ? ' checked' : ' unchecked'))}>
+            <TreeViewItemContent>Apple</TreeViewItemContent>
+          </TreeViewItem>
+        </TreeView>
+      </TreeViewItem>
+    </TreeView>
+    <p style="margin: 8px 0 0;">Tree: {treeEvent}</p>
+    <p style="margin: 0;">Item: {itemEvent}</p>
+  </div>
+</Showcase>

@@ -15,6 +15,8 @@ export type TreeViewNode = {
 	checked?: boolean;
 	indeterminate?: boolean;
 	open?: boolean;
+	onCheckedChange?: TreeViewItemProps['onCheckedChange'];
+	onOpenChange?: TreeViewItemProps['onOpenChange'];
 };
 export type TreeViewEvent<T extends Record<string, unknown> | Iterable<unknown>> = (e: Event, data: T) => void;
 
@@ -188,6 +190,8 @@ export type TreeViewItemContext = {
 	readonly id: string;
 	readonly type: TreeViewItemType;
 	readonly parentId?: string;
+	readonly onCheckedChange?: TreeViewItemProps['onCheckedChange'];
+	readonly onOpenChange?: TreeViewItemProps['onOpenChange'];
 	open?: boolean;
 	checked?: boolean;
 	indeterminate?: boolean;

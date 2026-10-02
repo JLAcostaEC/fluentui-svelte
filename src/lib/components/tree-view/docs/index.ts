@@ -27,7 +27,7 @@ export const META: Meta = {
 	},
 	// Library-only
 	slug: 'tree-view',
-	status: 'Experimental',
+	status: 'New',
 	icon: TextBulletListTreeRegular
 };
 

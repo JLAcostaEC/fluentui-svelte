@@ -89,12 +89,21 @@
 					await tick();
 				}
 
+				const wasChecked = new Map(state.TREE_NODES.entries().map(([nodeId, node]) => [nodeId, !!node.checked]));
+
 				if (selectionMode === 'single') {
 					traversalSyncSingleSelection(id, state.TREE_NODES, checkedItems);
-					return;
+				} else {
+					traversalSync(id, state.TREE_NODES, checkedItems, checked);
 				}
 
-				traversalSync(id, state.TREE_NODES, checkedItems, checked);
+				// Every item the click reached reports its own change, the tree reports the resulting set.
+				for (const node of state.TREE_NODES.values()) {
+					if (!!node.checked !== wasChecked.get(node.id)) {
+						node.onCheckedChange?.(e as Event, { id: node.id, checked: !!node.checked });
+					}
+				}
+				treeViewContext.events.onCheckedChange(e as Event, Array.from(checkedItems));
 			},
 			openItem: (e, id) => {
 				if (openItems instanceof SvelteSet) {
@@ -105,6 +114,9 @@
 				const node = treeViewContext.state.TREE_NODES.get(id)!;
 
 				node.open = true;
+
+				node.onOpenChange?.(e as Event, { id, open: true });
+				treeViewContext.events.onOpenChange(e as Event, Array.from(openItems));
 			},
 			closeItem: (e, id) => {
 				const { state } = treeViewContext;
@@ -122,6 +134,9 @@
 				if (virtualizer && state.forceVirtualRender) {
 					state.forceVirtualRender = false;
 				}
+
+				node.onOpenChange?.(e as Event, { id, open: false });
+				treeViewContext.events.onOpenChange(e as Event, Array.from(openItems));
 			},
 			registerItem: (node) => {
 				treeViewContext.state.TREE_NODES.set(node.id, node);

@@ -35,7 +35,7 @@ Nesting a TreeView inside a TreeViewItem of type='branch' creates a subtree. Use
 
 ### Checkable Items
 
-Set `selectionMode="multiple"` to render checkboxes on selectable items.
+Set `selectionMode` to `"multiple" | "single"` to render checkboxes on selectable items.
 
 ```svelte
 <TreeView selectionMode="multiple">
@@ -44,6 +44,115 @@ Set `selectionMode="multiple"` to render checkboxes on selectable items.
 		<TreeView>
 			<TreeViewItem id="apple">
 				<TreeViewItemContent>Apple</TreeViewItemContent>
+			</TreeViewItem>
+		</TreeView>
+	</TreeViewItem>
+</TreeView>
+```
+
+### Single selection
+
+Set `selectionMode` to `single` so checking an item unchecks the previous one, and branches no longer cascade to their children.
+
+```svelte
+<script>
+	let checked = $state([]);
+</script>
+
+<TreeView selectionMode="single" bind:checkedItems={checked}>
+	<TreeViewItem id="fruits" type="branch" open>
+		<TreeViewItemContent>Fruits</TreeViewItemContent>
+		<TreeView>
+			<TreeViewItem id="apple">
+				<TreeViewItemContent>Apple</TreeViewItemContent>
+			</TreeViewItem>
+			<TreeViewItem id="banana">
+				<TreeViewItemContent>Banana</TreeViewItemContent>
+			</TreeViewItem>
+		</TreeView>
+	</TreeViewItem>
+	<TreeViewItem id="vegetables">
+		<TreeViewItemContent>Vegetables</TreeViewItemContent>
+	</TreeViewItem>
+</TreeView>
+
+<p>Checked: {checked.join(', ')}</p>
+```
+
+### Icons
+
+Use `iconBefore` and `iconAfter` to render icons around the label. Every item reserves the space of the expand chevron, so checkboxes and icons stay aligned between branches and leaves.
+
+```svelte
+{#snippet folder()}<FolderRegular width="1.25rem" />{/snippet}
+{#snippet document()}<DocumentRegular width="1.25rem" />{/snippet}
+{#snippet image()}<ImageRegular width="1.25rem" />{/snippet}
+{#snippet star()}<StarRegular width="1rem" />{/snippet}
+{#snippet lock()}<LockClosedRegular width="1rem" />{/snippet}
+
+<TreeView selectionMode="multiple">
+	<TreeViewItem id="documents" type="branch" open>
+		<TreeViewItemContent iconBefore={folder}>Documents</TreeViewItemContent>
+		<TreeView>
+			<TreeViewItem id="report">
+				<TreeViewItemContent iconBefore={document} iconAfter={star}>Report</TreeViewItemContent>
+			</TreeViewItem>
+			<TreeViewItem id="photo">
+				<TreeViewItemContent iconBefore={image}>Photo</TreeViewItemContent>
+			</TreeViewItem>
+		</TreeView>
+	</TreeViewItem>
+	<TreeViewItem id="notes">
+		<TreeViewItemContent iconBefore={document} iconAfter={lock}>Notes</TreeViewItemContent>
+	</TreeViewItem>
+</TreeView>
+```
+
+### Aside and actions
+
+`aside` is pinned to the end of the row. `actions` comes after it and is revealed when the row is hovered or focused.
+
+```svelte
+{#snippet document()}<DocumentRegular width="1.25rem" />{/snippet}
+{#snippet fileSize()}<span>2 KB</span>{/snippet}
+{#snippet more()}
+	<Button appearance="subtle" aria-label="More actions"><MoreHorizontalRegular width="1rem" /></Button>
+{/snippet}
+
+<TreeView>
+	<TreeViewItem id="report">
+		<TreeViewItemContent iconBefore={document} aside={fileSize} actions={more}>Report</TreeViewItemContent>
+	</TreeViewItem>
+	<TreeViewItem id="annual-summary">
+		<TreeViewItemContent iconBefore={document} aside={fileSize} actions={more}>Annual summary</TreeViewItemContent>
+	</TreeViewItem>
+</TreeView>
+```
+
+### Sizes
+
+Set `size` to `small`, `medium` or `large` on the root `TreeView`.
+
+```svelte
+<TreeView size="small">...</TreeView>
+<TreeView size="medium">...</TreeView>
+<TreeView size="large">...</TreeView>
+```
+
+### Disabled items
+
+A disabled item can't be opened or checked, and it is skipped when its parent checks its children, which leaves the parent in its mixed state.
+
+```svelte
+<TreeView selectionMode="multiple">
+	<TreeViewItem id="fruits" type="branch" open>
+		<TreeViewItemContent>Fruits</TreeViewItemContent>
+		<TreeView>
+			<TreeViewItem id="apple">
+				<TreeViewItemContent>Apple</TreeViewItemContent>
+			</TreeViewItem>
+			<TreeViewItem id="banana" disabled>
+				<TreeViewItemContent>Banana</TreeViewItemContent>
 			</TreeViewItem>
 		</TreeView>
 	</TreeViewItem>
@@ -70,6 +179,45 @@ Use the bindable `openItems` and `checkedItems` props on the root `TreeView` to 
 		</TreeView>
 	</TreeViewItem>
 </TreeView>
+
+<p>Open: {openItems.join(', ')}</p>
+<p>Checked: {checkedItems.join(', ')}</p>
+```
+
+### Events
+
+`onCheckedChange` and `onOpenChange` on the TreeView receive the resulting ids. The same props on a TreeViewItem receive the item and its new state, including the children a branch cascades to.
+
+```svelte
+<script>
+	let treeEvent = $state('');
+	let itemEvent = $state('');
+</script>
+
+<TreeView
+	selectionMode="multiple"
+	onCheckedChange={(e, checkedItems) => (treeEvent = 'Checked: ' + checkedItems.join(', '))}
+	onOpenChange={(e, openItems) => (treeEvent = 'Open: ' + openItems.join(', '))}
+>
+	<TreeViewItem
+		id="fruits"
+		type="branch"
+		onOpenChange={(e, { id, open }) => (itemEvent = id + (open ? ' opened' : ' closed'))}
+	>
+		<TreeViewItemContent>Fruits</TreeViewItemContent>
+		<TreeView>
+			<TreeViewItem
+				id="apple"
+				onCheckedChange={(e, { id, checked }) => (itemEvent = id + (checked ? ' checked' : ' unchecked'))}
+			>
+				<TreeViewItemContent>Apple</TreeViewItemContent>
+			</TreeViewItem>
+		</TreeView>
+	</TreeViewItem>
+</TreeView>
+
+<p>Tree: {treeEvent}</p>
+<p>Item: {itemEvent}</p>
 ```
 
 ## Component Props (TreeView)

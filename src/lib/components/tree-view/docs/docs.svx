@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { TreeView, TreeViewItem, TreeViewItemContent, InfoBar } from '$lib/index.js';
+  import { TreeView, TreeViewItem, TreeViewItemContent } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
   import { m } from '$i18n/messages.js';
   import StatusBadge from '$site/components/status-badge/status-badge.svelte';
 </script>
@@ -8,28 +9,81 @@
 
 {m.tv_description()}
 
-<TreeView>
-  <TreeViewItem id="fruits" type="branch">
-    <TreeViewItemContent>Fruits</TreeViewItemContent>
+<Showcase columns={1} minHeight="250px">
+  <div style="width: 260px; max-width: 100%;">
     <TreeView>
-      <TreeViewItem id="apple">
-        <TreeViewItemContent>Apple</TreeViewItemContent>
+      <TreeViewItem id="fruits" type="branch" open>
+        <TreeViewItemContent>Fruits</TreeViewItemContent>
+        <TreeView>
+          <TreeViewItem id="apple">
+            <TreeViewItemContent>Apple</TreeViewItemContent>
+          </TreeViewItem>
+          <TreeViewItem id="banana" disabled>
+            <TreeViewItemContent>Banana</TreeViewItemContent>
+          </TreeViewItem>
+          <TreeViewItem id="citrus" type="branch" open>
+            <TreeViewItemContent>Citrus</TreeViewItemContent>
+            <TreeView>
+              <TreeViewItem id="orange" type="branch">
+                <TreeViewItemContent>Orange</TreeViewItemContent>
+                <TreeView>
+                  <TreeViewItem id="navel">
+                    <TreeViewItemContent>Navel</TreeViewItemContent>
+                  </TreeViewItem>
+                  <TreeViewItem id="valencia">
+                    <TreeViewItemContent>Valencia</TreeViewItemContent>
+                  </TreeViewItem>
+                </TreeView>
+              </TreeViewItem>
+              <TreeViewItem id="lemon">
+                <TreeViewItemContent>Lemon</TreeViewItemContent>
+              </TreeViewItem>
+            </TreeView>
+          </TreeViewItem>
+        </TreeView>
       </TreeViewItem>
-      <TreeViewItem id="banana" disabled>
-        <TreeViewItemContent>Banana</TreeViewItemContent>
+      <TreeViewItem id="vegetables" type="branch">
+        <TreeViewItemContent>Vegetables</TreeViewItemContent>
+        <TreeView>
+          <TreeViewItem id="carrot">
+            <TreeViewItemContent>Carrot</TreeViewItemContent>
+          </TreeViewItem>
+          <TreeViewItem id="spinach">
+            <TreeViewItemContent>Spinach</TreeViewItemContent>
+          </TreeViewItem>
+          <TreeViewItem id="broccoli">
+            <TreeViewItemContent>Broccoli</TreeViewItemContent>
+          </TreeViewItem>
+        </TreeView>
+      </TreeViewItem>
+      <TreeViewItem id="grains" type="branch">
+        <TreeViewItemContent>Grains</TreeViewItemContent>
+        <TreeView>
+          <TreeViewItem id="rice">
+            <TreeViewItemContent>Rice</TreeViewItemContent>
+          </TreeViewItem>
+          <TreeViewItem id="oats">
+            <TreeViewItemContent>Oats</TreeViewItemContent>
+          </TreeViewItem>
+        </TreeView>
+      </TreeViewItem>
+      <TreeViewItem id="dairy" type="branch">
+        <TreeViewItemContent>Dairy</TreeViewItemContent>
+        <TreeView>
+          <TreeViewItem id="milk">
+            <TreeViewItemContent>Milk</TreeViewItemContent>
+          </TreeViewItem>
+          <TreeViewItem id="cheese">
+            <TreeViewItemContent>Cheese</TreeViewItemContent>
+          </TreeViewItem>
+        </TreeView>
+      </TreeViewItem>
+      <TreeViewItem id="eggs">
+        <TreeViewItemContent>Eggs</TreeViewItemContent>
       </TreeViewItem>
     </TreeView>
-  </TreeViewItem>
-  <TreeViewItem id="vegetables">
-    <TreeViewItemContent>Vegetables</TreeViewItemContent>
-  </TreeViewItem>
-</TreeView>
-
-<InfoBar status="critical" style="multiline" title={m.global_early_access_title()} hideCloseButton>
-  <p>
-    {m.global_early_access_description()}
-  </p>
-</InfoBar>
+  </div>
+</Showcase>
 
 ## {m.global_usage()}
 

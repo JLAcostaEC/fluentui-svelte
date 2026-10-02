@@ -131,7 +131,9 @@ Use `iconBefore` and `iconAfter` to render icons around the label. Every item re
 {#snippet document()}<DocumentRegular width="1.25rem" />{/snippet}
 {#snippet fileSize()}<span>2 KB</span>{/snippet}
 {#snippet more()}
-	<Button appearance="subtle" onclick={(e) => e.stopPropagation()} aria-label="More actions"><MoreHorizontalRegular width="1rem" /></Button>
+	<Button appearance="subtle" onclick={(e) => e.stopPropagation()} aria-label="More actions"
+		><MoreHorizontalRegular width="1rem" /></Button
+	>
 {/snippet}
 
 <TreeView>

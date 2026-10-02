@@ -150,9 +150,9 @@ export function traversalSyncSingleSelection(
 
 	if (iterable instanceof Set) {
 		iterable.clear();
-		iterable.add(node.id);
+		if (node.checked) iterable.add(node.id);
 	} else if (Array.isArray(iterable)) {
 		iterable.length = 0;
-		iterable.push(node.id);
+		if (node.checked) iterable.push(node.id);
 	}
 }

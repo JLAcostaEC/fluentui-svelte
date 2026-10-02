@@ -84,6 +84,15 @@ Set `selectionMode` to `single` so checking an item unchecks the previous one, a
 Use `iconBefore` and `iconAfter` to render icons around the label. Every item reserves the space of the expand chevron, so checkboxes and icons stay aligned between branches and leaves.
 
 ```svelte
+<script>
+	import { TreeView, TreeViewItem, TreeViewItemContent } from 'fluentui-svelte';
+	import FolderRegular from 'fluentui-icons-svelte/FolderRegular.svelte';
+	import DocumentRegular from 'fluentui-icons-svelte/DocumentRegular.svelte';
+	import ImageRegular from 'fluentui-icons-svelte/ImageRegular.svelte';
+	import StarRegular from 'fluentui-icons-svelte/StarRegular.svelte';
+	import LockClosedRegular from 'fluentui-icons-svelte/LockClosedRegular.svelte';
+</script>
+
 {#snippet folder()}<FolderRegular width="1.25rem" />{/snippet}
 {#snippet document()}<DocumentRegular width="1.25rem" />{/snippet}
 {#snippet image()}<ImageRegular width="1.25rem" />{/snippet}
@@ -113,10 +122,16 @@ Use `iconBefore` and `iconAfter` to render icons around the label. Every item re
 `aside` is pinned to the end of the row. `actions` comes after it and is revealed when the row is hovered or focused.
 
 ```svelte
+<script>
+	import { TreeView, TreeViewItem, TreeViewItemContent, Button } from 'fluentui-svelte';
+	import DocumentRegular from 'fluentui-icons-svelte/DocumentRegular.svelte';
+	import MoreHorizontalRegular from 'fluentui-icons-svelte/MoreHorizontalRegular.svelte';
+</script>
+
 {#snippet document()}<DocumentRegular width="1.25rem" />{/snippet}
 {#snippet fileSize()}<span>2 KB</span>{/snippet}
 {#snippet more()}
-	<Button appearance="subtle" aria-label="More actions"><MoreHorizontalRegular width="1rem" /></Button>
+	<Button appearance="subtle" onclick={(e) => e.stopPropagation()} aria-label="More actions"><MoreHorizontalRegular width="1rem" /></Button>
 {/snippet}
 
 <TreeView>

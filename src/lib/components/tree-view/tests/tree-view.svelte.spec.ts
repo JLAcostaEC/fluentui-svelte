@@ -180,6 +180,25 @@ describe('checkbox', () => {
 });
 
 describe('events', () => {
+	it.each(['row', 'checkbox'])(
+		'reports an empty selection after a second single-selection %s click',
+		async (target) => {
+			const onCheckedChange = vi.fn();
+			render(TreeViewTestWrapper, { selectionMode: 'single', onCheckedChange });
+			const control =
+				target === 'row' ? page.getByText('Vegetables') : page.selector('li[data-value="vegetables"] .fs-checkbox');
+
+			await control.click();
+			expect(onCheckedChange.mock.calls.at(-1)?.[1]).toEqual(['vegetables']);
+			await control.click();
+			expect(onCheckedChange).toHaveBeenCalledTimes(2);
+			expect(onCheckedChange.mock.calls.at(-1)?.[1]).toEqual([]);
+			await expect
+				.element(page.getByRole('treeitem', { name: 'Vegetables' }))
+				.not.toHaveAttribute('aria-checked', 'true');
+		}
+	);
+
 	it('calls onCheckedChange with the checked ids', async () => {
 		const onCheckedChange = vi.fn();
 		render(TreeViewTestWrapper, { onCheckedChange });

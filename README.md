@@ -169,7 +169,7 @@ after changing a prop's JSDoc rather than editing the generated tables by hand.
 >
 > This app demonstrates all of the Windows UI 3 library controls and styles available to make a WinUI 3 app with the Windows App SDK.
 
-> ### Documentation: [Microsoft's Fluent UI](https://learn.microsoft.com/en-us/windows/apps/design/)
+> ### Documentation: [Microsoft's Fluent UI](https://developer.microsoft.com/en-us/fluentui/)
 >
 > Design guidelines and UI code examples for creating Windows app experiences.
 

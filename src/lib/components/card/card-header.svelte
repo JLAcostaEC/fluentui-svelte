@@ -42,7 +42,7 @@
 			{#if typeof title === 'string'}
 				<h4 class="body" id={`${id}-title`}>{title}</h4>
 			{:else if title}
-				<RenderSoC SoC={title} id={`${id}-title`} />
+				<RenderSoC SoC={title} args={{ id: `${id}-title` }} />
 			{/if}
 			{#if typeof description === 'string'}
 				<p class="caption">{description}</p>
@@ -53,7 +53,7 @@
 	{:else if typeof title === 'string'}
 		<h4 class="body" id={`${id}-title`}>{title}</h4>
 	{:else if title}
-		<RenderSoC SoC={title} id={`${id}-title`} />
+		<RenderSoC SoC={title} args={{ id: `${id}-title` }} />
 	{/if}
 	{#if _action}
 		<RenderSoC SoC={_action} />

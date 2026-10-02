@@ -47,10 +47,8 @@
 		wrapperAttributes={{
 			onclick: (e) => {
 				e.stopPropagation();
-				if (ITEM_CONTEXT.disabled) {
-					e.preventDefault();
-					return;
-				}
+				e.preventDefault();
+				if (ITEM_CONTEXT.disabled) return;
 				handleCheck(e, ITEM_CONTEXT.id, !ITEM_CONTEXT.checked);
 			}
 		}}
@@ -87,9 +85,12 @@
 
 <style>
 	.fs-tree-view-item-content {
+		--chevron-width: 1.2rem;
+		--gap: 0.75rem;
+		box-sizing: border-box;
 		display: flex;
 		align-items: center;
-		gap: 0.75rem;
+		gap: var(--gap);
 		position: relative;
 		border-radius: var(--fs-control-border-radius);
 		font-size: var(--fs-body-font-size);
@@ -100,20 +101,26 @@
 		width: 100%;
 		text-align: left;
 		user-select: none;
+		&:not(:has(:global(.branch-indicator))) {
+			--leaf-offset: calc(var(--chevron-width) + var(--gap) + 0rem);
+		}
 		&.size-small {
 			font-size: var(--fs-body2-font-size);
 			padding: 0.125rem 0.5rem;
-			padding-left: calc(0.5rem + 1.5rem * var(--depth, 0));
+			padding-left: calc(0.5rem + 2rem * var(--depth, 0) + var(--leaf-offset, 0rem));
+			min-height: 1.75rem;
 		}
 		&.size-medium {
 			font-size: var(--fs-body-font-size);
 			padding: 0.25rem 0.625rem;
-			padding-left: calc(0.625rem + 1.5rem * var(--depth, 0));
+			padding-left: calc(0.625rem + 2rem * var(--depth, 0) + var(--leaf-offset, 0rem));
+			min-height: 2rem;
 		}
 		&.size-large {
 			font-size: var(--fs-subtitle2-font-size);
 			padding: 0.375rem 0.75rem;
-			padding-left: calc(0.75rem + 1.5rem * var(--depth, 0));
+			padding-left: calc(0.75rem + 2rem * var(--depth, 0) + var(--leaf-offset, 0rem));
+			min-height: 2.25rem;
 		}
 
 		&::after {
@@ -154,5 +161,31 @@
 			flex-shrink: 0;
 			fill: currentColor;
 		}
+	}
+	.fs-tree-view-item-icon-before,
+	.fs-tree-view-item-icon-after,
+	.fs-tree-view-item-aside,
+	.fs-tree-view-item-actions {
+		display: inline-flex;
+		align-items: center;
+		flex-shrink: 0;
+	}
+	.fs-tree-view-item-aside,
+	.fs-tree-view-item-actions {
+		margin-left: auto;
+	}
+	.fs-tree-view-item-aside + .fs-tree-view-item-actions {
+		margin-left: 0;
+	}
+	.fs-tree-view-item-actions {
+		opacity: 0;
+		@media (hover: none) {
+			opacity: 1;
+		}
+	}
+	.fs-tree-view-item-content:hover .fs-tree-view-item-actions,
+	.fs-tree-view-item-content:focus-within .fs-tree-view-item-actions,
+	:global(.fs-tree-view-item:focus-visible) > .fs-tree-view-item-content .fs-tree-view-item-actions {
+		opacity: 1;
 	}
 </style>

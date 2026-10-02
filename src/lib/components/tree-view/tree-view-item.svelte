@@ -32,6 +32,8 @@
 		type = 'item',
 		open = (openItems instanceof Set ? openItems.has(id) : openItems.includes(id)) || undefined,
 		checked = (checkedItems instanceof Set ? checkedItems.has(id) : checkedItems.includes(id)) || undefined,
+		onCheckedChange,
+		onOpenChange,
 		children,
 		...attributes
 	}: TreeViewItemProps = $props();
@@ -60,6 +62,12 @@
 		},
 		get parentId() {
 			return itemContext?.id;
+		},
+		get onCheckedChange() {
+			return onCheckedChange;
+		},
+		get onOpenChange() {
+			return onOpenChange;
 		},
 		get open() {
 			return open;
@@ -190,7 +198,8 @@
 			outline: 2px solid var(--fs-focus-stroke-outer);
 			outline-offset: 2px;
 		}
-		&.open :global(.branch-indicator) {
+		/* Only the chevron of this item's own row, not the ones of the branches nested inside it. */
+		&.open > :global(.fs-tree-view-item-content .branch-indicator) {
 			rotate: 90deg;
 		}
 	}

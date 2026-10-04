@@ -1,5 +1,29 @@
 # fluentui-svelte
 
+## 0.5.0
+
+### Minor Changes
+
+- feat: Add a `keepMounted` prop to `MenuPopover` for preserving its content in the DOM while closed. ([#45](https://github.com/JLAcostaEC/fluentui-svelte/pull/45))
+
+### Patch Changes
+
+- fix: correctly assign ids to cards (internal RenderSoC component) ([#50](https://github.com/JLAcostaEC/fluentui-svelte/pull/50))
+
+- fix: `Dropdown` Ctrl/Cmd + click is no longer required when `multiple` is set. Just clicking an item toggles its selection directly. ([#43](https://github.com/JLAcostaEC/fluentui-svelte/pull/43))
+
+- fix: `ListViewItem` & `ListView` checkmark behavior and more examples docs ([#48](https://github.com/JLAcostaEC/fluentui-svelte/pull/48))
+
+  `ListViewItem` checkmark no longer triggers `onAction` when clicked, and now toggles the selection of its item, including on `role="row"` items.
+
+  Adds more examples to the documentation.
+
+- fix: `TreeView` checkbox selection, alignment, events and more examples docs ([#49](https://github.com/JLAcostaEC/fluentui-svelte/pull/49))
+
+  Clicking the checkbox of a `TreeViewItem` now checks it once instead of checking and unchecking it in the same click. Checkboxes and icons now line up between branches and leaves, `aside` and `actions` are pinned to the end of the row, and `actions` are revealed on hover and focus. `onCheckedChange` and `onOpenChange` are now called on both `TreeView` and `TreeViewItem`.
+
+  Adds more examples to the documentation.
+
 ## 0.4.0
 
 ### Minor Changes

@@ -1,0 +1,103 @@
+<script lang="ts">
+  import { Rating } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { BookmarkFilled, BookmarkRegular, HeartFilled, HeartRegular } from 'fluentui-icons-svelte';
+  import { m } from '$i18n/messages.js';
+
+  let value = $state(3);
+
+  const bindCode = `
+<script>
+  let value = $state(3);
+<\/script>
+
+<Rating bind:value />
+<p>{value}</p>`;
+
+  const stepCode = `
+<Rating value={2.5} step={0.5} />`;
+
+  const quartersCode = `
+<Rating value={3.75} />`;
+
+  const sizeCode = `
+<Rating value={3} size="small" />
+<Rating value={3} size="medium" />
+<Rating value={3} size="large" />
+<Rating value={3} size="extra-large" />`;
+
+  const shapeCode = `
+<script>
+  import { HeartFilled, HeartRegular, BookmarkFilled, BookmarkRegular } from 'fluentui-icons-svelte';
+<\/script>
+
+<Rating value={3} iconFilled={HeartFilled} iconOutline={HeartRegular} />
+<Rating value={2.5} step={0.5} iconFilled={BookmarkFilled} iconOutline={BookmarkRegular} />`;
+
+  const maxCode = `
+<Rating value={4} max={10} />`;
+
+  const labelCode = `
+<Rating value={3} itemLabel={(rating) => \`\${rating} out of 5 stars\`} />`;
+</script>
+
+### {m.rating_bind_title()}
+
+{m.rating_bind_description()}
+
+<Showcase columns={1} code={bindCode} minHeight="0" disablePanZoom showOverflow>
+  <Rating bind:value />
+  <p>{value}</p>
+</Showcase>
+
+### {m.rating_step_title()}
+
+{m.rating_step_description()}
+
+<Showcase columns={1} code={stepCode} minHeight="0" disablePanZoom showOverflow>
+  <Rating value={2.5} step={0.5} />
+</Showcase>
+
+### {m.rating_quarters_title()}
+
+{m.rating_quarters_description()}
+
+<Showcase columns={1} code={quartersCode} minHeight="0" disablePanZoom showOverflow>
+  <Rating value={3.75} />
+</Showcase>
+
+### {m.global_size()}
+
+{m.rating_size_description()}
+
+<Showcase columns={1} code={sizeCode} minHeight="0" disablePanZoom showOverflow>
+  <Rating value={3} size="small" />
+  <Rating value={3} size="medium" />
+  <Rating value={3} size="large" />
+  <Rating value={3} size="extra-large" />
+</Showcase>
+
+### {m.rating_shape_title()}
+
+{m.rating_shape_description()}
+
+<Showcase columns={1} code={shapeCode} minHeight="0" disablePanZoom showOverflow>
+  <Rating value={3} iconFilled={HeartFilled} iconOutline={HeartRegular} />
+  <Rating value={2.5} step={0.5} iconFilled={BookmarkFilled} iconOutline={BookmarkRegular} />
+</Showcase>
+
+### {m.rating_max_title()}
+
+{m.rating_max_description()}
+
+<Showcase columns={1} code={maxCode} minHeight="0" disablePanZoom showOverflow>
+  <Rating value={4} max={10} />
+</Showcase>
+
+### {m.rating_label_title()}
+
+{m.rating_label_description()}
+
+<Showcase columns={1} code={labelCode} minHeight="0" disablePanZoom showOverflow>
+  <Rating value={3} itemLabel={(rating) => `${rating} out of 5 stars`} />
+</Showcase>

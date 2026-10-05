@@ -2324,6 +2324,83 @@
       },
       "source": "src/lib/components/radio-button/types.ts#RadioButtonProps.ref"
     },
+    "generated_fs_rating_props_props_class": {
+      "en": "348bc76e",
+      "locales": {
+        "es": "348bc76e"
+      },
+      "source": "src/lib/components/rating/types.ts#RatingProps.class"
+    },
+    "generated_fs_rating_props_props_icon_filled": {
+      "en": "023b0bf1",
+      "locales": {
+        "es": "023b0bf1"
+      },
+      "source": "src/lib/components/rating/types.ts#RatingProps.iconFilled"
+    },
+    "generated_fs_rating_props_props_icon_outline": {
+      "en": "727fd759",
+      "locales": {
+        "es": "727fd759"
+      },
+      "source": "src/lib/components/rating/types.ts#RatingProps.iconOutline"
+    },
+    "generated_fs_rating_props_props_item_label": {
+      "en": "c3a1b0ee",
+      "locales": {
+        "es": "c3a1b0ee"
+      },
+      "source": "src/lib/components/rating/types.ts#RatingProps.itemLabel"
+    },
+    "generated_fs_rating_props_props_max": {
+      "en": "dcd7dab6",
+      "locales": {
+        "es": "dcd7dab6"
+      },
+      "source": "src/lib/components/rating/types.ts#RatingProps.max"
+    },
+    "generated_fs_rating_props_props_name": {
+      "en": "70e5ee33",
+      "locales": {
+        "es": "70e5ee33"
+      },
+      "source": "src/lib/components/rating/types.ts#RatingProps.name"
+    },
+    "generated_fs_rating_props_props_on_change": {
+      "en": "3f23efea",
+      "locales": {
+        "es": "3f23efea"
+      },
+      "source": "src/lib/components/rating/types.ts#RatingProps.onChange"
+    },
+    "generated_fs_rating_props_props_ref": {
+      "en": "ffe53348",
+      "locales": {
+        "es": "ffe53348"
+      },
+      "source": "src/lib/components/rating/types.ts#RatingProps.ref"
+    },
+    "generated_fs_rating_props_props_size": {
+      "en": "e81e12f5",
+      "locales": {
+        "es": "e81e12f5"
+      },
+      "source": "src/lib/components/rating/types.ts#RatingProps.size"
+    },
+    "generated_fs_rating_props_props_step": {
+      "en": "f73c8308",
+      "locales": {
+        "es": "f73c8308"
+      },
+      "source": "src/lib/components/rating/types.ts#RatingProps.step"
+    },
+    "generated_fs_rating_props_props_value": {
+      "en": "10f7b5dd",
+      "locales": {
+        "es": "10f7b5dd"
+      },
+      "source": "src/lib/components/rating/types.ts#RatingProps.value"
+    },
     "generated_fs_skeleton_props_props_animation": {
       "en": "9aac831a",
       "locales": {

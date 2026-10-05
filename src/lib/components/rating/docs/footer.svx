@@ -1,0 +1,26 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.global_component_props()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:RatingProps -->
+
+| Name                                                | Type                                                                | Default                       | Description                                                                      |
+| --------------------------------------------------- | ------------------------------------------------------------------- | ----------------------------- | -------------------------------------------------------------------------------- |
+| `value` _bindable_                                  | `number`                                                            | `0`                           | `<I18nMarkupMessage message={m.generated_fs_rating_props_props_value} />`        |
+| `max`                                               | `number`                                                            | `5`                           | `<I18nMarkupMessage message={m.generated_fs_rating_props_props_max} />`          |
+| `step`                                              | `1` &#124; `0.5`                                                    | `1`                           | `<I18nMarkupMessage message={m.generated_fs_rating_props_props_step} />`         |
+| `size`                                              | `'small'` &#124; `'medium'` &#124; `'large'` &#124; `'extra-large'` | `'extra-large'`               | `<I18nMarkupMessage message={m.generated_fs_rating_props_props_size} />`         |
+| `iconFilled`                                        | `Component`                                                         |                               | `<I18nMarkupMessage message={m.generated_fs_rating_props_props_icon_filled} />`  |
+| `iconOutline`                                       | `Component`                                                         |                               | `<I18nMarkupMessage message={m.generated_fs_rating_props_props_icon_outline} />` |
+| `name`                                              | `string`                                                            |                               | `<I18nMarkupMessage message={m.generated_fs_rating_props_props_name} />`         |
+| `itemLabel`                                         | `(rating: number) => string`                                        | `` (rating) => `${rating}` `` | `<I18nMarkupMessage message={m.generated_fs_rating_props_props_item_label} />`   |
+| `onChange`                                          | `(value: number) => void`                                           |                               | `<I18nMarkupMessage message={m.generated_fs_rating_props_props_on_change} />`    |
+| `class`                                             | `string`                                                            |                               | `<I18nMarkupMessage message={m.generated_fs_rating_props_props_class} />`        |
+| `ref` _bindable_                                    | `HTMLElement`                                                       |                               | `<I18nMarkupMessage message={m.generated_fs_rating_props_props_ref} />`          |
+| `HTMLAttributes<HTMLDivElement>` without `onchange` |                                                                     |                               |                                                                                  |
+
+<!-- /props:RatingProps -->

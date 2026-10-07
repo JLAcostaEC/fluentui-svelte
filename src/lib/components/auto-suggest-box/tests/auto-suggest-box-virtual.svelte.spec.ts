@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import AutoSuggestBoxVirtualTestWrapper from './AutoSuggestBoxVirtualTestWrapper.svelte';
 import AutoSuggestBoxDocsTestWrapper from './AutoSuggestBoxDocsTestWrapper.svelte';
-import { fake } from '$constants';
+import { fake } from '$site/fake.js';
 
 /**
  * The windowed list only ever has a slice of its options in the DOM, so these

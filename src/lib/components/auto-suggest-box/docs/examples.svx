@@ -1,7 +1,7 @@
 <script lang="ts">
   import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
   import { AutoSuggestBox, AutoSuggestBoxOption } from '$lib/index.js';
-  import { fake } from '$constants';
+  import { fake } from '$site/fake.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { m } from '$i18n/messages.js';
 

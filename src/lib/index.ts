@@ -160,6 +160,17 @@ export { default as TabView } from './components/tab-view/tab-view.svelte';
 export { default as TabViewTab } from './components/tab-view/tab-view-tab.svelte';
 // End TabView Component
 
+// Start Tag Component
+export { default as Tag } from './components/tag/tag.svelte';
+export { default as TagGroup } from './components/tag/tag-group.svelte';
+// End Tag Component
+
+// Start TagPicker Component
+export { default as TagPicker } from './components/tag-picker/tag-picker.svelte';
+export { default as TagPickerOption } from './components/tag-picker/option.svelte';
+export { default as TagPickerOptionGroup } from './components/tag-picker/option-group.svelte';
+// End TagPicker Component
+
 // Start TextArea Component
 export { default as TextArea } from './components/textarea/textarea.svelte';
 // End TextArea Component

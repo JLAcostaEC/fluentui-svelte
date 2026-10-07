@@ -1,0 +1,65 @@
+<script lang="ts">
+  import { Avatar, InfoBar, Tag, TagPicker, TagPickerOption } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import StatusBadge from '$site/components/status-badge/status-badge.svelte';
+  import { m } from '$i18n/messages.js';
+
+  const options = ['John Doe', 'Jane Doe', 'Max Mustermann', 'Erika Mustermann', 'Pierre Dupont', 'Amelie Dupont'];
+
+  let selectedOptions = $state<string[]>([]);
+</script>
+
+# TagPicker <StatusBadge />
+
+{m.tagpicker_description()}
+
+{#snippet tag({ value, text })}
+  {#snippet media()}
+    <Avatar aria-hidden="true" name={text} size={16} color="colorful" />
+  {/snippet}
+  <Tag role="listitem" {value} {media} title={text}>{text}</Tag>
+{/snippet}
+
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow>
+  <div class="tp-example">
+    <TagPicker
+      bind:selectedOptions
+      {tag}
+      inputProps={{ 'aria-label': 'Select Employees' }}
+      tagGroupProps={{ 'aria-label': 'Selected Employees' }}
+    >
+      {#each options as option (option)}
+        <TagPickerOption value={option}>
+          <Avatar aria-hidden="true" shape="rounded" name={option} size={20} color="colorful" />
+          {option}
+        </TagPickerOption>
+      {/each}
+    </TagPicker>
+  </div>
+</Showcase>
+
+## {m.global_usage()}
+
+```svelte
+<script>
+	import { TagPicker, TagPickerOption } from 'fluentui-svelte';
+
+	const options = ['John Doe', 'Jane Doe', 'Max Mustermann'];
+
+	let selectedOptions = $state([]);
+</script>
+
+<TagPicker
+	bind:selectedOptions
+	inputProps={{ 'aria-label': 'Select Employees' }}
+	tagGroupProps={{ 'aria-label': 'Selected Employees' }}
+>
+	{#each options as option (option)}
+		<TagPickerOption value={option}>{option}</TagPickerOption>
+	{/each}
+</TagPicker>
+```
+
+<InfoBar status="attention" title={m.tagpicker_keyboard_navigation_title()} style="multiline" hideCloseButton>
+  <p>{m.tagpicker_keyboard_navigation_description()}</p>
+</InfoBar>

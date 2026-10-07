@@ -3038,6 +3038,398 @@
       },
       "source": "src/lib/components/table/types.ts#TableSelectionCellProps.type"
     },
+    "generated_fs_tag_group_props_props_appearance": {
+      "en": "cb1f6f2e",
+      "locales": {
+        "es": "cb1f6f2e"
+      },
+      "source": "src/lib/components/tag/types.ts#TagGroupProps.appearance"
+    },
+    "generated_fs_tag_group_props_props_children": {
+      "en": "1818ee15",
+      "locales": {
+        "es": "1818ee15"
+      },
+      "source": "src/lib/components/tag/types.ts#TagGroupProps.children"
+    },
+    "generated_fs_tag_group_props_props_disabled": {
+      "en": "1a52de88",
+      "locales": {
+        "es": "1a52de88"
+      },
+      "source": "src/lib/components/tag/types.ts#TagGroupProps.disabled"
+    },
+    "generated_fs_tag_group_props_props_dismissible": {
+      "en": "3ec9592f",
+      "locales": {
+        "es": "3ec9592f"
+      },
+      "source": "src/lib/components/tag/types.ts#TagGroupProps.dismissible"
+    },
+    "generated_fs_tag_group_props_props_on_dismiss": {
+      "en": "7005df72",
+      "locales": {
+        "es": "7005df72"
+      },
+      "source": "src/lib/components/tag/types.ts#TagGroupProps.onDismiss"
+    },
+    "generated_fs_tag_group_props_props_on_tag_select": {
+      "en": "b655d30f",
+      "locales": {
+        "es": "b655d30f"
+      },
+      "source": "src/lib/components/tag/types.ts#TagGroupProps.onTagSelect"
+    },
+    "generated_fs_tag_group_props_props_ref": {
+      "en": "57933a48",
+      "locales": {
+        "es": "57933a48"
+      },
+      "source": "src/lib/components/tag/types.ts#TagGroupProps.ref"
+    },
+    "generated_fs_tag_group_props_props_role": {
+      "en": "36ab54be",
+      "locales": {
+        "es": "36ab54be"
+      },
+      "source": "src/lib/components/tag/types.ts#TagGroupProps.role"
+    },
+    "generated_fs_tag_group_props_props_selected_values": {
+      "en": "a971cfb9",
+      "locales": {
+        "es": "a971cfb9"
+      },
+      "source": "src/lib/components/tag/types.ts#TagGroupProps.selectedValues"
+    },
+    "generated_fs_tag_group_props_props_size": {
+      "en": "189d44c8",
+      "locales": {
+        "es": "189d44c8"
+      },
+      "source": "src/lib/components/tag/types.ts#TagGroupProps.size"
+    },
+    "generated_fs_tag_picker_option_group_props_props_children": {
+      "en": "74db6a56",
+      "locales": {
+        "es": "74db6a56"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerOptionGroupProps.children"
+    },
+    "generated_fs_tag_picker_option_group_props_props_label": {
+      "en": "31b13547",
+      "locales": {
+        "es": "31b13547"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerOptionGroupProps.label"
+    },
+    "generated_fs_tag_picker_option_group_props_props_ref": {
+      "en": "57933a48",
+      "locales": {
+        "es": "57933a48"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerOptionGroupProps.ref"
+    },
+    "generated_fs_tag_picker_option_props_props_disabled": {
+      "en": "3fbd0694",
+      "locales": {
+        "es": "3fbd0694"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerOptionProps.disabled"
+    },
+    "generated_fs_tag_picker_option_props_props_id": {
+      "en": "9b7b2209",
+      "locales": {
+        "es": "9b7b2209"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerOptionProps.id"
+    },
+    "generated_fs_tag_picker_option_props_props_ref": {
+      "en": "06a662d7",
+      "locales": {
+        "es": "06a662d7"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerOptionProps.ref"
+    },
+    "generated_fs_tag_picker_option_props_props_text": {
+      "en": "7625228d",
+      "locales": {
+        "es": "7625228d"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerOptionProps.text"
+    },
+    "generated_fs_tag_picker_option_props_props_value": {
+      "en": "4d876041",
+      "locales": {
+        "es": "4d876041"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerOptionProps.value"
+    },
+    "generated_fs_tag_picker_props_props_children": {
+      "en": "07f34058",
+      "locales": {
+        "es": "07f34058"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.children"
+    },
+    "generated_fs_tag_picker_props_props_disabled": {
+      "en": "d6707482",
+      "locales": {
+        "es": "d6707482"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.disabled"
+    },
+    "generated_fs_tag_picker_props_props_expand_icon": {
+      "en": "a8c850cd",
+      "locales": {
+        "es": "a8c850cd"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.expandIcon"
+    },
+    "generated_fs_tag_picker_props_props_input_props": {
+      "en": "4682bcce",
+      "locales": {
+        "es": "4682bcce"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.inputProps"
+    },
+    "generated_fs_tag_picker_props_props_input_ref": {
+      "en": "98d32ebc",
+      "locales": {
+        "es": "98d32ebc"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.inputRef"
+    },
+    "generated_fs_tag_picker_props_props_not_found_text": {
+      "en": "15a53842",
+      "locales": {
+        "es": "15a53842"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.notFoundText"
+    },
+    "generated_fs_tag_picker_props_props_on_selection_change": {
+      "en": "601e5979",
+      "locales": {
+        "es": "601e5979"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.onSelectionChange"
+    },
+    "generated_fs_tag_picker_props_props_open": {
+      "en": "c60d3285",
+      "locales": {
+        "es": "c60d3285"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.open"
+    },
+    "generated_fs_tag_picker_props_props_placeholder": {
+      "en": "dddb51a4",
+      "locales": {
+        "es": "dddb51a4"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.placeholder"
+    },
+    "generated_fs_tag_picker_props_props_query_submitted": {
+      "en": "61663b2d",
+      "locales": {
+        "es": "61663b2d"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.querySubmitted"
+    },
+    "generated_fs_tag_picker_props_props_ref": {
+      "en": "cd9a3eca",
+      "locales": {
+        "es": "cd9a3eca"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.ref"
+    },
+    "generated_fs_tag_picker_props_props_secondary_action": {
+      "en": "fb01e846",
+      "locales": {
+        "es": "fb01e846"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.secondaryAction"
+    },
+    "generated_fs_tag_picker_props_props_selected_options": {
+      "en": "d0e1823c",
+      "locales": {
+        "es": "d0e1823c"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.selectedOptions"
+    },
+    "generated_fs_tag_picker_props_props_single": {
+      "en": "9c0e4a71",
+      "locales": {
+        "es": "9c0e4a71"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.single"
+    },
+    "generated_fs_tag_picker_props_props_size": {
+      "en": "1591aaca",
+      "locales": {
+        "es": "1591aaca"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.size"
+    },
+    "generated_fs_tag_picker_props_props_tag": {
+      "en": "528ad4e7",
+      "locales": {
+        "es": "528ad4e7"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.tag"
+    },
+    "generated_fs_tag_picker_props_props_tag_group_props": {
+      "en": "58435643",
+      "locales": {
+        "es": "58435643"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.tagGroupProps"
+    },
+    "generated_fs_tag_picker_props_props_value": {
+      "en": "f81f14ad",
+      "locales": {
+        "es": "f81f14ad"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.value"
+    },
+    "generated_fs_tag_props_props_appearance": {
+      "en": "3b5aa09e",
+      "locales": {
+        "es": "3b5aa09e"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.appearance"
+    },
+    "generated_fs_tag_props_props_children": {
+      "en": "3539c7ad",
+      "locales": {
+        "es": "3539c7ad"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.children"
+    },
+    "generated_fs_tag_props_props_disabled": {
+      "en": "e11713f5",
+      "locales": {
+        "es": "e11713f5"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.disabled"
+    },
+    "generated_fs_tag_props_props_dismiss_icon": {
+      "en": "2d5a56fe",
+      "locales": {
+        "es": "2d5a56fe"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.dismissIcon"
+    },
+    "generated_fs_tag_props_props_dismiss_label": {
+      "en": "70b42590",
+      "locales": {
+        "es": "70b42590"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.dismissLabel"
+    },
+    "generated_fs_tag_props_props_dismiss_props": {
+      "en": "4fea24aa",
+      "locales": {
+        "es": "4fea24aa"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.dismissProps"
+    },
+    "generated_fs_tag_props_props_dismissible": {
+      "en": "b5861f6b",
+      "locales": {
+        "es": "b5861f6b"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.dismissible"
+    },
+    "generated_fs_tag_props_props_icon": {
+      "en": "f4d20b27",
+      "locales": {
+        "es": "f4d20b27"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.icon"
+    },
+    "generated_fs_tag_props_props_interactive": {
+      "en": "d5c35b9f",
+      "locales": {
+        "es": "d5c35b9f"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.interactive"
+    },
+    "generated_fs_tag_props_props_media": {
+      "en": "8159b507",
+      "locales": {
+        "es": "8159b507"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.media"
+    },
+    "generated_fs_tag_props_props_on_dismiss": {
+      "en": "22b6891e",
+      "locales": {
+        "es": "22b6891e"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.onDismiss"
+    },
+    "generated_fs_tag_props_props_onclick": {
+      "en": "225e661a",
+      "locales": {
+        "es": "225e661a"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.onclick"
+    },
+    "generated_fs_tag_props_props_onkeydown": {
+      "en": "12875216",
+      "locales": {
+        "es": "12875216"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.onkeydown"
+    },
+    "generated_fs_tag_props_props_primary_props": {
+      "en": "2d632648",
+      "locales": {
+        "es": "2d632648"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.primaryProps"
+    },
+    "generated_fs_tag_props_props_ref": {
+      "en": "3f5fbfcc",
+      "locales": {
+        "es": "3f5fbfcc"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.ref"
+    },
+    "generated_fs_tag_props_props_secondary_text": {
+      "en": "49302a6a",
+      "locales": {
+        "es": "49302a6a"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.secondaryText"
+    },
+    "generated_fs_tag_props_props_selected": {
+      "en": "a23f4ac8",
+      "locales": {
+        "es": "a23f4ac8"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.selected"
+    },
+    "generated_fs_tag_props_props_shape": {
+      "en": "01f8e359",
+      "locales": {
+        "es": "01f8e359"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.shape"
+    },
+    "generated_fs_tag_props_props_size": {
+      "en": "8897507d",
+      "locales": {
+        "es": "8897507d"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.size"
+    },
+    "generated_fs_tag_props_props_value": {
+      "en": "b3df9436",
+      "locales": {
+        "es": "b3df9436"
+      },
+      "source": "src/lib/components/tag/types.ts#TagProps.value"
+    },
     "generated_fs_text_area_props_props_disabled": {
       "en": "b99cb72f",
       "locales": {

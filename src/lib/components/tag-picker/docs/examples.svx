@@ -1,0 +1,407 @@
+<script lang="ts">
+  import { Avatar, Button, Tag, TagPicker, TagPickerOption, TagPickerOptionGroup } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+  import { ArrowDownFilled } from 'fluentui-icons-svelte';
+
+  const options = [
+    'John Doe',
+    'Jane Doe',
+    'Max Mustermann',
+    'Erika Mustermann',
+    'Pierre Dupont',
+    'Amelie Dupont',
+    'Mario Rossi',
+    'Maria Rossi'
+  ];
+  const longOptions = [
+    'A very long employee name that has to be truncated',
+    'Another very long employee name that gets an ellipsis in the list'
+  ];
+  const managers = options.slice(0, 4);
+  const devs = options.slice(4);
+
+  const aria = { 'aria-label': 'Select Employees' };
+  const groupAria = { 'aria-label': 'Selected Employees' };
+
+  let buttonSelected = $state<string[]>([options[0]]);
+  let defaultSelected = $state<string[]>([]);
+  let expandSelected = $state<string[][]>([[options[0]], [options[0]]]);
+  let filteringSelected = $state<string[]>([]);
+  let groupedSelected = $state<string[]>([]);
+  let freeSelected = $state<string[]>([]);
+  let freeValue = $state('');
+  let secondarySelected = $state<string[]>([options[0]]);
+  let singleSelected = $state<string[]>([]);
+  let sizeSelected = $state<string[][]>([[options[0]], [options[0]], [options[0]]]);
+  let truncatedSelected = $state<string[]>([longOptions[0]]);
+
+  const defaultCode = `
+<script>
+  let selectedOptions = $state([]);
+<\/script>
+
+{#snippet tag({ value, text })}
+  {#snippet media()}
+    <Avatar aria-hidden="true" shape="rounded" name={text} size={16} color="colorful" />
+  {/snippet}
+  <Tag role="listitem" shape="rounded" {value} {media} title={text}>{text}</Tag>
+{/snippet}
+
+<TagPicker
+  bind:selectedOptions
+  {tag}
+  inputProps={{ 'aria-label': 'Select Employees' }}
+  tagGroupProps={{ 'aria-label': 'Selected Employees' }}
+>
+  {#each options as option (option)}
+    <TagPickerOption value={option}>
+      <Avatar aria-hidden="true" shape="rounded" name={option} size={20} color="colorful" />
+      {option}
+    </TagPickerOption>
+  {/each}
+</TagPicker>`;
+
+  const buttonCode = `
+<TagPicker
+  bind:selectedOptions
+  placeholder="Select employees"
+  inputProps={{ 'aria-label': 'Select Employees', readonly: true }}
+>
+  {#each options as option (option)}
+    <TagPickerOption value={option}>{option}</TagPickerOption>
+  {/each}
+</TagPicker>`;
+
+  const disabledCode = `
+<TagPicker disabled selectedOptions={[options[0]]} inputProps={{ 'aria-label': 'Select Employees' }}>
+  {#each options as option (option)}
+    <TagPickerOption value={option}>{option}</TagPickerOption>
+  {/each}
+</TagPicker>`;
+
+  const expandIconCode = `
+<script>
+  import { ArrowDownFilled } from 'fluentui-icons-svelte';
+<\/script>
+
+<!-- A custom icon -->
+<TagPicker bind:selectedOptions expandIcon={ArrowDownFilled} inputProps={{ 'aria-label': 'Select Employees' }}>
+  ...
+</TagPicker>
+
+<!-- No icon -->
+<TagPicker bind:selectedOptions expandIcon={null} inputProps={{ 'aria-label': 'Select Employees' }}>
+  ...
+</TagPicker>`;
+
+  const filteringCode = `
+<TagPicker
+  bind:selectedOptions
+  notFoundText="We couldn't find any matches"
+  inputProps={{ 'aria-label': 'Select Employees' }}
+>
+  {#each options as option (option)}
+    <TagPickerOption value={option}>{option}</TagPickerOption>
+  {/each}
+</TagPicker>`;
+
+  const groupedCode = `
+<TagPicker bind:selectedOptions inputProps={{ 'aria-label': 'Select Employees' }}>
+  <TagPickerOptionGroup label="Managers">
+    {#each managers as option (option)}
+      <TagPickerOption value={option}>{option}</TagPickerOption>
+    {/each}
+  </TagPickerOptionGroup>
+  <TagPickerOptionGroup label="Developers">
+    {#each devs as option (option)}
+      <TagPickerOption value={option}>{option}</TagPickerOption>
+    {/each}
+  </TagPickerOptionGroup>
+</TagPicker>`;
+
+  const noPopoverCode = `
+<script>
+  let selectedOptions = $state([]);
+  let value = $state('');
+<\/script>
+
+<!-- Without children there is no list: Enter hands the text to querySubmitted -->
+<TagPicker
+  bind:selectedOptions
+  bind:value
+  placeholder="Type and press Enter"
+  inputProps={{ 'aria-label': 'Add Employees' }}
+  querySubmitted={(e, query) => {
+    if (!selectedOptions.includes(query)) selectedOptions = [...selectedOptions, query];
+    value = '';
+  }}
+/>`;
+
+  const secondaryActionCode = `
+{#snippet allClear()}
+  <Button appearance="subtle" onclick={() => (selectedOptions = [])}>All Clear</Button>
+{/snippet}
+
+<TagPicker bind:selectedOptions secondaryAction={allClear} inputProps={{ 'aria-label': 'Select Employees' }}>
+  {#each options as option (option)}
+    <TagPickerOption value={option}>{option}</TagPickerOption>
+  {/each}
+</TagPicker>`;
+
+  const singleCode = `
+<TagPicker single bind:selectedOptions inputProps={{ 'aria-label': 'Select Employee' }}>
+  {#each options as option (option)}
+    <TagPickerOption value={option}>{option}</TagPickerOption>
+  {/each}
+</TagPicker>`;
+
+  const sizeCode = `
+{#each ['medium', 'large', 'extra-large'] as size}
+  <TagPicker {size} selectedOptions={[options[0]]} inputProps={{ 'aria-label': size }}>
+    {#each options as option (option)}
+      <TagPickerOption value={option}>{option}</TagPickerOption>
+    {/each}
+  </TagPicker>
+{/each}`;
+
+  const truncatedCode = `
+{#snippet tag({ value, text })}
+  <Tag role="listitem" {value} title={text} style="max-width: 100px;">{text}</Tag>
+{/snippet}
+
+<TagPicker bind:selectedOptions {tag} inputProps={{ 'aria-label': 'Select Employees' }}>
+  {#each [...longOptions, ...options] as option (option)}
+    <TagPickerOption value={option}>
+      <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;">{option}</span>
+    </TagPickerOption>
+  {/each}
+</TagPicker>`;
+</script>
+
+<style>
+  /* A percentage width is cyclic in the shrink-to-fit grid of the showcase, so the width is set against the viewport instead:
+     the card is 3.5rem inside it on a phone, and 31rem inside it once the sidebar shows. */
+  :global(.tp-example) {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    width: min(400px, calc(100vw - 3.5rem));
+    /* The toggle of the card sits on its top edge on a phone. */
+    margin-block-start: 1.25rem;
+    @media (min-width: 769px) {
+      width: min(400px, calc(100vw - 31rem));
+      margin-block-start: 0;
+    }
+  }
+  /* The list of an open picker is taller than its card, so it has to paint over the card below. */
+  :global(.showcase:has(.fs-tagpicker.open)) {
+    z-index: 3;
+  }
+</style>
+
+{#snippet avatarTag({ value, text })}
+  {#snippet media()}
+    <Avatar aria-hidden="true" shape="rounded" name={text} size={16} color="colorful" />
+  {/snippet}
+  <Tag role="listitem" shape="rounded" {value} {media} title={text}>{text}</Tag>
+{/snippet}
+
+{#snippet fixedTag({ value, text })}
+  <Tag role="listitem" {value} title={text} style="max-width: 100px;">{text}</Tag>
+{/snippet}
+
+{#snippet allClear()}
+  <Button appearance="subtle" onclick={() => (secondarySelected = [])}>All Clear</Button>
+{/snippet}
+
+### {m.tagpicker_default_title()}
+
+{m.tagpicker_default_description()}
+
+<Showcase columns={1} code={defaultCode} minHeight="0" disablePanZoom showOverflow>
+  <div class="tp-example">
+    <TagPicker bind:selectedOptions={defaultSelected} tag={avatarTag} inputProps={aria} tagGroupProps={groupAria}>
+      {#each options as option (option)}
+        <TagPickerOption value={option}>
+          <Avatar aria-hidden="true" shape="rounded" name={option} size={20} color="colorful" />
+          {option}
+        </TagPickerOption>
+      {/each}
+    </TagPicker>
+  </div>
+</Showcase>
+
+### {m.tagpicker_button_title()}
+
+{m.tagpicker_button_description()}
+
+<Showcase columns={1} code={buttonCode} minHeight="0" disablePanZoom showOverflow>
+  <div class="tp-example">
+    <TagPicker
+      bind:selectedOptions={buttonSelected}
+      placeholder="Select employees"
+      inputProps={{ 'aria-label': 'Select Employees', readonly: true }}
+    >
+      {#each options as option (option)}
+        <TagPickerOption value={option}>{option}</TagPickerOption>
+      {/each}
+    </TagPicker>
+  </div>
+</Showcase>
+
+### {m.global_disabled()}
+
+{m.tagpicker_disabled_description()}
+
+<Showcase columns={1} code={disabledCode} minHeight="0" disablePanZoom showOverflow>
+  <div class="tp-example">
+    <TagPicker disabled selectedOptions={[options[0]]} inputProps={aria}>
+      {#each options as option (option)}
+        <TagPickerOption value={option}>{option}</TagPickerOption>
+      {/each}
+    </TagPicker>
+  </div>
+</Showcase>
+
+### {m.tagpicker_expand_icon_title()}
+
+{m.tagpicker_expand_icon_description()}
+
+<Showcase columns={1} code={expandIconCode} minHeight="0" disablePanZoom showOverflow>
+  <div class="tp-example">
+    <TagPicker bind:selectedOptions={expandSelected[0]} expandIcon={ArrowDownFilled} inputProps={aria}>
+      {#each options as option (option)}
+        <TagPickerOption value={option}>{option}</TagPickerOption>
+      {/each}
+    </TagPicker>
+    <TagPicker bind:selectedOptions={expandSelected[1]} expandIcon={null} inputProps={aria}>
+      {#each options as option (option)}
+        <TagPickerOption value={option}>{option}</TagPickerOption>
+      {/each}
+    </TagPicker>
+  </div>
+</Showcase>
+
+### {m.tagpicker_filtering_title()}
+
+{m.tagpicker_filtering_description()}
+
+<Showcase columns={1} code={filteringCode} minHeight="0" disablePanZoom showOverflow>
+  <div class="tp-example">
+    <TagPicker bind:selectedOptions={filteringSelected} notFoundText="We couldn't find any matches" inputProps={aria}>
+      {#each options as option (option)}
+        <TagPickerOption value={option}>{option}</TagPickerOption>
+      {/each}
+    </TagPicker>
+  </div>
+</Showcase>
+
+### {m.tagpicker_grouped_title()}
+
+{m.tagpicker_grouped_description()}
+
+<Showcase columns={1} code={groupedCode} minHeight="0" disablePanZoom showOverflow>
+  <div class="tp-example">
+    <TagPicker bind:selectedOptions={groupedSelected} inputProps={aria}>
+      <TagPickerOptionGroup label="Managers">
+        {#each managers as option (option)}
+          <TagPickerOption value={option}>{option}</TagPickerOption>
+        {/each}
+      </TagPickerOptionGroup>
+      <TagPickerOptionGroup label="Developers">
+        {#each devs as option (option)}
+          <TagPickerOption value={option}>{option}</TagPickerOption>
+        {/each}
+      </TagPickerOptionGroup>
+    </TagPicker>
+  </div>
+</Showcase>
+
+### {m.tagpicker_no_popover_title()}
+
+{m.tagpicker_no_popover_description()}
+
+<Showcase columns={1} code={noPopoverCode} minHeight="0" disablePanZoom showOverflow>
+  <div class="tp-example">
+    <TagPicker
+      bind:selectedOptions={freeSelected}
+      bind:value={freeValue}
+      placeholder="Type and press Enter"
+      inputProps={{ 'aria-label': 'Add Employees' }}
+      querySubmitted={(e, query) => {
+        if (!freeSelected.includes(query)) freeSelected = [...freeSelected, query];
+        freeValue = '';
+      }}
+    />
+  </div>
+</Showcase>
+
+### {m.tagpicker_secondary_action_title()}
+
+{m.tagpicker_secondary_action_description()}
+
+<Showcase columns={1} code={secondaryActionCode} minHeight="0" disablePanZoom showOverflow>
+  <div class="tp-example">
+    <TagPicker bind:selectedOptions={secondarySelected} secondaryAction={allClear} inputProps={aria}>
+      {#each options as option (option)}
+        <TagPickerOption value={option}>{option}</TagPickerOption>
+      {/each}
+    </TagPicker>
+  </div>
+</Showcase>
+
+### {m.tagpicker_single_select_title()}
+
+{m.tagpicker_single_select_description()}
+
+<Showcase columns={1} code={singleCode} minHeight="0" disablePanZoom showOverflow>
+  <div class="tp-example">
+    <TagPicker single bind:selectedOptions={singleSelected} inputProps={{ 'aria-label': 'Select Employee' }}>
+      {#each options as option (option)}
+        <TagPickerOption value={option}>{option}</TagPickerOption>
+      {/each}
+    </TagPicker>
+  </div>
+</Showcase>
+
+### {m.global_size()}
+
+{m.tagpicker_size_description()}
+
+<Showcase columns={1} code={sizeCode} minHeight="0" disablePanZoom showOverflow>
+  <div class="tp-example">
+    <TagPicker bind:selectedOptions={sizeSelected[0]} inputProps={{ 'aria-label': 'medium' }}>
+      {#each options as option (option)}
+        <TagPickerOption value={option}>{option}</TagPickerOption>
+      {/each}
+    </TagPicker>
+    <TagPicker size="large" bind:selectedOptions={sizeSelected[1]} inputProps={{ 'aria-label': 'large' }}>
+      {#each options as option (option)}
+        <TagPickerOption value={option}>{option}</TagPickerOption>
+      {/each}
+    </TagPicker>
+    <TagPicker size="extra-large" bind:selectedOptions={sizeSelected[2]} inputProps={{ 'aria-label': 'extra-large' }}>
+      {#each options as option (option)}
+        <TagPickerOption value={option}>{option}</TagPickerOption>
+      {/each}
+    </TagPicker>
+  </div>
+</Showcase>
+
+### {m.tagpicker_truncated_text_title()}
+
+{m.tagpicker_truncated_text_description()}
+
+<Showcase columns={1} code={truncatedCode} minHeight="0" disablePanZoom showOverflow>
+  <div class="tp-example">
+    <TagPicker bind:selectedOptions={truncatedSelected} tag={fixedTag} inputProps={aria}>
+      {#each [...longOptions, ...options] as option (option)}
+        <TagPickerOption value={option}>
+          <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;">{option}</span>
+        </TagPickerOption>
+      {/each}
+    </TagPicker>
+  </div>
+</Showcase>

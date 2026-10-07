@@ -58,6 +58,7 @@ export default defineConfig({
 			'fluentui-icons-svelte/CheckmarkCircleRegular.svelte',
 			'fluentui-icons-svelte/CheckmarkFilled.svelte',
 			'fluentui-icons-svelte/ChevronDownFilled.svelte',
+			'fluentui-icons-svelte/ChevronDownRegular.svelte',
 			'fluentui-icons-svelte/ChevronRightFilled.svelte',
 			'fluentui-icons-svelte/ChevronRightRegular.svelte',
 			'fluentui-icons-svelte/ChevronUpFilled.svelte',

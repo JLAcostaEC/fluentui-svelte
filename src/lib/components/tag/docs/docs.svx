@@ -1,0 +1,38 @@
+<script lang="ts">
+  import { Tag, TagGroup } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+  import { CalendarMonthRegular } from 'fluentui-icons-svelte';
+  import { fitCard } from './fit-card.js';
+</script>
+
+# Tag
+
+{m.tag_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom>
+  <div style="padding-block-start: clamp(0px, calc((768px - 100vw) * 100), 1.5rem);" {@attach fitCard}>
+    <TagGroup aria-label="Tags">
+      <Tag icon={CalendarMonthRegular} dismissible>Filled</Tag>
+      <Tag appearance="outline" icon={CalendarMonthRegular} dismissible>Outline</Tag>
+      <Tag appearance="brand" icon={CalendarMonthRegular} dismissible>Brand</Tag>
+      <Tag appearance="brand" interactive dismissible>Interactive</Tag>
+    </TagGroup>
+  </div>
+</Showcase>
+
+## {m.global_usage()}
+
+```svelte
+<script>
+	import { Tag, TagGroup } from 'fluentui-svelte';
+	import { CalendarMonthRegular } from 'fluentui-icons-svelte';
+</script>
+
+<Tag icon={CalendarMonthRegular}>Primary text</Tag>
+
+<TagGroup aria-label="Fruits">
+	<Tag interactive value="apple">Apple</Tag>
+	<Tag interactive value="banana">Banana</Tag>
+</TagGroup>
+```

@@ -1,0 +1,56 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.tag_tag_props_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TagProps -->
+
+| Name             | Type                                                            | Default          | Description                                                                     |
+| ---------------- | --------------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------- |
+| `appearance`     | `'filled'` &#124; `'outline'` &#124; `'brand'`                  | `'filled'`       | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_appearance} />`     |
+| `size`           | `'extra-small'` &#124; `'small'` &#124; `'medium'`              | `'medium'`       | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_size} />`           |
+| `shape`          | `'circular'` &#124; `'rounded'` &#124; `'square'`               | `'circular'`     | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_shape} />`          |
+| `disabled`       | `boolean`                                                       | `false`          | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_disabled} />`       |
+| `selected`       | `boolean`                                                       | `false`          | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_selected} />`       |
+| `dismissible`    | `boolean`                                                       | `false`          | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_dismissible} />`    |
+| `interactive`    | `boolean`                                                       | `false`          | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_interactive} />`    |
+| `value`          | `string`                                                        |                  | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_value} />`          |
+| `icon`           | `Snippet` &#124; `Component`                                    |                  | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_icon} />`           |
+| `media`          | `Snippet` &#124; `Component`                                    |                  | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_media} />`          |
+| `secondaryText`  | `string` &#124; `Snippet`                                       |                  | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_secondary_text} />` |
+| `dismissIcon`    | `Snippet` &#124; `Component`                                    | `DismissRegular` | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_dismiss_icon} />`   |
+| `dismissLabel`   | `string`                                                        | `'Dismiss'`      | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_dismiss_label} />`  |
+| `onDismiss`      | `(e: MouseEvent` &#124; `KeyboardEvent, value: string) => void` |                  | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_on_dismiss} />`     |
+| `onclick`        | `(e: MouseEvent) => void`                                       |                  | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_onclick} />`        |
+| `onkeydown`      | `(e: KeyboardEvent) => void`                                    |                  | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_onkeydown} />`      |
+| `primaryProps`   | `Omit<HTMLButtonAttributes, 'children'` &#124; `'onclick'>`     |                  | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_primary_props} />`  |
+| `dismissProps`   | `Omit<HTMLButtonAttributes, 'children'` &#124; `'onclick'>`     |                  | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_dismiss_props} />`  |
+| `children`       | `Snippet`                                                       |                  | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_children} />`       |
+| `ref` _bindable_ | `HTMLElement`                                                   |                  | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_ref} />`            |
+| HTML Attributes  |                                                                 |                  |                                                                                 |
+
+<!-- /props:TagProps -->
+
+## {m.tag_taggroup_props_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TagGroupProps -->
+
+| Name                        | Type                                                                      | Default     | Description                                                                            |
+| --------------------------- | ------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------- |
+| `size`                      | `'extra-small'` &#124; `'small'` &#124; `'medium'`                        | `'medium'`  | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_size} />`            |
+| `appearance`                | `'filled'` &#124; `'outline'` &#124; `'brand'`                            |             | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_appearance} />`      |
+| `disabled`                  | `boolean`                                                                 | `false`     | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_disabled} />`        |
+| `dismissible`               | `boolean`                                                                 |             | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_dismissible} />`     |
+| `selectedValues` _bindable_ | `string[]`                                                                | `[]`        | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_selected_values} />` |
+| `onTagSelect`               | `(e: MouseEvent, data: { value: string; selected: boolean }) => void`     |             | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_on_tag_select} />`   |
+| `onDismiss`                 | `(e: MouseEvent` &#124; `KeyboardEvent, data: { value: string }) => void` |             | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_on_dismiss} />`      |
+| `role`                      | `HTMLAttributes<HTMLDivElement>['role']`                                  | `'toolbar'` | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_role} />`            |
+| `children`                  | `Snippet`                                                                 |             | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_children} />`        |
+| `ref` _bindable_            | `HTMLDivElement`                                                          |             | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_ref} />`             |
+| HTML Attributes             |                                                                           |             |                                                                                        |
+
+<!-- /props:TagGroupProps -->

@@ -1,0 +1,63 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.tagpicker_component_props_tagpicker_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TagPickerProps -->
+
+| Name                                                | Type                                               | Default                  | Description                                                                                 |
+| --------------------------------------------------- | -------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLDivElement`                                   |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_ref} />`                 |
+| `inputRef` _bindable_                               | `HTMLInputElement`                                 |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_input_ref} />`           |
+| `selectedOptions` _bindable_                        | `string[]`                                         | `[]`                     | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_selected_options} />`    |
+| `value` _bindable_                                  | `string`                                           | `''`                     | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_value} />`               |
+| `open` _bindable_                                   | `boolean`                                          | `false`                  | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_open} />`                |
+| `single`                                            | `boolean`                                          |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_single} />`              |
+| `disabled`                                          | `boolean`                                          |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_disabled} />`            |
+| `size`                                              | `'medium'` &#124; `'large'` &#124; `'extra-large'` | `'medium'`               | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_size} />`                |
+| `placeholder`                                       | `string`                                           |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_placeholder} />`         |
+| `notFoundText`                                      | `string`                                           | `'No options available'` | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_not_found_text} />`      |
+| `expandIcon`                                        | `Snippet` &#124; `Component` &#124; `null`         | `ChevronDownRegular`     | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_expand_icon} />`         |
+| `secondaryAction`                                   | `Snippet`                                          |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_secondary_action} />`    |
+| `tag`                                               | `Snippet<[{ value: string; text: string }]>`       |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_tag} />`                 |
+| `tagGroupProps`                                     | `TagGroupProps`                                    |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_tag_group_props} />`     |
+| `inputProps`                                        | `HTMLInputAttributes`                              |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_input_props} />`         |
+| `onSelectionChange`                                 | `(e: Event, selectedOptions: string[]) => void`    |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_on_selection_change} />` |
+| `querySubmitted`                                    | `(e: KeyboardEvent, query: string) => void`        |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_query_submitted} />`     |
+| `children`                                          | `Snippet`                                          |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_children} />`            |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                                                    |                          |                                                                                             |
+
+<!-- /props:TagPickerProps -->
+
+## {m.tagpicker_component_props_tagpickeroption_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TagPickerOptionProps -->
+
+| Name                                                                     | Type            | Default | Description                                                                             |
+| ------------------------------------------------------------------------ | --------------- | ------- | --------------------------------------------------------------------------------------- |
+| `value`                                                                  | `string`        |         | `<I18nMarkupMessage message={m.generated_fs_tag_picker_option_props_props_value} />`    |
+| `text`                                                                   | `string`        |         | `<I18nMarkupMessage message={m.generated_fs_tag_picker_option_props_props_text} />`     |
+| `id`                                                                     | `string`        |         | `<I18nMarkupMessage message={m.generated_fs_tag_picker_option_props_props_id} />`       |
+| `ref` _bindable_                                                         | `HTMLLIElement` |         | `<I18nMarkupMessage message={m.generated_fs_tag_picker_option_props_props_ref} />`      |
+| `disabled`                                                               | `boolean`       |         | `<I18nMarkupMessage message={m.generated_fs_tag_picker_option_props_props_disabled} />` |
+| `ListViewItemProps<'li'>` without `as`, `value`, `onAction`, `checkmark` |                 |         |                                                                                         |
+
+<!-- /props:TagPickerOptionProps -->
+
+## {m.tagpicker_component_props_tagpickeroptiongroup_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TagPickerOptionGroupProps -->
+
+| Name                                                  | Type               | Default | Description                                                                                   |
+| ----------------------------------------------------- | ------------------ | ------- | --------------------------------------------------------------------------------------------- |
+| `label`                                               | `string`           |         | `<I18nMarkupMessage message={m.generated_fs_tag_picker_option_group_props_props_label} />`    |
+| `ref` _bindable_                                      | `HTMLUListElement` |         | `<I18nMarkupMessage message={m.generated_fs_tag_picker_option_group_props_props_ref} />`      |
+| `children`                                            | `Snippet`          |         | `<I18nMarkupMessage message={m.generated_fs_tag_picker_option_group_props_props_children} />` |
+| `HTMLAttributes<HTMLUListElement>` without `children` |                    |         |                                                                                               |
+
+<!-- /props:TagPickerOptionGroupProps -->

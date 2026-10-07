@@ -88,7 +88,7 @@
 	},
 	"dependencies": {
 		"@floating-ui/dom": "^1.8.0",
-		"fluentui-icons-svelte": "^1.1.1",
+		"fluentui-icons-svelte": "^1.2.0",
 		"mode-watcher": "^1.1.0",
 		"runed": "^0.37.1",
 		"tabspot": "^0.8.0"

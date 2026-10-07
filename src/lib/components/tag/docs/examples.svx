@@ -1,0 +1,533 @@
+<script lang="ts">
+  import { Avatar, Button, InfoBar, Tag, TagGroup } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { m } from '$i18n/messages.js';
+  import { CalendarMonthRegular } from 'fluentui-icons-svelte';
+  import { fitCard } from './fit-card.js';
+
+  const sizes = ['medium', 'small', 'extra-small'] as const;
+  // Phones only: the View Code toggle floats over the card's top corner, so the first row clears it.
+  const lead = 'padding-block-start: clamp(0px, calc((768px - 100vw) * 100), 1.5rem);';
+  const row = 'display: flex; flex-wrap: wrap; align-items: center; gap: 10px;';
+  const column = `display: flex; flex-direction: column; align-items: flex-start; gap: 10px; ${lead}`;
+
+  const initialTags = [
+    { value: '1', text: 'Tag 1' },
+    { value: '2', text: 'Tag 2' },
+    { value: '3', text: 'Tag 3' }
+  ];
+
+  let dismissed = $state(false);
+  let clicks = $state(0);
+  let plainTags = $state(initialTags);
+  let interactiveTags = $state(initialTags);
+  let selectedValues = $state<string[]>([]);
+  let dismissibleSelectedValues = $state<string[]>([]);
+  let dismissibleSelectTags = $state(initialTags);
+
+  const appearanceCode = `
+<Tag icon={CalendarMonthRegular} dismissible>filled</Tag>
+<Tag appearance="outline" icon={CalendarMonthRegular} dismissible>outline</Tag>
+<Tag appearance="brand" icon={CalendarMonthRegular} dismissible>brand</Tag>`;
+
+  const disabledCode = `
+<Tag disabled secondaryText="appearance=filled" icon={CalendarMonthRegular} dismissible>Disabled</Tag>
+<Tag disabled appearance="outline" secondaryText="appearance=outline" icon={CalendarMonthRegular} dismissible>Disabled</Tag>
+<Tag disabled appearance="brand" secondaryText="appearance=brand" icon={CalendarMonthRegular} dismissible>Disabled</Tag>`;
+
+  const dismissCode = `
+<script>
+  let dismissed = $state(false);
+<\/script>
+
+{#if !dismissed}
+  <Tag dismissible onDismiss={() => (dismissed = true)}>Tag 1</Tag>
+{/if}
+<Button disabled={!dismissed} onclick={() => (dismissed = false)}>Reset the example</Button>`;
+
+  const dismissLabelCode = `
+<!-- The dismiss icon names the button: "Tag 1 Remove" -->
+<Tag dismissible dismissLabel="Remove">Tag 1</Tag>
+
+<!-- Name the tag itself, and the dismiss icon is hidden from assistive technologies -->
+<Tag dismissible aria-label="Remove Tag 2">Tag 2</Tag>`;
+
+  const interactiveCode = `
+<script>
+  let clicks = $state(0);
+<\/script>
+
+<Tag interactive dismissible onclick={() => clicks++}>Clicked {clicks} times</Tag>
+<Tag interactive>Without dismiss</Tag>
+<Tag interactive dismissible dismissLabel="Remove" dismissProps={{ 'aria-label': 'Remove Tag', 'aria-labelledby': undefined }}>
+  Own accessible name
+</Tag>
+<Button disabled={clicks === 0} onclick={() => (clicks = 0)}>Reset the example</Button>`;
+
+  const iconCode = `
+<Tag icon={CalendarMonthRegular}>Primary text</Tag>`;
+
+  const mediaCode = `
+{#snippet avatar()}
+  <Avatar name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
+{/snippet}
+
+<Tag media={avatar}>Primary text</Tag>`;
+
+  const secondaryTextCode = `
+<Tag secondaryText="Secondary text">Primary text</Tag>`;
+
+  const selectedCode = `
+<Tag selected secondaryText="appearance=filled" icon={CalendarMonthRegular} dismissible>Selected</Tag>
+<Tag selected appearance="outline" secondaryText="appearance=outline" icon={CalendarMonthRegular} dismissible>Selected</Tag>
+<Tag selected appearance="brand" secondaryText="appearance=brand" icon={CalendarMonthRegular} dismissible>Selected</Tag>`;
+
+  const shapeCode = `
+{#snippet avatar()}
+  <Avatar name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
+{/snippet}
+
+<Tag media={avatar}>Circular</Tag>
+<Tag shape="rounded" media={avatar}>Rounded</Tag>
+<Tag shape="square" media={avatar}>Square</Tag>
+
+<Tag dismissible icon={CalendarMonthRegular} secondaryText="Secondary text">Circular</Tag>
+<Tag shape="rounded" dismissible icon={CalendarMonthRegular} secondaryText="Secondary text">Rounded</Tag>
+<Tag shape="square" dismissible icon={CalendarMonthRegular} secondaryText="Secondary text">Square</Tag>`;
+
+  const sizeCode = `
+{#snippet avatar()}
+  <Avatar name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
+{/snippet}
+{#snippet smallAvatar()}
+  <Avatar name="Katri Athokas" size={20} badge={{ status: 'busy' }} />
+{/snippet}
+{#snippet extraSmallAvatar()}
+  <Avatar name="Katri Athokas" size={16} badge={{ status: 'busy' }} />
+{/snippet}
+
+<Tag>Medium</Tag>
+<Tag dismissible media={avatar}>Medium dismissible</Tag>
+<Tag icon={CalendarMonthRegular}>Medium with icon</Tag>
+
+<Tag size="small">Small</Tag>
+<Tag size="small" dismissible media={smallAvatar}>Small dismissible</Tag>
+<Tag size="small" icon={CalendarMonthRegular}>Small with icon</Tag>
+
+<Tag size="extra-small">Extra small</Tag>
+<Tag size="extra-small" dismissible media={extraSmallAvatar}>Extra small dismissible</Tag>
+<Tag size="extra-small" icon={CalendarMonthRegular}>Extra small with icon</Tag>`;
+
+  const groupDefaultCode = `
+<!-- Tags that are not actionable are a list -->
+<TagGroup aria-label="Simple tag group with Tag" role="list">
+  <Tag role="listitem">Tag 1</Tag>
+  <Tag role="listitem">Tag 2</Tag>
+  <Tag role="listitem">Tag 3</Tag>
+</TagGroup>
+
+<!-- Interactive tags are a toolbar, which is the default role -->
+<TagGroup aria-label="Simple tag group with interactive tags">
+  <Tag interactive>Tag 1</Tag>
+  <Tag interactive>Tag 2</Tag>
+  <Tag interactive>Tag 3</Tag>
+</TagGroup>`;
+
+  const groupDisabledCode = `
+<TagGroup disabled aria-label="Disabled tag group with Tag" role="list">
+  <Tag role="listitem">Tag 1</Tag>
+  <Tag role="listitem">Tag 2</Tag>
+  <Tag role="listitem">Tag 3</Tag>
+</TagGroup>
+
+<TagGroup disabled aria-label="Disabled tag group with interactive tags">
+  <Tag interactive>Tag 1</Tag>
+  <Tag interactive>Tag 2</Tag>
+  <Tag interactive>Tag 3</Tag>
+</TagGroup>`;
+
+  const groupDismissCode = `
+<script>
+  const initialTags = [
+    { value: '1', text: 'Tag 1' },
+    { value: '2', text: 'Tag 2' },
+    { value: '3', text: 'Tag 3' }
+  ];
+
+  let plainTags = $state(initialTags);
+  let interactiveTags = $state(initialTags);
+<\/script>
+
+<TagGroup
+  dismissible
+  aria-label="TagGroup example with dismissible tags"
+  onDismiss={(e, { value }) => (plainTags = plainTags.filter((tag) => tag.value !== value))}
+>
+  {#each plainTags as tag (tag.value)}
+    <Tag value={tag.value}>{tag.text}</Tag>
+  {/each}
+</TagGroup>
+<Button disabled={plainTags.length === initialTags.length} onclick={() => (plainTags = initialTags)}>
+  Reset the example
+</Button>
+
+<TagGroup
+  dismissible
+  aria-label="TagGroup example with dismissible interactive tags"
+  onDismiss={(e, { value }) => (interactiveTags = interactiveTags.filter((tag) => tag.value !== value))}
+>
+  {#each interactiveTags as tag (tag.value)}
+    <Tag interactive value={tag.value}>{tag.text}</Tag>
+  {/each}
+</TagGroup>
+<Button disabled={interactiveTags.length === initialTags.length} onclick={() => (interactiveTags = initialTags)}>
+  Reset the example
+</Button>`;
+
+  const groupSelectCode = `
+<script>
+  const initialTags = [
+    { value: '1', text: 'Tag 1' },
+    { value: '2', text: 'Tag 2' },
+    { value: '3', text: 'Tag 3' }
+  ];
+
+  let selectedValues = $state([]);
+  let tags = $state(initialTags);
+  let dismissibleSelectedValues = $state([]);
+
+  const reset = () => {
+    selectedValues = [];
+    dismissibleSelectedValues = [];
+    tags = initialTags;
+  };
+<\/script>
+
+<p>Selected values: {selectedValues.join(', ')}</p>
+<TagGroup bind:selectedValues aria-label="Tag group with multiselect tags">
+  <Tag interactive value="1">Tag 1</Tag>
+  <Tag interactive value="2">Tag 2</Tag>
+  <Tag interactive value="3">Tag 3</Tag>
+</TagGroup>
+
+<p>Selected values: {dismissibleSelectedValues.join(', ')}</p>
+<TagGroup
+  dismissible
+  bind:selectedValues={dismissibleSelectedValues}
+  aria-label="Tag group with dismissible multiselect tags"
+  onDismiss={(e, { value }) => {
+    dismissibleSelectedValues = dismissibleSelectedValues.filter((v) => v !== value);
+    tags = tags.filter((tag) => tag.value !== value);
+  }}
+>
+  {#each tags as tag (tag.value)}
+    <Tag interactive value={tag.value}>{tag.text}</Tag>
+  {/each}
+</TagGroup>
+
+<Button
+  disabled={!selectedValues.length && !dismissibleSelectedValues.length && tags.length === initialTags.length}
+  onclick={reset}
+>
+  Reset the example
+</Button>`;
+
+  const groupSizesCode = `
+{#each ['medium', 'small', 'extra-small'] as size}
+  <TagGroup {size} aria-label="{size} tag group example">
+    <Tag interactive>{size}</Tag>
+    <Tag interactive icon={CalendarMonthRegular}>{size}</Tag>
+    <Tag interactive dismissible icon={CalendarMonthRegular}>{size}</Tag>
+  </TagGroup>
+{/each}`;
+</script>
+
+### {m.global_appearance()}
+
+{m.tag_appearance_description()}
+
+<Showcase columns={1} code={appearanceCode} minHeight="0" disablePanZoom>
+  <div style={row + lead} {@attach fitCard}>
+    <Tag icon={CalendarMonthRegular} dismissible>filled</Tag>
+    <Tag appearance="outline" icon={CalendarMonthRegular} dismissible>outline</Tag>
+    <Tag appearance="brand" icon={CalendarMonthRegular} dismissible>brand</Tag>
+  </div>
+</Showcase>
+
+### {m.global_disabled()}
+
+{m.tag_disabled_description()}
+
+<Showcase columns={1} code={disabledCode} minHeight="0" disablePanZoom>
+  <div style={row + lead} {@attach fitCard}>
+    <Tag disabled secondaryText="appearance=filled" icon={CalendarMonthRegular} dismissible>Disabled</Tag>
+    <Tag disabled appearance="outline" secondaryText="appearance=outline" icon={CalendarMonthRegular} dismissible>Disabled</Tag>
+    <Tag disabled appearance="brand" secondaryText="appearance=brand" icon={CalendarMonthRegular} dismissible>Disabled</Tag>
+  </div>
+</Showcase>
+
+### {m.tag_dismiss_title()}
+
+{m.tag_dismiss_description()}
+
+<Showcase columns={1} code={dismissCode} minHeight="0" disablePanZoom>
+  <div style={column} {@attach fitCard}>
+    {#if !dismissed}
+      <Tag dismissible onDismiss={() => (dismissed = true)}>Tag 1</Tag>
+    {/if}
+    <Button disabled={!dismissed} onclick={() => (dismissed = false)}>Reset the example</Button>
+  </div>
+</Showcase>
+
+### {m.tag_dismiss_label_title()}
+
+{m.tag_dismiss_label_description()}
+
+<Showcase columns={1} code={dismissLabelCode} minHeight="0" disablePanZoom>
+  <div style={row + lead} {@attach fitCard}>
+    <Tag dismissible dismissLabel="Remove">Tag 1</Tag>
+    <Tag dismissible aria-label="Remove Tag 2">Tag 2</Tag>
+  </div>
+</Showcase>
+
+### {m.tag_interactive_title()}
+
+{m.tag_interactive_description()}
+
+<Showcase columns={1} code={interactiveCode} minHeight="0" disablePanZoom>
+  <div style={row + lead} {@attach fitCard}>
+    <Tag interactive dismissible onclick={() => clicks++}>Clicked {clicks} times</Tag>
+    <Tag interactive>Without dismiss</Tag>
+    <Tag interactive dismissible dismissLabel="Remove" dismissProps={{ 'aria-label': 'Remove Tag', 'aria-labelledby': undefined }}>
+      Own accessible name
+    </Tag>
+    <Button disabled={clicks === 0} onclick={() => (clicks = 0)}>Reset the example</Button>
+  </div>
+</Showcase>
+
+### {m.global_icon()}
+
+{m.tag_icon_description()}
+
+<Showcase columns={1} code={iconCode} minHeight="0" disablePanZoom>
+  <Tag icon={CalendarMonthRegular}>Primary text</Tag>
+</Showcase>
+
+### {m.tag_media_title()}
+
+{m.tag_media_description()}
+
+<InfoBar status="warning" style="multiline" title={m.tag_media_icon_title()} hideCloseButton>
+  <p>{m.tag_media_icon_description()}</p>
+</InfoBar>
+
+{#snippet avatar()}
+  <Avatar name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
+{/snippet}
+
+<Showcase columns={1} code={mediaCode} minHeight="0" disablePanZoom>
+  <Tag media={avatar}>Primary text</Tag>
+</Showcase>
+
+### {m.tag_secondary_text_title()}
+
+{m.tag_secondary_text_description()}
+
+<Showcase columns={1} code={secondaryTextCode} minHeight="0" disablePanZoom>
+  <Tag secondaryText="Secondary text">Primary text</Tag>
+</Showcase>
+
+### {m.tag_selected_title()}
+
+{m.tag_selected_description()}
+
+<Showcase columns={1} code={selectedCode} minHeight="0" disablePanZoom>
+  <div style={row + lead} {@attach fitCard}>
+    <Tag selected secondaryText="appearance=filled" icon={CalendarMonthRegular} dismissible>Selected</Tag>
+    <Tag selected appearance="outline" secondaryText="appearance=outline" icon={CalendarMonthRegular} dismissible>Selected</Tag>
+    <Tag selected appearance="brand" secondaryText="appearance=brand" icon={CalendarMonthRegular} dismissible>Selected</Tag>
+  </div>
+</Showcase>
+
+### {m.global_shape()}
+
+{m.tag_shape_description()}
+
+<Showcase columns={1} code={shapeCode} minHeight="0" disablePanZoom>
+  <div style={column} {@attach fitCard}>
+    <div style={row}>
+      <Tag media={avatar}>Circular</Tag>
+      <Tag shape="rounded" media={avatar}>Rounded</Tag>
+      <Tag shape="square" media={avatar}>Square</Tag>
+    </div>
+    <div style={row}>
+      <Tag dismissible icon={CalendarMonthRegular} secondaryText="Secondary text">Circular</Tag>
+      <Tag shape="rounded" dismissible icon={CalendarMonthRegular} secondaryText="Secondary text">Rounded</Tag>
+      <Tag shape="square" dismissible icon={CalendarMonthRegular} secondaryText="Secondary text">Square</Tag>
+    </div>
+  </div>
+</Showcase>
+
+### {m.global_size()}
+
+{m.tag_size_description()}
+
+{#snippet smallAvatar()}
+  <Avatar name="Katri Athokas" size={20} badge={{ status: 'busy' }} />
+{/snippet}
+
+{#snippet extraSmallAvatar()}
+  <Avatar name="Katri Athokas" size={16} badge={{ status: 'busy' }} />
+{/snippet}
+
+<Showcase columns={1} code={sizeCode} minHeight="0" disablePanZoom>
+  <div style={column} {@attach fitCard}>
+    <div style={row}>
+      <Tag>Medium</Tag>
+      <Tag dismissible media={avatar}>Medium dismissible</Tag>
+      <Tag icon={CalendarMonthRegular}>Medium with icon</Tag>
+    </div>
+    <div style={row}>
+      <Tag size="small">Small</Tag>
+      <Tag size="small" dismissible media={smallAvatar}>Small dismissible</Tag>
+      <Tag size="small" icon={CalendarMonthRegular}>Small with icon</Tag>
+    </div>
+    <div style={row}>
+      <Tag size="extra-small">Extra small</Tag>
+      <Tag size="extra-small" dismissible media={extraSmallAvatar}>Extra small dismissible</Tag>
+      <Tag size="extra-small" icon={CalendarMonthRegular}>Extra small with icon</Tag>
+    </div>
+  </div>
+</Showcase>
+
+## {m.taggroup_api_title()}
+
+{m.taggroup_description()}
+
+### {m.global_usage()}
+
+{m.taggroup_default_description()}
+
+<Showcase columns={1} code={groupDefaultCode} minHeight="0" disablePanZoom>
+  <div style={column} {@attach fitCard}>
+    <TagGroup aria-label="Simple tag group with Tag" role="list">
+      <Tag role="listitem">Tag 1</Tag>
+      <Tag role="listitem">Tag 2</Tag>
+      <Tag role="listitem">Tag 3</Tag>
+    </TagGroup>
+    <TagGroup aria-label="Simple tag group with interactive tags">
+      <Tag interactive>Tag 1</Tag>
+      <Tag interactive>Tag 2</Tag>
+      <Tag interactive>Tag 3</Tag>
+    </TagGroup>
+  </div>
+</Showcase>
+
+### {m.global_disabled()}
+
+{m.taggroup_disabled_description()}
+
+<Showcase columns={1} code={groupDisabledCode} minHeight="0" disablePanZoom>
+  <div style={column} {@attach fitCard}>
+    <TagGroup disabled aria-label="Disabled tag group with Tag" role="list">
+      <Tag role="listitem">Tag 1</Tag>
+      <Tag role="listitem">Tag 2</Tag>
+      <Tag role="listitem">Tag 3</Tag>
+    </TagGroup>
+    <TagGroup disabled aria-label="Disabled tag group with interactive tags">
+      <Tag interactive>Tag 1</Tag>
+      <Tag interactive>Tag 2</Tag>
+      <Tag interactive>Tag 3</Tag>
+    </TagGroup>
+  </div>
+</Showcase>
+
+### {m.taggroup_dismiss_title()}
+
+{m.taggroup_dismiss_description()}
+
+<Showcase columns={1} code={groupDismissCode} minHeight="0" disablePanZoom>
+  <div style={column} {@attach fitCard}>
+    <TagGroup
+      dismissible
+      aria-label="TagGroup example with dismissible tags"
+      onDismiss={(e, { value }) => (plainTags = plainTags.filter((tag) => tag.value !== value))}
+    >
+      {#each plainTags as tag (tag.value)}
+        <Tag value={tag.value}>{tag.text}</Tag>
+      {/each}
+    </TagGroup>
+    <Button disabled={plainTags.length === initialTags.length} onclick={() => (plainTags = initialTags)}>
+      Reset the example
+    </Button>
+    <TagGroup
+      dismissible
+      aria-label="TagGroup example with dismissible interactive tags"
+      onDismiss={(e, { value }) => (interactiveTags = interactiveTags.filter((tag) => tag.value !== value))}
+    >
+      {#each interactiveTags as tag (tag.value)}
+        <Tag interactive value={tag.value}>{tag.text}</Tag>
+      {/each}
+    </TagGroup>
+    <Button disabled={interactiveTags.length === initialTags.length} onclick={() => (interactiveTags = initialTags)}>
+      Reset the example
+    </Button>
+  </div>
+</Showcase>
+
+### {m.taggroup_select_title()}
+
+{m.taggroup_select_description()}
+
+<Showcase columns={1} code={groupSelectCode} minHeight="0" disablePanZoom>
+  <div style={column} {@attach fitCard}>
+    <p>Selected values: {selectedValues.join(', ')}</p>
+    <TagGroup bind:selectedValues aria-label="Tag group with multiselect tags">
+      <Tag interactive value="1">Tag 1</Tag>
+      <Tag interactive value="2">Tag 2</Tag>
+      <Tag interactive value="3">Tag 3</Tag>
+    </TagGroup>
+    <p>Selected values: {dismissibleSelectedValues.join(', ')}</p>
+    <TagGroup
+      dismissible
+      bind:selectedValues={dismissibleSelectedValues}
+      aria-label="Tag group with dismissible multiselect tags"
+      onDismiss={(e, { value }) => {
+        dismissibleSelectedValues = dismissibleSelectedValues.filter((v) => v !== value);
+        dismissibleSelectTags = dismissibleSelectTags.filter((tag) => tag.value !== value);
+      }}
+    >
+      {#each dismissibleSelectTags as tag (tag.value)}
+        <Tag interactive value={tag.value}>{tag.text}</Tag>
+      {/each}
+    </TagGroup>
+    <Button
+      disabled={!selectedValues.length &&
+        !dismissibleSelectedValues.length &&
+        dismissibleSelectTags.length === initialTags.length}
+      onclick={() => {
+        selectedValues = [];
+        dismissibleSelectedValues = [];
+        dismissibleSelectTags = initialTags;
+      }}
+    >
+      Reset the example
+    </Button>
+  </div>
+</Showcase>
+
+### {m.taggroup_sizes_title()}
+
+{m.taggroup_sizes_description()}
+
+<Showcase columns={1} code={groupSizesCode} minHeight="0" disablePanZoom>
+  <div style={column} {@attach fitCard}>
+    {#each sizes as size (size)}
+      <TagGroup {size} aria-label="{size} tag group example">
+        <Tag interactive>{size}</Tag>
+        <Tag interactive icon={CalendarMonthRegular}>{size}</Tag>
+        <Tag interactive dismissible icon={CalendarMonthRegular}>{size}</Tag>
+      </TagGroup>
+    {/each}
+  </div>
+</Showcase>

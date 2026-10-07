@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { DialogContentProps } from './types.ts';
 
-	let { children }: DialogContentProps = $props();
+	let { ref = $bindable(), class: classes, children, ...attributes }: DialogContentProps = $props();
 </script>
 
-<div class="dialog-content">
+<div class={['dialog-content', classes]} bind:this={ref} {...attributes}>
 	{@render children?.()}
 </div>
 

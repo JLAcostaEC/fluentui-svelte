@@ -99,7 +99,7 @@ Add a `DialogActions` region to render action buttons in the dialog footer. Use 
 
 | Name                    | Type                | Default | Description                               |
 | ----------------------- | ------------------- | ------- | ----------------------------------------- |
-| `ref`                   | `HTMLButtonElement` |         | The DOM reference of the trigger element. |
+| `ref` _bindable_        | `HTMLButtonElement` |         | The DOM reference of the trigger element. |
 | `ButtonProps<'button'>` |                     |         |                                           |
 
 <!-- /props:DialogTriggerProps -->
@@ -136,7 +136,7 @@ Add a `DialogActions` region to render action buttons in the dialog footer. Use 
 
 | Name                       | Type             | Default | Description                               |
 | -------------------------- | ---------------- | ------- | ----------------------------------------- |
-| `ref`                      | `HTMLDivElement` |         | The DOM reference of the content element. |
+| `ref` _bindable_           | `HTMLDivElement` |         | The DOM reference of the content element. |
 | Element Attributes (`div`) |                  |         |                                           |
 
 <!-- /props:DialogContentProps -->

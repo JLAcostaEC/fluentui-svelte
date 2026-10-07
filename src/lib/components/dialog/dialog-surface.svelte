@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { onClickOutside } from 'runed';
+	import { on } from 'svelte/events';
 	import type { DialogSurfaceProps } from './types.ts';
 	import { getDialogContext } from './dialog.svelte.ts';
 	import { Button } from '$lib/index.js';
 	import DismissFilled from 'fluentui-icons-svelte/DismissFilled.svelte';
 
-	let { ref = $bindable(), children, ...attributes }: DialogSurfaceProps = $props();
+	let { ref = $bindable(), class: classes, oncancel, children, ...attributes }: DialogSurfaceProps = $props();
 
 	const CONTEXT = getDialogContext();
 
@@ -17,14 +18,35 @@
 
 	const { closeDialog } = methods;
 
+	// runed reports an outside press 10ms after the pointer goes down. By then the press that opens the
+	// dialog has already opened it, and a press while it is closed has nothing to dismiss, so remember
+	// whether the dialog was open at the moment the pointer went down.
+	let openOnPointerDown = false;
+
+	$effect(() => {
+		const doc = ref?.ownerDocument;
+		if (!doc) return;
+		return on(doc, 'pointerdown', () => (openOnPointerDown = !!ref?.open), { capture: true });
+	});
+
 	// Registered unconditionally and guarded from inside, so switching `type` after mount is honored.
 	onClickOutside(
 		() => ref,
 		() => {
-			if (config.type === 'alert') return;
+			if (config.type === 'alert' || !openOnPointerDown) return;
 			closeDialog();
 		}
 	);
+
+	// Escape cancels a modal dialog natively. An alert has to be answered with one of its actions, and any
+	// other modal closes through `closeDialog` so `onOpenChange` hears about it. A consumer's `oncancel`
+	// can still veto it with `preventDefault`.
+	function handleCancel(e: Event & { currentTarget: EventTarget & HTMLDialogElement }) {
+		oncancel?.(e);
+		if (e.defaultPrevented) return;
+		e.preventDefault();
+		if (config.type !== 'alert') closeDialog();
+	}
 
 	$effect(() => {
 		if (!ref) return;
@@ -32,7 +54,14 @@
 	});
 </script>
 
-<dialog open={_state.open} class="fs-dialog" aria-labelledby={_state.titleId} bind:this={ref} {...attributes}>
+<dialog
+	open={_state.open}
+	class={['fs-dialog', classes]}
+	aria-labelledby={_state.titleId}
+	bind:this={ref}
+	oncancel={handleCancel}
+	{...attributes}
+>
 	<div class="dialog-wrapper">
 		{#if config.type === 'non-modal'}
 			<Button class="close-icon" appearance="subtle" onclick={() => methods.closeDialog()} aria-label="Close dialog">

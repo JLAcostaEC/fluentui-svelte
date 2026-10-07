@@ -24,7 +24,7 @@
 
 | Name                    | Type                | Default | Description                                                                     |
 | ----------------------- | ------------------- | ------- | ------------------------------------------------------------------------------- |
-| `ref`                   | `HTMLButtonElement` |         | `<I18nMarkupMessage message={m.generated_fs_dialog_trigger_props_props_ref} />` |
+| `ref` _bindable_        | `HTMLButtonElement` |         | `<I18nMarkupMessage message={m.generated_fs_dialog_trigger_props_props_ref} />` |
 | `ButtonProps<'button'>` |                     |         |                                                                                 |
 
 <!-- /props:DialogTriggerProps -->
@@ -61,7 +61,7 @@
 
 | Name                       | Type             | Default | Description                                                                     |
 | -------------------------- | ---------------- | ------- | ------------------------------------------------------------------------------- |
-| `ref`                      | `HTMLDivElement` |         | `<I18nMarkupMessage message={m.generated_fs_dialog_content_props_props_ref} />` |
+| `ref` _bindable_           | `HTMLDivElement` |         | `<I18nMarkupMessage message={m.generated_fs_dialog_content_props_props_ref} />` |
 | Element Attributes (`div`) |                  |         |                                                                                 |
 
 <!-- /props:DialogContentProps -->

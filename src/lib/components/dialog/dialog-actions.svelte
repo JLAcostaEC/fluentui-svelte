@@ -2,7 +2,14 @@
 	import { getTabspotAttributes } from 'tabspot';
 	import type { DialogActionsProps } from './types.ts';
 
-	let { ref = $bindable(), position = 'end', fluid, children }: DialogActionsProps = $props();
+	let {
+		ref = $bindable(),
+		position = 'end',
+		fluid,
+		class: classes,
+		children,
+		...attributes
+	}: DialogActionsProps = $props();
 
 	// The bar is one tab stop holding a row of buttons: without the mover the root would
 	// take the tab stop and then offer no way to reach the rest of the buttons.
@@ -12,7 +19,12 @@
 	});
 </script>
 
-<div class={['dialog-actions', `justify-${position}`, { fluid }]} bind:this={ref} {...tabspotAttributes}>
+<div
+	class={['dialog-actions', `justify-${position}`, { fluid }, classes]}
+	bind:this={ref}
+	{...tabspotAttributes}
+	{...attributes}
+>
 	{@render children?.()}
 </div>
 
@@ -32,6 +44,9 @@
 		}
 		&.justify-end {
 			justify-content: flex-end;
+		}
+		&.fluid > :global(*) {
+			flex: 1 1 0;
 		}
 	}
 </style>

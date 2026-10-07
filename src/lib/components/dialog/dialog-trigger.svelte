@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { Button } from '$lib/index.js';
+	import { invokeHandlers } from '$internal';
 	import { getDialogContext } from './dialog.svelte.ts';
 	import type { DialogTriggerProps } from './types.ts';
 
-	let { children }: DialogTriggerProps = $props();
+	let { ref = $bindable(), class: classes, onclick, children, ...attributes }: DialogTriggerProps = $props();
 
 	const CONTEXT = getDialogContext();
 
@@ -14,7 +15,12 @@
 	const { methods } = CONTEXT;
 </script>
 
-<Button class="dialog-trigger" onclick={methods.openDialog}>
+<Button
+	bind:ref
+	class={['dialog-trigger', classes]}
+	onclick={(e: MouseEvent) => invokeHandlers(e, [], [onclick, methods.openDialog])}
+	{...attributes}
+>
 	{#if children}
 		{@render children()}
 	{:else}

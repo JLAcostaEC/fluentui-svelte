@@ -135,6 +135,11 @@ export { default as ProgressRing } from './components/progress-ring/progress-rin
 export { default as RadioButton } from './components/radio-button/radio-button.svelte';
 // End RadioButton Component
 
+// Start Rating Component
+export { default as Rating } from './components/rating/rating.svelte';
+export type { RatingProps } from './components/rating/types.js';
+// End Rating Component
+
 // Start Skeleton Component
 export { default as Skeleton } from './components/skeleton/skeleton.svelte';
 // End Skeleton Component

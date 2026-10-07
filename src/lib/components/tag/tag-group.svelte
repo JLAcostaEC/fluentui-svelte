@@ -56,19 +56,22 @@
 				onTagSelect?.(e, { value, selected });
 			},
 			async dismiss(e, value) {
-				// The tag will most likely leave the DOM, so hand its focus to the next tag (or the last one before it).
+				// Retain the next tag (or the last one before it) in case the consumer removes this tag.
 				const tag = (e.target as Element).closest('.fs-tag');
 				const others = [...(ref?.querySelectorAll<HTMLButtonElement>('button.fs-tag, .fs-tag-primary') ?? [])].filter(
 					(el) => !el.disabled && el.closest('.fs-tag') !== tag
 				);
-				(
+				const nextFocus =
 					others.find((el) => (tag?.compareDocumentPosition(el) ?? 0) & Node.DOCUMENT_POSITION_FOLLOWING) ??
-					others.at(-1)
-				)?.focus();
+					others.at(-1);
 				onDismiss?.(e, { value });
 				// Tabspot does not notice a removed tag, so it learns the new tags once the consumer has dropped it.
 				// The last tag leaving takes the group with it, and a rebuild without a root would walk every one.
 				await tick();
+				// Preserve focus when the consumer has already moved it, such as to a picker input.
+				if (tag && !tag.isConnected && nextFocus?.isConnected && document.activeElement === document.body) {
+					nextFocus.focus();
+				}
 				if (ref?.isConnected) globalFSContext?.state?.tabspotInstance?.rebuild(ref);
 			}
 		}

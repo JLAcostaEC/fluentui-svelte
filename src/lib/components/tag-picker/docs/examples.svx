@@ -41,7 +41,7 @@
   let selectedOptions = $state([]);
 <\/script>
 
-{#snippet avatarTag({ value, text })}
+{#snippet tag({ value, text })}
   {#snippet media()}
     <Avatar aria-hidden="true" shape="rounded" name={text} size={16} color="colorful" />
   {/snippet}

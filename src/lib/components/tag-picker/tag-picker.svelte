@@ -215,7 +215,7 @@
 				open = false;
 				break;
 			case 'Backspace':
-				if (value !== '' || selectedOptions.length === 0) return;
+				if (_picker.disabled || value !== '' || selectedOptions.length === 0) return;
 
 				selectedOptions = selectedOptions.slice(0, -1);
 				onSelectionChange?.(e, selectedOptions);

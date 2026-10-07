@@ -70,13 +70,14 @@ describe('TagGroup', () => {
 	});
 
 	describe('dismiss', () => {
-		it('reports the value of the dismissed tag, and leaves the tag in place', async () => {
+		it('reports the value of the dismissed tag, and leaves the tag and focus in place', async () => {
 			const onDismiss = vi.fn();
 			render(TagGroupTestWrapper, { groupProps: { dismissible: true, onDismiss } });
 			await page.getByRole('button', { name: 'Tag 2 Dismiss' }).click();
 			expect(onDismiss).toHaveBeenCalledOnce();
 			expect(onDismiss.mock.calls[0][1]).toEqual({ value: 'two' });
 			expect(page.getByRole('button').elements()).toHaveLength(3);
+			await expect.element(page.getByRole('button', { name: 'Tag 2 Dismiss' })).toHaveFocus();
 		});
 
 		it('reports the value of an interactive tag dismissed with Delete', async () => {

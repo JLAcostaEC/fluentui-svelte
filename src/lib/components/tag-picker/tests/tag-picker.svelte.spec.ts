@@ -208,6 +208,16 @@ describe('selection', () => {
 		expect(tags().elements()).toHaveLength(1);
 	});
 
+	it('does not remove tags on Backspace when disabled', async () => {
+		const onSelectionChange = vi.fn();
+		render(TagPickerTestWrapper, { disabled: true, selectedOptions: ['apple'], onSelectionChange });
+
+		input().dispatchEvent(new KeyboardEvent('keydown', { key: 'Backspace', bubbles: true }));
+
+		await expect.element(tags()).toHaveTextContent('Apple');
+		expect(onSelectionChange).not.toHaveBeenCalled();
+	});
+
 	it('does nothing on Backspace without tags', async () => {
 		const onSelectionChange = vi.fn();
 		render(TagPickerTestWrapper, { onSelectionChange });

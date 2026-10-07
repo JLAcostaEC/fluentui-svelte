@@ -1,5 +1,21 @@
 # fluentui-svelte
 
+## 0.6.0
+
+### Minor Changes
+
+- feat: Add the `Rating` component ([#51](https://github.com/JLAcostaEC/fluentui-svelte/pull/51))
+
+  A row of stars that lets users give a value to an item. It supports half-filled stars with `step={0.5}`, four sizes, a custom `max`, and keyboard navigation through native radio inputs. Fractional values are drawn in quarter stars until the user rates.
+
+- feat: Add the `Tag`, `TagGroup` and `TagPicker` components ([#52](https://github.com/JLAcostaEC/fluentui-svelte/pull/52))
+
+### Patch Changes
+
+- fix: complete the `Dialog` API, events handling, and docs. ([#57](https://github.com/JLAcostaEC/fluentui-svelte/pull/57))
+
+- fix: stop shipping the docs-only example data (more than 4,000 lines) in the published package ([#56](https://github.com/JLAcostaEC/fluentui-svelte/pull/56))
+
 ## 0.5.0
 
 ### Minor Changes

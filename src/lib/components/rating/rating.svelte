@@ -10,6 +10,7 @@
 	const FALLBACK_ID = $props.id();
 	const COMPONENT_NAME = 'rating';
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
+	const VALUE_ID = `${ID}-value`;
 
 	let {
 		value = $bindable(0),
@@ -37,6 +38,7 @@
 	});
 	const items = $derived(Array.from({ length: _max }, (_, index) => index + 1));
 	const shown = $derived(hovered ?? value);
+	const checkedValue = $derived(value === 0 ? 0 : Math.min(_max, Math.max(step, Math.round(value / step) * step)));
 
 	const custom = $derived(!!(iconFilled || iconOutline));
 
@@ -84,7 +86,10 @@
 	{role}
 	onpointerleave={() => (hovered = undefined)}
 	{...attributes}
+	aria-label={attributes['aria-label'] ?? (attributes['aria-labelledby'] ? undefined : 'Rating')}
+	aria-describedby={[attributes['aria-describedby'], VALUE_ID].filter(Boolean).join(' ')}
 >
+	<span id={VALUE_ID} hidden>Current rating: {value} out of {_max}.</span>
 	{#each items as item (item)}
 		{@const fill = fillFor(item)}
 		<span class="rating-item">
@@ -105,9 +110,9 @@
 					type="radio"
 					{name}
 					value={item - 0.5}
-					checked={value === item - 0.5}
+					checked={checkedValue === item - 0.5}
 					aria-label={itemLabel(item - 0.5)}
-					onchange={() => select(item - 0.5)}
+					onclick={() => value !== item - 0.5 && select(item - 0.5)}
 					onpointerenter={() => (hovered = item - 0.5)}
 				/>
 			{/if}
@@ -116,9 +121,9 @@
 				type="radio"
 				{name}
 				value={item}
-				checked={value === item}
+				checked={checkedValue === item}
 				aria-label={itemLabel(item)}
-				onchange={() => select(item)}
+				onclick={() => value !== item && select(item)}
 				onpointerenter={() => (hovered = item)}
 			/>
 		</span>

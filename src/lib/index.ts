@@ -137,6 +137,7 @@ export { default as RadioButton } from './components/radio-button/radio-button.s
 
 // Start Rating Component
 export { default as Rating } from './components/rating/rating.svelte';
+export type { RatingProps } from './components/rating/types.js';
 // End Rating Component
 
 // Start Skeleton Component

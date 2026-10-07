@@ -39,13 +39,17 @@ export type DialogSurfaceProps = {
 
 /** @propsmith DialogTriggerProps */
 export type DialogTriggerProps = {
-	/** The DOM reference of the trigger element. */
+	/** The DOM reference of the trigger element.
+	 * @bindable
+	 */
 	ref?: HTMLButtonElement;
 } & ButtonProps<'button'>;
 
 /** @propsmith DialogContentProps */
 export type DialogContentProps = {
-	/** The DOM reference of the content element. */
+	/** The DOM reference of the content element.
+	 * @bindable
+	 */
 	ref?: HTMLDivElement;
 } & HTMLAttributes<HTMLDivElement>;
 

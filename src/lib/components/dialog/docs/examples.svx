@@ -4,6 +4,10 @@
   import { m } from '$i18n/messages.js';
 
   let actionsDialog = $state();
+  let alertDialog = $state();
+  let controlledOpen = $state(false);
+  let eventsDialog = $state();
+  let openChanges = $state<string[]>([]);
 
   const actionsCode = `
 <script>
@@ -19,11 +23,86 @@
       <p>Dialog body content.</p>
     </DialogContent>
     <DialogActions fluid>
-      <Button style="flex: 1 1 auto;">Save</Button>
-      <Button style="flex: 1 1 auto;" appearance="standard" onclick={() => dialog.closeDialog()}>Close</Button>
+      <Button>Save</Button>
+      <Button appearance="standard" onclick={() => dialog.closeDialog()}>Close</Button>
     </DialogActions>
   </DialogSurface>
 </Dialog>`;
+
+  const nonModalCode = `
+<script>
+  import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent } from 'fluentui-svelte';
+<\/script>
+
+<Dialog type="non-modal">
+  <DialogTrigger>Non-modal Dialog</DialogTrigger>
+  <DialogSurface>
+    <DialogTitle>Dialog Title</DialogTitle>
+    <DialogContent>
+      <p>The page behind this dialog stays interactive.</p>
+    </DialogContent>
+  </DialogSurface>
+</Dialog>`;
+
+  const alertCode = `
+<script>
+  import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent, DialogActions, Button } from 'fluentui-svelte';
+  let dialog = $state();
+<\/script>
+
+<Dialog type="alert" bind:this={dialog}>
+  <DialogTrigger>Alert Dialog</DialogTrigger>
+  <DialogSurface>
+    <DialogTitle>Discard changes?</DialogTitle>
+    <DialogContent>
+      <p>Your changes will be lost.</p>
+    </DialogContent>
+    <DialogActions>
+      <Button appearance="standard" onclick={() => dialog.closeDialog()}>Cancel</Button>
+      <Button onclick={() => dialog.closeDialog()}>Discard</Button>
+    </DialogActions>
+  </DialogSurface>
+</Dialog>`;
+
+  const controlledCode = `
+<script>
+  import { Dialog, DialogSurface, DialogTitle, DialogContent, Button } from 'fluentui-svelte';
+  let open = $state(false);
+<\/script>
+
+<Button onclick={() => (open = true)}>Open dialog</Button>
+<p>open: {open}</p>
+
+<Dialog type="non-modal" bind:open>
+  <DialogSurface>
+    <DialogTitle>Controlled Dialog</DialogTitle>
+    <DialogContent>
+      <p>This dialog follows the bound open state.</p>
+    </DialogContent>
+  </DialogSurface>
+</Dialog>`;
+
+  const openChangeCode = `
+<script>
+  import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent, DialogActions, Button } from 'fluentui-svelte';
+  let dialog = $state();
+  let changes = $state([]);
+<\/script>
+
+<Dialog bind:this={dialog} onOpenChange={(open) => (changes = [...changes, \`onOpenChange(\${open})\`].slice(-5))}>
+  <DialogTrigger>Events Dialog</DialogTrigger>
+  <DialogSurface>
+    <DialogTitle>Dialog Title</DialogTitle>
+    <DialogContent>
+      <p>Close it with Escape, by clicking outside or with the button.</p>
+    </DialogContent>
+    <DialogActions>
+      <Button onclick={() => dialog.closeDialog()}>Close</Button>
+    </DialogActions>
+  </DialogSurface>
+</Dialog>
+
+<p>{changes.length ? changes.join(', ') : 'No changes yet'}</p>`;
 </script>
 
 ### {m.dialog_with_actions_title()}
@@ -39,9 +118,82 @@
         <p>Dialog body content.</p>
       </DialogContent>
       <DialogActions fluid>
-        <Button style="flex: 1 1 auto;">Save</Button>
-        <Button style="flex: 1 1 auto;" appearance="standard" onclick={() => actionsDialog.closeDialog()}>Close</Button>
+        <Button>Save</Button>
+        <Button appearance="standard" onclick={() => actionsDialog.closeDialog()}>Close</Button>
       </DialogActions>
     </DialogSurface>
   </Dialog>
+</Showcase>
+
+### {m.dialog_non_modal_title()}
+
+{m.dialog_non_modal_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow code={nonModalCode}>
+  <Dialog type="non-modal">
+    <DialogTrigger>Non-modal Dialog</DialogTrigger>
+    <DialogSurface>
+      <DialogTitle>Dialog Title</DialogTitle>
+      <DialogContent>
+        <p>The page behind this dialog stays interactive.</p>
+      </DialogContent>
+    </DialogSurface>
+  </Dialog>
+</Showcase>
+
+### {m.dialog_alert_title()}
+
+{m.dialog_alert_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow code={alertCode}>
+  <Dialog type="alert" bind:this={alertDialog}>
+    <DialogTrigger>Alert Dialog</DialogTrigger>
+    <DialogSurface>
+      <DialogTitle>Discard changes?</DialogTitle>
+      <DialogContent>
+        <p>Your changes will be lost.</p>
+      </DialogContent>
+      <DialogActions>
+        <Button appearance="standard" onclick={() => alertDialog.closeDialog()}>Cancel</Button>
+        <Button onclick={() => alertDialog.closeDialog()}>Discard</Button>
+      </DialogActions>
+    </DialogSurface>
+  </Dialog>
+</Showcase>
+
+### {m.dialog_controlled_title()}
+
+{m.dialog_controlled_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow code={controlledCode}>
+  <Button onclick={() => (controlledOpen = true)}>Open dialog</Button>
+  <p>open: {controlledOpen}</p>
+  <Dialog type="non-modal" bind:open={controlledOpen}>
+    <DialogSurface>
+      <DialogTitle>Controlled Dialog</DialogTitle>
+      <DialogContent>
+        <p>This dialog follows the bound open state.</p>
+      </DialogContent>
+    </DialogSurface>
+  </Dialog>
+</Showcase>
+
+### {m.dialog_on_open_change_title()}
+
+{m.dialog_on_open_change_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow code={openChangeCode}>
+  <Dialog bind:this={eventsDialog} onOpenChange={(open) => (openChanges = [...openChanges, `onOpenChange(${open})`].slice(-5))}>
+    <DialogTrigger>Events Dialog</DialogTrigger>
+    <DialogSurface>
+      <DialogTitle>Dialog Title</DialogTitle>
+      <DialogContent>
+        <p>Close it with Escape, by clicking outside or with the button.</p>
+      </DialogContent>
+      <DialogActions>
+        <Button onclick={() => eventsDialog.closeDialog()}>Close</Button>
+      </DialogActions>
+    </DialogSurface>
+  </Dialog>
+  <p>{openChanges.length ? openChanges.join(', ') : 'No changes yet'}</p>
 </Showcase>

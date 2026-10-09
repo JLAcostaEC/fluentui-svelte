@@ -1,0 +1,48 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import {
+    AppSurface,
+    AppWindow,
+    TitleBar,
+    TitleBarLeftControls,
+    TitleBarRightControls
+  } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { AppsRegular } from 'fluentui-icons-svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# AppSurface
+
+{m.app_surface_description()}
+
+<Showcase columns={1} columnWidth="400px" minHeight="0" disablePanZoom showOverflow>
+  <AppWindow width={400} height={200}>
+    <TitleBar>
+      {#snippet leftControls()}
+        <TitleBarLeftControls appIcon={AppsRegular} appName="Contoso" />
+      {/snippet}
+      {#snippet rightControls()}
+        <TitleBarRightControls />
+      {/snippet}
+    </TitleBar>
+    <div style="display: flex; flex: 1; min-height: 0">
+      <div style="flex: none; width: 3rem"></div>
+      <AppSurface style="padding: 1rem">This is the content of the app.</AppSurface>
+    </div>
+  </AppWindow>
+</Showcase>
+
+## {m.global_usage()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.app_surface_usage_description} /></p>
+
+```svelte
+<script>
+	import { AppSurface, AppWindow } from 'fluentui-svelte';
+</script>
+
+<AppWindow width={400} height={160}>
+	<AppSurface style="padding: 1rem">This is the content of the app.</AppSurface>
+</AppWindow>
+```

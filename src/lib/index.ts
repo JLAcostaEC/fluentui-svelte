@@ -1,3 +1,13 @@
+// Start AppSurface Component
+export { default as AppSurface } from './components/app-surface/app-surface.svelte';
+export type { AppSurfaceProps } from './components/app-surface/types.js';
+// End AppSurface Component
+
+// Start AppWindow Component
+export { default as AppWindow } from './components/app-window/app-window.svelte';
+export type { AppWindowProps } from './components/app-window/types.js';
+// End AppWindow Component
+
 // Start AutoSuggestBox Component
 export { default as AutoSuggestBox } from './components/auto-suggest-box/auto-suggest-box.svelte';
 export { default as AutoSuggestBoxOption } from './components/auto-suggest-box/option.svelte';
@@ -188,6 +198,17 @@ export { default as TextBoxButton } from './components/text-box/text-box-button.
 // Start TimePicker Component
 export { default as TimePicker } from './components/time-picker/time-picker.svelte';
 // End TimePicker Component
+
+// Start TitleBar Component
+export { default as TitleBar } from './components/title-bar/title-bar.svelte';
+export { default as TitleBarLeftControls } from './components/title-bar/title-bar-left-controls.svelte';
+export { default as TitleBarRightControls } from './components/title-bar/title-bar-right-controls.svelte';
+export type {
+	TitleBarProps,
+	TitleBarLeftControlsProps,
+	TitleBarRightControlsProps
+} from './components/title-bar/types.js';
+// End TitleBar Component
 
 // Start ToggleSwitch Component
 export { default as ToggleSwitch } from './components/toggle-switch/toggle-switch.svelte';

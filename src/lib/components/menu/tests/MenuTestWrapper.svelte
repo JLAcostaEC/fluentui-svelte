@@ -11,10 +11,12 @@
 		MenuDivider,
 		Button
 	} from '$lib/index.js';
+	import { SettingsRegular } from 'fluentui-icons-svelte';
 
 	let {
 		open,
 		keepMounted = false,
+		iconTrigger = false,
 		hasIcons,
 		hasCheckmarks,
 		checkedValues = {},
@@ -24,6 +26,8 @@
 	}: {
 		open?: boolean;
 		keepMounted?: boolean;
+		/** Renders the trigger as an icon-only button. */
+		iconTrigger?: boolean;
 		hasIcons?: boolean;
 		hasCheckmarks?: boolean;
 		checkedValues?: Record<string, string[]>;
@@ -36,7 +40,18 @@
 <Menu {open} {hasIcons} {hasCheckmarks} {checkedValues} {onOpenChange} {onCheckedValueChange}>
 	<MenuTrigger>
 		{#snippet children({ state, menuTriggerProps })}
-			<Button bind:ref={state.ref} {...menuTriggerProps as any}>Open Menu</Button>
+			<Button
+				bind:ref={state.ref}
+				{...menuTriggerProps as any}
+				appearance={iconTrigger ? 'subtle' : undefined}
+				aria-label={iconTrigger ? 'Settings' : undefined}
+			>
+				{#if iconTrigger}
+					<SettingsRegular aria-hidden="true" />
+				{:else}
+					Open Menu
+				{/if}
+			</Button>
 		{/snippet}
 	</MenuTrigger>
 	<MenuPopover {keepMounted}>

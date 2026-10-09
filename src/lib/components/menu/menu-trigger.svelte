@@ -55,7 +55,8 @@
 				return;
 			}
 
-			if (target === _state.ref) {
+			// A click on the icon inside the trigger is a click on the trigger.
+			if (target === _state.ref || (_state.ref instanceof Node && _state.ref.contains(target))) {
 				_state.locked = !_state.locked;
 				toggle(e);
 				// Focus the first button in the popover when opening

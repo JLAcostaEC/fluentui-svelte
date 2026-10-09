@@ -1,4 +1,4 @@
-import { page } from 'vitest/browser';
+import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { MenuItem, MenuTrigger, MenuDivider } from '$lib/index.js';
@@ -40,6 +40,19 @@ describe('opening', () => {
 		render(MenuTestWrapper, { open: true });
 		const el = page.getByRole('menu');
 		await expect.element(el.first()).toBeInTheDocument();
+	});
+
+	it('opens when the icon inside the trigger is clicked', async () => {
+		const onOpenChange = vi.fn();
+		render(MenuTestWrapper, { onOpenChange, iconTrigger: true });
+		const icon = page.getByRole('button', { name: 'Settings' }).element().querySelector('svg')!;
+		let clicked: Element | null = null;
+		document.addEventListener('click', (e) => (clicked = e.target as Element), { once: true, capture: true });
+		await userEvent.click(icon);
+		expect(clicked).not.toBeNull();
+		expect(clicked!.closest('svg')).not.toBeNull();
+		expect(onOpenChange).toHaveBeenCalledWith(expect.anything(), true);
+		await expect.element(page.getByRole('menu').first()).toBeInTheDocument();
 	});
 
 	it('keeps the popover mounted and hidden while closed when requested', async () => {

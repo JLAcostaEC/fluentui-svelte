@@ -1,0 +1,19 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.global_component_props()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:AppSurfaceProps -->
+
+| Name                                                | Type                      | Default   | Description                                                                       |
+| --------------------------------------------------- | ------------------------- | --------- | --------------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLElement`             |           | `<I18nMarkupMessage message={m.generated_fs_app_surface_props_props_ref} />`      |
+| `mode`                                              | `'layer'` &#124; `'mica'` | `'layer'` | `<I18nMarkupMessage message={m.generated_fs_app_surface_props_props_mode} />`     |
+| `active`                                            | `boolean`                 | `false`   | `<I18nMarkupMessage message={m.generated_fs_app_surface_props_props_active} />`   |
+| `children`                                          | `Snippet`                 |           | `<I18nMarkupMessage message={m.generated_fs_app_surface_props_props_children} />` |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                           |           |                                                                                   |
+
+<!-- /props:AppSurfaceProps -->

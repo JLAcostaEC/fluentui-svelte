@@ -1,0 +1,93 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import {
+    AppWindow,
+    AutoSuggestBox,
+    TitleBar,
+    TitleBarLeftControls,
+    TitleBarRightControls,
+    ToggleSwitch
+  } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { AppsRegular } from 'fluentui-icons-svelte';
+  import { m } from '$i18n/messages.js';
+
+  let active = $state(false);
+
+  const sizeCode = `
+<AppWindow width={200} height={100} />
+<AppWindow width="14rem" height="6rem" />
+
+<div style="width: 260px; height: 120px">
+  <AppWindow />
+</div>`;
+
+  const activeCode = `
+<script>
+  let active = $state(false);
+<\/script>
+
+<AppWindow {active} width={400} height={160} />`;
+
+  const titleBarCode = `
+<AppWindow width={400} height={220}>
+  <TitleBar searchMinWidth={120}>
+    {#snippet leftControls()}
+      <TitleBarLeftControls appIcon={AppsRegular} appName="Contoso" />
+    {/snippet}
+    {#snippet search()}
+      <AutoSuggestBox placeholder="Search" aria-label="Search" />
+    {/snippet}
+    {#snippet rightControls()}
+      <TitleBarRightControls />
+    {/snippet}
+  </TitleBar>
+  <p style="padding: 1rem">This is the content of the window.</p>
+</AppWindow>`;
+</script>
+
+### {m.app_window_size_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.app_window_size_description} /></p>
+
+<Showcase columns={1} columnWidth="400px" code={sizeCode} minHeight="0" disablePanZoom showOverflow>
+  <div style="display: flex; flex-direction: column; gap: 4rem; align-items: flex-start">
+    <AppWindow width={200} height={100} />
+    <AppWindow width="14rem" height="6rem" />
+    <div style="width: 260px; height: 120px">
+      <AppWindow />
+    </div>
+  </div>
+</Showcase>
+
+### {m.app_window_active_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.app_window_active_description} /></p>
+
+<Showcase columns={1} columnWidth="400px" code={activeCode} minHeight="0" disablePanZoom showOverflow>
+  <div style="display: flex; flex-direction: column; gap: 2rem; align-items: flex-start">
+    <ToggleSwitch bind:checked={active} label="Active" />
+    <AppWindow {active} width={400} height={160} />
+  </div>
+</Showcase>
+
+### {m.app_window_title_bar_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.app_window_title_bar_description} /></p>
+
+<Showcase columns={1} columnWidth="400px" code={titleBarCode} minHeight="0" disablePanZoom showOverflow>
+  <AppWindow width={400} height={220}>
+    <TitleBar searchMinWidth={120}>
+      {#snippet leftControls()}
+        <TitleBarLeftControls appIcon={AppsRegular} appName="Contoso" />
+      {/snippet}
+      {#snippet search()}
+        <AutoSuggestBox placeholder="Search" aria-label="Search" />
+      {/snippet}
+      {#snippet rightControls()}
+        <TitleBarRightControls />
+      {/snippet}
+    </TitleBar>
+    <p style="margin: 0; padding: 1rem">This is the content of the window.</p>
+  </AppWindow>
+</Showcase>

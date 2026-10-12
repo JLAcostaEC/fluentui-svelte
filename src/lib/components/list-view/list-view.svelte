@@ -1,7 +1,15 @@
 <script lang="ts" generics="Tag extends 'ul' | 'ol' | 'div' = 'ul'">
 	import type { ListViewContext, ListViewProps, ListViewDOM } from './types.ts';
-	import { getRole, TAG, setListViewContext } from './utils.ts';
-	import { getTabspotAttributes } from 'tabspot';
+	import {
+		attachTabspot,
+		getListViewContext,
+		getListViewItemContext,
+		getRole,
+		LIST_VIEW_SKIP,
+		TAG,
+		setListViewContext
+	} from './utils.ts';
+	import { getTabspotAttributes, type TabspotNodeOptions } from 'tabspot';
 
 	let {
 		as = 'ul' as Tag,
@@ -21,40 +29,63 @@
 	 * The tag the invariant rules over. The markup renders it through here, so it is checked
 	 * during SSR and on every prop update rather than only once on mount.
 	 */
+	const itemContext = getListViewItemContext();
 	const _as = $derived.by(() => {
 		if (!TAG.includes(as)) throw new Error(`Invalid tag: ${as}. Must be one of ${TAG.join(', ')}`);
+		if (itemContext?.as === 'a' || itemContext?.as === 'button') {
+			throw new Error('Nested ListView must be inside a li or div ListViewItem, outside links and buttons.');
+		}
 		return as;
 	});
 
-	const ROLE = $derived(getRole(as, selectionMode, navigationMode));
+	const parent = getListViewContext();
+	const tabspotDisabled = $derived(disableTabspot || !!parent?.config.disableTabspot);
+	const ROLE = $derived(attributes.role ?? getRole(as, selectionMode, navigationMode));
 
 	const MULTISELECTABLE = $derived(selectionMode === 'multiselect' || selectionMode === 'extended');
 
-	const tabspotAttrs = $derived(
-		!disableTabspot &&
-			getTabspotAttributes({
-				root: {
-					manageSpecialKeys: true
-				},
-				mover: {
-					axis: 'vertical',
-					items: '.fs-list-view-item'
+	const tabspotConfig: TabspotNodeOptions | undefined = $derived(
+		tabspotDisabled
+			? undefined
+			: {
+					...(parent
+						? { grouper: { enterDirection: 'right', exitDirection: 'left' } }
+						: { root: { manageSpecialKeys: true } }),
+					mover: {
+						axis: 'vertical',
+						items:
+							'.fs-list-view-item[data-list-view-interactive], .fs-list-view-item:not([data-list-view-interactive]) :is(a[href], button), .fs-list-view-item-branch-trigger',
+						visibilityAware: 'Visible',
+						skip: LIST_VIEW_SKIP,
+						...(!parent && { activation: { mode: 'focus', roving: navigationMode === 'composite' } })
+					}
 				}
-			})
 	);
+	const tabspotAttrs = $derived(tabspotConfig && getTabspotAttributes(tabspotConfig));
 
 	let anchorIndex: number | null = $state(null);
 
 	let items: {
 		id: string;
-		value: string;
-		disabled: boolean;
+		getItem: () => { value: string; disabled: boolean; element: HTMLElement | null };
 	}[] = $state([]);
 
 	const CONTEXT: ListViewContext = $state({
 		config: {
 			get shape() {
 				return shape;
+			},
+			get as() {
+				return as;
+			},
+			get selectionMode() {
+				return selectionMode;
+			},
+			get role() {
+				return ROLE;
+			},
+			get disableTabspot() {
+				return tabspotDisabled;
 			}
 		},
 		state: {
@@ -76,16 +107,23 @@
 			handleSelection: (e: MouseEvent, value: string, toggle = false) => {
 				if (selectionMode === 'none') return;
 
-				const itemIndex = items.findIndex((item) => item.value === value);
+				// Registration order can differ from the DOM after keyed items are reordered.
+				const orderedItems = items
+					.map((item) => item.getItem())
+					.sort((a, b) => {
+						if (!a.element || !b.element) return 0;
+						return a.element.compareDocumentPosition(b.element) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
+					});
+				const itemIndex = orderedItems.findIndex((item) => item.value === value);
 				if (itemIndex === -1) return;
 
-				const item = items[itemIndex];
+				const item = orderedItems[itemIndex];
 				if (item.disabled) return;
 
 				if (selectionMode === 'extended' && e.shiftKey && anchorIndex !== null) {
 					const start = Math.min(anchorIndex, itemIndex);
 					const end = Math.max(anchorIndex, itemIndex);
-					const rangeValues = items
+					const rangeValues = orderedItems
 						.slice(start, end + 1)
 						.filter((i) => !i.disabled)
 						.map((i) => i.value);
@@ -101,13 +139,13 @@
 				}
 				onSelectionChange?.(e, selectedItems);
 			},
-			registerItem: (id: string, value: string, disabled: boolean) => {
-				items.push({ id, value, disabled });
+			registerItem: (id, getItem) => {
+				items.push({ id, getItem });
 			},
 			unregisterItem: (id: string) => {
 				items = items.filter((item) => item.id !== id);
 			},
-			getChildrenRole: (_tag: 'li' | 'a' | 'div') => {
+			getChildrenRole: (_tag: 'li' | 'a' | 'button' | 'div') => {
 				if (ROLE === 'grid') return 'row';
 				if (ROLE === 'listbox') return 'option';
 				return _tag !== 'li' ? 'listitem' : undefined;
@@ -123,9 +161,10 @@
 	bind:this={ref as ListViewDOM[Tag]}
 	class="fs-list-view"
 	role={ROLE}
-	aria-multiselectable={MULTISELECTABLE || undefined}
+	aria-multiselectable={((ROLE === 'grid' || ROLE === 'listbox') && MULTISELECTABLE) || undefined}
 	{...tabspotAttrs}
 	{...attributes}
+	{@attach attachTabspot(tabspotConfig)}
 >
 	{@render children?.()}
 </svelte:element>

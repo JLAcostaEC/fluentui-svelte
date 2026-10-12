@@ -190,6 +190,7 @@
   "docs_overview_features_item4": "Reduced motion supported.",
   "docs_overview_features_title": "Features",
   "docs_overview_what_is_title": "What is FluentUI svelte?",
+  "docs_primary_navigation_label": "Documentation",
   "docs_search_placeholder": "Search docs...",
   "docs_status_ai": "More than 50% of this component has been built using AI tools",
   "docs_status_empty": "This component is not yet implemented, but the documentation is available",

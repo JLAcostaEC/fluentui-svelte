@@ -190,6 +190,7 @@
   "docs_overview_features_item4": "Soporte de movimiento reducido.",
   "docs_overview_features_title": "Características",
   "docs_overview_what_is_title": "¿Qué es FluentUI svelte?",
+  "docs_primary_navigation_label": "Documentación",
   "docs_search_placeholder": "Buscar en la documentación...",
   "docs_status_ai": "Más del 50% de este componente se ha construido usando herramientas de IA",
   "docs_status_empty": "Este componente aún no está implementado, pero la documentación está disponible",

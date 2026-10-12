@@ -54,32 +54,46 @@
 	);
 </script>
 
-<div class="toc">
+<nav class="toc" aria-label={m.docs_toc_title()}>
 	<h3>{m.docs_toc_title()}</h3>
 	{#key key}
 		<div
 			in:blur={!globalState.reducedMotion ? { amount: 20, delay: 500 } : { duration: 0 }}
 			out:blur={!globalState.reducedMotion ? { amount: 20 } : { duration: 0 }}
 		>
-			<ListView role="menu">
+			<ListView navigationMode="items">
 				{@render ToC(links)}
 			</ListView>
 		</div>
 	{/key}
-</div>
+</nav>
 
 {#snippet ToC(items: TocLink[])}
 	{#each items as { id, text, children } (id)}
-		<li role="none">
-			<ListViewItem as="a" href={`#${id}`} role="menuitem" active={activeId === id} shape="rounded">
-				{text}
-			</ListViewItem>
-			{#if children && children.length > 0}
-				<ListView>
+		{#if children && children.length > 0}
+			<ListViewItem class="toc-parent" shape="rounded">
+				<a
+					class={['toc-parent-link', { active: activeId === id }]}
+					href={`#${id}`}
+					aria-current={activeId === id ? 'location' : undefined}
+				>
+					{text}
+				</a>
+				<ListView navigationMode="items">
 					{@render ToC(children)}
 				</ListView>
-			{/if}
-		</li>
+			</ListViewItem>
+		{:else}
+			<ListViewItem
+				as="a"
+				href={`#${id}`}
+				active={activeId === id}
+				aria-current={activeId === id ? 'location' : undefined}
+				shape="rounded"
+			>
+				{text}
+			</ListViewItem>
+		{/if}
 	{/each}
 {/snippet}
 
@@ -90,10 +104,41 @@
 		& h3 {
 			margin-bottom: 1rem;
 		}
-		& :global(.fs-list-view .fs-list-view) {
-			list-style: none;
-			margin: 0;
-			padding-left: 1rem !important;
+		& :global(.toc-parent) {
+			padding: 0;
+		}
+	}
+	.toc-parent-link {
+		display: block;
+		position: relative;
+		padding: 0.275rem 0.713rem 0.4rem;
+		border-radius: var(--fs-control-border-radius);
+		color: inherit;
+		text-decoration: none;
+		outline: none;
+		&:hover {
+			background: var(--fs-subtle-fill-secondary);
+		}
+		&:active {
+			color: var(--fs-text-tertiary);
+			background: var(--fs-subtle-fill-tertiary);
+		}
+		&:focus-visible {
+			outline: 0.125rem var(--fs-focus-stroke-outer) solid;
+			outline-offset: 0.063rem;
+		}
+		&.active {
+			background: var(--fs-subtle-fill-tertiary);
+			&::after {
+				content: '';
+				position: absolute;
+				top: 25%;
+				left: 0;
+				width: 3px;
+				height: 50%;
+				background: var(--fs-accent-fill-default);
+				border-radius: var(--fs-control-border-radius);
+			}
 		}
 	}
 </style>

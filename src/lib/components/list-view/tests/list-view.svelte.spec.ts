@@ -1,7 +1,7 @@
 import { render } from 'vitest-browser-svelte';
 import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
-import { ListViewItem } from '$lib/index.js';
+import ListViewItem from '../list-view-item.svelte';
 import ListViewTestWrapper from './ListViewTestWrapper.svelte';
 
 describe('ListView', () => {

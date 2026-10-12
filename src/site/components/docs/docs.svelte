@@ -84,15 +84,15 @@
 			</AutoSuggestBox>
 		</div>
 
-		<nav class="navigation-list">
+		<nav class="navigation-list" aria-label={m.docs_primary_navigation_label()}>
 			{#if primaryNavigation}
-				<ListView role="menu">
+				<ListView navigationMode="items">
 					{#each primaryNavigation as nav (nav.label)}
 						<ListViewItem
-							role="menuitem"
 							as="a"
 							href={resolve(localizeHref(nav.url) as any)}
 							active={page.url.pathname.endsWith(nav.url)}
+							aria-current={page.url.pathname.endsWith(nav.url) ? 'page' : undefined}
 						>
 							{nav.label}
 						</ListViewItem>
@@ -103,19 +103,19 @@
 
 		<h3>{m.docs_nav_title()}</h3>
 
-		<nav class="navigation-list">
+		<nav class="navigation-list" aria-label={m.docs_nav_title()}>
 			{#if componentLinks}
-				<ListView role="menu">
+				<ListView navigationMode="items">
 					{#each componentLinks as doc (doc.label)}
 						{#if doc.status !== 'Empty' || dev}
 							<ListViewItem
-								role="menuitem"
 								as="a"
 								href={resolve(localizeHref(doc.url) as any)}
 								active={page.url.pathname.endsWith(doc.url)}
+								aria-current={page.url.pathname.endsWith(doc.url) ? 'page' : undefined}
 							>
 								{#if doc.icon}
-									<doc.icon width="1.2rem" />
+									<doc.icon width="1.2rem" aria-hidden="true" />
 								{/if}
 								{doc.label}
 								{#if doc.status}

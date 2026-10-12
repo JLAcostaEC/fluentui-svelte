@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { ListView, ListViewItem, Card, CardHeader, CardFooter, Button } from '$lib/index.js';
+  import { ListView, ListViewItem, ListViewItemBranch, Card, CardHeader, CardFooter, Button, Hyperlink } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+
   import { m } from '$i18n/messages.js';
 
   const list = ['Apple', 'Banana', 'Cherry'];
@@ -14,6 +16,38 @@
   let selectedFruits = $state<string[]>(['Apple']);
   let selectedCards = $state<string[]>([]);
   let lastAction = $state('');
+
+  const navigationCode = `
+<nav aria-label="Main navigation">
+  <ListView>
+    <ListViewItem as="a" href="/">Home</ListViewItem>
+    <ListViewItem as="a" href="/docs">Documentation</ListViewItem>
+    <ListViewItem as="a" href="/docs/components/list-view" aria-current="page">ListView</ListViewItem>
+  </ListView>
+</nav>`;
+
+  const nestedNavigationCode = `
+<script lang="ts">
+  import { ListView, ListViewItem, ListViewItemBranch } from 'fluentui-svelte';
+<\/script>
+
+<nav aria-label="Component navigation">
+  <ListView>
+    <ListViewItem as="a" href="/">Home</ListViewItem>
+    <ListViewItemBranch label="Components" expanded>
+      <ListView>
+        <ListViewItem as="a" href="/docs/components/button">Button</ListViewItem>
+        <ListViewItemBranch label="Inputs" expanded>
+          <ListView>
+            <ListViewItem as="a" href="/docs/components/checkbox">Checkbox</ListViewItem>
+            <ListViewItem as="a" href="/docs/components/radio-button">RadioButton</ListViewItem>
+          </ListView>
+        </ListViewItemBranch>
+      </ListView>
+    </ListViewItemBranch>
+    <ListViewItem as="a" href="/docs">Documentation</ListViewItem>
+  </ListView>
+</nav>`;
 
   const selectionCode = `
 <ListView selectionMode="multiselect" selectedItems={['Apple']}>
@@ -58,13 +92,13 @@
   {#each cards as card (card.name)}
     {#snippet install()}
       <Button
-        onclick={(e) => {
-          e.stopPropagation();
+        onclick={() => {
           lastAction = 'Installed ' + card.name;
         }}>Install</Button
       >
     {/snippet}
     <ListViewItem
+      as="div"
       value={card.name}
       checkmark={{ wrapperAttributes: { style: 'position: absolute; top: 0.5rem; right: 0.5rem; z-index: 2;' } }}
       style="padding: 0"
@@ -81,6 +115,52 @@
 <p>Selected: {selected.join(', ')}</p>
 <p>Last action: {lastAction}</p>`;
 </script>
+
+### {m.lv_keyboard_navigation_title()}
+
+{m.lv_keyboard_navigation_description()}
+
+### {m.lv_navigation_example_title()}
+
+<p class="fs-docs">
+  <I18nMarkupMessage message={m.lv_navigation_example_description} />
+</p>
+
+<Showcase columns={1} minHeight="0" disablePanZoom code={navigationCode}>
+  <nav aria-label={m.lv_navigation_example_title()} style="width: 260px; max-width: 100%;">
+    <ListView>
+      <ListViewItem as="a" href="/">{m.lv_navigation_home()}</ListViewItem>
+      <ListViewItem as="a" href="/docs">{m.lv_navigation_docs()}</ListViewItem>
+      <ListViewItem as="a" href="/docs/components/list-view" aria-current="page">ListView</ListViewItem>
+    </ListView>
+  </nav>
+</Showcase>
+
+### {m.lv_nested_navigation_title()}
+
+<p class="fs-docs">
+  <I18nMarkupMessage message={m.lv_nested_navigation_description} />
+</p>
+
+<Showcase columns={1} minHeight="0" disablePanZoom code={nestedNavigationCode}>
+  <nav aria-label={m.lv_nested_navigation_title()} style="width: 260px; max-width: 100%;">
+    <ListView>
+      <ListViewItem as="a" href="/">{m.lv_navigation_home()}</ListViewItem>
+      <ListViewItemBranch label={m.lv_navigation_components()} expanded>
+        <ListView>
+          <ListViewItem as="a" href="/docs/components/button">{m.lv_navigation_button()}</ListViewItem>
+          <ListViewItemBranch label={m.lv_navigation_inputs()} expanded>
+            <ListView>
+              <ListViewItem as="a" href="/docs/components/checkbox">{m.lv_navigation_checkbox()}</ListViewItem>
+              <ListViewItem as="a" href="/docs/components/radio-button">{m.lv_navigation_radio_button()}</ListViewItem>
+            </ListView>
+          </ListViewItemBranch>
+        </ListView>
+      </ListViewItemBranch>
+      <ListViewItem as="a" href="/docs">{m.lv_navigation_docs()}</ListViewItem>
+    </ListView>
+  </nav>
+</Showcase>
 
 ### Selection Mode
 
@@ -108,7 +188,11 @@ Use `selectionMode` (`single`, `multiselect`, or `extended`) to control how item
 
 ### {m.lv_listviewitem_checkmark_title()}
 
-{m.lv_listviewitem_checkmark_description_prefix()} [Checkbox](/docs/components/checkbox) {m.lv_listviewitem_checkmark_description_suffix()}
+<p>
+  {m.lv_listviewitem_checkmark_description_prefix()}
+  <Hyperlink href="/docs/components/checkbox">Checkbox</Hyperlink>
+  {m.lv_listviewitem_checkmark_description_suffix()}
+</p>
 
 {m.lv_checkmark_selection_description()}
 
@@ -125,16 +209,18 @@ Use `selectionMode` (`single`, `multiselect`, or `extended`) to control how item
 
 ### {m.lv_cards_title()}
 
-{m.lv_cards_description()}
+<p class="fs-docs">
+  <I18nMarkupMessage message={m.lv_cards_description} />
+</p>
 
 <Showcase columns={1} minHeight="0" disablePanZoom code={cardsCode}>
   <div style="width: 320px; max-width: 100%;">
     <ListView as="div" navigationMode="composite" selectionMode="multiselect" bind:selectedItems={selectedCards}>
       {#each cards as card (card.name)}
         {#snippet install()}
-          <Button onclick={(e) => { e.stopPropagation(); lastAction = 'Installed ' + card.name; }}>Install</Button>
+          <Button onclick={() => { lastAction = 'Installed ' + card.name; }}>Install</Button>
         {/snippet}
-        <ListViewItem value={card.name} checkmark={cardCheckmark} style="padding: 0" onAction={() => (lastAction = 'Opened ' + card.name)}>
+        <ListViewItem as="div" value={card.name} checkmark={cardCheckmark} style="padding: 0" onAction={() => (lastAction = 'Opened ' + card.name)}>
           <Card orientation="vertical" style="width: 100%;">
             <CardHeader title={card.name} description={card.description} />
             <CardFooter action={install} />

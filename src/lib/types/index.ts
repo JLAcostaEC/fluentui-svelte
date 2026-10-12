@@ -6,8 +6,8 @@ export type NoUndefinedField<T> = {
 };
 
 /** Omits all keys from `T` whose name starts with the prefix `K`. */
-export type OmitByWord<T, K extends string> = {
-	[P in keyof T as P extends `${K}${string}` ? never : P]: T[P];
+export type OmitByWord<T, K extends string, Excluded extends PropertyKey = never> = {
+	[P in keyof T as P extends Excluded ? never : P extends `${K}${string}` ? never : P]: T[P];
 };
 
 /** Picks only the keys from `T` whose name starts with the prefix `K`. */
@@ -39,7 +39,11 @@ export type THEME = 'light' | 'dark' | 'system';
  * @see https://github.com/sveltejs/svelte/issues/16046
  * @see https://github.com/sveltejs/svelte/issues/16839
  */
-export type PolymorphicProps<T extends keyof SvelteHTMLElements> = OmitByWord<SvelteHTMLElements[T], 'on:' | 'aria'> &
+export type PolymorphicProps<T extends keyof SvelteHTMLElements, Excluded extends PropertyKey = never> = OmitByWord<
+	SvelteHTMLElements[T],
+	'on:' | 'aria',
+	Excluded
+> &
 	AriaAttributes;
 
 /** Library maturity/status shown as a badge in the navigation. Not part of SEO/GEO. */

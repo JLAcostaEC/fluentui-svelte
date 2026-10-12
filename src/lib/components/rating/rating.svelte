@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { PREFIX } from '$constants';
 	import StarFilled from 'fluentui-icons-svelte/StarFilled.svelte';
-	import StarHalfFilled from 'fluentui-icons-svelte/StarHalfFilled.svelte';
-	import StarOneQuarterFilled from 'fluentui-icons-svelte/StarOneQuarterFilled.svelte';
+	import StarHalfRegular from 'fluentui-icons-svelte/StarHalfRegular.svelte';
+	import StarOneQuarterRegular from 'fluentui-icons-svelte/StarOneQuarterRegular.svelte';
 	import StarRegular from 'fluentui-icons-svelte/StarRegular.svelte';
-	import StarThreeQuarterFilled from 'fluentui-icons-svelte/StarThreeQuarterFilled.svelte';
+	import StarThreeQuarterRegular from 'fluentui-icons-svelte/StarThreeQuarterRegular.svelte';
 	import type { RatingProps } from './types.ts';
 
 	const FALLBACK_ID = $props.id();
@@ -51,9 +51,9 @@
 
 	function iconFor(snapped: number) {
 		if (snapped >= 1) return StarFilled;
-		if (snapped >= 0.75) return StarThreeQuarterFilled;
-		if (snapped >= 0.5) return StarHalfFilled;
-		if (snapped >= 0.25) return StarOneQuarterFilled;
+		if (snapped >= 0.75) return StarThreeQuarterRegular;
+		if (snapped >= 0.5) return StarHalfRegular;
+		if (snapped >= 0.25) return StarOneQuarterRegular;
 		return StarRegular;
 	}
 
@@ -96,13 +96,13 @@
 			{#if custom}
 				{@const Outline = iconOutline ?? StarRegular}
 				{@const Filled = iconFilled ?? StarFilled}
-				<span class="rating-icon custom" class:selected={fill > 0} style="--rating-fill: {fill * 100}%">
+				<span class={['rating-icon custom', { selected: fill > 0 }]} style="--rating-fill: {fill * 100}%">
 					<Outline aria-hidden="true" />
 					<span class="filled"><Filled aria-hidden="true" /></span>
 				</span>
 			{:else}
 				{@const Icon = iconFor(fill)}
-				<span class="rating-icon" class:selected={fill > 0}><Icon aria-hidden="true" /></span>
+				<span class={['rating-icon', { selected: fill > 0 }]}><Icon aria-hidden="true" /></span>
 			{/if}
 			{#if step === 0.5}
 				<input

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { ListView, ListViewItem } from '$lib/index.js';
+	import ListView from '../list-view.svelte';
+	import ListViewItem from '../list-view-item.svelte';
 	import type { ListViewProps } from '$lib/components/list-view/types.js';
 	import type { ListViewItemProps } from '$lib/components/list-view/types.js';
 	import type { Snippet } from 'svelte';

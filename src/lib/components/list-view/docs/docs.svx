@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { ListView, ListViewItem, InfoBar } from '$lib/index.js';
+  import { ListView, ListViewItem } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { m } from '$i18n/messages.js';
   import StatusBadge from '$site/components/status-badge/status-badge.svelte';
 
@@ -36,12 +37,19 @@
 </ListView>
 ```
 
-<InfoBar status="warning" style="multiline" title={m.lv_best_practices_title()} hideCloseButton>
-  <p>
-    {m.lv_best_practices_description_prefix()} <a href="https://react.fluentui.dev/?path=/docs/components-list--docs#best-practices">List</a> {m.lv_best_practices_description_suffix()}
-  </p>
-</InfoBar>
-
 ### {m.lv_navigation_mode_title()}
 
-{m.lv_navigation_mode_description()}
+<p class="fs-docs">
+  <I18nMarkupMessage message={m.lv_navigation_mode_description} />
+</p>
+
+### {m.lv_best_practices_title()}
+
+<ul class="fs-docs">
+  <li><I18nMarkupMessage message={m.lv_best_practices_focus} /></li>
+  <li><I18nMarkupMessage message={m.lv_best_practices_composite} /></li>
+  <li><I18nMarkupMessage message={m.lv_best_practices_actions} /></li>
+  <li><I18nMarkupMessage message={m.lv_best_practices_semantics} /></li>
+  <li><I18nMarkupMessage message={m.lv_best_practices_branches} /></li>
+  <li><I18nMarkupMessage message={m.lv_best_practices_accessibility} /></li>
+</ul>

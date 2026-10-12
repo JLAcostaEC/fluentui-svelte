@@ -1742,6 +1742,55 @@
       },
       "source": "src/lib/components/label/types.ts#LabelProps.weight"
     },
+    "generated_fs_list_view_item_branch_props_props_children": {
+      "en": "1856c74f",
+      "locales": {
+        "es": "1856c74f"
+      },
+      "source": "src/lib/components/list-view/types.ts#ListViewItemBranchProps.children"
+    },
+    "generated_fs_list_view_item_branch_props_props_disabled": {
+      "en": "5a99160c",
+      "locales": {
+        "es": "5a99160c"
+      },
+      "source": "src/lib/components/list-view/types.ts#ListViewItemBranchProps.disabled"
+    },
+    "generated_fs_list_view_item_branch_props_props_expanded": {
+      "en": "6404e39a",
+      "locales": {
+        "es": "6404e39a"
+      },
+      "source": "src/lib/components/list-view/types.ts#ListViewItemBranchProps.expanded"
+    },
+    "generated_fs_list_view_item_branch_props_props_label": {
+      "en": "f25036f5",
+      "locales": {
+        "es": "f25036f5"
+      },
+      "source": "src/lib/components/list-view/types.ts#ListViewItemBranchProps.label"
+    },
+    "generated_fs_list_view_item_branch_props_props_on_expanded_change": {
+      "en": "d70098e5",
+      "locales": {
+        "es": "d70098e5"
+      },
+      "source": "src/lib/components/list-view/types.ts#ListViewItemBranchProps.onExpandedChange"
+    },
+    "generated_fs_list_view_item_branch_props_props_ref": {
+      "en": "3c64b41e",
+      "locales": {
+        "es": "3c64b41e"
+      },
+      "source": "src/lib/components/list-view/types.ts#ListViewItemBranchProps.ref"
+    },
+    "generated_fs_list_view_item_branch_props_props_shape": {
+      "en": "f89095c3",
+      "locales": {
+        "es": "f89095c3"
+      },
+      "source": "src/lib/components/list-view/types.ts#ListViewItemBranchProps.shape"
+    },
     "generated_fs_list_view_item_props_props_active": {
       "en": "ec049c65",
       "locales": {
@@ -1750,9 +1799,9 @@
       "source": "src/lib/components/list-view/types.ts#ListViewItemProps.active"
     },
     "generated_fs_list_view_item_props_props_as": {
-      "en": "3f0446a3",
+      "en": "1b3e0a40",
       "locales": {
-        "es": "3f0446a3"
+        "es": "1b3e0a40"
       },
       "source": "src/lib/components/list-view/types.ts#ListViewItemProps.as"
     },
@@ -1846,6 +1895,13 @@
         "es": "ebccb8ce"
       },
       "source": "src/lib/components/list-view/types.ts#ListViewProps.ref"
+    },
+    "generated_fs_list_view_props_props_role": {
+      "en": "5a31e9b1",
+      "locales": {
+        "es": "5a31e9b1"
+      },
+      "source": "src/lib/components/list-view/types.ts#ListViewProps.role"
     },
     "generated_fs_list_view_props_props_selected_items": {
       "en": "b40b38ee",

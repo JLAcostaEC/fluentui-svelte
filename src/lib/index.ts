@@ -109,6 +109,16 @@ export { default as Label } from './components/label/label.svelte';
 // Start ListView Component
 export { default as ListView } from './components/list-view/list-view.svelte';
 export { default as ListViewItem } from './components/list-view/list-view-item.svelte';
+export { default as ListViewItemBranch } from './components/list-view/list-view-item-branch.svelte';
+export type {
+	ListViewProps,
+	ListViewItemProps,
+	ListViewItemBranchProps,
+	ListViewDOM,
+	ListViewItemDOM,
+	SelectionMode,
+	NavigationMode
+} from './components/list-view/types.ts';
 // End ListView Component
 
 // Start Menu Component

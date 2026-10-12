@@ -10,6 +10,7 @@
 
 | Name                       | Type                                                                  | Default     | Description                                                                                |
 | -------------------------- | --------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------ |
+| `role`                     | `AriaRole`                                                            |             | `<I18nMarkupMessage message={m.generated_fs_list_view_props_props_role} />`                |
 | `selectionMode`            | `'none'` &#124; `'single'` &#124; `'multiselect'` &#124; `'extended'` | `'none'`    | `<I18nMarkupMessage message={m.generated_fs_list_view_props_props_selection_mode} />`      |
 | `navigationMode`           | `'items'` &#124; `'composite'`                                        | `'items'`   | `<I18nMarkupMessage message={m.generated_fs_list_view_props_props_navigation_mode} />`     |
 | `selectedItems` _bindable_ | `string[]`                                                            |             | `<I18nMarkupMessage message={m.generated_fs_list_view_props_props_selected_items} />`      |
@@ -28,18 +29,36 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:ListViewItemProps -->
 
-| Name             | Type                                                               | Default | Description                                                                           |
-| ---------------- | ------------------------------------------------------------------ | ------- | ------------------------------------------------------------------------------------- |
-| `as`             | `'li'` &#124; `'a'` &#124; `'div'`                                 | `'li'`  | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_as} />`        |
-| `shape`          | `'circular'` &#124; `'rounded'` &#124; `'square'`                  |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_shape} />`     |
-| `value`          | `string`                                                           |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_value} />`     |
-| `active`         | `boolean`                                                          |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_active} />`    |
-| `role`           | `'treeitem'` &#124; `'menuitem'` &#124; `'option'` &#124; `'row'`  |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_role} />`      |
-| `disabled`       | `boolean`                                                          |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_disabled} />`  |
-| `checkmark`      | `CheckboxProps`                                                    |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_checkmark} />` |
-| `onAction`       | `(e: MouseEvent, value: string) => void`                           |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_on_action} />` |
-| `onfocus`        | `(e: Event, value: string) => void`                                |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_onfocus} />`   |
-| `ref` _bindable_ | `HTMLLIElement` &#124; `HTMLAnchorElement` &#124; `HTMLDivElement` |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_ref} />`       |
-| HTML Attributes  |                                                                    |         |                                                                                       |
+| Name             | Type                                                                                          | Default | Description                                                                           |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------- |
+| `as`             | `'li'` &#124; `'a'` &#124; `'button'` &#124; `'div'`                                          | `'li'`  | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_as} />`        |
+| `shape`          | `'circular'` &#124; `'rounded'` &#124; `'square'`                                             |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_shape} />`     |
+| `value`          | `string`                                                                                      |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_value} />`     |
+| `active`         | `boolean`                                                                                     |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_active} />`    |
+| `role`           | `'treeitem'` &#124; `'menuitem'` &#124; `'option'` &#124; `'row'`                             |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_role} />`      |
+| `disabled`       | `boolean`                                                                                     |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_disabled} />`  |
+| `checkmark`      | `CheckboxProps`                                                                               |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_checkmark} />` |
+| `onAction`       | `(e: MouseEvent, value: string) => void`                                                      |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_on_action} />` |
+| `onfocus`        | `(e: Event, value: string) => void`                                                           |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_onfocus} />`   |
+| `ref` _bindable_ | `HTMLLIElement` &#124; `HTMLAnchorElement` &#124; `HTMLButtonElement` &#124; `HTMLDivElement` |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_props_props_ref} />`       |
+| HTML Attributes  |                                                                                               |         |                                                                                       |
 
 <!-- /props:ListViewItemProps -->
+
+## {m.lv_listviewitembranch_props_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:ListViewItemBranchProps -->
+
+| Name                                                                                                 | Type                                              | Default | Description                                                                                           |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------- |
+| `label`                                                                                              | `string`                                          |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_branch_props_props_label} />`              |
+| `expanded` _bindable_                                                                                | `boolean`                                         | `false` | `<I18nMarkupMessage message={m.generated_fs_list_view_item_branch_props_props_expanded} />`           |
+| `onExpandedChange`                                                                                   | `(e: Event, expanded: boolean) => void`           |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_branch_props_props_on_expanded_change} />` |
+| `disabled`                                                                                           | `boolean`                                         | `false` | `<I18nMarkupMessage message={m.generated_fs_list_view_item_branch_props_props_disabled} />`           |
+| `shape`                                                                                              | `'circular'` &#124; `'rounded'` &#124; `'square'` |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_branch_props_props_shape} />`              |
+| `ref` _bindable_                                                                                     | `HTMLButtonElement`                               |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_branch_props_props_ref} />`                |
+| `children`                                                                                           | `Snippet`                                         |         | `<I18nMarkupMessage message={m.generated_fs_list_view_item_branch_props_props_children} />`           |
+| `HTMLButtonAttributes` without `children`, `role`, `type`, `value`, `aria-expanded`, `aria-controls` |                                                   |         |                                                                                                       |
+
+<!-- /props:ListViewItemBranchProps -->

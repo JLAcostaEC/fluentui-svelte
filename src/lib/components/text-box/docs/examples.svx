@@ -1,6 +1,7 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { TextBox } from '$lib/index.js';
+  import { MailRegular } from 'fluentui-icons-svelte';
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { m } from '$i18n/messages.js';
 
@@ -9,6 +10,21 @@
 <TextBox type="search" placeholder="Search" />
 <TextBox type="password" placeholder="Password" />
 <TextBox type="number" placeholder="Number" />`;
+
+  const sizeCode = `
+<TextBox size="small" placeholder="Small" />
+<TextBox size="medium" placeholder="Medium" />
+<TextBox size="large" placeholder="Large" />`;
+
+  const contentCode = `
+<script>
+  import { MailRegular } from 'fluentui-icons-svelte';
+<\/script>
+
+<TextBox contentBefore="https://" placeholder="Website" />
+<TextBox contentAfter=".com" placeholder="Domain" />
+<TextBox contentBefore="$" contentAfter=".00" type="number" placeholder="Price" />
+<TextBox contentBefore={MailRegular} placeholder="Email" />`;
 
   const readonlyCode = `<TextBox readonly value="Read-only value" />`;
 
@@ -24,6 +40,27 @@
   <TextBox type="search" placeholder="Search" />
   <TextBox type="password" placeholder="Password" />
   <TextBox type="number" placeholder="Number" />
+</Showcase>
+
+### {m.global_size()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.tb_size_description} /></p>
+
+<Showcase code={sizeCode}>
+  <TextBox size="small" placeholder="Small" />
+  <TextBox size="medium" placeholder="Medium" />
+  <TextBox size="large" placeholder="Large" />
+</Showcase>
+
+### {m.tb_content_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.tb_content_description} /></p>
+
+<Showcase columns={2} code={contentCode}>
+  <TextBox contentBefore="https://" placeholder="Website" />
+  <TextBox contentAfter=".com" placeholder="Domain" />
+  <TextBox contentBefore="$" contentAfter=".00" type="number" placeholder="Price" />
+  <TextBox contentBefore={MailRegular} placeholder="Email" />
 </Showcase>
 
 ### {m.tb_readonly_title()}

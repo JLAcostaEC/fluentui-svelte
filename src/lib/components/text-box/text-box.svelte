@@ -271,12 +271,14 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 			visibility: hidden;
 		}
 		&.text-box-size-small {
+			--text-box-edge-padding: 0.5rem;
 			& :is(input, .content-after, .content-before) {
 				font-size: var(--fs-body2-font-size);
 				padding: 0.25rem;
 			}
 		}
 		&.text-box-size-medium {
+			--text-box-edge-padding: 0.6875rem;
 			font-size: var(--fs-body-font-size);
 			& :is(input, .content-after, .content-before) {
 				padding: 0.375rem;
@@ -284,6 +286,7 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 			}
 		}
 		&.text-box-size-large {
+			--text-box-edge-padding: 0.9375rem;
 			& :is(input, .content-after, .content-before) {
 				padding: 0.625rem 0.625rem;
 				font-size: var(--fs-subtitle2-font-size);
@@ -293,6 +296,18 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 			}
 			& :global(.clear-button:last-of-type) {
 				margin-right: 0.3125rem;
+			}
+		}
+		/* The outer horizontal edges of the control use the per-size edge padding. */
+		&:is(.text-box-size-small, .text-box-size-medium, .text-box-size-large) {
+			& input:not(.content-before + input) {
+				padding-left: var(--text-box-edge-padding);
+			}
+			& :is(input, .content-after):last-child {
+				padding-right: var(--text-box-edge-padding);
+			}
+			& .content-before {
+				padding-left: var(--text-box-edge-padding);
 			}
 		}
 	}

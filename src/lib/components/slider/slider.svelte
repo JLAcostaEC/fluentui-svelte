@@ -271,6 +271,10 @@
 {/snippet}
 
 <style>
+	.slider-tooltip {
+		padding: 0.5rem;
+	}
+
 	.fs-slider {
 		display: flex;
 		justify-content: center;

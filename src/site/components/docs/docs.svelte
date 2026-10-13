@@ -142,7 +142,7 @@
 		</nav>
 	</aside>
 
-	<article id="docs">
+	<article id="docs" tabindex="-1">
 		{#key page.url.pathname}
 			<div
 				class="docs-content"
@@ -194,6 +194,7 @@
 		}
 		& #docs {
 			min-width: 10rem;
+			outline: none;
 			& > .docs-content {
 				padding: 1rem 1rem;
 				display: flex;

@@ -1127,12 +1127,26 @@
       },
       "source": "src/lib/components/dialog/types.ts#DialogContentProps.ref"
     },
+    "generated_fs_dialog_props_props_animation": {
+      "en": "7c38e3d2",
+      "locales": {
+        "es": "7c38e3d2"
+      },
+      "source": "src/lib/components/dialog/types.ts#DialogProps.animation"
+    },
     "generated_fs_dialog_props_props_children": {
       "en": "d1d0dd46",
       "locales": {
         "es": "d1d0dd46"
       },
       "source": "src/lib/components/dialog/types.ts#DialogProps.children"
+    },
+    "generated_fs_dialog_props_props_duration": {
+      "en": "8c37fc67",
+      "locales": {
+        "es": "8c37fc67"
+      },
+      "source": "src/lib/components/dialog/types.ts#DialogProps.duration"
     },
     "generated_fs_dialog_props_props_on_open_change": {
       "en": "4046e755",
@@ -1147,6 +1161,13 @@
         "es": "b4e068c6"
       },
       "source": "src/lib/components/dialog/types.ts#DialogProps.open"
+    },
+    "generated_fs_dialog_props_props_position": {
+      "en": "30e928a4",
+      "locales": {
+        "es": "30e928a4"
+      },
+      "source": "src/lib/components/dialog/types.ts#DialogProps.position"
     },
     "generated_fs_dialog_props_props_type": {
       "en": "b3e6d6ae",

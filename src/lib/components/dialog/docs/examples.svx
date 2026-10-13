@@ -2,6 +2,43 @@
   import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent, DialogActions, Button } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { m } from '$i18n/messages.js';
+  import type { DialogAnimation, DialogPosition } from '$lib/index.js';
+
+  const animations: DialogAnimation[] = ['fade', 'zoom', 'slide', 'bounce'];
+  const animationCode = `
+<script>
+  import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent } from 'fluentui-svelte';
+<\/script>
+
+<Dialog animation="zoom" duration="normal">
+  <DialogTrigger>zoom</DialogTrigger>
+  <DialogSurface>
+    <DialogTitle>Dialog Title</DialogTitle>
+    <DialogContent>Dialog body content.</DialogContent>
+  </DialogSurface>
+</Dialog>
+
+<!-- Theme token: duration="fast" or duration="--fs-fast-duration" -->
+<!-- Custom milliseconds: duration={200} -->`;
+
+  const positions: DialogPosition[] = [
+    'top-start', 'top-center', 'top-end',
+    'middle-start', 'middle-center', 'middle-end',
+    'bottom-start', 'bottom-center', 'bottom-end'
+  ];
+
+  const positionCode = `
+<script>
+  import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent } from 'fluentui-svelte';
+<\/script>
+
+<Dialog position="top-end">
+  <DialogTrigger>top-end</DialogTrigger>
+  <DialogSurface>
+    <DialogTitle>Dialog Title</DialogTitle>
+    <DialogContent>Dialog body content.</DialogContent>
+  </DialogSurface>
+</Dialog>`;
 
   let actionsDialog = $state();
   let alertDialog = $state();
@@ -104,6 +141,38 @@
 
 <p>{changes.length ? changes.join(', ') : 'No changes yet'}</p>`;
 </script>
+
+### {m.dialog_position_title()}
+
+{m.dialog_position_description()}
+
+<Showcase columns={3} columnWidth="auto" gap="12px" minHeight="0" disablePanZoom showOverflow code={positionCode}>
+  {#each positions as position (position)}
+    <Dialog {position}>
+      <DialogTrigger>{position}</DialogTrigger>
+      <DialogSurface>
+        <DialogTitle>{position}</DialogTitle>
+        <DialogContent>Dialog body content.</DialogContent>
+      </DialogSurface>
+    </Dialog>
+  {/each}
+</Showcase>
+
+### {m.dialog_animation_title()}
+
+{m.dialog_animation_description()}
+
+<Showcase columns={2} columnWidth="auto" gap="12px" minHeight="0" disablePanZoom showOverflow code={animationCode}>
+  {#each animations as animation (animation)}
+    <Dialog {animation} duration="normal">
+      <DialogTrigger>{animation}</DialogTrigger>
+      <DialogSurface>
+        <DialogTitle>{animation}</DialogTitle>
+        <DialogContent>{m.dialog_animation_content()}</DialogContent>
+      </DialogSurface>
+    </Dialog>
+  {/each}
+</Showcase>
 
 ### {m.dialog_with_actions_title()}
 

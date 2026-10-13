@@ -2,7 +2,15 @@
 	import { setDialogContext } from './dialog.svelte.ts';
 	import type { DialogContext, DialogProps } from './types.ts';
 
-	let { type = 'modal', open = $bindable(), onOpenChange, children }: DialogProps = $props();
+	let {
+		type = 'modal',
+		position = 'middle-center',
+		animation = 'zoom',
+		duration = 'normal',
+		open = $bindable(),
+		onOpenChange,
+		children
+	}: DialogProps = $props();
 
 	let dialogRef: HTMLDialogElement | undefined = $state();
 
@@ -12,6 +20,15 @@
 		config: {
 			get type() {
 				return type;
+			},
+			get position() {
+				return position;
+			},
+			get animation() {
+				return animation;
+			},
+			get duration() {
+				return duration;
 			}
 		},
 		state: {
@@ -34,19 +51,13 @@
 		events: null,
 		methods: {
 			openDialog: () => {
-				if (type !== 'non-modal') {
-					dialogRef?.showModal();
-				} else {
-					open = true;
-				}
+				if (type !== 'non-modal') dialogRef?.showModal();
+				open = true;
 				onOpenChange?.(true);
 			},
 			closeDialog: () => {
-				if (type !== 'non-modal') {
-					dialogRef?.close();
-				} else {
-					open = false;
-				}
+				if (type !== 'non-modal') dialogRef?.close();
+				open = false;
 				onOpenChange?.(false);
 			}
 		}

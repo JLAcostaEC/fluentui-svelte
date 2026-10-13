@@ -5,7 +5,17 @@
 	import { m } from '$i18n/messages.js';
 	import { mode } from 'mode-watcher';
 	import { localizeHref } from '../i18n/runtime.js';
+	import Seo from '$site/components/seo/seo.svelte';
+	
 </script>
+
+<Seo
+	title={m.seo_home_title()}
+	titleTemplate="%s"
+	description={m.seo_home_description()}
+	keywords={m.seo_home_keywords().split(', ')}
+	openGraph={{ type: 'website' }}
+/>
 
 <!-- shift background effect -->
 <div class="bg-effect" aria-hidden="true" {@attach shiftBackground}></div>

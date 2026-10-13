@@ -1,3 +1,10 @@
+<script lang="ts">
+  import { m } from '$i18n/messages.js';
+  import Seo from '$site/components/seo/seo.svelte';
+</script>
+
+<Seo title={m.seo_types_title()} description={m.seo_types_description()} keywords={m.seo_types_keywords().split(', ')} />
+
 # Types
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
@@ -6,6 +13,14 @@
 ### Colors
 
 `'information'` &#124; `'attention'` &#124; `'warning'` &#124; `'success'` &#124; `'critical'`
+
+### DialogDuration
+
+`number` &#124; `'fast'` &#124; `'normal'` &#124; `'slow'` &#124; `'slower'` &#124; `'very-slow'` &#124; `'extra-slow'` &#124; `` `--${string}` ``
+
+### DialogPosition
+
+`'top-start'` &#124; `'top-center'` &#124; `'top-end'` &#124; `'middle-start'` &#124; `'middle-center'` &#124; `'middle-end'` &#124; `'bottom-start'` &#124; `'bottom-center'` &#124; `'bottom-end'`
 
 ### Statuses
 

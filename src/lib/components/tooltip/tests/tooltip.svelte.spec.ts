@@ -1,6 +1,7 @@
 import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import { offset } from '@floating-ui/dom';
 import TooltipTestWrapper from './TooltipTestWrapper.svelte';
 
 const tooltip = () => page.getByRole('tooltip', { includeHidden: true });
@@ -8,6 +9,52 @@ const trigger = () => page.getByTestId('trigger');
 
 /** The tooltip element stays mounted; a class is what hides it. */
 const isHidden = () => document.querySelector('.fs-tooltip')?.classList.contains('tooltip-hidden') ?? true;
+
+describe('positioning', () => {
+	it.each([
+		{ edge: 'left', withArrow: false },
+		{ edge: 'right', withArrow: true }
+	])('keeps a margin at the $edge viewport edge', async ({ edge, withArrow }) => {
+		render(TooltipTestWrapper, { open: true, placement: 'bottom', withArrow, animationFrame: true });
+		const button = trigger().element() as HTMLElement;
+		button.style.cssText = `position: fixed; top: 150px; ${edge}: 1px; width: 80px;`;
+
+		await vi.waitFor(() => {
+			const rect = tooltip().element().getBoundingClientRect();
+			expect(rect.top).toBeGreaterThan(button.getBoundingClientRect().bottom);
+			expect(rect.left).toBeGreaterThanOrEqual(15.5);
+			expect(rect.right).toBeLessThanOrEqual(document.documentElement.clientWidth - 15.5);
+		});
+	});
+
+	it('flips below the trigger when the top placement would crowd the viewport edge', async () => {
+		render(TooltipTestWrapper, { open: true, placement: 'top', animationFrame: true });
+		const button = trigger().element() as HTMLElement;
+		const height = tooltip().element().getBoundingClientRect().height;
+		button.style.cssText = `position: fixed; left: 200px; top: ${height + 24}px;`;
+
+		await vi.waitFor(() => {
+			const gap = tooltip().element().getBoundingClientRect().top - button.getBoundingClientRect().bottom;
+			expect(gap).toBeCloseTo(8, 0);
+		});
+	});
+
+	it('uses custom positioning middleware instead of the default margins', async () => {
+		render(TooltipTestWrapper, {
+			open: true,
+			placement: 'bottom',
+			positionConfig: { middleware: [offset(4)] },
+			animationFrame: true
+		});
+		const button = trigger().element() as HTMLElement;
+		button.style.cssText = 'position: fixed; left: 200px; top: 150px;';
+
+		await vi.waitFor(() => {
+			const gap = tooltip().element().getBoundingClientRect().top - button.getBoundingClientRect().bottom;
+			expect(gap).toBeCloseTo(4, 0);
+		});
+	});
+});
 
 describe('rendering', () => {
 	it('renders the tooltip element and its trigger', async () => {

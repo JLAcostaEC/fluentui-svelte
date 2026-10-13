@@ -208,6 +208,7 @@
 		top: 0;
 		left: 0;
 		z-index: 110;
+		padding: 0.5rem !important;
 		& .fs-tooltip-arrow {
 			position: absolute;
 			width: 16px;

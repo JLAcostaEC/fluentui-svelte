@@ -418,6 +418,7 @@ This implementation is originally made by Tropix126 in his FluentSvelte library,
 			position: absolute;
 			top: 0;
 			left: 0;
+			z-index: 110;
 		}
 		& .calendar-wrapper {
 			overflow: hidden;

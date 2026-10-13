@@ -55,6 +55,7 @@ export { default as DatePicker } from './components/date-picker/date-picker.svel
 
 // Start Dialog Component
 export { default as Dialog } from './components/dialog/dialog.svelte';
+export type { DialogAnimation, DialogDuration, DialogPosition, DialogProps } from './components/dialog/types.js';
 export { default as DialogTitle } from './components/dialog/dialog-title.svelte';
 export { default as DialogContent } from './components/dialog/dialog-content.svelte';
 export { default as DialogActions } from './components/dialog/dialog-actions.svelte';

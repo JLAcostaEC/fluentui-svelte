@@ -5,6 +5,19 @@ import type { ButtonProps } from '../button/types.ts';
 import type { PolymorphicProps, XDirection } from '$types';
 
 export type DialogType = 'modal' | 'non-modal' | 'alert';
+export type DialogAnimation = 'fade' | 'zoom' | 'slide' | 'bounce';
+export type DialogDuration =
+	number | 'fast' | 'normal' | 'slow' | 'slower' | 'very-slow' | 'extra-slow' | `--${string}`;
+export type DialogPosition =
+	| 'top-start'
+	| 'top-center'
+	| 'top-end'
+	| 'middle-start'
+	| 'middle-center'
+	| 'middle-end'
+	| 'bottom-start'
+	| 'bottom-center'
+	| 'bottom-end';
 export type DialogTitleTag = 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 /** @propsmith DialogProps */
@@ -19,6 +32,18 @@ export type DialogProps = {
 	 * @default 'modal'
 	 */
 	type?: DialogType;
+	/** Where the dialog sits in the viewport. Start and end follow the text direction.
+	 * @default 'middle-center'
+	 */
+	position?: DialogPosition;
+	/** The entrance and exit animation. Bounce uses a subtle overshoot.
+	 * @default 'zoom'
+	 */
+	animation?: DialogAnimation;
+	/** Duration in milliseconds, a theme duration name, or a CSS custom property name. Use 0 for no motion.
+	 * @default 'normal'
+	 */
+	duration?: DialogDuration;
 	/** Controls the open state of the dialog.
 	 * @bindable
 	 */
@@ -94,6 +119,9 @@ export type DialogTitleProps<T extends DialogTitleTag> = {
 export type DialogContext = FSContext<
 	{
 		type: DialogType;
+		position: DialogPosition;
+		animation: DialogAnimation;
+		duration: DialogDuration;
 	},
 	{
 		dialogRef: HTMLDialogElement | undefined;

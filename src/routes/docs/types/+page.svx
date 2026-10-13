@@ -14,6 +14,14 @@
 
 `'information'` &#124; `'attention'` &#124; `'warning'` &#124; `'success'` &#124; `'critical'`
 
+### DialogDuration
+
+`number` &#124; `'fast'` &#124; `'normal'` &#124; `'slow'` &#124; `'slower'` &#124; `'very-slow'` &#124; `'extra-slow'` &#124; `` `--${string}` ``
+
+### DialogPosition
+
+`'top-start'` &#124; `'top-center'` &#124; `'top-end'` &#124; `'middle-start'` &#124; `'middle-center'` &#124; `'middle-end'` &#124; `'bottom-start'` &#124; `'bottom-center'` &#124; `'bottom-end'`
+
 ### Statuses
 
 `'available'` &#124; `'busy'` &#124; `'offline'` &#124; `'away'` &#124; `'do-not-disturb'` &#124; `'out-of-office'` &#124; `'unknown'` &#124; `'blocked'`

@@ -1,7 +1,10 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { m } from '$i18n/messages.js';
+  import Seo from '$site/components/seo/seo.svelte';
 </script>
+
+<Seo title={m.global_getting_started()} description={m.seo_getting_started_description()} keywords={m.seo_getting_started_keywords().split(', ')} />
 
 # {m.global_getting_started()}
 

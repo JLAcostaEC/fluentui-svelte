@@ -45,6 +45,40 @@ The Dialog is composed of several components that work together through a shared
 
 ## Examples
 
+### Position
+
+Set `position` on `Dialog` to combine `top`, `middle`, or `bottom` with `start`, `center`, or `end`, for example `top-end` or `bottom-start`. The default is `middle-center`.
+
+Start and end follow the text direction, so `top-start` sits on the right in RTL. All positions keep a 1rem gap from viewport edges and work with modal, non-modal, and alert dialogs. Changing `position` moves an open dialog without closing it.
+
+```svelte
+<Dialog position="top-end">
+	<DialogTrigger>Open Dialog</DialogTrigger>
+	<DialogSurface>
+		<DialogTitle>Dialog Title</DialogTitle>
+		<DialogContent>Dialog body content.</DialogContent>
+	</DialogSurface>
+</Dialog>
+```
+
+### Entrance and Exit Motion
+
+`animation` selects `fade`, `zoom`, `slide`, or `bounce` for both directions. The default is `zoom`. Zoom enters from 88% scale and exits to 90%; slide travels 16px, from above for top positions and below otherwise. Bounce uses a small scale overshoot with Fluent's strong-invoke curve.
+
+`duration` defaults to `normal`. Theme names are `fast`, `normal`, `slow`, `slower`, `very-slow`, and `extra-slow`, matching `--fs-<name>-duration`. A CSS custom property name such as `--fs-fast-duration` is also accepted. Numbers are milliseconds; `0` disables motion.
+
+```svelte
+<Dialog animation="slide" duration={200} position="bottom-end">
+	<DialogTrigger>Open Dialog</DialogTrigger>
+	<DialogSurface>
+		<DialogTitle>Dialog Title</DialogTitle>
+		<DialogContent>Dialog body content.</DialogContent>
+	</DialogSurface>
+</Dialog>
+```
+
+Motion is implemented with CSS `@starting-style` and discrete `display`/`overlay` transitions. Calling `closeDialog()` updates `open` and releases native modal focus immediately; CSS keeps the surface and backdrop painted until the exit ends. Browsers without these CSS features open and close immediately. The OS reduced-motion preference and FluentUISvelte's app preference disable motion, including numeric durations; an explicit app preference takes priority over the OS.
+
 ### With Actions
 
 Add a `DialogActions` region to render action buttons in the dialog footer. Use `bind:this` on the `Dialog` to call `closeDialog()` programmatically.
@@ -83,12 +117,15 @@ Add a `DialogActions` region to render action buttons in the dialog footer. Use 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DialogProps -->
 
-| Name              | Type                                            | Default   | Description                                       |
-| ----------------- | ----------------------------------------------- | --------- | ------------------------------------------------- |
-| `type`            | `'modal'` &#124; `'non-modal'` &#124; `'alert'` | `'modal'` | How the dialog behaves once open.                 |
-| `open` _bindable_ | `boolean`                                       |           | Controls the open state of the dialog.            |
-| `onOpenChange`    | `(open: boolean) => void`                       |           | Called whenever the dialog opens or closes.       |
-| `children`        | `Snippet`                                       |           | The parts of the dialog: a trigger and a surface. |
+| Name              | Type                                                                       | Default           | Description                                                                                          |
+| ----------------- | -------------------------------------------------------------------------- | ----------------- | ---------------------------------------------------------------------------------------------------- |
+| `type`            | `'modal'` &#124; `'non-modal'` &#124; `'alert'`                            | `'modal'`         | How the dialog behaves once open.                                                                    |
+| `position`        | [`DialogPosition`](https://fluentui-svelte.dev/docs/types/#dialogposition) | `'middle-center'` | Where the dialog sits in the viewport. Start and end follow the text direction.                      |
+| `animation`       | `'fade'` &#124; `'zoom'` &#124; `'slide'` &#124; `'bounce'`                | `'zoom'`          | The entrance and exit animation. Bounce uses a subtle overshoot.                                     |
+| `duration`        | [`DialogDuration`](https://fluentui-svelte.dev/docs/types/#dialogduration) | `'normal'`        | Duration in milliseconds, a theme duration name, or a CSS custom property name. Use 0 for no motion. |
+| `open` _bindable_ | `boolean`                                                                  |                   | Controls the open state of the dialog.                                                               |
+| `onOpenChange`    | `(open: boolean) => void`                                                  |                   | Called whenever the dialog opens or closes.                                                          |
+| `children`        | `Snippet`                                                                  |                   | The parts of the dialog: a trigger and a surface.                                                    |
 
 <!-- /props:DialogProps -->
 

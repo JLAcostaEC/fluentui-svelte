@@ -8,12 +8,15 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DialogProps -->
 
-| Name              | Type                                            | Default   | Description                                                                        |
-| ----------------- | ----------------------------------------------- | --------- | ---------------------------------------------------------------------------------- |
-| `type`            | `'modal'` &#124; `'non-modal'` &#124; `'alert'` | `'modal'` | `<I18nMarkupMessage message={m.generated_fs_dialog_props_props_type} />`           |
-| `open` _bindable_ | `boolean`                                       |           | `<I18nMarkupMessage message={m.generated_fs_dialog_props_props_open} />`           |
-| `onOpenChange`    | `(open: boolean) => void`                       |           | `<I18nMarkupMessage message={m.generated_fs_dialog_props_props_on_open_change} />` |
-| `children`        | `Snippet`                                       |           | `<I18nMarkupMessage message={m.generated_fs_dialog_props_props_children} />`       |
+| Name              | Type                                                        | Default           | Description                                                                        |
+| ----------------- | ----------------------------------------------------------- | ----------------- | ---------------------------------------------------------------------------------- |
+| `type`            | `'modal'` &#124; `'non-modal'` &#124; `'alert'`             | `'modal'`         | `<I18nMarkupMessage message={m.generated_fs_dialog_props_props_type} />`           |
+| `position`        | [`DialogPosition`](/docs/types/#dialogposition)             | `'middle-center'` | `<I18nMarkupMessage message={m.generated_fs_dialog_props_props_position} />`       |
+| `animation`       | `'fade'` &#124; `'zoom'` &#124; `'slide'` &#124; `'bounce'` | `'zoom'`          | `<I18nMarkupMessage message={m.generated_fs_dialog_props_props_animation} />`      |
+| `duration`        | [`DialogDuration`](/docs/types/#dialogduration)             | `'normal'`        | `<I18nMarkupMessage message={m.generated_fs_dialog_props_props_duration} />`       |
+| `open` _bindable_ | `boolean`                                                   |                   | `<I18nMarkupMessage message={m.generated_fs_dialog_props_props_open} />`           |
+| `onOpenChange`    | `(open: boolean) => void`                                   |                   | `<I18nMarkupMessage message={m.generated_fs_dialog_props_props_on_open_change} />` |
+| `children`        | `Snippet`                                                   |                   | `<I18nMarkupMessage message={m.generated_fs_dialog_props_props_children} />`       |
 
 <!-- /props:DialogProps -->
 

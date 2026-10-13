@@ -1,8 +1,114 @@
 import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import { tick } from 'svelte';
 import { DialogSurface, DialogTrigger, DialogTitle, DialogContent, DialogActions } from '$lib/index.js';
 import DialogTestWrapper from './DialogTestWrapper.svelte';
+import type { DialogPosition, DialogType } from '../types.js';
+
+const positions: DialogPosition[] = [
+	'top-start',
+	'top-center',
+	'top-end',
+	'middle-start',
+	'middle-center',
+	'middle-end',
+	'bottom-start',
+	'bottom-center',
+	'bottom-end'
+];
+
+function expectPosition(position: DialogPosition, rtl = false) {
+	const rect = page.selector('dialog.fs-dialog').element().getBoundingClientRect();
+	const [vertical, horizontal] = position.split('-');
+	const gap = parseFloat(getComputedStyle(document.documentElement).fontSize);
+	const width = document.documentElement.clientWidth;
+	const height = document.documentElement.clientHeight;
+	const top =
+		vertical === 'top' ? gap : vertical === 'bottom' ? height - gap - rect.height : (height - rect.height) / 2;
+	const atLeft = horizontal === (rtl ? 'end' : 'start');
+	const left = horizontal === 'center' ? (width - rect.width) / 2 : atLeft ? gap : width - gap - rect.width;
+
+	expect(rect.top).toBeCloseTo(top, 0);
+	expect(rect.left).toBeCloseTo(left, 0);
+}
+
+describe('positioning', () => {
+	describe.each<DialogType>(['modal', 'non-modal', 'alert'])('%s', (type) => {
+		it.each(positions)('places the dialog at %s', async (position) => {
+			render(DialogTestWrapper, { type, position });
+			await page.getByRole('button', { name: 'Open Dialog' }).click();
+			expect(page.selector('dialog.fs-dialog').element().matches(':modal')).toBe(type !== 'non-modal');
+			expectPosition(position);
+		});
+	});
+
+	it('centers the dialog by default', async () => {
+		render(DialogTestWrapper, { type: 'non-modal', open: true });
+		expectPosition('middle-center');
+	});
+
+	it.each<DialogPosition>(['top-start', 'bottom-end'])('respects RTL for %s', async (position) => {
+		render(DialogTestWrapper, { type: 'non-modal', open: true, position, surfaceProps: { dir: 'rtl' } });
+		expectPosition(position, true);
+	});
+
+	it('repositions an open modal without closing or replacing it', async () => {
+		const onOpenChange = vi.fn();
+		const screen = await render(DialogTestWrapper, { position: 'top-start', onOpenChange });
+		await page.getByRole('button', { name: 'Open Dialog' }).click();
+		const dialog = page.selector('dialog.fs-dialog').element();
+		screen.component.setPosition('bottom-end');
+		await tick();
+		expect(page.selector('dialog.fs-dialog').element()).toBe(dialog);
+		expect(dialog.matches(':modal')).toBe(true);
+		expectPosition('bottom-end');
+		screen.component.setPosition('middle-center');
+		await tick();
+		expectPosition('middle-center');
+		expect(onOpenChange).toHaveBeenCalledExactlyOnceWith(true);
+	});
+
+	it.each<DialogPosition>(['top-start', 'middle-center', 'bottom-end'])(
+		'keeps %s inside a narrow viewport',
+		async (position) => {
+			const { innerWidth, innerHeight } = window;
+			try {
+				await page.viewport(280, 600);
+				render(DialogTestWrapper, { type: 'non-modal', open: true, position });
+				expectPosition(position);
+				const rect = page.selector('dialog.fs-dialog').element().getBoundingClientRect();
+				expect(rect.left).toBeGreaterThanOrEqual(16);
+				expect(rect.right).toBeLessThanOrEqual(264);
+			} finally {
+				await page.viewport(innerWidth, innerHeight);
+			}
+		}
+	);
+
+	it('scrolls long content while keeping the dialog and its actions inside the viewport', async () => {
+		const { innerWidth, innerHeight } = window;
+		try {
+			await page.viewport(600, 320);
+			render(DialogTestWrapper, {
+				type: 'non-modal',
+				open: true,
+				position: 'bottom-end',
+				contentText: 'Dialog body content. '.repeat(1000)
+			});
+			expectPosition('bottom-end');
+			const rect = page.selector('dialog.fs-dialog').element().getBoundingClientRect();
+			const content = page.selector('.dialog-content').element();
+			const actions = page.selector('.dialog-actions').element().getBoundingClientRect();
+			expect(rect.top).toBeGreaterThanOrEqual(15.5);
+			expect(rect.bottom).toBeLessThanOrEqual(304.5);
+			expect(content.scrollHeight).toBeGreaterThan(content.clientHeight);
+			expect(actions.bottom).toBeLessThanOrEqual(rect.bottom);
+		} finally {
+			await page.viewport(innerWidth, innerHeight);
+		}
+	});
+});
 
 describe('DialogTrigger', () => {
 	it('renders a button with the default label', async () => {

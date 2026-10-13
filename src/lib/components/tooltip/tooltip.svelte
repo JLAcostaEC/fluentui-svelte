@@ -75,7 +75,7 @@
 		placement: placement ?? _config?.placement ?? 'top',
 		strategy: 'fixed' as const,
 		middleware: [
-			...(_config?.middleware ?? [offset(8), flip(), shift({ padding: 8 }), hide()]),
+			...(_config?.middleware ?? [offset(8), flip({ padding: 100 }), shift({ padding: 100 }), hide()]),
 			...(withArrow && arrowElement ? [arrow({ element: arrowElement })] : [])
 		]
 	});
@@ -207,7 +207,7 @@
 		position: fixed !important;
 		top: 0;
 		left: 0;
-		z-index: 50;
+		z-index: 110;
 		& .fs-tooltip-arrow {
 			position: absolute;
 			width: 16px;

@@ -142,7 +142,6 @@
 		background-color: var(--fs-card-background-default);
 		border: 1px solid var(--fs-card-stroke-default);
 		box-shadow: var(--fs-shadow-card);
-		z-index: 1;
 	}
 	.inner {
 		display: flex;

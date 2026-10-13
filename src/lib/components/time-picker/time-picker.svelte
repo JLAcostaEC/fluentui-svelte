@@ -291,6 +291,7 @@
 		position: fixed !important;
 		top: 0;
 		left: 0;
+		z-index: 110;
 		max-width: min-content;
 		padding: 0 !important;
 		& .wrapper {

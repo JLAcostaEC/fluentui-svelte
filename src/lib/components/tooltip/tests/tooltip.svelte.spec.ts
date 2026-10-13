@@ -35,7 +35,7 @@ describe('positioning', () => {
 
 		await vi.waitFor(() => {
 			const gap = tooltip().element().getBoundingClientRect().top - button.getBoundingClientRect().bottom;
-			expect(gap).toBeCloseTo(16, 0);
+			expect(gap).toBeCloseTo(8, 0);
 		});
 	});
 

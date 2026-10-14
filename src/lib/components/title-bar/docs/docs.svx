@@ -1,0 +1,58 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { TitleBar, TitleBarLeftControls, TitleBarRightControls } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { AppsRegular } from 'fluentui-icons-svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+# TitleBar
+
+{m.title_bar_description()}
+
+<Showcase columns={1} columnWidth="430px" minHeight="0" disablePanZoom showOverflow>
+  <div class="demo-window" style="width: 100%">
+    <TitleBar>
+      {#snippet leftControls()}
+        <TitleBarLeftControls back globalNav appIcon={AppsRegular} appName="FluentUI App" releaseTag="PREVIEW" />
+      {/snippet}
+      {#snippet rightControls()}
+        <TitleBarRightControls personPic={{ name: 'Ada Lovelace', color: 'colorful' }} />
+      {/snippet}
+    </TitleBar>
+  </div>
+</Showcase>
+
+{m.title_bar_required_components_description()}
+
+- `TitleBar`: {m.title_bar_component_titlebar_description()}
+- `TitleBarLeftControls`: {m.title_bar_component_titlebarleftcontrols_description()}
+- `TitleBarRightControls`: {m.title_bar_component_titlebarrightcontrols_description()}
+
+## {m.global_usage()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.title_bar_usage_description} /></p>
+
+```svelte
+<script>
+	import { TitleBar, TitleBarLeftControls, TitleBarRightControls } from 'fluentui-svelte';
+	import { AppsRegular } from 'fluentui-icons-svelte';
+
+	let maximized = $state(false);
+</script>
+
+<TitleBar>
+	{#snippet leftControls()}
+		<TitleBarLeftControls back globalNav appIcon={AppsRegular} appName="FluentUI App" releaseTag="PREVIEW" />
+	{/snippet}
+	{#snippet rightControls()}
+		<TitleBarRightControls
+			{maximized}
+			personPic={{ name: 'Ada Lovelace' }}
+			onMinimize={() => appWindow.minimize()}
+			onWindowToggle={() => appWindow.toggleMaximize()}
+			onClose={() => appWindow.close()}
+		/>
+	{/snippet}
+</TitleBar>
+```

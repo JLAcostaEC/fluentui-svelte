@@ -1,0 +1,20 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.global_component_props()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:AppWindowProps -->
+
+| Name                                                | Type                     | Default  | Description                                                                      |
+| --------------------------------------------------- | ------------------------ | -------- | -------------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLElement`            |          | `<I18nMarkupMessage message={m.generated_fs_app_window_props_props_ref} />`      |
+| `width`                                             | `number` &#124; `string` | `'100%'` | `<I18nMarkupMessage message={m.generated_fs_app_window_props_props_width} />`    |
+| `height`                                            | `number` &#124; `string` | `'100%'` | `<I18nMarkupMessage message={m.generated_fs_app_window_props_props_height} />`   |
+| `active`                                            | `boolean`                | `false`  | `<I18nMarkupMessage message={m.generated_fs_app_window_props_props_active} />`   |
+| `children`                                          | `Snippet`                |          | `<I18nMarkupMessage message={m.generated_fs_app_window_props_props_children} />` |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                          |          |                                                                                  |
+
+<!-- /props:AppWindowProps -->

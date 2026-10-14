@@ -1,0 +1,76 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '$i18n/messages.js';
+</script>
+
+## {m.title_bar_component_props_titlebar_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TitleBarProps -->
+
+| Name                                             | Type                     | Default    | Description                                                                              |
+| ------------------------------------------------ | ------------------------ | ---------- | ---------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                 | `HTMLElement`            |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_ref} />`               |
+| `leftControls`                                   | `Snippet`                |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_left_controls} />`     |
+| `search`                                         | `Snippet`                |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search} />`            |
+| `rightControls`                                  | `Snippet`                |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_right_controls} />`    |
+| `tall`                                           | `boolean`                |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_tall} />`              |
+| `searchMinWidth`                                 | `number` &#124; `string` | `200`      | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search_min_width} />`  |
+| `searchMaxWidth`                                 | `number` &#124; `string` | `480`      | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search_max_width} />`  |
+| `searchCollapsed` _bindable_                     | `boolean`                | `false`    | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search_collapsed} />`  |
+| `searchLabel`                                    | `string`                 | `'Search'` | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search_label} />`      |
+| `tabbable`                                       | `boolean`                | `false`    | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_tabbable} />`          |
+| `dragRegionProps`                                | `HTMLAttributes`         |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_drag_region_props} />` |
+| `HTMLAttributes<HTMLElement>` without `children` |                          |            |                                                                                          |
+
+<!-- /props:TitleBarProps -->
+
+## {m.title_bar_component_props_titlebarleftcontrols_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TitleBarLeftControlsProps -->
+
+| Name                                                | Type                                         | Default             | Description                                                                                              |
+| --------------------------------------------------- | -------------------------------------------- | ------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLDivElement`                             |                     | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_ref} />`                 |
+| `back`                                              | `boolean`                                    | `false`             | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_back} />`                |
+| `backDisabled`                                      | `boolean`                                    | `false`             | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_back_disabled} />`       |
+| `onBack`                                            | `MouseEventHandler<HTMLButtonElement>`       |                     | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_on_back} />`             |
+| `backLabel`                                         | `string`                                     | `'Back'`            | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_back_label} />`          |
+| `globalNav`                                         | `boolean` &#124; `Snippet`                   | `false`             | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_global_nav} />`          |
+| `globalNavExpanded`                                 | `boolean`                                    | `false`             | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_global_nav_expanded} />` |
+| `onGlobalNav`                                       | `MouseEventHandler<HTMLButtonElement>`       |                     | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_on_global_nav} />`       |
+| `globalNavLabel`                                    | `string`                                     | `'Navigation menu'` | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_global_nav_label} />`    |
+| `appIcon`                                           | `string` &#124; `Snippet` &#124; `Component` |                     | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_app_icon} />`            |
+| `appName`                                           | `string`                                     |                     | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_app_name} />`            |
+| `releaseTag`                                        | `string` &#124; `Snippet`                    |                     | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_release_tag} />`         |
+| `children`                                          | `Snippet`                                    |                     | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_children} />`            |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                                              |                     |                                                                                                          |
+
+<!-- /props:TitleBarLeftControlsProps -->
+
+## {m.title_bar_component_props_titlebarrightcontrols_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TitleBarRightControlsProps -->
+
+| Name                                                | Type                                   | Default      | Description                                                                                               |
+| --------------------------------------------------- | -------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLDivElement`                       |              | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_ref} />`                 |
+| `hideMinimize`                                      | `boolean`                              | `false`      | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_hide_minimize} />`       |
+| `hideWindowToggle`                                  | `boolean`                              | `false`      | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_hide_window_toggle} />`  |
+| `hideClose`                                         | `boolean`                              | `false`      | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_hide_close} />`          |
+| `maximized`                                         | `boolean`                              | `false`      | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_maximized} />`           |
+| `onMinimize`                                        | `MouseEventHandler<HTMLButtonElement>` |              | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_on_minimize} />`         |
+| `onWindowToggle`                                    | `MouseEventHandler<HTMLButtonElement>` |              | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_on_window_toggle} />`    |
+| `onClose`                                           | `MouseEventHandler<HTMLButtonElement>` |              | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_on_close} />`            |
+| `minimizeLabel`                                     | `string`                               | `'Minimize'` | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_minimize_label} />`      |
+| `maximizeLabel`                                     | `string`                               | `'Maximize'` | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_maximize_label} />`      |
+| `restoreLabel`                                      | `string`                               | `'Restore'`  | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_restore_label} />`       |
+| `closeLabel`                                        | `string`                               | `'Close'`    | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_close_label} />`         |
+| `personPic`                                         | `AvatarProps`                          |              | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_person_pic} />`          |
+| `onPersonPicClick`                                  | `MouseEventHandler<HTMLButtonElement>` |              | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_on_person_pic_click} />` |
+| `customMenu`                                        | `Snippet`                              |              | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_custom_menu} />`         |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                                        |              |                                                                                                           |
+
+<!-- /props:TitleBarRightControlsProps -->

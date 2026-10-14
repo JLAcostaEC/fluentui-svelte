@@ -1,0 +1,524 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import {
+    AutoSuggestBox,
+    AutoSuggestBoxOption,
+    Button,
+    Menu,
+    MenuItem,
+    MenuList,
+    MenuPopover,
+    MenuTrigger,
+    TitleBar,
+    TitleBarLeftControls,
+    TitleBarRightControls,
+    ToggleSwitch
+  } from '$lib/index.js';
+  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { AppsRegular, SettingsRegular } from 'fluentui-icons-svelte';
+  import { m } from '$i18n/messages.js';
+
+  let navExpanded = $state(false);
+  let collapsed = $state(false);
+  let maximized = $state(false);
+
+  const leftControlsCode = `
+<TitleBar>
+  {#snippet leftControls()}
+    <TitleBarLeftControls
+      back
+      globalNav
+      globalNavExpanded={navExpanded}
+      onBack={() => history.back()}
+      onGlobalNav={() => (navExpanded = !navExpanded)}
+      appIcon={AppsRegular}
+      appName="FluentUI App"
+    />
+  {/snippet}
+</TitleBar>`;
+
+  const appIconCode = `
+<TitleBar>
+  {#snippet leftControls()}
+    <TitleBarLeftControls appIcon="/logo.png" appName="Image URL" />
+  {/snippet}
+</TitleBar>
+
+<TitleBar>
+  {#snippet leftControls()}
+    <TitleBarLeftControls appIcon={AppsRegular} appName="Fluent icon" />
+  {/snippet}
+</TitleBar>
+
+<TitleBar>
+  {#snippet leftControls()}
+    <TitleBarLeftControls appName="Custom SVG">
+      {#snippet appIcon(props)}
+        <svg {...props} viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="currentColor" /></svg>
+      {/snippet}
+    </TitleBarLeftControls>
+  {/snippet}
+</TitleBar>`;
+
+  const releaseTagCode = `
+<TitleBar>
+  {#snippet leftControls()}
+    <TitleBarLeftControls appIcon={AppsRegular} appName="FluentUI App" releaseTag="PREVIEW" />
+  {/snippet}
+</TitleBar>
+
+<TitleBar>
+  {#snippet leftControls()}
+    <TitleBarLeftControls appIcon={AppsRegular} appName="FluentUI App" releaseTag="BETA" />
+  {/snippet}
+</TitleBar>`;
+
+  const searchCode = `
+<TitleBar searchMinWidth={120}>
+  {#snippet leftControls()}
+    <TitleBarLeftControls appIcon={AppsRegular} appName="FluentUI App" />
+  {/snippet}
+  {#snippet search()}
+    <AutoSuggestBox placeholder="Search" aria-label="Search">
+      <AutoSuggestBoxOption index={0} value="Documents">Documents</AutoSuggestBoxOption>
+      <AutoSuggestBoxOption index={1} value="Pictures">Pictures</AutoSuggestBoxOption>
+    </AutoSuggestBox>
+  {/snippet}
+  {#snippet rightControls()}
+    <TitleBarRightControls />
+  {/snippet}
+</TitleBar>`;
+
+  const searchWidthCode = `
+<TitleBar searchMinWidth={100} searchMaxWidth={180}>...</TitleBar>
+<TitleBar searchMinWidth="30%" searchMaxWidth="60%">...</TitleBar>`;
+
+  const collapsedCode = `
+<script>
+  let collapsed = $state(false);
+<\/script>
+
+<TitleBar searchMinWidth={120} bind:searchCollapsed={collapsed}>
+  {#snippet search()}
+    <AutoSuggestBox placeholder="Search" aria-label="Search" />
+  {/snippet}
+  ...
+</TitleBar>`;
+
+  const windowControlsCode = `
+<TitleBar>
+  {#snippet rightControls()}
+    <TitleBarRightControls />
+  {/snippet}
+</TitleBar>
+
+<TitleBar>
+  {#snippet rightControls()}
+    <TitleBarRightControls hideMinimize />
+  {/snippet}
+</TitleBar>
+
+<TitleBar>
+  {#snippet rightControls()}
+    <TitleBarRightControls hideWindowToggle />
+  {/snippet}
+</TitleBar>
+
+<TitleBar>
+  {#snippet rightControls()}
+    <TitleBarRightControls hideClose />
+  {/snippet}
+</TitleBar>
+
+<TitleBar>
+  {#snippet rightControls()}
+    <TitleBarRightControls hideMinimize hideWindowToggle />
+  {/snippet}
+</TitleBar>`;
+
+  const maximizedCode = `
+<script>
+  let maximized = $state(false);
+<\/script>
+
+<TitleBar>
+  {#snippet rightControls()}
+    <TitleBarRightControls {maximized} onWindowToggle={() => (maximized = !maximized)} />
+  {/snippet}
+</TitleBar>`;
+
+  const personPicCode = `
+<TitleBar>
+  {#snippet rightControls()}
+    <TitleBarRightControls personPic={{ name: 'Ada Lovelace', image: { src: 'https://placehold.co/120x120/jpeg' } }} />
+  {/snippet}
+</TitleBar>
+
+<TitleBar>
+  {#snippet rightControls()}
+    <TitleBarRightControls
+      personPic={{ name: 'Grace Hopper', image: { src: 'https://placehold.co/120x120/jpeg' }, size: 28 }}
+      onPersonPicClick={() => openAccount()}
+    />
+  {/snippet}
+</TitleBar>`;
+
+  const customMenuCode = `
+<TitleBar>
+  {#snippet rightControls()}
+    <TitleBarRightControls personPic={{ name: 'Ada Lovelace', image: { src: 'https://placehold.co/120x120/jpeg' } }}>
+      {#snippet customMenu()}
+        <Menu>
+          <MenuTrigger>
+            {#snippet children({ state, menuTriggerProps })}
+              <Button bind:ref={state.ref} {...menuTriggerProps} appearance="subtle" aria-label="Settings">
+                <SettingsRegular width="1rem" height="1rem" />
+              </Button>
+            {/snippet}
+          </MenuTrigger>
+          <MenuPopover>
+            <MenuList>
+              <MenuItem>Preferences</MenuItem>
+              <MenuItem>Keyboard shortcuts</MenuItem>
+            </MenuList>
+          </MenuPopover>
+        </Menu>
+      {/snippet}
+    </TitleBarRightControls>
+  {/snippet}
+</TitleBar>`;
+
+  const labelsCode = `
+<TitleBar>
+  {#snippet leftControls()}
+    <TitleBarLeftControls back globalNav backLabel="Atrás" globalNavLabel="Menú de navegación" />
+  {/snippet}
+  {#snippet rightControls()}
+    <TitleBarRightControls
+      minimizeLabel="Minimizar"
+      maximizeLabel="Maximizar"
+      restoreLabel="Restaurar"
+      closeLabel="Cerrar"
+    />
+  {/snippet}
+</TitleBar>`;
+
+  const tabbableCode = `
+<TitleBar tabbable>
+  {#snippet leftControls()}
+    <TitleBarLeftControls back globalNav appName="Contoso" />
+  {/snippet}
+  {#snippet rightControls()}
+    <TitleBarRightControls />
+  {/snippet}
+</TitleBar>`;
+
+  const dragRegionCode = `
+<TitleBar dragRegionProps={{ 'data-tauri-drag-region': true }}>
+  ...
+</TitleBar>
+
+<TitleBar dragRegionProps={{ onpointerdown: (e) => e.target === e.currentTarget && appWindow.startDragging() }}>
+  ...
+</TitleBar>`;
+</script>
+
+### {m.title_bar_left_controls_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.title_bar_left_controls_description} /></p>
+
+<Showcase columns={1} columnWidth="430px" code={leftControlsCode} minHeight="0" disablePanZoom showOverflow>
+  <div style="width: 100%">
+    <TitleBar>
+      {#snippet leftControls()}
+        <TitleBarLeftControls
+          back
+          globalNav
+          globalNavExpanded={navExpanded}
+          onGlobalNav={() => (navExpanded = !navExpanded)}
+          appIcon={AppsRegular}
+          appName="FluentUI App"
+        />
+      {/snippet}
+      {#snippet rightControls()}
+        <TitleBarRightControls />
+      {/snippet}
+    </TitleBar>
+  </div>
+</Showcase>
+
+### {m.title_bar_app_icon_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.title_bar_app_icon_description} /></p>
+
+<Showcase columns={1} columnWidth="430px" code={appIconCode} minHeight="0" disablePanZoom showOverflow>
+  <div style="display: flex; flex-direction: column; gap: 1rem; width: 100%">
+    <TitleBar>
+      {#snippet leftControls()}
+        <TitleBarLeftControls appIcon="/favicon.png" appName="Image URL" />
+      {/snippet}
+    </TitleBar>
+    <TitleBar>
+      {#snippet leftControls()}
+        <TitleBarLeftControls appIcon={AppsRegular} appName="Fluent icon" />
+      {/snippet}
+    </TitleBar>
+    <TitleBar>
+      {#snippet leftControls()}
+        <TitleBarLeftControls appName="Custom SVG">
+          {#snippet appIcon(props)}
+            <svg {...props} viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="currentColor" /></svg>
+          {/snippet}
+        </TitleBarLeftControls>
+      {/snippet}
+    </TitleBar>
+  </div>
+</Showcase>
+
+### {m.title_bar_release_tag_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.title_bar_release_tag_description} /></p>
+
+<Showcase columns={1} columnWidth="430px" code={releaseTagCode} minHeight="0" disablePanZoom showOverflow>
+  <div style="display: flex; flex-direction: column; gap: 1rem; width: 100%">
+    <TitleBar>
+      {#snippet leftControls()}
+        <TitleBarLeftControls appIcon={AppsRegular} appName="FluentUI App" releaseTag="PREVIEW" />
+      {/snippet}
+    </TitleBar>
+    <TitleBar>
+      {#snippet leftControls()}
+        <TitleBarLeftControls appIcon={AppsRegular} appName="FluentUI App" releaseTag="BETA" />
+      {/snippet}
+    </TitleBar>
+  </div>
+</Showcase>
+
+### {m.title_bar_search_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.title_bar_search_description} /></p>
+
+<Showcase columns={1} columnWidth="430px" code={searchCode} minHeight="0" disablePanZoom showOverflow>
+  <div style="width: 100%">
+    <TitleBar searchMinWidth={120}>
+      {#snippet leftControls()}
+        <TitleBarLeftControls appIcon={AppsRegular} appName="FluentUI App" />
+      {/snippet}
+      {#snippet search()}
+        <AutoSuggestBox placeholder="Search" aria-label="Search">
+          <AutoSuggestBoxOption index={0} value="Documents">Documents</AutoSuggestBoxOption>
+          <AutoSuggestBoxOption index={1} value="Pictures">Pictures</AutoSuggestBoxOption>
+          <AutoSuggestBoxOption index={2} value="Music">Music</AutoSuggestBoxOption>
+        </AutoSuggestBox>
+      {/snippet}
+      {#snippet rightControls()}
+        <TitleBarRightControls />
+      {/snippet}
+    </TitleBar>
+  </div>
+</Showcase>
+
+### {m.title_bar_search_width_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.title_bar_search_width_description} /></p>
+
+<Showcase columns={1} columnWidth="430px" code={searchWidthCode} minHeight="0" disablePanZoom showOverflow>
+  <div style="display: flex; flex-direction: column; gap: 1rem; width: 100%">
+    <TitleBar searchMinWidth={100} searchMaxWidth={180}>
+      {#snippet leftControls()}
+        <TitleBarLeftControls appIcon={AppsRegular} appName="100 to 180 pixels" />
+      {/snippet}
+      {#snippet search()}
+        <AutoSuggestBox placeholder="Search" aria-label="Search" />
+      {/snippet}
+    </TitleBar>
+    <TitleBar searchMinWidth="30%" searchMaxWidth="60%">
+      {#snippet leftControls()}
+        <TitleBarLeftControls appIcon={AppsRegular} appName="30% to 60%" />
+      {/snippet}
+      {#snippet search()}
+        <AutoSuggestBox placeholder="Search" aria-label="Search" />
+      {/snippet}
+    </TitleBar>
+  </div>
+</Showcase>
+
+### {m.title_bar_search_collapsed_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.title_bar_search_collapsed_description} /></p>
+
+<Showcase columns={1} columnWidth="430px" code={collapsedCode} minHeight="0" disablePanZoom showOverflow>
+  <div style="display: flex; flex-direction: column; gap: 1rem; width: 100%">
+    <ToggleSwitch bind:checked={collapsed} label="Collapsed" />
+    <TitleBar searchMinWidth={120} bind:searchCollapsed={collapsed}>
+      {#snippet leftControls()}
+        <TitleBarLeftControls appIcon={AppsRegular} appName="FluentUI App" />
+      {/snippet}
+      {#snippet search()}
+        <AutoSuggestBox placeholder="Search" aria-label="Search" />
+      {/snippet}
+      {#snippet rightControls()}
+        <TitleBarRightControls />
+      {/snippet}
+    </TitleBar>
+  </div>
+</Showcase>
+
+### {m.title_bar_window_controls_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.title_bar_window_controls_description} /></p>
+
+<Showcase columns={1} columnWidth="430px" code={windowControlsCode} minHeight="0" disablePanZoom showOverflow>
+  <div style="display: flex; flex-direction: column; gap: 1rem; width: 100%">
+    <TitleBar>
+      {#snippet rightControls()}
+        <TitleBarRightControls />
+      {/snippet}
+    </TitleBar>
+    <TitleBar>
+      {#snippet rightControls()}
+        <TitleBarRightControls hideMinimize />
+      {/snippet}
+    </TitleBar>
+    <TitleBar>
+      {#snippet rightControls()}
+        <TitleBarRightControls hideWindowToggle />
+      {/snippet}
+    </TitleBar>
+    <TitleBar>
+      {#snippet rightControls()}
+        <TitleBarRightControls hideClose />
+      {/snippet}
+    </TitleBar>
+    <TitleBar>
+      {#snippet rightControls()}
+        <TitleBarRightControls hideMinimize hideWindowToggle />
+      {/snippet}
+    </TitleBar>
+  </div>
+</Showcase>
+
+### {m.title_bar_maximized_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.title_bar_maximized_description} /></p>
+
+<Showcase columns={1} columnWidth="430px" code={maximizedCode} minHeight="0" disablePanZoom showOverflow>
+  <div style="width: 100%">
+    <TitleBar>
+      {#snippet rightControls()}
+        <TitleBarRightControls {maximized} onWindowToggle={() => (maximized = !maximized)} />
+      {/snippet}
+    </TitleBar>
+  </div>
+</Showcase>
+
+### {m.title_bar_person_pic_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.title_bar_person_pic_description} /></p>
+
+<Showcase columns={1} columnWidth="430px" code={personPicCode} minHeight="0" disablePanZoom showOverflow>
+  <div style="display: flex; flex-direction: column; gap: 1rem; width: 100%">
+    <TitleBar>
+      {#snippet rightControls()}
+        <TitleBarRightControls
+          personPic={{ name: 'Ada Lovelace', image: { src: 'https://placehold.co/120x120/jpeg' } }}
+        />
+      {/snippet}
+    </TitleBar>
+    <TitleBar>
+      {#snippet rightControls()}
+        <TitleBarRightControls
+          personPic={{ name: 'Grace Hopper', image: { src: 'https://placehold.co/120x120/jpeg' }, size: 28 }}
+          onPersonPicClick={() => console.log('Open the account')}
+        />
+      {/snippet}
+    </TitleBar>
+  </div>
+</Showcase>
+
+### {m.title_bar_custom_menu_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.title_bar_custom_menu_description} /></p>
+
+<Showcase columns={1} columnWidth="430px" code={customMenuCode} minHeight="0" disablePanZoom showOverflow>
+  <div style="width: 100%">
+    <TitleBar>
+      {#snippet rightControls()}
+        <TitleBarRightControls
+          personPic={{ name: 'Ada Lovelace', image: { src: 'https://placehold.co/120x120/jpeg' } }}
+        >
+          {#snippet customMenu()}
+            <Menu>
+              <MenuTrigger>
+                {#snippet children({ state, menuTriggerProps })}
+                  <Button bind:ref={state.ref} {...menuTriggerProps} appearance="subtle" aria-label="Settings">
+                    <SettingsRegular width="1rem" height="1rem" />
+                  </Button>
+                {/snippet}
+              </MenuTrigger>
+              <MenuPopover>
+                <MenuList>
+                  <MenuItem>Preferences</MenuItem>
+                  <MenuItem>Keyboard shortcuts</MenuItem>
+                </MenuList>
+              </MenuPopover>
+            </Menu>
+          {/snippet}
+        </TitleBarRightControls>
+      {/snippet}
+    </TitleBar>
+  </div>
+</Showcase>
+
+### {m.title_bar_labels_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.title_bar_labels_description} /></p>
+
+<Showcase columns={1} columnWidth="430px" code={labelsCode} minHeight="0" disablePanZoom showOverflow>
+  <div style="width: 100%">
+    <TitleBar>
+      {#snippet leftControls()}
+        <TitleBarLeftControls back globalNav backLabel="Atrás" globalNavLabel="Menú de navegación" />
+      {/snippet}
+      {#snippet rightControls()}
+        <TitleBarRightControls
+          minimizeLabel="Minimizar"
+          maximizeLabel="Maximizar"
+          restoreLabel="Restaurar"
+          closeLabel="Cerrar"
+        />
+      {/snippet}
+    </TitleBar>
+  </div>
+</Showcase>
+
+### {m.title_bar_tabbable_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.title_bar_tabbable_description} /></p>
+
+<Showcase columns={1} columnWidth="430px" code={tabbableCode} minHeight="0" disablePanZoom showOverflow>
+  <div style="width: 100%">
+    <TitleBar tabbable>
+      {#snippet leftControls()}
+        <TitleBarLeftControls back globalNav appName="Contoso" />
+      {/snippet}
+      {#snippet rightControls()}
+        <TitleBarRightControls />
+      {/snippet}
+    </TitleBar>
+  </div>
+</Showcase>
+
+### {m.title_bar_drag_region_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.title_bar_drag_region_description} /></p>
+
+```svelte
+<TitleBar dragRegionProps={{ 'data-tauri-drag-region': true }}>
+	...
+</TitleBar>
+
+<TitleBar dragRegionProps={{ onpointerdown: (e) => e.target === e.currentTarget && appWindow.startDragging() }}>
+	...
+</TitleBar>
+```

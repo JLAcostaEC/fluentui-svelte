@@ -57,6 +57,8 @@
 		}))
 	);
 
+	const typesUrl = '/docs/types';
+
 	const suggestions = $derived([...primaryNavigation, ...componentLinks].map((nav) => nav.label));
 
 	const handleNav = async (item: string) => {
@@ -137,6 +139,14 @@
 							</ListViewItem>
 						{/if}
 					{/each}
+					<ListViewItem
+						as="a"
+						href={resolve(localizeHref(typesUrl) as any)}
+						active={page.url.pathname.endsWith(typesUrl)}
+						aria-current={page.url.pathname.endsWith(typesUrl) ? 'page' : undefined}
+					>
+						{m.docs_types_reference()}
+					</ListViewItem>
 				</ListView>
 			{/if}
 		</nav>

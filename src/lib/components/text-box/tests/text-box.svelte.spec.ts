@@ -49,6 +49,35 @@ describe('size', () => {
 	});
 });
 
+describe('padding', () => {
+	const padding = (element: Element) => {
+		const { paddingTop, paddingRight, paddingBottom, paddingLeft } = getComputedStyle(element);
+		return { paddingTop, paddingRight, paddingBottom, paddingLeft };
+	};
+
+	it('uses 11px of horizontal padding at the start of the input and keeps the vertical padding', async () => {
+		render(TextBox);
+		const input = page.getByRole('textbox').element();
+		expect(padding(input)).toMatchObject({ paddingLeft: '11px', paddingTop: '6px', paddingBottom: '6px' });
+	});
+
+	it('uses 11px of horizontal padding at the end of the input when there are no action buttons', async () => {
+		render(TextBox, { hideActionButtons: true });
+		const input = page.getByRole('textbox').element();
+		expect(padding(input)).toMatchObject({ paddingLeft: '11px', paddingRight: '11px' });
+	});
+
+	it('moves the outer horizontal padding to the content before and after the input', async () => {
+		render(TextBox, { contentBefore: 'https://', contentAfter: '.com', hideActionButtons: true });
+		const before = page.getByText('https://').element();
+		const after = page.getByText('.com').element();
+		const input = page.getByRole('textbox').element();
+		expect(padding(before).paddingLeft).toBe('11px');
+		expect(padding(after).paddingRight).toBe('11px');
+		expect(padding(input)).toMatchObject({ paddingLeft: '6px', paddingRight: '6px' });
+	});
+});
+
 describe('content before/after', () => {
 	it('renders string content before the input', async () => {
 		render(TextBox, { contentBefore: 'https://' });

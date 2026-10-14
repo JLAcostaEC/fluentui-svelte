@@ -891,6 +891,8 @@
   "gs_yarn_label": "Yarn:",
   "header_change_language": "Change Language",
   "header_dark_mode": "Dark Mode",
+  "header_disable_panzoom": "Disable Panzoom",
+  "header_disable_panzoom_subtext": "Disable Zoom on Previews",
   "header_nav_menu_tooltip": "Navigate to a different page",
   "header_reduce_motion": "Reduce Motion",
   "header_settings_label": "Show Configuration Options",

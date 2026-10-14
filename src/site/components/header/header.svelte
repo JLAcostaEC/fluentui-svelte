@@ -18,9 +18,11 @@
 	} from '$lib/index.js';
 	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { GITHUB_REPO_URL } from '$site/constants.js';
+	import { getDisablePanZoom } from '$site/preferences.js';
 	import type { Pathname } from '$app/types';
 
 	const globalContext = getGlobalFSContext();
+	const disablePanZoom = getDisablePanZoom();
 
 	const { state: globalState, methods } = globalContext!;
 
@@ -152,6 +154,12 @@
 						bind:checked={() => globalState.reducedMotion, () => null}
 						onclick={() => methods.setReducedMotion(!globalState.reducedMotion)}
 						>{m.header_reduce_motion()}</MenuItemSwitch
+					>
+					<MenuItemSwitch
+						aria-label={m.header_disable_panzoom()}
+						bind:checked={() => disablePanZoom.current, () => null}
+						onclick={() => (disablePanZoom.current = !disablePanZoom.current)}
+						subText={m.header_disable_panzoom_subtext()}>{m.header_disable_panzoom()}</MenuItemSwitch
 					>
 					<MenuItemSwitch bind:checked={() => mode.current === 'dark', () => null} onclick={toggleMode}>
 						{m.header_dark_mode()}

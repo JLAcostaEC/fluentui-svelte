@@ -17,6 +17,7 @@
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
 	import { ModeWatcher } from 'mode-watcher';
+	import { PersistedState } from 'runed';
 	import { FluentUISvelte } from '$lib/index.js';
 	import { locales, localizeHref } from '$i18n/runtime.js';
 	import { m } from '$i18n/messages.js';
@@ -24,8 +25,12 @@
 
 	import Header from '$site/components/header/header.svelte';
 	import Footer from '$site/components/footer/footer.svelte';
+	import { setDisablePanZoom } from '$site/preferences.js';
 
 	let { children } = $props();
+
+	const disablePanZoom = new PersistedState<boolean>('fluentui-svelte-disable-panzoom', false);
+	setDisablePanZoom(disablePanZoom);
 
 	const inDocs = $derived(!!page.route.id?.startsWith('/docs'));
 </script>

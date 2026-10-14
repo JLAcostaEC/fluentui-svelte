@@ -49,6 +49,55 @@ import 'fluentui-svelte/typography.css';
 import 'fluentui-svelte/media-darkmode.css'; /* Or:  import 'fluentui-svelte/class-darkmode.css' */
 ```
 
+### {m.gs_optional_font_title()}
+
+{m.gs_optional_font_description()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.gs_optional_font_download_description} /></p>
+
+- <a href="/fonts/selawik/selawk.ttf" download>selawk.ttf</a>
+- <a href="/fonts/selawik/selawksb.ttf" download>selawksb.ttf</a>
+- <a href="/fonts/selawik/selawkb.ttf" download>selawkb.ttf</a>
+- <a href="/fonts/selawik/SIL%20Open%20Font%20License.txt" download>{m.gs_optional_font_license_label()}</a>
+
+<p class="fs-docs"><I18nMarkupMessage message={m.gs_optional_font_configuration_description} /></p>
+
+```css
+@font-face {
+  font-family: 'Selawik';
+  src: url('/fonts/selawik/selawk.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Selawik';
+  src: url('/fonts/selawik/selawksb.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Selawik';
+  src: url('/fonts/selawik/selawkb.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+```
+
+<p class="fs-docs"><I18nMarkupMessage message={m.gs_optional_font_import_description} /></p>
+
+```js
+import 'fluentui-svelte/theme.css';
+import 'fluentui-svelte/typography.css';
+import '../app.css';
+```
+
+<p class="fs-docs"><I18nMarkupMessage message={m.gs_optional_font_fallback_note} /></p>
+
 ## {m.gs_provider_title()}
 
 {m.gs_provider_description_before_code()} `+layout.svelte` {m.gs_provider_description_after_code()}

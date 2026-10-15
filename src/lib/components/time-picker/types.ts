@@ -31,7 +31,7 @@ export type TimePickerProps = {
 	/** The DOM reference of the trigger button.
 	 * @bindable
 	 */
-	element?: HTMLButtonElement;
+	ref?: HTMLButtonElement;
 	/** The DOM reference of the element wrapping the trigger and its input.
 	 * @bindable
 	 */

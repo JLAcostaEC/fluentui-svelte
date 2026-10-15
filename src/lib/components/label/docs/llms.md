@@ -6,11 +6,13 @@ A Label provides an accessible caption for a form control. It supports different
 
 ```svelte
 <script>
-	import { Label } from 'fluentui-svelte';
+	import { Label, TextBox } from 'fluentui-svelte';
 </script>
 
-<Label label="Email" />
+<Label label="Email" for="label-email"><TextBox id="label-email" /></Label>
 ```
+
+The root is a `div` by default; `as="span"` selects a span. The text label and the field are siblings. Link them explicitly using `for` on Label and the same `id` on the control. `size` and `weight` style only the label text. `class`, other label attributes and `ref` apply to the label; use `wrapperAttributes` and `wrapperRef` for the root.
 
 ## Examples
 
@@ -19,9 +21,9 @@ A Label provides an accessible caption for a form control. It supports different
 Use the `size` prop to control the label text size.
 
 ```svelte
-<Label size="small" label="Small" />
-<Label size="medium" label="Medium" />
-<Label size="large" label="Large" />
+<Label size="small" label="Small" for="label-small"><TextBox id="label-small" /></Label>
+<Label size="medium" label="Medium" for="label-medium"><TextBox id="label-medium" /></Label>
+<Label size="large" label="Large" for="label-large"><TextBox id="label-large" /></Label>
 ```
 
 ### Weight
@@ -29,8 +31,8 @@ Use the `size` prop to control the label text size.
 Use the `weight` prop to switch between a regular and a semibold label.
 
 ```svelte
-<Label weight="regular" label="Regular" />
-<Label weight="semibold" label="Semibold" />
+<Label weight="regular" label="Regular" for="label-regular"><TextBox id="label-regular" /></Label>
+<Label weight="semibold" label="Semibold" for="label-semibold"><TextBox id="label-semibold" /></Label>
 ```
 
 ### Label Position
@@ -38,10 +40,10 @@ Use the `weight` prop to switch between a regular and a semibold label.
 Use the `labelPosition` prop to place the label text relative to the wrapped control.
 
 ```svelte
-<Label labelPosition="before" label="Before" />
-<Label labelPosition="after" label="After" />
-<Label labelPosition="above" label="Above" />
-<Label labelPosition="below" label="Below" />
+<Label labelPosition="before" label="Before" for="label-before"><TextBox id="label-before" /></Label>
+<Label labelPosition="after" label="After" for="label-after"><TextBox id="label-after" /></Label>
+<Label labelPosition="above" label="Above" for="label-above"><TextBox id="label-above" /></Label>
+<Label labelPosition="below" label="Below" for="label-below"><TextBox id="label-below" /></Label>
 ```
 
 ### Required
@@ -49,8 +51,23 @@ Use the `labelPosition` prop to place the label text relative to the wrapped con
 Pass a `required` object to mark the label as required and render a required indicator.
 
 ```svelte
-<Label label="Email" required={{ message: 'Required field' }} />
+<Label label="Email" required={{ message: 'Required field' }} for="label-email-required"
+	><TextBox id="label-email-required" required /></Label
+>
 ```
+
+### Other form controls
+
+```svelte
+<Label label="Accept terms" for="terms"><Checkbox id="terms" /></Label>
+<Label label="Email updates" for="updates"><ToggleSwitch id="updates" /></Label>
+<Label label="Standard plan" for="plan"><RadioButton id="plan" name="plan" value="standard" /></Label>
+<Label label="Country" for="country">
+	<Dropdown id="country"><DropdownOption value="bo">Bolivia</DropdownOption></Dropdown>
+</Label>
+```
+
+Label renders its text and field as siblings. Link the label to the control with for and id. HTML attributes, class and ref apply to the label text element; wrapperAttributes and wrapperRef apply to the container. Size and weight affect only the label text.
 
 ## Component Props
 
@@ -59,7 +76,11 @@ Pass a `required` object to mark the label as required and render a required ind
 
 | Name                         | Type                                                          | Default           | Description                                                               |
 | ---------------------------- | ------------------------------------------------------------- | ----------------- | ------------------------------------------------------------------------- |
-| `label`                      | `string`                                                      | `'Label Element'` | The text of the label. Falls back to the rendered children.               |
+| `as`                         | `'div'` &#124; `'span'`                                       | `'div'`           | The element used to wrap the label and its field.                         |
+| `children`                   | `Snippet`                                                     |                   | The field described by the label, rendered beside the label text.         |
+| `wrapperRef` _bindable_      | `HTMLDivElement` &#124; `HTMLSpanElement`                     |                   | The DOM reference of the wrapper element.                                 |
+| `wrapperAttributes`          | `HTMLAttributes`                                              |                   | The attributes to spread on the wrapper element.                          |
+| `label`                      | `string`                                                      | `'Label Element'` | The text of the label.                                                    |
 | `size`                       | `'small'` &#124; `'medium'` &#124; `'large'`                  | `'medium'`        | The size of the label text.                                               |
 | `weight`                     | `'regular'` &#124; `'semibold'`                               | `'regular'`       | The weight of the label text.                                             |
 | `labelPosition`              | `'before'` &#124; `'after'` &#124; `'above'` &#124; `'below'` | `'after'`         | Where the label sits relative to the field it describes.                  |

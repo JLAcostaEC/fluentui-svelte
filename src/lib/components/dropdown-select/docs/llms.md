@@ -51,6 +51,8 @@ Set the `multiple` prop to allow selecting more than one option.
 </DropdownSelect>
 ```
 
+HTML attributes, including class, id and ARIA attributes, apply to the control element. Bind ref to access that control. Use wrapperAttributes and wrapperRef for the outer container.
+
 ## Component Props
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
@@ -64,7 +66,7 @@ Set the `multiple` prop to allow selecting more than one option.
 | `hidePlaceholder`             | `boolean`                  |                            | Keeps the placeholder out of the option list once a value is selected. |
 | `ref` _bindable_              | `HTMLSelectElement`        |                            | The DOM reference of the select element.                               |
 | `wrapperRef` _bindable_       | `HTMLDivElement`           |                            | The DOM reference of the wrapper element.                              |
-| `wrapperProps`                | `HTMLAttributes`           |                            | The attributes to spread on the wrapper element.                       |
+| `wrapperAttributes`           | `HTMLAttributes`           |                            | The attributes to spread on the wrapper element.                       |
 | Element Attributes (`select`) |                            |                            |                                                                        |
 
 <!-- /props:DropdownSelectProps -->

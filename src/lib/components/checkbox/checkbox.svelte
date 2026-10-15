@@ -1,9 +1,8 @@
-<script lang="ts" generics="T extends 'div' | 'label' = 'label'">
+<script lang="ts">
 	import CheckmarkFilled from 'fluentui-icons-svelte/CheckmarkFilled.svelte';
 	import SubtractFilled from 'fluentui-icons-svelte/SubtractFilled.svelte';
 	import { PREFIX } from '$constants';
 	import type { CheckboxProps } from './types.ts';
-	import type { PolymorphicProps } from '$types';
 
 	const FALLBACK_ID = $props.id();
 	const COMPONENT_NAME = 'checkbox';
@@ -18,11 +17,10 @@
 		name = id,
 		'aria-hidden': ariaHidden,
 		disabled,
-		wrapperAs = 'label' as T,
 		wrapperAttributes,
 		children,
 		...attributes
-	}: CheckboxProps<T> = $props();
+	}: CheckboxProps = $props();
 </script>
 
 <!-- 
@@ -38,17 +36,13 @@
     import { Checkbox } from 'fluentui-svelte';
   </script>
 
-  <Checkbox label="Checkbox label" />
+  <Checkbox>Checkbox label</Checkbox>
   ```
  -->
 
-<svelte:element
-	this={wrapperAs}
-	bind:this={wrapperRef}
-	{...wrapperAttributes as PolymorphicProps<T>}
-	class={['fs-checkbox', wrapperAttributes?.class, wrapperAs === 'label' && 'label-wrapper']}
->
+<div {...wrapperAttributes} class={['fs-checkbox', wrapperAttributes?.class]} bind:this={wrapperRef}>
 	<input
+		{...attributes}
 		{id}
 		{name}
 		{disabled}
@@ -57,14 +51,15 @@
 		bind:checked
 		bind:this={ref}
 		{indeterminate}
-		{...attributes}
 	/>
 	<div style="pointer-events: none;" aria-hidden="true">
 		<SubtractFilled class="indeterminate" />
 		<CheckmarkFilled class="checked" />
 	</div>
-	{@render children?.()}
-</svelte:element>
+	{#if children}
+		<label for={id}>{@render children()}</label>
+	{/if}
+</div>
 
 <style>
 	.fs-checkbox {
@@ -74,11 +69,10 @@
 		outline: none;
 		cursor: pointer;
 		position: relative;
-		gap: 0.75rem;
 		&:has(input:focus-visible) {
 			outline: 0.125rem var(--fs-focus-stroke-outer) solid;
 			outline-offset: 0.125rem;
-			&.label-wrapper {
+			&:has(> label) {
 				border-radius: 0.063rem;
 				outline-offset: 0.313rem;
 			}
@@ -90,9 +84,15 @@
 			background-color: var(--fs-control-alt-fill-quaternary);
 			border-color: var(--fs-control-strong-disabled);
 		}
+		& > label {
+			padding-inline-start: 0.75rem;
+			cursor: inherit;
+		}
 		& input {
 			position: absolute;
 			inset: 0;
+			width: 1.25rem;
+			margin: 0;
 			border: unset;
 			outline: 0 !important;
 			opacity: 0;

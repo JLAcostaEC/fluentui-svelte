@@ -144,7 +144,6 @@
 >
 	{#if selectable && _card.showFloatingAction && as !== 'a'}
 		<Checkbox
-			wrapperAs="div"
 			aria-labelledby={`${id}-title`}
 			bind:checked={selected}
 			{disabled}

@@ -13,18 +13,18 @@
 		multiple,
 		hidePlaceholder,
 		placeholder,
-		wrapperProps
+		wrapperAttributes
 	}: {
 		options?: Option[];
 		value?: string | string[];
 		multiple?: boolean;
 		hidePlaceholder?: boolean;
 		placeholder?: string;
-		wrapperProps?: Record<string, unknown>;
+		wrapperAttributes?: Record<string, unknown>;
 	} = $props();
 </script>
 
-<DropdownSelect {multiple} {hidePlaceholder} {placeholder} {wrapperProps} {value}>
+<DropdownSelect {multiple} {hidePlaceholder} {placeholder} {wrapperAttributes} {value}>
 	{#each options as opt (opt.value)}
 		<DropdownSelectOption value={opt.value} text={opt.text} disabled={opt.disabled}>
 			{opt.text}

@@ -1,5 +1,4 @@
-import type { HTMLInputAttributes } from 'svelte/elements';
-import type { PolymorphicProps } from '$types';
+import type { HTMLAttributes, HTMLInputAttributes } from 'svelte/elements';
 
 /** @propsmith RadioButtonProps */
 export type RadioButtonProps = {
@@ -18,8 +17,12 @@ export type RadioButtonProps = {
 	 * @bindable
 	 */
 	ref?: HTMLInputElement;
-	/** The attributes to spread on the label wrapping the radio button.
-	 * @type PolymorphicProps
+	/** The attributes to spread on the wrapper element.
+	 * @type HTMLAttributes
 	 */
-	labelAttributes?: PolymorphicProps<'label'>;
+	wrapperAttributes?: HTMLAttributes<HTMLDivElement>;
+	/** The DOM reference of the wrapper element.
+	 * @bindable
+	 */
+	wrapperRef?: HTMLDivElement;
 } & HTMLInputAttributes;

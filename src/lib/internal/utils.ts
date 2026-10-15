@@ -47,6 +47,9 @@ export function preventDefault<E extends Event = Event>(fn: EventHandler<E>): Ev
 	};
 }
 
+/** Method syntax keeps `event` bivariant, so handlers typed with a narrower `currentTarget` are accepted. */
+type BivariantHandler<E extends Event> = { bivarianceHack(event: E): unknown }['bivarianceHack'];
+
 /**
  * Dispatches an event to a list of callbacks.
  * If any blocker in `blockers` is true, calls `preventDefault()` and skips the callbacks.
@@ -54,7 +57,7 @@ export function preventDefault<E extends Event = Event>(fn: EventHandler<E>): Ev
 export const invokeHandlers = <T extends Event>(
 	e: T,
 	blockers: boolean | (boolean | undefined)[] = [],
-	callbacks: Array<((event: any) => void) | unknown> = []
+	callbacks: Array<BivariantHandler<NoInfer<T>> | false | null | undefined> = []
 ) => {
 	if ((Array.isArray(blockers) ? blockers : [blockers]).some(Boolean)) return e.preventDefault();
 

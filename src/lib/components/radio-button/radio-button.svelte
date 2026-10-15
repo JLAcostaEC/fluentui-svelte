@@ -8,13 +8,14 @@
 
 	let {
 		ref = $bindable(),
+		wrapperRef = $bindable(),
 		group = $bindable(undefined),
 		id = ID,
 		label,
 		name = id,
 		value,
 		checked = $bindable(false),
-		labelAttributes,
+		wrapperAttributes,
 		...attributes
 	}: RadioButtonProps = $props();
 </script>
@@ -37,12 +38,12 @@
   ```
  -->
 
-<label class="fs-radio-button" {...labelAttributes}>
-	<input type="radio" {id} {name} {value} {checked} bind:this={ref} bind:group {...attributes} />
+<div {...wrapperAttributes} class={['fs-radio-button', wrapperAttributes?.class]} bind:this={wrapperRef}>
+	<input {...attributes} type="radio" {id} {name} {value} {checked} bind:this={ref} bind:group />
 	{#if label}
-		<span>{label}</span>
+		<label for={id}>{label}</label>
 	{/if}
-</label>
+</div>
 
 <style>
 	.fs-radio-button {
@@ -115,12 +116,14 @@
 		&:has(input:focus-visible) {
 			outline: 0.125rem var(--fs-focus-stroke-outer) solid;
 			outline-offset: 0.125rem;
-			&:has(span) {
+			&:has(> label) {
 				border-radius: 0.063rem;
 				outline-offset: 0.313rem;
 			}
 		}
-		& span {
+		& > label {
+			flex-grow: 1;
+			cursor: pointer;
 			font-size: inherit;
 			color: inherit;
 			padding: 0px 0.75rem;

@@ -1,54 +1,54 @@
 <script lang="ts">
-  import { Label } from '$lib/index.js';
+  import { Label, TextBox, Checkbox, RadioButton, ToggleSwitch, Dropdown, DropdownOption } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { m } from '$i18n/messages.js';
 
   const sizeCode = `
-<Label size="small" label="Small" />
-<Label size="medium" label="Medium" />
-<Label size="large" label="Large" />`;
+<Label size="small" label="Small" for="label-small"><TextBox id="label-small" /></Label>
+<Label size="medium" label="Medium" for="label-medium"><TextBox id="label-medium" /></Label>
+<Label size="large" label="Large" for="label-large"><TextBox id="label-large" /></Label>`;
 
   const weightCode = `
-<Label weight="regular" label="Regular" />
-<Label weight="semibold" label="Semibold" />`;
+<Label weight="regular" label="Regular" for="label-regular"><TextBox id="label-regular" /></Label>
+<Label weight="semibold" label="Semibold" for="label-semibold"><TextBox id="label-semibold" /></Label>`;
 
   const positionCode = `
-<Label labelPosition="before" label="Before" />
-<Label labelPosition="after" label="After" />
-<Label labelPosition="above" label="Above" />
-<Label labelPosition="below" label="Below" />`;
+<Label labelPosition="before" label="Before" for="label-before"><TextBox id="label-before" /></Label>
+<Label labelPosition="after" label="After" for="label-after"><TextBox id="label-after" /></Label>
+<Label labelPosition="above" label="Above" for="label-above"><TextBox id="label-above" /></Label>
+<Label labelPosition="below" label="Below" for="label-below"><TextBox id="label-below" /></Label>`;
 
-  const requiredCode = `<Label label="Email" required={{ message: 'Required field' }} />`;
+  const requiredCode = `<Label label="Email" required={{ message: 'Required field' }} for="label-email-required"><TextBox id="label-email-required" required /></Label>`;
 </script>
 
 ### {m.global_size()}
 
 {m.label_size_description()}
 
-<Showcase code={sizeCode}>
-  <Label size="small" label="Small" />
-  <Label size="medium" label="Medium" />
-  <Label size="large" label="Large" />
+<Showcase columns={1} code={sizeCode}>
+  <Label size="small" label="Small" for="label-small"><TextBox id="label-small" /></Label>
+  <Label size="medium" label="Medium" for="label-medium"><TextBox id="label-medium" /></Label>
+  <Label size="large" label="Large" for="label-large"><TextBox id="label-large" /></Label>
 </Showcase>
 
 ### {m.label_weight_title()}
 
 {m.label_weight_description()}
 
-<Showcase code={weightCode}>
-  <Label weight="regular" label="Regular" />
-  <Label weight="semibold" label="Semibold" />
+<Showcase columns={1} code={weightCode}>
+  <Label weight="regular" label="Regular" for="label-regular"><TextBox id="label-regular" /></Label>
+  <Label weight="semibold" label="Semibold" for="label-semibold"><TextBox id="label-semibold" /></Label>
 </Showcase>
 
 ### {m.label_position_title()}
 
 {m.label_position_description()}
 
-<Showcase columns={2} code={positionCode}>
-  <Label labelPosition="before" label="Before" />
-  <Label labelPosition="after" label="After" />
-  <Label labelPosition="above" label="Above" />
-  <Label labelPosition="below" label="Below" />
+<Showcase columns={1} code={positionCode}>
+  <Label labelPosition="before" label="Before" for="label-before"><TextBox id="label-before" /></Label>
+  <Label labelPosition="after" label="After" for="label-after"><TextBox id="label-after" /></Label>
+  <Label labelPosition="above" label="Above" for="label-above"><TextBox id="label-above" /></Label>
+  <Label labelPosition="below" label="Below" for="label-below"><TextBox id="label-below" /></Label>
 </Showcase>
 
 ### {m.label_required_title()}
@@ -56,5 +56,21 @@
 {m.label_required_description()}
 
 <Showcase columns={1} code={requiredCode}>
-  <Label label="Email" required={{ message: 'Required field' }} />
+  <Label label="Email" required={{ message: 'Required field' }} for="label-email-required"><TextBox id="label-email-required" required /></Label>
+</Showcase>
+
+### {m.label_controls_title()}
+
+{m.label_controls_description()}
+
+<Showcase columns={1} disablePanZoom showOverflow>
+  <Label label="Accept terms" for="label-terms"><Checkbox id="label-terms" /></Label>
+  <Label label="Email updates" for="label-updates"><ToggleSwitch id="label-updates" /></Label>
+  <Label label="Standard plan" for="label-plan"><RadioButton id="label-plan" name="plan" value="standard" /></Label>
+  <Label label="Country" for="label-country" labelPosition="above">
+    <Dropdown id="label-country">
+      <DropdownOption value="bo">Bolivia</DropdownOption>
+      <DropdownOption value="ec">Ecuador</DropdownOption>
+    </Dropdown>
+  </Label>
 </Showcase>

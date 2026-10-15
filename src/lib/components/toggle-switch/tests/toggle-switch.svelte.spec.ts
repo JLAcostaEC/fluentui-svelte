@@ -14,9 +14,9 @@ describe('rendering', () => {
 		await expect.element(toggle()).toHaveAttribute('type', 'checkbox');
 	});
 
-	it('wraps the input in a label', async () => {
+	it('wraps the input in a div', async () => {
 		render(ToggleSwitch);
-		await expect.element(page.selector('label.fs-toggle-switch')).toBeInTheDocument();
+		await expect.element(page.selector('div.fs-toggle-switch')).toBeInTheDocument();
 	});
 
 	it('renders the label text it is given', async () => {
@@ -24,9 +24,9 @@ describe('rendering', () => {
 		await expect.element(page.getByRole('switch', { name: 'Wi-Fi' })).toBeInTheDocument();
 	});
 
-	it('leaves out the label span when there is no label', async () => {
+	it('leaves out the text label when there is no label', async () => {
 		render(ToggleSwitch);
-		await expect.element(page.selector('label.fs-toggle-switch span')).not.toBeInTheDocument();
+		await expect.element(page.selector('div.fs-toggle-switch > label')).not.toBeInTheDocument();
 	});
 });
 
@@ -88,5 +88,13 @@ describe('disabled', () => {
 
 		await expect(toggle().click({ timeout: 300 })).rejects.toThrow();
 		await expect.element(state()).toHaveTextContent('off');
+	});
+});
+
+describe('separate text label', () => {
+	it('never contains its input in a label', async () => {
+		render(ToggleSwitch, { label: 'Choose me' });
+		expect(document.querySelector('label input')).toBeNull();
+		await expect.element(page.selector('.fs-toggle-switch > label')).toHaveAttribute('for');
 	});
 });

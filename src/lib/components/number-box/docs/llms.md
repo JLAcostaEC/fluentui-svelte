@@ -27,6 +27,8 @@ The variant prop determines the visual style of the NumberBox.
 <NumberBox hideActionButtons min={0} max={100} step={1} variant="compact" />
 ```
 
+HTML attributes, including class, id and ARIA attributes, apply to the control element. Bind ref to access that control. Use wrapperAttributes and wrapperRef for the outer container.
+
 ## Component Props
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->

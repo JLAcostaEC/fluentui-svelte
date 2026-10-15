@@ -2,18 +2,18 @@ import type { FSContext } from '$internal';
 import type { TextBoxProps } from '../text-box/types.ts';
 import type { ListViewItemProps } from '../list-view/types.ts';
 import type { FlyoutProps } from '../flyout/types.ts';
-import type { HTMLAttributes } from 'svelte/elements';
+import type { HTMLAttributes, HTMLInputAttributes } from 'svelte/elements';
 
 /** @propsmith AutoSuggestBoxProps */
 export type AutoSuggestBoxProps = {
 	/** The DOM reference of the wrapper element.
 	 * @bindable
 	 */
-	ref?: HTMLElement;
+	wrapperRef?: HTMLDivElement;
 	/** The DOM reference of the text box element.
 	 * @bindable
 	 */
-	inputRef?: HTMLInputElement;
+	ref?: HTMLInputElement;
 	/** The current text of the box.
 	 * @default ''
 	 * @bindable
@@ -62,14 +62,10 @@ export type AutoSuggestBoxProps = {
 	 * @default 6
 	 */
 	maxItemsInView?: number;
-	/** The DOM reference of the underlying text box input.
-	 * @bindable
+	/** The attributes to spread on the wrapper element.
+	 * @type HTMLAttributes
 	 */
-	textBoxRef?: HTMLInputElement;
-	/** The props to spread on the text box.
-	 * @type TextBoxProps
-	 */
-	textBoxProps?: Omit<TextBoxProps, 'type' | 'ref' | 'placeholder' | 'hideActionButtons' | 'textChanged'>;
+	wrapperAttributes?: HTMLAttributes<HTMLDivElement>;
 	/** The DOM reference of the flyout holding the suggestion list.
 	 * @bindable
 	 */
@@ -86,8 +82,8 @@ export type AutoSuggestBoxProps = {
 	 * @type ListViewItemProps
 	 */
 	listViewProps?: Omit<ListViewItemProps, 'as' | 'role' | 'ref' | 'navigationMode' | 'selectedItems'>;
-} & Pick<TextBoxProps, 'type' | 'placeholder' | 'hideActionButtons' | 'textChanged'> &
-	HTMLAttributes<HTMLDivElement>;
+} & Pick<TextBoxProps, 'type' | 'placeholder' | 'hideActionButtons' | 'textChanged' | 'onClear'> &
+	Omit<HTMLInputAttributes, 'value' | 'type' | 'role' | 'size' | 'placeholder'>;
 
 /**
  * Bridge to a windowed list. `size` is the total number of suggestions, not the

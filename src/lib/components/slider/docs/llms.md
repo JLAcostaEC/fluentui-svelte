@@ -50,6 +50,8 @@ Set the `disabled` prop to prevent interaction with the slider.
 <Slider value={30} disabled />
 ```
 
+The root is the control element. HTML attributes, class and ref apply to that element. There is no separate wrapper API.
+
 ## Component Props
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->

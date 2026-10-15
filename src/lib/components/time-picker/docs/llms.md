@@ -33,6 +33,8 @@ Use `hideHours`, `hideMinutes`, or `hideSeconds` to hide individual columns. By 
 <TimePicker format={24} hideSeconds />
 ```
 
+HTML attributes, including class, id and ARIA attributes, apply to the control element. Bind ref to access that control. Use wrapperAttributes and wrapperRef for the outer container.
+
 ## Component Props
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
@@ -46,7 +48,7 @@ Use `hideHours`, `hideMinutes`, or `hideSeconds` to hide individual columns. By 
 | `hideHours`                   | `boolean`             | `false`           | Removes the hour column.                                                                            |
 | `hideMinutes`                 | `boolean`             | `false`           | Removes the minute column.                                                                          |
 | `hideSeconds`                 | `boolean`             | `false`           | Removes the second column.                                                                          |
-| `element` _bindable_          | `HTMLButtonElement`   |                   | The DOM reference of the trigger button.                                                            |
+| `ref` _bindable_              | `HTMLButtonElement`   |                   | The DOM reference of the trigger button.                                                            |
 | `wrapperRef` _bindable_       | `HTMLDivElement`      |                   | The DOM reference of the element wrapping the trigger and its input.                                |
 | `wrapperAttributes`           | `HTMLAttributes`      |                   | The attributes to spread on the wrapper element.                                                    |
 | `inputElement` _bindable_     | `HTMLInputElement`    |                   | The DOM reference of the underlying input element.                                                  |

@@ -7,10 +7,10 @@ import RadioButtonGroupTestWrapper from './RadioButtonGroupTestWrapper.svelte';
 const selection = () => page.getByTestId('selection');
 
 describe('rendering', () => {
-	it('renders a radio input wrapped in a label', async () => {
+	it('renders a radio input inside a div', async () => {
 		render(RadioButton);
 		await expect.element(page.getByRole('radio')).toBeInTheDocument();
-		await expect.element(page.selector('label.fs-radio-button')).toBeInTheDocument();
+		await expect.element(page.selector('div.fs-radio-button')).toBeInTheDocument();
 	});
 
 	it('renders the label text it is given', async () => {
@@ -18,9 +18,9 @@ describe('rendering', () => {
 		await expect.element(page.getByRole('radio', { name: 'Apple' })).toBeInTheDocument();
 	});
 
-	it('leaves out the label span when there is no label', async () => {
+	it('leaves out the text label when there is no label', async () => {
 		render(RadioButton);
-		await expect.element(page.selector('label.fs-radio-button span')).not.toBeInTheDocument();
+		await expect.element(page.selector('div.fs-radio-button > label')).not.toBeInTheDocument();
 	});
 
 	it('carries the name and value it is given', async () => {
@@ -88,5 +88,13 @@ describe('a group', () => {
 	it('leaves a disabled member out of reach', async () => {
 		render(RadioButtonGroupTestWrapper);
 		await expect.element(page.getByRole('radio', { name: 'Cherry' })).toBeDisabled();
+	});
+});
+
+describe('separate text label', () => {
+	it('never contains its input in a label', async () => {
+		render(RadioButton, { label: 'Choose me' });
+		expect(document.querySelector('label input')).toBeNull();
+		await expect.element(page.selector('.fs-radio-button > label')).toHaveAttribute('for');
 	});
 });

@@ -45,7 +45,7 @@
 	{#if type === 'radio'}
 		<RadioButton checked={checked === true} {...radioIndicator} />
 	{:else}
-		<Checkbox wrapperAs="div" checked={checked === true} indeterminate={checked === 'mixed'} {...checkboxIndicator} />
+		<Checkbox checked={checked === true} indeterminate={checked === 'mixed'} {...checkboxIndicator} />
 	{/if}
 </svelte:element>
 

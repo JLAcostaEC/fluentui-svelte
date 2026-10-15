@@ -4,7 +4,7 @@
 	import { on } from 'svelte/events';
 	import { tick } from 'svelte';
 	import { PREFIX } from '$constants';
-	import { floating } from '$internal';
+	import { floating, invokeHandlers } from '$internal';
 	import { flip, hide, offset, shift } from '@floating-ui/dom';
 	import DynamicCarousel from '$lib/internal/components/dynamic-carousel/dynamic-carousel.svelte';
 	import { CheckmarkRegular, DismissRegular } from 'fluentui-icons-svelte';
@@ -24,6 +24,8 @@
 		ref = $bindable(),
 		wrapperRef = $bindable(),
 		wrapperAttributes,
+		class: classes,
+		onclick,
 		inputElement = $bindable(),
 		inputProps,
 		popupLabel = 'Choose a date',
@@ -173,18 +175,18 @@
 	}
 </script>
 
-<div class="fs-date-picker-wrapper" bind:this={wrapperRef} {...wrapperAttributes}>
+<div {...wrapperAttributes} class={['fs-date-picker-wrapper', wrapperAttributes?.class]} bind:this={wrapperRef}>
 	<!-- A real button: Enter and Space, the disabled state and High Contrast styling all
 	     come for free, and the hidden input cannot live inside it. -->
 	<button
+		{...attributes}
 		type="button"
-		class="fs-date-picker"
+		class={['fs-date-picker', classes]}
 		aria-haspopup="dialog"
 		aria-expanded={open}
 		aria-controls={open ? POPUP_ID : undefined}
-		onclick={() => (open = !open)}
+		onclick={(e) => invokeHandlers(e, [], [() => (open = !open), onclick])}
 		bind:this={ref}
-		{...attributes}
 	>
 		{#each columns as col, idx (col)}
 			{#if idx > 0}

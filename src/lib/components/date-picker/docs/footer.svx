@@ -1,7 +1,12 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import InfoBar from '$lib/components/info-bar/info-bar.svelte';
   import { m } from '$i18n/messages.js';
 </script>
+
+<InfoBar title={m.form_control_attributes_title()} style="multiline" status="warning" hideCloseButton>
+  <p><I18nMarkupMessage message={m.form_control_attributes_description} /></p>
+</InfoBar>
 
 ## {m.global_component_props()}
 

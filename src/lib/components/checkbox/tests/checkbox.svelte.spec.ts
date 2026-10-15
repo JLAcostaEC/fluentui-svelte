@@ -5,14 +5,8 @@ import { Checkbox } from '$lib/index.js';
 import CheckboxTestWrapper from './CheckboxTestWrapper.svelte';
 
 describe('rendering', () => {
-	it('renders a label wrapper by default, so the children name the input', async () => {
+	it('renders a div wrapper by default', async () => {
 		render(Checkbox);
-		const el = page.selector('label.fs-checkbox');
-		await expect.element(el).toBeInTheDocument();
-	});
-
-	it('renders a div wrapper when wrapperAs="div"', async () => {
-		render(Checkbox, { wrapperAs: 'div' });
 		const el = page.selector('div.fs-checkbox');
 		await expect.element(el).toBeInTheDocument();
 	});
@@ -108,5 +102,13 @@ describe('attributes', () => {
 		render(Checkbox, { wrapperAttributes: { 'data-testid': 'my-wrapper' } });
 		const el = page.getByTestId('my-wrapper');
 		await expect.element(el).toBeInTheDocument();
+	});
+});
+
+describe('separate text label', () => {
+	it('never contains its input in a label', async () => {
+		render(CheckboxTestWrapper, { label: 'Choose me' });
+		expect(document.querySelector('label input')).toBeNull();
+		await expect.element(page.selector('.fs-checkbox > label')).toHaveAttribute('for');
 	});
 });

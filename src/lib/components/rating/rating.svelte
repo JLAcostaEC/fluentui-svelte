@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { invokeHandlers } from '$internal';
 	import { PREFIX } from '$constants';
 	import StarFilled from 'fluentui-icons-svelte/StarFilled.svelte';
 	import StarHalfRegular from 'fluentui-icons-svelte/StarHalfRegular.svelte';
@@ -24,7 +25,7 @@
 		onChange,
 		class: classes,
 		ref = $bindable(),
-		role = 'radiogroup',
+		onpointerleave,
 		...attributes
 	}: RatingProps = $props();
 
@@ -81,11 +82,11 @@
 	```
 -->
 <div
+	{...attributes}
 	class={['fs-rating', `size-${size}`, classes]}
 	bind:this={ref}
-	{role}
-	onpointerleave={() => (hovered = undefined)}
-	{...attributes}
+	role="radiogroup"
+	onpointerleave={(e) => invokeHandlers(e, [], [() => (hovered = undefined), onpointerleave])}
 	aria-label={attributes['aria-label'] ?? (attributes['aria-labelledby'] ? undefined : 'Rating')}
 	aria-describedby={[attributes['aria-describedby'], VALUE_ID].filter(Boolean).join(' ')}
 >

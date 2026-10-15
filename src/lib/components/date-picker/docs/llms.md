@@ -33,6 +33,8 @@ Use `hideDays`, `hideMonths`, or `hideYears` to hide individual selector columns
 <DatePicker hideDays />
 ```
 
+HTML attributes, including class, id and ARIA attributes, apply to the control element. Bind ref to access that control. Use wrapperAttributes and wrapperRef for the outer container.
+
 ## Component Props
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->

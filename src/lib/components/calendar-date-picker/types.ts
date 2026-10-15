@@ -1,13 +1,13 @@
-import type { HTMLAttributes } from 'svelte/elements';
+import type { HTMLAttributes, HTMLButtonAttributes } from 'svelte/elements';
 import type { ComputePositionConfig } from '@floating-ui/dom';
 import type { CalendarViewProps } from '../calendar-view/types.js';
 
 /** @propsmith CalendarDatePickerProps */
 export type CalendarDatePickerProps = {
-	/** The DOM reference of the picker element.
+	/** The DOM reference of the wrapper element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	wrapperRef?: HTMLDivElement;
 	/** The selected date.
 	 * @default null
 	 * @bindable
@@ -29,10 +29,14 @@ export type CalendarDatePickerProps = {
 	/** The DOM reference of the trigger button.
 	 * @bindable
 	 */
-	triggerRef?: HTMLButtonElement;
+	ref?: HTMLButtonElement;
+	/** The attributes to spread on the wrapper element.
+	 * @type HTMLAttributes
+	 */
+	wrapperAttributes?: HTMLAttributes<HTMLDivElement>;
 	/** The DOM reference of the calendar popup.
 	 * @bindable
 	 */
 	popupRef?: HTMLDivElement;
 } & Pick<CalendarViewProps, 'locale' | 'blackoutDates' | 'headers' | 'minDate' | 'maxDate' | 'weekStart'> &
-	HTMLAttributes<HTMLDivElement>;
+	Omit<HTMLButtonAttributes, 'value'>;

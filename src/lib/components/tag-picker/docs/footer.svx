@@ -1,34 +1,39 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import InfoBar from '$lib/components/info-bar/info-bar.svelte';
   import { m } from '$i18n/messages.js';
 </script>
+
+<InfoBar title={m.form_control_attributes_title()} style="multiline" status="warning" hideCloseButton>
+  <p><I18nMarkupMessage message={m.form_control_attributes_description} /></p>
+</InfoBar>
 
 ## {m.tagpicker_component_props_tagpicker_title()}
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TagPickerProps -->
 
-| Name                                                | Type                                               | Default                  | Description                                                                                 |
-| --------------------------------------------------- | -------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------- |
-| `ref` _bindable_                                    | `HTMLDivElement`                                   |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_ref} />`                 |
-| `inputRef` _bindable_                               | `HTMLInputElement`                                 |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_input_ref} />`           |
-| `selectedOptions` _bindable_                        | `string[]`                                         | `[]`                     | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_selected_options} />`    |
-| `value` _bindable_                                  | `string`                                           | `''`                     | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_value} />`               |
-| `open` _bindable_                                   | `boolean`                                          | `false`                  | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_open} />`                |
-| `single`                                            | `boolean`                                          |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_single} />`              |
-| `disabled`                                          | `boolean`                                          |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_disabled} />`            |
-| `size`                                              | `'medium'` &#124; `'large'` &#124; `'extra-large'` | `'medium'`               | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_size} />`                |
-| `placeholder`                                       | `string`                                           |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_placeholder} />`         |
-| `notFoundText`                                      | `string`                                           | `'No options available'` | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_not_found_text} />`      |
-| `expandIcon`                                        | `Snippet` &#124; `Component` &#124; `null`         | `ChevronDownRegular`     | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_expand_icon} />`         |
-| `secondaryAction`                                   | `Snippet`                                          |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_secondary_action} />`    |
-| `tag`                                               | `Snippet<[{ value: string; text: string }]>`       |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_tag} />`                 |
-| `tagGroupProps`                                     | `TagGroupProps`                                    |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_tag_group_props} />`     |
-| `inputProps`                                        | `HTMLInputAttributes`                              |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_input_props} />`         |
-| `onSelectionChange`                                 | `(e: Event, selectedOptions: string[]) => void`    |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_on_selection_change} />` |
-| `querySubmitted`                                    | `(e: KeyboardEvent, query: string) => void`        |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_query_submitted} />`     |
-| `children`                                          | `Snippet`                                          |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_children} />`            |
-| `HTMLAttributes<HTMLDivElement>` without `children` |                                                    |                          |                                                                                             |
+| Name                                                                                                 | Type                                               | Default                  | Description                                                                                 |
+| ---------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------- |
+| `wrapperRef` _bindable_                                                                              | `HTMLDivElement`                                   |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_wrapper_ref} />`         |
+| `ref` _bindable_                                                                                     | `HTMLInputElement`                                 |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_ref} />`                 |
+| `selectedOptions` _bindable_                                                                         | `string[]`                                         | `[]`                     | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_selected_options} />`    |
+| `value` _bindable_                                                                                   | `string`                                           | `''`                     | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_value} />`               |
+| `open` _bindable_                                                                                    | `boolean`                                          | `false`                  | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_open} />`                |
+| `single`                                                                                             | `boolean`                                          |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_single} />`              |
+| `disabled`                                                                                           | `boolean`                                          |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_disabled} />`            |
+| `size`                                                                                               | `'medium'` &#124; `'large'` &#124; `'extra-large'` | `'medium'`               | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_size} />`                |
+| `placeholder`                                                                                        | `string`                                           |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_placeholder} />`         |
+| `notFoundText`                                                                                       | `string`                                           | `'No options available'` | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_not_found_text} />`      |
+| `expandIcon`                                                                                         | `Snippet` &#124; `Component` &#124; `null`         | `ChevronDownRegular`     | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_expand_icon} />`         |
+| `secondaryAction`                                                                                    | `Snippet`                                          |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_secondary_action} />`    |
+| `tag`                                                                                                | `Snippet<[{ value: string; text: string }]>`       |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_tag} />`                 |
+| `tagGroupProps`                                                                                      | `TagGroupProps`                                    |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_tag_group_props} />`     |
+| `wrapperAttributes`                                                                                  | `HTMLAttributes`                                   |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_wrapper_attributes} />`  |
+| `onSelectionChange`                                                                                  | `(e: Event, selectedOptions: string[]) => void`    |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_on_selection_change} />` |
+| `querySubmitted`                                                                                     | `(e: KeyboardEvent, query: string) => void`        |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_query_submitted} />`     |
+| `children`                                                                                           | `Snippet`                                          |                          | `<I18nMarkupMessage message={m.generated_fs_tag_picker_props_props_children} />`            |
+| `HTMLInputAttributes` without `value`, `type`, `role`, `size`, `disabled`, `placeholder`, `children` |                                                    |                          |                                                                                             |
 
 <!-- /props:TagPickerProps -->
 

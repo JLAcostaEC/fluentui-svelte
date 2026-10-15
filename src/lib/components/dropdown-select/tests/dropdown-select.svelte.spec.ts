@@ -90,8 +90,8 @@ describe('multiple', () => {
 });
 
 describe('attributes', () => {
-	it('forwards wrapperProps to the wrapper element', async () => {
-		render(DropdownSelectTestWrapper, { wrapperProps: { 'data-testid': 'my-select' } });
+	it('forwards wrapperAttributes to the wrapper element', async () => {
+		render(DropdownSelectTestWrapper, { wrapperAttributes: { 'data-testid': 'my-select' } });
 		const el = page.getByTestId('my-select');
 		await expect.element(el).toBeInTheDocument();
 	});

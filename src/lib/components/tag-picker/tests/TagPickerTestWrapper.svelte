@@ -19,7 +19,6 @@
 		customExpand,
 		withSecondary,
 		onSecondary,
-		inputProps = { 'aria-label': 'Fruits' },
 		...rest
 	}: {
 		options?: Option[];
@@ -72,7 +71,7 @@
 		bind:selectedOptions
 		bind:value
 		bind:open
-		{inputProps}
+		aria-label="Fruits"
 		tag={useTagSnippet ? customTag : undefined}
 		{...rest}
 		{...customExpand ? { expandIcon: expand } : {}}

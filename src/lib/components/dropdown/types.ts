@@ -1,4 +1,4 @@
-import type { HTMLAttributes, HTMLButtonAttributes, HTMLInputAttributes } from 'svelte/elements';
+import type { HTMLAttributes, HTMLButtonAttributes } from 'svelte/elements';
 import type { ListViewProps, ListViewItemProps } from '../list-view/types.ts';
 import type { FlyoutProps } from '../flyout/types.ts';
 import type { FSContext } from '$internal';
@@ -35,26 +35,20 @@ export type DropdownProps = {
 	 * @default id
 	 */
 	name?: string | null;
-	/** The DOM reference of the dropdown element.
+	/** The DOM reference of the wrapper element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	wrapperRef?: HTMLDivElement;
 	/** Called when the dropdown is clicked. */
 	onclick?: (e: MouseEvent) => void;
 	/** The attributes to spread on the wrapper element.
 	 * @type HTMLAttributes
 	 */
-	wrapperProps?: HTMLAttributes<HTMLDivElement>;
+	wrapperAttributes?: HTMLAttributes<HTMLDivElement>;
 	/** The DOM reference of the button that opens the dropdown.
 	 * @bindable
 	 */
-	buttonRef?: HTMLButtonElement;
-	/** The attributes to spread on the button that opens the dropdown.
-	 * @type HTMLButtonAttributes
-	 */
-	buttonProps?: HTMLButtonAttributes;
-	/** The DOM reference of the hidden input holding the value. */
-	inputRef?: HTMLInputElement;
+	ref?: HTMLButtonElement;
 	/** The DOM reference of the flyout element.
 	 * @bindable
 	 */
@@ -74,7 +68,7 @@ export type DropdownProps = {
 	 */
 	listboxProps?: Omit<ListViewProps<'ul'>, 'ref' | 'children' | 'selectedItems' | 'selectionMode'>;
 } & (DropdownMultipleValue | DropdownSingleValue) &
-	Omit<HTMLInputAttributes, 'value' | 'onclick'>;
+	Omit<HTMLButtonAttributes, 'value' | 'type' | 'role' | 'onclick'>;
 
 /** @propsmith DropdownOptionProps */
 export type DropdownOptionProps = {

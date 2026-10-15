@@ -14,8 +14,9 @@
 		value = $bindable(),
 		variant = 'inline',
 		ref = $bindable(),
+		wrapperRef = $bindable(),
+		wrapperAttributes,
 		placeholder = '',
-		class: classes,
 		...attributes
 	}: NumberBoxProps = $props();
 
@@ -46,7 +47,17 @@
     <NumberBox />
     ```
 -->
-<TextBox class={['fs-number-box', classes]} type="number" {id} {name} {placeholder} bind:value bind:ref {...attributes}>
+<TextBox
+	{...attributes}
+	bind:wrapperRef
+	wrapperAttributes={{ ...wrapperAttributes, class: ['fs-number-box', wrapperAttributes?.class] }}
+	type="number"
+	{id}
+	{name}
+	{placeholder}
+	bind:value
+	bind:ref
+>
 	{#if variant === 'inline'}
 		<TextBoxButton aria-label="Increase Number" onclick={() => (value = value ? ++value : 1)}>
 			<ChevronUpFilled />

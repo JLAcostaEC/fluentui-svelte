@@ -9,14 +9,15 @@
 		ref = $bindable(),
 		children,
 		wrapperRef = $bindable(),
-		wrapperProps,
+		wrapperAttributes,
 		multiple,
+		class: classes,
 		value = $bindable(multiple ? [] : ''),
 		...attributes
 	}: DropdownSelectProps = $props();
 </script>
 
-<div class="fs-dropdown" bind:this={wrapperRef} {...wrapperProps}>
+<div {...wrapperAttributes} class={['fs-dropdown', wrapperAttributes?.class]} bind:this={wrapperRef}>
 	{#if !multiple}
 		<ChevronDownFilled class="indicator" />
 	{/if}
@@ -25,7 +26,14 @@
 		We need to use a if block with the same structure 
 	-->
 	{#if multiple}
-		<select class="fs-dropdown-select" {@attach selectDirection()} multiple bind:value bind:this={ref} {...attributes}>
+		<select
+			{...attributes}
+			class={['fs-dropdown-select', classes]}
+			{@attach selectDirection()}
+			multiple
+			bind:value
+			bind:this={ref}
+		>
 			<button>
 				<selectedcontent></selectedcontent>
 			</button>
@@ -35,7 +43,13 @@
 			{@render children?.()}
 		</select>
 	{:else}
-		<select class="fs-dropdown-select" {@attach selectDirection()} bind:value bind:this={ref} {...attributes}>
+		<select
+			{...attributes}
+			class={['fs-dropdown-select', classes]}
+			{@attach selectDirection()}
+			bind:value
+			bind:this={ref}
+		>
 			<button>
 				<selectedcontent></selectedcontent>
 			</button>

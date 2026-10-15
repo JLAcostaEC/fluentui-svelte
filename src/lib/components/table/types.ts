@@ -232,7 +232,7 @@ export type TableSelectionCellProps<Tag extends 'td' | 'div' = 'td'> = {
 	/** The props to spread on the checkbox rendered when `type` is `'checkbox'`.
 	 * @type CheckboxProps
 	 */
-	checkboxIndicator?: Omit<CheckboxProps<'div'>, 'wrapperAs' | 'checked' | 'indeterminate' | 'children'>;
+	checkboxIndicator?: Omit<CheckboxProps, 'checked' | 'indeterminate' | 'children'>;
 	/** The props to spread on the radio button rendered when `type` is `'radio'`.
 	 * @type RadioButtonProps
 	 */

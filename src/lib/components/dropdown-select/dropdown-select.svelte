@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { flushSync } from 'svelte';
 	import ChevronDownFilled from 'fluentui-icons-svelte/ChevronDownFilled.svelte';
 	import { selectDirection } from './dropdown-select.svelte.ts';
 	import type { DropdownSelectProps } from './types.ts';
@@ -9,14 +10,15 @@
 		ref = $bindable(),
 		children,
 		wrapperRef = $bindable(),
-		wrapperProps,
+		wrapperAttributes,
 		multiple,
+		class: classes,
 		value = $bindable(multiple ? [] : ''),
 		...attributes
 	}: DropdownSelectProps = $props();
 </script>
 
-<div class="fs-dropdown" bind:this={wrapperRef} {...wrapperProps}>
+<div {...wrapperAttributes} class={['fs-dropdown', wrapperAttributes?.class]} bind:this={wrapperRef}>
 	{#if !multiple}
 		<ChevronDownFilled class="indicator" />
 	{/if}
@@ -25,7 +27,14 @@
 		We need to use a if block with the same structure 
 	-->
 	{#if multiple}
-		<select class="fs-dropdown-select" {@attach selectDirection()} multiple bind:value bind:this={ref} {...attributes}>
+		<select
+			{...attributes}
+			class={['fs-dropdown-select', classes]}
+			{@attach selectDirection()}
+			multiple
+			bind:value
+			bind:this={ref}
+		>
 			<button>
 				<selectedcontent></selectedcontent>
 			</button>
@@ -35,7 +44,18 @@
 			{@render children?.()}
 		</select>
 	{:else}
-		<select class="fs-dropdown-select" {@attach selectDirection()} bind:value bind:this={ref} {...attributes}>
+		<select
+			{...attributes}
+			class={['fs-dropdown-select', classes]}
+			{@attach selectDirection()}
+			bind:value
+			bind:this={ref}
+			oninputcapture={(event) => {
+				// selectedcontent mutates before change; sync the binding before its observer restores the old value.
+				flushSync(() => (value = event.currentTarget.value));
+				attributes.oninputcapture?.(event);
+			}}
+		>
 			<button>
 				<selectedcontent></selectedcontent>
 			</button>

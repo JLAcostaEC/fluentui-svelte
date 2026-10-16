@@ -4,10 +4,14 @@
 	import type { CalendarDatePickerProps } from './types.js';
 	import { onMount, tick } from 'svelte';
 	import { on } from 'svelte/events';
+	import { invokeHandlers } from '$internal';
 	import { PREFIX } from '$constants';
 	import { flip, hide, offset, shift } from '@floating-ui/dom';
 
 	let {
+		wrapperAttributes,
+		disabled,
+		onclick,
 		value = $bindable(null),
 		locale = 'en-US',
 		format = {
@@ -17,13 +21,13 @@
 		},
 		calendarPosition: _positionConfig,
 		blackoutDates,
-		ref = $bindable(),
+		wrapperRef = $bindable(),
 		headers,
 		maxDate,
 		minDate,
 		weekStart,
 		onChange,
-		triggerRef = $bindable(),
+		ref = $bindable(),
 		popupRef = $bindable(),
 		popupLabel = 'Choose a date',
 		...attributes
@@ -37,7 +41,7 @@
 	/** Closing always hands the focus back to the trigger button. */
 	function closePopup() {
 		open = false;
-		triggerRef?.focus();
+		ref?.focus();
 	}
 
 	let positionConfig = $derived({
@@ -48,7 +52,7 @@
 
 	onMount(() => {
 		const off = on(document, 'click', (event: MouseEvent) => {
-			if (ref && !ref.contains(event.target as Node)) {
+			if (wrapperRef && !wrapperRef.contains(event.target as Node)) {
 				open = false;
 			}
 		});
@@ -76,14 +80,17 @@
 	});
 </script>
 
-<div class="fs-calendar-date-picker" bind:this={ref} {...attributes}>
+<div {...wrapperAttributes} class={['fs-calendar-date-picker', wrapperAttributes?.class]} bind:this={wrapperRef}>
 	<Button
+		{...attributes}
 		appearance="standard"
+		type="button"
+		disabled={disabled ?? false}
 		aria-haspopup="dialog"
 		aria-expanded={open}
 		aria-controls={open ? POPUP_ID : undefined}
-		bind:ref={triggerRef}
-		onclick={() => (open = !open)}
+		bind:ref
+		onclick={(e) => invokeHandlers(e, [], [() => (open = !open), onclick])}
 	>
 		{#if value}
 			{value.toLocaleDateString(locale, format)}
@@ -101,7 +108,7 @@
 			aria-modal="true"
 			aria-label={popupLabel}
 			tabindex={-1}
-			floating={{ ref, positionConfig }}
+			floating={{ ref: wrapperRef, positionConfig }}
 			onChange={onChange as any}
 			{blackoutDates}
 			{headers}

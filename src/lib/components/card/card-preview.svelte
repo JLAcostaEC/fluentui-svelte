@@ -2,7 +2,14 @@
 	import type { CardPreviewProps } from './types.ts';
 	import { getCardContext } from './card-context.svelte.ts';
 
-	let { ref = $bindable(), logoSrc, logoAlt = '', class: classes, children, ...attrs }: CardPreviewProps = $props();
+	let {
+		ref = $bindable(),
+		logoSrc,
+		logoAlt = '',
+		class: classes,
+		children,
+		...attributes
+	}: CardPreviewProps = $props();
 
 	const context = getCardContext();
 
@@ -15,7 +22,11 @@
 	const orientation = $derived(_state.orientation);
 </script>
 
-<div class={['fs-card-preview', showFloatingAction && 'with-action', orientation, classes]} bind:this={ref} {...attrs}>
+<div
+	{...attributes}
+	class={['fs-card-preview', showFloatingAction && 'with-action', orientation, classes]}
+	bind:this={ref}
+>
 	{@render children?.()}
 	<img src={logoSrc} alt={logoAlt} class="fs-card-preview-logo" />
 </div>

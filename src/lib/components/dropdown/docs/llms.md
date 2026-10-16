@@ -28,7 +28,7 @@ Options can render any content, such as a `Persona`. Pass a `text` prop so the c
 			name="John Doe"
 			primaryText="Software Engineer"
 			presence={{ status: 'available' }}
-			avatar={{ color: 'colorful', idForColor: '' }}
+			avatarProps={{ color: 'colorful', idForColor: '' }}
 		/>
 	</DropdownOption>
 	<DropdownOption value="B" text="Option B">Option B</DropdownOption>
@@ -48,31 +48,31 @@ Set the `multiple` prop to allow selecting more than one option.
 </Dropdown>
 ```
 
+HTML attributes, including class, id and ARIA attributes, apply to the control element. Bind ref to access that control. Use wrapperAttributes and wrapperRef for the outer container.
+
 ## Component Props
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DropdownProps -->
 
-| Name                                                 | Type                       | Default              | Description                                                             |
-| ---------------------------------------------------- | -------------------------- | -------------------- | ----------------------------------------------------------------------- |
-| `value` _bindable_                                   | `string` &#124; `string[]` | `multiple ? [] : ''` | The selected value. An array of values when `multiple` is set.          |
-| `multiple`                                           | `boolean`                  |                      | Allows more than one option to be selected at a time.                   |
-| `placeholder`                                        | `string`                   | `'Select an option'` | The text shown by the trigger while no option is selected.              |
-| `disabled`                                           | `boolean`                  |                      | Disables the user interaction.                                          |
-| `name`                                               | `string` &#124; `null`     | `id`                 | The name submitted with the form. Falls back to the id of the dropdown. |
-| `ref` _bindable_                                     | `HTMLDivElement`           |                      | The DOM reference of the dropdown element.                              |
-| `onclick`                                            | `(e: MouseEvent) => void`  |                      | Called when the dropdown is clicked.                                    |
-| `wrapperProps`                                       | `HTMLAttributes`           |                      | The attributes to spread on the wrapper element.                        |
-| `buttonRef` _bindable_                               | `HTMLButtonElement`        |                      | The DOM reference of the button that opens the dropdown.                |
-| `buttonProps`                                        | `HTMLButtonAttributes`     |                      | The attributes to spread on the button that opens the dropdown.         |
-| `inputRef`                                           | `HTMLInputElement`         |                      | The DOM reference of the hidden input holding the value.                |
-| `flyoutRef` _bindable_                               | `HTMLDivElement`           |                      | The DOM reference of the flyout element.                                |
-| `flyoutProps`                                        | `FlyoutProps`              |                      | The props to spread on the flyout.                                      |
-| `flyoutMaxHeight`                                    | `string`                   |                      | The maximum height of the flyout, as a CSS length.                      |
-| `listboxRef` _bindable_                              | `HTMLUListElement`         |                      | The DOM reference of the listbox element.                               |
-| `listboxProps`                                       | `ListViewProps`            |                      | The props to spread on the listbox rendered inside the flyout.          |
-| `DropdownMultipleValue` &#124; `DropdownSingleValue` |                            |                      |                                                                         |
-| `HTMLInputAttributes` without `value`, `onclick`     |                            |                      |                                                                         |
+| Name                                                              | Type                       | Default              | Description                                                             |
+| ----------------------------------------------------------------- | -------------------------- | -------------------- | ----------------------------------------------------------------------- |
+| `value` _bindable_                                                | `string` &#124; `string[]` | `multiple ? [] : ''` | The selected value. An array of values when `multiple` is set.          |
+| `multiple`                                                        | `boolean`                  |                      | Allows more than one option to be selected at a time.                   |
+| `placeholder`                                                     | `string`                   | `'Select an option'` | The text shown by the trigger while no option is selected.              |
+| `disabled`                                                        | `boolean`                  |                      | Disables the user interaction.                                          |
+| `name`                                                            | `string` &#124; `null`     | `id`                 | The name submitted with the form. Falls back to the id of the dropdown. |
+| `wrapperRef` _bindable_                                           | `HTMLDivElement`           |                      | The DOM reference of the wrapper element.                               |
+| `onclick`                                                         | `(e: MouseEvent) => void`  |                      | Called when the dropdown is clicked.                                    |
+| `wrapperAttributes`                                               | `HTMLAttributes`           |                      | The attributes to spread on the wrapper element.                        |
+| `ref` _bindable_                                                  | `HTMLButtonElement`        |                      | The DOM reference of the button that opens the dropdown.                |
+| `flyoutRef` _bindable_                                            | `HTMLDivElement`           |                      | The DOM reference of the flyout element.                                |
+| `flyoutProps`                                                     | `FlyoutProps`              |                      | The props to spread on the flyout.                                      |
+| `flyoutMaxHeight`                                                 | `string`                   |                      | The maximum height of the flyout, as a CSS length.                      |
+| `listboxRef` _bindable_                                           | `HTMLUListElement`         |                      | The DOM reference of the listbox element.                               |
+| `listboxProps`                                                    | `ListViewProps`            |                      | The props to spread on the listbox rendered inside the flyout.          |
+| `DropdownMultipleValue` &#124; `DropdownSingleValue`              |                            |                      |                                                                         |
+| `HTMLButtonAttributes` without `value`, `type`, `role`, `onclick` |                            |                      |                                                                         |
 
 <!-- /props:DropdownProps -->
 

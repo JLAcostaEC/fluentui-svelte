@@ -19,8 +19,8 @@
 		<Button appearance="accent" />
 		<Button appearance="standard" />
 		<Button appearance="subtle" />
-		<Checkbox name="checked" wrapperAs="label" checked>Checked Checkbox</Checkbox>
-		<Checkbox name="indeterminate" indeterminate wrapperAs="label">Indeterminate Checkbox</Checkbox>
+		<Checkbox name="checked" checked>Checked Checkbox</Checkbox>
+		<Checkbox name="indeterminate" indeterminate>Indeterminate Checkbox</Checkbox>
 		<ToggleSwitch label="ToggleButton" checked />
 		<RadioButton label="RadioButton" value="checked" checked={true} />
 		<Persona

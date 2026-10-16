@@ -4,7 +4,7 @@
 	import { onClickOutside } from 'runed';
 	import ChevronDownRegular from 'fluentui-icons-svelte/ChevronDownRegular.svelte';
 	import { PREFIX } from '$constants';
-	import { RenderSoC } from '$internal';
+	import { invokeHandlers, RenderSoC } from '$internal';
 	import { setTagPickerContext } from './tag-picker.ts';
 	import { Flyout, ListView, ListViewItem, Tag, TagGroup } from '$lib/index.js';
 	import {
@@ -26,8 +26,8 @@
 	const TAG_SIZES: Record<TagPickerSizes, TagSize> = { medium: 'extra-small', large: 'small', 'extra-large': 'medium' };
 
 	let {
+		wrapperRef = $bindable(),
 		ref = $bindable(),
-		inputRef = $bindable(),
 		selectedOptions = $bindable([]),
 		value = $bindable(''),
 		open = $bindable(false),
@@ -40,15 +40,17 @@
 		secondaryAction,
 		tag,
 		tagGroupProps,
-		inputProps,
+		id = `${ID}-input`,
+		wrapperAttributes,
+		oninput,
+		onkeydown,
 		onSelectionChange,
 		querySubmitted,
-		class: classes,
 		children,
 		...attributes
 	}: TagPickerProps = $props();
 
-	const INPUT_ID = $derived(inputProps?.id ?? `${ID}-input`);
+	const INPUT_ID = $derived(id ?? `${ID}-input`);
 
 	/**
 	 * The props the invariants rule over. The markup and the context read them through here, so
@@ -183,7 +185,7 @@
 		await undefined;
 		await tick();
 
-		inputRef?.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
+		ref?.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
 	}
 
 	function handleKeyDown(e: KeyboardEvent) {
@@ -237,14 +239,14 @@
 	function handleDismiss(e: MouseEvent | KeyboardEvent, data: { value: string }) {
 		selectedOptions = selectedOptions.filter((v) => v !== data.value);
 		onSelectionChange?.(e, selectedOptions);
-		inputRef?.focus();
+		ref?.focus();
 	}
 
 	function handleControlClick(e: MouseEvent) {
 		// Tags and the aside have a job of their own.
 		if (_picker.disabled || (e.target as Element).closest('.fs-tag, .fs-tagpicker-aside')) return;
 
-		inputRef?.focus();
+		ref?.focus();
 
 		if (_picker.hasList) open = true;
 	}
@@ -252,14 +254,14 @@
 	function handleChevronClick() {
 		if (_picker.disabled) return;
 
-		inputRef?.focus();
+		ref?.focus();
 
 		if (_picker.hasList) open = !_picker.open;
 	}
 
 	/** A click on the secondary action must not strand focus on it: the list is still open, and Escape lives on the input. */
 	function handleAsideClick(e: MouseEvent) {
-		if (_picker.open && !(e.target as Element).closest('.chevron')) inputRef?.focus();
+		if (_picker.open && !(e.target as Element).closest('.chevron')) ref?.focus();
 	}
 
 	/** Focus stays in the input: the chrome around it only forwards the click. */
@@ -272,7 +274,7 @@
 	}
 
 	onClickOutside(
-		() => ref,
+		() => wrapperRef,
 		() => (open = false)
 	);
 
@@ -311,28 +313,28 @@ A text field and a dropdown that give people a way to choose several options fro
     let selectedOptions = $state([]);
   </script>
 
-  <TagPicker bind:selectedOptions inputProps={{ 'aria-label': 'Fruits' }}>
+  <TagPicker bind:selectedOptions aria-label="Fruits">
     <TagPickerOption value="Apple">Apple</TagPickerOption>
     <TagPickerOption value="Banana">Banana</TagPickerOption>
   </TagPicker>
   ```
 -->
 <div
-	class={['fs-tagpicker', `size-${size}`, { disabled: _picker.disabled, open: _picker.open }, classes]}
-	bind:this={ref}
-	{...attributes}
+	{...wrapperAttributes}
+	class={['fs-tagpicker', `size-${size}`, { disabled: _picker.disabled, open: _picker.open }, wrapperAttributes?.class]}
+	bind:this={wrapperRef}
 >
 	<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
 	<div class={['control', _picker.open && `square-${roundClass}`]} onclick={handleControlClick} onmousedown={keepFocus}>
 		<div class="content">
 			{#if selectedOptions.length > 0}
 				<TagGroup
+					{...tagGroupProps}
 					role="list"
 					size={tagSize}
 					disabled={_picker.disabled}
 					dismissible
 					onDismiss={handleDismiss}
-					{...tagGroupProps}
 				>
 					{#each selectedOptions as v (v)}
 						{@const text = labels.get(v) ?? v}
@@ -345,9 +347,10 @@ A text field and a dropdown that give people a way to choose several options fro
 				</TagGroup>
 			{/if}
 			<input
-				bind:this={inputRef}
-				type="text"
+				{...attributes}
 				autocomplete="off"
+				bind:this={ref}
+				type="text"
 				{placeholder}
 				id={INPUT_ID}
 				disabled={_picker.disabled}
@@ -356,10 +359,9 @@ A text field and a dropdown that give people a way to choose several options fro
 				aria-haspopup={_picker.hasList ? 'listbox' : undefined}
 				aria-autocomplete={_picker.hasList ? 'list' : undefined}
 				aria-controls={_picker.open ? LIST_ID : undefined}
-				{...inputProps}
 				bind:value
-				oninput={handleInput}
-				onkeydown={handleKeyDown}
+				oninput={(e) => invokeHandlers(e, [disabled], [handleInput, oninput])}
+				onkeydown={(e) => invokeHandlers(e, [disabled], [handleKeyDown, onkeydown])}
 			/>
 		</div>
 		{#if secondaryAction || (expandIcon && _picker.hasList)}
@@ -375,11 +377,11 @@ A text field and a dropdown that give people a way to choose several options fro
 			</span>
 		{/if}
 	</div>
-	{#if _picker.open && ref}
+	{#if _picker.open && wrapperRef}
 		<Flyout
 			floating
 			offset={0}
-			reference={ref}
+			reference={wrapperRef}
 			roundCorners="bottom"
 			placementConfig={{ allowedPlacements: ['bottom', 'top'] }}
 			onPlacementChange={(place) => handlePlacementChange(place)}
@@ -387,12 +389,13 @@ A text field and a dropdown that give people a way to choose several options fro
 		>
 			<ListView
 				role="listbox"
+				selectionMode={_picker.single ? 'single' : 'multiselect'}
 				navigationMode="items"
 				disableTabspot
 				id={LIST_ID}
 				aria-multiselectable={_picker.single ? undefined : 'true'}
-				aria-label={inputProps?.['aria-label']}
-				aria-labelledby={inputProps?.['aria-labelledby']}
+				aria-label={attributes['aria-label']}
+				aria-labelledby={attributes['aria-labelledby']}
 				bind:ref={listViewRef}
 				onmousedown={(e: MouseEvent) => e.preventDefault()}
 			>

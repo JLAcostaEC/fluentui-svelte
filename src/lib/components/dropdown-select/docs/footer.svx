@@ -1,23 +1,28 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import InfoBar from '$lib/components/info-bar/info-bar.svelte';
   import { m } from '$i18n/messages.js';
 </script>
+
+<InfoBar title={m.form_control_attributes_title()} style="multiline" status="warning" hideCloseButton>
+  <p><I18nMarkupMessage message={m.form_control_attributes_description} /></p>
+</InfoBar>
 
 ## {m.global_component_props()}
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DropdownSelectProps -->
 
-| Name                          | Type                       | Default                    | Description                                                                                   |
-| ----------------------------- | -------------------------- | -------------------------- | --------------------------------------------------------------------------------------------- |
-| `value` _bindable_            | `string` &#124; `string[]` | `multiple ? [] : ''`       | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_value} />`            |
-| `multiple`                    | `boolean`                  |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_multiple} />`         |
-| `placeholder`                 | `string`                   | `'Native Select Dropdown'` | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_placeholder} />`      |
-| `hidePlaceholder`             | `boolean`                  |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_hide_placeholder} />` |
-| `ref` _bindable_              | `HTMLSelectElement`        |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_ref} />`              |
-| `wrapperRef` _bindable_       | `HTMLDivElement`           |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_wrapper_ref} />`      |
-| `wrapperProps`                | `HTMLAttributes`           |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_wrapper_props} />`    |
-| Element Attributes (`select`) |                            |                            |                                                                                               |
+| Name                          | Type                       | Default                    | Description                                                                                     |
+| ----------------------------- | -------------------------- | -------------------------- | ----------------------------------------------------------------------------------------------- |
+| `value` _bindable_            | `string` &#124; `string[]` | `multiple ? [] : ''`       | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_value} />`              |
+| `multiple`                    | `boolean`                  |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_multiple} />`           |
+| `placeholder`                 | `string`                   | `'Native Select Dropdown'` | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_placeholder} />`        |
+| `hidePlaceholder`             | `boolean`                  |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_hide_placeholder} />`   |
+| `ref` _bindable_              | `HTMLSelectElement`        |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_ref} />`                |
+| `wrapperRef` _bindable_       | `HTMLDivElement`           |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_wrapper_ref} />`        |
+| `wrapperAttributes`           | `HTMLAttributes`           |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_wrapper_attributes} />` |
+| Element Attributes (`select`) |                            |                            |                                                                                                 |
 
 <!-- /props:DropdownSelectProps -->
 

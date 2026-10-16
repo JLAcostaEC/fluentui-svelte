@@ -16,10 +16,10 @@
 </script>
 
 <Button
+	{...attributes}
 	bind:ref
 	class={['dialog-trigger', classes]}
 	onclick={(e: MouseEvent) => invokeHandlers(e, [], [onclick, methods.openDialog])}
-	{...attributes}
 >
 	{#if children}
 		{@render children()}

@@ -11,11 +11,11 @@ export type TagPickerProps = {
 	/** The DOM reference of the wrapper element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	wrapperRef?: HTMLDivElement;
 	/** The DOM reference of the input element.
 	 * @bindable
 	 */
-	inputRef?: HTMLInputElement;
+	ref?: HTMLInputElement;
 	/** The values of the chosen options, shown as tags in the control. A value no option has is shown as it is.
 	 * @default []
 	 * @bindable
@@ -64,11 +64,10 @@ export type TagPickerProps = {
 		TagGroupProps,
 		'children' | 'size' | 'appearance' | 'disabled' | 'dismissible' | 'selectedValues' | 'onTagSelect' | 'onDismiss'
 	>;
-	/** The props to spread on the input. This is where its accessible name (`aria-label`) and
-	 * `readonly` (to turn the input into a plain trigger) go.
-	 * @type HTMLInputAttributes
+	/** The attributes to spread on the wrapper element.
+	 * @type HTMLAttributes
 	 */
-	inputProps?: Omit<HTMLInputAttributes, 'value' | 'type' | 'role' | 'disabled' | 'oninput' | 'onkeydown'>;
+	wrapperAttributes?: HTMLAttributes<HTMLDivElement>;
 	/** Called when an option is chosen, or a tag is removed. */
 	onSelectionChange?: (e: Event, selectedOptions: string[]) => void;
 	/** Called when Enter is pressed with text in the input and no option under the cursor. This is
@@ -77,7 +76,7 @@ export type TagPickerProps = {
 	querySubmitted?: (e: KeyboardEvent, query: string) => void;
 	/** The options. Leave it out to get a picker without a list. */
 	children?: Snippet;
-} & Omit<HTMLAttributes<HTMLDivElement>, 'children'>;
+} & Omit<HTMLInputAttributes, 'value' | 'type' | 'role' | 'size' | 'disabled' | 'placeholder' | 'children'>;
 
 export type OptionType = { id: string; value: string; disabled?: boolean };
 
@@ -126,4 +125,12 @@ export type TagPickerOptionGroupProps = {
 	ref?: HTMLUListElement;
 	/** The options of the group. */
 	children?: Snippet;
+	/** The attributes to spread on the wrapper element.
+	 * @type HTMLAttributes
+	 */
+	wrapperAttributes?: HTMLAttributes<HTMLLIElement>;
+	/** The DOM reference of the wrapper element.
+	 * @bindable
+	 */
+	wrapperRef?: HTMLLIElement;
 } & Omit<HTMLAttributes<HTMLUListElement>, 'children'>;

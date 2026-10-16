@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
+	import { invokeHandlers } from '$internal';
 	import { PREFIX } from '$constants';
 	import {
 		getTreeViewDepth,
@@ -35,6 +36,8 @@
 		onCheckedChange,
 		onOpenChange,
 		children,
+		onclick,
+		onkeydown,
 		...attributes
 	}: TreeViewItemProps = $props();
 
@@ -162,9 +165,10 @@
 </script>
 
 <li
+	{...attributes}
 	{id}
-	class={['fs-tree-view-item', `fs-tree-item-size-${size}`, { open }]}
-	style="--depth: {depth}"
+	class={['fs-tree-view-item', `fs-tree-item-size-${size}`, { open }, attributes?.class]}
+	style="{attributes?.style ?? ''}; --depth: {depth}"
 	role="treeitem"
 	aria-expanded={type === 'branch' ? open : undefined}
 	aria-checked={indeterminate ? 'mixed' : checked}
@@ -173,10 +177,9 @@
 	data-index={isVirtualRoot ? index : undefined}
 	data-value={value}
 	aria-disabled={itemState.disabled ? 'true' : undefined}
-	onclick={handleClick}
-	onkeydown={handleKeydown}
+	onclick={(event) => invokeHandlers(event, itemState.disabled, [handleClick, onclick])}
+	onkeydown={(event) => invokeHandlers(event, itemState.disabled, [handleKeydown, onkeydown])}
 	bind:this={ref}
-	{...attributes}
 >
 	{@render children?.()}
 </li>

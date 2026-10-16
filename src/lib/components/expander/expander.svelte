@@ -18,7 +18,7 @@
 		children,
 		Icon,
 		summaryRef = $bindable(),
-		summaryProps,
+		summaryAttributes,
 		...attributes
 	}: ExpanderProps = $props();
 
@@ -66,17 +66,22 @@ improve the user experience.
 ```
 -->
 <details
+	{...attributes}
 	bind:this={ref}
 	bind:open={expanded}
 	use:expander
-	class={['fs-expander', direction, { disabled, justify }]}
-	{...attributes}
+	class={['fs-expander', direction, { disabled, justify }, attributes?.class]}
 >
 	<summary
-		class="fs-summary"
-		onclick={(e) => invokeHandlers(e, [disabled], [supportInterpolation && (() => e.preventDefault()), handleClick])}
+		{...summaryAttributes}
+		class={['fs-summary', summaryAttributes?.class]}
+		onclick={(e) =>
+			invokeHandlers(
+				e,
+				[disabled],
+				[supportInterpolation && (() => e.preventDefault()), handleClick, summaryAttributes?.onclick]
+			)}
 		bind:this={summaryRef}
-		{...summaryProps}
 	>
 		<span class="row">
 			{#if Icon}

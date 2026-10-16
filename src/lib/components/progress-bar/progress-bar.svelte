@@ -31,6 +31,7 @@
     ```
 -->
 <svg
+	{...attributes}
 	class={['fs-progress-bar', status && `status-${status}`, classes, typeof value !== 'number' && 'indeterminate']}
 	role="progressbar"
 	aria-label={ariaLabel ??
@@ -41,7 +42,6 @@
 	aria-valuemax={max}
 	aria-valuenow={checkValue}
 	bind:this={ref}
-	{...attributes}
 >
 	{#if !hideRail}
 		<rect bind:this={railElement} height="1" rx="0.5" y="1" width="100%" class="progress-bar-rail" />

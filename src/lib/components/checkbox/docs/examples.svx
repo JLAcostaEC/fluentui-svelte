@@ -6,22 +6,22 @@
 
   const labelCode = `
 <Checkbox />
-<Checkbox wrapperAs="label">FluentUI Checkbox</Checkbox>
-<Checkbox wrapperAs="label">Another Checkbox</Checkbox>`;
+<Checkbox>FluentUI Checkbox</Checkbox>
+<Checkbox>Another Checkbox</Checkbox>`;
 
   const checkedCode = `
-<Checkbox wrapperAs="label">Unchecked</Checkbox>
-<Checkbox wrapperAs="label" checked>Checked</Checkbox>`;
+<Checkbox>Unchecked</Checkbox>
+<Checkbox checked>Checked</Checkbox>`;
 
   const indeterminateCode = `
-<Checkbox wrapperAs="label" indeterminate>Indeterminate</Checkbox>`;
+<Checkbox indeterminate>Indeterminate</Checkbox>`;
 
   const disabledCode = `
-<Checkbox wrapperAs="label" disabled>Disabled</Checkbox>
-<Checkbox wrapperAs="label" checked disabled>Checked & Disabled</Checkbox>`;
+<Checkbox disabled>Disabled</Checkbox>
+<Checkbox checked disabled>Checked & Disabled</Checkbox>`;
 
   const valueCode = `
-<Checkbox wrapperAs="label" value="checkbox-value">Checkbox with Value</Checkbox>`;
+<Checkbox value="checkbox-value">Checkbox with Value</Checkbox>`;
 </script>
 
 ### {m.cb_label_title()}
@@ -29,8 +29,8 @@
 <p class="fs-docs"><I18nMarkupMessage message={m.cb_label_description} /></p>
 
 ```svelte
-<Checkbox wrapperAs="label">I'm Labeled</Checkbox>
-<Checkbox>I'm Unlabeled</Checkbox>
+<Checkbox>I'm Labeled</Checkbox>
+<Checkbox aria-label="Without visible text" />
 ```
 
 ### {m.global_indeterminate()}
@@ -38,7 +38,7 @@
 <p class="fs-docs"><I18nMarkupMessage message={m.cb_indeterminate_description} /></p>
 
 <Showcase minHeight="100px" columns={1} code={indeterminateCode}>
-  <Checkbox wrapperAs="label" indeterminate>Indeterminate</Checkbox>
+  <Checkbox indeterminate>Indeterminate</Checkbox>
 </Showcase>
 
 ### {m.global_disabled()}
@@ -46,6 +46,6 @@
 <p class="fs-docs"><I18nMarkupMessage message={m.cb_disabled_description} /></p>
 
 <Showcase minHeight="100px" code={disabledCode}>
-  <Checkbox wrapperAs="label" disabled>Disabled</Checkbox>
-  <Checkbox wrapperAs="label" checked disabled>Checked & Disabled</Checkbox>
+  <Checkbox disabled>Disabled</Checkbox>
+  <Checkbox checked disabled>Checked & Disabled</Checkbox>
 </Showcase>

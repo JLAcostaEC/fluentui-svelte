@@ -13,10 +13,10 @@
 
 <svelte:element
 	this={_as}
+	{...attributes}
 	bind:this={ref as TableDOM[Tag]}
 	role={_as === 'div' ? 'rowgroup' : undefined}
 	class={['fs-table-body', { flex: _as === 'div' }, classes]}
-	{...attributes}
 >
 	{@render children?.()}
 </svelte:element>

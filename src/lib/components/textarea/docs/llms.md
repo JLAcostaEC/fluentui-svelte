@@ -44,6 +44,8 @@ The `onChange` event is triggered whenever the content of the textarea changes. 
 <TextArea onChange={(e) => console.log(e)} placeholder="Type..." />
 ```
 
+HTML attributes, including class, id and ARIA attributes, apply to the control element. Bind ref to access that control. Use wrapperAttributes and wrapperRef for the outer container.
+
 ## Component Props
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
@@ -52,10 +54,9 @@ The `onChange` event is triggered whenever the content of the textarea changes. 
 | Name                             | Type                                                               | Default      | Description                                      |
 | -------------------------------- | ------------------------------------------------------------------ | ------------ | ------------------------------------------------ |
 | `value` _bindable_               | `string`                                                           | `''`         | The current value of the textarea.               |
-| `ref` _bindable_                 | `HTMLElement`                                                      |              | The DOM reference of the textarea element.       |
+| `ref` _bindable_                 | `HTMLTextAreaElement`                                              |              | The DOM reference of the textarea element.       |
 | `placeholder`                    | `string`                                                           |              | The placeholder text for the textarea.           |
 | `resize`                         | `'none'` &#124; `'both'` &#124; `'horizontal'` &#124; `'vertical'` | `'vertical'` | Configures the resize behavior of the textarea.  |
-| `onChange`                       | `(e: Event) => void`                                               |              | Callback function for the change event.          |
 | `disabled`                       | `boolean`                                                          | `false`      | Disables the user interaction.                   |
 | `wrapperAttributes`              | `HTMLAttributes`                                                   |              | The attributes to spread on the wrapper element. |
 | `wrapperRef` _bindable_          | `HTMLDivElement`                                                   |              | The DOM reference of the wrapper element.        |

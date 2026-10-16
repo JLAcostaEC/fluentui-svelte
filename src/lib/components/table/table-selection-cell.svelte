@@ -11,8 +11,8 @@
 		checked = false,
 		subtle = false,
 		invisible = false,
-		checkboxIndicator,
-		radioIndicator,
+		checkboxProps,
+		radioProps,
 		class: classes,
 		onclick,
 		...attributes
@@ -30,22 +30,22 @@
 
 <svelte:element
 	this={_as}
+	{...attributes}
 	bind:this={ref as TableDOM[Tag]}
 	role={enableTabspot ? 'gridcell' : _as === 'div' ? 'cell' : undefined}
 	class={['fs-table-selection-cell', { flex: _as === 'div', subtle, invisible, checked: !!checked }, classes]}
 	{@attach enableTabspot ? colIndex() : undefined}
 	{@attach onclick ? selectOnSpace : undefined}
 	{onclick}
-	{...attributes}
 >
 	<!--
 		The indicator answers the pointer itself, and the click still reaches the row underneath, so
 		hitting it selects the row rather than only ticking a box the consumer never hears about.
 	-->
 	{#if type === 'radio'}
-		<RadioButton checked={checked === true} {...radioIndicator} />
+		<RadioButton {...radioProps} checked={checked === true} />
 	{:else}
-		<Checkbox wrapperAs="div" checked={checked === true} indeterminate={checked === 'mixed'} {...checkboxIndicator} />
+		<Checkbox {...checkboxProps} checked={checked === true} indeterminate={checked === 'mixed'} />
 	{/if}
 </svelte:element>
 

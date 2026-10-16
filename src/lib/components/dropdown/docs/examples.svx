@@ -6,7 +6,7 @@
   const customCode = `
 <Dropdown>
   <DropdownOption value="John Doe" text="John Doe">
-    <Persona name="John Doe" primaryText="Software Engineer" presence={{ status: 'available' }} avatar={{ color: 'colorful', idForColor: '' }} />
+    <Persona name="John Doe" primaryText="Software Engineer" presence={{ status: 'available' }} avatarProps={{ color: 'colorful', idForColor: '' }} />
   </DropdownOption>
   <DropdownOption value="B" text="Option B">Option B</DropdownOption>
   <DropdownOption value="C" text="Option C">Option C</DropdownOption>
@@ -27,7 +27,7 @@
 <Showcase columns={1} code={customCode} minHeight="0" disablePanZoom showOverflow>
   <Dropdown>
     <DropdownOption value="John Doe" text="John Doe">
-      <Persona name="John Doe" primaryText="Software Engineer" presence={{ status: 'available' }} avatar={{ color: 'colorful', idForColor: '' }} />
+      <Persona name="John Doe" primaryText="Software Engineer" presence={{ status: 'available' }} avatarProps={{ color: 'colorful', idForColor: '' }} />
     </DropdownOption>
     <DropdownOption value="B" text="Option B">Option B</DropdownOption>
     <DropdownOption value="C" text="Option C">Option C</DropdownOption>

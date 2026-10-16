@@ -87,6 +87,8 @@ Use `itemLabel` to customize the accessible label of each radio input.
 <Rating value={3} itemLabel={(rating) => `${rating} out of 5 stars`} />
 ```
 
+The root is the control element. HTML attributes, class and ref apply to that element. There is no separate wrapper API.
+
 ## Component Props
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->

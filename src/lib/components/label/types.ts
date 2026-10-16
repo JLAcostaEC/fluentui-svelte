@@ -1,9 +1,27 @@
-import type { HTMLLabelAttributes } from 'svelte/elements';
+import type { Snippet } from 'svelte';
+import type { HTMLAttributes, HTMLLabelAttributes } from 'svelte/elements';
 import type { Sizes } from '$types';
 
 /** @propsmith LabelProps */
 export type LabelProps = {
-	/** The text of the label. Falls back to the rendered children.
+	/** The element used to wrap the label and its field.
+	 * @default 'div'
+	 */
+	as?: 'div' | 'span';
+	/** The field described by the label, rendered beside the label text.
+	 * @type Snippet
+	 */
+	children?: Snippet;
+	/** The DOM reference of the wrapper element.
+	 * @type HTMLDivElement | HTMLSpanElement
+	 * @bindable
+	 */
+	wrapperRef?: HTMLDivElement | HTMLSpanElement;
+	/** The attributes to spread on the wrapper element.
+	 * @type HTMLAttributes
+	 */
+	wrapperAttributes?: HTMLAttributes<HTMLDivElement | HTMLSpanElement>;
+	/** The text of the label.
 	 * @default 'Label Element'
 	 */
 	label?: string;

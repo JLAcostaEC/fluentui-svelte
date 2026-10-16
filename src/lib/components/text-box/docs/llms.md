@@ -90,6 +90,8 @@ The `textChanged` event is triggered whenever the content of the text box change
 
 The `onClear` event is triggered when the input is cleared, allowing you to handle any necessary actions when the user removes the input value.
 
+HTML attributes, including class, id and ARIA attributes, apply to the control element. Bind ref to access that control. Use wrapperAttributes and wrapperRef for the outer container.
+
 ## Component Props
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
@@ -107,11 +109,11 @@ The `onClear` event is triggered when the input is cleared, allowing you to hand
 | `contentBefore`                      | `string` &#124; `Snippet` &#124; `Component`                           |                    | Content rendered before the input, inside the wrapper.                                                                                           |
 | `contentAfter`                       | `string` &#124; `Snippet` &#124; `Component`                           |                    | Content rendered after the input, inside the wrapper.                                                                                            |
 | `size`                               | `'small'` &#124; `'medium'` &#124; `'large'`                           | `'medium'`         | The size of the input element.                                                                                                                   |
-| `textChanged`                        | `(e: InputEvent, text: string) => void`                                |                    | Occurs when content changes in the text box.                                                                                                     |
+| `textChanged`                        | `(e: Event & unknown, text: string) => void`                           |                    | Occurs when content changes in the text box.                                                                                                     |
 | `querySubmitted`                     | `(e: MouseEvent` &#124; `KeyboardEvent, query: string) => void`        |                    | The QuerySubmitted event occurs when: 1. The input type is 'search'. 2. While the focus is in the text box, press Enter or click the query icon. |
 | `onClear`                            | `(e: MouseEvent) => void`                                              |                    | Occurs when the clear button is clicked.                                                                                                         |
 | `children`                           | `Snippet`                                                              |                    | The children elements to render inside the input.                                                                                                |
-| `wrapperAttributes`                  | `HTMLAttributes`                                                       |                    | The attributes to apply to the wrapper element.                                                                                                  |
+| `wrapperAttributes`                  | `HTMLAttributes`                                                       |                    | The attributes to spread on the wrapper element.                                                                                                 |
 | `HTMLInputAttributes` without `size` |                                                                        |                    |                                                                                                                                                  |
 
 <!-- /props:TextBoxProps -->

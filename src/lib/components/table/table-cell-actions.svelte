@@ -21,7 +21,7 @@
 	</TableCell>
 	```
 -->
-<div bind:this={ref} class={['fs-table-cell-actions', { visible }, classes]} {...attributes}>
+<div {...attributes} bind:this={ref} class={['fs-table-cell-actions', { visible }, classes]}>
 	{@render children?.()}
 </div>
 

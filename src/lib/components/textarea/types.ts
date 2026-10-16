@@ -10,15 +10,13 @@ export type TextAreaProps = {
 	/** The DOM reference of the textarea element.
 	 * @bindable
 	 */
-	ref?: HTMLElement;
+	ref?: HTMLTextAreaElement;
 	/** The placeholder text for the textarea. */
 	placeholder?: string;
 	/** Configures the resize behavior of the textarea.
 	 * @default 'vertical'
 	 */
 	resize?: 'none' | 'both' | 'horizontal' | 'vertical';
-	/** Callback function for the change event. */
-	onChange?: (e: Event) => void;
 	/** Disables the user interaction.
 	 * @default false
 	 */

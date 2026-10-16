@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { Label } from '$lib/index.js';
+	import { Label, TextBox } from '$lib/index.js';
 	import type { LabelProps } from '$lib/components/label/types.js';
 
+	const id = $props.id();
 	let { field = 'Field', ...props }: Partial<LabelProps> & { field?: string } = $props();
 </script>
 
-<Label {...props}><input type="text" aria-label={field} /></Label>
+<Label label={field} for={id} {...props}><TextBox {id} hideActionButtons /></Label>

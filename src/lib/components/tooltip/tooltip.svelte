@@ -174,11 +174,11 @@
     ``` 
 -->
 <Flyout
+	{...attributes}
 	{id}
 	class={['fs-tooltip', !open && 'tooltip-hidden', classes]}
 	role="tooltip"
 	bind:ref
-	{...attributes}
 	{@attach triggerElement && open
 		? floating(triggerElement, positionConfig, {
 				onComputed: withArrow ? arrowComputeCallback : undefined,

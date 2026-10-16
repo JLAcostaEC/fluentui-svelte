@@ -21,7 +21,7 @@
 	});
 </script>
 
-<div bind:this={ref} class={['fs-card-footer', showFloatingAction && 'with-action', classes]} {...attributes}>
+<div {...attributes} bind:this={ref} class={['fs-card-footer', showFloatingAction && 'with-action', classes]}>
 	{#if _action}
 		<RenderSoC SoC={_action} />
 	{/if}

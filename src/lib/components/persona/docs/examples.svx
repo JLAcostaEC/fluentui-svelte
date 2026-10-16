@@ -4,15 +4,15 @@
   import { m } from '$i18n/messages.js';
 
   const textAlignCode = `
-<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" />
-<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textAlign="center" />
-<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textAlign="right" />`
+<Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" />
+<Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" textAlign="center" />
+<Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" textAlign="right" />`
 
   const textPositionCode = `
-<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" />
-<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="bottom" textAlign="center" />
-<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="left" />
-<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="top" textAlign="center" />`
+<Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" />
+<Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" textPosition="bottom" textAlign="center" />
+<Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" textPosition="left" />
+<Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" textPosition="top" textAlign="center" />`
 
 const sizeCode = `
 <Persona name="John Doe" size={24} />
@@ -20,9 +20,9 @@ const sizeCode = `
 <Persona name="John Doe" size={56} />`
 
 const avatarCode = `
-<Persona name="John Doe" avatar={{ color: "attention" }} />
-<Persona name="John Doe" avatar={{ color: "colorful", idForColor: '' }} />
-<Persona name="John Doe" avatar={{ image: { src: 'https://placehold.co/96x96/jpeg', alt: 'Placeholder Image' } }} />`
+<Persona name="John Doe" avatarProps={{ color: "attention" }} />
+<Persona name="John Doe" avatarProps={{ color: "colorful", idForColor: '' }} />
+<Persona name="John Doe" avatarProps={{ image: { src: 'https://placehold.co/96x96/jpeg', alt: 'Placeholder Image' } }} />`
 
 const presenceCode = `
 <Persona name="John Doe" presence={{ status: 'available' }} />
@@ -40,9 +40,9 @@ const presenceCode = `
 {m.persona_text_align_description()}
 
 <Showcase columns={3} autoCenter code={textAlignCode}>
-  <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" />
-  <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textAlign="center" />
-  <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textAlign="right" />
+  <Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" />
+  <Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" textAlign="center" />
+  <Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" textAlign="right" />
 </Showcase>
 
 ### {m.persona_text_position_title()}
@@ -50,10 +50,10 @@ const presenceCode = `
 {m.persona_text_position_description()}
 
 <Showcase columns={4} autoCenter code={textPositionCode}>
-  <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" />
-  <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="bottom" textAlign="center" />
-  <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="left" />
-  <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="top" textAlign="center" />
+  <Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" />
+  <Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" textPosition="bottom" textAlign="center" />
+  <Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" textPosition="left" />
+  <Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" textPosition="top" textAlign="center" />
 </Showcase>
 
 ### {m.global_size()}
@@ -71,9 +71,9 @@ const presenceCode = `
 {m.persona_avatar_description()}
 
 <Showcase columns={3} autoCenter code={avatarCode}>
-  <Persona name="John Doe" avatar={{ color: "attention" }} />
-  <Persona name="John Doe" avatar={{ color: "colorful", idForColor: '' }} />
-  <Persona name="John Doe" avatar={{ image: { src: 'https://placehold.co/96x96/jpeg', alt: 'Placeholder Image' } }} />
+  <Persona name="John Doe" avatarProps={{ color: "attention" }} />
+  <Persona name="John Doe" avatarProps={{ color: "colorful", idForColor: '' }} />
+  <Persona name="John Doe" avatarProps={{ image: { src: 'https://placehold.co/96x96/jpeg', alt: 'Placeholder Image' } }} />
 </Showcase>
 
 ### {m.persona_presence_title()}

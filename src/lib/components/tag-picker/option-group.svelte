@@ -5,12 +5,25 @@
 	const FALLBACK_ID = $props.id();
 	const LABEL_ID = `${PREFIX}-tagpicker-group-${FALLBACK_ID}-label`;
 
-	let { label, ref = $bindable(), class: classes, children, ...attributes }: TagPickerOptionGroupProps = $props();
+	let {
+		label,
+		ref = $bindable(),
+		class: classes,
+		children,
+		wrapperAttributes,
+		wrapperRef = $bindable(),
+		...attributes
+	}: TagPickerOptionGroupProps = $props();
 </script>
 
-<li class="fs-tagpicker-group" role="presentation">
+<li
+	{...wrapperAttributes}
+	class={['fs-tagpicker-group', wrapperAttributes?.class]}
+	role="presentation"
+	bind:this={wrapperRef}
+>
 	<span class="fs-tagpicker-group-label" id={LABEL_ID}>{label}</span>
-	<ul bind:this={ref} class={classes} role="group" aria-labelledby={LABEL_ID} {...attributes}>
+	<ul {...attributes} class={classes} role="group" aria-labelledby={LABEL_ID} bind:this={ref}>
 		{@render children?.()}
 	</ul>
 </li>
@@ -18,7 +31,7 @@
 <style>
 	.fs-tagpicker-group {
 		list-style: none;
-		/* A group left without an option on screen hides itself. */
+		/* A group left without an option on screen hides itself. F*/
 		&:not(:has(:global(.fs-tagpicker-option))) {
 			display: none;
 		}

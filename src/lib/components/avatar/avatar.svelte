@@ -49,6 +49,7 @@
   ```
 -->
 <div
+	{...attributes}
 	role="img"
 	aria-label={name}
 	bind:this={ref}
@@ -60,9 +61,9 @@
 		active,
 		shape,
 		hideBg && 'hide-bg',
-		(badge?.status || badge?.icon) && 'mask'
+		(badge?.status || badge?.icon) && 'mask',
+		attributes?.class
 	]}
-	{...attributes}
 >
 	<span class="content">
 		{#if image}

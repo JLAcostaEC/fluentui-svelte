@@ -48,8 +48,8 @@ describe('rendering', () => {
 		expect(document.querySelector('.fs-time-picker')?.tagName).toBe('BUTTON');
 	});
 
-	it('takes a name for the form through inputProps', async () => {
-		render(TimePicker, { value: '13:45:30', inputProps: { name: 'meeting-time' } });
+	it('takes a name for the form through inputAttributes', async () => {
+		render(TimePicker, { value: '13:45:30', inputAttributes: { name: 'meeting-time' } });
 		await expect.element(page.selector('input[type="time"]')).toHaveAttribute('name', 'meeting-time');
 	});
 });

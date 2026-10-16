@@ -3,6 +3,7 @@
 	import { SvelteMap } from 'svelte/reactivity';
 	import { on } from 'svelte/events';
 	import { onClickOutside } from 'runed';
+	import { invokeHandlers } from '$internal';
 	import { PREFIX } from '$constants';
 	import { setAutoSuggestBoxContext } from './auto-suggest-box.ts';
 	import { Flyout, TextBox, ListView, ListViewItem } from '$lib/index.js';
@@ -19,17 +20,20 @@
 
 	const FALLBACK_ID = $props.id();
 	const ID = `${PREFIX}autosuggestbox-${FALLBACK_ID}`;
-	const INPUT_ID = `${ID}-input`;
 
 	let {
+		id = `${ID}-input`,
+		wrapperAttributes,
+		onfocus,
+		onClear,
 		placeholder,
 		hideActionButtons,
 		type = 'search',
 		open = $bindable(false),
 		multiselect,
-		ref = $bindable(),
+		wrapperRef = $bindable(),
 		value = $bindable(''),
-		inputRef = $bindable(),
+		ref = $bindable(),
 		selectOnFocus,
 		openOnFocus = false,
 		virtualizer,
@@ -44,7 +48,8 @@
 		textChanged,
 		querySubmitted,
 		suggestionChosen,
-		children
+		children,
+		...attributes
 	}: AutoSuggestBoxProps = $props();
 
 	/**
@@ -69,7 +74,7 @@
 
 	const OPTIONS = '.fs-autosuggest-option';
 
-	const NAVIGATION: TabspotNodeOptions = {
+	const NAVIGATION: TabspotNodeOptions = $derived({
 		root: {},
 		mover: {
 			axis: 'vertical',
@@ -77,11 +82,11 @@
 			skip: "[aria-disabled='true']",
 			activation: {
 				mode: 'activedescendant',
-				controller: `#${INPUT_ID}`,
+				controller: `#${CSS.escape(id ?? ID)}`,
 				mark: { attribute: 'data-active' }
 			}
 		}
-	};
+	});
 
 	const context: AutoSuggestBoxContext = $state({
 		config: {
@@ -106,7 +111,7 @@
 				open = v;
 			},
 			get textBoxRef() {
-				return inputRef;
+				return ref;
 			},
 			get activeOption() {
 				return activeOption;
@@ -220,7 +225,7 @@
 
 	/** The two keys that are the box's own business rather than the list's. */
 	function handleKeyDown(e: KeyboardEvent) {
-		if (e.target !== inputRef) return;
+		if (e.target !== ref) return;
 
 		if (e.key === 'Escape') {
 			e.preventDefault();
@@ -260,14 +265,14 @@
 		// end of the list: a second arrow pressed while this one is still in flight is
 		// a second move, and two cursor sets onto the same option would be one.
 		// Untrusted, so it passes straight through to Tabspot this time.
-		inputRef?.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
+		ref?.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
 	}
 
 	function handleFocus() {
 		if (openOnFocus) open = true;
 	}
 
-	async function handleTextChanged(e: InputEvent, val: string) {
+	async function handleTextChanged(e: Event, val: string) {
 		if (val.length > 0 && !open) open = true;
 		lastTypedValue = val;
 		textChanged?.(e, val);
@@ -290,15 +295,15 @@
 	}
 
 	onClickOutside(
-		() => ref,
+		() => wrapperRef,
 		() => (open = false)
 	);
 
 	onMount(() => {
-		if (!inputRef) return;
+		if (!ref) return;
 
 		const off = [
-			on(inputRef, 'keydown', handleKeyDown),
+			on(ref, 'keydown', handleKeyDown),
 			// Tabspot listens on `document` in the capture phase,
 			// `window` comes first on the capture path, to note the
 			// key that caused a move,and to hold a move back until
@@ -307,7 +312,7 @@
 				window,
 				'keydown',
 				(event) => {
-					if (event.target !== inputRef || !event.isTrusted) return;
+					if (event.target !== ref || !event.isTrusted) return;
 
 					const key = event.key;
 
@@ -366,48 +371,53 @@
 </script>
 
 <div
-	class={['fs-autosuggestbox', { open, multiselect: _box.multiselect }]}
-	style="--max-items: {maxItemsInView}; --current-items: {items.size};"
-	bind:this={ref}
+	{...wrapperAttributes}
+	class={['fs-autosuggestbox', { open, multiselect: _box.multiselect }, wrapperAttributes?.class]}
+	style="--max-items: {maxItemsInView}; --current-items: {items.size}; {wrapperAttributes?.style ?? ''}"
+	bind:this={wrapperRef}
 >
 	<TextBox
+		{...attributes}
 		{type}
 		{placeholder}
 		{hideActionButtons}
-		id={INPUT_ID}
+		{id}
 		bind:value
-		bind:ref={inputRef}
+		bind:ref
 		querySubmitted={(e) => querySubmitted?.(e, value)}
 		textChanged={(e) => handleTextChanged(e, value)}
-		onClear={handleClear}
-		onfocus={handleFocus}
+		onClear={(e) => invokeHandlers(e, [], [handleClear, onClear])}
+		onfocus={(e) => invokeHandlers(e, [], [handleFocus, onfocus])}
 		role="combobox"
 		aria-expanded={open}
 		aria-autocomplete="list"
 		aria-controls={open ? `${ID}-list` : undefined}
 		aria-haspopup="listbox"
-		class="square-{roundClass}"
+		wrapperAttributes={{ class: `square-${roundClass}` }}
 	/>
 	{#if open}
 		<Flyout
+			{...flyoutProps}
 			floating
 			offset={0}
-			reference={ref}
+			reference={wrapperRef}
 			bind:ref={flyoutRef}
 			roundCorners="bottom"
 			placementConfig={{ allowedPlacements: ['bottom', 'top'] }}
-			onPlacementChange={(place) => handlePlacementChange(place)}
+			onPlacementChange={(place) => {
+				handlePlacementChange(place);
+				flyoutProps?.onPlacementChange?.(place);
+			}}
 			class={['fs-autosuggestbox-flyout', roundClass === 'top' && 'top-shadow', flyoutProps?.class]}
-			{...flyoutProps}
 		>
 			<ListView
+				{...listViewProps as any}
 				role="listbox"
 				navigationMode="items"
 				disableTabspot
 				id="{ID}-list"
 				selectedItems={Array.from(selectedOptions.values()).map((opt) => opt.value)}
 				bind:ref={listViewRef}
-				{...listViewProps as any}
 			>
 				{#if items.size === 0}
 					<ListViewItem disabled>{notFoundText}</ListViewItem>

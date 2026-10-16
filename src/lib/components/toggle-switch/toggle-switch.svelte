@@ -12,8 +12,8 @@
 		id = ID,
 		name = id,
 		label,
-		labelAttributes,
-		labelElement,
+		wrapperAttributes,
+		wrapperRef = $bindable(),
 		...attributes
 	}: ToggleSwitchProps = $props();
 </script>
@@ -33,17 +33,17 @@
   <ToggleSwitch label="Toggle Switch" />
   ```
 -->
-<label class="fs-toggle-switch" {...labelAttributes} bind:this={labelElement}>
-	<input type="checkbox" role="switch" {id} {name} bind:checked bind:this={ref} {...attributes} />
+<div {...wrapperAttributes} class={['fs-toggle-switch', wrapperAttributes?.class]} bind:this={wrapperRef}>
+	<input {...attributes} type="checkbox" role="switch" {id} {name} bind:checked bind:this={ref} />
 	{#if label}
-		<span>
+		<label for={id}>
 			{label}
-		</span>
+		</label>
 	{/if}
-</label>
+</div>
 
 <style>
-	label {
+	.fs-toggle-switch {
 		display: flex;
 		align-items: center;
 		border-radius: 1.125rem;
@@ -53,7 +53,7 @@
 		&:has(input:focus-visible) {
 			outline: 0.125rem var(--fs-focus-stroke-outer) solid;
 			outline-offset: 0.125rem;
-			&:has(span) {
+			&:has(> label) {
 				border-radius: 0.063rem;
 				outline-offset: 0.313rem;
 			}
@@ -142,7 +142,9 @@
 				}
 			}
 		}
-		& span {
+		& > label {
+			flex-grow: 1;
+			cursor: pointer;
 			font-size: inherit;
 			color: inherit;
 			padding-inline: 0.8rem;

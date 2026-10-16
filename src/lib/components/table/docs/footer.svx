@@ -105,17 +105,17 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableSelectionCellProps -->
 
-| Name                | Type                                           | Default      | Description                                                                                          |
-| ------------------- | ---------------------------------------------- | ------------ | ---------------------------------------------------------------------------------------------------- |
-| `as`                | `'td'` &#124; `'div'`                          | `'td'`       | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_as} />`                 |
-| `ref` _bindable_    | `HTMLTableCellElement` &#124; `HTMLDivElement` |              | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_ref} />`                |
-| `type`              | `'checkbox'` &#124; `'radio'`                  | `'checkbox'` | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_type} />`               |
-| `checked`           | `boolean` &#124; `'mixed'`                     | `false`      | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_checked} />`            |
-| `subtle`            | `boolean`                                      | `false`      | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_subtle} />`             |
-| `invisible`         | `boolean`                                      | `false`      | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_invisible} />`          |
-| `checkboxIndicator` | `CheckboxProps`                                |              | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_checkbox_indicator} />` |
-| `radioIndicator`    | `RadioButtonProps`                             |              | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_radio_indicator} />`    |
-| HTML Attributes     |                                                |              |                                                                                                      |
+| Name             | Type                                           | Default      | Description                                                                                      |
+| ---------------- | ---------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------ |
+| `as`             | `'td'` &#124; `'div'`                          | `'td'`       | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_as} />`             |
+| `ref` _bindable_ | `HTMLTableCellElement` &#124; `HTMLDivElement` |              | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_ref} />`            |
+| `type`           | `'checkbox'` &#124; `'radio'`                  | `'checkbox'` | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_type} />`           |
+| `checked`        | `boolean` &#124; `'mixed'`                     | `false`      | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_checked} />`        |
+| `subtle`         | `boolean`                                      | `false`      | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_subtle} />`         |
+| `invisible`      | `boolean`                                      | `false`      | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_invisible} />`      |
+| `checkboxProps`  | `CheckboxProps`                                |              | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_checkbox_props} />` |
+| `radioProps`     | `RadioButtonProps`                             |              | `<I18nMarkupMessage message={m.generated_fs_table_selection_cell_props_props_radio_props} />`    |
+| HTML Attributes  |                                                |              |                                                                                                  |
 
 <!-- /props:TableSelectionCellProps -->
 

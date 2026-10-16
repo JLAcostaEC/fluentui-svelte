@@ -135,7 +135,7 @@ Other components that can be used within the table include:
 		<TableRow>
 			<TableSelectionCell
 				checked={allSelected ? true : someSelected ? 'mixed' : false}
-				checkboxIndicator={{ 'aria-label': 'Select all rows' }}
+				checkboxProps={{ 'aria-label': 'Select all rows' }}
 				onclick={() => (selected = allSelected ? [] : items.map((item) => item.file))}
 			/>
 			<TableHeaderCell>File</TableHeaderCell>
@@ -149,7 +149,7 @@ Other components that can be used within the table include:
 				appearance={isSelected ? 'brand' : 'none'}
 				onclick={() => toggleRow(item.file)}
 			>
-				<TableSelectionCell checked={isSelected} checkboxIndicator={{ 'aria-label': 'Select row' }} />
+				<TableSelectionCell checked={isSelected} checkboxProps={{ 'aria-label': 'Select row' }} />
 				<TableCell>{item.file}</TableCell>
 			</TableRow>
 		{/each}
@@ -177,11 +177,7 @@ Set `type="radio"` on the selection cell when only one row can be selected at a 
 		{#each items as item (item.file)}
 			{@const isPicked = picked === item.file}
 			<TableRow aria-selected={isPicked} appearance={isPicked ? 'brand' : 'none'} onclick={() => (picked = item.file)}>
-				<TableSelectionCell
-					type="radio"
-					checked={isPicked}
-					radioIndicator={{ name: 'file', 'aria-label': 'Select row' }}
-				/>
+				<TableSelectionCell type="radio" checked={isPicked} radioProps={{ name: 'file', 'aria-label': 'Select row' }} />
 				<TableCell>{item.file}</TableCell>
 			</TableRow>
 		{/each}
@@ -195,7 +191,7 @@ Set `type="radio"` on the selection cell when only one row can be selected at a 
 
 ```svelte
 <TableRow aria-selected={isSelected} appearance={isSelected ? 'brand' : 'none'} onclick={() => toggleSubtle(item.file)}>
-	<TableSelectionCell subtle checked={isSelected} checkboxIndicator={{ 'aria-label': 'Select row' }} />
+	<TableSelectionCell subtle checked={isSelected} checkboxProps={{ 'aria-label': 'Select row' }} />
 	<TableCell>{item.file}</TableCell>
 </TableRow>
 ```
@@ -487,17 +483,17 @@ The table renders whatever you put inside it, so any virtualization library work
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableSelectionCellProps -->
 
-| Name                | Type                                           | Default      | Description                                                                    |
-| ------------------- | ---------------------------------------------- | ------------ | ------------------------------------------------------------------------------ |
-| `as`                | `'td'` &#124; `'div'`                          | `'td'`       | The HTML element to render the cell as. Inherited from the table by default.   |
-| `ref` _bindable_    | `HTMLTableCellElement` &#124; `HTMLDivElement` |              | The DOM reference of the cell element.                                         |
-| `type`              | `'checkbox'` &#124; `'radio'`                  | `'checkbox'` | A table can have two kinds of selection modes.                                 |
-| `checked`           | `boolean` &#124; `'mixed'`                     | `false`      | Whether the row is selected. `'mixed'` renders the indeterminate state.        |
-| `subtle`            | `boolean`                                      | `false`      | Only shows the indicator when it is checked, or the row is hovered or focused. |
-| `invisible`         | `boolean`                                      | `false`      | Hides the indicator while it keeps taking up the same space.                   |
-| `checkboxIndicator` | `CheckboxProps`                                |              | The props to spread on the checkbox rendered when `type` is `'checkbox'`.      |
-| `radioIndicator`    | `RadioButtonProps`                             |              | The props to spread on the radio button rendered when `type` is `'radio'`.     |
-| HTML Attributes     |                                                |              |                                                                                |
+| Name             | Type                                           | Default      | Description                                                                    |
+| ---------------- | ---------------------------------------------- | ------------ | ------------------------------------------------------------------------------ |
+| `as`             | `'td'` &#124; `'div'`                          | `'td'`       | The HTML element to render the cell as. Inherited from the table by default.   |
+| `ref` _bindable_ | `HTMLTableCellElement` &#124; `HTMLDivElement` |              | The DOM reference of the cell element.                                         |
+| `type`           | `'checkbox'` &#124; `'radio'`                  | `'checkbox'` | A table can have two kinds of selection modes.                                 |
+| `checked`        | `boolean` &#124; `'mixed'`                     | `false`      | Whether the row is selected. `'mixed'` renders the indeterminate state.        |
+| `subtle`         | `boolean`                                      | `false`      | Only shows the indicator when it is checked, or the row is hovered or focused. |
+| `invisible`      | `boolean`                                      | `false`      | Hides the indicator while it keeps taking up the same space.                   |
+| `checkboxProps`  | `CheckboxProps`                                |              | The props to spread on the checkbox rendered when `type` is `'checkbox'`.      |
+| `radioProps`     | `RadioButtonProps`                             |              | The props to spread on the radio button rendered when `type` is `'radio'`.     |
+| HTML Attributes  |                                                |              |                                                                                |
 
 <!-- /props:TableSelectionCellProps -->
 

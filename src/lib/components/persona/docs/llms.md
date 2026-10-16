@@ -15,7 +15,7 @@ A Persona is a visual representation of a person that combines an avatar, presen
 	secondaryText="Intranet"
 	tertiaryText="Team A"
 	presence={{ status: 'available' }}
-	avatar={{ color: 'colorful' }}
+	avatarProps={{ color: 'colorful' }}
 />
 ```
 
@@ -26,9 +26,9 @@ A Persona is a visual representation of a person that combines an avatar, presen
 A Persona supports three text alignments, with 'left' as the default position.
 
 ```svelte
-<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" />
-<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textAlign="center" />
-<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textAlign="right" />
+<Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" />
+<Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" textAlign="center" />
+<Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" textAlign="right" />
 ```
 
 ### Text Position
@@ -36,18 +36,18 @@ A Persona supports three text alignments, with 'left' as the default position.
 A Persona supports four text positions: 'top', 'bottom', 'left', and 'right'. The default position is 'right'.
 
 ```svelte
-<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" />
+<Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" />
 <Persona
 	name="Alex Johnson"
-	avatar={{ initials: 'AJ' }}
+	avatarProps={{ initials: 'AJ' }}
 	secondaryText="Available"
 	textPosition="bottom"
 	textAlign="center"
 />
-<Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="left" />
+<Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" textPosition="left" />
 <Persona
 	name="Alex Johnson"
-	avatar={{ initials: 'AJ' }}
+	avatarProps={{ initials: 'AJ' }}
 	secondaryText="Available"
 	textPosition="top"
 	textAlign="center"
@@ -69,9 +69,12 @@ A Persona supports custom sizes, with a default of 42px. You can set the size us
 A Persona wraps an avatar inside it, which can be customized with all the props available to the Avatar component.
 
 ```svelte
-<Persona name="John Doe" avatar={{ color: 'attention' }} />
-<Persona name="John Doe" avatar={{ color: 'colorful', idForColor: '' }} />
-<Persona name="John Doe" avatar={{ image: { src: 'https://placehold.co/96x96/jpeg', alt: 'Placeholder Image' } }} />
+<Persona name="John Doe" avatarProps={{ color: 'attention' }} />
+<Persona name="John Doe" avatarProps={{ color: 'colorful', idForColor: '' }} />
+<Persona
+	name="John Doe"
+	avatarProps={{ image: { src: 'https://placehold.co/96x96/jpeg', alt: 'Placeholder Image' } }}
+/>
 ```
 
 ### Presence
@@ -94,19 +97,20 @@ A Persona can display presence information, such as online status or availabilit
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:PersonaProps -->
 
-| Name                 | Type                                                       | Default    | Description                                                                                                   |
-| -------------------- | ---------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------- |
-| `name`               | `string`                                                   |            | The name of the person or entity represented by this Persona. It is also used by the avatar for its initials. |
-| `size`               | `number`                                                   | `42`       | The size of the avatar in pixels. The text scales with it.                                                    |
-| `primaryText`        | `string`                                                   |            | Text to display below the name.                                                                               |
-| `secondaryText`      | `string`                                                   |            | Text to display below the primary text.                                                                       |
-| `tertiaryText`       | `string`                                                   |            | Text to display below the secondary text.                                                                     |
-| `textAlign`          | `'left'` &#124; `'center'` &#124; `'right'`                | `'left'`   | How the text block is aligned.                                                                                |
-| `textPosition`       | `'top'` &#124; `'bottom'` &#124; `'left'` &#124; `'right'` | `'right'`  | Where the text block sits relative to the avatar.                                                             |
-| `presenceOnly`       | `boolean`                                                  |            | Renders the presence badge on its own, without the avatar behind it.                                          |
-| `avatarAlign`        | `'start'` &#124; `'center'` &#124; `'end'`                 | `'center'` | How the avatar is aligned against the text block.                                                             |
-| `element` _bindable_ | `HTMLDivElement`                                           |            | The DOM reference of the persona element.                                                                     |
-| `avatar`             | `AvatarProps`                                              |            | The props to spread on the avatar.                                                                            |
-| `presence`           | `BadgePresence`                                            |            | The presence badge to display as a status indicator.                                                          |
+| Name                       | Type                                                       | Default    | Description                                                                                                   |
+| -------------------------- | ---------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------- |
+| `name`                     | `string`                                                   |            | The name of the person or entity represented by this Persona. It is also used by the avatar for its initials. |
+| `size`                     | `number`                                                   | `42`       | The size of the avatar in pixels. The text scales with it.                                                    |
+| `primaryText`              | `string`                                                   |            | Text to display below the name.                                                                               |
+| `secondaryText`            | `string`                                                   |            | Text to display below the primary text.                                                                       |
+| `tertiaryText`             | `string`                                                   |            | Text to display below the secondary text.                                                                     |
+| `textAlign`                | `'left'` &#124; `'center'` &#124; `'right'`                | `'left'`   | How the text block is aligned.                                                                                |
+| `textPosition`             | `'top'` &#124; `'bottom'` &#124; `'left'` &#124; `'right'` | `'right'`  | Where the text block sits relative to the avatar.                                                             |
+| `presenceOnly`             | `boolean`                                                  |            | Renders the presence badge on its own, without the avatar behind it.                                          |
+| `avatarAlign`              | `'start'` &#124; `'center'` &#124; `'end'`                 | `'center'` | How the avatar is aligned against the text block.                                                             |
+| `element` _bindable_       | `HTMLDivElement`                                           |            | The DOM reference of the persona element.                                                                     |
+| `avatarProps`              | `AvatarProps`                                              |            | The props to spread on the avatar.                                                                            |
+| `presence`                 | `BadgePresence`                                            |            | The presence badge to display as a status indicator.                                                          |
+| Element Attributes (`div`) |                                                            |            |                                                                                                               |
 
 <!-- /props:PersonaProps -->

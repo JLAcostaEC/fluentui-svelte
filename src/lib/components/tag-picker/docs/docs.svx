@@ -25,7 +25,7 @@
     <TagPicker
       bind:selectedOptions
       {tag}
-      inputProps={{ 'aria-label': 'Select Employees' }}
+      aria-label="Select Employees"
       tagGroupProps={{ 'aria-label': 'Selected Employees' }}
     >
       {#each options as option (option)}
@@ -51,7 +51,7 @@
 
 <TagPicker
 	bind:selectedOptions
-	inputProps={{ 'aria-label': 'Select Employees' }}
+	aria-label="Select Employees"
 	tagGroupProps={{ 'aria-label': 'Selected Employees' }}
 >
 	{#each options as option (option)}

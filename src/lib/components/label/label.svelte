@@ -3,6 +3,9 @@
 
 	let {
 		ref = $bindable(),
+		as = 'div',
+		wrapperRef = $bindable(),
+		wrapperAttributes,
 		class: classes,
 		disabled,
 		required,
@@ -15,38 +18,37 @@
 	}: LabelProps = $props();
 </script>
 
-<label
+<svelte:element
+	this={as}
+	{...wrapperAttributes}
 	class={[
 		'fs-label',
 		`size-${size}`,
-		`weight-${weight}`,
-		classes,
 		{ disabled, required },
-		(labelPosition === 'above' || labelPosition === 'below') && 'column'
+		(labelPosition === 'above' || labelPosition === 'below') && 'column',
+		wrapperAttributes?.class
 	]}
-	bind:this={ref}
-	{...attributes}
+	bind:this={wrapperRef}
 >
 	{#if labelPosition === 'before' || labelPosition === 'above'}
-		<span>
-			{label}
-			{#if required}
-				<abbr title={required.message || label}>{required.abbr ?? '*'}</abbr>
-			{/if}
-		</span>
+		{@render labelText()}
 	{/if}
 
 	{@render children?.()}
 
 	{#if labelPosition === 'after' || labelPosition === 'below'}
-		<span>
-			{label}
-			{#if required}
-				<abbr title={required.message || label}>{required.abbr ?? '*'}</abbr>
-			{/if}
-		</span>
+		{@render labelText()}
 	{/if}
-</label>
+</svelte:element>
+
+{#snippet labelText()}
+	<label {...attributes} class={['fs-label-text', `size-${size}`, `weight-${weight}`, classes]} bind:this={ref}>
+		{label}
+		{#if required}
+			<abbr aria-hidden="true" title={required.message || label}>{required.abbr ?? '*'}</abbr>
+		{/if}
+	</label>
+{/snippet}
 
 <style>
 	.fs-label {
@@ -58,23 +60,13 @@
 			align-items: flex-start;
 		}
 		&.size-small {
-			font-size: var(--fs-caption-font-size);
-			letter-spacing: 0.04em;
 			gap: 0.25rem;
 		}
 		&.size-medium {
-			font-size: var(--fs-body-font-size);
 			gap: 0.375rem;
 		}
 		&.size-large {
-			font-size: var(--fs-subtitle2-font-size);
 			gap: 0.5rem;
-		}
-		&.weight-regular {
-			font-weight: 400;
-		}
-		&.weight-semibold {
-			font-weight: 600;
 		}
 		&.disabled {
 			color: var(--fs-text-disabled);
@@ -89,6 +81,24 @@
 			}
 			&.disabled abbr {
 				color: var(--fs-text-disabled);
+			}
+		}
+		& .fs-label-text {
+			&.size-small {
+				font-size: var(--fs-caption-font-size);
+				letter-spacing: 0.04em;
+			}
+			&.size-medium {
+				font-size: var(--fs-body-font-size);
+			}
+			&.size-large {
+				font-size: var(--fs-subtitle2-font-size);
+			}
+			&.weight-regular {
+				font-weight: 400;
+			}
+			&.weight-semibold {
+				font-weight: 600;
 			}
 		}
 	}

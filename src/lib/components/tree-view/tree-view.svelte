@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
+	import { invokeHandlers } from '$internal';
 	import { SvelteMap, SvelteSet } from 'svelte/reactivity';
 	import { getTabspotAttributes, tabspotVirtual } from 'tabspot';
 	import {
@@ -32,6 +33,7 @@
 		selectionMode = CONTEXT?.state.selectionMode ?? 'multiple',
 		size = 'medium',
 		children,
+		onkeydown,
 		...attributes
 	}: TreeViewProps = $props();
 
@@ -207,13 +209,13 @@
 <!-- Render only when necessary (virtualizer perf) -->
 {#if treeViewContext.state.forceVirtualRender || (treeViewContext.config.virtualized && (!IS_SUB_TREE || ITEM_CONTEXT?.open)) || !treeViewContext.config.virtualized}
 	<ul
-		class="fs-tree-view"
+		{...attributes}
+		class={['fs-tree-view', attributes?.class]}
 		role={IS_SUB_TREE ? 'group' : 'tree'}
 		aria-multiselectable={selectionMode !== 'single'}
-		onkeydown={!IS_SUB_TREE ? handleTypeahead : undefined}
+		onkeydown={(event) => invokeHandlers(event, [], [!IS_SUB_TREE && handleTypeahead, onkeydown])}
 		bind:this={ref}
 		{...tabspotAttributes}
-		{...attributes}
 	>
 		{@render children?.()}
 	</ul>

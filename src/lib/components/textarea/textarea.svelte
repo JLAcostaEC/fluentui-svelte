@@ -36,16 +36,16 @@
 	<TextArea resize="none" disabled />
 	```
 -->
-<div class="fs-textarea" {...wrapperAttributes} bind:this={wrapperRef}>
+<div {...wrapperAttributes} class={['fs-textarea', wrapperAttributes?.class]} bind:this={wrapperRef}>
 	<textarea
+		{...attributes}
 		{name}
 		{id}
 		{disabled}
 		onchange={(e) => invokeHandlers(e, [disabled], [onchange])}
 		style="resize: {resize}; {style}"
 		bind:this={ref}
-		bind:value
-		{...attributes}></textarea>
+		bind:value></textarea>
 </div>
 
 <style>

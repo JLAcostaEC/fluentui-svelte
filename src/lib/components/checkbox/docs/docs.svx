@@ -9,11 +9,11 @@
 {m.cb_description()}
 
 <Showcase>
-  <Checkbox wrapperAs="label">Default</Checkbox>
-  <Checkbox wrapperAs="label" checked>Checked</Checkbox>
-  <Checkbox wrapperAs="label" indeterminate>Indeterminate</Checkbox>
-  <Checkbox wrapperAs="label" disabled>Disabled</Checkbox>
-  <Checkbox wrapperAs="label" checked disabled>Checked & Disabled</Checkbox>
+  <Checkbox>Default</Checkbox>
+  <Checkbox checked>Checked</Checkbox>
+  <Checkbox indeterminate>Indeterminate</Checkbox>
+  <Checkbox disabled>Disabled</Checkbox>
+  <Checkbox checked disabled>Checked & Disabled</Checkbox>
 </Showcase>
 
 ## {m.global_usage()}
@@ -23,5 +23,5 @@
   import { Checkbox } from 'fluentui-svelte';
 </script>
 
-<Checkbox wrapperAs="label">Default</Checkbox>
+<Checkbox>Default</Checkbox>
 ```

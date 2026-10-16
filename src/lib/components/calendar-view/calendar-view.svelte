@@ -340,7 +340,8 @@ A calendar view lets a user view and interact with a calendar that they can navi
 This implementation is originally made by Tropix126 in his FluentSvelte library, I have changed several things but thanks to him for the original work.
 -->
 <div
-	class={['fs-calendar-view', { floating }]}
+	{...attributes}
+	class={['fs-calendar-view', { floating }, attributes?.class]}
 	bind:this={ref}
 	in:flyToOffset={floating && floating.ref
 		? {
@@ -356,7 +357,6 @@ This implementation is originally made by Tropix126 in his FluentSvelte library,
 			}
 		: undefined}
 	{@attach floating?.ref ? _floating(floating.ref, floating.positionConfig) : undefined}
-	{...attributes}
 >
 	<Flyout>
 		<CalendarViewControls />

@@ -5,7 +5,7 @@
 	import { untrack } from 'svelte';
 	import { watch } from 'runed';
 	import { Tooltip } from '$lib/index.js';
-	import { preventDefault } from '$internal';
+	import { invokeHandlers } from '$internal';
 	import type { Attachment } from 'svelte/attachments';
 	import type { MouseOrTouchEvent, SliderProps } from './types.ts';
 
@@ -35,7 +35,11 @@
 		railRef = $bindable(),
 		trackRef = $bindable(),
 		tickBarRef = $bindable(),
-		'aria-label': ariaLabel = 'Slider',
+		'aria-label': ariaLabel,
+		onkeydown,
+		onmousedown,
+		ontouchstart,
+		style,
 		...attributes
 	}: SliderProps = $props();
 
@@ -204,26 +208,35 @@
 />
 
 <div
+	{...attributes}
+	aria-valuetext={prefix || suffix ? `${prefix}${value}${suffix}` : attributes['aria-valuetext']}
 	class={['fs-slider', `orientation-${orientation}`, classes, { disabled }, directionAwareReverse && 'reverse']}
 	bind:this={ref}
 	tabindex={disabled ? -1 : 0}
 	role="slider"
-	aria-label={ariaLabel}
+	aria-label={ariaLabel ?? (attributes['aria-labelledby'] ? undefined : 'Slider')}
 	aria-orientation={orientation}
 	aria-valuemin={_range.min}
 	aria-valuemax={_range.max}
 	aria-valuenow={value}
-	aria-valuetext={prefix || suffix ? `${prefix}${value}${suffix}` : undefined}
 	aria-disabled={disabled || undefined}
-	ontouchstart={handleTouchStart}
-	onkeydown={handleArrowKeys}
-	onmousedown={preventDefault(() => {
-		holding = true;
-		dragging = true;
-	})}
+	ontouchstart={(e) => invokeHandlers(e, [disabled], [handleTouchStart, ontouchstart])}
+	onkeydown={(e) => invokeHandlers(e, [disabled], [handleArrowKeys, onkeydown])}
+	onmousedown={(e) =>
+		invokeHandlers(
+			e,
+			[disabled],
+			[
+				() => {
+					e.preventDefault();
+					holding = true;
+					dragging = true;
+				},
+				onmousedown
+			]
+		)}
 	style="--slider-percentage: {percentage}%; --slider-thumb-offset: {thumbClientWidth / 2 -
-		linearScale([0, 50], [6, thumbClientWidth / 2])(percentage)}px;"
-	{...attributes}
+		linearScale([0, 50], [6, thumbClientWidth / 2])(percentage)}px; {style ?? ''}"
 >
 	{#if tooltip && !disabled}
 		<Tooltip
@@ -262,8 +275,8 @@
 
 {#snippet sliderThumb(attrs: Record<string, unknown> | undefined = undefined, ref: Attachment | undefined = undefined)}
 	<div
-		class="slider-thumb"
 		{...attrs}
+		class={['slider-thumb', attrs?.class]}
 		{@attach ref ? ref : undefined}
 		bind:this={thumbRef}
 		bind:clientWidth={thumbClientWidth}

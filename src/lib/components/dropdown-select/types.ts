@@ -28,7 +28,7 @@ export type DropdownSelectProps = {
 	/** The attributes to spread on the wrapper element.
 	 * @type HTMLAttributes
 	 */
-	wrapperProps?: HTMLAttributes<HTMLDivElement>;
+	wrapperAttributes?: HTMLAttributes<HTMLDivElement>;
 } & HTMLSelectAttributes;
 
 /** @propsmith DropdownSelectOptionProps */

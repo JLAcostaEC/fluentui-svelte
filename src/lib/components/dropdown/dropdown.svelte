@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { invokeHandlers } from '$internal';
 	import { onClickOutside } from 'runed';
 	import ChevronDownFilled from 'fluentui-icons-svelte/ChevronDownFilled.svelte';
 	import { Flyout, ListView, ListViewItem } from '$lib/index.js';
@@ -21,16 +22,18 @@
 		value = $bindable(multiple ? [] : ''),
 		disabled,
 		flyoutMaxHeight,
+		wrapperRef = $bindable(),
+		wrapperAttributes,
 		ref = $bindable(),
-		wrapperProps,
-		buttonRef = $bindable(),
-		buttonProps,
+		class: classes,
+		onkeydown,
 		flyoutRef = $bindable(),
 		flyoutProps,
 		listboxRef = $bindable(),
 		listboxProps,
 		onclick,
-		children
+		children,
+		...attributes
 	}: DropdownProps = $props();
 
 	let open = $state(false);
@@ -65,8 +68,11 @@
 	);
 
 	onClickOutside(
-		() => ref,
-		() => closeDropdown()
+		() => wrapperRef,
+		(event) => {
+			if (event.target instanceof Element && event.target.closest('label')?.control === ref) return;
+			closeDropdown();
+		}
 	);
 
 	function handlePlacementChange(newPlacement: string) {
@@ -77,7 +83,7 @@
 		if (disabled || open) return;
 		open = true;
 		await tick();
-		globalFSContext?.state?.tabspotInstance?.rebuild(ref);
+		globalFSContext?.state?.tabspotInstance?.rebuild(wrapperRef);
 	}
 
 	function closeDropdown() {
@@ -103,18 +109,17 @@
 		}
 	}
 
-	async function handleClick(e: MouseEvent) {
+	async function handleClick() {
 		if (open) closeDropdown();
 		else await openDropdown();
-		onclick?.(e);
 	}
 
 	// Force rebuild of tabspot handling tree
 	$effect(() => {
-		if (!ref) return;
+		if (!wrapperRef) return;
 
 		if (!open) {
-			unsetTabspotSection(ref, 'root');
+			unsetTabspotSection(wrapperRef, 'root');
 			return;
 		}
 
@@ -127,7 +132,7 @@
 					axis: 'vertical',
 					items: '.fs-list-view-item',
 					activation: {
-						controller: `#${id}-button`,
+						controller: `#${CSS.escape(id ?? ID)}`,
 						mode: 'activedescendant',
 						mark: {
 							attribute: 'data-active'
@@ -135,48 +140,56 @@
 					}
 				}
 			},
-			element: ref,
+			element: wrapperRef,
 			merge: true
 		});
 	});
 </script>
 
-<div class={['fs-dropdown', `square-${roundClass}`, { open, disabled }]} bind:this={ref} {...wrapperProps}>
+<div
+	{...wrapperAttributes}
+	class={['fs-dropdown', `square-${roundClass}`, { open, disabled }, wrapperAttributes?.class]}
+	bind:this={wrapperRef}
+>
 	<ChevronDownFilled class="indicator" />
 	<button
-		bind:this={buttonRef}
+		{...attributes}
+		bind:this={ref}
 		type="button"
 		role="combobox"
-		onclick={handleClick}
-		onkeydown={handleKeyDown}
+		onclick={(e) => invokeHandlers(e, [disabled], [handleClick, onclick])}
+		onkeydown={(e) => invokeHandlers(e, [disabled], [handleKeyDown, onkeydown])}
 		aria-controls={`${id}-listbox`}
 		aria-expanded={open}
-		id={`${id}-button`}
+		{id}
 		aria-haspopup="listbox"
 		{disabled}
-		class={['fs-dropdown-button', hasValue && 'has-value']}
-		{...buttonProps}
+		class={['fs-dropdown-button', hasValue && 'has-value', classes]}
 	>
 		{displayLabel}
 	</button>
 
-	<input type="hidden" {name} {value} {id} {disabled} />
+	<input type="hidden" {name} {value} {disabled} />
 
 	{#if open}
 		<Flyout
-			style={flyoutMaxHeight ? `max-height: ${flyoutMaxHeight};` : ''}
+			{...flyoutProps}
+			style="{flyoutProps?.style ?? ''}; {flyoutMaxHeight ? `max-height: ${flyoutMaxHeight};` : ''}"
 			offset={0}
 			bind:ref={flyoutRef}
-			{...flyoutProps}
 			floating
 			roundCorners="bottom"
-			reference={ref}
+			reference={wrapperRef}
 			id={`${id}-flyout`}
-			onPlacementChange={(place) => handlePlacementChange(place)}
+			onPlacementChange={(place) => {
+				handlePlacementChange(place);
+				flyoutProps?.onPlacementChange?.(place);
+			}}
 			placementConfig={{ allowedPlacements: ['bottom', 'top'] }}
 			class="fs-dropdown-flyout {roundClass === 'top' ? 'top-shadow' : ''} {flyoutProps?.class}"
 		>
 			<ListView
+				{...listboxProps}
 				bind:ref={listboxRef}
 				bind:selectedItems={
 					() => {
@@ -196,14 +209,14 @@
 				}
 				selectionMode={multiple ? 'multiselect' : 'single'}
 				toggleOnClick={multiple}
-				onSelectionChange={() => {
+				onSelectionChange={(event, selected) => {
 					if (!multiple) closeDropdown();
+					listboxProps?.onSelectionChange?.(event, selected);
 				}}
 				navigationMode="items"
 				id={`${id}-listbox`}
 				role="listbox"
 				disableTabspot
-				{...listboxProps}
 			>
 				{#if !children}
 					<ListViewItem disabled>No options available</ListViewItem>

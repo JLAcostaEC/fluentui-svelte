@@ -4,7 +4,7 @@
 	import { on } from 'svelte/events';
 	import { tick } from 'svelte';
 	import { PREFIX } from '$constants';
-	import { floating } from '$internal';
+	import { floating, invokeHandlers } from '$internal';
 	import { flip, hide, offset, shift } from '@floating-ui/dom';
 	import DynamicCarousel from '$lib/internal/components/dynamic-carousel/dynamic-carousel.svelte';
 	import { CheckmarkRegular, DismissRegular } from 'fluentui-icons-svelte';
@@ -16,11 +16,13 @@
 		hideHours = false,
 		hideMinutes = false,
 		hideSeconds = false,
-		element = $bindable(),
+		ref = $bindable(),
 		wrapperRef = $bindable(),
 		wrapperAttributes,
-		inputElement = $bindable(),
-		inputProps,
+		class: classes,
+		onclick,
+		inputRef = $bindable(),
+		inputAttributes,
 		popupLabel = 'Choose a time',
 		...attributes
 	}: TimePickerProps = $props();
@@ -33,7 +35,7 @@
 	/** Closing always hands the focus back, so the keyboard never lands nowhere. */
 	function closePopup() {
 		open = false;
-		element?.focus();
+		ref?.focus();
 	}
 
 	// Escape has to work from inside the popup too, and the popup is not a descendant
@@ -146,16 +148,16 @@
 	}
 </script>
 
-<div class="fs-time-picker-wrapper" bind:this={wrapperRef} {...wrapperAttributes}>
+<div {...wrapperAttributes} class={['fs-time-picker-wrapper', wrapperAttributes?.class]} bind:this={wrapperRef}>
 	<button
+		{...attributes}
 		type="button"
-		class="fs-time-picker"
+		class={['fs-time-picker', classes]}
 		aria-haspopup="dialog"
 		aria-expanded={open}
 		aria-controls={open ? POPUP_ID : undefined}
-		onclick={() => (open = !open)}
-		bind:this={element}
-		{...attributes}
+		onclick={(e) => invokeHandlers(e, [], [() => (open = !open), onclick])}
+		bind:this={ref}
 	>
 		{#each columns as col, idx (col)}
 			{#if idx > 0}
@@ -166,12 +168,12 @@
 	</button>
 
 	<!-- Carries the value into a form. -->
-	<input type="time" hidden step={hideSeconds ? undefined : 1} {value} bind:this={inputElement} {...inputProps} />
+	<input {...inputAttributes} type="time" hidden step={hideSeconds ? undefined : 1} {value} bind:this={inputRef} />
 </div>
 
 {#if open}
 	<Flyout
-		{@attach floating(element, {
+		{@attach floating(ref, {
 			placement: 'bottom',
 			middleware: [
 				offset(({ rects }) => {
@@ -183,7 +185,7 @@
 			],
 			strategy: 'fixed'
 		})}
-		reference={element}
+		reference={ref}
 		id={POPUP_ID}
 		role="dialog"
 		aria-modal="true"

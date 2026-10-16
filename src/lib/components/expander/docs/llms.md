@@ -89,7 +89,7 @@ You can easily add an icon to an expander's header using the `Icon` prop. You ca
 | `ref` _bindable_               | `HTMLDetailsElement`                    |          | The DOM reference of the expander element.                                |
 | `Icon`                         | `Snippet` &#124; `Component`            |          | The icon to display before the label.                                     |
 | `summaryRef` _bindable_        | `HTMLElement`                           |          | The DOM reference of the summary element.                                 |
-| `summaryProps`                 | `HTMLAttributes`                        |          | The props to spread on the summary element.                               |
+| `summaryAttributes`            | `HTMLAttributes<HTMLElement>`           |          | The HTML attributes to spread on the summary element.                     |
 | Element Attributes (`details`) |                                         |          |                                                                           |
 
 <!-- /props:ExpanderProps -->

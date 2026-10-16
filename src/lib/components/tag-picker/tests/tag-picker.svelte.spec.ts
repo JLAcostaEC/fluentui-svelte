@@ -602,7 +602,8 @@ describe('readonly input', () => {
 	it('acts as a trigger', async () => {
 		render(TagPickerTestWrapper, {
 			selectedOptions: ['apple'],
-			inputProps: { 'aria-label': 'Fruits', readonly: true }
+			'aria-label': 'Fruits',
+			readonly: true
 		});
 		focusInput();
 

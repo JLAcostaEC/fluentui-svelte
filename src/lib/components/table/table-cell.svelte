@@ -36,6 +36,7 @@
 
 <svelte:element
 	this={_as}
+	{...attributes}
 	bind:this={ref as TableDOM[Tag]}
 	role={enableTabspot ? 'gridcell' : _as === 'div' ? 'cell' : undefined}
 	data-fs-focus-mode={enableTabspot ? focusMode : undefined}
@@ -43,7 +44,6 @@
 	style:width={width === undefined ? undefined : `${width}px`}
 	{@attach enableTabspot || resizableColumns ? colIndex((i) => (index = i)) : undefined}
 	{@attach enableTabspot && focusMode === 'group' ? focusGroup : undefined}
-	{...attributes}
 >
 	{@render children?.()}
 </svelte:element>

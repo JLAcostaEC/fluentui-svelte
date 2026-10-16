@@ -1,3 +1,4 @@
+import type { HTMLAttributes } from 'svelte/elements';
 import type { AvatarProps } from '../avatar/type.ts';
 
 /** @propsmith PersonaProps */
@@ -35,9 +36,9 @@ export type PersonaProps = {
 	/** The props to spread on the avatar.
 	 * @type AvatarProps
 	 */
-	avatar?: AvatarProps;
+	avatarProps?: AvatarProps;
 	/** The presence badge to display as a status indicator.
 	 * @type BadgePresence
 	 */
 	presence?: AvatarProps['badge'];
-};
+} & HTMLAttributes<HTMLDivElement>;

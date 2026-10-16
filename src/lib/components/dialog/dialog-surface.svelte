@@ -61,13 +61,13 @@
 </script>
 
 <dialog
+	{...attributes}
 	open={_state.open}
 	class={['fs-dialog', `position-${config.position}`, `animation-${config.animation}`, classes]}
 	style:--fs-dialog-duration={duration}
-	aria-labelledby={_state.titleId}
+	aria-labelledby={_state.titleId ?? attributes['aria-labelledby']}
 	bind:this={ref}
 	oncancel={handleCancel}
-	{...attributes}
 >
 	<div class="dialog-wrapper">
 		{#if config.type === 'non-modal'}

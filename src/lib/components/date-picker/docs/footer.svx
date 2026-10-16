@@ -1,7 +1,12 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import InfoBar from '$lib/components/info-bar/info-bar.svelte';
   import { m } from '$i18n/messages.js';
 </script>
+
+<InfoBar title={m.form_control_attributes_title()} style="multiline" status="warning" hideCloseButton>
+  <p><I18nMarkupMessage message={m.form_control_attributes_description} /></p>
+</InfoBar>
 
 ## {m.global_component_props()}
 
@@ -25,7 +30,7 @@
 | `wrapperRef` _bindable_       | `HTMLDivElement`                     |                   | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_wrapper_ref} />`        |
 | `wrapperAttributes`           | `HTMLAttributes`                     |                   | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_wrapper_attributes} />` |
 | `inputElement` _bindable_     | `HTMLInputElement`                   |                   | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_input_element} />`      |
-| `inputProps`                  | `HTMLInputAttributes`                |                   | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_input_props} />`        |
+| `inputAttributes`             | `HTMLInputAttributes`                |                   | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_input_attributes} />`   |
 | `popupLabel`                  | `string`                             | `'Choose a date'` | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_popup_label} />`        |
 | Element Attributes (`button`) |                                      |                   |                                                                                             |
 

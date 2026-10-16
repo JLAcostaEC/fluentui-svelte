@@ -31,7 +31,7 @@ export type TimePickerProps = {
 	/** The DOM reference of the trigger button.
 	 * @bindable
 	 */
-	element?: HTMLButtonElement;
+	ref?: HTMLButtonElement;
 	/** The DOM reference of the element wrapping the trigger and its input.
 	 * @bindable
 	 */
@@ -43,11 +43,11 @@ export type TimePickerProps = {
 	/** The DOM reference of the underlying input element.
 	 * @bindable
 	 */
-	inputElement?: HTMLInputElement;
+	inputRef?: HTMLInputElement;
 	/** HTML attributes for the underlying input element. Give it a `name` to submit the
 	 * value with a form.
 	 */
-	inputProps?: HTMLInputAttributes;
+	inputAttributes?: HTMLInputAttributes;
 	/** The accessible name of the popup, which is announced as a dialog.
 	 * @default 'Choose a time'
 	 */

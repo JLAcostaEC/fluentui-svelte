@@ -37,6 +37,7 @@
 -->
 <svelte:element
 	this={_as}
+	{...attributes}
 	bind:this={ref as BreadcrumbItemElementDOMType[T]}
 	type={_as === 'button' ? 'button' : undefined}
 	disabled={nativelyDisabled || undefined}
@@ -44,7 +45,6 @@
 	aria-current={current ? 'page' : undefined}
 	class={['fs-breadcrumb-button', { current, disabled }, classes]}
 	onclick={(e: MouseEvent) => invokeHandlers(e, disabled, [onclick])}
-	{...attributes}
 >
 	{#if icon && iconPosition === 'before'}
 		<span class="fs-breadcrumb-button-icon">

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { invokeHandlers } from '$internal';
 	import { getTabspotAttributes } from 'tabspot';
 	import AddRegular from 'fluentui-icons-svelte/AddRegular.svelte';
 	import { setTabViewContext, TABSPOT_ITEMS, TABSPOT_SKIP } from './tab-view.svelte.ts';
@@ -7,14 +8,14 @@
 	let {
 		ref = $bindable(),
 		listRef = $bindable(),
-		listProps,
+		listAttributes,
 		activeTab = $bindable(''),
 		onTabChange,
 		closable = false,
 		onTabClose,
 		showNewTabButton = false,
 		onNewTab,
-		newTabButtonProps,
+		newTabButtonAttributes,
 		tabWidthMode = 'equal',
 		disableTabspot = false,
 		class: classes,
@@ -90,17 +91,23 @@
 	{/if}
 	```
 -->
-<div bind:this={ref} class={['fs-tab-view', classes]} {...attributes}>
-	<div bind:this={listRef} role="tablist" class="fs-tab-view-list" {...tabspotAttributes} {...listProps}>
+<div {...attributes} bind:this={ref} class={['fs-tab-view', classes]}>
+	<div
+		{...listAttributes}
+		bind:this={listRef}
+		role="tablist"
+		class={['fs-tab-view-list', listAttributes?.class]}
+		{...tabspotAttributes}
+	>
 		{@render children?.()}
 	</div>
 	{#if showNewTabButton}
 		<button
+			{...newTabButtonAttributes}
 			type="button"
-			class="fs-tab-view-new-tab"
+			class={['fs-tab-view-new-tab', newTabButtonAttributes?.class]}
 			aria-label="Add new tab"
-			onclick={(e: MouseEvent) => onNewTab?.(e)}
-			{...newTabButtonProps}
+			onclick={(e: MouseEvent) => invokeHandlers(e, [], [onNewTab, newTabButtonAttributes?.onclick])}
 		>
 			<AddRegular />
 		</button>

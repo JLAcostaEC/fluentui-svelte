@@ -9,9 +9,9 @@
 {m.persona_description()}
 
 <Showcase columns={4} autoCenter>
-  <Persona name="John Doe" primaryText="Software Engineer" secondaryText="Intranet" tertiaryText="Team A" presence={{status: 'available'}} avatar={{ color: "colorful", idForColor: '' }} />
+  <Persona name="John Doe" primaryText="Software Engineer" secondaryText="Intranet" tertiaryText="Team A" presence={{status: 'available'}} avatarProps={{ color: "colorful", idForColor: '' }} />
   <Persona presenceOnly name="Presence Only" presence={{status: 'available'}} secondaryText="Available" />
-  <Persona name="Alex Johnson" avatar={{ initials: 'AJ' }} secondaryText="Available" textPosition="bottom" textAlign="center" />
+  <Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" textPosition="bottom" textAlign="center" />
   <Persona name="Custom Size" size={24} />
 </Showcase>
 
@@ -28,6 +28,6 @@
 	secondaryText="Intranet"
 	tertiaryText="Team A"
 	presence={{ status: 'available' }}
-	avatar={{ color: 'colorful' }}
+	avatarProps={{ color: 'colorful' }}
 />
 ```

@@ -10,7 +10,7 @@
 	}: { element?: HTMLButtonElement; children: Snippet } & HTMLButtonAttributes = $props();
 </script>
 
-<button {type} bind:this={element} {...attributes}>
+<button {...attributes} {type} bind:this={element}>
 	{@render children?.()}
 </button>
 

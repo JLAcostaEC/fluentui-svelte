@@ -51,7 +51,7 @@
 <TagPicker
   bind:selectedOptions
   {tag}
-  inputProps={{ 'aria-label': 'Select Employees' }}
+  aria-label="Select Employees"
   tagGroupProps={{ 'aria-label': 'Selected Employees' }}
 >
   {#each options as option (option)}
@@ -66,7 +66,7 @@
 <TagPicker
   bind:selectedOptions
   placeholder="Select employees"
-  inputProps={{ 'aria-label': 'Select Employees', readonly: true }}
+  aria-label="Select Employees" readonly
 >
   {#each options as option (option)}
     <TagPickerOption value={option}>{option}</TagPickerOption>
@@ -74,7 +74,7 @@
 </TagPicker>`;
 
   const disabledCode = `
-<TagPicker disabled selectedOptions={[options[0]]} inputProps={{ 'aria-label': 'Select Employees' }}>
+<TagPicker disabled selectedOptions={[options[0]]} aria-label="Select Employees">
   {#each options as option (option)}
     <TagPickerOption value={option}>{option}</TagPickerOption>
   {/each}
@@ -86,12 +86,12 @@
 <\/script>
 
 <!-- A custom icon -->
-<TagPicker bind:selectedOptions expandIcon={ArrowDownFilled} inputProps={{ 'aria-label': 'Select Employees' }}>
+<TagPicker bind:selectedOptions expandIcon={ArrowDownFilled} aria-label="Select Employees">
   ...
 </TagPicker>
 
 <!-- No icon -->
-<TagPicker bind:selectedOptions expandIcon={null} inputProps={{ 'aria-label': 'Select Employees' }}>
+<TagPicker bind:selectedOptions expandIcon={null} aria-label="Select Employees">
   ...
 </TagPicker>`;
 
@@ -99,7 +99,7 @@
 <TagPicker
   bind:selectedOptions
   notFoundText="We couldn't find any matches"
-  inputProps={{ 'aria-label': 'Select Employees' }}
+  aria-label="Select Employees"
 >
   {#each options as option (option)}
     <TagPickerOption value={option}>{option}</TagPickerOption>
@@ -107,7 +107,7 @@
 </TagPicker>`;
 
   const groupedCode = `
-<TagPicker bind:selectedOptions inputProps={{ 'aria-label': 'Select Employees' }}>
+<TagPicker bind:selectedOptions aria-label="Select Employees">
   <TagPickerOptionGroup label="Managers">
     {#each managers as option (option)}
       <TagPickerOption value={option}>{option}</TagPickerOption>
@@ -131,7 +131,7 @@
   bind:selectedOptions
   bind:value
   placeholder="Type and press Enter"
-  inputProps={{ 'aria-label': 'Add Employees' }}
+  aria-label="Add Employees"
   querySubmitted={(e, query) => {
     if (!selectedOptions.includes(query)) selectedOptions = [...selectedOptions, query];
     value = '';
@@ -143,14 +143,14 @@
   <Button appearance="subtle" onclick={() => (selectedOptions = [])}>All Clear</Button>
 {/snippet}
 
-<TagPicker bind:selectedOptions secondaryAction={allClear} inputProps={{ 'aria-label': 'Select Employees' }}>
+<TagPicker bind:selectedOptions secondaryAction={allClear} aria-label="Select Employees">
   {#each options as option (option)}
     <TagPickerOption value={option}>{option}</TagPickerOption>
   {/each}
 </TagPicker>`;
 
   const singleCode = `
-<TagPicker single bind:selectedOptions inputProps={{ 'aria-label': 'Select Employee' }}>
+<TagPicker single bind:selectedOptions aria-label="Select Employee">
   {#each options as option (option)}
     <TagPickerOption value={option}>{option}</TagPickerOption>
   {/each}
@@ -158,7 +158,7 @@
 
   const sizeCode = `
 {#each ['medium', 'large', 'extra-large'] as size}
-  <TagPicker {size} selectedOptions={[options[0]]} inputProps={{ 'aria-label': size }}>
+  <TagPicker {size} selectedOptions={[options[0]]} aria-label={size}>
     {#each options as option (option)}
       <TagPickerOption value={option}>{option}</TagPickerOption>
     {/each}
@@ -170,7 +170,7 @@
   <Tag role="listitem" {value} title={text} style="max-width: 100px;">{text}</Tag>
 {/snippet}
 
-<TagPicker bind:selectedOptions {tag} inputProps={{ 'aria-label': 'Select Employees' }}>
+<TagPicker bind:selectedOptions {tag} aria-label="Select Employees">
   {#each [...longOptions, ...options] as option (option)}
     <TagPickerOption value={option}>
       <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;">{option}</span>
@@ -222,7 +222,7 @@
 
 <Showcase columns={1} code={defaultCode} minHeight="0" disablePanZoom showOverflow>
   <div class="tp-example">
-    <TagPicker bind:selectedOptions={defaultSelected} tag={avatarTag} inputProps={aria} tagGroupProps={groupAria}>
+    <TagPicker bind:selectedOptions={defaultSelected} tag={avatarTag} {...aria} tagGroupProps={groupAria}>
       {#each options as option (option)}
         <TagPickerOption value={option}>
           <Avatar aria-hidden="true" shape="rounded" name={option} size={20} color="colorful" />
@@ -242,7 +242,7 @@
     <TagPicker
       bind:selectedOptions={buttonSelected}
       placeholder="Select employees"
-      inputProps={{ 'aria-label': 'Select Employees', readonly: true }}
+      aria-label="Select Employees" readonly
     >
       {#each options as option (option)}
         <TagPickerOption value={option}>{option}</TagPickerOption>
@@ -257,7 +257,7 @@
 
 <Showcase columns={1} code={disabledCode} minHeight="0" disablePanZoom showOverflow>
   <div class="tp-example">
-    <TagPicker disabled selectedOptions={[options[0]]} inputProps={aria}>
+    <TagPicker disabled selectedOptions={[options[0]]} {...aria}>
       {#each options as option (option)}
         <TagPickerOption value={option}>{option}</TagPickerOption>
       {/each}
@@ -271,12 +271,12 @@
 
 <Showcase columns={1} code={expandIconCode} minHeight="0" disablePanZoom showOverflow>
   <div class="tp-example">
-    <TagPicker bind:selectedOptions={expandSelected[0]} expandIcon={ArrowDownFilled} inputProps={aria}>
+    <TagPicker bind:selectedOptions={expandSelected[0]} expandIcon={ArrowDownFilled} {...aria}>
       {#each options as option (option)}
         <TagPickerOption value={option}>{option}</TagPickerOption>
       {/each}
     </TagPicker>
-    <TagPicker bind:selectedOptions={expandSelected[1]} expandIcon={null} inputProps={aria}>
+    <TagPicker bind:selectedOptions={expandSelected[1]} expandIcon={null} {...aria}>
       {#each options as option (option)}
         <TagPickerOption value={option}>{option}</TagPickerOption>
       {/each}
@@ -290,7 +290,7 @@
 
 <Showcase columns={1} code={filteringCode} minHeight="0" disablePanZoom showOverflow>
   <div class="tp-example">
-    <TagPicker bind:selectedOptions={filteringSelected} notFoundText="We couldn't find any matches" inputProps={aria}>
+    <TagPicker bind:selectedOptions={filteringSelected} notFoundText="We couldn't find any matches" {...aria}>
       {#each options as option (option)}
         <TagPickerOption value={option}>{option}</TagPickerOption>
       {/each}
@@ -304,7 +304,7 @@
 
 <Showcase columns={1} code={groupedCode} minHeight="0" disablePanZoom showOverflow>
   <div class="tp-example">
-    <TagPicker bind:selectedOptions={groupedSelected} inputProps={aria}>
+    <TagPicker bind:selectedOptions={groupedSelected} {...aria}>
       <TagPickerOptionGroup label="Managers">
         {#each managers as option (option)}
           <TagPickerOption value={option}>{option}</TagPickerOption>
@@ -329,7 +329,7 @@
       bind:selectedOptions={freeSelected}
       bind:value={freeValue}
       placeholder="Type and press Enter"
-      inputProps={{ 'aria-label': 'Add Employees' }}
+      aria-label="Add Employees"
       querySubmitted={(e, query) => {
         if (!freeSelected.includes(query)) freeSelected = [...freeSelected, query];
         freeValue = '';
@@ -344,7 +344,7 @@
 
 <Showcase columns={1} code={secondaryActionCode} minHeight="0" disablePanZoom showOverflow>
   <div class="tp-example">
-    <TagPicker bind:selectedOptions={secondarySelected} secondaryAction={allClear} inputProps={aria}>
+    <TagPicker bind:selectedOptions={secondarySelected} secondaryAction={allClear} {...aria}>
       {#each options as option (option)}
         <TagPickerOption value={option}>{option}</TagPickerOption>
       {/each}
@@ -358,7 +358,7 @@
 
 <Showcase columns={1} code={singleCode} minHeight="0" disablePanZoom showOverflow>
   <div class="tp-example">
-    <TagPicker single bind:selectedOptions={singleSelected} inputProps={{ 'aria-label': 'Select Employee' }}>
+    <TagPicker single bind:selectedOptions={singleSelected} aria-label="Select Employee">
       {#each options as option (option)}
         <TagPickerOption value={option}>{option}</TagPickerOption>
       {/each}
@@ -372,17 +372,17 @@
 
 <Showcase columns={1} code={sizeCode} minHeight="0" disablePanZoom showOverflow>
   <div class="tp-example">
-    <TagPicker bind:selectedOptions={sizeSelected[0]} inputProps={{ 'aria-label': 'medium' }}>
+    <TagPicker bind:selectedOptions={sizeSelected[0]} aria-label="medium">
       {#each options as option (option)}
         <TagPickerOption value={option}>{option}</TagPickerOption>
       {/each}
     </TagPicker>
-    <TagPicker size="large" bind:selectedOptions={sizeSelected[1]} inputProps={{ 'aria-label': 'large' }}>
+    <TagPicker size="large" bind:selectedOptions={sizeSelected[1]} aria-label="large">
       {#each options as option (option)}
         <TagPickerOption value={option}>{option}</TagPickerOption>
       {/each}
     </TagPicker>
-    <TagPicker size="extra-large" bind:selectedOptions={sizeSelected[2]} inputProps={{ 'aria-label': 'extra-large' }}>
+    <TagPicker size="extra-large" bind:selectedOptions={sizeSelected[2]} aria-label="extra-large">
       {#each options as option (option)}
         <TagPickerOption value={option}>{option}</TagPickerOption>
       {/each}
@@ -396,7 +396,7 @@
 
 <Showcase columns={1} code={truncatedCode} minHeight="0" disablePanZoom showOverflow>
   <div class="tp-example">
-    <TagPicker bind:selectedOptions={truncatedSelected} tag={fixedTag} inputProps={aria}>
+    <TagPicker bind:selectedOptions={truncatedSelected} tag={fixedTag} {...aria}>
       {#each [...longOptions, ...options] as option (option)}
         <TagPickerOption value={option}>
           <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;">{option}</span>

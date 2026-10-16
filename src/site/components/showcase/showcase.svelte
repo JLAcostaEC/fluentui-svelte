@@ -86,7 +86,7 @@
 		<ToggleSwitch
 			label={m.showcase_view_code()}
 			bind:checked={showCode}
-			labelAttributes={{ class: `switch-view ${showCode ? 'show' : ''}` }}
+			wrapperAttributes={{ class: `switch-view ${showCode ? 'show' : ''}` }}
 		/>
 		<div style={`display: ${code && showCode ? 'block' : 'none'};`}>
 			<RenderShiki {code} />

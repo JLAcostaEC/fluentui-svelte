@@ -4,7 +4,7 @@
 	import EyeShowFilled from 'fluentui-icons-svelte/EyeShowFilled.svelte';
 	import EyeHideFilled from 'fluentui-icons-svelte/EyeHideFilled.svelte';
 	import { TextBoxButton } from '$lib/index.js';
-	import { RenderSoC } from '$internal';
+	import { invokeHandlers, RenderSoC } from '$internal';
 	import type { TextBoxProps } from './types.ts';
 
 	const FALLBACK_ID = $props.id();
@@ -15,7 +15,6 @@
 		name = id,
 		hideActionButtons,
 		type = 'text',
-		class: classes,
 		wrapperAttributes,
 		wrapperRef = $bindable(),
 		value = $bindable(),
@@ -26,8 +25,10 @@
 		contentAfter,
 		querySubmitted,
 		textChanged,
-		onkeydown,
+		onkeyup,
 		onClear,
+		onchange,
+		oninput,
 		children,
 		...attributes
 	}: TextBoxProps = $props();
@@ -57,12 +58,11 @@
 		}
 	};
 
-	const handleKeyDown = (e: KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement }) => {
+	const handleKeyUp = (e: KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement }) => {
 		if (e.key === 'Escape') {
 			e.preventDefault();
 			(e.target as HTMLInputElement).blur();
 		}
-		onkeydown?.(e);
 	};
 </script>
 
@@ -80,7 +80,11 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
   <TextBox type="text" placeholder="Enter your name" />
   ```
 -->
-<div class={['fs-textbox', id, `text-box-size-${size}`, classes]} {...wrapperAttributes} bind:this={wrapperRef}>
+<div
+	{...wrapperAttributes}
+	class={['fs-textbox', id, `text-box-size-${size}`, wrapperAttributes?.class]}
+	bind:this={wrapperRef}
+>
 	{#if contentBefore}
 		<span class="content-before">
 			{#if typeof contentBefore === 'string'}
@@ -91,6 +95,7 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 		</span>
 	{/if}
 	<input
+		{...attributes}
 		{type}
 		{id}
 		{name}
@@ -98,10 +103,9 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 		{readonly}
 		bind:value
 		bind:this={ref}
-		onkeyup={handleKeyDown}
-		oninput={(e) => textChanged?.(e as any, value)}
-		onchange={(e) => textChanged?.(e as any, value)}
-		{...attributes}
+		onkeyup={(e) => invokeHandlers(e, [], [handleKeyUp, onkeyup])}
+		oninput={(e) => invokeHandlers(e, [], [(_e) => textChanged?.(_e, value), oninput])}
+		onchange={(e) => invokeHandlers(e, [], [(_e) => textChanged?.(_e, value), onchange])}
 	/>
 	{#if contentAfter}
 		<span class="content-after">

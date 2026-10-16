@@ -64,10 +64,8 @@ export type DatePickerProps = {
 	 * @bindable
 	 */
 	inputElement?: HTMLInputElement;
-	/** HTML attributes for the underlying input element. Give it a `name` to submit the
-	 * value with a form.
-	 */
-	inputProps?: HTMLInputAttributes;
+	/** HTML attributes to spread on the underlying input element. */
+	inputAttributes?: HTMLInputAttributes;
 	/** The accessible name of the popup, which is announced as a dialog.
 	 * @default 'Choose a date'
 	 */

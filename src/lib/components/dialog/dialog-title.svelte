@@ -38,7 +38,7 @@
 	});
 </script>
 
-<svelte:element this={_as} {id} class={['dialog-title', classes]} bind:this={ref} {...attributes}>
+<svelte:element this={_as} {...attributes} {id} class={['dialog-title', classes]} bind:this={ref}>
 	{@render children?.()}
 </svelte:element>
 

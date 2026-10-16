@@ -19,7 +19,6 @@
 | `ref` _bindable_                 | `HTMLTextAreaElement`                                              |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_ref} />`                |
 | `placeholder`                    | `string`                                                           |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_placeholder} />`        |
 | `resize`                         | `'none'` &#124; `'both'` &#124; `'horizontal'` &#124; `'vertical'` | `'vertical'` | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_resize} />`             |
-| `onChange`                       | `(e: Event) => void`                                               |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_on_change} />`          |
 | `disabled`                       | `boolean`                                                          | `false`      | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_disabled} />`           |
 | `wrapperAttributes`              | `HTMLAttributes`                                                   |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_wrapper_attributes} />` |
 | `wrapperRef` _bindable_          | `HTMLDivElement`                                                   |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_wrapper_ref} />`        |

@@ -21,8 +21,8 @@
 		wrapperAttributes,
 		class: classes,
 		onclick,
-		inputElement = $bindable(),
-		inputProps,
+		inputRef = $bindable(),
+		inputAttributes,
 		popupLabel = 'Choose a time',
 		...attributes
 	}: TimePickerProps = $props();
@@ -168,7 +168,7 @@
 	</button>
 
 	<!-- Carries the value into a form. -->
-	<input type="time" hidden step={hideSeconds ? undefined : 1} {value} bind:this={inputElement} {...inputProps} />
+	<input {...inputAttributes} type="time" hidden step={hideSeconds ? undefined : 1} {value} bind:this={inputRef} />
 </div>
 
 {#if open}

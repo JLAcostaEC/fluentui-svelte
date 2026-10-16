@@ -92,8 +92,8 @@
 						{checked}
 						{subtle}
 						{invisible}
-						checkboxIndicator={{ 'aria-label': 'Select all rows' }}
-						radioIndicator={{ 'aria-label': 'Select all rows' }}
+						checkboxProps={{ 'aria-label': 'Select all rows' }}
+						radioProps={{ 'aria-label': 'Select all rows' }}
 					/>
 				{/if}
 				<TableHeaderCell {sortDirection} {onclick}>File</TableHeaderCell>
@@ -109,8 +109,8 @@
 							{checked}
 							{subtle}
 							{invisible}
-							checkboxIndicator={{ 'aria-label': 'Select row' }}
-							radioIndicator={{ 'aria-label': 'Select row' }}
+							checkboxProps={{ 'aria-label': 'Select row' }}
+							radioProps={{ 'aria-label': 'Select row' }}
 						/>
 					{/if}
 					<TableCell focusMode={variant === 'actions' ? 'group' : undefined}>

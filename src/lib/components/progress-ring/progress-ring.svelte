@@ -39,6 +39,7 @@
     ```
 -->
 <svg
+	{...attributes}
 	bind:this={ref}
 	tabindex="-1"
 	class={['progress-ring', status && `status-${status}`, classes, { indeterminate }]}
@@ -50,8 +51,7 @@
 	aria-valuemin={!indeterminate ? min : undefined}
 	aria-valuemax={!indeterminate ? max : undefined}
 	aria-valuenow={!indeterminate ? checkValue : undefined}
-	style="--ring-circumference: {circumference}px;"
-	{...attributes}
+	style="{attributes?.style ?? ''}; --ring-circumference: {circumference}px;"
 >
 	{#if !hideRail}
 		<circle

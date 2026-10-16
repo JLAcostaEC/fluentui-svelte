@@ -18,8 +18,8 @@
 	}: SplitButtonProps = $props();
 </script>
 
-<div class={['fs-split-button', classes]} role="group" bind:this={wrapperRef} {...attributes}>
-	<Button as="button" {appearance} {shape} {disabled} bind:ref={primaryButtonRef} {...primaryButtonProps}>
+<div {...attributes} class={['fs-split-button', classes]} role="group" bind:this={wrapperRef}>
+	<Button {...primaryButtonProps} as="button" {appearance} {shape} {disabled} bind:ref={primaryButtonRef}>
 		{#if children}
 			{@render children()}
 		{:else}
@@ -27,13 +27,13 @@
 		{/if}
 	</Button>
 	<Button
+		{...menuTriggerProps}
 		as="button"
-		class="menu-button"
+		class={['menu-button', menuTriggerProps?.class]}
 		{appearance}
 		{shape}
 		{disabled}
 		bind:ref={menuTriggerRef}
-		{...menuTriggerProps}
 	>
 		<ChevronDownFilled class="indicator" />
 	</Button>

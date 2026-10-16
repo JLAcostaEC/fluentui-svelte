@@ -53,7 +53,7 @@
 						appearance={isSelected ? 'brand' : 'none'}
 						onclick={() => toggleRow(row.id)}
 					>
-						<TableSelectionCell checked={isSelected} checkboxIndicator={{ 'aria-label': `Select ${row.file}` }} />
+						<TableSelectionCell checked={isSelected} checkboxProps={{ 'aria-label': `Select ${row.file}` }} />
 						<TableCell>{row.file}</TableCell>
 					</TableRow>
 				{/snippet}

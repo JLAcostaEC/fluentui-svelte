@@ -397,24 +397,27 @@
 	/>
 	{#if open}
 		<Flyout
+			{...flyoutProps}
 			floating
 			offset={0}
 			reference={wrapperRef}
 			bind:ref={flyoutRef}
 			roundCorners="bottom"
 			placementConfig={{ allowedPlacements: ['bottom', 'top'] }}
-			onPlacementChange={(place) => handlePlacementChange(place)}
+			onPlacementChange={(place) => {
+				handlePlacementChange(place);
+				flyoutProps?.onPlacementChange?.(place);
+			}}
 			class={['fs-autosuggestbox-flyout', roundClass === 'top' && 'top-shadow', flyoutProps?.class]}
-			{...flyoutProps}
 		>
 			<ListView
+				{...listViewProps as any}
 				role="listbox"
 				navigationMode="items"
 				disableTabspot
 				id="{ID}-list"
 				selectedItems={Array.from(selectedOptions.values()).map((opt) => opt.value)}
 				bind:ref={listViewRef}
-				{...listViewProps as any}
 			>
 				{#if items.size === 0}
 					<ListViewItem disabled>{notFoundText}</ListViewItem>

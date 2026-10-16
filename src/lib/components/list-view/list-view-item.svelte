@@ -130,12 +130,12 @@
 {#snippet content()}
 	{#if checkmark}
 		<Checkbox
+			{...!isObjectEmpty(checkmark) ? checkmark : {}}
 			{disabled}
 			bind:checked={active}
 			bind:wrapperRef={checkmarkRef}
 			tabindex={tabspotDisabled ? undefined : -1}
-			aria-label={attributes['aria-label'] ?? value}
-			{...!isObjectEmpty(checkmark) ? checkmark : {}}
+			aria-label={checkmark?.['aria-label'] ?? attributes['aria-label'] ?? value}
 		/>
 	{/if}
 	{@render children?.()}
@@ -144,6 +144,7 @@
 {#snippet item()}
 	<svelte:element
 		this={_as}
+		{...attributes}
 		role={wrapped || (nativeAction && role === 'listitem') ? undefined : role}
 		type={as === 'button' ? 'button' : undefined}
 		disabled={as === 'button' ? disabled : undefined}
@@ -168,7 +169,6 @@
 		}}
 		onclick={handleClick}
 		onkeydown={handleKeydown}
-		{...attributes}
 	>
 		{#if role === 'row'}
 			<div role="gridcell" {...cellAttrs} {@attach attachTabspot(cellConfig)}>

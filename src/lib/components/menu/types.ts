@@ -1,8 +1,7 @@
 import type { ComputePositionConfig, VirtualElement } from '@floating-ui/dom';
 import type { FSContext } from '$internal';
-import type { Component, ComponentProps, Snippet } from 'svelte';
+import type { Component, Snippet } from 'svelte';
 import type { NoUndefinedField, Shapes } from '$types';
-import type { Button } from '../../index.ts';
 import type { ButtonProps } from '../button/types.ts';
 
 export type MenuContext = FSContext<
@@ -155,4 +154,4 @@ export type MenuItemActionableProps = {
 	 */
 	name?: string;
 } & Omit<MenuItemProps, 'href'> &
-	ComponentProps<typeof Button<'div'>>;
+	ButtonProps<'button'>;

@@ -97,7 +97,7 @@
 		</TagGroup>
 		```
 -->
-<div bind:this={ref} class={['fs-tag-group', size ?? 'medium', classes]} {role} {...tabspotAttrs} {...attributes}>
+<div {...attributes} bind:this={ref} class={['fs-tag-group', size ?? 'medium', classes]} {role} {...tabspotAttrs}>
 	{@render children?.()}
 </div>
 

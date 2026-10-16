@@ -208,8 +208,8 @@
 />
 
 <div
-	aria-valuetext={prefix || suffix ? `${prefix}${value}${suffix}` : undefined}
 	{...attributes}
+	aria-valuetext={prefix || suffix ? `${prefix}${value}${suffix}` : attributes['aria-valuetext']}
 	class={['fs-slider', `orientation-${orientation}`, classes, { disabled }, directionAwareReverse && 'reverse']}
 	bind:this={ref}
 	tabindex={disabled ? -1 : 0}
@@ -275,8 +275,8 @@
 
 {#snippet sliderThumb(attrs: Record<string, unknown> | undefined = undefined, ref: Attachment | undefined = undefined)}
 	<div
-		class="slider-thumb"
 		{...attrs}
+		class={['slider-thumb', attrs?.class]}
 		{@attach ref ? ref : undefined}
 		bind:this={thumbRef}
 		bind:clientWidth={thumbClientWidth}

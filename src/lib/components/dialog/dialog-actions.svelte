@@ -20,10 +20,10 @@
 </script>
 
 <div
+	{...attributes}
 	class={['dialog-actions', `justify-${position}`, { fluid }, classes]}
 	bind:this={ref}
 	{...tabspotAttributes}
-	{...attributes}
 >
 	{@render children?.()}
 </div>

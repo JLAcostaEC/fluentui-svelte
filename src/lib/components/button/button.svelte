@@ -49,6 +49,7 @@
  -->
 <svelte:element
 	this={_as}
+	{...attributes}
 	bind:this={ref}
 	disabled={disabled && as !== 'div' ? true : undefined}
 	aria-disabled={disabled && as !== 'div' ? true : undefined}
@@ -56,7 +57,6 @@
 	tabindex={_tabIndex ?? (as !== 'div' && (disabledFocusable || disabled) ? -1 : undefined)}
 	onclick={(e: MouseEvent) => invokeHandlers(e, [as === 'div', disabled], [onclick])}
 	onkeydown={(e: KeyboardEvent) => invokeHandlers(e, [as === 'div', disabled], [onkeydown])}
-	{...attributes}
 >
 	{#if isMenuButton && indicatorPosition === 'before'}
 		{#if indicatorIcon}

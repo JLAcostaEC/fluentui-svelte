@@ -8,21 +8,21 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TabViewProps -->
 
-| Name                       | Type                                                    | Default   | Description                                                                                |
-| -------------------------- | ------------------------------------------------------- | --------- | ------------------------------------------------------------------------------------------ |
-| `ref` _bindable_           | `HTMLDivElement`                                        |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_ref} />`                  |
-| `listRef` _bindable_       | `HTMLDivElement`                                        |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_list_ref} />`             |
-| `listProps`                | `HTMLAttributes`                                        |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_list_props} />`           |
-| `activeTab` _bindable_     | `string`                                                |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_active_tab} />`           |
-| `onTabChange`              | `(event: Event, value: string) => void`                 |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_on_tab_change} />`        |
-| `closable`                 | `boolean`                                               | `false`   | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_closable} />`             |
-| `onTabClose`               | `(event: Event, value: string) => void`                 |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_on_tab_close} />`         |
-| `showNewTabButton`         | `boolean`                                               | `false`   | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_show_new_tab_button} />`  |
-| `onNewTab`                 | `(event: MouseEvent) => void`                           |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_on_new_tab} />`           |
-| `newTabButtonProps`        | `HTMLButtonAttributes`                                  |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_new_tab_button_props} />` |
-| `tabWidthMode`             | `'equal'` &#124; `'size-to-content'` &#124; `'compact'` | `'equal'` | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_tab_width_mode} />`       |
-| `disableTabspot`           | `boolean`                                               | `false`   | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_disable_tabspot} />`      |
-| Element Attributes (`div`) |                                                         |           |                                                                                            |
+| Name                       | Type                                                    | Default   | Description                                                                                     |
+| -------------------------- | ------------------------------------------------------- | --------- | ----------------------------------------------------------------------------------------------- |
+| `ref` _bindable_           | `HTMLDivElement`                                        |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_ref} />`                       |
+| `listRef` _bindable_       | `HTMLDivElement`                                        |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_list_ref} />`                  |
+| `listAttributes`           | `HTMLAttributes`                                        |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_list_attributes} />`           |
+| `activeTab` _bindable_     | `string`                                                |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_active_tab} />`                |
+| `onTabChange`              | `(event: Event, value: string) => void`                 |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_on_tab_change} />`             |
+| `closable`                 | `boolean`                                               | `false`   | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_closable} />`                  |
+| `onTabClose`               | `(event: Event, value: string) => void`                 |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_on_tab_close} />`              |
+| `showNewTabButton`         | `boolean`                                               | `false`   | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_show_new_tab_button} />`       |
+| `onNewTab`                 | `(event: MouseEvent) => void`                           |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_on_new_tab} />`                |
+| `newTabButtonAttributes`   | `HTMLButtonAttributes`                                  |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_new_tab_button_attributes} />` |
+| `tabWidthMode`             | `'equal'` &#124; `'size-to-content'` &#124; `'compact'` | `'equal'` | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_tab_width_mode} />`            |
+| `disableTabspot`           | `boolean`                                               | `false`   | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_disable_tabspot} />`           |
+| Element Attributes (`div`) |                                                         |           |                                                                                                 |
 
 <!-- /props:TabViewProps -->
 

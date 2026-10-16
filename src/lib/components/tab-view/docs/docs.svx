@@ -18,7 +18,7 @@
 
 <Showcase columns={1} columnWidth="680px" >
   <div style="width: 100%">
-    <TabView bind:activeTab closable listProps={{ 'aria-label': 'Workspaces' }} showNewTabButton>
+    <TabView bind:activeTab closable listAttributes={{ 'aria-label': 'Workspaces' }} showNewTabButton>
       <TabViewTab value="document" icon={DocumentRegular}>Document</TabViewTab>
       <TabViewTab value="mail" icon={MailRegular}>Mail</TabViewTab>
       <TabViewTab value="calendar" icon={CalendarLtrRegular}>Calendar</TabViewTab>
@@ -53,7 +53,7 @@
 	let activeTab = $state('document');
 </script>
 
-<TabView bind:activeTab listProps={{ 'aria-label': 'Workspaces' }}>
+<TabView bind:activeTab listAttributes={{ 'aria-label': 'Workspaces' }}>
 	<TabViewTab id="tab-document" value="document">Document</TabViewTab>
 	<TabViewTab id="tab-mail" value="mail">Mail</TabViewTab>
 </TabView>

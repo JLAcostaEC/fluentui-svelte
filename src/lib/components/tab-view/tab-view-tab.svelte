@@ -73,6 +73,7 @@
 	```
 -->
 <div
+	{...attributes}
 	bind:this={ref}
 	role="tab"
 	tabindex={disabled ? -1 : 0}
@@ -82,7 +83,6 @@
 	class={['fs-tab-view-tab', context.config.tabWidthMode, { active, disabled }, classes]}
 	onclick={(e: MouseEvent) => invokeHandlers(e, disabled, [() => context.methods.setActiveTab(e, value), onclick])}
 	onkeydown={(e: KeyboardEvent) => invokeHandlers(e, disabled, [onTabKeydown, onkeydown])}
-	{...attributes}
 >
 	{#if icon}
 		<span class="fs-tab-view-tab-icon">

@@ -12,7 +12,7 @@
 		textPosition: dir = 'right',
 		avatarAlign = 'center',
 		element = $bindable(),
-		avatar,
+		avatarProps,
 		presence,
 		presenceOnly,
 		...attributes
@@ -27,15 +27,17 @@
 </script>
 
 <div
-	bind:this={element}
-	class="persona"
-	style="--p-size: {size}px; --avatar-align: {avatarAlign}; flex-direction: {position[dir]}; text-align: {textAlign};"
 	{...attributes}
+	bind:this={element}
+	class={['persona', attributes?.class]}
+	style="{attributes?.style ?? ''}; --p-size: {size}px; --avatar-align: {avatarAlign}; flex-direction: {position[
+		dir
+	]}; text-align: {textAlign};"
 >
 	{#if presenceOnly && presence?.status}
 		<BadgeIcon {size} icon={presence?.icon || undefined} status={presence.status} outOfOffice={presence?.outOfOffice} />
 	{:else}
-		<Avatar {name} {size} {...avatar} badge={presence} />
+		<Avatar {...avatarProps} {name} {size} badge={presence} />
 	{/if}
 	<div class="persona-data">
 		<p class="persona-name">{name}</p>

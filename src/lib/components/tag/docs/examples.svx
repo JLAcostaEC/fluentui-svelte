@@ -59,7 +59,7 @@
 
 <Tag interactive dismissible onclick={() => clicks++}>Clicked {clicks} times</Tag>
 <Tag interactive>Without dismiss</Tag>
-<Tag interactive dismissible dismissLabel="Remove" dismissProps={{ 'aria-label': 'Remove Tag', 'aria-labelledby': undefined }}>
+<Tag interactive dismissible dismissLabel="Remove" dismissButtonAttributes={{ 'aria-label': 'Remove Tag', 'aria-labelledby': undefined }}>
   Own accessible name
 </Tag>
 <Button disabled={clicks === 0} onclick={() => (clicks = 0)}>Reset the example</Button>`;
@@ -298,7 +298,7 @@
   <div style={row + lead} {@attach fitCard}>
     <Tag interactive dismissible onclick={() => clicks++}>Clicked {clicks} times</Tag>
     <Tag interactive>Without dismiss</Tag>
-    <Tag interactive dismissible dismissLabel="Remove" dismissProps={{ 'aria-label': 'Remove Tag', 'aria-labelledby': undefined }}>
+    <Tag interactive dismissible dismissLabel="Remove" dismissButtonAttributes={{ 'aria-label': 'Remove Tag', 'aria-labelledby': undefined }}>
       Own accessible name
     </Tag>
     <Button disabled={clicks === 0} onclick={() => (clicks = 0)}>Reset the example</Button>

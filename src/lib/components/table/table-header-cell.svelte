@@ -87,6 +87,7 @@
 
 <svelte:element
 	this={_as}
+	{...attributes}
 	bind:this={ref as TableDOM[Tag]}
 	role={_as === 'div' ? 'columnheader' : undefined}
 	scope={_as === 'th' ? 'col' : undefined}
@@ -96,7 +97,6 @@
 	style:width={width === undefined ? undefined : `${width}px`}
 	{@attach enableTabspot || _resizable ? colIndex((i) => (index = i)) : undefined}
 	{@attach enableTabspot && _focusMode === 'group' ? focusGroup : undefined}
-	{...attributes}
 >
 	<span class="inner">
 		{#if _sortable}

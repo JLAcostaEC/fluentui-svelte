@@ -24,8 +24,8 @@
 | `ref` _bindable_              | `HTMLButtonElement`   |                   | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_ref} />`                |
 | `wrapperRef` _bindable_       | `HTMLDivElement`      |                   | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_wrapper_ref} />`        |
 | `wrapperAttributes`           | `HTMLAttributes`      |                   | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_wrapper_attributes} />` |
-| `inputElement` _bindable_     | `HTMLInputElement`    |                   | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_input_element} />`      |
-| `inputProps`                  | `HTMLInputAttributes` |                   | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_input_props} />`        |
+| `inputRef` _bindable_         | `HTMLInputElement`    |                   | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_input_ref} />`          |
+| `inputAttributes`             | `HTMLInputAttributes` |                   | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_input_attributes} />`   |
 | `popupLabel`                  | `string`              | `'Choose a time'` | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_popup_label} />`        |
 | Element Attributes (`button`) |                       |                   |                                                                                             |
 

@@ -51,8 +51,8 @@ HTML attributes, including class, id and ARIA attributes, apply to the control e
 | `ref` _bindable_              | `HTMLButtonElement`   |                   | The DOM reference of the trigger button.                                                            |
 | `wrapperRef` _bindable_       | `HTMLDivElement`      |                   | The DOM reference of the element wrapping the trigger and its input.                                |
 | `wrapperAttributes`           | `HTMLAttributes`      |                   | The attributes to spread on the wrapper element.                                                    |
-| `inputElement` _bindable_     | `HTMLInputElement`    |                   | The DOM reference of the underlying input element.                                                  |
-| `inputProps`                  | `HTMLInputAttributes` |                   | HTML attributes for the underlying input element. Give it a `name` to submit the value with a form. |
+| `inputRef` _bindable_         | `HTMLInputElement`    |                   | The DOM reference of the underlying input element.                                                  |
+| `inputAttributes`             | `HTMLInputAttributes` |                   | HTML attributes for the underlying input element. Give it a `name` to submit the value with a form. |
 | `popupLabel`                  | `string`              | `'Choose a time'` | The accessible name of the popup, which is announced as a dialog.                                   |
 | Element Attributes (`button`) |                       |                   |                                                                                                     |
 

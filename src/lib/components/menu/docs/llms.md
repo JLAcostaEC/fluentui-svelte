@@ -190,13 +190,13 @@ This variant of the `MenuTrigger` component allows you to create context menus t
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:MenuItemActionableProps -->
 
-| Name                                   | Type      | Default | Description                                                                                |
-| -------------------------------------- | --------- | ------- | ------------------------------------------------------------------------------------------ |
-| `checked` _bindable_                   | `boolean` |         | Whether the item is checked.                                                               |
-| `value`                                | `string`  | `id`    | The value reported to the menu when the item is checked. Falls back to the id of the item. |
-| `name`                                 | `string`  | `id`    | The group of items this one belongs to. Falls back to the id of the item.                  |
-| `MenuItemProps` without `href`         |           |         |                                                                                            |
-| `ComponentProps<typeof Button<'div'>>` |           |         |                                                                                            |
+| Name                           | Type      | Default | Description                                                                                |
+| ------------------------------ | --------- | ------- | ------------------------------------------------------------------------------------------ |
+| `checked` _bindable_           | `boolean` |         | Whether the item is checked.                                                               |
+| `value`                        | `string`  | `id`    | The value reported to the menu when the item is checked. Falls back to the id of the item. |
+| `name`                         | `string`  | `id`    | The group of items this one belongs to. Falls back to the id of the item.                  |
+| `MenuItemProps` without `href` |           |         |                                                                                            |
+| `ButtonProps<'button'>`        |           |         |                                                                                            |
 
 <!-- /props:MenuItemActionableProps -->
 

@@ -41,8 +41,8 @@ export type ExpanderProps = {
 	 * @bindable
 	 */
 	summaryRef?: HTMLElement;
-	/** The props to spread on the summary element.
-	 * @type HTMLAttributes
+	/** The HTML attributes to spread on the summary element.
+	 * @type HTMLAttributes<HTMLElement>
 	 */
-	summaryProps?: HTMLAttributes<HTMLElement>;
+	summaryAttributes?: HTMLAttributes<HTMLElement>;
 } & HTMLDetailsAttributes;

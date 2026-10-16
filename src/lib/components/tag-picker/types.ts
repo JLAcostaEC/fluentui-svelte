@@ -125,4 +125,12 @@ export type TagPickerOptionGroupProps = {
 	ref?: HTMLUListElement;
 	/** The options of the group. */
 	children?: Snippet;
+	/** The attributes to spread on the wrapper element.
+	 * @type HTMLAttributes
+	 */
+	wrapperAttributes?: HTMLAttributes<HTMLLIElement>;
+	/** The DOM reference of the wrapper element.
+	 * @bindable
+	 */
+	wrapperRef?: HTMLLIElement;
 } & Omit<HTMLAttributes<HTMLUListElement>, 'children'>;

@@ -31,7 +31,7 @@ Options can render rich content such as a `Persona`. Provide a `text` prop for t
 			name="John Doe"
 			primaryText="Software Engineer"
 			presence={{ status: 'available' }}
-			avatar={{ color: 'colorful', idForColor: '' }}
+			avatarProps={{ color: 'colorful', idForColor: '' }}
 		/>
 	</DropdownSelectOption>
 	<DropdownSelectOption value="B">Option B</DropdownSelectOption>

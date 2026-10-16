@@ -22,6 +22,7 @@
 		class: classes,
 		children,
 		onclick,
+		onkeydown,
 		onSelectionChange,
 		...attributes
 	}: CardProps<Tag> = $props();
@@ -102,7 +103,7 @@
 	 * consumer named the card itself.
 	 */
 	let rootLabelledBy = $derived(
-		isRootControl && !attributes['aria-label'] && !attributes['aria-labelledby'] ? `${id}-title` : undefined
+		attributes['aria-labelledby'] ?? (isRootControl && !attributes['aria-label'] ? `${id}-title` : undefined)
 	);
 
 	/** Enter and Space toggle the selection, the same way a pointer click does. */
@@ -130,6 +131,7 @@
  -->
 <svelte:element
 	this={_card.as}
+	{...attributes}
 	class={['fs-card', { actionable, disabled, selected: _card.selected }, orientation, appearance, classes]}
 	bind:this={ref}
 	{id}
@@ -139,8 +141,7 @@
 	aria-disabled={disabled || undefined}
 	tabindex={isRootControl && !disabled ? 0 : undefined}
 	onclick={(e: MouseEvent) => invokeHandlers(e, [disabled], [context.methods.handleAction])}
-	onkeydown={isRootControl ? handleKeydown : undefined}
-	{...attributes}
+	onkeydown={(event: KeyboardEvent) => invokeHandlers(event, disabled, [isRootControl && handleKeydown, onkeydown])}
 >
 	{#if selectable && _card.showFloatingAction && as !== 'a'}
 		<Checkbox

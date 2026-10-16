@@ -20,7 +20,7 @@
 
 <!-- The provider is what starts the tabspot engine, so the strip only rovers inside it. -->
 <FluentUISvelte>
-	<TabView bind:activeTab listProps={{ 'aria-label': 'Workspaces' }} {...props}>
+	<TabView bind:activeTab listAttributes={{ 'aria-label': 'Workspaces' }} {...props}>
 		{#each tabs as tab (tab.value)}
 			<TabViewTab value={tab.value} icon={withIcon ? DocumentRegular : undefined} {...tab.props}>
 				{tab.label}

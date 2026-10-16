@@ -9,6 +9,8 @@
 		appearance = 'default',
 		inset,
 		children,
+		class: classes,
+		style,
 		...attributes
 	}: DividerProps<Tag> = $props();
 </script>
@@ -30,12 +32,12 @@
 -->
 <svelte:element
 	this={as}
+	{...attributes}
 	bind:this={ref}
 	role="separator"
-	class={['fs-divider', appearance, `align-${alignContent}`, { inset, vertical }]}
-	style=" --divider-margin: {children ? (vertical ? '0.5rem' : '0.75rem') : '0'}"
+	class={['fs-divider', appearance, `align-${alignContent}`, { inset, vertical }, classes]}
+	style="{style ?? ''};  --divider-margin: {children ? (vertical ? '0.5rem' : '0.75rem') : '0'}"
 	aria-orientation={vertical ? 'vertical' : 'horizontal'}
-	{...attributes}
 >
 	{@render children?.()}
 </svelte:element>

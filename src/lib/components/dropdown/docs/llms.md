@@ -28,7 +28,7 @@ Options can render any content, such as a `Persona`. Pass a `text` prop so the c
 			name="John Doe"
 			primaryText="Software Engineer"
 			presence={{ status: 'available' }}
-			avatar={{ color: 'colorful', idForColor: '' }}
+			avatarProps={{ color: 'colorful', idForColor: '' }}
 		/>
 	</DropdownOption>
 	<DropdownOption value="B" text="Option B">Option B</DropdownOption>

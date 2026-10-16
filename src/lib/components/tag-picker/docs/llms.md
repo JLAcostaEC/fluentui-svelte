@@ -270,11 +270,13 @@ HTML attributes, including class, id and ARIA attributes, apply to the control e
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TagPickerOptionGroupProps -->
 
-| Name                                                  | Type               | Default | Description                             |
-| ----------------------------------------------------- | ------------------ | ------- | --------------------------------------- |
-| `label`                                               | `string`           |         | The label of the group.                 |
-| `ref` _bindable_                                      | `HTMLUListElement` |         | The DOM reference of the group element. |
-| `children`                                            | `Snippet`          |         | The options of the group.               |
-| `HTMLAttributes<HTMLUListElement>` without `children` |                    |         |                                         |
+| Name                                                  | Type               | Default | Description                                      |
+| ----------------------------------------------------- | ------------------ | ------- | ------------------------------------------------ |
+| `label`                                               | `string`           |         | The label of the group.                          |
+| `ref` _bindable_                                      | `HTMLUListElement` |         | The DOM reference of the group element.          |
+| `children`                                            | `Snippet`          |         | The options of the group.                        |
+| `wrapperAttributes`                                   | `HTMLAttributes`   |         | The attributes to spread on the wrapper element. |
+| `wrapperRef` _bindable_                               | `HTMLLIElement`    |         | The DOM reference of the wrapper element.        |
+| `HTMLAttributes<HTMLUListElement>` without `children` |                    |         |                                                  |
 
 <!-- /props:TagPickerOptionGroupProps -->

@@ -95,7 +95,7 @@
 
 <Showcase columns={1} columnWidth="680px" code={closableCode} >
   <div style="width: 100%">
-    <TabView bind:activeTab={closableActive} closable onTabClose={closeTab} listProps={{ 'aria-label': 'Closable tabs' }}>
+    <TabView bind:activeTab={closableActive} closable onTabClose={closeTab} listAttributes={{ 'aria-label': 'Closable tabs' }}>
       {#each closableTabs as tab (tab.value)}
         <TabViewTab value={tab.value}>{tab.label}</TabViewTab>
       {/each}
@@ -109,7 +109,7 @@
 
 <Showcase columns={1} columnWidth="680px" code={newTabCode} disablePanZoom>
   <div style="width: 100%">
-    <TabView bind:activeTab={openActive} showNewTabButton onNewTab={addTab} listProps={{ 'aria-label': 'Open tabs' }}>
+    <TabView bind:activeTab={openActive} showNewTabButton onNewTab={addTab} listAttributes={{ 'aria-label': 'Open tabs' }}>
       {#each openTabs as tab (tab.value)}
         <TabViewTab value={tab.value}>{tab.label}</TabViewTab>
       {/each}
@@ -123,17 +123,17 @@
 
 <Showcase columns={1} columnWidth="680px" code={widthModeCode} disablePanZoom>
   <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 100%">
-    <TabView bind:activeTab={widthActive} tabWidthMode="equal" listProps={{ 'aria-label': 'Equal' }}>
+    <TabView bind:activeTab={widthActive} tabWidthMode="equal" listAttributes={{ 'aria-label': 'Equal' }}>
       <TabViewTab value="document" icon={DocumentRegular}>Document</TabViewTab>
       <TabViewTab value="mail" icon={MailRegular}>Mail</TabViewTab>
       <TabViewTab value="calendar" icon={CalendarLtrRegular}>Calendar</TabViewTab>
     </TabView>
-    <TabView bind:activeTab={widthActive} tabWidthMode="size-to-content" listProps={{ 'aria-label': 'Size to content' }}>
+    <TabView bind:activeTab={widthActive} tabWidthMode="size-to-content" listAttributes={{ 'aria-label': 'Size to content' }}>
       <TabViewTab value="document" icon={DocumentRegular}>Document</TabViewTab>
       <TabViewTab value="mail" icon={MailRegular}>Mail</TabViewTab>
       <TabViewTab value="calendar" icon={CalendarLtrRegular}>Calendar</TabViewTab>
     </TabView>
-    <TabView bind:activeTab={widthActive} tabWidthMode="compact" listProps={{ 'aria-label': 'Compact' }}>
+    <TabView bind:activeTab={widthActive} tabWidthMode="compact" listAttributes={{ 'aria-label': 'Compact' }}>
       <TabViewTab value="document" icon={DocumentRegular}>Document</TabViewTab>
       <TabViewTab value="mail" icon={MailRegular}>Mail</TabViewTab>
       <TabViewTab value="calendar" icon={CalendarLtrRegular}>Calendar</TabViewTab>
@@ -147,7 +147,7 @@
 
 <Showcase columns={1} columnWidth="680px" code={disabledCode} disablePanZoom>
   <div style="width: 100%">
-    <TabView bind:activeTab={disabledActive} listProps={{ 'aria-label': 'Disabled tab' }}>
+    <TabView bind:activeTab={disabledActive} listAttributes={{ 'aria-label': 'Disabled tab' }}>
       <TabViewTab value="document" icon={DocumentRegular}>Document</TabViewTab>
       <TabViewTab value="mail" icon={MailRegular}>Mail</TabViewTab>
       <TabViewTab value="calendar" icon={CalendarLtrRegular} disabled>Calendar</TabViewTab>

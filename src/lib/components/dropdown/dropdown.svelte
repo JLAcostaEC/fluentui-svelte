@@ -173,19 +173,23 @@
 
 	{#if open}
 		<Flyout
-			style={flyoutMaxHeight ? `max-height: ${flyoutMaxHeight};` : ''}
+			{...flyoutProps}
+			style="{flyoutProps?.style ?? ''}; {flyoutMaxHeight ? `max-height: ${flyoutMaxHeight};` : ''}"
 			offset={0}
 			bind:ref={flyoutRef}
-			{...flyoutProps}
 			floating
 			roundCorners="bottom"
 			reference={wrapperRef}
 			id={`${id}-flyout`}
-			onPlacementChange={(place) => handlePlacementChange(place)}
+			onPlacementChange={(place) => {
+				handlePlacementChange(place);
+				flyoutProps?.onPlacementChange?.(place);
+			}}
 			placementConfig={{ allowedPlacements: ['bottom', 'top'] }}
 			class="fs-dropdown-flyout {roundClass === 'top' ? 'top-shadow' : ''} {flyoutProps?.class}"
 		>
 			<ListView
+				{...listboxProps}
 				bind:ref={listboxRef}
 				bind:selectedItems={
 					() => {
@@ -205,14 +209,14 @@
 				}
 				selectionMode={multiple ? 'multiselect' : 'single'}
 				toggleOnClick={multiple}
-				onSelectionChange={() => {
+				onSelectionChange={(event, selected) => {
 					if (!multiple) closeDropdown();
+					listboxProps?.onSelectionChange?.(event, selected);
 				}}
 				navigationMode="items"
 				id={`${id}-listbox`}
 				role="listbox"
 				disableTabspot
-				{...listboxProps}
 			>
 				{#if !children}
 					<ListViewItem disabled>No options available</ListViewItem>

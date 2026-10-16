@@ -8,14 +8,14 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:BreadcrumbProps -->
 
-| Name                 | Type                                         | Default    | Description                                                                        |
-| -------------------- | -------------------------------------------- | ---------- | ---------------------------------------------------------------------------------- |
-| `ref` _bindable_     | `HTMLElement`                                |            | `<I18nMarkupMessage message={m.generated_fs_breadcrumb_props_props_ref} />`        |
-| `listRef` _bindable_ | `HTMLOListElement`                           |            | `<I18nMarkupMessage message={m.generated_fs_breadcrumb_props_props_list_ref} />`   |
-| `listProps`          | `HTMLOlAttributes`                           |            | `<I18nMarkupMessage message={m.generated_fs_breadcrumb_props_props_list_props} />` |
-| `size`               | `'small'` &#124; `'medium'` &#124; `'large'` | `'medium'` | `<I18nMarkupMessage message={m.generated_fs_breadcrumb_props_props_size} />`       |
-| `focusMode`          | `'tab'` &#124; `'arrow'`                     | `'tab'`    | `<I18nMarkupMessage message={m.generated_fs_breadcrumb_props_props_focus_mode} />` |
-| Element Attributes   |                                              |            |                                                                                    |
+| Name                 | Type                                         | Default    | Description                                                                             |
+| -------------------- | -------------------------------------------- | ---------- | --------------------------------------------------------------------------------------- |
+| `ref` _bindable_     | `HTMLElement`                                |            | `<I18nMarkupMessage message={m.generated_fs_breadcrumb_props_props_ref} />`             |
+| `listRef` _bindable_ | `HTMLOListElement`                           |            | `<I18nMarkupMessage message={m.generated_fs_breadcrumb_props_props_list_ref} />`        |
+| `listAttributes`     | `HTMLOlAttributes`                           |            | `<I18nMarkupMessage message={m.generated_fs_breadcrumb_props_props_list_attributes} />` |
+| `size`               | `'small'` &#124; `'medium'` &#124; `'large'` | `'medium'` | `<I18nMarkupMessage message={m.generated_fs_breadcrumb_props_props_size} />`            |
+| `focusMode`          | `'tab'` &#124; `'arrow'`                     | `'tab'`    | `<I18nMarkupMessage message={m.generated_fs_breadcrumb_props_props_focus_mode} />`      |
+| Element Attributes   |                                              |            |                                                                                         |
 
 <!-- /props:BreadcrumbProps -->
 

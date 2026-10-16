@@ -36,10 +36,10 @@
   ```
  -->
 <span
+	{...attributes}
 	bind:this={ref}
 	class={['fs-badge', shape, appearance, color, classes]}
 	style="--badge-shapes: {shapes[shape]}; --badge-size: {pxToRem(size)}; {style}"
-	{...attributes}
 >
 	{#if iconPosition === 'after'}
 		{@render children?.()}

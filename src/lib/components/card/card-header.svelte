@@ -31,7 +31,7 @@
 	});
 </script>
 
-<div bind:this={ref} class={['fs-card-header', showFloatingAction && 'with-action', classes]} {...attributes}>
+<div {...attributes} bind:this={ref} class={['fs-card-header', showFloatingAction && 'with-action', classes]}>
 	{#if typeof image === 'string'}
 		<img src={image} alt={imageAlt} />
 	{:else if image}

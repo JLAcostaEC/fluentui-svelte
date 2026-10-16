@@ -131,6 +131,7 @@
 -->
 <svelte:element
 	this={_as}
+	{...attributes}
 	bind:this={ref as TableDOM[Tag]}
 	role={enableTabspot ? 'grid' : _as === 'div' ? 'table' : undefined}
 	class={[
@@ -140,7 +141,6 @@
 		classes
 	]}
 	{...tabspotAttributes}
-	{...attributes}
 >
 	{@render children?.()}
 </svelte:element>

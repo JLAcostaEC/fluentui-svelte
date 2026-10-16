@@ -232,11 +232,11 @@ export type TableSelectionCellProps<Tag extends 'td' | 'div' = 'td'> = {
 	/** The props to spread on the checkbox rendered when `type` is `'checkbox'`.
 	 * @type CheckboxProps
 	 */
-	checkboxIndicator?: Omit<CheckboxProps, 'checked' | 'indeterminate' | 'children'>;
+	checkboxProps?: Omit<CheckboxProps, 'checked' | 'indeterminate' | 'children'>;
 	/** The props to spread on the radio button rendered when `type` is `'radio'`.
 	 * @type RadioButtonProps
 	 */
-	radioIndicator?: Omit<RadioButtonProps, 'checked' | 'group'>;
+	radioProps?: Omit<RadioButtonProps, 'checked' | 'group'>;
 } & PolymorphicProps<Tag>;
 
 /** @propsmith TableCellLayoutProps */

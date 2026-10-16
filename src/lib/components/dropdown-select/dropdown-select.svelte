@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { flushSync } from 'svelte';
 	import ChevronDownFilled from 'fluentui-icons-svelte/ChevronDownFilled.svelte';
 	import { selectDirection } from './dropdown-select.svelte.ts';
 	import type { DropdownSelectProps } from './types.ts';
@@ -49,6 +50,11 @@
 			{@attach selectDirection()}
 			bind:value
 			bind:this={ref}
+			oninputcapture={(event) => {
+				// selectedcontent mutates before change; sync the binding before its observer restores the old value.
+				flushSync(() => (value = event.currentTarget.value));
+				attributes.oninputcapture?.(event);
+			}}
 		>
 			<button>
 				<selectedcontent></selectedcontent>

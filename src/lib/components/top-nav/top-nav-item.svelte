@@ -54,6 +54,7 @@
 -->
 <svelte:element
 	this={_as}
+	{...attributes}
 	bind:this={ref as TopNavItemElementDOMType[T]}
 	type={_as === 'button' ? 'button' : undefined}
 	role="tab"
@@ -73,7 +74,6 @@
 			() => context.config.selectTabOnFocus && context.methods.selectTab(e, value),
 			onfocus
 		])}
-	{...attributes}
 >
 	{#if icon}
 		<span class="fs-top-nav-item-icon">

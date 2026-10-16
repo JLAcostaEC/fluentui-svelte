@@ -30,10 +30,10 @@ export type TabViewProps = {
 	 * @bindable
 	 */
 	listRef?: HTMLDivElement;
-	/** The props to spread on the tab list element, where the `tablist` role and its label belong.
+	/** The Attributes to spread on the tab list element, where the `tablist` role and its label belong.
 	 * @type HTMLAttributes
 	 */
-	listProps?: HTMLAttributes<HTMLDivElement>;
+	listAttributes?: HTMLAttributes<HTMLDivElement>;
 	/** The value of the selected tab.
 	 * @bindable
 	 */
@@ -55,7 +55,7 @@ export type TabViewProps = {
 	/** The props to spread on the new tab button.
 	 * @type HTMLButtonAttributes
 	 */
-	newTabButtonProps?: HTMLButtonAttributes;
+	newTabButtonAttributes?: HTMLButtonAttributes;
 	/** How the tabs take their width: sharing the strip evenly, sizing to their own content, or
 	 * shrinking to the icon of every tab but the selected one.
 	 * @default 'equal'

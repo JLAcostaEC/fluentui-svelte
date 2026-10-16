@@ -82,8 +82,8 @@
 
 <div {...wrapperAttributes} class={['fs-calendar-date-picker', wrapperAttributes?.class]} bind:this={wrapperRef}>
 	<Button
-		appearance="standard"
 		{...attributes}
+		appearance="standard"
 		type="button"
 		disabled={disabled ?? false}
 		aria-haspopup="dialog"

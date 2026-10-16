@@ -22,10 +22,10 @@ export type BreadcrumbProps = {
 	 * @bindable
 	 */
 	listRef?: HTMLOListElement;
-	/** The props to spread on the list element.
+	/** The attributes to spread on the list element.
 	 * @type HTMLOlAttributes
 	 */
-	listProps?: HTMLOlAttributes;
+	listAttributes?: HTMLOlAttributes;
 	/** The size of every step and divider of the trail.
 	 * @default 'medium'
 	 */

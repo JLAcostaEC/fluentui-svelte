@@ -17,7 +17,7 @@
 	</BreadcrumbItem>
 	```
 -->
-<li bind:this={ref} class={['fs-breadcrumb-item', classes]} {...attributes}>
+<li {...attributes} bind:this={ref} class={['fs-breadcrumb-item', classes]}>
 	{@render children?.()}
 </li>
 

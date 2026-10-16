@@ -58,11 +58,13 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TagPickerOptionGroupProps -->
 
-| Name                                                  | Type               | Default | Description                                                                                   |
-| ----------------------------------------------------- | ------------------ | ------- | --------------------------------------------------------------------------------------------- |
-| `label`                                               | `string`           |         | `<I18nMarkupMessage message={m.generated_fs_tag_picker_option_group_props_props_label} />`    |
-| `ref` _bindable_                                      | `HTMLUListElement` |         | `<I18nMarkupMessage message={m.generated_fs_tag_picker_option_group_props_props_ref} />`      |
-| `children`                                            | `Snippet`          |         | `<I18nMarkupMessage message={m.generated_fs_tag_picker_option_group_props_props_children} />` |
-| `HTMLAttributes<HTMLUListElement>` without `children` |                    |         |                                                                                               |
+| Name                                                  | Type               | Default | Description                                                                                             |
+| ----------------------------------------------------- | ------------------ | ------- | ------------------------------------------------------------------------------------------------------- |
+| `label`                                               | `string`           |         | `<I18nMarkupMessage message={m.generated_fs_tag_picker_option_group_props_props_label} />`              |
+| `ref` _bindable_                                      | `HTMLUListElement` |         | `<I18nMarkupMessage message={m.generated_fs_tag_picker_option_group_props_props_ref} />`                |
+| `children`                                            | `Snippet`          |         | `<I18nMarkupMessage message={m.generated_fs_tag_picker_option_group_props_props_children} />`           |
+| `wrapperAttributes`                                   | `HTMLAttributes`   |         | `<I18nMarkupMessage message={m.generated_fs_tag_picker_option_group_props_props_wrapper_attributes} />` |
+| `wrapperRef` _bindable_                               | `HTMLLIElement`    |         | `<I18nMarkupMessage message={m.generated_fs_tag_picker_option_group_props_props_wrapper_ref} />`        |
+| `HTMLAttributes<HTMLUListElement>` without `children` |                    |         |                                                                                                         |
 
 <!-- /props:TagPickerOptionGroupProps -->

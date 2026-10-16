@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { invokeHandlers } from '$internal';
 	import { PREFIX } from '$constants';
 	import ListViewItem from '$lib/components/list-view/list-view-item.svelte';
 	import { getAutoSuggestBoxContext } from './auto-suggest-box.ts';
@@ -15,6 +16,7 @@
 		text,
 		index,
 		children,
+		onclick,
 		...attributes
 	}: AutoSuggestOptionProps = $props();
 
@@ -58,16 +60,16 @@
 
 {#if isVisible || virtualized}
 	<ListViewItem
+		{...attributes}
 		{id}
 		role="option"
 		{value}
 		tabindex={-1}
 		data-index={index}
-		class={['fs-autosuggest-option', selectOnFocus && 'no-outline']}
-		onclick={handleClick}
+		class={['fs-autosuggest-option', selectOnFocus && 'no-outline', attributes?.class]}
+		onclick={(e) => invokeHandlers(e, disabled, [handleClick, onclick])}
 		bind:ref
 		{disabled}
-		{...attributes}
 	>
 		{@render children?.()}
 	</ListViewItem>

@@ -1,7 +1,16 @@
 <script lang="ts">
+	import { invokeHandlers } from '$internal';
 	import type { HyperlinkProps } from './types.ts';
 
-	let { href = '#', disabled, class: classes, children, ref = $bindable(), ...attributes }: HyperlinkProps = $props();
+	let {
+		href = '#',
+		disabled,
+		onclick,
+		class: classes,
+		children,
+		ref = $bindable(),
+		...attributes
+	}: HyperlinkProps = $props();
 </script>
 
 <!-- 
@@ -19,14 +28,14 @@ F
 ```
 -->
 <a
+	{...attributes}
 	// eslint-disable-next-line svelte/no-navigation-without-resolve
 	{href}
 	class={['fs-hyperlink', classes, { disabled }]}
-	tabindex={disabled ? -1 : undefined}
+	tabindex={disabled ? -1 : attributes.tabindex}
 	aria-disabled={disabled || undefined}
-	onclick={disabled ? (e) => e?.preventDefault() : undefined}
+	onclick={(e) => invokeHandlers(e, disabled, [onclick])}
 	bind:this={ref}
-	{...attributes}
 >
 	{#if children}
 		{@render children()}

@@ -17,21 +17,27 @@
 </script>
 
 <div
+	{...attributes}
 	class={[
 		'fs-calendar-view-item',
 		`variant-${variant === 'day' ? 'day' : 'month-year'}`,
-		rangePosition && `in-range range-${rangePosition}`
+		rangePosition && `in-range range-${rangePosition}`,
+		attributes?.class
 	]}
 	role="gridcell"
 	aria-selected={!!selected || rangePosition !== undefined}
-	{...attributes}
 >
 	<button
+		{...buttonAttributes}
 		type="button"
-		class={['calendar-item-button', { selected, disabled, current, blackout }, outOfRange && 'out-of-range']}
+		class={[
+			'calendar-item-button',
+			{ selected, disabled, current, blackout },
+			outOfRange && 'out-of-range',
+			buttonAttributes?.class
+		]}
 		aria-disabled={disabled}
 		{disabled}
-		{...buttonAttributes}
 	>
 		{#if header}
 			<small>{header}</small>

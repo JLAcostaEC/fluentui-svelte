@@ -71,12 +71,14 @@ export type TagProps = {
 	onkeydown?: (e: KeyboardEvent) => void;
 	/** Attributes for the primary button of an interactive tag, for example `aria-haspopup`. If you give it
 	 * a custom `id`, the dismiss button is named after it.
+	 * @type HTMLButtonAttributes
 	 */
-	primaryProps?: Omit<HTMLButtonAttributes, 'children' | 'onclick'>;
+	primaryButtonAttributes?: Omit<HTMLButtonAttributes, 'children' | 'onclick'>;
 	/** Attributes for the dismiss button of an interactive tag. Use `aria-label` together with
 	 * `aria-labelledby: undefined` to give the button a name that stands on its own.
+	 * @type HTMLButtonAttributes
 	 */
-	dismissProps?: Omit<HTMLButtonAttributes, 'children' | 'onclick'>;
+	dismissButtonAttributes?: Omit<HTMLButtonAttributes, 'children' | 'onclick'>;
 	/** The primary text of the tag. */
 	children?: Snippet;
 	/** The DOM reference of the tag element.

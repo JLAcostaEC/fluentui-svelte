@@ -56,6 +56,7 @@
 
 {#if isVisible}
 	<ListViewItem
+		{...attributes}
 		{id}
 		role="option"
 		{value}
@@ -63,7 +64,6 @@
 		class={['fs-tagpicker-option', classes]}
 		bind:ref
 		{disabled}
-		{...attributes}
 		onclick={handleClick}
 	>
 		{@render children?.()}

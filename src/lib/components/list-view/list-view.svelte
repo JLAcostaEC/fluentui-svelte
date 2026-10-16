@@ -22,6 +22,7 @@
 		disableTabspot = false,
 		toggleOnClick = false,
 		children,
+		class: classes,
 		...attributes
 	}: ListViewProps<Tag> = $props();
 
@@ -158,12 +159,12 @@
 
 <svelte:element
 	this={_as}
+	{...attributes}
 	bind:this={ref as ListViewDOM[Tag]}
-	class="fs-list-view"
+	class={['fs-list-view', classes]}
 	role={ROLE}
 	aria-multiselectable={((ROLE === 'grid' || ROLE === 'listbox') && MULTISELECTABLE) || undefined}
 	{...tabspotAttrs}
-	{...attributes}
 	{@attach attachTabspot(tabspotConfig)}
 >
 	{@render children?.()}

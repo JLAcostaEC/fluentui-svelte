@@ -120,7 +120,7 @@
     <TableRow>
       <TableSelectionCell
         checked={allSelected ? true : someSelected ? 'mixed' : false}
-        checkboxIndicator={{ 'aria-label': 'Select all rows' }}
+        checkboxProps={{ 'aria-label': 'Select all rows' }}
         onclick={() => (selected = allSelected ? [] : items.map((item) => item.file))}
       />
       <TableHeaderCell>File</TableHeaderCell>
@@ -134,7 +134,7 @@
         appearance={isSelected ? 'brand' : 'none'}
         onclick={() => toggleRow(item.file)}
       >
-        <TableSelectionCell checked={isSelected} checkboxIndicator={{ 'aria-label': 'Select row' }} />
+        <TableSelectionCell checked={isSelected} checkboxProps={{ 'aria-label': 'Select row' }} />
         <TableCell>{item.file}</TableCell>
       </TableRow>
     {/each}
@@ -167,7 +167,7 @@
         <TableSelectionCell
           type="radio"
           checked={isPicked}
-          radioIndicator={{ name: 'file', 'aria-label': 'Select row' }}
+          radioProps={{ name: 'file', 'aria-label': 'Select row' }}
         />
         <TableCell>{item.file}</TableCell>
       </TableRow>
@@ -186,7 +186,7 @@
 
   const subtleCode = `
 <TableRow aria-selected={isSelected} appearance={isSelected ? 'brand' : 'none'} onclick={() => toggleSubtle(item.file)}>
-  <TableSelectionCell subtle checked={isSelected} checkboxIndicator={{ 'aria-label': 'Select row' }} />
+  <TableSelectionCell subtle checked={isSelected} checkboxProps={{ 'aria-label': 'Select row' }} />
   <TableCell>{item.file}</TableCell>
 </TableRow>`;
 
@@ -362,7 +362,7 @@
           appearance={isSelected ? 'brand' : 'none'}
           onclick={() => toggleRow(row.id)}
         >
-          <TableSelectionCell checked={isSelected} checkboxIndicator={{ 'aria-label': \`Select \${row.file}\` }} />
+          <TableSelectionCell checked={isSelected} checkboxProps={{ 'aria-label': \`Select \${row.file}\` }} />
           <TableCell>{row.file}</TableCell>
         </TableRow>
       {/snippet}
@@ -435,7 +435,7 @@
   <Table aria-label="Table with multiselect">
     <TableHeader>
       <TableRow>
-        <TableSelectionCell checked={allSelected ? true : someSelected ? 'mixed' : false} checkboxIndicator={{ 'aria-label': 'Select all rows' }} onclick={toggleAll} />
+        <TableSelectionCell checked={allSelected ? true : someSelected ? 'mixed' : false} checkboxProps={{ 'aria-label': 'Select all rows' }} onclick={toggleAll} />
         <TableHeaderCell>File</TableHeaderCell>
         <TableHeaderCell>Author</TableHeaderCell>
       </TableRow>
@@ -444,7 +444,7 @@
       {#each items as item (item.file)}
         {@const isSelected = selected.includes(item.file)}
         <TableRow aria-selected={isSelected} appearance={isSelected ? 'brand' : 'none'} onclick={() => toggleRow(item.file)}>
-          <TableSelectionCell checked={isSelected} checkboxIndicator={{ 'aria-label': 'Select row' }} />
+          <TableSelectionCell checked={isSelected} checkboxProps={{ 'aria-label': 'Select row' }} />
           <TableCell>
             <TableCellLayout media={item.icon}>{item.file}</TableCellLayout>
           </TableCell>
@@ -472,7 +472,7 @@
       {#each items as item (item.file)}
         {@const isPicked = picked === item.file}
         <TableRow aria-selected={isPicked} appearance={isPicked ? 'brand' : 'none'} onclick={() => (picked = item.file)}>
-          <TableSelectionCell type="radio" checked={isPicked} radioIndicator={{ name: 'picked-file', 'aria-label': 'Select row' }} />
+          <TableSelectionCell type="radio" checked={isPicked} radioProps={{ name: 'picked-file', 'aria-label': 'Select row' }} />
           <TableCell>
             <TableCellLayout media={item.icon}>{item.file}</TableCellLayout>
           </TableCell>
@@ -500,7 +500,7 @@
       {#each items as item (item.file)}
         {@const isSelected = subtlySelected.includes(item.file)}
         <TableRow aria-selected={isSelected} appearance={isSelected ? 'brand' : 'none'} onclick={() => toggleSubtle(item.file)}>
-          <TableSelectionCell subtle checked={isSelected} checkboxIndicator={{ 'aria-label': 'Select row' }} />
+          <TableSelectionCell subtle checked={isSelected} checkboxProps={{ 'aria-label': 'Select row' }} />
           <TableCell>
             <TableCellLayout media={item.icon}>{item.file}</TableCellLayout>
           </TableCell>
@@ -708,7 +708,7 @@
         {#snippet renderItem(row: (typeof rows)[number], index: number)}
           {@const isSelected = virtualSelected.has(row.id)}
           <TableRow aria-rowindex={index + 2} aria-selected={isSelected} appearance={isSelected ? 'brand' : 'none'} onclick={() => toggleVirtualRow(row.id)}>
-            <TableSelectionCell checked={isSelected} checkboxIndicator={{ 'aria-label': `Select ${row.file}` }} />
+            <TableSelectionCell checked={isSelected} checkboxProps={{ 'aria-label': `Select ${row.file}` }} />
             <TableCell>
               <TableCellLayout media={DocumentRegular}>{row.file}</TableCellLayout>
             </TableCell>

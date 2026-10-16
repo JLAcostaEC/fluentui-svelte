@@ -329,12 +329,12 @@ A text field and a dropdown that give people a way to choose several options fro
 		<div class="content">
 			{#if selectedOptions.length > 0}
 				<TagGroup
+					{...tagGroupProps}
 					role="list"
 					size={tagSize}
 					disabled={_picker.disabled}
 					dismissible
 					onDismiss={handleDismiss}
-					{...tagGroupProps}
 				>
 					{#each selectedOptions as v (v)}
 						{@const text = labels.get(v) ?? v}
@@ -347,8 +347,8 @@ A text field and a dropdown that give people a way to choose several options fro
 				</TagGroup>
 			{/if}
 			<input
-				autocomplete="off"
 				{...attributes}
+				autocomplete="off"
 				bind:this={ref}
 				type="text"
 				{placeholder}
@@ -389,6 +389,7 @@ A text field and a dropdown that give people a way to choose several options fro
 		>
 			<ListView
 				role="listbox"
+				selectionMode={_picker.single ? 'single' : 'multiselect'}
 				navigationMode="items"
 				disableTabspot
 				id={LIST_ID}

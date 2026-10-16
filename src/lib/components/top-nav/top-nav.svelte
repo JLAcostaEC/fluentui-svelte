@@ -172,12 +172,12 @@
 	```
 -->
 <div
+	{...attributes}
 	bind:this={ref}
 	role="tablist"
 	aria-orientation={vertical ? 'vertical' : undefined}
 	class={['fs-top-nav', appearance, size, { vertical }, classes]}
 	{...tabspotAttributes}
-	{...attributes}
 >
 	{@render children?.()}
 	{#if hasIndicator && measured}

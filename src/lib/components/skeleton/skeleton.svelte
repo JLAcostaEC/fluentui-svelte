@@ -36,10 +36,10 @@
  -->
 <svelte:element
 	this={as}
+	{...attributes}
 	bind:this={ref}
 	aria-hidden="true"
 	class={['fs-skeleton', animation, shape, classes, { justify }]}
-	{...attributes}
 ></svelte:element>
 
 <style>

@@ -16,7 +16,7 @@
 	<BreadcrumbDivider />
 	```
 -->
-<li bind:this={ref} aria-hidden="true" class={['fs-breadcrumb-divider', classes]} {...attributes}>
+<li {...attributes} bind:this={ref} aria-hidden="true" class={['fs-breadcrumb-divider', classes]}>
 	{#if children}
 		{@render children()}
 	{:else}

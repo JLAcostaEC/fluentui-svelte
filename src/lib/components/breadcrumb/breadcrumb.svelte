@@ -8,7 +8,7 @@
 	let {
 		ref = $bindable(),
 		listRef = $bindable(),
-		listProps,
+		listAttributes,
 		size = 'medium',
 		focusMode = 'tab',
 		'aria-label': ariaLabel,
@@ -50,13 +50,18 @@
 	```
 -->
 <nav
+	{...attributes}
 	bind:this={ref}
 	aria-label={ariaLabelledby ? undefined : (ariaLabel ?? 'Breadcrumb')}
 	aria-labelledby={ariaLabelledby}
 	class={['fs-breadcrumb', size, classes]}
-	{...attributes}
 >
-	<ol bind:this={listRef} class="fs-breadcrumb-list" {...tabspotAttributes} {...listProps}>
+	<ol
+		{...listAttributes}
+		bind:this={listRef}
+		class={['fs-breadcrumb-list', listAttributes?.class]}
+		{...tabspotAttributes}
+	>
 		{@render children?.()}
 	</ol>
 </nav>

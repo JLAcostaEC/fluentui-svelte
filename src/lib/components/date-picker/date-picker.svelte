@@ -27,7 +27,7 @@
 		class: classes,
 		onclick,
 		inputElement = $bindable(),
-		inputProps,
+		inputAttributes,
 		popupLabel = 'Choose a date',
 		...attributes
 	}: DatePickerProps = $props();
@@ -198,7 +198,7 @@
 
 	<!-- Carries the value into a form. `hidden` keeps it out of the tab order and out of
 	     the accessibility tree, and a hidden control is still submitted. -->
-	<input type="date" hidden {value} bind:this={inputElement} {...inputProps} />
+	<input {...inputAttributes} type="date" hidden {value} bind:this={inputElement} />
 </div>
 
 {#if open}

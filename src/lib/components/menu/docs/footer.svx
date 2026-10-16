@@ -74,13 +74,13 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:MenuItemActionableProps -->
 
-| Name                                   | Type      | Default | Description                                                                               |
-| -------------------------------------- | --------- | ------- | ----------------------------------------------------------------------------------------- |
-| `checked` _bindable_                   | `boolean` |         | `<I18nMarkupMessage message={m.generated_fs_menu_item_actionable_props_props_checked} />` |
-| `value`                                | `string`  | `id`    | `<I18nMarkupMessage message={m.generated_fs_menu_item_actionable_props_props_value} />`   |
-| `name`                                 | `string`  | `id`    | `<I18nMarkupMessage message={m.generated_fs_menu_item_actionable_props_props_name} />`    |
-| `MenuItemProps` without `href`         |           |         |                                                                                           |
-| `ComponentProps<typeof Button<'div'>>` |           |         |                                                                                           |
+| Name                           | Type      | Default | Description                                                                               |
+| ------------------------------ | --------- | ------- | ----------------------------------------------------------------------------------------- |
+| `checked` _bindable_           | `boolean` |         | `<I18nMarkupMessage message={m.generated_fs_menu_item_actionable_props_props_checked} />` |
+| `value`                        | `string`  | `id`    | `<I18nMarkupMessage message={m.generated_fs_menu_item_actionable_props_props_value} />`   |
+| `name`                         | `string`  | `id`    | `<I18nMarkupMessage message={m.generated_fs_menu_item_actionable_props_props_name} />`    |
+| `MenuItemProps` without `href` |           |         |                                                                                           |
+| `ButtonProps<'button'>`        |           |         |                                                                                           |
 
 <!-- /props:MenuItemActionableProps -->
 

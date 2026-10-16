@@ -41,12 +41,12 @@
   ```
  -->
 <span
+	{...attributes}
 	bind:this={ref}
 	aria-label={arialabel}
 	role="img"
 	class={['fs-badge-icon', color || colors[status], classes]}
 	style="--badge-size: {pxToRem(size)}; {style}"
-	{...attributes}
 >
 	{#if Icon}
 		<RenderSoC SoC={Icon} args={{ 'aria-hidden': true, width: `${size}px`, height: `${size}px` }} />

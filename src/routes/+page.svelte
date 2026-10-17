@@ -1,30 +1,12 @@
 <script lang="ts">
 	import ComponentsFlyout from '$site/components/components-flyout/components-flyout.svelte';
 	import { Button } from '$lib/index.js';
-	import { setup, resize } from '$site/utils/shift.js';
-	import { on } from 'svelte/events';
+	import { shiftBackground } from '$site/utils/shift.js';
 	import { m } from '$i18n/messages.js';
 	import { mode } from 'mode-watcher';
 	import { localizeHref } from '../i18n/runtime.js';
 	import Seo from '$site/components/seo/seo.svelte';
-
-	$effect(() => {
-		let off: () => void;
-		let destroy: () => void;
-		if (!document.querySelector('.bg-effect canvas')) {
-			destroy = setup();
-			off = on(window, 'resize', resize);
-		}
-
-		return () => {
-			off?.();
-			destroy?.();
-			const canvas = document.querySelector('.bg-effect canvas');
-			if (canvas) {
-				canvas.remove();
-			}
-		};
-	});
+	
 </script>
 
 <Seo
@@ -36,7 +18,7 @@
 />
 
 <!-- shift background effect -->
-<div class="bg-effect"></div>
+<div class="bg-effect" aria-hidden="true" {@attach shiftBackground}></div>
 <section id="banner">
 	<picture>
 		{#if mode.current === 'dark'}
@@ -107,10 +89,10 @@
 
 	.bg-effect {
 		position: fixed;
-		top: -1000px;
-		left: -1000px;
-		width: 0;
-		height: 0;
+		inset: 0;
+		z-index: -1;
+		background: hsl(0, 0%, 5%);
+		pointer-events: none;
 	}
 
 	/* Tablet: the two halves stop fitting side by side, so stack them. */

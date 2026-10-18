@@ -183,7 +183,7 @@
 	});
 </script>
 
-<!-- 
+<!--
 	@component
 	A slider allows users to select a value from a continuous or discrete range by moving a thumb along a track. It supports horizontal and vertical orientations, ticks, tooltips, and reverse direction.
 

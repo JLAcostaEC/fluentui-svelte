@@ -48,4 +48,8 @@ export type LabelProps = {
 	 * @bindable
 	 */
 	ref?: HTMLLabelElement;
+	/** The id of the label element. Pickers name their visible control after the labels of their native field through it.
+	 * @default Generated
+	 */
+	id?: string;
 } & HTMLLabelAttributes;

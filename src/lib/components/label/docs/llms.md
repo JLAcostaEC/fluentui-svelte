@@ -74,19 +74,20 @@ Label renders its text and field as siblings. Link the label to the control with
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:LabelProps -->
 
-| Name                         | Type                                                          | Default           | Description                                                               |
-| ---------------------------- | ------------------------------------------------------------- | ----------------- | ------------------------------------------------------------------------- |
-| `as`                         | `'div'` &#124; `'span'`                                       | `'div'`           | The element used to wrap the label and its field.                         |
-| `children`                   | `Snippet`                                                     |                   | The field described by the label, rendered beside the label text.         |
-| `wrapperRef` _bindable_      | `HTMLDivElement` &#124; `HTMLSpanElement`                     |                   | The DOM reference of the wrapper element.                                 |
-| `wrapperAttributes`          | `HTMLAttributes`                                              |                   | The attributes to spread on the wrapper element.                          |
-| `label`                      | `string`                                                      | `'Label Element'` | The text of the label.                                                    |
-| `size`                       | `'small'` &#124; `'medium'` &#124; `'large'`                  | `'medium'`        | The size of the label text.                                               |
-| `weight`                     | `'regular'` &#124; `'semibold'`                               | `'regular'`       | The weight of the label text.                                             |
-| `labelPosition`              | `'before'` &#124; `'after'` &#124; `'above'` &#124; `'below'` | `'after'`         | Where the label sits relative to the field it describes.                  |
-| `required`                   | `{ abbr?: string; message: string; }`                         |                   | Marks the field as required, and describes why through the given message. |
-| `disabled`                   | `boolean`                                                     |                   | Renders the label as disabled, to match the field it describes.           |
-| `ref` _bindable_             | `HTMLLabelElement`                                            |                   | The DOM reference of the label element.                                   |
-| Element Attributes (`label`) |                                                               |                   |                                                                           |
+| Name                         | Type                                                          | Default           | Description                                                                                                        |
+| ---------------------------- | ------------------------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `as`                         | `'div'` &#124; `'span'`                                       | `'div'`           | The element used to wrap the label and its field.                                                                  |
+| `children`                   | `Snippet`                                                     |                   | The field described by the label, rendered beside the label text.                                                  |
+| `wrapperRef` _bindable_      | `HTMLDivElement` &#124; `HTMLSpanElement`                     |                   | The DOM reference of the wrapper element.                                                                          |
+| `wrapperAttributes`          | `HTMLAttributes`                                              |                   | The attributes to spread on the wrapper element.                                                                   |
+| `label`                      | `string`                                                      | `'Label Element'` | The text of the label.                                                                                             |
+| `size`                       | `'small'` &#124; `'medium'` &#124; `'large'`                  | `'medium'`        | The size of the label text.                                                                                        |
+| `weight`                     | `'regular'` &#124; `'semibold'`                               | `'regular'`       | The weight of the label text.                                                                                      |
+| `labelPosition`              | `'before'` &#124; `'after'` &#124; `'above'` &#124; `'below'` | `'after'`         | Where the label sits relative to the field it describes.                                                           |
+| `required`                   | `{ abbr?: string; message: string; }`                         |                   | Marks the field as required, and describes why through the given message.                                          |
+| `disabled`                   | `boolean`                                                     |                   | Renders the label as disabled, to match the field it describes.                                                    |
+| `ref` _bindable_             | `HTMLLabelElement`                                            |                   | The DOM reference of the label element.                                                                            |
+| `id`                         | `string`                                                      | `Generated`       | The id of the label element. Pickers name their visible control after the labels of their native field through it. |
+| Element Attributes (`label`) |                                                               |                   |                                                                                                                    |
 
 <!-- /props:LabelProps -->

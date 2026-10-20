@@ -18,7 +18,7 @@ describe('rendering', () => {
 	});
 
 	it('preserves a consumer-provided accessible label', async () => {
-		const props: RatingProps = { 'aria-label': 'Product quality' };
+		const props: RatingProps = { wrapperAttributes: { 'aria-label': 'Product quality' } };
 		render(Rating, props);
 		await expect.element(page.getByRole('radiogroup')).toHaveAccessibleName('Product quality');
 	});
@@ -29,7 +29,7 @@ describe('rendering', () => {
 		label.textContent = 'Product quality';
 		document.body.appendChild(label);
 		try {
-			render(Rating, { 'aria-labelledby': label.id });
+			render(Rating, { wrapperAttributes: { 'aria-labelledby': label.id } });
 			await expect.element(page.getByRole('radiogroup')).toHaveAccessibleName('Product quality');
 			await expect.element(page.getByRole('radiogroup')).toHaveAttribute('aria-labelledby', label.id);
 			await expect.element(page.getByRole('radiogroup')).not.toHaveAttribute('aria-label');
@@ -39,7 +39,7 @@ describe('rendering', () => {
 	});
 
 	it('preserves both supplied naming attributes', async () => {
-		render(Rating, { 'aria-label': 'Quality', 'aria-labelledby': 'quality-label' });
+		render(Rating, { wrapperAttributes: { 'aria-label': 'Quality', 'aria-labelledby': 'quality-label' } });
 		await expect.element(page.getByRole('radiogroup')).toHaveAttribute('aria-label', 'Quality');
 		await expect.element(page.getByRole('radiogroup')).toHaveAttribute('aria-labelledby', 'quality-label');
 	});
@@ -109,7 +109,10 @@ describe('value', () => {
 		description.textContent = 'Rate this product.';
 		document.body.appendChild(description);
 		try {
-			const screen = await render(Rating, { value: 2.25, 'aria-describedby': description.id });
+			const screen = await render(Rating, {
+				value: 2.25,
+				wrapperAttributes: { 'aria-describedby': description.id }
+			});
 			await expect
 				.element(page.getByRole('radiogroup'))
 				.toHaveAccessibleDescription('Rate this product. Current rating: 2.25 out of 5.');

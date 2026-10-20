@@ -130,6 +130,20 @@
 			&:checked + div :global(svg.checked) {
 				width: 1rem;
 			}
+			&:is(:user-invalid, [aria-invalid='true']) {
+				& + div {
+					border-color: var(--fs-system-critical);
+					color: var(--fs-system-critical) !important;
+					& + label {
+						color: var(--fs-system-critical);
+					}
+				}
+				&:hover {
+					& + div {
+						border-color: var(--fs-system-critical);
+					}
+				}
+			}
 			&:indeterminate + div :global(svg.indeterminate) {
 				width: 0.8rem;
 			}
@@ -146,11 +160,13 @@
 			justify-content: center;
 			& :global(svg) {
 				width: 0;
-				fill: var(--fs-text-on-accent-primary);
 				transform-origin: 80% 20%;
 				mask-image: linear-gradient(black, black);
 				mask-repeat: no-repeat;
 				mask-size: 0% 100%;
+				& :global(path) {
+					fill: var(--fs-text-on-accent-primary);
+				}
 			}
 		}
 		&:has(input:disabled) {

@@ -235,12 +235,13 @@
 
 		if (e.key !== 'Enter') return;
 
-		e.preventDefault();
-
 		if (activeOption) {
+			// Enter chooses the suggestion under the cursor rather than submitting the form.
+			e.preventDefault();
 			context.methods.toggleSelection(e, activeOption.id);
 			open = false;
 		} else {
+			// The free text is the value: the form submits it, unless `querySubmitted` prevents it.
 			querySubmitted?.(e, value);
 		}
 	}

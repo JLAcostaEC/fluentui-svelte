@@ -1,7 +1,11 @@
 <script lang="ts">
 	import type { LabelProps } from './types.ts';
+	import { PREFIX } from '$constants';
+
+	const FALLBACK_ID = $props.id();
 
 	let {
+		id = `${PREFIX}-label-${FALLBACK_ID}`,
 		ref = $bindable(),
 		as = 'div',
 		wrapperRef = $bindable(),
@@ -42,7 +46,7 @@
 </svelte:element>
 
 {#snippet labelText()}
-	<label {...attributes} class={['fs-label-text', `size-${size}`, `weight-${weight}`, classes]} bind:this={ref}>
+	<label {...attributes} {id} class={['fs-label-text', `size-${size}`, `weight-${weight}`, classes]} bind:this={ref}>
 		{label}
 		{#if required}
 			<abbr aria-hidden="true" title={required.message || label}>{required.abbr ?? '*'}</abbr>

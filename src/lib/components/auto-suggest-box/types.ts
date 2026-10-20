@@ -51,7 +51,8 @@ export type AutoSuggestBoxProps = {
 	 */
 	suggestionChosen?: (e: Event, selection: string) => void;
 	/** Called when Enter is pressed with no suggestion under the cursor, or when the search
-	 * button is clicked. This is where a fresh set of suggestions is fetched.
+	 * button is clicked. This is where a fresh set of suggestions is fetched. Enter then also
+	 * submits the form with the typed text, unless the event is prevented.
 	 */
 	querySubmitted?: (e: MouseEvent | KeyboardEvent, query: string) => void;
 	/** Bridge to a windowed list, for suggestion sets too long to render whole.

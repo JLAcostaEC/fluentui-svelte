@@ -225,6 +225,11 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 			left: -0.063rem;
 			background-color: var(--fs-accent-fill-default);
 		}
+		&:has(input:is(:user-invalid, [aria-invalid='true'])):after {
+			width: calc(100% + 0.125rem);
+			left: -0.063rem;
+			background-color: var(--fs-system-critical);
+		}
 		&:has(input:focus) {
 			background: var(--fs-control-fill-input-active);
 			& input::placeholder {

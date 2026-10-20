@@ -128,6 +128,11 @@
 			left: -0.063rem;
 			background: var(--fs-accent-fill-default);
 		}
+		&:has(textarea:is(:user-invalid, [aria-invalid='true'])):after {
+			width: calc(100% + 0.125rem);
+			left: -0.063rem;
+			background: var(--fs-system-critical);
+		}
 		&:has(textarea:focus) {
 			background: var(--fs-control-fill-input-active);
 			& textarea::placeholder {

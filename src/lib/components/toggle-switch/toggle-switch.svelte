@@ -130,6 +130,9 @@
 			&:active::after {
 				width: 1rem;
 			}
+			&:is(:user-invalid, [aria-invalid='true']) {
+				border-color: var(--fs-system-critical);
+			}
 			&:checked {
 				background-color: var(--fs-accent-fill-default);
 				border-color: var(--fs-accent-fill-default);

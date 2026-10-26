@@ -1,6 +1,7 @@
-import type { Snippet } from 'svelte';
-import type { HTMLAttributes, HTMLLabelAttributes } from 'svelte/elements';
+import type { Component, Snippet } from 'svelte';
+import type { HTMLAttributes, HTMLButtonAttributes, HTMLLabelAttributes } from 'svelte/elements';
 import type { Sizes } from '$types';
+import type { TooltipProps } from '../tooltip/types.ts';
 
 /** @propsmith LabelProps */
 export type LabelProps = {
@@ -48,8 +49,29 @@ export type LabelProps = {
 	 * @bindable
 	 */
 	ref?: HTMLLabelElement;
-	/** The id of the label element. Pickers name their visible control after the labels of their native field through it.
+	/** The id of the label element. A control inside the label is named after it, including a picker whose visible control stands in for its native field.
 	 * @default Generated
 	 */
 	id?: string;
-} & HTMLLabelAttributes;
+	/** The id of the field the label is for. Without it, the label is for the first field inside it, which takes a generated id when it has none of its own. With `labelPosition` `before` or `above` and a field that has an id of its own, pass that id here, so the server renders the association too.
+	 * @default The field inside
+	 */
+	for?: string;
+	/** More about the field, in a tooltip shown from a badge after the label text, on hover and on focus. People cannot move into a tooltip, so keep links and buttons out of it.
+	 * @type string | Snippet | Component
+	 */
+	tooltipContent?: string | Snippet | Component;
+	/** What the badge that shows the tooltip displays. Only rendered with `tooltipContent`.
+	 * @type Snippet | Component
+	 * @default InfoRegular
+	 */
+	tooltipBadge?: Snippet | Component;
+	/** The props to spread on the tooltip.
+	 * @type TooltipProps
+	 */
+	tooltipProps?: Omit<TooltipProps, 'content' | 'relationship' | 'children'>;
+	/** The attributes to spread on the button of the badge. Its name is the label text followed by its `aria-label`.
+	 * @type HTMLButtonAttributes
+	 */
+	tooltipButtonAttributes?: HTMLButtonAttributes;
+} & Omit<HTMLLabelAttributes, 'for'>;

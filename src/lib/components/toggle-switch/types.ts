@@ -10,7 +10,7 @@ export type ToggleSwitchProps = {
 	 * @bindable
 	 */
 	ref?: HTMLInputElement;
-	/** The label displayed next to the input element. */
+	/** The label displayed next to the input element. Inside a `Label`, it is not rendered */
 	label?: string;
 	/** The attributes to spread on the wrapper element.
 	 * @type HTMLAttributes

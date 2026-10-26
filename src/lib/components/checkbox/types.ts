@@ -31,7 +31,7 @@ export type CheckboxProps = {
 	checked?: boolean;
 	/** Disables the user interaction. */
 	disabled?: boolean;
-	/** The content of the label associated with the checkbox.
+	/** The content of the label associated with the checkbox. Inside a `Label`, it is not rendered
 	 * @type Snippet
 	 */
 	children?: Snippet;

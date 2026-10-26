@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import { PREFIX } from '$constants';
 	import type { ToggleSwitchProps } from './types.ts';
 
@@ -6,10 +7,12 @@
 	const COMPONENT_NAME = 'toggle-switch';
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
+	const labelContext = claimLabel(() => id);
+
 	let {
 		ref = $bindable(),
 		checked = $bindable(),
-		id = ID,
+		id = labelContext?.fieldId ?? ID,
 		name = id,
 		label,
 		wrapperAttributes,
@@ -35,7 +38,8 @@
 -->
 <div {...wrapperAttributes} class={['fs-toggle-switch', wrapperAttributes?.class]} bind:this={wrapperRef}>
 	<input {...attributes} type="checkbox" role="switch" {id} {name} bind:checked bind:this={ref} />
-	{#if label}
+	<!-- Inside a Label, the Label names the field instead. -->
+	{#if label && !labelContext}
 		<label for={id}>
 			{label}
 		</label>

@@ -1,15 +1,18 @@
 <script lang="ts">
-	import { on } from 'svelte/events';
+	import { claimLabel } from '../label/label-context.ts';
 	import { floating } from '$internal';
 	import { offset, shift } from '@floating-ui/dom';
 	import { Flyout, TextBoxButton, TextBox } from '$lib/index.js';
 	import { ChevronUpFilled, ChevronDownFilled, ChevronUpDownFilled } from 'fluentui-icons-svelte';
 	import type { NumberBoxProps } from './types.ts';
+	import { onClickOutside } from 'runed';
 
 	const ID = $props.id();
 
+	const label = claimLabel(() => id);
+
 	let {
-		id = 'input-' + ID,
+		id = label?.fieldId ?? 'input-' + ID,
 		name = id,
 		value = $bindable(),
 		variant = 'inline',
@@ -21,19 +24,11 @@
 	}: NumberBoxProps = $props();
 
 	let openFlyout = $state(false);
-	let cleanEvent: () => void;
 
-	let handler = (e: Event) => {
-		if (!(e.target as HTMLElement).closest(`.${id}`)) {
-			openFlyout = false;
-			cleanEvent();
-		}
-	};
-
-	const compactToggler = () => {
-		openFlyout = true;
-		cleanEvent = on(document, 'click', handler);
-	};
+	onClickOutside(
+		() => wrapperRef,
+		() => (openFlyout = false)
+	);
 </script>
 
 <!-- @component
@@ -57,6 +52,7 @@
 	{placeholder}
 	bind:value
 	bind:ref
+	inputmode="numeric"
 >
 	{#if variant === 'inline'}
 		<TextBoxButton aria-label="Increase Number" onclick={() => (value = value ? ++value : 1)}>
@@ -66,7 +62,7 @@
 			<ChevronDownFilled />
 		</TextBoxButton>
 	{:else}
-		<TextBoxButton aria-label="Open" onclick={() => compactToggler()}>
+		<TextBoxButton aria-label="Open" onclick={() => (openFlyout = !openFlyout)}>
 			<ChevronUpDownFilled />
 		</TextBoxButton>
 		{#if openFlyout}

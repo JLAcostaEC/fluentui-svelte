@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import { invokeHandlers } from '$internal';
 	import { PREFIX } from '$constants';
 	import StarFilled from 'fluentui-icons-svelte/StarFilled.svelte';
@@ -12,6 +13,8 @@
 	const COMPONENT_NAME = 'rating';
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 	const VALUE_ID = `${ID}-value`;
+
+	const labelContext = claimLabel(() => undefined);
 
 	let {
 		value = $bindable(0),
@@ -101,7 +104,9 @@
 	bind:this={wrapperRef}
 	role="radiogroup"
 	onpointerleave={(e) => invokeHandlers(e, [], [() => (hovered = undefined), wrapperAttributes?.onpointerleave])}
-	aria-label={wrapperAttributes?.['aria-label'] ?? (wrapperAttributes?.['aria-labelledby'] ? undefined : 'Rating')}
+	aria-labelledby={wrapperAttributes?.['aria-labelledby'] ?? labelContext?.labelId}
+	aria-label={wrapperAttributes?.['aria-label'] ??
+		(wrapperAttributes?.['aria-labelledby'] || labelContext ? undefined : 'Rating')}
 	aria-describedby={[wrapperAttributes?.['aria-describedby'], VALUE_ID].filter(Boolean).join(' ')}
 >
 	<span id={VALUE_ID} hidden>Current rating: {value} out of {_max}.</span>

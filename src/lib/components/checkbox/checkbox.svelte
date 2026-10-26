@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import CheckmarkFilled from 'fluentui-icons-svelte/CheckmarkFilled.svelte';
 	import SubtractFilled from 'fluentui-icons-svelte/SubtractFilled.svelte';
 	import { PREFIX } from '$constants';
@@ -8,12 +9,14 @@
 	const COMPONENT_NAME = 'checkbox';
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
+	const labelContext = claimLabel(() => id);
+
 	let {
 		ref = $bindable(),
 		wrapperRef = $bindable(),
 		checked = $bindable(),
 		indeterminate = $bindable(),
-		id = ID,
+		id = labelContext?.fieldId ?? ID,
 		name = id,
 		'aria-hidden': ariaHidden,
 		disabled,
@@ -56,7 +59,8 @@
 		<SubtractFilled class="indeterminate" />
 		<CheckmarkFilled class="checked" />
 	</div>
-	{#if children}
+	<!-- Inside a Label, the Label names the field instead. -->
+	{#if children && !labelContext}
 		<label for={id}>{@render children()}</label>
 	{/if}
 </div>

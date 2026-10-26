@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import { PREFIX } from '$constants';
 	import type { RadioButtonProps } from './types.ts';
 
@@ -6,11 +7,13 @@
 	const COMPONENT_NAME = 'radio-button';
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
+	const labelContext = claimLabel(() => id);
+
 	let {
 		ref = $bindable(),
 		wrapperRef = $bindable(),
 		group = $bindable(undefined),
-		id = ID,
+		id = labelContext?.fieldId ?? ID,
 		label,
 		name = id,
 		value,
@@ -40,7 +43,8 @@
 
 <div {...wrapperAttributes} class={['fs-radio-button', wrapperAttributes?.class]} bind:this={wrapperRef}>
 	<input {...attributes} type="radio" {id} {name} {value} {checked} bind:this={ref} bind:group />
-	{#if label}
+	<!-- Inside a Label, the Label names the field instead. -->
+	{#if label && !labelContext}
 		<label for={id}>{label}</label>
 	{/if}
 </div>

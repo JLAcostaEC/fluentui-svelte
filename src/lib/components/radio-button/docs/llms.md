@@ -61,7 +61,7 @@ HTML attributes, including class, id and ARIA attributes, apply to the control e
 
 | Name                         | Type               | Default | Description                                                                          |
 | ---------------------------- | ------------------ | ------- | ------------------------------------------------------------------------------------ |
-| `label`                      | `string`           |         | The label displayed next to the radio button.                                        |
+| `label`                      | `string`           |         | The label displayed next to the radio button. Inside a `Label`, it is not rendered   |
 | `group` _bindable_           | `unknown`          |         | Bindable value representing a group of radio inputs that the input will be bound to. |
 | `checked` _bindable_         | `boolean`          | `false` | Whether the radio button is selected.                                                |
 | `ref` _bindable_             | `HTMLInputElement` |         | The DOM reference of the radio button element.                                       |

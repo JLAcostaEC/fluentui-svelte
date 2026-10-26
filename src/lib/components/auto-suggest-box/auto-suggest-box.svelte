@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import { onMount, tick } from 'svelte';
 	import { SvelteMap } from 'svelte/reactivity';
 	import { on } from 'svelte/events';
@@ -21,8 +22,10 @@
 	const FALLBACK_ID = $props.id();
 	const ID = `${PREFIX}autosuggestbox-${FALLBACK_ID}`;
 
+	const labelContext = claimLabel(() => id);
+
 	let {
-		id = `${ID}-input`,
+		id = labelContext?.fieldId ?? `${ID}-input`,
 		wrapperAttributes,
 		onfocus,
 		onClear,

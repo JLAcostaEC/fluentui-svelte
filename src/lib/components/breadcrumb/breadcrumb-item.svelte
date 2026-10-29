@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { BreadcrumbItemProps } from './types.ts';
 
-	let { ref = $bindable(), class: classes, children, ...attributes }: BreadcrumbItemProps = $props();
+	let { ref = $bindable(null), class: classes, children, ...attributes }: BreadcrumbItemProps = $props();
 </script>
 
 <!--

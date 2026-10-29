@@ -1,5 +1,5 @@
 import type { Component } from 'svelte';
-import type { HTMLAttributes } from 'svelte/elements';
+import type { HTMLAttributes, HTMLInputAttributes } from 'svelte/elements';
 
 /** @propsmith RatingProps */
 export type RatingProps = {
@@ -28,18 +28,32 @@ export type RatingProps = {
 	 * @type Component
 	 */
 	iconOutline?: Component;
-	/** The name of the radio inputs. Generated when not provided. */
-	name?: string;
 	/** Generates the accessible label of the radio input for a rating value.
 	 * @default (rating) => `${rating}`
 	 */
 	itemLabel?: (rating: number) => string;
 	/** Called when the user changes the rating. */
 	onChange?: (value: number) => void;
-	/** The class to apply to the rating. */
-	class?: string;
-	/** The DOM reference of the rating element.
+	/** The DOM reference of the radiogroup element.
 	 * @bindable
 	 */
-	ref?: HTMLElement;
-} & Omit<HTMLAttributes<HTMLDivElement>, 'onchange'>;
+	wrapperRef?: HTMLDivElement | null;
+	/** The attributes to spread on the radiogroup element. This is where its `aria-label`, `aria-labelledby`, `aria-invalid`, `id` and `class` go.
+	 * @type HTMLAttributes
+	 */
+	wrapperAttributes?: HTMLAttributes<HTMLDivElement>;
+} & Omit<
+	HTMLInputAttributes,
+	| 'type'
+	| 'value'
+	| 'checked'
+	| 'max'
+	| 'step'
+	| 'size'
+	| 'id'
+	| 'class'
+	| 'style'
+	| 'aria-label'
+	| 'aria-invalid'
+	| 'children'
+>;

@@ -17,11 +17,11 @@ export type BreadcrumbProps = {
 	/** The DOM reference of the `nav`.
 	 * @bindable
 	 */
-	ref?: HTMLElement;
+	ref?: HTMLElement | null;
 	/** The DOM reference of the list.
 	 * @bindable
 	 */
-	listRef?: HTMLOListElement;
+	listRef?: HTMLOListElement | null;
 	/** The attributes to spread on the list element.
 	 * @type HTMLOlAttributes
 	 */
@@ -42,7 +42,7 @@ export type BreadcrumbItemProps = {
 	/** The DOM reference of the item.
 	 * @bindable
 	 */
-	ref?: HTMLLIElement;
+	ref?: HTMLLIElement | null;
 } & HTMLAttributes<HTMLLIElement>;
 
 /** @propsmith BreadcrumbButtonProps */
@@ -51,7 +51,7 @@ export type BreadcrumbButtonProps<T extends BreadcrumbItemGenerics = 'button'> =
 	 * @type BreadcrumbItemElementDOMType[T]
 	 * @bindable
 	 */
-	ref?: BreadcrumbItemElementDOMType[T];
+	ref?: BreadcrumbItemElementDOMType[T] | null;
 	/** The DOM element to render. A step that goes somewhere is an anchor and takes `href`.
 	 * @type 'button' | 'a'
 	 * @default 'button'
@@ -83,5 +83,5 @@ export type BreadcrumbDividerProps = {
 	/** The DOM reference of the divider.
 	 * @bindable
 	 */
-	ref?: HTMLLIElement;
+	ref?: HTMLLIElement | null;
 } & HTMLAttributes<HTMLLIElement>;

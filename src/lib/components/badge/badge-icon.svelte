@@ -11,7 +11,7 @@
 		class: classes,
 		color,
 		style,
-		ref = $bindable(),
+		ref = $bindable(null),
 		...attributes
 	}: BadgeIconProps = $props();
 

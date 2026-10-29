@@ -8,7 +8,7 @@
 	const FALLBACK_ID = $props.id();
 	const ID = `${PREFIX}-dropdown-option-${FALLBACK_ID}`;
 
-	let { value, text, disabled, id = ID, ref = $bindable(), children }: DropdownOptionProps = $props();
+	let { value, text, disabled, id = ID, ref = $bindable(null), children }: DropdownOptionProps = $props();
 
 	const context = getDropdownContext();
 

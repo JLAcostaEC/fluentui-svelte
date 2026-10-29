@@ -103,9 +103,9 @@ To add a menu to the split button, please refer to the Menu documentation for de
 | `disabled`                    | `boolean`                                         | `false`     | Disables the user interaction on both buttons.                                               |
 | `primaryButtonProps`          | `ButtonProps`                                     |             | The props to spread on the primary button.                                                   |
 | `menuTriggerProps`            | `ButtonProps`                                     |             | The props to spread on the button that opens the menu.                                       |
-| `wrapperRef` _bindable_       | `HTMLDivElement`                                  |             | The DOM reference of the element wrapping both buttons.                                      |
-| `primaryButtonRef` _bindable_ | `HTMLButtonElement`                               |             | The DOM reference of the primary button.                                                     |
-| `menuTriggerRef` _bindable_   | `HTMLButtonElement`                               |             | The DOM reference of the button that opens the menu.                                         |
+| `wrapperRef` _bindable_       | `HTMLDivElement` &#124; `null`                    |             | The DOM reference of the element wrapping both buttons.                                      |
+| `primaryButtonRef` _bindable_ | `HTMLButtonElement` &#124; `null`                 |             | The DOM reference of the primary button.                                                     |
+| `menuTriggerRef` _bindable_   | `HTMLButtonElement` &#124; `null`                 |             | The DOM reference of the button that opens the menu.                                         |
 | HTML Attributes               |                                                   |             |                                                                                              |
 
 <!-- /props:SplitButtonProps -->

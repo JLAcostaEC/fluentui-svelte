@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import { PREFIX } from '$constants';
 	import type { RadioButtonProps } from './types.ts';
 
@@ -6,18 +7,30 @@
 	const COMPONENT_NAME = 'radio-button';
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
+	const labelContext = claimLabel(() => id);
+
 	let {
-		ref = $bindable(),
-		wrapperRef = $bindable(),
-		group = $bindable(undefined),
-		id = ID,
+		ref = $bindable(null),
+		wrapperRef = $bindable(null),
+		group = $bindable(null),
+		id = labelContext?.fieldId ?? ID,
 		label,
 		name = id,
 		value,
-		checked = $bindable(false),
+		checked = $bindable(null),
 		wrapperAttributes,
 		...attributes
 	}: RadioButtonProps = $props();
+
+	/** What `bind:group` reads and writes. Without a group, `checked` decides: an empty group (`null`) matches no value. */
+	const binding = {
+		get group() {
+			return group ?? (checked ? value : null);
+		},
+		set group(selected) {
+			group = selected;
+		}
+	};
 </script>
 
 <!-- 
@@ -39,8 +52,9 @@
  -->
 
 <div {...wrapperAttributes} class={['fs-radio-button', wrapperAttributes?.class]} bind:this={wrapperRef}>
-	<input {...attributes} type="radio" {id} {name} {value} {checked} bind:this={ref} bind:group />
-	{#if label}
+	<input {...attributes} type="radio" {id} {name} {value} {checked} bind:this={ref} bind:group={binding.group} />
+	<!-- Inside a Label, the Label names the field instead. -->
+	{#if label && !labelContext}
 		<label for={id}>{label}</label>
 	{/if}
 </div>
@@ -79,6 +93,12 @@
 				background-color: var(--fs-control-alt-fill-quaternary);
 				&::after {
 					transform: scale(0.7);
+				}
+			}
+			&:is(:user-invalid, [aria-invalid='true']) {
+				border-color: var(--fs-system-critical);
+				& + label {
+					color: var(--fs-system-critical);
 				}
 			}
 			&:checked {

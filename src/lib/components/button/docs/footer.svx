@@ -69,9 +69,9 @@
 | `disabled`                    | `boolean`                                         | `false`     | `<I18nMarkupMessage message={m.generated_fs_split_button_props_props_disabled} />`             |
 | `primaryButtonProps`          | `ButtonProps`                                     |             | `<I18nMarkupMessage message={m.generated_fs_split_button_props_props_primary_button_props} />` |
 | `menuTriggerProps`            | `ButtonProps`                                     |             | `<I18nMarkupMessage message={m.generated_fs_split_button_props_props_menu_trigger_props} />`   |
-| `wrapperRef` _bindable_       | `HTMLDivElement`                                  |             | `<I18nMarkupMessage message={m.generated_fs_split_button_props_props_wrapper_ref} />`          |
-| `primaryButtonRef` _bindable_ | `HTMLButtonElement`                               |             | `<I18nMarkupMessage message={m.generated_fs_split_button_props_props_primary_button_ref} />`   |
-| `menuTriggerRef` _bindable_   | `HTMLButtonElement`                               |             | `<I18nMarkupMessage message={m.generated_fs_split_button_props_props_menu_trigger_ref} />`     |
+| `wrapperRef` _bindable_       | `HTMLDivElement` &#124; `null`                    |             | `<I18nMarkupMessage message={m.generated_fs_split_button_props_props_wrapper_ref} />`          |
+| `primaryButtonRef` _bindable_ | `HTMLButtonElement` &#124; `null`                 |             | `<I18nMarkupMessage message={m.generated_fs_split_button_props_props_primary_button_ref} />`   |
+| `menuTriggerRef` _bindable_   | `HTMLButtonElement` &#124; `null`                 |             | `<I18nMarkupMessage message={m.generated_fs_split_button_props_props_menu_trigger_ref} />`     |
 | HTML Attributes               |                                                   |             |                                                                                                |
 
 <!-- /props:SplitButtonProps -->

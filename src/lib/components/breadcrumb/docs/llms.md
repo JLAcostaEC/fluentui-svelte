@@ -133,8 +133,8 @@ The label on the menu button is yours to write, and it is worth writing: a trigg
 
 | Name                 | Type                                         | Default    | Description                                                                                                                                                |
 | -------------------- | -------------------------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ref` _bindable_     | `HTMLElement`                                |            | The DOM reference of the `nav`.                                                                                                                            |
-| `listRef` _bindable_ | `HTMLOListElement`                           |            | The DOM reference of the list.                                                                                                                             |
+| `ref` _bindable_     | `HTMLElement` &#124; `null`                  |            | The DOM reference of the `nav`.                                                                                                                            |
+| `listRef` _bindable_ | `HTMLOListElement` &#124; `null`             |            | The DOM reference of the list.                                                                                                                             |
 | `listAttributes`     | `HTMLOlAttributes`                           |            | The attributes to spread on the list element.                                                                                                              |
 | `size`               | `'small'` &#124; `'medium'` &#124; `'large'` | `'medium'` | The size of every step and divider of the trail.                                                                                                           |
 | `focusMode`          | `'tab'` &#124; `'arrow'`                     | `'tab'`    | How the focus walks the trail: `tab` leaves every step its own tab stop, `arrow` gives the trail a single one and moves between steps with the arrow keys. |
@@ -147,10 +147,10 @@ The label on the menu button is yours to write, and it is worth writing: a trigg
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:BreadcrumbItemProps -->
 
-| Name                      | Type            | Default | Description                    |
-| ------------------------- | --------------- | ------- | ------------------------------ |
-| `ref` _bindable_          | `HTMLLIElement` |         | The DOM reference of the item. |
-| Element Attributes (`li`) |                 |         |                                |
+| Name                      | Type                          | Default | Description                    |
+| ------------------------- | ----------------------------- | ------- | ------------------------------ |
+| `ref` _bindable_          | `HTMLLIElement` &#124; `null` |         | The DOM reference of the item. |
+| Element Attributes (`li`) |                               |         |                                |
 
 <!-- /props:BreadcrumbItemProps -->
 
@@ -177,10 +177,10 @@ The label on the menu button is yours to write, and it is worth writing: a trigg
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:BreadcrumbDividerProps -->
 
-| Name                      | Type            | Default | Description                       |
-| ------------------------- | --------------- | ------- | --------------------------------- |
-| `ref` _bindable_          | `HTMLLIElement` |         | The DOM reference of the divider. |
-| Element Attributes (`li`) |                 |         |                                   |
+| Name                      | Type                          | Default | Description                       |
+| ------------------------- | ----------------------------- | ------- | --------------------------------- |
+| `ref` _bindable_          | `HTMLLIElement` &#124; `null` |         | The DOM reference of the divider. |
+| Element Attributes (`li`) |                               |         |                                   |
 
 <!-- /props:BreadcrumbDividerProps -->
 

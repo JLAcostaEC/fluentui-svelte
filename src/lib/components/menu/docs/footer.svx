@@ -31,8 +31,8 @@
 
 | Name              | Type                                 | Default | Description                                                                               |
 | ----------------- | ------------------------------------ | ------- | ----------------------------------------------------------------------------------------- |
-| `ref`             | `HTMLElement`                        |         | `<I18nMarkupMessage message={m.generated_fs_menu_popover_props_props_ref} />`             |
-| `open` _bindable_ | `boolean`                            |         | `<I18nMarkupMessage message={m.generated_fs_menu_popover_props_props_open} />`            |
+| `ref`             | `HTMLElement` &#124; `null`          |         | `<I18nMarkupMessage message={m.generated_fs_menu_popover_props_props_ref} />`             |
+| `open` _bindable_ | `boolean` &#124; `null`              |         | `<I18nMarkupMessage message={m.generated_fs_menu_popover_props_props_open} />`            |
 | `keepMounted`     | `boolean`                            | `false` | `<I18nMarkupMessage message={m.generated_fs_menu_popover_props_props_keep_mounted} />`    |
 | `placement`       | `ComputePositionConfig['placement']` |         | `<I18nMarkupMessage message={m.generated_fs_menu_popover_props_props_placement} />`       |
 | `positionConfig`  | `ComputePositionConfig`              |         | `<I18nMarkupMessage message={m.generated_fs_menu_popover_props_props_position_config} />` |
@@ -74,13 +74,13 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:MenuItemActionableProps -->
 
-| Name                           | Type      | Default | Description                                                                               |
-| ------------------------------ | --------- | ------- | ----------------------------------------------------------------------------------------- |
-| `checked` _bindable_           | `boolean` |         | `<I18nMarkupMessage message={m.generated_fs_menu_item_actionable_props_props_checked} />` |
-| `value`                        | `string`  | `id`    | `<I18nMarkupMessage message={m.generated_fs_menu_item_actionable_props_props_value} />`   |
-| `name`                         | `string`  | `id`    | `<I18nMarkupMessage message={m.generated_fs_menu_item_actionable_props_props_name} />`    |
-| `MenuItemProps` without `href` |           |         |                                                                                           |
-| `ButtonProps<'button'>`        |           |         |                                                                                           |
+| Name                           | Type                    | Default | Description                                                                               |
+| ------------------------------ | ----------------------- | ------- | ----------------------------------------------------------------------------------------- |
+| `checked` _bindable_           | `boolean` &#124; `null` |         | `<I18nMarkupMessage message={m.generated_fs_menu_item_actionable_props_props_checked} />` |
+| `value`                        | `string`                | `id`    | `<I18nMarkupMessage message={m.generated_fs_menu_item_actionable_props_props_value} />`   |
+| `name`                         | `string`                | `id`    | `<I18nMarkupMessage message={m.generated_fs_menu_item_actionable_props_props_name} />`    |
+| `MenuItemProps` without `href` |                         |         |                                                                                           |
+| `ButtonProps<'button'>`        |                         |         |                                                                                           |
 
 <!-- /props:MenuItemActionableProps -->
 
@@ -89,10 +89,10 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:MenuGroupProps -->
 
-| Name             | Type             | Default | Description                                                                      |
-| ---------------- | ---------------- | ------- | -------------------------------------------------------------------------------- |
-| `ref` _bindable_ | `HTMLDivElement` |         | `<I18nMarkupMessage message={m.generated_fs_menu_group_props_props_ref} />`      |
-| `header`         | `string`         |         | `<I18nMarkupMessage message={m.generated_fs_menu_group_props_props_header} />`   |
-| `children`       | `Snippet`        |         | `<I18nMarkupMessage message={m.generated_fs_menu_group_props_props_children} />` |
+| Name             | Type                           | Default | Description                                                                      |
+| ---------------- | ------------------------------ | ------- | -------------------------------------------------------------------------------- |
+| `ref` _bindable_ | `HTMLDivElement` &#124; `null` |         | `<I18nMarkupMessage message={m.generated_fs_menu_group_props_props_ref} />`      |
+| `header`         | `string`                       |         | `<I18nMarkupMessage message={m.generated_fs_menu_group_props_props_header} />`   |
+| `children`       | `Snippet`                      |         | `<I18nMarkupMessage message={m.generated_fs_menu_group_props_props_children} />` |
 
 <!-- /props:MenuGroupProps -->

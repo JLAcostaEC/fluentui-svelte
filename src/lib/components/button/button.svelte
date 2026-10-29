@@ -9,7 +9,7 @@
 		class: classes,
 		shape = 'rounded',
 		disabled,
-		ref = $bindable(),
+		ref = $bindable(null),
 		onclick,
 		onkeydown,
 		isMenuButton,

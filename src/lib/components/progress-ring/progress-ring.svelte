@@ -12,9 +12,9 @@
 		'aria-label': ariaLabel,
 		indeterminate,
 		value = $bindable(0),
-		ref = $bindable(),
-		railElement = $bindable(),
-		trackElement = $bindable(),
+		ref = $bindable(null),
+		railElement = $bindable(null),
+		trackElement = $bindable(null),
 		...attributes
 	}: ProgressRingProps = $props();
 

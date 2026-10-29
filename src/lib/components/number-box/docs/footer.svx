@@ -15,7 +15,7 @@
 
 | Name                          | Type                          | Default    | Description                                                                     |
 | ----------------------------- | ----------------------------- | ---------- | ------------------------------------------------------------------------------- |
-| `value` _bindable_            | `number`                      |            | `<I18nMarkupMessage message={m.generated_fs_number_box_props_props_value} />`   |
+| `value` _bindable_            | `number` &#124; `null`        |            | `<I18nMarkupMessage message={m.generated_fs_number_box_props_props_value} />`   |
 | `variant`                     | `'inline'` &#124; `'compact'` | `'inline'` | `<I18nMarkupMessage message={m.generated_fs_number_box_props_props_variant} />` |
 | `TextBoxProps` without `type` |                               |            |                                                                                 |
 

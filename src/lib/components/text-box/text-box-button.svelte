@@ -3,11 +3,11 @@
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 
 	let {
-		element = $bindable(),
+		element = $bindable(null),
 		type = 'button',
 		children,
 		...attributes
-	}: { element?: HTMLButtonElement; children: Snippet } & HTMLButtonAttributes = $props();
+	}: { element?: HTMLButtonElement | null; children: Snippet } & HTMLButtonAttributes = $props();
 </script>
 
 <button {...attributes} {type} bind:this={element}>

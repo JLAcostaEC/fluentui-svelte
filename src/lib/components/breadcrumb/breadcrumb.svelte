@@ -6,8 +6,8 @@
 	const TABSPOT_ITEMS = '.fs-breadcrumb-button';
 
 	let {
-		ref = $bindable(),
-		listRef = $bindable(),
+		ref = $bindable(null),
+		listRef = $bindable(null),
 		listAttributes,
 		size = 'medium',
 		focusMode = 'tab',

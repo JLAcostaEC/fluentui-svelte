@@ -9,11 +9,11 @@ export type AutoSuggestBoxProps = {
 	/** The DOM reference of the wrapper element.
 	 * @bindable
 	 */
-	wrapperRef?: HTMLDivElement;
+	wrapperRef?: HTMLDivElement | null;
 	/** The DOM reference of the text box element.
 	 * @bindable
 	 */
-	ref?: HTMLInputElement;
+	ref?: HTMLInputElement | null;
 	/** The current text of the box.
 	 * @default ''
 	 * @bindable
@@ -51,7 +51,8 @@ export type AutoSuggestBoxProps = {
 	 */
 	suggestionChosen?: (e: Event, selection: string) => void;
 	/** Called when Enter is pressed with no suggestion under the cursor, or when the search
-	 * button is clicked. This is where a fresh set of suggestions is fetched.
+	 * button is clicked. This is where a fresh set of suggestions is fetched. Enter then also
+	 * submits the form with the typed text, unless the event is prevented.
 	 */
 	querySubmitted?: (e: MouseEvent | KeyboardEvent, query: string) => void;
 	/** Bridge to a windowed list, for suggestion sets too long to render whole.
@@ -69,7 +70,7 @@ export type AutoSuggestBoxProps = {
 	/** The DOM reference of the flyout holding the suggestion list.
 	 * @bindable
 	 */
-	flyoutRef?: HTMLElement;
+	flyoutRef?: HTMLElement | null;
 	/** The props to spread on the flyout.
 	 * @type FlyoutProps
 	 */
@@ -77,7 +78,7 @@ export type AutoSuggestBoxProps = {
 	/** The DOM reference of the suggestion list.
 	 * @bindable
 	 */
-	listViewRef?: HTMLUListElement;
+	listViewRef?: HTMLUListElement | null;
 	/** The props to spread on the suggestion list.
 	 * @type ListViewItemProps
 	 */
@@ -105,7 +106,7 @@ export type AutoSuggestBoxContext = FSContext<
 	},
 	{
 		readonly searchValue?: string;
-		readonly textBoxRef?: HTMLInputElement;
+		readonly textBoxRef?: HTMLInputElement | null;
 		readonly lastTypedValue?: string;
 		open?: boolean;
 		activeOption?: OptionType | null;
@@ -133,7 +134,7 @@ export type AutoSuggestOptionProps = {
 	/** The DOM reference of the option element.
 	 * @bindable
 	 */
-	ref?: HTMLLIElement;
+	ref?: HTMLLIElement | null;
 	/** Takes the suggestion out of reach: it is shown, but the cursor steps over it. */
 	disabled?: boolean;
 	/** Where the suggestion sits in the whole set. A windowed list needs the real index,

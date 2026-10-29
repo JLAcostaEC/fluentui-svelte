@@ -502,14 +502,14 @@ The table renders whatever you put inside it, so any virtualization library work
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableCellLayoutProps -->
 
-| Name             | Type                         | Default | Description                                                                    |
-| ---------------- | ---------------------------- | ------- | ------------------------------------------------------------------------------ |
-| `ref` _bindable_ | `HTMLDivElement`             |         | The DOM reference of the layout element.                                       |
-| `media`          | `Snippet` &#124; `Component` |         | An icon, an avatar or any other visual element placed before the main content. |
-| `description`    | `string`                     |         | A second line of text that describes or complements the main content.          |
-| `appearance`     | `'primary'`                  |         | Emphasizes the cell by enlarging the media and bolding the main content.       |
-| `truncate`       | `boolean`                    |         | Clips the content with an ellipsis instead of letting it wrap.                 |
-| HTML Attributes  |                              |         |                                                                                |
+| Name             | Type                           | Default | Description                                                                    |
+| ---------------- | ------------------------------ | ------- | ------------------------------------------------------------------------------ |
+| `ref` _bindable_ | `HTMLDivElement` &#124; `null` |         | The DOM reference of the layout element.                                       |
+| `media`          | `Snippet` &#124; `Component`   |         | An icon, an avatar or any other visual element placed before the main content. |
+| `description`    | `string`                       |         | A second line of text that describes or complements the main content.          |
+| `appearance`     | `'primary'`                    |         | Emphasizes the cell by enlarging the media and bolding the main content.       |
+| `truncate`       | `boolean`                      |         | Clips the content with an ellipsis instead of letting it wrap.                 |
+| HTML Attributes  |                                |         |                                                                                |
 
 <!-- /props:TableCellLayoutProps -->
 
@@ -518,10 +518,10 @@ The table renders whatever you put inside it, so any virtualization library work
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableCellActionsProps -->
 
-| Name             | Type             | Default | Description                                                                          |
-| ---------------- | ---------------- | ------- | ------------------------------------------------------------------------------------ |
-| `ref` _bindable_ | `HTMLDivElement` |         | The DOM reference of the actions element.                                            |
-| `visible`        | `boolean`        |         | Keeps the actions on screen instead of waiting for the row to be hovered or focused. |
-| HTML Attributes  |                  |         |                                                                                      |
+| Name             | Type                           | Default | Description                                                                          |
+| ---------------- | ------------------------------ | ------- | ------------------------------------------------------------------------------------ |
+| `ref` _bindable_ | `HTMLDivElement` &#124; `null` |         | The DOM reference of the actions element.                                            |
+| `visible`        | `boolean`                      |         | Keeps the actions on screen instead of waiting for the row to be hovered or focused. |
+| HTML Attributes  |                                |         |                                                                                      |
 
 <!-- /props:TableCellActionsProps -->

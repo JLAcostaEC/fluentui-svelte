@@ -8,7 +8,7 @@
 		shape = 'rounded',
 		justify,
 		class: classes,
-		ref = $bindable(),
+		ref = $bindable(null),
 		...attributes
 	}: SkeletonProps<Tag> = $props();
 

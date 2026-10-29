@@ -6,7 +6,7 @@
 	const COMPONENT_NAME = 'menu-group';
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
-	let { ref = $bindable(), header, children }: MenuGroupProps = $props();
+	let { ref = $bindable(null), header, children }: MenuGroupProps = $props();
 </script>
 
 <div class="fs-menu-group" role="group" aria-labelledby="group-name-{ID}" bind:this={ref}>

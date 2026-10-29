@@ -36,7 +36,7 @@ HTML attributes, including class, id and ARIA attributes, apply to the control e
 
 | Name                          | Type                          | Default    | Description                                           |
 | ----------------------------- | ----------------------------- | ---------- | ----------------------------------------------------- |
-| `value` _bindable_            | `number`                      |            | The current value of the input.                       |
+| `value` _bindable_            | `number` &#124; `null`        |            | The current value of the input.                       |
 | `variant`                     | `'inline'` &#124; `'compact'` | `'inline'` | How the increment and decrement buttons are laid out. |
 | `TextBoxProps` without `type` |                               |            |                                                       |
 

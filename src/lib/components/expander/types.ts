@@ -32,7 +32,7 @@ export type ExpanderProps = {
 	/** The DOM reference of the expander element.
 	 * @bindable
 	 */
-	ref?: HTMLDetailsElement;
+	ref?: HTMLDetailsElement | null;
 	/** The icon to display before the label.
 	 * @type Snippet | Component
 	 */
@@ -40,7 +40,7 @@ export type ExpanderProps = {
 	/** The DOM reference of the summary element.
 	 * @bindable
 	 */
-	summaryRef?: HTMLElement;
+	summaryRef?: HTMLElement | null;
 	/** The HTML attributes to spread on the summary element.
 	 * @type HTMLAttributes<HTMLElement>
 	 */

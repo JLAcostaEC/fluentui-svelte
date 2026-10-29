@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import { PREFIX } from '$constants';
 	import { invokeHandlers } from '$internal';
 	import type { TextAreaProps } from './types.ts';
@@ -7,17 +8,19 @@
 	const COMPONENT_NAME = 'textarea';
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
+	const labelContext = claimLabel(() => id);
+
 	let {
-		id = ID,
+		id = labelContext?.fieldId ?? ID,
 		name = id,
 		value = $bindable(''),
-		ref = $bindable(),
+		ref = $bindable(null),
 		resize = 'vertical',
 		style,
 		wrapperAttributes,
 		onchange,
 		disabled = false,
-		wrapperRef = $bindable(),
+		wrapperRef = $bindable(null),
 		...attributes
 	}: TextAreaProps = $props();
 </script>
@@ -127,6 +130,11 @@
 			width: calc(100% + 0.125rem);
 			left: -0.063rem;
 			background: var(--fs-accent-fill-default);
+		}
+		&:has(textarea:is(:user-invalid, [aria-invalid='true'])):after {
+			width: calc(100% + 0.125rem);
+			left: -0.063rem;
+			background: var(--fs-system-critical);
 		}
 		&:has(textarea:focus) {
 			background: var(--fs-control-fill-input-active);

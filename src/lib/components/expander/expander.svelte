@@ -13,11 +13,11 @@
 		direction = 'down',
 		animation,
 		justify = false,
-		ref = $bindable(),
+		ref = $bindable(null),
 		expanded = $bindable(false),
 		children,
 		Icon,
-		summaryRef = $bindable(),
+		summaryRef = $bindable(null),
 		summaryAttributes,
 		...attributes
 	}: ExpanderProps = $props();

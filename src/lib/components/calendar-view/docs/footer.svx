@@ -10,7 +10,7 @@
 
 | Name                       | Type                                                                | Default                      | Description                                                                                      |
 | -------------------------- | ------------------------------------------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------ |
-| `ref` _bindable_           | `HTMLDivElement`                                                    |                              | `<I18nMarkupMessage message={m.generated_fs_calendar_view_props_props_ref} />`                   |
+| `ref` _bindable_           | `HTMLDivElement` &#124; `null`                                      |                              | `<I18nMarkupMessage message={m.generated_fs_calendar_view_props_props_ref} />`                   |
 | `value` _bindable_         | `Date` &#124; `Date[]` &#124; `null`                                | `null`                       | `<I18nMarkupMessage message={m.generated_fs_calendar_view_props_props_value} />`                 |
 | `selectionMode`            | `'single'` &#124; `'multiple'` &#124; `'range'`                     | `'single'`                   | `<I18nMarkupMessage message={m.generated_fs_calendar_view_props_props_selection_mode} />`        |
 | `range` _bindable_         | `{ start: Date` &#124; `null; end: Date` &#124; `null; }`           | `{ start: null, end: null }` | `<I18nMarkupMessage message={m.generated_fs_calendar_view_props_props_range} />`                 |

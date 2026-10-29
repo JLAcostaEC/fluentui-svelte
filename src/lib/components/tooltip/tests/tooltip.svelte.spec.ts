@@ -117,6 +117,17 @@ describe('visibility', () => {
 		await vi.waitFor(() => expect(isHidden()).toBe(true));
 	});
 
+	it('closes on Escape', async () => {
+		render(TooltipTestWrapper, { openDelay: 0, hideDelay: 0 });
+
+		document.querySelector<HTMLButtonElement>('button')?.focus();
+		await vi.waitFor(() => expect(isHidden()).toBe(false));
+
+		await userEvent.keyboard('{Escape}');
+
+		await vi.waitFor(() => expect(isHidden()).toBe(true));
+	});
+
 	it('reports the change to onVisibleChange', async () => {
 		const onVisibleChange = vi.fn();
 		render(TooltipTestWrapper, { openDelay: 0, onVisibleChange });

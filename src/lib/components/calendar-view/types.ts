@@ -72,7 +72,7 @@ export type CalendarViewProps = {
 	/** The DOM reference of the calendar element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** The selected date, or an array of dates when `selectionMode` is `'multiple'`. Unused by `'range'`.
 	 * @default null
 	 * @bindable

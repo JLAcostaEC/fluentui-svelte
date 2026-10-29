@@ -5,7 +5,7 @@ export type NumberBoxProps = {
 	/** The current value of the input.
 	 * @bindable
 	 */
-	value?: number;
+	value?: number | null;
 	/** How the increment and decrement buttons are laid out.
 	 *
 	 * `inline`: the buttons sit inside the input, one next to the other.

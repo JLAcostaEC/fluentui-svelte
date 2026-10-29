@@ -32,7 +32,7 @@ export type PersonaProps = {
 	/** The DOM reference of the persona element.
 	 * @bindable
 	 */
-	element?: HTMLDivElement;
+	element?: HTMLDivElement | null;
 	/** The props to spread on the avatar.
 	 * @type AvatarProps
 	 */

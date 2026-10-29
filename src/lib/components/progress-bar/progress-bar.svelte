@@ -8,11 +8,11 @@
 		'aria-label': ariaLabel,
 		min = 0,
 		max = 100,
-		value = $bindable(),
-		ref = $bindable(),
-		railElement = $bindable(),
-		trackElement = $bindable(),
-		secondaryTrackElement = $bindable(),
+		value = $bindable(null),
+		ref = $bindable(null),
+		railElement = $bindable(null),
+		trackElement = $bindable(null),
+		secondaryTrackElement = $bindable(null),
 		...attributes
 	}: ProgressBarProps = $props();
 

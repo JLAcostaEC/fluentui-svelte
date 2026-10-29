@@ -11,5 +11,5 @@ export type HyperlinkProps = {
 	/** The DOM reference of the anchor element.
 	 * @bindable
 	 */
-	ref?: HTMLAnchorElement;
+	ref?: HTMLAnchorElement | null;
 } & HTMLAnchorAttributes;

@@ -31,7 +31,7 @@ export type BadgeProps = {
 	/** The DOM reference of the badge element.
 	 * @bindable
 	 */
-	ref?: HTMLSpanElement;
+	ref?: HTMLSpanElement | null;
 } & PolymorphicProps<'span'>;
 
 /** The presence of a person, rendered by BadgeIcon on its own or by an Avatar through its badge prop. */
@@ -69,5 +69,5 @@ export type BadgeIconProps = {
 	/** The DOM reference of the badge element.
 	 * @bindable
 	 */
-	ref?: HTMLSpanElement;
+	ref?: HTMLSpanElement | null;
 } & Omit<PolymorphicProps<'span'>, 'children'>;

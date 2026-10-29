@@ -9,7 +9,7 @@
 
 	let {
 		as = 'h3' as T,
-		ref = $bindable(),
+		ref = $bindable(null),
 		id = FALLBACK_ID,
 		class: classes,
 		children,

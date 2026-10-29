@@ -3,7 +3,6 @@
 		AutoSuggestBox,
 		AutoSuggestBoxOption,
 		CalendarDatePicker,
-		CalendarView,
 		Checkbox,
 		DatePicker,
 		Dropdown,
@@ -39,77 +38,75 @@
 		| 'DatePicker'
 		| 'TimePicker'
 		| 'CalendarDatePicker'
-		| 'CalendarView'
 		| 'Slider'
 		| 'Rating';
 
 	let {
 		control,
+		fieldId,
+		labelFor,
 		label = 'Field label',
 		labelPosition = 'above',
-		required = false
+		required = false,
+		second = false
 	}: {
 		control: Control;
+		/** An id of the field's own. */
+		fieldId?: string;
+		/** The `for` of the Label. */
+		labelFor?: string;
 		label?: string;
 		labelPosition?: LabelProps['labelPosition'];
 		required?: boolean;
+		/** Puts a second field in the Label, after the control. */
+		second?: boolean;
 	} = $props();
-
-	const id = $props.id();
-	const controlId = id + '-control';
-	const labelId = id + '-label';
-	const native = $derived(control !== 'Slider' && control !== 'Rating' && control !== 'CalendarView');
 </script>
 
 <FluentUISvelte>
-	<Label
-		{label}
-		{labelPosition}
-		id={labelId}
-		for={native ? controlId : undefined}
-		required={required ? { message: 'Required field' } : undefined}
-	>
+	<Label {label} {labelPosition} for={labelFor} required={required ? { message: 'Required field' } : undefined}>
 		{#if control === 'TextBox'}
-			<TextBox id={controlId} value="Existing value" />
+			<TextBox id={fieldId} value="Existing value" />
 		{:else if control === 'NumberBox'}
-			<NumberBox id={controlId} value={42} />
+			<NumberBox id={fieldId} value={42} />
 		{:else if control === 'TextArea'}
-			<TextArea id={controlId} value="Existing value" />
+			<TextArea id={fieldId} value="Existing value" />
 		{:else if control === 'DropdownSelect'}
-			<DropdownSelect id={controlId} value="apple">
+			<DropdownSelect id={fieldId} value="apple">
 				<DropdownSelectOption value="apple">Apple</DropdownSelectOption>
 			</DropdownSelect>
 		{:else if control === 'Checkbox'}
-			<Checkbox id={controlId} />
+			<Checkbox id={fieldId}>Inner text</Checkbox>
 		{:else if control === 'RadioButton'}
-			<RadioButton id={controlId} value="apple" />
+			<RadioButton id={fieldId} value="apple" label="Inner text" />
 		{:else if control === 'ToggleSwitch'}
-			<ToggleSwitch id={controlId} />
+			<ToggleSwitch id={fieldId} label="Inner text" />
 		{:else if control === 'Dropdown'}
-			<Dropdown id={controlId} value="apple">
+			<Dropdown id={fieldId} value="apple">
 				<DropdownOption value="apple">Apple</DropdownOption>
 			</Dropdown>
 		{:else if control === 'TagPicker'}
-			<TagPicker id={controlId} selectedOptions={['apple']}>
+			<TagPicker id={fieldId} selectedOptions={['apple']}>
 				<TagPickerOption value="apple">Apple</TagPickerOption>
 				<TagPickerOption value="banana">Banana</TagPickerOption>
 			</TagPicker>
 		{:else if control === 'AutoSuggestBox'}
-			<AutoSuggestBox id={controlId} value="Apple">
+			<AutoSuggestBox id={fieldId} value="Apple">
 				<AutoSuggestBoxOption index={0} value="apple">Apple</AutoSuggestBoxOption>
 			</AutoSuggestBox>
 		{:else if control === 'DatePicker'}
-			<DatePicker id={controlId} />
+			<DatePicker id={fieldId} />
 		{:else if control === 'TimePicker'}
-			<TimePicker id={controlId} />
+			<TimePicker id={fieldId} />
 		{:else if control === 'CalendarDatePicker'}
-			<CalendarDatePicker id={controlId} />
-		{:else if control === 'CalendarView'}
-			<CalendarView id={controlId} role="group" aria-labelledby={labelId} value={new Date(2026, 0, 15)} />
+			<CalendarDatePicker id={fieldId} />
 		{:else if control === 'Slider'}
-			<Slider id={controlId} aria-labelledby={labelId} tooltip={false} />
+			<Slider id={fieldId} tooltip={false} />
 		{:else if control === 'Rating'}
-			<Rating id={controlId} aria-labelledby={labelId} />
+			<Rating />
+		{/if}
+		{#if second}
+			<TextBox placeholder="Second" />
 		{/if}
 	</Label>
 </FluentUISvelte>

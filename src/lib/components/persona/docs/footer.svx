@@ -19,7 +19,7 @@
 | `textPosition`             | `'top'` &#124; `'bottom'` &#124; `'left'` &#124; `'right'` | `'right'`  | `<I18nMarkupMessage message={m.generated_fs_persona_props_props_text_position} />`  |
 | `presenceOnly`             | `boolean`                                                  |            | `<I18nMarkupMessage message={m.generated_fs_persona_props_props_presence_only} />`  |
 | `avatarAlign`              | `'start'` &#124; `'center'` &#124; `'end'`                 | `'center'` | `<I18nMarkupMessage message={m.generated_fs_persona_props_props_avatar_align} />`   |
-| `element` _bindable_       | `HTMLDivElement`                                           |            | `<I18nMarkupMessage message={m.generated_fs_persona_props_props_element} />`        |
+| `element` _bindable_       | `HTMLDivElement` &#124; `null`                             |            | `<I18nMarkupMessage message={m.generated_fs_persona_props_props_element} />`        |
 | `avatarProps`              | `AvatarProps`                                              |            | `<I18nMarkupMessage message={m.generated_fs_persona_props_props_avatar_props} />`   |
 | `presence`                 | `BadgePresence`                                            |            | `<I18nMarkupMessage message={m.generated_fs_persona_props_props_presence} />`       |
 | Element Attributes (`div`) |                                                            |            |                                                                                     |

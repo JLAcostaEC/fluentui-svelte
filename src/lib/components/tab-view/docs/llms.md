@@ -104,8 +104,8 @@ A disabled tab cannot be selected, and the arrow keys pass over it rather than l
 
 | Name                       | Type                                                    | Default   | Description                                                                                                                                       |
 | -------------------------- | ------------------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ref` _bindable_           | `HTMLDivElement`                                        |           | The DOM reference of the element wrapping the strip.                                                                                              |
-| `listRef` _bindable_       | `HTMLDivElement`                                        |           | The DOM reference of the tab list.                                                                                                                |
+| `ref` _bindable_           | `HTMLDivElement` &#124; `null`                          |           | The DOM reference of the element wrapping the strip.                                                                                              |
+| `listRef` _bindable_       | `HTMLDivElement` &#124; `null`                          |           | The DOM reference of the tab list.                                                                                                                |
 | `listAttributes`           | `HTMLAttributes`                                        |           | The Attributes to spread on the tab list element, where the `tablist` role and its label belong.                                                  |
 | `activeTab` _bindable_     | `string`                                                |           | The value of the selected tab.                                                                                                                    |
 | `onTabChange`              | `(event: Event, value: string) => void`                 |           | Fired when the selected tab changes.                                                                                                              |
@@ -127,7 +127,7 @@ A disabled tab cannot be selected, and the arrow keys pass over it rather than l
 
 | Name                       | Type                                    | Default | Description                                                                             |
 | -------------------------- | --------------------------------------- | ------- | --------------------------------------------------------------------------------------- |
-| `ref` _bindable_           | `HTMLDivElement`                        |         | The DOM reference of the tab element.                                                   |
+| `ref` _bindable_           | `HTMLDivElement` &#124; `null`          |         | The DOM reference of the tab element.                                                   |
 | `value`                    | `string`                                |         | The value that identifies the tab. Defaults to a generated id.                          |
 | `icon`                     | `Snippet` &#124; `Component`            |         | The icon to display before the label.                                                   |
 | `closable`                 | `boolean`                               |         | Shows the close button of the tab. Falls back to the `closable` of the strip.           |

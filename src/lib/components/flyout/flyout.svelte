@@ -5,7 +5,7 @@
 	import type { FlyoutProps } from './types.ts';
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		children,
 		floating = false,
 		reference,

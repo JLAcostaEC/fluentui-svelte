@@ -25,11 +25,11 @@ export type TabViewProps = {
 	/** The DOM reference of the element wrapping the strip.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** The DOM reference of the tab list.
 	 * @bindable
 	 */
-	listRef?: HTMLDivElement;
+	listRef?: HTMLDivElement | null;
 	/** The Attributes to spread on the tab list element, where the `tablist` role and its label belong.
 	 * @type HTMLAttributes
 	 */
@@ -72,7 +72,7 @@ export type TabViewTabProps = {
 	/** The DOM reference of the tab element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** The value that identifies the tab. Defaults to a generated id. */
 	value?: string;
 	/** The icon to display before the label.

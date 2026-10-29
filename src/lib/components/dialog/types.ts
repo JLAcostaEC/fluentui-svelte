@@ -47,7 +47,7 @@ export type DialogProps = {
 	/** Controls the open state of the dialog.
 	 * @bindable
 	 */
-	open?: boolean;
+	open?: boolean | null;
 	/** Called whenever the dialog opens or closes. */
 	onOpenChange?: (open: boolean) => void;
 	/** The parts of the dialog: a trigger and a surface. */
@@ -59,7 +59,7 @@ export type DialogSurfaceProps = {
 	/** The DOM reference of the dialog element.
 	 * @bindable
 	 */
-	ref?: HTMLDialogElement;
+	ref?: HTMLDialogElement | null;
 } & HTMLAttributes<HTMLDialogElement>;
 
 /** @propsmith DialogTriggerProps */
@@ -67,7 +67,7 @@ export type DialogTriggerProps = {
 	/** The DOM reference of the trigger element.
 	 * @bindable
 	 */
-	ref?: HTMLButtonElement;
+	ref?: HTMLButtonElement | null;
 } & ButtonProps<'button'>;
 
 /** @propsmith DialogContentProps */
@@ -75,7 +75,7 @@ export type DialogContentProps = {
 	/** The DOM reference of the content element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 } & HTMLAttributes<HTMLDivElement>;
 
 /** @propsmith DialogActionsProps */
@@ -83,7 +83,7 @@ export type DialogActionsProps = {
 	/** The DOM reference of the actions element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** Stretches every action to share the available width evenly. */
 	fluid?: boolean;
 	/** Where the actions sit along the main axis.
@@ -108,7 +108,7 @@ export type DialogTitleProps<T extends DialogTitleTag> = {
 	 * @type HTMLDivElement | HTMLHeadingElement
 	 * @bindable
 	 */
-	ref?: DialogTitleRefType[T];
+	ref?: DialogTitleRefType[T] | null;
 	/** The HTML element to render the title as.
 	 * @type DialogTitleTag
 	 * @default 'h3'
@@ -125,7 +125,7 @@ export type DialogContext = FSContext<
 	},
 	{
 		dialogRef: HTMLDialogElement | undefined;
-		readonly open: boolean | undefined;
+		readonly open: boolean | null | undefined;
 		/** Set by `DialogTitle`, to allow the surface pointing `aria-labelledby` at it. */
 		titleId: string | undefined;
 	},

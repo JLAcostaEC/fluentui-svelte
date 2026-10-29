@@ -3,7 +3,7 @@
 	import { RenderSoC } from '$internal';
 	import { getCardContext } from './card-context.svelte.ts';
 
-	let { ref = $bindable(), class: classes, action, ...attributes }: CardFooterProps = $props();
+	let { ref = $bindable(null), class: classes, action, ...attributes }: CardFooterProps = $props();
 
 	const context = getCardContext();
 

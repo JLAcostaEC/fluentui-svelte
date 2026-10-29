@@ -59,14 +59,14 @@ HTML attributes, including class, id and ARIA attributes, apply to the control e
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:RadioButtonProps -->
 
-| Name                         | Type               | Default | Description                                                                          |
-| ---------------------------- | ------------------ | ------- | ------------------------------------------------------------------------------------ |
-| `label`                      | `string`           |         | The label displayed next to the radio button.                                        |
-| `group` _bindable_           | `unknown`          |         | Bindable value representing a group of radio inputs that the input will be bound to. |
-| `checked` _bindable_         | `boolean`          | `false` | Whether the radio button is selected.                                                |
-| `ref` _bindable_             | `HTMLInputElement` |         | The DOM reference of the radio button element.                                       |
-| `wrapperAttributes`          | `HTMLAttributes`   |         | The attributes to spread on the wrapper element.                                     |
-| `wrapperRef` _bindable_      | `HTMLDivElement`   |         | The DOM reference of the wrapper element.                                            |
-| Element Attributes (`input`) |                    |         |                                                                                      |
+| Name                         | Type                             | Default | Description                                                                          |
+| ---------------------------- | -------------------------------- | ------- | ------------------------------------------------------------------------------------ |
+| `label`                      | `string`                         |         | The label displayed next to the radio button. Inside a `Label`, it is not rendered   |
+| `group` _bindable_           | `unknown`                        |         | Bindable value representing a group of radio inputs that the input will be bound to. |
+| `checked` _bindable_         | `boolean` &#124; `null`          | `false` | Whether the radio button is selected.                                                |
+| `ref` _bindable_             | `HTMLInputElement` &#124; `null` |         | The DOM reference of the radio button element.                                       |
+| `wrapperAttributes`          | `HTMLAttributes`                 |         | The attributes to spread on the wrapper element.                                     |
+| `wrapperRef` _bindable_      | `HTMLDivElement` &#124; `null`   |         | The DOM reference of the wrapper element.                                            |
+| Element Attributes (`input`) |                                  |         |                                                                                      |
 
 <!-- /props:RadioButtonProps -->

@@ -13,13 +13,13 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:ToggleSwitchProps -->
 
-| Name                         | Type               | Default | Description                                                                                   |
-| ---------------------------- | ------------------ | ------- | --------------------------------------------------------------------------------------------- |
-| `checked` _bindable_         | `boolean`          |         | `<I18nMarkupMessage message={m.generated_fs_toggle_switch_props_props_checked} />`            |
-| `ref` _bindable_             | `HTMLInputElement` |         | `<I18nMarkupMessage message={m.generated_fs_toggle_switch_props_props_ref} />`                |
-| `label`                      | `string`           |         | `<I18nMarkupMessage message={m.generated_fs_toggle_switch_props_props_label} />`              |
-| `wrapperAttributes`          | `HTMLAttributes`   |         | `<I18nMarkupMessage message={m.generated_fs_toggle_switch_props_props_wrapper_attributes} />` |
-| `wrapperRef` _bindable_      | `HTMLDivElement`   |         | `<I18nMarkupMessage message={m.generated_fs_toggle_switch_props_props_wrapper_ref} />`        |
-| Element Attributes (`input`) |                    |         |                                                                                               |
+| Name                         | Type                             | Default | Description                                                                                   |
+| ---------------------------- | -------------------------------- | ------- | --------------------------------------------------------------------------------------------- |
+| `checked` _bindable_         | `boolean` &#124; `null`          |         | `<I18nMarkupMessage message={m.generated_fs_toggle_switch_props_props_checked} />`            |
+| `ref` _bindable_             | `HTMLInputElement` &#124; `null` |         | `<I18nMarkupMessage message={m.generated_fs_toggle_switch_props_props_ref} />`                |
+| `label`                      | `string`                         |         | `<I18nMarkupMessage message={m.generated_fs_toggle_switch_props_props_label} />`              |
+| `wrapperAttributes`          | `HTMLAttributes`                 |         | `<I18nMarkupMessage message={m.generated_fs_toggle_switch_props_props_wrapper_attributes} />` |
+| `wrapperRef` _bindable_      | `HTMLDivElement` &#124; `null`   |         | `<I18nMarkupMessage message={m.generated_fs_toggle_switch_props_props_wrapper_ref} />`        |
+| Element Attributes (`input`) |                                  |         |                                                                                               |
 
 <!-- /props:ToggleSwitchProps -->

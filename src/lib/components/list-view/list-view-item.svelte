@@ -17,7 +17,7 @@
 
 	let {
 		as = 'li' as T,
-		ref = $bindable(),
+		ref = $bindable(null),
 		shape,
 		disabled,
 		active: _active,
@@ -66,7 +66,7 @@
 	});
 
 	let active = $derived(_state.selectedItems.includes(value));
-	let checkmarkRef = $state<HTMLDivElement>();
+	let checkmarkRef = $state<HTMLDivElement | null>(null);
 
 	// A grid cell contains the secondary controls, independently of the primary row action.
 	const cellConfig: TabspotNodeOptions | undefined = $derived(

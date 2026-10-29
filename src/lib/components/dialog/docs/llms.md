@@ -123,7 +123,7 @@ Add a `DialogActions` region to render action buttons in the dialog footer. Use 
 | `position`        | [`DialogPosition`](https://fluentui-svelte.dev/docs/types/#dialogposition) | `'middle-center'` | Where the dialog sits in the viewport. Start and end follow the text direction.                      |
 | `animation`       | `'fade'` &#124; `'zoom'` &#124; `'slide'` &#124; `'bounce'`                | `'zoom'`          | The entrance and exit animation. Bounce uses a subtle overshoot.                                     |
 | `duration`        | [`DialogDuration`](https://fluentui-svelte.dev/docs/types/#dialogduration) | `'normal'`        | Duration in milliseconds, a theme duration name, or a CSS custom property name. Use 0 for no motion. |
-| `open` _bindable_ | `boolean`                                                                  |                   | Controls the open state of the dialog.                                                               |
+| `open` _bindable_ | `boolean` &#124; `null`                                                    |                   | Controls the open state of the dialog.                                                               |
 | `onOpenChange`    | `(open: boolean) => void`                                                  |                   | Called whenever the dialog opens or closes.                                                          |
 | `children`        | `Snippet`                                                                  |                   | The parts of the dialog: a trigger and a surface.                                                    |
 
@@ -134,10 +134,10 @@ Add a `DialogActions` region to render action buttons in the dialog footer. Use 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DialogTriggerProps -->
 
-| Name                    | Type                | Default | Description                               |
-| ----------------------- | ------------------- | ------- | ----------------------------------------- |
-| `ref` _bindable_        | `HTMLButtonElement` |         | The DOM reference of the trigger element. |
-| `ButtonProps<'button'>` |                     |         |                                           |
+| Name                    | Type                              | Default | Description                               |
+| ----------------------- | --------------------------------- | ------- | ----------------------------------------- |
+| `ref` _bindable_        | `HTMLButtonElement` &#124; `null` |         | The DOM reference of the trigger element. |
+| `ButtonProps<'button'>` |                                   |         |                                           |
 
 <!-- /props:DialogTriggerProps -->
 
@@ -146,10 +146,10 @@ Add a `DialogActions` region to render action buttons in the dialog footer. Use 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DialogSurfaceProps -->
 
-| Name                          | Type                | Default | Description                              |
-| ----------------------------- | ------------------- | ------- | ---------------------------------------- |
-| `ref` _bindable_              | `HTMLDialogElement` |         | The DOM reference of the dialog element. |
-| Element Attributes (`dialog`) |                     |         |                                          |
+| Name                          | Type                              | Default | Description                              |
+| ----------------------------- | --------------------------------- | ------- | ---------------------------------------- |
+| `ref` _bindable_              | `HTMLDialogElement` &#124; `null` |         | The DOM reference of the dialog element. |
+| Element Attributes (`dialog`) |                                   |         |                                          |
 
 <!-- /props:DialogSurfaceProps -->
 
@@ -171,10 +171,10 @@ Add a `DialogActions` region to render action buttons in the dialog footer. Use 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DialogContentProps -->
 
-| Name                       | Type             | Default | Description                               |
-| -------------------------- | ---------------- | ------- | ----------------------------------------- |
-| `ref` _bindable_           | `HTMLDivElement` |         | The DOM reference of the content element. |
-| Element Attributes (`div`) |                  |         |                                           |
+| Name                       | Type                           | Default | Description                               |
+| -------------------------- | ------------------------------ | ------- | ----------------------------------------- |
+| `ref` _bindable_           | `HTMLDivElement` &#124; `null` |         | The DOM reference of the content element. |
+| Element Attributes (`div`) |                                |         |                                           |
 
 <!-- /props:DialogContentProps -->
 
@@ -185,7 +185,7 @@ Add a `DialogActions` region to render action buttons in the dialog footer. Use 
 
 | Name                       | Type                                       | Default | Description                                                 |
 | -------------------------- | ------------------------------------------ | ------- | ----------------------------------------------------------- |
-| `ref` _bindable_           | `HTMLDivElement`                           |         | The DOM reference of the actions element.                   |
+| `ref` _bindable_           | `HTMLDivElement` &#124; `null`             |         | The DOM reference of the actions element.                   |
 | `fluid`                    | `boolean`                                  |         | Stretches every action to share the available width evenly. |
 | `position`                 | `'start'` &#124; `'center'` &#124; `'end'` | `'end'` | Where the actions sit along the main axis.                  |
 | Element Attributes (`div`) |                                            |         |                                                             |

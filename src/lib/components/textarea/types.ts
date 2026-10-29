@@ -10,7 +10,7 @@ export type TextAreaProps = {
 	/** The DOM reference of the textarea element.
 	 * @bindable
 	 */
-	ref?: HTMLTextAreaElement;
+	ref?: HTMLTextAreaElement | null;
 	/** The placeholder text for the textarea. */
 	placeholder?: string;
 	/** Configures the resize behavior of the textarea.
@@ -28,5 +28,5 @@ export type TextAreaProps = {
 	/** The DOM reference of the wrapper element.
 	 * @bindable
 	 */
-	wrapperRef?: HTMLDivElement;
+	wrapperRef?: HTMLDivElement | null;
 } & SvelteHTMLElements['textarea'];

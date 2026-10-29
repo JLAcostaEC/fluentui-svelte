@@ -1,8 +1,11 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import { flushSync } from 'svelte';
 	import ChevronDownFilled from 'fluentui-icons-svelte/ChevronDownFilled.svelte';
 	import { selectDirection } from './dropdown-select.svelte.ts';
 	import type { DropdownSelectProps } from './types.ts';
+
+	const labelContext = claimLabel(() => id);
 
 	let {
 		hidePlaceholder,
@@ -14,6 +17,7 @@
 		multiple,
 		class: classes,
 		value = $bindable(multiple ? [] : ''),
+		id = labelContext?.fieldId,
 		...attributes
 	}: DropdownSelectProps = $props();
 </script>
@@ -29,6 +33,7 @@
 	{#if multiple}
 		<select
 			{...attributes}
+			{id}
 			class={['fs-dropdown-select', classes]}
 			{@attach selectDirection()}
 			multiple
@@ -46,6 +51,7 @@
 	{:else}
 		<select
 			{...attributes}
+			{id}
 			class={['fs-dropdown-select', classes]}
 			{@attach selectDirection()}
 			bind:value
@@ -113,6 +119,11 @@
 			width: calc(100%);
 			left: 0;
 			background-color: var(--fs-accent-fill-default);
+		}
+		&:has(select:is(:user-invalid, [aria-invalid='true'])):after {
+			width: calc(100%);
+			left: 0;
+			background-color: var(--fs-system-critical);
 		}
 		& .fs-dropdown-select {
 			border-radius: 0;

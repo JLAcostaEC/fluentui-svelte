@@ -1,24 +1,58 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import QuestionCircleRegular from 'fluentui-icons-svelte/QuestionCircleRegular.svelte';
   import { Label, TextBox, Checkbox, RadioButton, ToggleSwitch, Dropdown, DropdownOption } from '$lib/index.js';
   import Showcase from '$site/components/showcase/showcase.svelte';
   import { m } from '$i18n/messages.js';
 
   const sizeCode = `
-<Label size="small" label="Small" for="label-small"><TextBox id="label-small" /></Label>
-<Label size="medium" label="Medium" for="label-medium"><TextBox id="label-medium" /></Label>
-<Label size="large" label="Large" for="label-large"><TextBox id="label-large" /></Label>`;
+<Label size="small" label="Small"><TextBox /></Label>
+<Label size="medium" label="Medium"><TextBox /></Label>
+<Label size="large" label="Large"><TextBox /></Label>`;
 
   const weightCode = `
-<Label weight="regular" label="Regular" for="label-regular"><TextBox id="label-regular" /></Label>
-<Label weight="semibold" label="Semibold" for="label-semibold"><TextBox id="label-semibold" /></Label>`;
+<Label weight="regular" label="Regular"><TextBox /></Label>
+<Label weight="semibold" label="Semibold"><TextBox /></Label>`;
 
   const positionCode = `
-<Label labelPosition="before" label="Before" for="label-before"><TextBox id="label-before" /></Label>
-<Label labelPosition="after" label="After" for="label-after"><TextBox id="label-after" /></Label>
-<Label labelPosition="above" label="Above" for="label-above"><TextBox id="label-above" /></Label>
-<Label labelPosition="below" label="Below" for="label-below"><TextBox id="label-below" /></Label>`;
+<Label labelPosition="before" label="Before"><TextBox /></Label>
+<Label labelPosition="after" label="After"><TextBox /></Label>
+<Label labelPosition="above" label="Above"><TextBox /></Label>
+<Label labelPosition="below" label="Below"><TextBox /></Label>`;
 
-  const requiredCode = `<Label label="Email" required={{ message: 'Required field' }} for="label-email-required"><TextBox id="label-email-required" required /></Label>`;
+  const tooltipCode = `
+<Label
+  label="Bank"
+  labelPosition="above"
+  required={{ message: 'Required field' }}
+  tooltipContent="The bank that holds the account the payments come from."
+>
+  <Dropdown placeholder="Bank Name">
+    <DropdownOption value="pichincha">Banco Pichincha</DropdownOption>
+    <DropdownOption value="guayaquil">Banco Guayaquil</DropdownOption>
+  </Dropdown>
+</Label>
+<Label
+  label="IBAN"
+  labelPosition="above"
+  tooltipBadge={QuestionCircleRegular}
+  tooltipContent="The international number of the account, as your bank prints it."
+>
+  <TextBox placeholder="EC00 0000 0000 0000" />
+</Label>`;
+
+  const requiredCode = `<Label label="Email" required={{ message: 'Required field' }}><TextBox required /></Label>`;
+
+  const controlsCode = `
+<Label label="Accept terms" labelPosition="after"><Checkbox /></Label>
+<Label label="Email updates" labelPosition="after"><ToggleSwitch /></Label>
+<Label label="Standard plan" labelPosition="after"><RadioButton name="plan" value="standard" /></Label>
+<Label label="Country" labelPosition="above">
+  <Dropdown>
+    <DropdownOption value="bo">Bolivia</DropdownOption>
+    <DropdownOption value="ec">Ecuador</DropdownOption>
+  </Dropdown>
+</Label>`;
 </script>
 
 ### {m.global_size()}
@@ -26,9 +60,9 @@
 {m.label_size_description()}
 
 <Showcase columns={1} code={sizeCode}>
-  <Label size="small" label="Small" for="label-small"><TextBox id="label-small" /></Label>
-  <Label size="medium" label="Medium" for="label-medium"><TextBox id="label-medium" /></Label>
-  <Label size="large" label="Large" for="label-large"><TextBox id="label-large" /></Label>
+  <Label size="small" label="Small"><TextBox /></Label>
+  <Label size="medium" label="Medium"><TextBox /></Label>
+  <Label size="large" label="Large"><TextBox /></Label>
 </Showcase>
 
 ### {m.label_weight_title()}
@@ -36,8 +70,8 @@
 {m.label_weight_description()}
 
 <Showcase columns={1} code={weightCode}>
-  <Label weight="regular" label="Regular" for="label-regular"><TextBox id="label-regular" /></Label>
-  <Label weight="semibold" label="Semibold" for="label-semibold"><TextBox id="label-semibold" /></Label>
+  <Label weight="regular" label="Regular"><TextBox /></Label>
+  <Label weight="semibold" label="Semibold"><TextBox /></Label>
 </Showcase>
 
 ### {m.label_position_title()}
@@ -45,10 +79,10 @@
 {m.label_position_description()}
 
 <Showcase columns={1} code={positionCode}>
-  <Label labelPosition="before" label="Before" for="label-before"><TextBox id="label-before" /></Label>
-  <Label labelPosition="after" label="After" for="label-after"><TextBox id="label-after" /></Label>
-  <Label labelPosition="above" label="Above" for="label-above"><TextBox id="label-above" /></Label>
-  <Label labelPosition="below" label="Below" for="label-below"><TextBox id="label-below" /></Label>
+  <Label labelPosition="before" label="Before"><TextBox /></Label>
+  <Label labelPosition="after" label="After"><TextBox /></Label>
+  <Label labelPosition="above" label="Above"><TextBox /></Label>
+  <Label labelPosition="below" label="Below"><TextBox /></Label>
 </Showcase>
 
 ### {m.label_required_title()}
@@ -56,19 +90,45 @@
 {m.label_required_description()}
 
 <Showcase columns={1} code={requiredCode}>
-  <Label label="Email" required={{ message: 'Required field' }} for="label-email-required"><TextBox id="label-email-required" required /></Label>
+  <Label label="Email" required={{ message: 'Required field' }}><TextBox required /></Label>
+</Showcase>
+
+### {m.label_tooltip_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.label_tooltip_description} /></p>
+
+<Showcase columns={1} code={tooltipCode} disablePanZoom showOverflow>
+  <Label
+    label="Bank"
+    labelPosition="above"
+    required={{ message: 'Required field' }}
+    tooltipContent="The bank that holds the account the payments come from."
+  >
+    <Dropdown placeholder="Bank Name">
+      <DropdownOption value="pichincha">Banco Pichincha</DropdownOption>
+      <DropdownOption value="guayaquil">Banco Guayaquil</DropdownOption>
+    </Dropdown>
+  </Label>
+  <Label
+    label="IBAN"
+    labelPosition="above"
+    tooltipBadge={QuestionCircleRegular}
+    tooltipContent="The international number of the account, as your bank prints it."
+  >
+    <TextBox placeholder="EC00 0000 0000 0000" />
+  </Label>
 </Showcase>
 
 ### {m.label_controls_title()}
 
 {m.label_controls_description()}
 
-<Showcase columns={1} disablePanZoom showOverflow>
-  <Label label="Accept terms" for="label-terms"><Checkbox id="label-terms" /></Label>
-  <Label label="Email updates" for="label-updates"><ToggleSwitch id="label-updates" /></Label>
-  <Label label="Standard plan" for="label-plan"><RadioButton id="label-plan" name="plan" value="standard" /></Label>
-  <Label label="Country" for="label-country" labelPosition="above">
-    <Dropdown id="label-country">
+<Showcase columns={1} code={controlsCode} disablePanZoom showOverflow>
+  <Label label="Accept terms" labelPosition="after"><Checkbox /></Label>
+  <Label label="Email updates" labelPosition="after"><ToggleSwitch /></Label>
+  <Label label="Standard plan" labelPosition="after"><RadioButton name="plan" value="standard" /></Label>
+  <Label label="Country" labelPosition="above">
+    <Dropdown>
       <DropdownOption value="bo">Bolivia</DropdownOption>
       <DropdownOption value="ec">Ecuador</DropdownOption>
     </Dropdown>

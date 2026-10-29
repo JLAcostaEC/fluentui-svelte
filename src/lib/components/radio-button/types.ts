@@ -12,11 +12,11 @@ export type RadioButtonProps = {
 	 * @default false
 	 * @bindable
 	 */
-	checked?: boolean;
+	checked?: boolean | null;
 	/** The DOM reference of the radio button element.
 	 * @bindable
 	 */
-	ref?: HTMLInputElement;
+	ref?: HTMLInputElement | null;
 	/** The attributes to spread on the wrapper element.
 	 * @type HTMLAttributes
 	 */
@@ -24,5 +24,5 @@ export type RadioButtonProps = {
 	/** The DOM reference of the wrapper element.
 	 * @bindable
 	 */
-	wrapperRef?: HTMLDivElement;
+	wrapperRef?: HTMLDivElement | null;
 } & HTMLInputAttributes;

@@ -7,7 +7,7 @@
 
 	let {
 		as,
-		ref = $bindable(),
+		ref = $bindable(null),
 		sortable,
 		sortDirection,
 		sortIcon,

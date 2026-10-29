@@ -23,7 +23,7 @@ The Flyout.
 
 | Name                       | Type                                                                      | Default    | Description                                                                     |
 | -------------------------- | ------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------- |
-| `ref` _bindable_           | `HTMLElement`                                                             |            | The DOM reference of the flyout element.                                        |
+| `ref` _bindable_           | `HTMLElement` &#124; `null`                                               |            | The DOM reference of the flyout element.                                        |
 | `children`                 | `Snippet`                                                                 |            | The content of the flyout.                                                      |
 | `floating`                 | `boolean`                                                                 | `false`    | Positions the flyout with floating-ui instead of leaving it in the normal flow. |
 | `reference`                | `HTMLElement`                                                             |            | The element the flyout is positioned against when `floating` is set.            |

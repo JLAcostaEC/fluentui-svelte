@@ -54,12 +54,12 @@ HTML attributes, including class, id and ARIA attributes, apply to the control e
 | Name                             | Type                                                               | Default      | Description                                      |
 | -------------------------------- | ------------------------------------------------------------------ | ------------ | ------------------------------------------------ |
 | `value` _bindable_               | `string`                                                           | `''`         | The current value of the textarea.               |
-| `ref` _bindable_                 | `HTMLTextAreaElement`                                              |              | The DOM reference of the textarea element.       |
+| `ref` _bindable_                 | `HTMLTextAreaElement` &#124; `null`                                |              | The DOM reference of the textarea element.       |
 | `placeholder`                    | `string`                                                           |              | The placeholder text for the textarea.           |
 | `resize`                         | `'none'` &#124; `'both'` &#124; `'horizontal'` &#124; `'vertical'` | `'vertical'` | Configures the resize behavior of the textarea.  |
 | `disabled`                       | `boolean`                                                          | `false`      | Disables the user interaction.                   |
 | `wrapperAttributes`              | `HTMLAttributes`                                                   |              | The attributes to spread on the wrapper element. |
-| `wrapperRef` _bindable_          | `HTMLDivElement`                                                   |              | The DOM reference of the wrapper element.        |
+| `wrapperRef` _bindable_          | `HTMLDivElement` &#124; `null`                                     |              | The DOM reference of the wrapper element.        |
 | `SvelteHTMLElements['textarea']` |                                                                    |              |                                                  |
 
 <!-- /props:TextAreaProps -->

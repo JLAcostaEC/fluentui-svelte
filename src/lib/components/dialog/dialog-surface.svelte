@@ -6,7 +6,7 @@
 	import { Button } from '$lib/index.js';
 	import DismissFilled from 'fluentui-icons-svelte/DismissFilled.svelte';
 
-	let { ref = $bindable(), class: classes, oncancel, children, ...attributes }: DialogSurfaceProps = $props();
+	let { ref = $bindable(null), class: classes, oncancel, children, ...attributes }: DialogSurfaceProps = $props();
 
 	const CONTEXT = getDialogContext();
 

@@ -14,10 +14,10 @@
 	let {
 		id = label?.fieldId ?? 'input-' + ID,
 		name = id,
-		value = $bindable(),
+		value = $bindable(null),
 		variant = 'inline',
-		ref = $bindable(),
-		wrapperRef = $bindable(),
+		ref = $bindable(null),
+		wrapperRef = $bindable(null),
 		wrapperAttributes,
 		placeholder = '',
 		...attributes
@@ -102,7 +102,7 @@
 		position: absolute;
 		right: 0;
 		top: 0;
-		z-index: 2;
+		z-index: 3;
 		& :global(.fs-flyout) {
 			padding: 8px;
 		}

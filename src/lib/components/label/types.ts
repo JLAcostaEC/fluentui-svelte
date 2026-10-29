@@ -17,7 +17,7 @@ export type LabelProps = {
 	 * @type HTMLDivElement | HTMLSpanElement
 	 * @bindable
 	 */
-	wrapperRef?: HTMLDivElement | HTMLSpanElement;
+	wrapperRef?: HTMLDivElement | HTMLSpanElement | null;
 	/** The attributes to spread on the wrapper element.
 	 * @type HTMLAttributes
 	 */
@@ -48,7 +48,7 @@ export type LabelProps = {
 	/** The DOM reference of the label element.
 	 * @bindable
 	 */
-	ref?: HTMLLabelElement;
+	ref?: HTMLLabelElement | null;
 	/** The id of the label element. A control inside the label is named after it, including a picker whose visible control stands in for its native field.
 	 * @default Generated
 	 */

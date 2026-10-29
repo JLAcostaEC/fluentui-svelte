@@ -86,9 +86,9 @@ You can easily add an icon to an expander's header using the `Icon` prop. You ca
 | `disabled`                     | `boolean`                               | `false`  | Disables the user interaction.                                            |
 | `animation`                    | `{ duration: number; easing: string; }` |          | The animation configuration. Reduced motion is always honoured over this. |
 | `expanded` _bindable_          | `boolean`                               | `false`  | Control the opening state of the expander.                                |
-| `ref` _bindable_               | `HTMLDetailsElement`                    |          | The DOM reference of the expander element.                                |
+| `ref` _bindable_               | `HTMLDetailsElement` &#124; `null`      |          | The DOM reference of the expander element.                                |
 | `Icon`                         | `Snippet` &#124; `Component`            |          | The icon to display before the label.                                     |
-| `summaryRef` _bindable_        | `HTMLElement`                           |          | The DOM reference of the summary element.                                 |
+| `summaryRef` _bindable_        | `HTMLElement` &#124; `null`             |          | The DOM reference of the summary element.                                 |
 | `summaryAttributes`            | `HTMLAttributes<HTMLElement>`           |          | The HTML attributes to spread on the summary element.                     |
 | Element Attributes (`details`) |                                         |          |                                                                           |
 

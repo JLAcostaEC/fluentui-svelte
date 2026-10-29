@@ -11,7 +11,7 @@
 
 	let {
 		as = 'div' as Tag,
-		ref = $bindable(),
+		ref = $bindable(null),
 		orientation = 'horizontal',
 		id = FALLBACK_ID,
 		selectable = false,

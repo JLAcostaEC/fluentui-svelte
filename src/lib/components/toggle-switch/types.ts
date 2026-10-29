@@ -5,11 +5,11 @@ export type ToggleSwitchProps = {
 	/** Whether the switch is on.
 	 * @bindable
 	 */
-	checked?: boolean;
+	checked?: boolean | null;
 	/** The DOM reference of the input element.
 	 * @bindable
 	 */
-	ref?: HTMLInputElement;
+	ref?: HTMLInputElement | null;
 	/** The label displayed next to the input element. Inside a `Label`, it is not rendered */
 	label?: string;
 	/** The attributes to spread on the wrapper element.
@@ -19,5 +19,5 @@ export type ToggleSwitchProps = {
 	/** The DOM reference of the wrapper element.
 	 * @bindable
 	 */
-	wrapperRef?: HTMLDivElement;
+	wrapperRef?: HTMLDivElement | null;
 } & HTMLInputAttributes;

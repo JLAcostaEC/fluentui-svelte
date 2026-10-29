@@ -9,7 +9,7 @@ export type ButtonProps<T extends ButtonGenerics = 'button'> = {
 	 * @type ButtonElementDOMType[T]
 	 * @bindable
 	 */
-	ref?: ButtonElementDOMType[T];
+	ref?: ButtonElementDOMType[T] | null;
 	/** The DOM element to render.
 	 * @type 'button' | 'a' | 'div'
 	 * @default 'button'
@@ -76,13 +76,13 @@ export type SplitButtonProps = {
 	/** The DOM reference of the element wrapping both buttons.
 	 * @bindable
 	 */
-	wrapperRef?: HTMLDivElement;
+	wrapperRef?: HTMLDivElement | null;
 	/** The DOM reference of the primary button.
 	 * @bindable
 	 */
-	primaryButtonRef?: HTMLButtonElement;
+	primaryButtonRef?: HTMLButtonElement | null;
 	/** The DOM reference of the button that opens the menu.
 	 * @bindable
 	 */
-	menuTriggerRef?: HTMLButtonElement;
+	menuTriggerRef?: HTMLButtonElement | null;
 } & PolymorphicProps<'div'>;

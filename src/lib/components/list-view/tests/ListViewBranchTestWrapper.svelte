@@ -30,7 +30,7 @@
 	let selected = $state<string[]>([]);
 	let childSelected = $state<string[]>([]);
 	let grandchildSelected = $state<string[]>([]);
-	let triggerRef = $state<HTMLButtonElement | null>();
+	let triggerRef = $state<HTMLButtonElement | null>(null);
 </script>
 
 <FluentUISvelte>

@@ -10,13 +10,13 @@
 	const labelContext = claimLabel(() => id);
 
 	let {
-		ref = $bindable(),
-		checked = $bindable(),
+		ref = $bindable(null),
+		checked = $bindable(null),
 		id = labelContext?.fieldId ?? ID,
 		name = id,
 		label,
 		wrapperAttributes,
-		wrapperRef = $bindable(),
+		wrapperRef = $bindable(null),
 		...attributes
 	}: ToggleSwitchProps = $props();
 </script>

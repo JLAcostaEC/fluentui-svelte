@@ -14,13 +14,13 @@
 		id = labelContext?.fieldId ?? ID,
 		name = id,
 		value = $bindable(''),
-		ref = $bindable(),
+		ref = $bindable(null),
 		resize = 'vertical',
 		style,
 		wrapperAttributes,
 		onchange,
 		disabled = false,
-		wrapperRef = $bindable(),
+		wrapperRef = $bindable(null),
 		...attributes
 	}: TextAreaProps = $props();
 </script>

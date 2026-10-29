@@ -10,17 +10,27 @@
 	const labelContext = claimLabel(() => id);
 
 	let {
-		ref = $bindable(),
-		wrapperRef = $bindable(),
-		group = $bindable(undefined),
+		ref = $bindable(null),
+		wrapperRef = $bindable(null),
+		group = $bindable(null),
 		id = labelContext?.fieldId ?? ID,
 		label,
 		name = id,
 		value,
-		checked = $bindable(false),
+		checked = $bindable(null),
 		wrapperAttributes,
 		...attributes
 	}: RadioButtonProps = $props();
+
+	/** What `bind:group` reads and writes. Without a group, `checked` decides: an empty group (`null`) matches no value. */
+	const binding = {
+		get group() {
+			return group ?? (checked ? value : null);
+		},
+		set group(selected) {
+			group = selected;
+		}
+	};
 </script>
 
 <!-- 
@@ -42,7 +52,7 @@
  -->
 
 <div {...wrapperAttributes} class={['fs-radio-button', wrapperAttributes?.class]} bind:this={wrapperRef}>
-	<input {...attributes} type="radio" {id} {name} {value} {checked} bind:this={ref} bind:group />
+	<input {...attributes} type="radio" {id} {name} {value} {checked} bind:this={ref} bind:group={binding.group} />
 	<!-- Inside a Label, the Label names the field instead. -->
 	{#if label && !labelContext}
 		<label for={id}>{label}</label>

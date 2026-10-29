@@ -37,7 +37,7 @@ export type RatingProps = {
 	/** The DOM reference of the radiogroup element.
 	 * @bindable
 	 */
-	wrapperRef?: HTMLDivElement;
+	wrapperRef?: HTMLDivElement | null;
 	/** The attributes to spread on the radiogroup element. This is where its `aria-label`, `aria-labelledby`, `aria-invalid`, `id` and `class` go.
 	 * @type HTMLAttributes
 	 */

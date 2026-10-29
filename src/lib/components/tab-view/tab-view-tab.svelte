@@ -7,7 +7,7 @@
 	const ID = $props.id();
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		value = `${COMPONENT_NAME}-${ID}`,
 		icon,
 		closable,

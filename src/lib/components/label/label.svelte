@@ -12,9 +12,9 @@
 	let {
 		id = `${PREFIX}-label-${FALLBACK_ID}`,
 		for: htmlFor,
-		ref = $bindable(),
+		ref = $bindable(null),
 		as = 'div',
-		wrapperRef = $bindable(),
+		wrapperRef = $bindable(null),
 		wrapperAttributes,
 		class: classes,
 		disabled,

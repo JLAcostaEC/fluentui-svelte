@@ -4,7 +4,7 @@
 
 	let {
 		as = 'button' as T,
-		ref = $bindable(),
+		ref = $bindable(null),
 		icon,
 		iconPosition = 'before',
 		current = false,

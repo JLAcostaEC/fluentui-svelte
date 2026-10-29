@@ -26,7 +26,7 @@
 		name = ID,
 		itemLabel = (rating) => `${rating}`,
 		onChange,
-		wrapperRef = $bindable(),
+		wrapperRef = $bindable(null),
 		wrapperAttributes,
 		onclick,
 		onpointerenter,

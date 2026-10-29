@@ -11,7 +11,7 @@ export type DividerProps<Tag extends DividerGenerics = 'div'> = {
 	 * @type HTMLDivElement | HTMLHRElement | HTMLSpanElement
 	 * @bindable
 	 */
-	ref?: DividerElement[Tag];
+	ref?: DividerElement[Tag] | null;
 	/** Renders the divider vertically instead of horizontally. */
 	vertical?: boolean;
 	/** Where the content of the divider sits along the line.

@@ -12,10 +12,10 @@
 	const labelContext = claimLabel(() => id);
 
 	let {
-		ref = $bindable(),
-		wrapperRef = $bindable(),
-		checked = $bindable(),
-		indeterminate = $bindable(),
+		ref = $bindable(null),
+		wrapperRef = $bindable(null),
+		checked = $bindable(null),
+		indeterminate = $bindable(null),
 		id = labelContext?.fieldId ?? ID,
 		name = id,
 		'aria-hidden': ariaHidden,

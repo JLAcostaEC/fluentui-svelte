@@ -244,7 +244,7 @@ Use the bindable `openItems` and `checkedItems` props on the root `TreeView` to 
 
 | Name                                                | Type                                         | Default      | Description                                                                          |
 | --------------------------------------------------- | -------------------------------------------- | ------------ | ------------------------------------------------------------------------------------ |
-| `ref` _bindable_                                    | `HTMLUListElement`                           |              | The DOM reference of the tree element.                                               |
+| `ref` _bindable_                                    | `HTMLUListElement` &#124; `null`             |              | The DOM reference of the tree element.                                               |
 | `size`                                              | `'small'` &#124; `'medium'` &#124; `'large'` | `'medium'`   | The size of every item in the tree.                                                  |
 | `navigationMode`                                    | `'tree'` &#124; `'treegrid'`                 | `'tree'`     | Whether the tree takes a single tab stop, or every row is reachable on its own.      |
 | `onOpenChange`                                      | `(e: Event, openItems: string[]) => void`    |              | Called whenever a branch opens or closes.                                            |
@@ -268,7 +268,7 @@ Use the bindable `openItems` and `checkedItems` props on the root `TreeView` to 
 | ------------------------- | ------------------------------------------------------------ | -------- | -------------------------------------------------------------------------------------- |
 | `id`                      | `string`                                                     |          | The id of the item, used by the tree to track its state. Falls back to a generated id. |
 | `type`                    | `'item'` &#124; `'branch'`                                   | `'item'` | Whether the item holds children, and can therefore be opened.                          |
-| `ref`                     | `HTMLLIElement`                                              |          | The DOM reference of the item element.                                                 |
+| `ref`                     | `HTMLLIElement` &#124; `null`                                |          | The DOM reference of the item element.                                                 |
 | `value`                   | `string` &#124; `number`                                     | `id`     | The value reported by the tree events. Falls back to the id of the item.               |
 | `text`                    | `string`                                                     |          | The label of the item, used by the type-ahead navigation.                              |
 | `open`                    | `boolean`                                                    |          | Whether the branch is open.                                                            |
@@ -287,14 +287,14 @@ Use the bindable `openItems` and `checkedItems` props on the root `TreeView` to 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TreeViewItemLayoutProps -->
 
-| Name                       | Type                         | Default | Description                                                           |
-| -------------------------- | ---------------------------- | ------- | --------------------------------------------------------------------- |
-| `ref`                      | `HTMLDivElement`             |         | The DOM reference of the layout element.                              |
-| `expandIcon`               | `Snippet` &#124; `Component` |         | Custom icon for the control that opens a branch.                      |
-| `iconBefore`               | `Snippet` &#124; `Component` |         | Content rendered before the label.                                    |
-| `iconAfter`                | `Snippet` &#124; `Component` |         | Content rendered after the label.                                     |
-| `aside`                    | `Snippet` &#124; `Component` |         | Content pinned to the end of the row.                                 |
-| `actions`                  | `Snippet` &#124; `Component` |         | Content pinned to the end of the row, revealed on hover and on focus. |
-| Element Attributes (`div`) |                              |         |                                                                       |
+| Name                       | Type                           | Default | Description                                                           |
+| -------------------------- | ------------------------------ | ------- | --------------------------------------------------------------------- |
+| `ref`                      | `HTMLDivElement` &#124; `null` |         | The DOM reference of the layout element.                              |
+| `expandIcon`               | `Snippet` &#124; `Component`   |         | Custom icon for the control that opens a branch.                      |
+| `iconBefore`               | `Snippet` &#124; `Component`   |         | Content rendered before the label.                                    |
+| `iconAfter`                | `Snippet` &#124; `Component`   |         | Content rendered after the label.                                     |
+| `aside`                    | `Snippet` &#124; `Component`   |         | Content pinned to the end of the row.                                 |
+| `actions`                  | `Snippet` &#124; `Component`   |         | Content pinned to the end of the row, revealed on hover and on focus. |
+| Element Attributes (`div`) |                                |         |                                                                       |
 
 <!-- /props:TreeViewItemLayoutProps -->

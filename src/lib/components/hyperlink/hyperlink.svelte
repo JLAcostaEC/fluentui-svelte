@@ -8,7 +8,7 @@
 		onclick,
 		class: classes,
 		children,
-		ref = $bindable(),
+		ref = $bindable(null),
 		...attributes
 	}: HyperlinkProps = $props();
 </script>

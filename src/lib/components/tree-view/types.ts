@@ -54,7 +54,7 @@ export type TreeViewProps = {
 	/** The DOM reference of the tree element.
 	 * @bindable
 	 */
-	ref?: HTMLUListElement;
+	ref?: HTMLUListElement | null;
 	/** The size of every item in the tree.
 	 * @default 'medium'
 	 */
@@ -103,7 +103,7 @@ export type TreeViewItemProps = {
 	 */
 	type?: TreeViewItemType;
 	/** The DOM reference of the item element. */
-	ref?: HTMLLIElement;
+	ref?: HTMLLIElement | null;
 	/** The value reported by the tree events. Falls back to the id of the item.
 	 * @default id
 	 */
@@ -133,7 +133,7 @@ export type TreeViewItemProps = {
 /** @propsmith TreeViewItemLayoutProps */
 export type TreeViewItemLayoutProps = {
 	/** The DOM reference of the layout element. */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** Custom icon for the control that opens a branch.
 	 * @type Snippet | Component
 	 */

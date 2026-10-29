@@ -42,7 +42,7 @@ export type ListViewProps<T extends 'ul' | 'ol' | 'div'> = {
 	 * @type HTMLUListElement | HTMLOListElement | HTMLDivElement
 	 * @bindable
 	 */
-	ref?: ListViewDOM[T];
+	ref?: ListViewDOM[T] | null;
 	/** Opts the list out of the tabspot focus management, to wire your own.
 	 * @default false
 	 */

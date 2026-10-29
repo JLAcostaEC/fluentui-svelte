@@ -147,8 +147,8 @@ This variant of the `MenuTrigger` component allows you to create context menus t
 
 | Name              | Type                                 | Default | Description                                              |
 | ----------------- | ------------------------------------ | ------- | -------------------------------------------------------- |
-| `ref`             | `HTMLElement`                        |         | The element used to position the popover.                |
-| `open` _bindable_ | `boolean`                            |         | Controls the open state of the popover.                  |
+| `ref`             | `HTMLElement` &#124; `null`          |         | The element used to position the popover.                |
+| `open` _bindable_ | `boolean` &#124; `null`              |         | Controls the open state of the popover.                  |
 | `keepMounted`     | `boolean`                            | `false` | Keeps the popover mounted in the DOM while it is closed. |
 | `placement`       | `ComputePositionConfig['placement']` |         | Where the popover is positioned relative to its trigger. |
 | `positionConfig`  | `ComputePositionConfig`              |         | The position configuration handed over to floating-ui.   |
@@ -190,13 +190,13 @@ This variant of the `MenuTrigger` component allows you to create context menus t
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:MenuItemActionableProps -->
 
-| Name                           | Type      | Default | Description                                                                                |
-| ------------------------------ | --------- | ------- | ------------------------------------------------------------------------------------------ |
-| `checked` _bindable_           | `boolean` |         | Whether the item is checked.                                                               |
-| `value`                        | `string`  | `id`    | The value reported to the menu when the item is checked. Falls back to the id of the item. |
-| `name`                         | `string`  | `id`    | The group of items this one belongs to. Falls back to the id of the item.                  |
-| `MenuItemProps` without `href` |           |         |                                                                                            |
-| `ButtonProps<'button'>`        |           |         |                                                                                            |
+| Name                           | Type                    | Default | Description                                                                                |
+| ------------------------------ | ----------------------- | ------- | ------------------------------------------------------------------------------------------ |
+| `checked` _bindable_           | `boolean` &#124; `null` |         | Whether the item is checked.                                                               |
+| `value`                        | `string`                | `id`    | The value reported to the menu when the item is checked. Falls back to the id of the item. |
+| `name`                         | `string`                | `id`    | The group of items this one belongs to. Falls back to the id of the item.                  |
+| `MenuItemProps` without `href` |                         |         |                                                                                            |
+| `ButtonProps<'button'>`        |                         |         |                                                                                            |
 
 <!-- /props:MenuItemActionableProps -->
 
@@ -205,10 +205,10 @@ This variant of the `MenuTrigger` component allows you to create context menus t
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:MenuGroupProps -->
 
-| Name             | Type             | Default | Description                             |
-| ---------------- | ---------------- | ------- | --------------------------------------- |
-| `ref` _bindable_ | `HTMLDivElement` |         | The DOM reference of the group element. |
-| `header`         | `string`         |         | The label of the group.                 |
-| `children`       | `Snippet`        |         | The items of the group.                 |
+| Name             | Type                           | Default | Description                             |
+| ---------------- | ------------------------------ | ------- | --------------------------------------- |
+| `ref` _bindable_ | `HTMLDivElement` &#124; `null` |         | The DOM reference of the group element. |
+| `header`         | `string`                       |         | The label of the group.                 |
+| `children`       | `Snippet`                      |         | The items of the group.                 |
 
 <!-- /props:MenuGroupProps -->

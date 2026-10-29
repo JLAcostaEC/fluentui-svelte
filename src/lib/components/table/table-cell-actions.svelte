@@ -2,7 +2,13 @@
 	import { requireTableContext } from './table.svelte.ts';
 	import type { TableCellActionsProps } from './types.ts';
 
-	let { ref = $bindable(), visible = false, class: classes, children, ...attributes }: TableCellActionsProps = $props();
+	let {
+		ref = $bindable(null),
+		visible = false,
+		class: classes,
+		children,
+		...attributes
+	}: TableCellActionsProps = $props();
 
 	requireTableContext();
 </script>

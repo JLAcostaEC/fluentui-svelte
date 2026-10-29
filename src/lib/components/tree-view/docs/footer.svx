@@ -10,7 +10,7 @@
 
 | Name                                                | Type                                         | Default      | Description                                                                              |
 | --------------------------------------------------- | -------------------------------------------- | ------------ | ---------------------------------------------------------------------------------------- |
-| `ref` _bindable_                                    | `HTMLUListElement`                           |              | `<I18nMarkupMessage message={m.generated_fs_tree_view_props_props_ref} />`               |
+| `ref` _bindable_                                    | `HTMLUListElement` &#124; `null`             |              | `<I18nMarkupMessage message={m.generated_fs_tree_view_props_props_ref} />`               |
 | `size`                                              | `'small'` &#124; `'medium'` &#124; `'large'` | `'medium'`   | `<I18nMarkupMessage message={m.generated_fs_tree_view_props_props_size} />`              |
 | `navigationMode`                                    | `'tree'` &#124; `'treegrid'`                 | `'tree'`     | `<I18nMarkupMessage message={m.generated_fs_tree_view_props_props_navigation_mode} />`   |
 | `onOpenChange`                                      | `(e: Event, openItems: string[]) => void`    |              | `<I18nMarkupMessage message={m.generated_fs_tree_view_props_props_on_open_change} />`    |
@@ -34,7 +34,7 @@
 | ------------------------- | ------------------------------------------------------------ | -------- | --------------------------------------------------------------------------------------------- |
 | `id`                      | `string`                                                     |          | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_id} />`                |
 | `type`                    | `'item'` &#124; `'branch'`                                   | `'item'` | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_type} />`              |
-| `ref`                     | `HTMLLIElement`                                              |          | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_ref} />`               |
+| `ref`                     | `HTMLLIElement` &#124; `null`                                |          | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_ref} />`               |
 | `value`                   | `string` &#124; `number`                                     | `id`     | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_value} />`             |
 | `text`                    | `string`                                                     |          | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_text} />`              |
 | `open`                    | `boolean`                                                    |          | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_props_props_open} />`              |
@@ -53,14 +53,14 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TreeViewItemLayoutProps -->
 
-| Name                       | Type                         | Default | Description                                                                                    |
-| -------------------------- | ---------------------------- | ------- | ---------------------------------------------------------------------------------------------- |
-| `ref`                      | `HTMLDivElement`             |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_ref} />`         |
-| `expandIcon`               | `Snippet` &#124; `Component` |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_expand_icon} />` |
-| `iconBefore`               | `Snippet` &#124; `Component` |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_icon_before} />` |
-| `iconAfter`                | `Snippet` &#124; `Component` |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_icon_after} />`  |
-| `aside`                    | `Snippet` &#124; `Component` |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_aside} />`       |
-| `actions`                  | `Snippet` &#124; `Component` |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_actions} />`     |
-| Element Attributes (`div`) |                              |         |                                                                                                |
+| Name                       | Type                           | Default | Description                                                                                    |
+| -------------------------- | ------------------------------ | ------- | ---------------------------------------------------------------------------------------------- |
+| `ref`                      | `HTMLDivElement` &#124; `null` |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_ref} />`         |
+| `expandIcon`               | `Snippet` &#124; `Component`   |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_expand_icon} />` |
+| `iconBefore`               | `Snippet` &#124; `Component`   |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_icon_before} />` |
+| `iconAfter`                | `Snippet` &#124; `Component`   |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_icon_after} />`  |
+| `aside`                    | `Snippet` &#124; `Component`   |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_aside} />`       |
+| `actions`                  | `Snippet` &#124; `Component`   |         | `<I18nMarkupMessage message={m.generated_fs_tree_view_item_layout_props_props_actions} />`     |
+| Element Attributes (`div`) |                                |         |                                                                                                |
 
 <!-- /props:TreeViewItemLayoutProps -->

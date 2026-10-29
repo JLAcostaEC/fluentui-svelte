@@ -3,7 +3,7 @@
 	import type { TableCellLayoutProps } from './types.ts';
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		media: Media,
 		description,
 		appearance,

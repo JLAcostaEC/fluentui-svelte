@@ -7,7 +7,7 @@ export type FlyoutProps = {
 	/** The DOM reference of the flyout element.
 	 * @bindable
 	 */
-	ref?: HTMLElement;
+	ref?: HTMLElement | null;
 	/** The content of the flyout. */
 	children?: Snippet;
 	/** Positions the flyout with floating-ui instead of leaving it in the normal flow.

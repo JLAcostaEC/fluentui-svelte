@@ -15,8 +15,8 @@
 
 | Name                                                                                     | Type                                                            | Default              | Description                                                                                            |
 | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------ |
-| `wrapperRef` _bindable_                                                                  | `HTMLDivElement`                                                |                      | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_box_props_props_wrapper_ref} />`              |
-| `ref` _bindable_                                                                         | `HTMLInputElement`                                              |                      | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_box_props_props_ref} />`                      |
+| `wrapperRef` _bindable_                                                                  | `HTMLDivElement` &#124; `null`                                  |                      | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_box_props_props_wrapper_ref} />`              |
+| `ref` _bindable_                                                                         | `HTMLInputElement` &#124; `null`                                |                      | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_box_props_props_ref} />`                      |
 | `value` _bindable_                                                                       | `string`                                                        | `''`                 | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_box_props_props_value} />`                    |
 | `open` _bindable_                                                                        | `boolean`                                                       | `false`              | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_box_props_props_open} />`                     |
 | `multiselect`                                                                            | `boolean`                                                       |                      | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_box_props_props_multiselect} />`              |
@@ -30,9 +30,9 @@
 | `virtualizer`                                                                            | `AutoSuggestVirtualizer`                                        |                      | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_box_props_props_virtualizer} />`              |
 | `maxItemsInView`                                                                         | `number`                                                        | `6`                  | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_box_props_props_max_items_in_view} />`        |
 | `wrapperAttributes`                                                                      | `HTMLAttributes`                                                |                      | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_box_props_props_wrapper_attributes} />`       |
-| `flyoutRef` _bindable_                                                                   | `HTMLElement`                                                   |                      | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_box_props_props_flyout_ref} />`               |
+| `flyoutRef` _bindable_                                                                   | `HTMLElement` &#124; `null`                                     |                      | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_box_props_props_flyout_ref} />`               |
 | `flyoutProps`                                                                            | `FlyoutProps`                                                   |                      | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_box_props_props_flyout_props} />`             |
-| `listViewRef` _bindable_                                                                 | `HTMLUListElement`                                              |                      | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_box_props_props_list_view_ref} />`            |
+| `listViewRef` _bindable_                                                                 | `HTMLUListElement` &#124; `null`                                |                      | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_box_props_props_list_view_ref} />`            |
 | `listViewProps`                                                                          | `ListViewItemProps`                                             |                      | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_box_props_props_list_view_props} />`          |
 | `type`, `placeholder`, `hideActionButtons`, `textChanged`, `onClear` from `TextBoxProps` |                                                                 |                      |                                                                                                        |
 | `HTMLInputAttributes` without `value`, `type`, `role`, `size`, `placeholder`             |                                                                 |                      |                                                                                                        |
@@ -44,14 +44,14 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:AutoSuggestOptionProps -->
 
-| Name                                            | Type            | Default | Description                                                                               |
-| ----------------------------------------------- | --------------- | ------- | ----------------------------------------------------------------------------------------- |
-| `value`                                         | `string`        |         | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_option_props_props_value} />`    |
-| `text`                                          | `string`        |         | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_option_props_props_text} />`     |
-| `id`                                            | `string`        |         | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_option_props_props_id} />`       |
-| `ref` _bindable_                                | `HTMLLIElement` |         | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_option_props_props_ref} />`      |
-| `disabled`                                      | `boolean`       |         | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_option_props_props_disabled} />` |
-| `index`                                         | `number`        |         | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_option_props_props_index} />`    |
-| `ListViewItemProps<'li'>` without `as`, `value` |                 |         |                                                                                           |
+| Name                                            | Type                          | Default | Description                                                                               |
+| ----------------------------------------------- | ----------------------------- | ------- | ----------------------------------------------------------------------------------------- |
+| `value`                                         | `string`                      |         | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_option_props_props_value} />`    |
+| `text`                                          | `string`                      |         | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_option_props_props_text} />`     |
+| `id`                                            | `string`                      |         | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_option_props_props_id} />`       |
+| `ref` _bindable_                                | `HTMLLIElement` &#124; `null` |         | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_option_props_props_ref} />`      |
+| `disabled`                                      | `boolean`                     |         | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_option_props_props_disabled} />` |
+| `index`                                         | `number`                      |         | `<I18nMarkupMessage message={m.generated_fs_auto_suggest_option_props_props_index} />`    |
+| `ListViewItemProps<'li'>` without `as`, `value` |                               |         |                                                                                           |
 
 <!-- /props:AutoSuggestOptionProps -->

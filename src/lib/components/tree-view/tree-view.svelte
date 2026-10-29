@@ -27,7 +27,7 @@
 		navigationMode = CONTEXT?.config.navigationMode ?? 'tree',
 		checkedItems = $bindable(CONTEXT?.state.checkedItems ?? (virtualizer !== undefined ? new SvelteSet<string>() : [])),
 		openItems = $bindable(CONTEXT?.state.openItems ?? (virtualizer !== undefined ? new SvelteSet<string>() : [])),
-		ref = $bindable(),
+		ref = $bindable(null),
 		onOpenChange,
 		onCheckedChange,
 		selectionMode = CONTEXT?.state.selectionMode ?? 'multiple',

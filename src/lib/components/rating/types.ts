@@ -50,8 +50,6 @@ export type RatingProps = {
 	| 'max'
 	| 'step'
 	| 'size'
-	| 'id'
-	| 'class'
 	| 'style'
 	| 'aria-label'
 	| 'aria-invalid'

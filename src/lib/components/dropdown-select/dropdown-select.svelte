@@ -10,14 +10,15 @@
 	let {
 		hidePlaceholder,
 		placeholder = 'Native Select Dropdown',
-		ref = $bindable(),
+		ref = $bindable(null),
 		children,
-		wrapperRef = $bindable(),
+		wrapperRef = $bindable(null),
 		wrapperAttributes,
 		multiple,
 		class: classes,
 		value = $bindable(multiple ? [] : ''),
 		id = labelContext?.fieldId,
+		name = id,
 		...attributes
 	}: DropdownSelectProps = $props();
 </script>
@@ -34,6 +35,7 @@
 		<select
 			{...attributes}
 			{id}
+			{name}
 			class={['fs-dropdown-select', classes]}
 			{@attach selectDirection()}
 			multiple
@@ -52,6 +54,7 @@
 		<select
 			{...attributes}
 			{id}
+			{name}
 			class={['fs-dropdown-select', classes]}
 			{@attach selectDirection()}
 			bind:value

@@ -69,17 +69,17 @@ HTML attributes, including class, id and ARIA attributes, apply to the control e
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:CheckboxProps -->
 
-| Name                                            | Type                   | Default | Description                                                                                 |
-| ----------------------------------------------- | ---------------------- | ------- | ------------------------------------------------------------------------------------------- |
-| `ref` _bindable_                                | `HTMLInputElement`     |         | The DOM reference of the checkbox element.                                                  |
-| `wrapperRef` _bindable_                         | `HTMLDivElement`       |         | The DOM reference of the checkbox wrapper element.                                          |
-| `wrapperAttributes`                             | `HTMLAttributes`       |         | The attributes to spread on the wrapper element.                                            |
-| `indeterminate` _bindable_                      | `boolean`              |         | Renders the checkbox in its mixed state, neither checked nor unchecked.                     |
-| `name`                                          | `string` &#124; `null` | `id`    | The name submitted with the form. Falls back to the id of the checkbox.                     |
-| `group`                                         | `string` &#124; `null` |         | The value of the group of checkboxes this input belongs to.                                 |
-| `checked` _bindable_                            | `boolean`              |         | Whether the checkbox is checked.                                                            |
-| `disabled`                                      | `boolean`              |         | Disables the user interaction.                                                              |
-| `children`                                      | `Snippet`              |         | The content of the label associated with the checkbox. Inside a `Label`, it is not rendered |
-| `HTMLInputAttributes` without `on:`, `children` |                        |         |                                                                                             |
+| Name                                            | Type                             | Default | Description                                                                                 |
+| ----------------------------------------------- | -------------------------------- | ------- | ------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                | `HTMLInputElement` &#124; `null` |         | The DOM reference of the checkbox element.                                                  |
+| `wrapperRef` _bindable_                         | `HTMLDivElement` &#124; `null`   |         | The DOM reference of the checkbox wrapper element.                                          |
+| `wrapperAttributes`                             | `HTMLAttributes`                 |         | The attributes to spread on the wrapper element.                                            |
+| `indeterminate` _bindable_                      | `boolean` &#124; `null`          |         | Renders the checkbox in its mixed state, neither checked nor unchecked.                     |
+| `name`                                          | `string` &#124; `null`           | `id`    | The name submitted with the form. Falls back to the id of the checkbox.                     |
+| `group`                                         | `string` &#124; `null`           |         | The value of the group of checkboxes this input belongs to.                                 |
+| `checked` _bindable_                            | `boolean` &#124; `null`          |         | Whether the checkbox is checked.                                                            |
+| `disabled`                                      | `boolean`                        |         | Disables the user interaction.                                                              |
+| `children`                                      | `Snippet`                        |         | The content of the label associated with the checkbox. Inside a `Label`, it is not rendered |
+| `HTMLInputAttributes` without `on:`, `children` |                                  |         |                                                                                             |
 
 <!-- /props:CheckboxProps -->

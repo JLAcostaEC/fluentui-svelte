@@ -23,7 +23,9 @@
 		size = 'extra-large',
 		iconFilled,
 		iconOutline,
-		name = ID,
+		id = ID,
+		class: classes,
+		name = id,
 		itemLabel = (rating) => `${rating}`,
 		onChange,
 		wrapperRef = $bindable(null),
@@ -127,9 +129,10 @@
 			{#if step === 0.5}
 				<input
 					{...attributes}
-					class="half-value"
-					type="radio"
+					{id}
 					{name}
+					class={["half-value", classes]}
+					type="radio"
 					value={item - 0.5}
 					aria-label={itemLabel(item - 0.5)}
 					bind:group={checked}
@@ -139,9 +142,10 @@
 			{/if}
 			<input
 				{...attributes}
-				class="full-value"
-				type="radio"
 				{name}
+				{id}
+				class={["full-value", classes]}
+				type="radio"
 				value={item}
 				aria-label={itemLabel(item)}
 				bind:group={checked}

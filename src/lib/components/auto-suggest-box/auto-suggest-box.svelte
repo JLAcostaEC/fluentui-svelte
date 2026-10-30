@@ -26,6 +26,7 @@
 
 	let {
 		id = labelContext?.fieldId ?? `${ID}-input`,
+		name = id,
 		wrapperAttributes,
 		onfocus,
 		onClear,
@@ -386,6 +387,7 @@
 		{placeholder}
 		{hideActionButtons}
 		{id}
+		{name}
 		bind:value
 		bind:ref
 		querySubmitted={(e) => querySubmitted?.(e, value)}

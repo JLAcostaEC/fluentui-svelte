@@ -28,7 +28,7 @@
 		primaryButtonAttributes,
 		dismissButtonAttributes,
 		class: classes,
-		ref = $bindable(),
+		ref = $bindable(null),
 		children,
 		...attributes
 	}: TagProps = $props();

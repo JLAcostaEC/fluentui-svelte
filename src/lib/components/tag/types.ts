@@ -84,7 +84,7 @@ export type TagProps = {
 	/** The DOM reference of the tag element.
 	 * @bindable
 	 */
-	ref?: HTMLElement;
+	ref?: HTMLElement | null;
 } & Omit<PolymorphicProps<'span'>, 'children' | 'onclick' | 'onkeydown'>;
 
 /** @propsmith TagGroupProps */
@@ -119,7 +119,7 @@ export type TagGroupProps = {
 	/** The DOM reference of the group element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 } & Omit<PolymorphicProps<'div'>, 'children' | 'role'>;
 
 export type TagGroupContext = FSContext<

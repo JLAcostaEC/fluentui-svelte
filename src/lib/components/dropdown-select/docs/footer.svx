@@ -13,16 +13,16 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DropdownSelectProps -->
 
-| Name                          | Type                       | Default                    | Description                                                                                     |
-| ----------------------------- | -------------------------- | -------------------------- | ----------------------------------------------------------------------------------------------- |
-| `value` _bindable_            | `string` &#124; `string[]` | `multiple ? [] : ''`       | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_value} />`              |
-| `multiple`                    | `boolean`                  |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_multiple} />`           |
-| `placeholder`                 | `string`                   | `'Native Select Dropdown'` | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_placeholder} />`        |
-| `hidePlaceholder`             | `boolean`                  |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_hide_placeholder} />`   |
-| `ref` _bindable_              | `HTMLSelectElement`        |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_ref} />`                |
-| `wrapperRef` _bindable_       | `HTMLDivElement`           |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_wrapper_ref} />`        |
-| `wrapperAttributes`           | `HTMLAttributes`           |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_wrapper_attributes} />` |
-| Element Attributes (`select`) |                            |                            |                                                                                                 |
+| Name                          | Type                              | Default                    | Description                                                                                     |
+| ----------------------------- | --------------------------------- | -------------------------- | ----------------------------------------------------------------------------------------------- |
+| `value` _bindable_            | `string` &#124; `string[]`        | `multiple ? [] : ''`       | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_value} />`              |
+| `multiple`                    | `boolean`                         |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_multiple} />`           |
+| `placeholder`                 | `string`                          | `'Native Select Dropdown'` | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_placeholder} />`        |
+| `hidePlaceholder`             | `boolean`                         |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_hide_placeholder} />`   |
+| `ref` _bindable_              | `HTMLSelectElement` &#124; `null` |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_ref} />`                |
+| `wrapperRef` _bindable_       | `HTMLDivElement` &#124; `null`    |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_wrapper_ref} />`        |
+| `wrapperAttributes`           | `HTMLAttributes`                  |                            | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_props_props_wrapper_attributes} />` |
+| Element Attributes (`select`) |                                   |                            |                                                                                                 |
 
 <!-- /props:DropdownSelectProps -->
 
@@ -31,13 +31,13 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DropdownSelectOptionProps -->
 
-| Name                          | Type          | Default | Description                                                                                  |
-| ----------------------------- | ------------- | ------- | -------------------------------------------------------------------------------------------- |
-| `value`                       | `string`      |         | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_option_props_props_value} />`    |
-| `text`                        | `string`      |         | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_option_props_props_text} />`     |
-| `disabled`                    | `boolean`     |         | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_option_props_props_disabled} />` |
-| `ref` _bindable_              | `HTMLElement` |         | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_option_props_props_ref} />`      |
-| `children`                    | `Snippet`     |         | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_option_props_props_children} />` |
-| Element Attributes (`option`) |               |         |                                                                                              |
+| Name                          | Type                        | Default | Description                                                                                  |
+| ----------------------------- | --------------------------- | ------- | -------------------------------------------------------------------------------------------- |
+| `value`                       | `string`                    |         | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_option_props_props_value} />`    |
+| `text`                        | `string`                    |         | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_option_props_props_text} />`     |
+| `disabled`                    | `boolean`                   |         | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_option_props_props_disabled} />` |
+| `ref` _bindable_              | `HTMLElement` &#124; `null` |         | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_option_props_props_ref} />`      |
+| `children`                    | `Snippet`                   |         | `<I18nMarkupMessage message={m.generated_fs_dropdown_select_option_props_props_children} />` |
+| Element Attributes (`option`) |                             |         |                                                                                              |
 
 <!-- /props:DropdownSelectOptionProps -->

@@ -6,7 +6,7 @@
 		value,
 		text,
 		disabled,
-		ref = $bindable(),
+		ref = $bindable(null),
 		class: classes,
 		children,
 		...attributes

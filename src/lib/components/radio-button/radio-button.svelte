@@ -95,12 +95,6 @@
 					transform: scale(0.7);
 				}
 			}
-			&:is(:user-invalid, [aria-invalid='true']) {
-				border-color: var(--fs-system-critical);
-				& + label {
-					color: var(--fs-system-critical);
-				}
-			}
 			&:checked {
 				border-color: transparent;
 				background-color: var(--fs-accent-fill-default);
@@ -119,6 +113,15 @@
 					&::after {
 						transform: scale(0.7);
 					}
+				}
+			}
+			&:is(:user-invalid, [aria-invalid='true']) {
+				border-color: var(--fs-system-critical);
+				&:hover {
+					border-color: var(--fs-system-critical);
+				}
+				& + label {
+					color: var(--fs-system-critical);
 				}
 			}
 		}

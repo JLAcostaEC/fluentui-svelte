@@ -1,4 +1,4 @@
-import { page } from 'vitest/browser';
+import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { RadioButton } from '$lib/index.js';
@@ -50,6 +50,21 @@ describe('checked state', () => {
 		await page.getByText('Apple').click();
 
 		await expect.element(input).toBeChecked();
+	});
+});
+
+describe('invalid', () => {
+	// The tests run without the theme, so the token is set here.
+	const CRITICAL = 'rgb(196, 43, 28)';
+	const wrapperAttributes = { style: `--fs-system-critical: ${CRITICAL}` };
+
+	it.each([false, true])('paints the border and the label critical when checked is %s', async (checked) => {
+		await render(RadioButton, { label: 'Apple', checked, 'aria-invalid': 'true', wrapperAttributes });
+		const input = page.getByRole('radio').element();
+		expect(getComputedStyle(input).borderColor).toBe(CRITICAL);
+		expect(getComputedStyle(page.getByText('Apple').element()).color).toBe(CRITICAL);
+		await userEvent.hover(input);
+		expect(getComputedStyle(input).borderColor).toBe(CRITICAL);
 	});
 });
 

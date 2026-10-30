@@ -15,7 +15,7 @@
 		onDismiss,
 		role = 'toolbar',
 		class: classes,
-		ref = $bindable(),
+		ref = $bindable(null),
 		children,
 		...attributes
 	}: TagGroupProps = $props();

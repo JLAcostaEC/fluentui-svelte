@@ -1,13 +1,16 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import type { TimePickerProps } from './types.ts';
 	import { Flyout, Button, Divider } from '$lib/index.js';
 	import { on } from 'svelte/events';
 	import { tick } from 'svelte';
 	import { PREFIX } from '$constants';
-	import { floating, invokeHandlers } from '$internal';
+	import { dispatchFieldEvents, floating, invokeHandlers, NativeField } from '$internal';
 	import { flip, hide, offset, shift } from '@floating-ui/dom';
 	import DynamicCarousel from '$lib/internal/components/dynamic-carousel/dynamic-carousel.svelte';
 	import { CheckmarkRegular, DismissRegular } from 'fluentui-icons-svelte';
+
+	const labelContext = claimLabel(() => id);
 
 	let {
 		format = 24,
@@ -16,13 +19,18 @@
 		hideHours = false,
 		hideMinutes = false,
 		hideSeconds = false,
-		ref = $bindable(),
-		wrapperRef = $bindable(),
+		id = labelContext?.fieldId,
+		name = id,
+		ref = $bindable(null),
+		buttonRef = $bindable(null),
+		buttonAttributes,
+		wrapperRef = $bindable(null),
 		wrapperAttributes,
-		class: classes,
-		onclick,
-		inputRef = $bindable(),
-		inputAttributes,
+		disabled,
+		readonly,
+		step,
+		onfocus,
+		onblur,
 		popupLabel = 'Choose a time',
 		...attributes
 	}: TimePickerProps = $props();
@@ -30,12 +38,24 @@
 	const FALLBACK_ID = $props.id();
 	const POPUP_ID = `${PREFIX}timepicker-${FALLBACK_ID}-popup`;
 
-	let popupRef: HTMLElement | undefined = $state();
+	let popupRef: HTMLElement | null = $state(null);
+
+	const native = new NativeField(
+		() => ref,
+		() => buttonRef,
+		labelContext
+	);
 
 	/** Closing always hands the focus back, so the keyboard never lands nowhere. */
 	function closePopup() {
 		open = false;
-		ref?.focus();
+		buttonRef?.focus();
+	}
+
+	/** A label activates the native input it belongs to, which hands the activation to the button. */
+	function openFromField() {
+		buttonRef?.focus();
+		open = !readonly;
 	}
 
 	// Escape has to work from inside the popup too, and the popup is not a descendant
@@ -129,7 +149,11 @@
 	}
 
 	function confirm() {
-		value = `${pad(hour)}:${pad(minute)}${hideSeconds ? '' : `:${pad(second)}`}`;
+		const next = `${pad(hour)}:${pad(minute)}${hideSeconds ? '' : `:${pad(second)}`}`;
+		if (next !== value) {
+			value = next;
+			dispatchFieldEvents(ref);
+		}
 		closePopup();
 	}
 
@@ -150,14 +174,18 @@
 
 <div {...wrapperAttributes} class={['fs-time-picker-wrapper', wrapperAttributes?.class]} bind:this={wrapperRef}>
 	<button
-		{...attributes}
+		{...buttonAttributes}
+		{...native.aria(attributes, buttonAttributes, 'button')}
 		type="button"
-		class={['fs-time-picker', classes]}
+		class={['fs-time-picker', buttonAttributes?.class]}
+		{disabled}
 		aria-haspopup="dialog"
 		aria-expanded={open}
 		aria-controls={open ? POPUP_ID : undefined}
-		onclick={(e) => invokeHandlers(e, [], [() => (open = !open), onclick])}
-		bind:this={ref}
+		onclick={(e) => invokeHandlers(e, [], [() => (open = !readonly && !open), buttonAttributes?.onclick])}
+		onfocus={(e) => invokeHandlers(e, [], [onfocus, buttonAttributes?.onfocus])}
+		onblur={(e) => invokeHandlers(e, [], [onblur, buttonAttributes?.onblur])}
+		bind:this={buttonRef}
 	>
 		{#each columns as col, idx (col)}
 			{#if idx > 0}
@@ -167,13 +195,29 @@
 		{/each}
 	</button>
 
-	<!-- Carries the value into a form. -->
-	<input {...inputAttributes} type="time" hidden step={hideSeconds ? undefined : 1} {value} bind:this={inputRef} />
+	<!-- The field of the form: submitted, validated and reset like any time input,
+	     behind the button and out of the tab order, since the button is what people use. See `NativeField`.
+	     Seconds need a step of one to be a valid value. -->
+	<input
+		{...attributes}
+		{id}
+		{name}
+		class="native-field"
+		aria-hidden={native.reported ? undefined : 'true'}
+		type="time"
+		tabindex={-1}
+		step={step ?? (hideSeconds ? undefined : 1)}
+		{disabled}
+		{readonly}
+		bind:value
+		bind:this={ref}
+		onclick={openFromField}
+	/>
 </div>
 
 {#if open}
 	<Flyout
-		{@attach floating(ref, {
+		{@attach floating(buttonRef, {
 			placement: 'bottom',
 			middleware: [
 				offset(({ rects }) => {
@@ -185,7 +229,7 @@
 			],
 			strategy: 'fixed'
 		})}
-		reference={ref}
+		reference={buttonRef}
 		id={POPUP_ID}
 		role="dialog"
 		aria-modal="true"
@@ -232,11 +276,34 @@
 {/if}
 
 <style>
+	/* The box of the button, which the native field covers so its validation message points at the button. */
 	.fs-time-picker-wrapper {
-		display: contents;
+		display: flex;
+		position: relative;
+		inline-size: fit-content;
+	}
+	.fs-time-picker-wrapper:has(> .native-field:is(:user-invalid, [aria-invalid='true'])) {
+		& .picker-content {
+			color: var(--fs-system-critical);
+		}
+		& .fs-time-picker::after,
+		& :global(.fs-divider) {
+			background: var(--fs-system-critical);
+		}
+	}
+	.native-field {
+		position: absolute;
+		inset: 0;
+		inline-size: 100%;
+		block-size: 100%;
+		margin: 0;
+		box-sizing: border-box;
+		opacity: 0;
+		pointer-events: none;
 	}
 	.fs-time-picker {
 		display: flex;
+		flex: 1 1 auto;
 		position: relative;
 		border-radius: var(--fs-control-border-radius);
 		font-size: var(--fs-body-font-size);

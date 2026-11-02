@@ -21,7 +21,7 @@ type KeyboardFocusEventName = `key${string}` | 'focus' | 'blur' | 'focusin' | 'f
 type Handlers<E extends string> = `on${E}` | `on${E}capture`;
 
 /** The attributes of a field nobody sees: its look and its pointer events belong to what is drawn instead. */
-export type HiddenInputAttributes<T> = Omit<T, 'class' | 'style' | Handlers<PointerEventName>>;
+export type HiddenInputAttributes<T> = Omit<T, Handlers<PointerEventName>>;
 
 /**
  * The attributes of the native field a custom control stands in front of. People point at, type into

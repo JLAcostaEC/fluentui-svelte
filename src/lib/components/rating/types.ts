@@ -44,14 +44,5 @@ export type RatingProps = {
 	wrapperAttributes?: HTMLAttributes<HTMLDivElement>;
 } & Omit<
 	HTMLInputAttributes,
-	| 'type'
-	| 'value'
-	| 'checked'
-	| 'max'
-	| 'step'
-	| 'size'
-	| 'style'
-	| 'aria-label'
-	| 'aria-invalid'
-	| 'children'
+	'type' | 'value' | 'checked' | 'max' | 'step' | 'size' | 'style' | 'aria-label' | 'aria-invalid' | 'children'
 >;

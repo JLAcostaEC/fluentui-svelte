@@ -36,17 +36,32 @@ describe('rendering', () => {
 		await expect.element(page.selector('input[type="date"]')).toHaveValue('2024-03-15');
 	});
 
-	it('keeps that input out of the tab order and out of the accessibility tree', async () => {
+	it('keeps that input behind the button, out of the tab order and the accessibility tree, but not out of validation', async () => {
 		render(DatePicker, { value: '2024-03-15' });
 
 		const input = document.querySelector<HTMLInputElement>('input[type="date"]')!;
-		expect(input.hidden).toBe(true);
+		expect(input.willValidate).toBe(true);
+		expect(input.getAttribute('aria-hidden')).toBe('true');
+		expect(getComputedStyle(input).opacity).toBe('0');
 
 		document.querySelector<HTMLElement>('.fs-date-picker')?.focus();
 		await userEvent.tab();
 
 		expect(document.activeElement).not.toBe(input);
 	});
+
+	it.each([
+		[{}, ['2000-01-01', '2010-12-31']],
+		[{ min: '2005-06-01', max: '2006-06-01' }, ['2005-06-01', '2006-06-01']]
+	])(
+		'accepts on its native input only the dates of the years it offers, unless min and max say otherwise (%o)',
+		async (limits, expected) => {
+			render(DatePicker, { minYear: 2000, maxYear: 2010, ...limits });
+			const input = document.querySelector<HTMLInputElement>('input[type="date"]')!;
+
+			expect([input.min, input.max]).toEqual(expected);
+		}
+	);
 
 	it('is a real button', async () => {
 		render(DatePicker);

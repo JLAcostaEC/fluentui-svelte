@@ -31,11 +31,13 @@ describe('rendering', () => {
 		await expect.element(page.selector('input[type="time"]')).toHaveValue('13:45:30');
 	});
 
-	it('keeps that input out of the tab order and out of the accessibility tree', async () => {
+	it('keeps that input behind the button, out of the tab order and the accessibility tree, but not out of validation', async () => {
 		render(TimePicker, { value: '13:45:30' });
 
 		const input = document.querySelector<HTMLInputElement>('input[type="time"]')!;
-		expect(input.hidden).toBe(true);
+		expect(input.willValidate).toBe(true);
+		expect(input.getAttribute('aria-hidden')).toBe('true');
+		expect(getComputedStyle(input).opacity).toBe('0');
 
 		document.querySelector<HTMLElement>('.fs-time-picker')?.focus();
 		await userEvent.tab();
@@ -48,9 +50,11 @@ describe('rendering', () => {
 		expect(document.querySelector('.fs-time-picker')?.tagName).toBe('BUTTON');
 	});
 
-	it('takes a name for the form through inputAttributes', async () => {
-		render(TimePicker, { value: '13:45:30', inputAttributes: { name: 'meeting-time' } });
-		await expect.element(page.selector('input[type="time"]')).toHaveAttribute('name', 'meeting-time');
+	it('takes the native attributes directly on the time input', async () => {
+		render(TimePicker, { value: '13:45:30', name: 'meeting-time', required: true });
+		const input = page.selector('input[type="time"]');
+		await expect.element(input).toHaveAttribute('name', 'meeting-time');
+		await expect.element(input).toBeRequired();
 	});
 });
 

@@ -1,4 +1,5 @@
 import type { HTMLAttributes, HTMLButtonAttributes, HTMLInputAttributes } from 'svelte/elements';
+import type { NativeFieldAttributes } from '$internal';
 
 /** @propsmith TimePickerProps */
 export type TimePickerProps = {
@@ -28,28 +29,28 @@ export type TimePickerProps = {
 	 * @default false
 	 */
 	hideSeconds?: boolean;
-	/** The DOM reference of the trigger button.
+	/** The DOM reference of the native time input that holds the value. The other attributes of the picker are applied to it.
 	 * @bindable
 	 */
-	ref?: HTMLButtonElement;
-	/** The DOM reference of the element wrapping the trigger and its input.
+	ref?: HTMLInputElement | null;
+	/** The DOM reference of the button that opens the picker.
 	 * @bindable
 	 */
-	wrapperRef?: HTMLDivElement;
+	buttonRef?: HTMLButtonElement | null;
+	/** The attributes to spread on the button that opens the picker.
+	 * @type HTMLButtonAttributes
+	 */
+	buttonAttributes?: HTMLButtonAttributes;
+	/** The DOM reference of the element wrapping the button and the native input.
+	 * @bindable
+	 */
+	wrapperRef?: HTMLDivElement | null;
 	/** The attributes to spread on the wrapper element.
 	 * @type HTMLAttributes
 	 */
 	wrapperAttributes?: HTMLAttributes<HTMLDivElement>;
-	/** The DOM reference of the underlying input element.
-	 * @bindable
-	 */
-	inputRef?: HTMLInputElement;
-	/** HTML attributes for the underlying input element. Give it a `name` to submit the
-	 * value with a form.
-	 */
-	inputAttributes?: HTMLInputAttributes;
 	/** The accessible name of the popup, which is announced as a dialog.
 	 * @default 'Choose a time'
 	 */
 	popupLabel?: string;
-} & HTMLButtonAttributes;
+} & NativeFieldAttributes<HTMLInputAttributes>;

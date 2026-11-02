@@ -131,7 +131,7 @@
 					{...attributes}
 					{id}
 					{name}
-					class={["half-value", classes]}
+					class={['half-value', classes]}
 					type="radio"
 					value={item - 0.5}
 					aria-label={itemLabel(item - 0.5)}
@@ -144,7 +144,7 @@
 				{...attributes}
 				{name}
 				{id}
-				class={["full-value", classes]}
+				class={['full-value', classes]}
 				type="radio"
 				value={item}
 				aria-label={itemLabel(item)}

@@ -1,7 +1,8 @@
-import type { HTMLAttributes, HTMLButtonAttributes } from 'svelte/elements';
+import type { Snippet } from 'svelte';
+import type { HTMLAttributes, HTMLButtonAttributes, HTMLSelectAttributes } from 'svelte/elements';
 import type { ListViewProps, ListViewItemProps } from '../list-view/types.ts';
 import type { FlyoutProps } from '../flyout/types.ts';
-import type { FSContext } from '$internal';
+import type { FSContext, NativeFieldAttributes } from '$internal';
 
 /** The value shape of a dropdown that allows more than one selection. */
 export type DropdownMultipleValue = {
@@ -31,28 +32,32 @@ export type DropdownProps = {
 	placeholder?: string;
 	/** Disables the user interaction. */
 	disabled?: boolean;
-	/** The name submitted with the form. Falls back to the id of the dropdown.
-	 * @default id
-	 */
+	/** The name the value is submitted under. Without one, the form leaves the value out, as with any field. */
 	name?: string | null;
 	/** The DOM reference of the wrapper element.
 	 * @bindable
 	 */
-	wrapperRef?: HTMLDivElement;
-	/** Called when the dropdown is clicked. */
-	onclick?: (e: MouseEvent) => void;
+	wrapperRef?: HTMLDivElement | null;
 	/** The attributes to spread on the wrapper element.
 	 * @type HTMLAttributes
 	 */
 	wrapperAttributes?: HTMLAttributes<HTMLDivElement>;
+	/** The DOM reference of the native select that holds the value. The other attributes of the dropdown are applied to it.
+	 * @bindable
+	 */
+	ref?: HTMLSelectElement | null;
 	/** The DOM reference of the button that opens the dropdown.
 	 * @bindable
 	 */
-	ref?: HTMLButtonElement;
+	buttonRef?: HTMLButtonElement | null;
+	/** The attributes to spread on the button that opens the dropdown.
+	 * @type HTMLButtonAttributes
+	 */
+	buttonAttributes?: Omit<HTMLButtonAttributes, 'type' | 'role' | 'value'>;
 	/** The DOM reference of the flyout element.
 	 * @bindable
 	 */
-	flyoutRef?: HTMLDivElement;
+	flyoutRef?: HTMLDivElement | null;
 	/** The props to spread on the flyout.
 	 * @type FlyoutProps
 	 */
@@ -62,13 +67,15 @@ export type DropdownProps = {
 	/** The DOM reference of the listbox element.
 	 * @bindable
 	 */
-	listboxRef?: HTMLUListElement;
+	listboxRef?: HTMLUListElement | null;
 	/** The props to spread on the listbox rendered inside the flyout.
 	 * @type ListViewProps
 	 */
 	listboxProps?: Omit<ListViewProps<'ul'>, 'ref' | 'children' | 'selectedItems' | 'selectionMode'>;
+	/** The `DropdownOption` elements of the list. */
+	children?: Snippet;
 } & (DropdownMultipleValue | DropdownSingleValue) &
-	Omit<HTMLButtonAttributes, 'value' | 'type' | 'role' | 'onclick'>;
+	NativeFieldAttributes<HTMLSelectAttributes>;
 
 /** @propsmith DropdownOptionProps */
 export type DropdownOptionProps = {

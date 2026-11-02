@@ -12,6 +12,7 @@
 	let {
 		status = 'information',
 		title,
+		headingLevel = 3,
 		icon: Icon,
 		style = 'inline',
 		hideCloseButton,
@@ -55,7 +56,7 @@
 			{/if}
 		</div>
 		<div class="content">
-			{#if title}<h3>{title}</h3>{/if}
+			{#if title}<svelte:element this={`h${headingLevel}`} class="title">{title}</svelte:element>{/if}
 			{@render children?.()}
 		</div>
 		{#if !hideCloseButton}
@@ -120,7 +121,7 @@
 			align-items: center;
 			gap: 0.5rem;
 			width: 100%;
-			& h3 {
+			& .title {
 				font-weight: semibold;
 				font-size: var(--fs-body-font-size);
 				line-height: var(--fs-body-line-height);

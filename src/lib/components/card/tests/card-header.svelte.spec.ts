@@ -61,6 +61,11 @@ describe('rendering', () => {
 		await expect.element(el).toHaveAttribute('id', 'my-card-title');
 	});
 
+	it('renders the string title at the heading level it is given', async () => {
+		render(CardTestWrapper, { part: 'header', title: 'My title', headingLevel: 2 });
+		await expect.element(page.getByRole('heading', { level: 2, name: 'My title' })).toBeInTheDocument();
+	});
+
 	it('gives the string title the id even without a description', async () => {
 		render(CardTestWrapper, { part: 'header', title: 'My title', id: 'my-card' });
 		const el = page.selector('.fs-card-header h4.body');

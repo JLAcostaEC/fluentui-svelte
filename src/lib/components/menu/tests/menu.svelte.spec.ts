@@ -162,6 +162,19 @@ describe('MenuGroup', () => {
 		await expect.element(group).toBeInTheDocument();
 		await expect.element(page.getByText('Section')).toBeInTheDocument();
 	});
+
+	it('names the group with its header, which is not a heading among the items', async () => {
+		render(MenuTestWrapper, { open: true, variant: 'group' });
+		await expect.element(page.getByRole('group', { name: 'Section' })).toBeInTheDocument();
+		expect(page.getByRole('menu').getByRole('heading').elements()).toHaveLength(0);
+	});
+
+	it('renders no label when the group has no header', async () => {
+		render(MenuTestWrapper, { open: true, variant: 'group', groupHeader: '' });
+		const group = page.getByRole('group');
+		await expect.element(group).not.toHaveAttribute('aria-labelledby');
+		expect(group.element().querySelector('.group-name')).toBeNull();
+	});
 });
 
 describe('MenuDivider', () => {

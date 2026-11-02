@@ -79,12 +79,12 @@ A split button is a special type of button that combines a standard button with 
 	import { SplitButton } from 'fluentui-svelte';
 </script>
 
-<SplitButton />
-<SplitButton appearance="standard" />
-<SplitButton appearance="subtle" />
-<SplitButton shape="circular" />
-<SplitButton shape="circular" appearance="standard" />
-<SplitButton shape="circular" appearance="subtle" />
+<SplitButton menuTriggerProps={{ 'aria-label': 'More options' }} />
+<SplitButton appearance="standard" menuTriggerProps={{ 'aria-label': 'More options' }} />
+<SplitButton appearance="subtle" menuTriggerProps={{ 'aria-label': 'More options' }} />
+<SplitButton shape="circular" menuTriggerProps={{ 'aria-label': 'More options' }} />
+<SplitButton shape="circular" appearance="standard" menuTriggerProps={{ 'aria-label': 'More options' }} />
+<SplitButton shape="circular" appearance="subtle" menuTriggerProps={{ 'aria-label': 'More options' }} />
 ```
 
 ### Adding a Menu
@@ -96,16 +96,16 @@ To add a menu to the split button, please refer to the Menu documentation for de
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:SplitButtonProps -->
 
-| Name                          | Type                                              | Default     | Description                                                                                  |
-| ----------------------------- | ------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------- |
-| `appearance`                  | `'accent'` &#124; `'standard'` &#124; `'subtle'`  | `'accent'`  | Both buttons can have their content and borders styled for greater emphasis or to be subtle. |
-| `shape`                       | `'circular'` &#124; `'rounded'` &#124; `'square'` | `'rounded'` | Both buttons can be rounded, circular, or square.                                            |
-| `disabled`                    | `boolean`                                         | `false`     | Disables the user interaction on both buttons.                                               |
-| `primaryButtonProps`          | `ButtonProps`                                     |             | The props to spread on the primary button.                                                   |
-| `menuTriggerProps`            | `ButtonProps`                                     |             | The props to spread on the button that opens the menu.                                       |
-| `wrapperRef` _bindable_       | `HTMLDivElement` &#124; `null`                    |             | The DOM reference of the element wrapping both buttons.                                      |
-| `primaryButtonRef` _bindable_ | `HTMLButtonElement` &#124; `null`                 |             | The DOM reference of the primary button.                                                     |
-| `menuTriggerRef` _bindable_   | `HTMLButtonElement` &#124; `null`                 |             | The DOM reference of the button that opens the menu.                                         |
-| HTML Attributes               |                                                   |             |                                                                                              |
+| Name                          | Type                                              | Default     | Description                                                                                                |
+| ----------------------------- | ------------------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------- |
+| `appearance`                  | `'accent'` &#124; `'standard'` &#124; `'subtle'`  | `'accent'`  | Both buttons can have their content and borders styled for greater emphasis or to be subtle.               |
+| `shape`                       | `'circular'` &#124; `'rounded'` &#124; `'square'` | `'rounded'` | Both buttons can be rounded, circular, or square.                                                          |
+| `disabled`                    | `boolean`                                         | `false`     | Disables the user interaction on both buttons.                                                             |
+| `primaryButtonProps`          | `ButtonProps`                                     |             | The props to spread on the primary button.                                                                 |
+| `menuTriggerProps`            | `ButtonProps`                                     |             | The props to spread on the button that opens the menu. It shows only an arrow, so give it an `aria-label`. |
+| `wrapperRef` _bindable_       | `HTMLDivElement` &#124; `null`                    |             | The DOM reference of the element wrapping both buttons.                                                    |
+| `primaryButtonRef` _bindable_ | `HTMLButtonElement` &#124; `null`                 |             | The DOM reference of the primary button.                                                                   |
+| `menuTriggerRef` _bindable_   | `HTMLButtonElement` &#124; `null`                 |             | The DOM reference of the button that opens the menu.                                                       |
+| HTML Attributes               |                                                   |             |                                                                                                            |
 
 <!-- /props:SplitButtonProps -->

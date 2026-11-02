@@ -9,7 +9,7 @@ The NumberBox component allows users to input numeric values with specified cons
 	import { NumberBox } from 'fluentui-svelte';
 </script>
 
-<NumberBox value={0} min={0} max={100} step={1} />
+<NumberBox aria-label="Quantity" value={0} min={0} max={100} step={1} />
 ```
 
 ## Component API
@@ -23,8 +23,8 @@ A brief explanation of the props that really need explaining. You can see the re
 The variant prop determines the visual style of the NumberBox.
 
 ```svelte
-<NumberBox hideActionButtons min={0} max={100} step={1} />
-<NumberBox hideActionButtons min={0} max={100} step={1} variant="compact" />
+<NumberBox aria-label="Quantity" hideActionButtons min={0} max={100} step={1} />
+<NumberBox aria-label="Quantity" hideActionButtons min={0} max={100} step={1} variant="compact" />
 ```
 
 HTML attributes, including class, id and ARIA attributes, apply to the control element. Bind ref to access that control. Use wrapperAttributes and wrapperRef for the outer container.

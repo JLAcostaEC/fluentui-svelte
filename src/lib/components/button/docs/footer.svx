@@ -36,21 +36,21 @@
 	import { SplitButton } from 'fluentui-svelte';
 </script>
 
-<SplitButton />
-<SplitButton appearance="standard" />
-<SplitButton appearance="subtle" />
-<SplitButton shape="circular" />
-<SplitButton shape="circular" appearance="standard" />
-<SplitButton shape="circular" appearance="subtle" />
+<SplitButton menuTriggerProps={{ 'aria-label': 'More options' }} />
+<SplitButton appearance="standard" menuTriggerProps={{ 'aria-label': 'More options' }} />
+<SplitButton appearance="subtle" menuTriggerProps={{ 'aria-label': 'More options' }} />
+<SplitButton shape="circular" menuTriggerProps={{ 'aria-label': 'More options' }} />
+<SplitButton shape="circular" appearance="standard" menuTriggerProps={{ 'aria-label': 'More options' }} />
+<SplitButton shape="circular" appearance="subtle" menuTriggerProps={{ 'aria-label': 'More options' }} />
 ```
 
 <Showcase minHeight="200px" minZoom={1}>
-  <SplitButton />
-  <SplitButton appearance="standard" />
-  <SplitButton appearance="subtle" />
-  <SplitButton shape="circular" />
-  <SplitButton shape="circular" appearance="standard" />
-  <SplitButton shape="circular" appearance="subtle" />
+  <SplitButton menuTriggerProps={{ 'aria-label': 'More options' }} />
+  <SplitButton appearance="standard" menuTriggerProps={{ 'aria-label': 'More options' }} />
+  <SplitButton appearance="subtle" menuTriggerProps={{ 'aria-label': 'More options' }} />
+  <SplitButton shape="circular" menuTriggerProps={{ 'aria-label': 'More options' }} />
+  <SplitButton shape="circular" appearance="standard" menuTriggerProps={{ 'aria-label': 'More options' }} />
+  <SplitButton shape="circular" appearance="subtle" menuTriggerProps={{ 'aria-label': 'More options' }} />
 </Showcase>
 
 ### {m.btn_adding_a_menu_title()}

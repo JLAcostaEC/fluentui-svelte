@@ -22,7 +22,8 @@
 		checkedValues = {},
 		onOpenChange,
 		onCheckedValueChange,
-		variant = 'items'
+		variant = 'items',
+		groupHeader = 'Section'
 	}: {
 		open?: boolean;
 		keepMounted?: boolean;
@@ -34,6 +35,8 @@
 		onOpenChange?: (e: Event, open: boolean) => void;
 		onCheckedValueChange?: (e: Event, values: Record<string, string[]>) => void;
 		variant?: 'items' | 'checkbox' | 'radio' | 'group';
+		/** The header of the group variant. */
+		groupHeader?: string;
 	} = $props();
 </script>
 
@@ -67,7 +70,7 @@
 				<MenuItemRadio name="pick" value="x">Pick X</MenuItemRadio>
 				<MenuItemRadio name="pick" value="y">Pick Y</MenuItemRadio>
 			{:else if variant === 'group'}
-				<MenuGroup header="Section">
+				<MenuGroup header={groupHeader}>
 					<MenuItem>Grouped</MenuItem>
 				</MenuGroup>
 			{/if}

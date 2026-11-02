@@ -50,14 +50,14 @@
 </nav>`;
 
   const selectionCode = `
-<ListView selectionMode="multiselect" selectedItems={['Apple']}>
+<ListView aria-label="Fruits" selectionMode="multiselect" selectedItems={['Apple']}>
   {#each ['Apple', 'Banana', 'Cherry'] as item (item)}
     <ListViewItem value={item}>{item}</ListViewItem>
   {/each}
 </ListView>`;
 
   const toggleOnClickCode = `
-<ListView selectionMode="multiselect" toggleOnClick>
+<ListView aria-label="Fruits" selectionMode="multiselect" toggleOnClick>
   {#each ['Apple', 'Banana', 'Cherry'] as item (item)}
     <ListViewItem value={item}>{item}</ListViewItem>
   {/each}
@@ -68,7 +68,7 @@
   let selected = $state<string[]>(['Apple']);
 <\/script>
 
-<ListView selectionMode="multiselect" bind:selectedItems={selected}>
+<ListView aria-label="Fruits" selectionMode="multiselect" bind:selectedItems={selected}>
   {#each ['Apple', 'Banana', 'Cherry'] as item (item)}
     <ListViewItem value={item} checkmark={{}}>{item}</ListViewItem>
   {/each}
@@ -167,7 +167,7 @@
 Use `selectionMode` (`single`, `multiselect`, or `extended`) to control how items are selected.
 
 <Showcase columns={1} minHeight="220px" code={selectionCode}>
-  <ListView selectionMode="multiselect" selectedItems={['Apple']}>
+  <ListView aria-label="Fruits" selectionMode="multiselect" selectedItems={['Apple']}>
     {#each list as item (item)}
       <ListViewItem value={item}>{item}</ListViewItem>
     {/each}
@@ -179,7 +179,7 @@ Use `selectionMode` (`single`, `multiselect`, or `extended`) to control how item
 {m.lv_toggle_on_click_description()}
 
 <Showcase columns={1} minHeight="0" disablePanZoom code={toggleOnClickCode}>
-  <ListView selectionMode="multiselect" toggleOnClick>
+  <ListView aria-label="Fruits" selectionMode="multiselect" toggleOnClick>
     {#each list as item (item)}
       <ListViewItem value={item}>{item}</ListViewItem>
     {/each}
@@ -198,7 +198,7 @@ Use `selectionMode` (`single`, `multiselect`, or `extended`) to control how item
 
 <Showcase columns={1} minHeight="0" disablePanZoom code={checkmarkCode}>
   <div style="width: 240px; max-width: 100%;">
-    <ListView selectionMode="multiselect" bind:selectedItems={selectedFruits}>
+    <ListView aria-label="Fruits" selectionMode="multiselect" bind:selectedItems={selectedFruits}>
       {#each list as item (item)}
         <ListViewItem value={item} checkmark={{}}>{item}</ListViewItem>
       {/each}

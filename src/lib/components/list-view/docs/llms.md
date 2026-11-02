@@ -96,7 +96,7 @@ This event is triggered when clicking or tapping the element. It executes the pr
 Use `selectionMode` (`single`, `multiselect`, or `extended`) to control how items are selected.
 
 ```svelte
-<ListView selectionMode="multiselect" selectedItems={['Apple']}>
+<ListView aria-label="Fruits" selectionMode="multiselect" selectedItems={['Apple']}>
 	{#each ['Apple', 'Banana', 'Cherry'] as item (item)}
 		<ListViewItem value={item}>{item}</ListViewItem>
 	{/each}
@@ -108,7 +108,7 @@ Use `selectionMode` (`single`, `multiselect`, or `extended`) to control how item
 In a multiselect list, a plain click selects only that item and Ctrl/Cmd + click toggles it. Set `toggleOnClick` to make a plain click toggle the item directly.
 
 ```svelte
-<ListView selectionMode="multiselect" toggleOnClick>
+<ListView aria-label="Fruits" selectionMode="multiselect" toggleOnClick>
 	{#each ['Apple', 'Banana', 'Cherry'] as item (item)}
 		<ListViewItem value={item}>{item}</ListViewItem>
 	{/each}
@@ -124,7 +124,7 @@ Add and configure a checkbox for the element. You can use the same props for the
 	let selected = $state(['Apple']);
 </script>
 
-<ListView selectionMode="multiselect" bind:selectedItems={selected}>
+<ListView aria-label="Fruits" selectionMode="multiselect" bind:selectedItems={selected}>
 	{#each ['Apple', 'Banana', 'Cherry'] as item (item)}
 		<ListViewItem value={item} checkmark={{}}>{item}</ListViewItem>
 	{/each}

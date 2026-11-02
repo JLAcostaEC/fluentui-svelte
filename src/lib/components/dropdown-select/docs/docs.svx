@@ -31,7 +31,7 @@ import { DropdownSelect } from 'fluentui-svelte';
 </InfoBar>
 
 <Showcase columns={1} minHeight="0" disablePanZoom showOverflow>
-  <DropdownSelect>
+  <DropdownSelect aria-label="Choose an option">
     <DropdownSelectOption value="A">Option A</DropdownSelectOption>
     <DropdownSelectOption value="B">Option B</DropdownSelectOption>
     <DropdownSelectOption value="C">Option C</DropdownSelectOption>

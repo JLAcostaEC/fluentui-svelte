@@ -68,7 +68,7 @@ export type TagPickerProps = {
 	 * @type Snippet<[{ value: string; text: string }]>
 	 */
 	tag?: Snippet<[{ value: string; text: string }]>;
-	/** The props to spread on the group holding the tags. This is where its `aria-label` goes.
+	/** The props to spread on the group holding the tags. This is where its `aria-label` goes, `'Selected options'` by default.
 	 * @type TagGroupProps
 	 */
 	tagGroupProps?: Omit<

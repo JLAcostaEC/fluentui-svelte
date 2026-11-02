@@ -664,6 +664,11 @@ describe('slots', () => {
 		expect(field.left).toBeGreaterThan(lastTag.left);
 	});
 
+	it('names the group of tags by default', async () => {
+		render(TagPickerTestWrapper, { selectedOptions: ['apple'] });
+		await expect.element(page.getByRole('toolbar', { name: 'Selected options' })).toBeInTheDocument();
+	});
+
 	it('names the group of tags', async () => {
 		render(TagPickerTestWrapper, {
 			selectedOptions: ['apple'],

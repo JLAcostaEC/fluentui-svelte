@@ -136,6 +136,7 @@
 			bind:wrapperRef={checkmarkRef}
 			tabindex={tabspotDisabled ? undefined : -1}
 			aria-label={checkmark?.['aria-label'] ?? attributes['aria-label'] ?? value}
+			inert={role === 'option' || undefined}
 		/>
 	{/if}
 	{@render children?.()}

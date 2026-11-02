@@ -24,6 +24,12 @@ describe('TreeView', () => {
 		await expect.element(el).toHaveAttribute('aria-multiselectable', 'false');
 	});
 
+	it('leaves aria-multiselectable to the tree, where groups do not take it', async () => {
+		render(TreeViewTestWrapper);
+		const el = page.selector('ul.fs-tree-view[role="group"]');
+		await expect.element(el).not.toHaveAttribute('aria-multiselectable');
+	});
+
 	it('renders a nested group', async () => {
 		render(TreeViewTestWrapper);
 		const el = page.selector('ul.fs-tree-view[role="group"]');

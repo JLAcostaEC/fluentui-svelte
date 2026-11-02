@@ -37,9 +37,9 @@
 	 * That costs the keys a button would have answered on its own, so they are handled here:
 	 * `Enter`/`Space` select, and `Delete` closes — the tabs pattern reserves it for exactly that.
 	 *
-	 * The close button is held out of the tab order, so the strip stays a single tab stop. `Delete`
-	 * is what reaches it from the keyboard, which is why the key is bound even while the pointer
-	 * has a button of its own.
+	 * The close button is for the pointer only: a tab cannot hold a control of its own, so it is
+	 * hidden from assistive technology and out of the tab order. `Delete` is what closes the tab
+	 * from the keyboard, and `aria-keyshortcuts` announces it.
 	 */
 	const onTabKeydown = (event: KeyboardEvent) => {
 		// A key spent inside the close button is already answered; only the tab itself speaks here.
@@ -80,6 +80,7 @@
 	data-value={value}
 	aria-selected={active}
 	aria-disabled={disabled || undefined}
+	aria-keyshortcuts={_closable ? 'Delete' : undefined}
 	class={['fs-tab-view-tab', context.config.tabWidthMode, { active, disabled }, classes]}
 	onclick={(e: MouseEvent) => invokeHandlers(e, disabled, [() => context.methods.setActiveTab(e, value), onclick])}
 	onkeydown={(e: KeyboardEvent) => invokeHandlers(e, disabled, [onTabKeydown, onkeydown])}
@@ -91,20 +92,18 @@
 	{/if}
 	<span class="fs-tab-view-tab-label">{@render children?.()}</span>
 	{#if _closable}
-		<button
-			type="button"
+		<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
+		<span
 			class="fs-tab-view-tab-close"
-			aria-label="Close tab"
-			tabindex={-1}
-			{disabled}
+			aria-hidden="true"
 			onclick={(e: MouseEvent) => {
 				// The tab underneath would otherwise read the click as "select me".
 				e.stopPropagation();
-				close(e);
+				if (!disabled) close(e);
 			}}
 		>
 			<DismissRegular />
-		</button>
+		</span>
 	{/if}
 	{#if active}
 		<!--
@@ -223,6 +222,10 @@
 			}
 			& .fs-tab-view-tab-close {
 				cursor: not-allowed;
+				&:hover,
+				&:active {
+					background: transparent;
+				}
 			}
 		}
 		/* Share the strip evenly, within the width a document tab is worth. */
@@ -274,10 +277,10 @@
 			background: transparent;
 			color: inherit;
 			cursor: pointer;
-			&:hover:not(:disabled) {
+			&:hover {
 				background: var(--fs-subtle-fill-secondary);
 			}
-			&:active:not(:disabled) {
+			&:active {
 				background: var(--fs-subtle-fill-tertiary);
 			}
 			& :global(svg) {

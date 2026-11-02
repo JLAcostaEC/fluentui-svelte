@@ -9,7 +9,7 @@ The Dropdown lets users select one or more options from a list of `DropdownOptio
 	import { Dropdown, DropdownOption } from 'fluentui-svelte';
 </script>
 
-<Dropdown>
+<Dropdown aria-label="Choose an option">
 	<DropdownOption value="A" text="Option A">Option A</DropdownOption>
 	<DropdownOption value="B" text="Option B">Option B</DropdownOption>
 </Dropdown>
@@ -22,7 +22,7 @@ The Dropdown lets users select one or more options from a list of `DropdownOptio
 Options can render any content, such as a `Persona`. Pass a `text` prop so the closed dropdown can still display the selection.
 
 ```svelte
-<Dropdown>
+<Dropdown aria-label="Choose an option">
 	<DropdownOption value="John Doe" text="John Doe">
 		<Persona
 			name="John Doe"
@@ -41,7 +41,7 @@ Options can render any content, such as a `Persona`. Pass a `text` prop so the c
 Set the `multiple` prop to allow selecting more than one option.
 
 ```svelte
-<Dropdown multiple>
+<Dropdown multiple aria-label="Choose options">
 	<DropdownOption value="A" text="Option A">Option A</DropdownOption>
 	<DropdownOption value="B" text="Option B">Option B</DropdownOption>
 	<DropdownOption value="C" text="Option C">Option C</DropdownOption>

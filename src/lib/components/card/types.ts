@@ -106,6 +106,10 @@ export type CardHeaderProps = {
 	 * @type Snippet | Component | string
 	 */
 	title: Snippet<[attrs: { id: string }]> | Component<{ id: string }> | string;
+	/** The level of the heading that holds a string title, to fit the headings of the page around it.
+	 * @default 4
+	 */
+	headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 	/** The image rendered before the title. A string is used as the `src` of an `<img>`.
 	 * @type Snippet | Component | string
 	 */

@@ -11,7 +11,7 @@ The Dropdown Select is a dropdown built on the native `<select>` element. It let
 	import { DropdownSelect, DropdownSelectOption } from 'fluentui-svelte';
 </script>
 
-<DropdownSelect>
+<DropdownSelect aria-label="Choose an option">
 	<DropdownSelectOption value="A">Option A</DropdownSelectOption>
 	<DropdownSelectOption value="B">Option B</DropdownSelectOption>
 	<DropdownSelectOption value="C">Option C</DropdownSelectOption>
@@ -25,7 +25,7 @@ The Dropdown Select is a dropdown built on the native `<select>` element. It let
 Options can render rich content such as a `Persona`. Provide a `text` prop for the plain-text selection label.
 
 ```svelte
-<DropdownSelect>
+<DropdownSelect aria-label="Choose an option">
 	<DropdownSelectOption value="John Doe" text="John Doe">
 		<Persona
 			name="John Doe"
@@ -44,7 +44,7 @@ Options can render rich content such as a `Persona`. Provide a `text` prop for t
 Set the `multiple` prop to allow selecting more than one option.
 
 ```svelte
-<DropdownSelect multiple>
+<DropdownSelect multiple aria-label="Choose options">
 	<DropdownSelectOption value="A">Option A</DropdownSelectOption>
 	<DropdownSelectOption value="B">Option B</DropdownSelectOption>
 	<DropdownSelectOption value="C">Option C</DropdownSelectOption>

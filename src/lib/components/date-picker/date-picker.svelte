@@ -36,6 +36,7 @@
 		onfocus,
 		onblur,
 		popupLabel = 'Choose a date',
+		columnLabels,
 		...attributes
 	}: DatePickerProps = $props();
 
@@ -99,7 +100,8 @@
 		'November',
 		'December'
 	];
-	const LABELS: Record<Column, string> = { month: 'Month', day: 'Day', year: 'Year' };
+	// Name the columns on the trigger while there is no date, and the listboxes of the popup.
+	const labels: Record<Column, string> = $derived({ month: 'Month', day: 'Day', year: 'Year', ...columnLabels });
 
 	// Working selection (actual values). Kept in sync with `value` while the popup is closed,
 	// so each open starts from the committed value and Cancel/dismiss discards edits.
@@ -191,7 +193,7 @@
 
 	// Trigger label per column
 	function display(col: Column): string {
-		if (!hasValue) return LABELS[col];
+		if (!hasValue) return labels[col];
 		if (col === 'month') return MONTH_NAMES[committed.mo];
 		if (col === 'day') return pad(committed.d);
 		return String(committed.y);
@@ -270,6 +272,7 @@
 				<div class="carousel-col col-{col}">
 					{#if col === 'month'}
 						<DynamicCarousel
+							label={labels.month}
 							values={MONTH_NAMES}
 							selectedIndex={month}
 							disabledIndices={disabledMonthIdx}
@@ -278,6 +281,7 @@
 					{:else if col === 'day'}
 						{#key `${year}-${month}`}
 							<DynamicCarousel
+								label={labels.day}
 								values={dayList}
 								selectedIndex={effectiveDay - 1}
 								disabledIndices={disabledDayIdx}
@@ -286,6 +290,7 @@
 						{/key}
 					{:else}
 						<DynamicCarousel
+							label={labels.year}
 							values={yearStrings}
 							selectedIndex={yearIdx}
 							disabledIndices={disabledYearIdx}

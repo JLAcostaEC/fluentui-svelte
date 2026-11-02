@@ -9,7 +9,7 @@ A toggle switch represents a physical switch that allows someone to choose betwe
 	import { ToggleSwitch } from 'fluentui-svelte';
 </script>
 
-<ToggleSwitch />
+<ToggleSwitch aria-label="Notifications" />
 <ToggleSwitch label="Toggle me" />
 <ToggleSwitch label="I'm disabled" disabled />
 ```

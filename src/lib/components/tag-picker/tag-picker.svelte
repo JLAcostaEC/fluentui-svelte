@@ -350,7 +350,14 @@ A text field and a dropdown that give people a way to choose several options fro
 	<div class={['control', _picker.open && `square-${roundClass}`]} onclick={handleControlClick} onmousedown={keepFocus}>
 		<div class="content">
 			{#if selectedOptions.length > 0}
-				<TagGroup {...tagGroupProps} size={tagSize} disabled={_picker.disabled} dismissible onDismiss={handleDismiss}>
+				<TagGroup
+					aria-label="Selected options"
+					{...tagGroupProps}
+					size={tagSize}
+					disabled={_picker.disabled}
+					dismissible
+					onDismiss={handleDismiss}
+				>
 					{#each selectedOptions as v (v)}
 						{@const text = labels.get(v) ?? v}
 						{#if tag}

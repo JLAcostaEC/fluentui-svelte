@@ -208,6 +208,8 @@ describe('ListViewItem', () => {
 
 describe('ListViewItem checkmark', () => {
 	const checkbox = (value: string) => page.selector(`[data-value="${value}"] input[type="checkbox"]`);
+	/** The visible box: the input of an option is inert, so a pointer lands on its wrapper. */
+	const box = (value: string) => page.selector(`[data-value="${value}"] .fs-checkbox`);
 
 	const renderCards = (listProps: Record<string, unknown> = {}, itemProps: Record<string, unknown> = {}) => {
 		const onAction = vi.fn();
@@ -225,7 +227,7 @@ describe('ListViewItem checkmark', () => {
 
 	it('does not trigger onAction when the checkbox is clicked', async () => {
 		const { onAction } = renderCards();
-		await checkbox('a').click();
+		await box('a').click();
 		expect(onAction).not.toHaveBeenCalled();
 	});
 
@@ -238,15 +240,15 @@ describe('ListViewItem checkmark', () => {
 
 	it('toggles the selection of the row from its checkbox', async () => {
 		const { state } = renderCards();
-		await checkbox('a').click();
+		await box('a').click();
 		await expect.element(checkbox('a')).toBeChecked();
 		expect(state.selected).toEqual(['a']);
 
-		await checkbox('b').click();
+		await box('b').click();
 		await expect.element(checkbox('b')).toBeChecked();
 		expect(state.selected).toEqual(['a', 'b']);
 
-		await checkbox('a').click();
+		await box('a').click();
 		await expect.element(checkbox('a')).not.toBeChecked();
 		expect(state.selected).toEqual(['b']);
 	});
@@ -259,8 +261,8 @@ describe('ListViewItem checkmark', () => {
 
 	it('keeps a single selection when the list is selectionMode="single"', async () => {
 		const { state } = renderCards({ selectionMode: 'single' });
-		await checkbox('a').click();
-		await checkbox('b').click();
+		await box('a').click();
+		await box('b').click();
 		expect(state.selected).toEqual(['b']);
 		await expect.element(checkbox('a')).not.toBeChecked();
 		await expect.element(checkbox('b')).toBeChecked();
@@ -268,18 +270,18 @@ describe('ListViewItem checkmark', () => {
 
 	it('does not change the selection when selectionMode="none"', async () => {
 		const { onAction, onSelectionChange } = renderCards({ selectionMode: 'none' }, { role: 'row' });
-		await checkbox('a').click();
+		await box('a').click();
 		expect(onSelectionChange).not.toHaveBeenCalled();
 		expect(onAction).not.toHaveBeenCalled();
 	});
 
 	it('toggles without triggering onAction on selectable (non-row) items', async () => {
 		const { onAction, state } = renderCards({ navigationMode: 'items' });
-		await checkbox('a').click();
-		await checkbox('b').click();
+		await box('a').click();
+		await box('b').click();
 		expect(onAction).not.toHaveBeenCalled();
 		expect(state.selected).toEqual(['a', 'b']);
-		await checkbox('a').click();
+		await box('a').click();
 		expect(state.selected).toEqual(['b']);
 	});
 
@@ -289,7 +291,7 @@ describe('ListViewItem checkmark', () => {
 		const wrapper = page.selector('[data-value="a"] .fs-checkbox');
 		await expect.element(wrapper).toHaveStyle({ position: 'absolute', top: '10px', left: '10px' });
 
-		await checkbox('a').click();
+		await box('a').click();
 		expect(onAction).not.toHaveBeenCalled();
 		expect(state.selected).toEqual(['a']);
 	});
@@ -301,5 +303,19 @@ describe('ListViewItem checkmark', () => {
 			items: [{ value: 'off', disabled: true }]
 		});
 		await expect.element(checkbox('off')).toBeDisabled();
+	});
+
+	it('keeps the checkbox of an option out of the accessibility tree, where the option reports the selection', async () => {
+		renderCards({ navigationMode: 'items' });
+		await expect.element(checkbox('a')).toHaveAttribute('inert');
+		// The role queries do not read `inert`; the browser does, so ask it for focus instead.
+		const input = checkbox('a').element() as HTMLInputElement;
+		input.focus();
+		expect(document.activeElement).not.toBe(input);
+	});
+
+	it('keeps the checkbox of a row, which is a control of its own', async () => {
+		renderCards({}, { role: 'row' });
+		await expect.element(checkbox('a')).not.toHaveAttribute('inert');
 	});
 });

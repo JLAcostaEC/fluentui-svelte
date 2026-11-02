@@ -352,6 +352,15 @@ The table renders whatever you put inside it, so any virtualization library work
 	import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
 
 	const rows = Array.from({ length: 2000 }, (_, i) => ({ id: i, file: `Document ${i + 1}` }));
+
+	// The virtualizer names its viewport a region, which a rowgroup cannot hold between itself and its rows.
+	const presentational = (node) => {
+		const region = node.querySelector('[role="region"]');
+		region?.setAttribute('role', 'none');
+		// A name or a tab stop would keep the role. The rows are reached with the arrow keys of the table.
+		region?.removeAttribute('aria-label');
+		region?.removeAttribute('tabindex');
+	};
 </script>
 
 <Table noNativeElements style="min-width: 520px;" aria-label="Virtualized table" aria-rowcount={rows.length + 1}>
@@ -360,7 +369,7 @@ The table renders whatever you put inside it, so any virtualization library work
 			<TableHeaderCell>File</TableHeaderCell>
 		</TableRow>
 	</TableHeader>
-	<TableBody style="height: 320px;">
+	<TableBody style="height: 320px;" {@attach presentational}>
 		<SvelteVirtualList items={rows} defaultEstimatedItemHeight={44}>
 			{#snippet renderItem(row, index)}
 				<TableRow aria-rowindex={index + 2}>

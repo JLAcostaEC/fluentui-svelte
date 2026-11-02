@@ -108,6 +108,28 @@ describe('the popup', () => {
 		await expect.element(flyout()).toBeInTheDocument();
 	});
 
+	it('names each list of the popup after its column', async () => {
+		render(TimePicker, { format: 12 });
+		await picker().click();
+		for (const name of ['Hour', 'Minute', 'Second', 'AM/PM'])
+			await expect.element(flyout().getByRole('listbox', { name })).toBeInTheDocument();
+	});
+
+	it('takes the names of the columns from columnLabels', async () => {
+		render(TimePicker, { columnLabels: { hour: 'Hora', minute: 'Minuto', second: 'Segundo' } });
+		expect(columns()).toEqual(['Hora', 'Minuto', 'Segundo']);
+		await picker().click();
+		await expect.element(flyout().getByRole('listbox', { name: 'Minuto' })).toBeInTheDocument();
+	});
+
+	it('gives the options of every column ids of their own', async () => {
+		render(TimePicker);
+		await picker().click();
+		await expect.element(flyout()).toBeInTheDocument();
+		const ids = [...flyout().element().querySelectorAll('[role="option"]')].map((el) => el.id);
+		expect(new Set(ids).size).toBe(ids.length);
+	});
+
 	it('announces the popup as a dialog it controls', async () => {
 		render(TimePicker, { open: true });
 

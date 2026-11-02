@@ -798,6 +798,13 @@
       },
       "source": "src/lib/components/card/types.ts#CardHeaderProps.description"
     },
+    "generated_fs_card_header_props_props_heading_level": {
+      "en": "1501ff3d",
+      "locales": {
+        "es": "1501ff3d"
+      },
+      "source": "src/lib/components/card/types.ts#CardHeaderProps.headingLevel"
+    },
     "generated_fs_card_header_props_props_image": {
       "en": "6685b00d",
       "locales": {
@@ -998,6 +1005,13 @@
         "es": "eed842dd"
       },
       "source": "src/lib/components/date-picker/types.ts#DatePickerProps.buttonRef"
+    },
+    "generated_fs_date_picker_props_props_column_labels": {
+      "en": "21690bab",
+      "locales": {
+        "es": "21690bab"
+      },
+      "source": "src/lib/components/date-picker/types.ts#DatePickerProps.columnLabels"
     },
     "generated_fs_date_picker_props_props_disabled_dates": {
       "en": "f13f5661",
@@ -1621,6 +1635,13 @@
         "es": "a5639795"
       },
       "source": "src/lib/components/info-bar/types.ts#InfoBarProps.children"
+    },
+    "generated_fs_info_bar_props_props_heading_level": {
+      "en": "4c8eacf8",
+      "locales": {
+        "es": "4c8eacf8"
+      },
+      "source": "src/lib/components/info-bar/types.ts#InfoBarProps.headingLevel"
     },
     "generated_fs_info_bar_props_props_hide_close_button": {
       "en": "d9424994",
@@ -2783,9 +2804,9 @@
       "source": "src/lib/components/button/types.ts#SplitButtonProps.disabled"
     },
     "generated_fs_split_button_props_props_menu_trigger_props": {
-      "en": "f4c2b6f1",
+      "en": "f5b26460",
       "locales": {
-        "es": "f4c2b6f1"
+        "es": "f5b26460"
       },
       "source": "src/lib/components/button/types.ts#SplitButtonProps.menuTriggerProps"
     },
@@ -3525,9 +3546,9 @@
       "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.tag"
     },
     "generated_fs_tag_picker_props_props_tag_group_props": {
-      "en": "58435643",
+      "en": "049daa04",
       "locales": {
-        "es": "58435643"
+        "es": "049daa04"
       },
       "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.tagGroupProps"
     },
@@ -3859,6 +3880,13 @@
         "es": "eed842dd"
       },
       "source": "src/lib/components/time-picker/types.ts#TimePickerProps.buttonRef"
+    },
+    "generated_fs_time_picker_props_props_column_labels": {
+      "en": "3930a9b0",
+      "locales": {
+        "es": "3930a9b0"
+      },
+      "source": "src/lib/components/time-picker/types.ts#TimePickerProps.columnLabels"
     },
     "generated_fs_time_picker_props_props_format": {
       "en": "d29c909c",

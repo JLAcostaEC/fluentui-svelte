@@ -7,6 +7,7 @@
 		ref = $bindable(null),
 		class: classes,
 		title,
+		headingLevel = 4,
 		image,
 		imageAlt = '',
 		description,
@@ -40,7 +41,7 @@
 	{#if description}
 		<div class="fs-card-header-content">
 			{#if typeof title === 'string'}
-				<h4 class="body" id={`${id}-title`}>{title}</h4>
+				<svelte:element this={`h${headingLevel}`} class="body" id={`${id}-title`}>{title}</svelte:element>
 			{:else if title}
 				<RenderSoC SoC={title} args={{ id: `${id}-title` }} />
 			{/if}
@@ -51,7 +52,7 @@
 			{/if}
 		</div>
 	{:else if typeof title === 'string'}
-		<h4 class="body" id={`${id}-title`}>{title}</h4>
+		<svelte:element this={`h${headingLevel}`} class="body" id={`${id}-title`}>{title}</svelte:element>
 	{:else if title}
 		<RenderSoC SoC={title} args={{ id: `${id}-title` }} />
 	{/if}

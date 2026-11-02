@@ -9,7 +9,7 @@
 {m.nb_description()}
 
 <Showcase columns={1}>
-  <NumberBox value={0} min={0} max={100} step={1} />
+  <NumberBox aria-label="Quantity" value={0} min={0} max={100} step={1} />
 </Showcase>
 
 ## {m.global_usage()}
@@ -19,5 +19,5 @@
 	import { NumberBox } from 'fluentui-svelte';
 </script>
 
-<NumberBox value={0} min={0} max={100} step={1} />
+<NumberBox aria-label="Quantity" value={0} min={0} max={100} step={1} />
 ```

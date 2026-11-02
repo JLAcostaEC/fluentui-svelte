@@ -13,20 +13,21 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TimePickerProps -->
 
-| Name                                         | Type                              | Default           | Description                                                                                 |
-| -------------------------------------------- | --------------------------------- | ----------------- | ------------------------------------------------------------------------------------------- |
-| `value` _bindable_                           | `string`                          | `''`              | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_value} />`              |
-| `format`                                     | `12` &#124; `24`                  | `24`              | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_format} />`             |
-| `open` _bindable_                            | `boolean`                         | `false`           | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_open} />`               |
-| `hideHours`                                  | `boolean`                         | `false`           | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_hide_hours} />`         |
-| `hideMinutes`                                | `boolean`                         | `false`           | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_hide_minutes} />`       |
-| `hideSeconds`                                | `boolean`                         | `false`           | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_hide_seconds} />`       |
-| `ref` _bindable_                             | `HTMLInputElement` &#124; `null`  |                   | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_ref} />`                |
-| `buttonRef` _bindable_                       | `HTMLButtonElement` &#124; `null` |                   | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_button_ref} />`         |
-| `buttonAttributes`                           | `HTMLButtonAttributes`            |                   | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_button_attributes} />`  |
-| `wrapperRef` _bindable_                      | `HTMLDivElement` &#124; `null`    |                   | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_wrapper_ref} />`        |
-| `wrapperAttributes`                          | `HTMLAttributes`                  |                   | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_wrapper_attributes} />` |
-| `popupLabel`                                 | `string`                          | `'Choose a time'` | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_popup_label} />`        |
-| `NativeFieldAttributes<HTMLInputAttributes>` |                                   |                   |                                                                                             |
+| Name                                         | Type                                   | Default                                                                   | Description                                                                                 |
+| -------------------------------------------- | -------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `value` _bindable_                           | `string`                               | `''`                                                                      | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_value} />`              |
+| `format`                                     | `12` &#124; `24`                       | `24`                                                                      | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_format} />`             |
+| `open` _bindable_                            | `boolean`                              | `false`                                                                   | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_open} />`               |
+| `hideHours`                                  | `boolean`                              | `false`                                                                   | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_hide_hours} />`         |
+| `hideMinutes`                                | `boolean`                              | `false`                                                                   | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_hide_minutes} />`       |
+| `hideSeconds`                                | `boolean`                              | `false`                                                                   | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_hide_seconds} />`       |
+| `ref` _bindable_                             | `HTMLInputElement` &#124; `null`       |                                                                           | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_ref} />`                |
+| `buttonRef` _bindable_                       | `HTMLButtonElement` &#124; `null`      |                                                                           | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_button_ref} />`         |
+| `buttonAttributes`                           | `HTMLButtonAttributes`                 |                                                                           | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_button_attributes} />`  |
+| `wrapperRef` _bindable_                      | `HTMLDivElement` &#124; `null`         |                                                                           | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_wrapper_ref} />`        |
+| `wrapperAttributes`                          | `HTMLAttributes`                       |                                                                           | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_wrapper_attributes} />` |
+| `popupLabel`                                 | `string`                               | `'Choose a time'`                                                         | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_popup_label} />`        |
+| `columnLabels`                               | `{ hour, minute, second, … (4 keys) }` | `{ hour: 'Hour', minute: 'Minute', second: 'Second', meridiem: 'AM/PM' }` | `<I18nMarkupMessage message={m.generated_fs_time_picker_props_props_column_labels} />`      |
+| `NativeFieldAttributes<HTMLInputAttributes>` |                                        |                                                                           |                                                                                             |
 
 <!-- /props:TimePickerProps -->

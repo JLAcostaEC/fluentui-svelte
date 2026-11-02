@@ -87,7 +87,7 @@ To correctly attach events to the trigger element, you should wrap the element w
 		{#snippet children({ state, menuTriggerProps, primaryButtonProps })}
 			<SplitButton
 				bind:menuTriggerRef={state.ref}
-				{menuTriggerProps}
+				menuTriggerProps={{ ...menuTriggerProps, 'aria-label': 'More options' }}
 				primaryButtonProps={{ onclick: () => alert('Primary action'), ...primaryButtonProps }}
 			>
 				Primary Action

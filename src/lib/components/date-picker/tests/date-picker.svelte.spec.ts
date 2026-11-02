@@ -103,6 +103,37 @@ describe('the popup', () => {
 		await expect.element(flyout()).toBeInTheDocument();
 	});
 
+	it('names each list of the popup after its column', async () => {
+		render(DatePicker);
+		await picker().click();
+		for (const name of ['Day', 'Month', 'Year'])
+			await expect.element(flyout().getByRole('listbox', { name })).toBeInTheDocument();
+	});
+
+	it('takes the names of the columns from columnLabels', async () => {
+		render(DatePicker, { columnLabels: { day: 'Día', month: 'Mes', year: 'Año' } });
+		expect(columns()).toEqual(['Día', 'Mes', 'Año']);
+		await picker().click();
+		await expect.element(flyout().getByRole('listbox', { name: 'Mes' })).toBeInTheDocument();
+	});
+
+	it('gives the options of every column ids of their own, and keeps the arrows to the pointer', async () => {
+		render(DatePicker);
+		await picker().click();
+		await expect.element(flyout()).toBeInTheDocument();
+		const ids = [...flyout().element().querySelectorAll('[role="option"]')].map((el) => el.id);
+		expect(new Set(ids).size).toBe(ids.length);
+		for (const listbox of flyout().getByRole('listbox').elements()) {
+			const active = listbox.getAttribute('aria-activedescendant')!;
+			expect(listbox.contains(document.getElementById(active))).toBe(true);
+		}
+		expect(
+			flyout()
+				.getByRole('button', { name: /previous|next/i })
+				.elements()
+		).toHaveLength(0);
+	});
+
 	it('opens on Enter', async () => {
 		render(DatePicker);
 		document.querySelector<HTMLElement>('.fs-date-picker')?.focus();

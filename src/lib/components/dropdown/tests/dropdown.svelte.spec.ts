@@ -89,7 +89,7 @@ describe('single selection', () => {
 		render(DropdownTestWrapper);
 		const combobox = trigger();
 		await combobox.click();
-		await userEvent.keyboard('{ArrowDown}{ArrowDown}');
+		await userEvent.keyboard('{ArrowDown}');
 		await expect.element(list().getByRole('option', { name: 'Banana' })).toHaveAttribute('data-active', 'true');
 		await userEvent.keyboard(key);
 		await expect.element(combobox).toHaveTextContent('Banana');
@@ -104,6 +104,22 @@ describe('single selection', () => {
 		await combobox.click();
 		await list().getByRole('option', { name: 'Cherry' }).click();
 		await expect.element(combobox).toHaveTextContent('Cherry');
+	});
+
+	it('starts the cursor on the first option when nothing is selected', async () => {
+		render(DropdownTestWrapper);
+		await trigger().click();
+		const apple = list().getByRole('option', { name: 'Apple' });
+		await expect.element(apple).toHaveAttribute('data-active', 'true');
+		await expect.element(trigger()).toHaveAttribute('aria-activedescendant', apple.element().id);
+	});
+
+	it('starts the cursor on the selected option', async () => {
+		render(DropdownTestWrapper, { value: 'cherry' });
+		await trigger().click();
+		const cherry = list().getByRole('option', { name: 'Cherry' });
+		await expect.element(cherry).toHaveAttribute('data-active', 'true');
+		await expect.element(trigger()).toHaveAttribute('aria-activedescendant', cherry.element().id);
 	});
 });
 
@@ -120,7 +136,6 @@ describe('multiple selection', () => {
 		render(DropdownTestWrapper, { multiple: true });
 		const combobox = trigger();
 		await combobox.click();
-		await userEvent.keyboard('{ArrowDown}');
 		const apple = list().getByRole('option', { name: 'Apple' });
 		await expect.element(apple).toHaveAttribute('data-active', 'true');
 		await userEvent.keyboard(' ');

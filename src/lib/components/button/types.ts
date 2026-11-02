@@ -69,7 +69,7 @@ export type SplitButtonProps = {
 	 * @type ButtonProps
 	 */
 	primaryButtonProps: ButtonProps<'button'>;
-	/** The props to spread on the button that opens the menu.
+	/** The props to spread on the button that opens the menu. It shows only an arrow, so give it an `aria-label`.
 	 * @type ButtonProps
 	 */
 	menuTriggerProps: ButtonProps<'button'>;

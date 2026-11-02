@@ -7,7 +7,7 @@
 	import type { DropdownContext, DropdownProps } from './types.ts';
 	import { tick } from 'svelte';
 	import { SvelteMap } from 'svelte/reactivity';
-	import { setTabspotAttributes, unsetTabspotSection } from 'tabspot';
+	import { setTabspotActive, setTabspotAttributes, unsetTabspotSection } from 'tabspot';
 	import { PREFIX } from '../../internal/constants.ts';
 	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { setDropdownContext } from './dropdown-context.ts';
@@ -96,6 +96,11 @@
 		open = true;
 		await tick();
 		globalFSContext?.state?.tabspotInstance?.rebuild(wrapperRef ?? undefined);
+		// The cursor starts on the selection, or on the first option, so it is announced on open.
+		const start =
+			listboxRef?.querySelector<HTMLElement>('.fs-list-view-item[aria-selected="true"]:not([aria-disabled="true"])') ??
+			listboxRef?.querySelector<HTMLElement>('.fs-list-view-item:not([aria-disabled="true"])');
+		if (start) setTabspotActive(start, { nearest: true });
 	}
 
 	function closeDropdown() {

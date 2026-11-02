@@ -212,7 +212,7 @@
 		{...attributes}
 		class={['fs-tree-view', attributes?.class]}
 		role={IS_SUB_TREE ? 'group' : 'tree'}
-		aria-multiselectable={selectionMode !== 'single'}
+		aria-multiselectable={IS_SUB_TREE ? undefined : selectionMode !== 'single'}
 		onkeydown={(event) => invokeHandlers(event, [], [!IS_SUB_TREE && handleTypeahead, onkeydown])}
 		bind:this={ref}
 		{...tabspotAttributes}

@@ -32,6 +32,7 @@
 		onfocus,
 		onblur,
 		popupLabel = 'Choose a time',
+		columnLabels,
 		...attributes
 	}: TimePickerProps = $props();
 
@@ -86,12 +87,14 @@
 	const HOURS_12 = Array.from({ length: 12 }, (_, i) => pad(i === 0 ? 12 : i)); // 12, 01 … 11
 	const SIXTY = Array.from({ length: 60 }, (_, i) => pad(i));
 	const MERIDIEM = ['AM', 'PM'];
-	const LABELS: Record<Column, string> = {
+	// Name the columns on the trigger while there is no time, and the listboxes of the popup.
+	const labels: Record<Column, string> = $derived({
 		hour: 'Hour',
 		minute: 'Minute',
 		second: 'Second',
-		meridiem: 'AM/PM'
-	};
+		meridiem: 'AM/PM',
+		...columnLabels
+	});
 
 	const hour12 = $derived(format === 12);
 
@@ -164,7 +167,7 @@
 	// Trigger label per column: the live selection while open, the committed value once set,
 	// otherwise the placeholder column name.
 	function display(col: Column): string {
-		if (!open && !hasValue) return LABELS[col];
+		if (!open && !hasValue) return labels[col];
 		if (col === 'hour') return hour12 ? HOURS_12[hour12Index] : pad(hour);
 		if (col === 'minute') return pad(minute);
 		if (col === 'second') return pad(second);
@@ -244,16 +247,37 @@
 				<div class="carousel-col col-{col}">
 					{#if col === 'hour'}
 						{#if hour12}
-							<DynamicCarousel values={HOURS_12} selectedIndex={hour12Index} onSelected={(_, i) => setHour12(i)} />
+							<DynamicCarousel
+								label={labels.hour}
+								values={HOURS_12}
+								selectedIndex={hour12Index}
+								onSelected={(_, i) => setHour12(i)}
+							/>
 						{:else}
-							<DynamicCarousel values={HOURS_24} selectedIndex={hour} onSelected={(_, i) => (hour = i)} />
+							<DynamicCarousel
+								label={labels.hour}
+								values={HOURS_24}
+								selectedIndex={hour}
+								onSelected={(_, i) => (hour = i)}
+							/>
 						{/if}
 					{:else if col === 'minute'}
-						<DynamicCarousel values={SIXTY} selectedIndex={minute} onSelected={(_, i) => (minute = i)} />
+						<DynamicCarousel
+							label={labels.minute}
+							values={SIXTY}
+							selectedIndex={minute}
+							onSelected={(_, i) => (minute = i)}
+						/>
 					{:else if col === 'second'}
-						<DynamicCarousel values={SIXTY} selectedIndex={second} onSelected={(_, i) => (second = i)} />
+						<DynamicCarousel
+							label={labels.second}
+							values={SIXTY}
+							selectedIndex={second}
+							onSelected={(_, i) => (second = i)}
+						/>
 					{:else}
 						<DynamicCarousel
+							label={labels.meridiem}
 							values={MERIDIEM}
 							selectedIndex={isPM ? 1 : 0}
 							infinite={false}

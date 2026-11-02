@@ -73,4 +73,8 @@ export type DatePickerProps = {
 	 * @default 'Choose a date'
 	 */
 	popupLabel?: string;
+	/** The names of the month, day and year columns: shown on the trigger while there is no date, and given to the lists of the popup.
+	 * @default { month: 'Month', day: 'Day', year: 'Year' }
+	 */
+	columnLabels?: { month?: string; day?: string; year?: string };
 } & NativeFieldAttributes<HTMLInputAttributes>;

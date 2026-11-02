@@ -53,4 +53,8 @@ export type TimePickerProps = {
 	 * @default 'Choose a time'
 	 */
 	popupLabel?: string;
+	/** The names of the hour, minute, second and AM/PM columns: shown on the trigger while there is no time, and given to the lists of the popup.
+	 * @default { hour: 'Hour', minute: 'Minute', second: 'Second', meridiem: 'AM/PM' }
+	 */
+	columnLabels?: { hour?: string; minute?: string; second?: string; meridiem?: string };
 } & NativeFieldAttributes<HTMLInputAttributes>;

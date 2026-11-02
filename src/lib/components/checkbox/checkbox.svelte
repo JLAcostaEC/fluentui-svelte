@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import CheckmarkFilled from 'fluentui-icons-svelte/CheckmarkFilled.svelte';
 	import SubtractFilled from 'fluentui-icons-svelte/SubtractFilled.svelte';
 	import { PREFIX } from '$constants';
@@ -8,12 +9,14 @@
 	const COMPONENT_NAME = 'checkbox';
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
+	const labelContext = claimLabel(() => id);
+
 	let {
-		ref = $bindable(),
-		wrapperRef = $bindable(),
-		checked = $bindable(),
-		indeterminate = $bindable(),
-		id = ID,
+		ref = $bindable(null),
+		wrapperRef = $bindable(null),
+		checked = $bindable(null),
+		indeterminate = $bindable(null),
+		id = labelContext?.fieldId ?? ID,
 		name = id,
 		'aria-hidden': ariaHidden,
 		disabled,
@@ -56,7 +59,8 @@
 		<SubtractFilled class="indeterminate" />
 		<CheckmarkFilled class="checked" />
 	</div>
-	{#if children}
+	<!-- Inside a Label, the Label names the field instead. -->
+	{#if children && !labelContext}
 		<label for={id}>{@render children()}</label>
 	{/if}
 </div>
@@ -130,6 +134,20 @@
 			&:checked + div :global(svg.checked) {
 				width: 1rem;
 			}
+			&:is(:user-invalid, [aria-invalid='true']) {
+				& + div {
+					border-color: var(--fs-system-critical);
+					color: var(--fs-system-critical) !important;
+					& + label {
+						color: var(--fs-system-critical);
+					}
+				}
+				&:hover {
+					& + div {
+						border-color: var(--fs-system-critical);
+					}
+				}
+			}
 			&:indeterminate + div :global(svg.indeterminate) {
 				width: 0.8rem;
 			}
@@ -146,11 +164,13 @@
 			justify-content: center;
 			& :global(svg) {
 				width: 0;
-				fill: var(--fs-text-on-accent-primary);
 				transform-origin: 80% 20%;
 				mask-image: linear-gradient(black, black);
 				mask-repeat: no-repeat;
 				mask-size: 0% 100%;
+				& :global(path) {
+					fill: var(--fs-text-on-accent-primary);
+				}
 			}
 		}
 		&:has(input:disabled) {

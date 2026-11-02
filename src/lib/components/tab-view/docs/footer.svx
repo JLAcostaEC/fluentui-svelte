@@ -10,8 +10,8 @@
 
 | Name                       | Type                                                    | Default   | Description                                                                                     |
 | -------------------------- | ------------------------------------------------------- | --------- | ----------------------------------------------------------------------------------------------- |
-| `ref` _bindable_           | `HTMLDivElement`                                        |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_ref} />`                       |
-| `listRef` _bindable_       | `HTMLDivElement`                                        |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_list_ref} />`                  |
+| `ref` _bindable_           | `HTMLDivElement` &#124; `null`                          |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_ref} />`                       |
+| `listRef` _bindable_       | `HTMLDivElement` &#124; `null`                          |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_list_ref} />`                  |
 | `listAttributes`           | `HTMLAttributes`                                        |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_list_attributes} />`           |
 | `activeTab` _bindable_     | `string`                                                |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_active_tab} />`                |
 | `onTabChange`              | `(event: Event, value: string) => void`                 |           | `<I18nMarkupMessage message={m.generated_fs_tab_view_props_props_on_tab_change} />`             |
@@ -33,7 +33,7 @@
 
 | Name                       | Type                                    | Default | Description                                                                        |
 | -------------------------- | --------------------------------------- | ------- | ---------------------------------------------------------------------------------- |
-| `ref` _bindable_           | `HTMLDivElement`                        |         | `<I18nMarkupMessage message={m.generated_fs_tab_view_tab_props_props_ref} />`      |
+| `ref` _bindable_           | `HTMLDivElement` &#124; `null`          |         | `<I18nMarkupMessage message={m.generated_fs_tab_view_tab_props_props_ref} />`      |
 | `value`                    | `string`                                |         | `<I18nMarkupMessage message={m.generated_fs_tab_view_tab_props_props_value} />`    |
 | `icon`                     | `Snippet` &#124; `Component`            |         | `<I18nMarkupMessage message={m.generated_fs_tab_view_tab_props_props_icon} />`     |
 | `closable`                 | `boolean`                               |         | `<I18nMarkupMessage message={m.generated_fs_tab_view_tab_props_props_closable} />` |

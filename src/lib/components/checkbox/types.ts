@@ -6,11 +6,11 @@ export type CheckboxProps = {
 	/** The DOM reference of the checkbox element.
 	 * @bindable
 	 */
-	ref?: HTMLInputElement;
+	ref?: HTMLInputElement | null;
 	/** The DOM reference of the checkbox wrapper element.
 	 * @bindable
 	 */
-	wrapperRef?: HTMLDivElement;
+	wrapperRef?: HTMLDivElement | null;
 	/** The attributes to spread on the wrapper element.
 	 * @type HTMLAttributes
 	 */
@@ -18,7 +18,7 @@ export type CheckboxProps = {
 	/** Renders the checkbox in its mixed state, neither checked nor unchecked.
 	 * @bindable
 	 */
-	indeterminate?: boolean;
+	indeterminate?: boolean | null;
 	/** The name submitted with the form. Falls back to the id of the checkbox.
 	 * @default id
 	 */
@@ -28,10 +28,10 @@ export type CheckboxProps = {
 	/** Whether the checkbox is checked.
 	 * @bindable
 	 */
-	checked?: boolean;
+	checked?: boolean | null;
 	/** Disables the user interaction. */
 	disabled?: boolean;
-	/** The content of the label associated with the checkbox.
+	/** The content of the label associated with the checkbox. Inside a `Label`, it is not rendered
 	 * @type Snippet
 	 */
 	children?: Snippet;

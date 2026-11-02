@@ -8,11 +8,11 @@
 		appearance = 'accent',
 		shape = 'rounded',
 		disabled = false,
-		wrapperRef = $bindable(),
+		wrapperRef = $bindable(null),
 		primaryButtonProps,
 		menuTriggerProps,
-		primaryButtonRef = $bindable(),
-		menuTriggerRef = $bindable(),
+		primaryButtonRef = $bindable(null),
+		menuTriggerRef = $bindable(null),
 		children,
 		...attributes
 	}: SplitButtonProps = $props();

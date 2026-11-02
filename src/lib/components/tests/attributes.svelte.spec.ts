@@ -25,6 +25,8 @@ describe('consumer attributes and internal state', () => {
 			listAttributes: { 'data-tabspot': '{}', class: 'custom-trail' },
 			buttonProps: { 'aria-current': 'false', type: 'submit' }
 		});
+		// The first Tab of a test can leave the page, unless something in it was clicked first.
+		await userEvent.click(document.body);
 		await userEvent.tab();
 		await expect.element(page.getByRole('link', { name: 'Home' })).toHaveFocus();
 		await userEvent.keyboard('{ArrowRight}{ArrowRight}');

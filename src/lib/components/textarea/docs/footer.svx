@@ -16,12 +16,12 @@
 | Name                             | Type                                                               | Default      | Description                                                                               |
 | -------------------------------- | ------------------------------------------------------------------ | ------------ | ----------------------------------------------------------------------------------------- |
 | `value` _bindable_               | `string`                                                           | `''`         | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_value} />`              |
-| `ref` _bindable_                 | `HTMLTextAreaElement`                                              |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_ref} />`                |
+| `ref` _bindable_                 | `HTMLTextAreaElement` &#124; `null`                                |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_ref} />`                |
 | `placeholder`                    | `string`                                                           |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_placeholder} />`        |
 | `resize`                         | `'none'` &#124; `'both'` &#124; `'horizontal'` &#124; `'vertical'` | `'vertical'` | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_resize} />`             |
 | `disabled`                       | `boolean`                                                          | `false`      | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_disabled} />`           |
 | `wrapperAttributes`              | `HTMLAttributes`                                                   |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_wrapper_attributes} />` |
-| `wrapperRef` _bindable_          | `HTMLDivElement`                                                   |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_wrapper_ref} />`        |
+| `wrapperRef` _bindable_          | `HTMLDivElement` &#124; `null`                                     |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_wrapper_ref} />`        |
 | `SvelteHTMLElements['textarea']` |                                                                    |              |                                                                                           |
 
 <!-- /props:TextAreaProps -->

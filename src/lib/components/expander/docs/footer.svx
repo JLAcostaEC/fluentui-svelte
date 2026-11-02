@@ -17,9 +17,9 @@
 | `disabled`                     | `boolean`                               | `false`  | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_disabled} />`           |
 | `animation`                    | `{ duration: number; easing: string; }` |          | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_animation} />`          |
 | `expanded` _bindable_          | `boolean`                               | `false`  | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_expanded} />`           |
-| `ref` _bindable_               | `HTMLDetailsElement`                    |          | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_ref} />`                |
+| `ref` _bindable_               | `HTMLDetailsElement` &#124; `null`      |          | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_ref} />`                |
 | `Icon`                         | `Snippet` &#124; `Component`            |          | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_icon} />`               |
-| `summaryRef` _bindable_        | `HTMLElement`                           |          | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_summary_ref} />`        |
+| `summaryRef` _bindable_        | `HTMLElement` &#124; `null`             |          | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_summary_ref} />`        |
 | `summaryAttributes`            | `HTMLAttributes<HTMLElement>`           |          | `<I18nMarkupMessage message={m.generated_fs_expander_props_props_summary_attributes} />` |
 | Element Attributes (`details`) |                                         |          |                                                                                          |
 

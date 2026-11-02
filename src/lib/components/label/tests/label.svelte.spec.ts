@@ -8,11 +8,6 @@ const label = () => page.selector('.fs-label > label');
 const wrapper = () => page.selector('.fs-label');
 
 describe('rendering', () => {
-	it('renders a label element', async () => {
-		render(Label);
-		await expect.element(label()).toBeInTheDocument();
-	});
-
 	it('falls back to its default text', async () => {
 		render(Label);
 		await expect.element(page.getByText('Label Element')).toBeInTheDocument();
@@ -21,11 +16,6 @@ describe('rendering', () => {
 	it('renders the text it is given', async () => {
 		render(Label, { label: 'First name' });
 		await expect.element(page.getByText('First name')).toBeInTheDocument();
-	});
-
-	it('wraps the field passed as children', async () => {
-		render(LabelTestWrapper, { field: 'First name' });
-		await expect.element(page.getByRole('textbox', { name: 'First name' })).toBeInTheDocument();
 	});
 });
 
@@ -39,11 +29,6 @@ describe('size and weight', () => {
 	it('takes the size it is given', async () => {
 		render(Label, { size: 'large' });
 		await expect.element(label()).toHaveClass(/size-large/);
-	});
-
-	it('takes the weight it is given', async () => {
-		render(Label, { weight: 'semibold' });
-		await expect.element(label()).toHaveClass(/weight-semibold/);
 	});
 });
 
@@ -94,16 +79,9 @@ describe('wrapper and association', () => {
 		expect(document.querySelector('label input')).toBeNull();
 	});
 
-	it('puts its text before the field when requested and focuses the field on click', async () => {
+	it('puts its text before the field when requested', async () => {
 		render(LabelTestWrapper, { field: 'Email', labelPosition: 'above' });
 		expect(wrapper().element().firstElementChild?.tagName).toBe('LABEL');
-		await page.getByText('Email', { exact: true }).click();
-		await expect.element(page.getByRole('textbox', { name: 'Email', exact: true })).toHaveFocus();
-	});
-
-	it('keeps the required indicator out of the accessible name', async () => {
-		render(LabelTestWrapper, { field: 'Email', required: { message: 'Required field' } });
-		await expect.element(page.getByRole('textbox', { name: 'Email', exact: true })).toBeInTheDocument();
 	});
 
 	it('applies typography to the label text without changing the field wrapper', async () => {

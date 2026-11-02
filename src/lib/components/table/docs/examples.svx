@@ -2,6 +2,7 @@
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
   import { SvelteSet } from 'svelte/reactivity';
+  import type { Attachment } from 'svelte/attachments';
   import { Button, Table, TableHeader, TableHeaderCell, TableBody, TableRow, TableCell, TableCellLayout, TableCellActions, TableSelectionCell } from '$lib/index.js';
   import { DocumentRegular, FolderRegular, VideoRegular, DocumentPdfRegular, EditRegular, MoreHorizontalRegular } from 'fluentui-icons-svelte';
   import Showcase from '$site/components/showcase/showcase.svelte';
@@ -311,6 +312,15 @@
 
   let virtualListRef = $state<ReturnType<typeof SvelteVirtualList> | null>(null);
 
+  // The virtualizer names its viewport a region, which a rowgroup cannot hold between itself and its rows.
+  const presentational: Attachment<HTMLElement> = (node) => {
+    const region = node.querySelector('[role="region"]');
+    region?.setAttribute('role', 'none');
+    // A name or a tab stop would keep the role. The rows are reached with the arrow keys of the table.
+    region?.removeAttribute('aria-label');
+    region?.removeAttribute('tabindex');
+  };
+
   const toggleVirtualRow = (id: number) => {
     if (virtualSelected.has(id)) virtualSelected.delete(id);
     else virtualSelected.add(id);
@@ -328,6 +338,15 @@
   let listRef = $state(null);
 
   const toggleRow = (id) => (selected.has(id) ? selected.delete(id) : selected.add(id));
+
+  // The virtualizer names its viewport a region, which a rowgroup cannot hold between itself and its rows.
+  const presentational = (node) => {
+    const region = node.querySelector('[role="region"]');
+    region?.setAttribute('role', 'none');
+    // A name or a tab stop would keep the role. The rows are reached with the arrow keys of the table.
+    region?.removeAttribute('aria-label');
+    region?.removeAttribute('tabindex');
+  };
 <\/script>
 
 <!--
@@ -352,7 +371,7 @@
       <TableHeaderCell>File</TableHeaderCell>
     </TableRow>
   </TableHeader>
-  <TableBody style="height: 320px;">
+  <TableBody style="height: 320px;" {@attach presentational}>
     <SvelteVirtualList items={rows} bind:this={listRef} defaultEstimatedItemHeight={44}>
       {#snippet renderItem(row, index)}
         {@const isSelected = selected.has(row.id)}
@@ -703,7 +722,7 @@
         <TableHeaderCell>Last updated</TableHeaderCell>
       </TableRow>
     </TableHeader>
-    <TableBody style="height: 320px;">
+    <TableBody style="height: 320px;" {@attach presentational}>
       <SvelteVirtualList items={rows} bind:this={virtualListRef as any} defaultEstimatedItemHeight={44}>
         {#snippet renderItem(row: (typeof rows)[number], index: number)}
           {@const isSelected = virtualSelected.has(row.id)}

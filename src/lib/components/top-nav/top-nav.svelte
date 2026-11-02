@@ -4,7 +4,7 @@
 	import type { TopNavContext, TopNavProps } from './types.ts';
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		selectedValue = $bindable(''),
 		onTabSelect,
 		appearance = 'transparent',

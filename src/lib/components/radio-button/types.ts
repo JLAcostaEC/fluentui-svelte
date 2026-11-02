@@ -2,7 +2,7 @@ import type { HTMLAttributes, HTMLInputAttributes } from 'svelte/elements';
 
 /** @propsmith RadioButtonProps */
 export type RadioButtonProps = {
-	/** The label displayed next to the radio button. */
+	/** The label displayed next to the radio button. Inside a `Label`, it is not rendered */
 	label?: string;
 	/** Bindable value representing a group of radio inputs that the input will be bound to.
 	 * @bindable
@@ -12,11 +12,11 @@ export type RadioButtonProps = {
 	 * @default false
 	 * @bindable
 	 */
-	checked?: boolean;
+	checked?: boolean | null;
 	/** The DOM reference of the radio button element.
 	 * @bindable
 	 */
-	ref?: HTMLInputElement;
+	ref?: HTMLInputElement | null;
 	/** The attributes to spread on the wrapper element.
 	 * @type HTMLAttributes
 	 */
@@ -24,5 +24,5 @@ export type RadioButtonProps = {
 	/** The DOM reference of the wrapper element.
 	 * @bindable
 	 */
-	wrapperRef?: HTMLDivElement;
+	wrapperRef?: HTMLDivElement | null;
 } & HTMLInputAttributes;

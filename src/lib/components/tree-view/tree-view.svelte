@@ -27,7 +27,7 @@
 		navigationMode = CONTEXT?.config.navigationMode ?? 'tree',
 		checkedItems = $bindable(CONTEXT?.state.checkedItems ?? (virtualizer !== undefined ? new SvelteSet<string>() : [])),
 		openItems = $bindable(CONTEXT?.state.openItems ?? (virtualizer !== undefined ? new SvelteSet<string>() : [])),
-		ref = $bindable(),
+		ref = $bindable(null),
 		onOpenChange,
 		onCheckedChange,
 		selectionMode = CONTEXT?.state.selectionMode ?? 'multiple',
@@ -212,7 +212,7 @@
 		{...attributes}
 		class={['fs-tree-view', attributes?.class]}
 		role={IS_SUB_TREE ? 'group' : 'tree'}
-		aria-multiselectable={selectionMode !== 'single'}
+		aria-multiselectable={IS_SUB_TREE ? undefined : selectionMode !== 'single'}
 		onkeydown={(event) => invokeHandlers(event, [], [!IS_SUB_TREE && handleTypeahead, onkeydown])}
 		bind:this={ref}
 		{...tabspotAttributes}

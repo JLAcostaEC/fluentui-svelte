@@ -1,3 +1,5 @@
+import { flushSync } from 'svelte';
+
 /** Converts a pixel value (number, string, or getter function) to a `rem` string. */
 export const pxToRem = (px: number | string | (() => number | string), base = 16) => {
 	if (typeof px === 'function') {
@@ -65,6 +67,25 @@ export const invokeHandlers = <T extends Event>(
 		if (typeof cb === 'function') cb(e);
 	}
 };
+
+/**
+ * A custom control sets the value of its native field programmatically, which fires no event.
+ * Once the field shows the new value, this fires the events when a user edit of the field would.
+ * Call it from event handlers only: `flushSync` cannot run inside an effect.
+ */
+export function dispatchFieldEvents(
+	field: EventTarget | null | undefined,
+	types: ('input' | 'change')[] = ['input', 'change']
+) {
+	flushSync();
+	for (const type of types) field?.dispatchEvent(new Event(type, { bubbles: true }));
+}
+
+/** The ids of the labels of a native field, so the visible control that stands in for it is named by them. */
+export const labelIds = (field: HTMLInputElement | HTMLSelectElement | null | undefined) =>
+	Array.from(field?.labels ?? [], (label) => label.id)
+		.filter(Boolean)
+		.join(' ') || undefined;
 
 /** Returns `true` if the object has no own enumerable keys (also handles `null`/`undefined`). */
 export const isObjectEmpty = (obj: Record<string, unknown> | null | undefined): boolean =>

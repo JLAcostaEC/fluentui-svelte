@@ -19,7 +19,7 @@
 | `iconPosition`   | `'before'` &#124; `'after'`                                    | `'before'`      | `<I18nMarkupMessage message={m.generated_fs_badge_props_props_icon_position} />` |
 | `color`          | [`Colors`](/docs/types/#colors)                                | `'information'` | `<I18nMarkupMessage message={m.generated_fs_badge_props_props_color} />`         |
 | `icon`           | `Snippet` &#124; `Component`                                   |                 | `<I18nMarkupMessage message={m.generated_fs_badge_props_props_icon} />`          |
-| `ref` _bindable_ | `HTMLSpanElement`                                              |                 | `<I18nMarkupMessage message={m.generated_fs_badge_props_props_ref} />`           |
+| `ref` _bindable_ | `HTMLSpanElement` &#124; `null`                                |                 | `<I18nMarkupMessage message={m.generated_fs_badge_props_props_ref} />`           |
 | HTML Attributes  |                                                                |                 |                                                                                  |
 
 <!-- /props:BadgeProps -->
@@ -83,7 +83,7 @@
 | `size`           | `number`                            | `20`          | `<I18nMarkupMessage message={m.generated_fs_badge_icon_props_props_size} />`          |
 | `color`          | [`Colors`](/docs/types/#colors)     |               | `<I18nMarkupMessage message={m.generated_fs_badge_icon_props_props_color} />`         |
 | `icon`           | `Snippet` &#124; `Component`        |               | `<I18nMarkupMessage message={m.generated_fs_badge_icon_props_props_icon} />`          |
-| `ref` _bindable_ | `HTMLSpanElement`                   |               | `<I18nMarkupMessage message={m.generated_fs_badge_icon_props_props_ref} />`           |
+| `ref` _bindable_ | `HTMLSpanElement` &#124; `null`     |               | `<I18nMarkupMessage message={m.generated_fs_badge_icon_props_props_ref} />`           |
 | HTML Attributes  |                                     |               |                                                                                       |
 
 <!-- /props:BadgeIconProps -->

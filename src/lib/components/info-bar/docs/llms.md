@@ -73,15 +73,16 @@ The hideCloseButton prop allows you to hide the close button in the InfoBar.
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:InfoBarProps -->
 
-| Name                       | Type                                                                                           | Default         | Description                                                                  |
-| -------------------------- | ---------------------------------------------------------------------------------------------- | --------------- | ---------------------------------------------------------------------------- |
-| `status`                   | `'information'` &#124; `'attention'` &#124; `'warning'` &#124; `'critical'` &#124; `'success'` | `'information'` | The severity of the message, which picks the icon and the colors.            |
-| `style`                    | `'inline'` &#124; `'multiline'`                                                                | `'inline'`      | Lays the message out on a single line, or stacked below the title.           |
-| `title`                    | `string`                                                                                       |                 | The title of the InfoBar.                                                    |
-| `icon`                     | `Snippet` &#124; `Component`                                                                   |                 | Custom icon, rendered instead of the one the `status` would pick on its own. |
-| `iconSize`                 | `number`                                                                                       | `20`            | The size of the icon in pixels.                                              |
-| `hideCloseButton`          | `boolean`                                                                                      |                 | Removes the button that dismisses the InfoBar.                               |
-| `children`                 | `Snippet`                                                                                      |                 | The message of the InfoBar.                                                  |
-| Element Attributes (`div`) |                                                                                                |                 |                                                                              |
+| Name                       | Type                                                                                           | Default         | Description                                                                               |
+| -------------------------- | ---------------------------------------------------------------------------------------------- | --------------- | ----------------------------------------------------------------------------------------- |
+| `status`                   | `'information'` &#124; `'attention'` &#124; `'warning'` &#124; `'critical'` &#124; `'success'` | `'information'` | The severity of the message, which picks the icon and the colors.                         |
+| `style`                    | `'inline'` &#124; `'multiline'`                                                                | `'inline'`      | Lays the message out on a single line, or stacked below the title.                        |
+| `title`                    | `string`                                                                                       |                 | The title of the InfoBar.                                                                 |
+| `headingLevel`             | `1` &#124; `2` &#124; `3` &#124; `4` &#124; `5` &#124; `6`                                     | `3`             | The level of the heading that holds the title, to fit the headings of the page around it. |
+| `icon`                     | `Snippet` &#124; `Component`                                                                   |                 | Custom icon, rendered instead of the one the `status` would pick on its own.              |
+| `iconSize`                 | `number`                                                                                       | `20`            | The size of the icon in pixels.                                                           |
+| `hideCloseButton`          | `boolean`                                                                                      |                 | Removes the button that dismisses the InfoBar.                                            |
+| `children`                 | `Snippet`                                                                                      |                 | The message of the InfoBar.                                                               |
+| Element Attributes (`div`) |                                                                                                |                 |                                                                                           |
 
 <!-- /props:InfoBarProps -->

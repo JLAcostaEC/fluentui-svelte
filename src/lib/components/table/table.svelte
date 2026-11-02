@@ -6,7 +6,7 @@
 
 	let {
 		as,
-		ref = $bindable(),
+		ref = $bindable(null),
 		size = 'medium',
 		noNativeElements = false,
 		sortable = false,

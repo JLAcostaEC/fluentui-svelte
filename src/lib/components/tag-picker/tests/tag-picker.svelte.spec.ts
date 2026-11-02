@@ -5,8 +5,10 @@ import { TagPickerOption } from '$lib/index.js';
 import TagPickerTestWrapper from './TagPickerTestWrapper.svelte';
 
 const combobox = () => page.getByRole('combobox');
-const tags = () => page.selector('.fs-tag-group').getByRole('listitem');
+const tags = () => page.selector('.fs-tag-group').getByRole('button');
 const control = () => page.selector('.fs-tagpicker .control');
+/** The options on screen, not those of the native select that holds the selection. */
+const list = () => page.selector('.fs-tagpicker-flyout');
 
 const input = () => document.querySelector<HTMLInputElement>('.fs-tagpicker input')!;
 
@@ -47,18 +49,18 @@ describe('rendering', () => {
 	it('shows a multiselectable listbox when open', async () => {
 		render(TagPickerTestWrapper, { open: true });
 
-		const listbox = page.getByRole('listbox');
+		const listbox = page.getByRole('listbox', { name: 'Fruits' });
 		await expect.element(listbox).toBeInTheDocument();
 		await expect.element(listbox).toHaveAttribute('aria-multiselectable', 'true');
 		await expect.element(combobox()).toHaveAttribute('aria-expanded', 'true');
 		await expect.element(combobox()).toHaveAttribute('aria-controls', listbox.element().id);
-		await expect.element(page.getByRole('option', { name: 'Apple' })).toBeInTheDocument();
+		await expect.element(list().getByRole('option', { name: 'Apple' })).toBeInTheDocument();
 	});
 
 	it('does not mark a single listbox as multiselectable', async () => {
 		render(TagPickerTestWrapper, { open: true, single: true });
 
-		await expect.element(page.getByRole('listbox')).not.toHaveAttribute('aria-multiselectable');
+		await expect.element(page.getByRole('listbox', { name: 'Fruits' })).not.toHaveAttribute('aria-multiselectable');
 	});
 
 	it('names the listbox like the input', async () => {
@@ -86,7 +88,7 @@ describe('rendering', () => {
 		render(TagPickerTestWrapper, { disabled: true, open: true });
 
 		await expect.element(combobox()).toHaveAttribute('aria-expanded', 'false');
-		await expect.element(page.getByRole('listbox')).not.toBeInTheDocument();
+		await expect.element(page.getByRole('listbox', { name: 'Fruits' })).not.toBeInTheDocument();
 	});
 
 	it('is a plain textbox without children', async () => {
@@ -96,7 +98,7 @@ describe('rendering', () => {
 		await expect.element(combobox()).not.toBeInTheDocument();
 		const textbox = page.getByRole('textbox', { name: 'Fruits' });
 		await textbox.fill('zzz');
-		await expect.element(page.getByRole('listbox')).not.toBeInTheDocument();
+		await expect.element(page.getByRole('listbox', { name: 'Fruits' })).not.toBeInTheDocument();
 
 		await userEvent.keyboard('{Enter}');
 		expect(querySubmitted).toHaveBeenCalledWith(expect.anything(), 'zzz');
@@ -130,7 +132,7 @@ describe('selection', () => {
 		render(TagPickerTestWrapper, { onSelectionChange });
 
 		await combobox().fill('a');
-		await page.getByRole('option', { name: 'Apple' }).click();
+		await list().getByRole('option', { name: 'Apple' }).click();
 
 		await expect.element(tags()).toHaveTextContent('Apple');
 		await expect.element(combobox()).toHaveValue('');
@@ -141,28 +143,28 @@ describe('selection', () => {
 	it('does not offer a chosen option again', async () => {
 		render(TagPickerTestWrapper, { open: true });
 
-		await page.getByRole('option', { name: 'Apple' }).click();
+		await list().getByRole('option', { name: 'Apple' }).click();
 
-		await expect.element(page.getByRole('option', { name: 'Apple' })).not.toBeInTheDocument();
-		await expect.element(page.getByRole('option', { name: 'Banana' })).toBeInTheDocument();
+		await expect.element(list().getByRole('option', { name: 'Apple' })).not.toBeInTheDocument();
+		await expect.element(list().getByRole('option', { name: 'Banana' })).toBeInTheDocument();
 	});
 
 	it('replaces the tag and closes the list when single', async () => {
 		render(TagPickerTestWrapper, { open: true, single: true });
 
-		await page.getByRole('option', { name: 'Apple' }).click();
+		await list().getByRole('option', { name: 'Apple' }).click();
 		await expect.element(combobox()).toHaveAttribute('aria-expanded', 'false');
 		await expect.element(tags()).toHaveTextContent('Apple');
 
 		await control().click();
-		await expect.element(page.getByRole('option', { name: 'Banana' })).toBeInTheDocument();
-		await page.getByRole('option', { name: 'Banana' }).click();
+		await expect.element(list().getByRole('option', { name: 'Banana' })).toBeInTheDocument();
+		await list().getByRole('option', { name: 'Banana' }).click();
 
 		expect(tags().elements()).toHaveLength(1);
 		await expect.element(tags()).toHaveTextContent('Banana');
 
 		await control().click();
-		await expect.element(page.getByRole('option', { name: 'Apple' })).toBeInTheDocument();
+		await expect.element(list().getByRole('option', { name: 'Apple' })).toBeInTheDocument();
 	});
 
 	it('removes a tag when it is dismissed', async () => {
@@ -180,10 +182,10 @@ describe('selection', () => {
 	it('offers a dismissed option again', async () => {
 		render(TagPickerTestWrapper, { selectedOptions: ['apple'], open: true });
 
-		await expect.element(page.getByRole('option', { name: 'Apple' })).not.toBeInTheDocument();
+		await expect.element(list().getByRole('option', { name: 'Apple' })).not.toBeInTheDocument();
 		await tags().click();
 
-		await expect.element(page.getByRole('option', { name: 'Apple' })).toBeInTheDocument();
+		await expect.element(list().getByRole('option', { name: 'Apple' })).toBeInTheDocument();
 	});
 
 	it('removes the last tag on Backspace in an empty input', async () => {
@@ -237,7 +239,7 @@ describe('selection', () => {
 			open: true
 		});
 
-		await page.getByRole('option', { name: 'Alpha' }).click();
+		await list().getByRole('option', { name: 'Alpha' }).click();
 		await expect.element(tags()).toHaveTextContent('Alpha');
 
 		focusInput();
@@ -267,8 +269,8 @@ describe('filtering', () => {
 		await combobox().fill('AN');
 
 		await expect.element(combobox()).toHaveAttribute('aria-expanded', 'true');
-		await expect.element(page.getByRole('option', { name: 'Banana' })).toBeInTheDocument();
-		await expect.element(page.getByRole('option', { name: 'Apple' })).not.toBeInTheDocument();
+		await expect.element(list().getByRole('option', { name: 'Banana' })).toBeInTheDocument();
+		await expect.element(list().getByRole('option', { name: 'Apple' })).not.toBeInTheDocument();
 	});
 
 	it('filters by the text of an option, not by its value', async () => {
@@ -280,11 +282,11 @@ describe('filtering', () => {
 		});
 
 		await combobox().fill('alp');
-		await expect.element(page.getByRole('option', { name: 'Alpha' })).toBeInTheDocument();
-		await expect.element(page.getByRole('option', { name: 'Beta' })).not.toBeInTheDocument();
+		await expect.element(list().getByRole('option', { name: 'Alpha' })).toBeInTheDocument();
+		await expect.element(list().getByRole('option', { name: 'Beta' })).not.toBeInTheDocument();
 
 		await combobox().fill('a1');
-		await expect.element(page.getByRole('option', { name: 'Alpha' })).not.toBeInTheDocument();
+		await expect.element(list().getByRole('option', { name: 'Alpha' })).not.toBeInTheDocument();
 		await expect.element(page.getByText('No options available')).toBeInTheDocument();
 	});
 
@@ -292,10 +294,10 @@ describe('filtering', () => {
 		render(TagPickerTestWrapper, { options: [{ value: 'Plain' }, { value: 'Other' }] });
 
 		await combobox().fill('pla');
-		await expect.element(page.getByRole('option', { name: 'Plain' })).toBeInTheDocument();
-		await expect.element(page.getByRole('option', { name: 'Other' })).not.toBeInTheDocument();
+		await expect.element(list().getByRole('option', { name: 'Plain' })).toBeInTheDocument();
+		await expect.element(list().getByRole('option', { name: 'Other' })).not.toBeInTheDocument();
 
-		await page.getByRole('option', { name: 'Plain' }).click();
+		await list().getByRole('option', { name: 'Plain' }).click();
 		await expect.element(tags()).toHaveTextContent('Plain');
 	});
 
@@ -561,7 +563,7 @@ describe('pointer', () => {
 		render(TagPickerTestWrapper, { open: true });
 		focusInput();
 
-		await page.getByRole('option', { name: 'Apple' }).click();
+		await list().getByRole('option', { name: 'Apple' }).click();
 
 		await expect.element(tags()).toHaveTextContent('Apple');
 		expect(document.activeElement).toBe(input());
@@ -592,7 +594,7 @@ describe('pointer', () => {
 	it('does not choose a disabled option', async () => {
 		render(TagPickerTestWrapper, { open: true, options: people });
 
-		await page.getByRole('option', { name: 'Banana' }).click({ force: true });
+		await list().getByRole('option', { name: 'Banana' }).click({ force: true });
 
 		expect(tags().elements()).toHaveLength(0);
 	});
@@ -602,8 +604,7 @@ describe('readonly input', () => {
 	it('acts as a trigger', async () => {
 		render(TagPickerTestWrapper, {
 			selectedOptions: ['apple'],
-			'aria-label': 'Fruits',
-			readonly: true
+			inputAttributes: { 'aria-label': 'Fruits', readonly: true }
 		});
 		focusInput();
 
@@ -663,13 +664,18 @@ describe('slots', () => {
 		expect(field.left).toBeGreaterThan(lastTag.left);
 	});
 
+	it('names the group of tags by default', async () => {
+		render(TagPickerTestWrapper, { selectedOptions: ['apple'] });
+		await expect.element(page.getByRole('toolbar', { name: 'Selected options' })).toBeInTheDocument();
+	});
+
 	it('names the group of tags', async () => {
 		render(TagPickerTestWrapper, {
 			selectedOptions: ['apple'],
 			tagGroupProps: { 'aria-label': 'Selected fruits' }
 		});
 
-		await expect.element(page.getByRole('list', { name: 'Selected fruits' })).toBeInTheDocument();
+		await expect.element(page.getByRole('toolbar', { name: 'Selected fruits' })).toBeInTheDocument();
 	});
 });
 

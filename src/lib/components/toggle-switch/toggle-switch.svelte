@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import { PREFIX } from '$constants';
 	import type { ToggleSwitchProps } from './types.ts';
 
@@ -6,14 +7,16 @@
 	const COMPONENT_NAME = 'toggle-switch';
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
+	const labelContext = claimLabel(() => id);
+
 	let {
-		ref = $bindable(),
-		checked = $bindable(),
-		id = ID,
+		ref = $bindable(null),
+		checked = $bindable(null),
+		id = labelContext?.fieldId ?? ID,
 		name = id,
 		label,
 		wrapperAttributes,
-		wrapperRef = $bindable(),
+		wrapperRef = $bindable(null),
 		...attributes
 	}: ToggleSwitchProps = $props();
 </script>
@@ -35,7 +38,8 @@
 -->
 <div {...wrapperAttributes} class={['fs-toggle-switch', wrapperAttributes?.class]} bind:this={wrapperRef}>
 	<input {...attributes} type="checkbox" role="switch" {id} {name} bind:checked bind:this={ref} />
-	{#if label}
+	<!-- Inside a Label, the Label names the field instead. -->
+	{#if label && !labelContext}
 		<label for={id}>
 			{label}
 		</label>
@@ -129,6 +133,9 @@
 			/* Add effects support for Keyboard Events */
 			&:active::after {
 				width: 1rem;
+			}
+			&:is(:user-invalid, [aria-invalid='true']) {
+				border-color: var(--fs-system-critical);
 			}
 			&:checked {
 				background-color: var(--fs-accent-fill-default);

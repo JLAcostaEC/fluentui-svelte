@@ -4,7 +4,7 @@
 
 	let {
 		as,
-		ref = $bindable(),
+		ref = $bindable(null),
 		appearance = 'none',
 		class: classes,
 		onclick,

@@ -9,7 +9,7 @@
 {m.label_description()}
 
 <Showcase columns={1}>
-  <Label label="Label" for="label-label"><TextBox id="label-label" /></Label>
+  <Label label="Label"><TextBox /></Label>
 </Showcase>
 
 ## {m.global_usage()}
@@ -19,5 +19,5 @@
 	import { Label, TextBox } from 'fluentui-svelte';
 </script>
 
-<Label label="Email" for="label-email"><TextBox id="label-email" /></Label>
+<Label label="Email"><TextBox /></Label>
 ```

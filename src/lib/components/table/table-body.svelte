@@ -2,7 +2,7 @@
 	import { getTag, requireTableContext } from './table.svelte.ts';
 	import type { TableBodyProps, TableDOM } from './types.ts';
 
-	let { as, ref = $bindable(), class: classes, children, ...attributes }: TableBodyProps<Tag> = $props();
+	let { as, ref = $bindable(null), class: classes, children, ...attributes }: TableBodyProps<Tag> = $props();
 
 	const context = requireTableContext();
 

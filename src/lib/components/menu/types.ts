@@ -68,11 +68,11 @@ export type MenuProps = {
 /** @propsmith MenuPopoverProps */
 export type MenuPopoverProps = {
 	/** The element used to position the popover. */
-	ref?: HTMLElement;
+	ref?: HTMLElement | null;
 	/** Controls the open state of the popover.
 	 * @bindable
 	 */
-	open?: boolean;
+	open?: boolean | null;
 	/** Keeps the popover mounted in the DOM while it is closed.
 	 * @default false
 	 */
@@ -116,7 +116,7 @@ export type MenuGroupProps = {
 	/** The DOM reference of the group element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** The label of the group. */
 	header?: string;
 	/** The items of the group. */
@@ -144,7 +144,7 @@ export type MenuItemActionableProps = {
 	/** Whether the item is checked.
 	 * @bindable
 	 */
-	checked?: boolean;
+	checked?: boolean | null;
 	/** The value reported to the menu when the item is checked. Falls back to the id of the item.
 	 * @default id
 	 */

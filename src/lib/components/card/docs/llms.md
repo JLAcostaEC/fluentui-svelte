@@ -177,13 +177,13 @@ The media shown at one edge of the card, with an optional logo overlaid on it.
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:CardPreviewProps -->
 
-| Name                                                | Type             | Default | Description                                                                             |
-| --------------------------------------------------- | ---------------- | ------- | --------------------------------------------------------------------------------------- |
-| `ref` _bindable_                                    | `HTMLDivElement` |         | The DOM reference of the preview element.                                               |
-| `logoSrc`                                           | `string`         |         | The URL of the logo overlaid on the bottom left corner of the preview.                  |
-| `logoAlt`                                           | `string`         | `''`    | The alternative text of the logo. Empty by default, which marks the logo as decorative. |
-| `children`                                          | `Snippet`        |         | The media to preview, usually an image.                                                 |
-| `HTMLAttributes<HTMLDivElement>` without `children` |                  |         |                                                                                         |
+| Name                                                | Type                           | Default | Description                                                                             |
+| --------------------------------------------------- | ------------------------------ | ------- | --------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLDivElement` &#124; `null` |         | The DOM reference of the preview element.                                               |
+| `logoSrc`                                           | `string`                       |         | The URL of the logo overlaid on the bottom left corner of the preview.                  |
+| `logoAlt`                                           | `string`                       | `''`    | The alternative text of the logo. Empty by default, which marks the logo as decorative. |
+| `children`                                          | `Snippet`                      |         | The media to preview, usually an image.                                                 |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                                |         |                                                                                         |
 
 <!-- /props:CardPreviewProps -->
 
@@ -196,15 +196,16 @@ The title of the card, with an optional image, description and action.
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:CardHeaderProps -->
 
-| Name                                                         | Type                                         | Default | Description                                                                                           |
-| ------------------------------------------------------------ | -------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------- |
-| `ref` _bindable_                                             | `HTMLDivElement`                             |         | The DOM reference of the header element.                                                              |
-| `title`                                                      | `Snippet` &#124; `Component` &#124; `string` |         | The title of the card. A snippet or a component receives the id the floating checkbox is labelled by. |
-| `image`                                                      | `Snippet` &#124; `Component` &#124; `string` |         | The image rendered before the title. A string is used as the `src` of an `<img>`.                     |
-| `imageAlt`                                                   | `string`                                     | `''`    | The alternative text of a string image. Empty by default, which marks the image as decorative.        |
-| `description`                                                | `Snippet` &#124; `Component` &#124; `string` |         | A second line of text below the title.                                                                |
-| `action`                                                     | `Snippet` &#124; `Component`                 |         | The action rendered at the end of the header. Not available on selectable cards.                      |
-| `HTMLAttributes<HTMLDivElement>` without `children`, `title` |                                              |         |                                                                                                       |
+| Name                                                         | Type                                                       | Default | Description                                                                                           |
+| ------------------------------------------------------------ | ---------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                             | `HTMLDivElement` &#124; `null`                             |         | The DOM reference of the header element.                                                              |
+| `title`                                                      | `Snippet` &#124; `Component` &#124; `string`               |         | The title of the card. A snippet or a component receives the id the floating checkbox is labelled by. |
+| `headingLevel`                                               | `1` &#124; `2` &#124; `3` &#124; `4` &#124; `5` &#124; `6` | `4`     | The level of the heading that holds a string title, to fit the headings of the page around it.        |
+| `image`                                                      | `Snippet` &#124; `Component` &#124; `string`               |         | The image rendered before the title. A string is used as the `src` of an `<img>`.                     |
+| `imageAlt`                                                   | `string`                                                   | `''`    | The alternative text of a string image. Empty by default, which marks the image as decorative.        |
+| `description`                                                | `Snippet` &#124; `Component` &#124; `string`               |         | A second line of text below the title.                                                                |
+| `action`                                                     | `Snippet` &#124; `Component`                               |         | The action rendered at the end of the header. Not available on selectable cards.                      |
+| `HTMLAttributes<HTMLDivElement>` without `children`, `title` |                                                            |         |                                                                                                       |
 
 <!-- /props:CardHeaderProps -->
 
@@ -217,10 +218,10 @@ The actions shown at the bottom of the card.
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:CardFooterProps -->
 
-| Name                                                | Type                         | Default | Description                                                                |
-| --------------------------------------------------- | ---------------------------- | ------- | -------------------------------------------------------------------------- |
-| `ref` _bindable_                                    | `HTMLDivElement`             |         | The DOM reference of the footer element.                                   |
-| `action`                                            | `Snippet` &#124; `Component` |         | The actions rendered inside the footer. Not available on selectable cards. |
-| `HTMLAttributes<HTMLDivElement>` without `children` |                              |         |                                                                            |
+| Name                                                | Type                           | Default | Description                                                                |
+| --------------------------------------------------- | ------------------------------ | ------- | -------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLDivElement` &#124; `null` |         | The DOM reference of the footer element.                                   |
+| `action`                                            | `Snippet` &#124; `Component`   |         | The actions rendered inside the footer. Not available on selectable cards. |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                                |         |                                                                            |
 
 <!-- /props:CardFooterProps -->

@@ -27,15 +27,15 @@ export type ProgressRingProps = {
 	/** The DOM reference of the progress ring element.
 	 * @bindable
 	 */
-	ref?: SVGElement;
+	ref?: SVGElement | null;
 	/** The DOM reference of the rail element.
 	 * @bindable
 	 */
-	railElement?: SVGCircleElement;
+	railElement?: SVGCircleElement | null;
 	/** The DOM reference of the track element.
 	 * @bindable
 	 */
-	trackElement?: SVGCircleElement;
+	trackElement?: SVGCircleElement | null;
 	/** The current status of the progress ring, which recolors the track. */
 	status?: ProgressStatus;
 	/** The class to apply to the progress ring. */

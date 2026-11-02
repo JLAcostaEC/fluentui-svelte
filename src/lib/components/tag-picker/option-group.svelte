@@ -7,11 +7,11 @@
 
 	let {
 		label,
-		ref = $bindable(),
+		ref = $bindable(null),
 		class: classes,
 		children,
 		wrapperAttributes,
-		wrapperRef = $bindable(),
+		wrapperRef = $bindable(null),
 		...attributes
 	}: TagPickerOptionGroupProps = $props();
 </script>

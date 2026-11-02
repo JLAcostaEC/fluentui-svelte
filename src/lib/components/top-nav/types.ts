@@ -37,7 +37,7 @@ export type TopNavProps = {
 	/** The DOM reference of the strip.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** The value of the selected item.
 	 * @bindable
 	 */
@@ -82,7 +82,7 @@ export type TopNavItemProps<T extends TopNavItemGenerics = 'button'> = {
 	 * @type TopNavItemElementDOMType[T]
 	 * @bindable
 	 */
-	ref?: TopNavItemElementDOMType[T];
+	ref?: TopNavItemElementDOMType[T] | null;
 	/** The DOM element to render. An anchor takes the attributes of one, `href` among them, and is
 	 * what an item that navigates should be.
 	 * @type 'button' | 'a'

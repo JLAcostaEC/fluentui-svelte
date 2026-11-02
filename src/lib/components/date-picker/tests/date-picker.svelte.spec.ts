@@ -36,17 +36,32 @@ describe('rendering', () => {
 		await expect.element(page.selector('input[type="date"]')).toHaveValue('2024-03-15');
 	});
 
-	it('keeps that input out of the tab order and out of the accessibility tree', async () => {
+	it('keeps that input behind the button, out of the tab order and the accessibility tree, but not out of validation', async () => {
 		render(DatePicker, { value: '2024-03-15' });
 
 		const input = document.querySelector<HTMLInputElement>('input[type="date"]')!;
-		expect(input.hidden).toBe(true);
+		expect(input.willValidate).toBe(true);
+		expect(input.getAttribute('aria-hidden')).toBe('true');
+		expect(getComputedStyle(input).opacity).toBe('0');
 
 		document.querySelector<HTMLElement>('.fs-date-picker')?.focus();
 		await userEvent.tab();
 
 		expect(document.activeElement).not.toBe(input);
 	});
+
+	it.each([
+		[{}, ['2000-01-01', '2010-12-31']],
+		[{ min: '2005-06-01', max: '2006-06-01' }, ['2005-06-01', '2006-06-01']]
+	])(
+		'accepts on its native input only the dates of the years it offers, unless min and max say otherwise (%o)',
+		async (limits, expected) => {
+			render(DatePicker, { minYear: 2000, maxYear: 2010, ...limits });
+			const input = document.querySelector<HTMLInputElement>('input[type="date"]')!;
+
+			expect([input.min, input.max]).toEqual(expected);
+		}
+	);
 
 	it('is a real button', async () => {
 		render(DatePicker);
@@ -86,6 +101,37 @@ describe('the popup', () => {
 
 		await expect.element(picker()).toHaveAttribute('aria-expanded', 'true');
 		await expect.element(flyout()).toBeInTheDocument();
+	});
+
+	it('names each list of the popup after its column', async () => {
+		render(DatePicker);
+		await picker().click();
+		for (const name of ['Day', 'Month', 'Year'])
+			await expect.element(flyout().getByRole('listbox', { name })).toBeInTheDocument();
+	});
+
+	it('takes the names of the columns from columnLabels', async () => {
+		render(DatePicker, { columnLabels: { day: 'Día', month: 'Mes', year: 'Año' } });
+		expect(columns()).toEqual(['Día', 'Mes', 'Año']);
+		await picker().click();
+		await expect.element(flyout().getByRole('listbox', { name: 'Mes' })).toBeInTheDocument();
+	});
+
+	it('gives the options of every column ids of their own, and keeps the arrows to the pointer', async () => {
+		render(DatePicker);
+		await picker().click();
+		await expect.element(flyout()).toBeInTheDocument();
+		const ids = [...flyout().element().querySelectorAll('[role="option"]')].map((el) => el.id);
+		expect(new Set(ids).size).toBe(ids.length);
+		for (const listbox of flyout().getByRole('listbox').elements()) {
+			const active = listbox.getAttribute('aria-activedescendant')!;
+			expect(listbox.contains(document.getElementById(active))).toBe(true);
+		}
+		expect(
+			flyout()
+				.getByRole('button', { name: /previous|next/i })
+				.elements()
+		).toHaveLength(0);
 	});
 
 	it('opens on Enter', async () => {

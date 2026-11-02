@@ -4,8 +4,8 @@
   import { m } from '$i18n/messages.js';
 
   const variantCode = `
-<NumberBox hideActionButtons min={0} max={100} step={1} />
-<NumberBox hideActionButtons min={0} max={100} step={1} variant="compact" />`;
+<NumberBox aria-label="Quantity" hideActionButtons min={0} max={100} step={1} />
+<NumberBox aria-label="Quantity" hideActionButtons min={0} max={100} step={1} variant="compact" />`;
 </script>
 
 ### {m.nb_variant_title()}
@@ -13,6 +13,6 @@
 {m.nb_variant_description()}
 
 <Showcase columns={1} minHeight="250px" code={variantCode}>
-  <NumberBox hideActionButtons min={0} max={100} step={1} />
-  <NumberBox hideActionButtons min={0} max={100} step={1} variant="compact" />
+  <NumberBox aria-label="Quantity" hideActionButtons min={0} max={100} step={1} />
+  <NumberBox aria-label="Quantity" hideActionButtons min={0} max={100} step={1} variant="compact" />
 </Showcase>

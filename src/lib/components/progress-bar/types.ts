@@ -12,7 +12,7 @@ export type ProgressBarProps = {
 	/** The DOM reference of the progress bar element.
 	 * @bindable
 	 */
-	ref?: SVGElement;
+	ref?: SVGElement | null;
 	/** The minimum value of the progress bar.
 	 * @default 0
 	 */
@@ -26,15 +26,15 @@ export type ProgressBarProps = {
 	/** The DOM reference of the rail element.
 	 * @bindable
 	 */
-	railElement?: SVGRectElement;
+	railElement?: SVGRectElement | null;
 	/** The DOM reference of the secondary track element, used while indeterminate.
 	 * @bindable
 	 */
-	secondaryTrackElement?: SVGRectElement;
+	secondaryTrackElement?: SVGRectElement | null;
 	/** The DOM reference of the track element.
 	 * @bindable
 	 */
-	trackElement?: SVGRectElement;
+	trackElement?: SVGRectElement | null;
 	/** The current status of the progress bar, which recolors the track. */
 	status?: ProgressStatus;
 } & SVGAttributes<SVGElement>;

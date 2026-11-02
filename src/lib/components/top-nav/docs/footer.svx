@@ -10,7 +10,7 @@
 
 | Name                       | Type                                                | Default         | Description                                                                                     |
 | -------------------------- | --------------------------------------------------- | --------------- | ----------------------------------------------------------------------------------------------- |
-| `ref` _bindable_           | `HTMLDivElement`                                    |                 | `<I18nMarkupMessage message={m.generated_fs_top_nav_props_props_ref} />`                        |
+| `ref` _bindable_           | `HTMLDivElement` &#124; `null`                      |                 | `<I18nMarkupMessage message={m.generated_fs_top_nav_props_props_ref} />`                        |
 | `selectedValue` _bindable_ | `string`                                            |                 | `<I18nMarkupMessage message={m.generated_fs_top_nav_props_props_selected_value} />`             |
 | `onTabSelect`              | `(event: Event, value: string) => void`             |                 | `<I18nMarkupMessage message={m.generated_fs_top_nav_props_props_on_tab_select} />`              |
 | `appearance`               | [`TopNavAppearance`](/docs/types/#topnavappearance) | `'transparent'` | `<I18nMarkupMessage message={m.generated_fs_top_nav_props_props_appearance} />`                 |

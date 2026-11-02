@@ -3,9 +3,11 @@
 	import CaretDownFilled from 'fluentui-icons-svelte/CaretDownFilled.svelte';
 	import CaretUpFilled from 'fluentui-icons-svelte/CaretUpFilled.svelte';
 	import { Button } from '$lib/index.js';
+	import { PREFIX } from '$constants';
 	import { on } from 'svelte/events';
 
 	let {
+		label,
 		values = Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, '0')),
 		selectedIndex = $bindable(0),
 		disabledIndices = [],
@@ -16,6 +18,8 @@
 		inertia = true,
 		children
 	}: {
+		/** The accessible name of the listbox, such as the field it picks. */
+		label: string;
 		values?: string[];
 		selectedIndex?: number;
 		/** Real (0-based, unwrapped) indices the carousel must never rest on. */
@@ -29,6 +33,10 @@
 		inertia?: boolean;
 		children?: Snippet<[{ value: string; index: number; selected: boolean }]>;
 	} = $props();
+
+	// Picker columns render side by side, so the option ids need a prefix of their own.
+	const UID = $props.id();
+	const ITEM_ID = `${PREFIX}carousel-${UID}-item`;
 
 	// Reactive state — read by the template and deriveds.
 	let scrolling = $state(false);
@@ -301,7 +309,14 @@
 </script>
 
 <div class="fs-dynamic-carousel" style:--item-height="{itemHeight}px" style:--container-height="{containerHeight}px">
-	<Button class="fs-dynamic-carousel-btn" appearance="subtle" aria-label="Previous" onclick={() => moveBy(-1)}>
+	<!-- The arrows are for the pointer: the listbox moves with ArrowUp/ArrowDown. -->
+	<Button
+		class="fs-dynamic-carousel-btn"
+		appearance="subtle"
+		tabindex={-1}
+		aria-hidden="true"
+		onclick={() => moveBy(-1)}
+	>
 		<CaretUpFilled />
 	</Button>
 	<div
@@ -310,13 +325,13 @@
 		onkeydown={handleKeydown}
 		role="listbox"
 		tabindex="0"
-		aria-label="Selector"
-		aria-activedescendant="carousel-item-{centerIndex}"
+		aria-label={label}
+		aria-activedescendant="{ITEM_ID}-{centerIndex}"
 	>
 		<div class="fs-dynamic-carousel-track">
 			{#each virtualItems as item (item.key)}
 				<div
-					id="carousel-item-{item.key}"
+					id="{ITEM_ID}-{item.key}"
 					class={[
 						'fs-dynamic-carousel-item',
 						item.realIndex === currentSelectedIndex && 'selected',
@@ -352,7 +367,13 @@
 			{/each}
 		</div>
 	</div>
-	<Button class="fs-dynamic-carousel-btn" appearance="subtle" aria-label="Next" onclick={() => moveBy(1)}>
+	<Button
+		class="fs-dynamic-carousel-btn"
+		appearance="subtle"
+		tabindex={-1}
+		aria-hidden="true"
+		onclick={() => moveBy(1)}
+	>
 		<CaretDownFilled />
 	</Button>
 </div>

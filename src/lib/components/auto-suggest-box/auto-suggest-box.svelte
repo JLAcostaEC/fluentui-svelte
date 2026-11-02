@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import { onMount, tick } from 'svelte';
 	import { SvelteMap } from 'svelte/reactivity';
 	import { on } from 'svelte/events';
@@ -21,8 +22,11 @@
 	const FALLBACK_ID = $props.id();
 	const ID = `${PREFIX}autosuggestbox-${FALLBACK_ID}`;
 
+	const labelContext = claimLabel(() => id);
+
 	let {
-		id = `${ID}-input`,
+		id = labelContext?.fieldId ?? `${ID}-input`,
+		name = id,
 		wrapperAttributes,
 		onfocus,
 		onClear,
@@ -31,15 +35,15 @@
 		type = 'search',
 		open = $bindable(false),
 		multiselect,
-		wrapperRef = $bindable(),
+		wrapperRef = $bindable(null),
 		value = $bindable(''),
-		ref = $bindable(),
+		ref = $bindable(null),
 		selectOnFocus,
 		openOnFocus = false,
 		virtualizer,
-		flyoutRef = $bindable(),
+		flyoutRef = $bindable(null),
 		flyoutProps,
-		listViewRef = $bindable(),
+		listViewRef = $bindable(null),
 		selectedOptions = $bindable([]),
 		listViewProps,
 		showTextualMultiselect,
@@ -235,12 +239,13 @@
 
 		if (e.key !== 'Enter') return;
 
-		e.preventDefault();
-
 		if (activeOption) {
+			// Enter chooses the suggestion under the cursor rather than submitting the form.
+			e.preventDefault();
 			context.methods.toggleSelection(e, activeOption.id);
 			open = false;
 		} else {
+			// The free text is the value: the form submits it, unless `querySubmitted` prevents it.
 			querySubmitted?.(e, value);
 		}
 	}
@@ -382,6 +387,7 @@
 		{placeholder}
 		{hideActionButtons}
 		{id}
+		{name}
 		bind:value
 		bind:ref
 		querySubmitted={(e) => querySubmitted?.(e, value)}

@@ -38,7 +38,7 @@
 	} from './types.js';
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		value = $bindable(null),
 		range = $bindable({ start: null, end: null }),
 		view = 'days',

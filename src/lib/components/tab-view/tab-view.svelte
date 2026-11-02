@@ -6,8 +6,8 @@
 	import type { TabViewContext, TabViewProps } from './types.ts';
 
 	let {
-		ref = $bindable(),
-		listRef = $bindable(),
+		ref = $bindable(null),
+		listRef = $bindable(null),
 		listAttributes,
 		activeTab = $bindable(''),
 		onTabChange,

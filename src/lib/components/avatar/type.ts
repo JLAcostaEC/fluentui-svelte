@@ -18,7 +18,7 @@ export type AvatarProps = {
 	/** The DOM reference of the avatar element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** Size of the avatar in pixels.
 	 * @default 48
 	 */

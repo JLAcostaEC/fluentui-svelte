@@ -29,7 +29,7 @@
 | `primaryButtonAttributes` | `HTMLButtonAttributes`                                          |                  | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_primary_button_attributes} />` |
 | `dismissButtonAttributes` | `HTMLButtonAttributes`                                          |                  | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_dismiss_button_attributes} />` |
 | `children`                | `Snippet`                                                       |                  | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_children} />`                  |
-| `ref` _bindable_          | `HTMLElement`                                                   |                  | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_ref} />`                       |
+| `ref` _bindable_          | `HTMLElement` &#124; `null`                                     |                  | `<I18nMarkupMessage message={m.generated_fs_tag_props_props_ref} />`                       |
 | HTML Attributes           |                                                                 |                  |                                                                                            |
 
 <!-- /props:TagProps -->
@@ -50,7 +50,7 @@
 | `onDismiss`                 | `(e: MouseEvent` &#124; `KeyboardEvent, data: { value: string }) => void` |             | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_on_dismiss} />`      |
 | `role`                      | `HTMLAttributes<HTMLDivElement>['role']`                                  | `'toolbar'` | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_role} />`            |
 | `children`                  | `Snippet`                                                                 |             | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_children} />`        |
-| `ref` _bindable_            | `HTMLDivElement`                                                          |             | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_ref} />`             |
+| `ref` _bindable_            | `HTMLDivElement` &#124; `null`                                            |             | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_ref} />`             |
 | HTML Attributes             |                                                                           |             |                                                                                        |
 
 <!-- /props:TagGroupProps -->

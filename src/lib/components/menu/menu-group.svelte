@@ -6,11 +6,14 @@
 	const COMPONENT_NAME = 'menu-group';
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
-	let { ref = $bindable(), header, children }: MenuGroupProps = $props();
+	let { ref = $bindable(null), header, children }: MenuGroupProps = $props();
 </script>
 
-<div class="fs-menu-group" role="group" aria-labelledby="group-name-{ID}" bind:this={ref}>
-	<h3 id="group-name-{ID}" class="group-name">{header || ID}</h3>
+<div class="fs-menu-group" role="group" aria-labelledby={header ? `group-name-${ID}` : undefined} bind:this={ref}>
+	{#if header}
+		<!-- A menu holds only items, groups and separators, so the label is plain text that names the group. -->
+		<div id="group-name-{ID}" class="group-name" role="presentation">{header}</div>
+	{/if}
 	{@render children()}
 </div>
 

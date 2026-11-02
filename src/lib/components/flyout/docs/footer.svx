@@ -10,7 +10,7 @@
 
 | Name                       | Type                                                                      | Default    | Description                                                                             |
 | -------------------------- | ------------------------------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------- |
-| `ref` _bindable_           | `HTMLElement`                                                             |            | `<I18nMarkupMessage message={m.generated_fs_flyout_props_props_ref} />`                 |
+| `ref` _bindable_           | `HTMLElement` &#124; `null`                                               |            | `<I18nMarkupMessage message={m.generated_fs_flyout_props_props_ref} />`                 |
 | `children`                 | `Snippet`                                                                 |            | `<I18nMarkupMessage message={m.generated_fs_flyout_props_props_children} />`            |
 | `floating`                 | `boolean`                                                                 | `false`    | `<I18nMarkupMessage message={m.generated_fs_flyout_props_props_floating} />`            |
 | `reference`                | `HTMLElement`                                                             |            | `<I18nMarkupMessage message={m.generated_fs_flyout_props_props_reference} />`           |

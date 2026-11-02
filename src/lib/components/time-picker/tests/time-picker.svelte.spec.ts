@@ -31,11 +31,13 @@ describe('rendering', () => {
 		await expect.element(page.selector('input[type="time"]')).toHaveValue('13:45:30');
 	});
 
-	it('keeps that input out of the tab order and out of the accessibility tree', async () => {
+	it('keeps that input behind the button, out of the tab order and the accessibility tree, but not out of validation', async () => {
 		render(TimePicker, { value: '13:45:30' });
 
 		const input = document.querySelector<HTMLInputElement>('input[type="time"]')!;
-		expect(input.hidden).toBe(true);
+		expect(input.willValidate).toBe(true);
+		expect(input.getAttribute('aria-hidden')).toBe('true');
+		expect(getComputedStyle(input).opacity).toBe('0');
 
 		document.querySelector<HTMLElement>('.fs-time-picker')?.focus();
 		await userEvent.tab();
@@ -48,9 +50,11 @@ describe('rendering', () => {
 		expect(document.querySelector('.fs-time-picker')?.tagName).toBe('BUTTON');
 	});
 
-	it('takes a name for the form through inputAttributes', async () => {
-		render(TimePicker, { value: '13:45:30', inputAttributes: { name: 'meeting-time' } });
-		await expect.element(page.selector('input[type="time"]')).toHaveAttribute('name', 'meeting-time');
+	it('takes the native attributes directly on the time input', async () => {
+		render(TimePicker, { value: '13:45:30', name: 'meeting-time', required: true });
+		const input = page.selector('input[type="time"]');
+		await expect.element(input).toHaveAttribute('name', 'meeting-time');
+		await expect.element(input).toBeRequired();
 	});
 });
 
@@ -102,6 +106,28 @@ describe('the popup', () => {
 
 		await expect.element(picker()).toHaveAttribute('aria-expanded', 'true');
 		await expect.element(flyout()).toBeInTheDocument();
+	});
+
+	it('names each list of the popup after its column', async () => {
+		render(TimePicker, { format: 12 });
+		await picker().click();
+		for (const name of ['Hour', 'Minute', 'Second', 'AM/PM'])
+			await expect.element(flyout().getByRole('listbox', { name })).toBeInTheDocument();
+	});
+
+	it('takes the names of the columns from columnLabels', async () => {
+		render(TimePicker, { columnLabels: { hour: 'Hora', minute: 'Minuto', second: 'Segundo' } });
+		expect(columns()).toEqual(['Hora', 'Minuto', 'Segundo']);
+		await picker().click();
+		await expect.element(flyout().getByRole('listbox', { name: 'Minuto' })).toBeInTheDocument();
+	});
+
+	it('gives the options of every column ids of their own', async () => {
+		render(TimePicker);
+		await picker().click();
+		await expect.element(flyout()).toBeInTheDocument();
+		const ids = [...flyout().element().querySelectorAll('[role="option"]')].map((el) => el.id);
+		expect(new Set(ids).size).toBe(ids.length);
 	});
 
 	it('announces the popup as a dialog it controls', async () => {

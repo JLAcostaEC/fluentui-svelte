@@ -6,7 +6,7 @@
 
 	let {
 		as,
-		ref = $bindable(),
+		ref = $bindable(null),
 		type = 'checkbox',
 		checked = false,
 		subtle = false,

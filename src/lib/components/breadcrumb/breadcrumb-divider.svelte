@@ -2,7 +2,7 @@
 	import ChevronRightRegular from 'fluentui-icons-svelte/ChevronRightRegular.svelte';
 	import type { BreadcrumbDividerProps } from './types.ts';
 
-	let { ref = $bindable(), class: classes, children, ...attributes }: BreadcrumbDividerProps = $props();
+	let { ref = $bindable(null), class: classes, children, ...attributes }: BreadcrumbDividerProps = $props();
 </script>
 
 <!--

@@ -14,7 +14,7 @@
 | `animation`      | `'wave'` &#124; `'pulse'`                         | `'wave'`    | `<I18nMarkupMessage message={m.generated_fs_skeleton_props_props_animation} />` |
 | `shape`          | `'circular'` &#124; `'rounded'` &#124; `'square'` | `'rounded'` | `<I18nMarkupMessage message={m.generated_fs_skeleton_props_props_shape} />`     |
 | `justify`        | `boolean`                                         |             | `<I18nMarkupMessage message={m.generated_fs_skeleton_props_props_justify} />`   |
-| `ref` _bindable_ | `HTMLElement`                                     |             | `<I18nMarkupMessage message={m.generated_fs_skeleton_props_props_ref} />`       |
+| `ref` _bindable_ | `HTMLElement` &#124; `null`                       |             | `<I18nMarkupMessage message={m.generated_fs_skeleton_props_props_ref} />`       |
 | HTML Attributes  |                                                   |             |                                                                                 |
 
 <!-- /props:SkeletonProps -->

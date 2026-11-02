@@ -15,7 +15,12 @@ describe('rendering', () => {
 
 	it('renders the title it is given', async () => {
 		render(InfoBar, { title: 'Update available' });
-		await expect.element(page.getByRole('heading', { name: 'Update available' })).toBeInTheDocument();
+		await expect.element(page.getByRole('heading', { level: 3, name: 'Update available' })).toBeInTheDocument();
+	});
+
+	it('renders the title at the heading level it is given', async () => {
+		render(InfoBar, { title: 'Update available', headingLevel: 2 });
+		await expect.element(page.getByRole('heading', { level: 2, name: 'Update available' })).toBeInTheDocument();
 	});
 
 	it('renders the message passed as children', async () => {

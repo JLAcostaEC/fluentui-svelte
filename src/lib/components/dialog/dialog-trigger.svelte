@@ -4,7 +4,7 @@
 	import { getDialogContext } from './dialog.svelte.ts';
 	import type { DialogTriggerProps } from './types.ts';
 
-	let { ref = $bindable(), class: classes, onclick, children, ...attributes }: DialogTriggerProps = $props();
+	let { ref = $bindable(null), class: classes, onclick, children, ...attributes }: DialogTriggerProps = $props();
 
 	const CONTEXT = getDialogContext();
 

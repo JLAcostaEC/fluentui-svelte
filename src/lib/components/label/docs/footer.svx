@@ -13,19 +13,25 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:LabelProps -->
 
-| Name                         | Type                                                          | Default           | Description                                                                           |
-| ---------------------------- | ------------------------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------- |
-| `as`                         | `'div'` &#124; `'span'`                                       | `'div'`           | `<I18nMarkupMessage message={m.generated_fs_label_props_props_as} />`                 |
-| `children`                   | `Snippet`                                                     |                   | `<I18nMarkupMessage message={m.generated_fs_label_props_props_children} />`           |
-| `wrapperRef` _bindable_      | `HTMLDivElement` &#124; `HTMLSpanElement`                     |                   | `<I18nMarkupMessage message={m.generated_fs_label_props_props_wrapper_ref} />`        |
-| `wrapperAttributes`          | `HTMLAttributes`                                              |                   | `<I18nMarkupMessage message={m.generated_fs_label_props_props_wrapper_attributes} />` |
-| `label`                      | `string`                                                      | `'Label Element'` | `<I18nMarkupMessage message={m.generated_fs_label_props_props_label} />`              |
-| `size`                       | `'small'` &#124; `'medium'` &#124; `'large'`                  | `'medium'`        | `<I18nMarkupMessage message={m.generated_fs_label_props_props_size} />`               |
-| `weight`                     | `'regular'` &#124; `'semibold'`                               | `'regular'`       | `<I18nMarkupMessage message={m.generated_fs_label_props_props_weight} />`             |
-| `labelPosition`              | `'before'` &#124; `'after'` &#124; `'above'` &#124; `'below'` | `'after'`         | `<I18nMarkupMessage message={m.generated_fs_label_props_props_label_position} />`     |
-| `required`                   | `{ abbr?: string; message: string; }`                         |                   | `<I18nMarkupMessage message={m.generated_fs_label_props_props_required} />`           |
-| `disabled`                   | `boolean`                                                     |                   | `<I18nMarkupMessage message={m.generated_fs_label_props_props_disabled} />`           |
-| `ref` _bindable_             | `HTMLLabelElement`                                            |                   | `<I18nMarkupMessage message={m.generated_fs_label_props_props_ref} />`                |
-| Element Attributes (`label`) |                                                               |                   |                                                                                       |
+| Name                                | Type                                                          | Default            | Description                                                                                  |
+| ----------------------------------- | ------------------------------------------------------------- | ------------------ | -------------------------------------------------------------------------------------------- |
+| `as`                                | `'div'` &#124; `'span'`                                       | `'div'`            | `<I18nMarkupMessage message={m.generated_fs_label_props_props_as} />`                        |
+| `children`                          | `Snippet`                                                     |                    | `<I18nMarkupMessage message={m.generated_fs_label_props_props_children} />`                  |
+| `wrapperRef` _bindable_             | `HTMLDivElement` &#124; `HTMLSpanElement`                     |                    | `<I18nMarkupMessage message={m.generated_fs_label_props_props_wrapper_ref} />`               |
+| `wrapperAttributes`                 | `HTMLAttributes`                                              |                    | `<I18nMarkupMessage message={m.generated_fs_label_props_props_wrapper_attributes} />`        |
+| `label`                             | `string`                                                      | `'Label Element'`  | `<I18nMarkupMessage message={m.generated_fs_label_props_props_label} />`                     |
+| `size`                              | `'small'` &#124; `'medium'` &#124; `'large'`                  | `'medium'`         | `<I18nMarkupMessage message={m.generated_fs_label_props_props_size} />`                      |
+| `weight`                            | `'regular'` &#124; `'semibold'`                               | `'regular'`        | `<I18nMarkupMessage message={m.generated_fs_label_props_props_weight} />`                    |
+| `labelPosition`                     | `'before'` &#124; `'after'` &#124; `'above'` &#124; `'below'` | `'after'`          | `<I18nMarkupMessage message={m.generated_fs_label_props_props_label_position} />`            |
+| `required`                          | `{ abbr?: string; message: string; }`                         |                    | `<I18nMarkupMessage message={m.generated_fs_label_props_props_required} />`                  |
+| `disabled`                          | `boolean`                                                     |                    | `<I18nMarkupMessage message={m.generated_fs_label_props_props_disabled} />`                  |
+| `ref` _bindable_                    | `HTMLLabelElement` &#124; `null`                              |                    | `<I18nMarkupMessage message={m.generated_fs_label_props_props_ref} />`                       |
+| `id`                                | `string`                                                      | `Generated`        | `<I18nMarkupMessage message={m.generated_fs_label_props_props_id} />`                        |
+| `for`                               | `string`                                                      | `The field inside` | `<I18nMarkupMessage message={m.generated_fs_label_props_props_for} />`                       |
+| `tooltipContent`                    | `string` &#124; `Snippet` &#124; `Component`                  |                    | `<I18nMarkupMessage message={m.generated_fs_label_props_props_tooltip_content} />`           |
+| `tooltipBadge`                      | `Snippet` &#124; `Component`                                  | `InfoRegular`      | `<I18nMarkupMessage message={m.generated_fs_label_props_props_tooltip_badge} />`             |
+| `tooltipProps`                      | `TooltipProps`                                                |                    | `<I18nMarkupMessage message={m.generated_fs_label_props_props_tooltip_props} />`             |
+| `tooltipButtonAttributes`           | `HTMLButtonAttributes`                                        |                    | `<I18nMarkupMessage message={m.generated_fs_label_props_props_tooltip_button_attributes} />` |
+| `HTMLLabelAttributes` without `for` |                                                               |                    |                                                                                              |
 
 <!-- /props:LabelProps -->

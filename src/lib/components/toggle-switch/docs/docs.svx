@@ -9,7 +9,7 @@
 {m.tswitch_description()}
 
 <Showcase>
-  <ToggleSwitch />
+  <ToggleSwitch aria-label="Notifications" />
   <ToggleSwitch label="Toggle me" />
   <ToggleSwitch label="I'm disabled" disabled />
 </Showcase>
@@ -21,7 +21,7 @@
 	import { ToggleSwitch } from 'fluentui-svelte';
 </script>
 
-<ToggleSwitch />
+<ToggleSwitch aria-label="Notifications" />
 <ToggleSwitch label="Toggle me" />
 <ToggleSwitch label="I'm disabled" disabled />
 ```

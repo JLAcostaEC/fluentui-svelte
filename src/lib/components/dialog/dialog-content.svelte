@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { DialogContentProps } from './types.ts';
 
-	let { ref = $bindable(), class: classes, children, ...attributes }: DialogContentProps = $props();
+	let { ref = $bindable(null), class: classes, children, ...attributes }: DialogContentProps = $props();
 </script>
 
 <div {...attributes} class={['dialog-content', classes]} bind:this={ref}>

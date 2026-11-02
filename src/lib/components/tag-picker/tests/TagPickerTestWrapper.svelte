@@ -54,7 +54,7 @@
 {/snippet}
 
 {#snippet customTag(tag: { value: string; text: string })}
-	<Tag role="listitem" value={tag.value} title={tag.text}>custom {tag.text}</Tag>
+	<Tag value={tag.value} title={tag.text}>custom {tag.text}</Tag>
 {/snippet}
 
 {#snippet expand()}
@@ -71,7 +71,7 @@
 		bind:selectedOptions
 		bind:value
 		bind:open
-		aria-label="Fruits"
+		inputAttributes={{ 'aria-label': 'Fruits' }}
 		tag={useTagSnippet ? customTag : undefined}
 		{...rest}
 		{...customExpand ? { expandIcon: expand } : {}}

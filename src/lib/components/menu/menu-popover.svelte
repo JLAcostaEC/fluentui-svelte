@@ -10,7 +10,7 @@
 
 	let {
 		ref: _ref,
-		open: _open = $bindable(),
+		open: _open = $bindable(null),
 		keepMounted = false,
 		placement,
 		positionConfig: floatingPosition = {

@@ -13,7 +13,7 @@
 
 	let {
 		as = 'ul' as Tag,
-		ref = $bindable(),
+		ref = $bindable(null),
 		selectionMode = 'none',
 		navigationMode = 'items',
 		shape = 'rounded',

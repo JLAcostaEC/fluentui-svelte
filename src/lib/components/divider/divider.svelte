@@ -3,7 +3,7 @@
 
 	let {
 		as = 'div' as Tag,
-		ref = $bindable(),
+		ref = $bindable(null),
 		vertical,
 		alignContent = 'center',
 		appearance = 'default',

@@ -1,6 +1,6 @@
 import type { Component, Snippet } from 'svelte';
-import type { HTMLAttributes, HTMLInputAttributes, SVGAttributes } from 'svelte/elements';
-import type { FSContext } from '$internal';
+import type { HTMLAttributes, HTMLInputAttributes, HTMLSelectAttributes, SVGAttributes } from 'svelte/elements';
+import type { FSContext, NativeFieldAttributes } from '$internal';
 import type { ListViewItemProps } from '../list-view/types.ts';
 import type { TagGroupProps } from '../tag/types.ts';
 
@@ -11,11 +11,22 @@ export type TagPickerProps = {
 	/** The DOM reference of the wrapper element.
 	 * @bindable
 	 */
-	wrapperRef?: HTMLDivElement;
-	/** The DOM reference of the input element.
+	wrapperRef?: HTMLDivElement | null;
+	/** The DOM reference of the native multiple select that holds the selected options. The other attributes of the picker are applied to it.
 	 * @bindable
 	 */
-	ref?: HTMLInputElement;
+	ref?: HTMLSelectElement | null;
+	/** The DOM reference of the text input.
+	 * @bindable
+	 */
+	inputRef?: HTMLInputElement | null;
+	/** The attributes to spread on the text input.
+	 * @type HTMLInputAttributes
+	 */
+	inputAttributes?: Omit<
+		HTMLInputAttributes,
+		'value' | 'type' | 'role' | 'size' | 'disabled' | 'placeholder' | 'children'
+	>;
 	/** The values of the chosen options, shown as tags in the control. A value no option has is shown as it is.
 	 * @default []
 	 * @bindable
@@ -53,11 +64,11 @@ export type TagPickerProps = {
 	/** A button-like element rendered at the end of the control, before the dropdown arrow. */
 	secondaryAction?: Snippet;
 	/** Renders the tag of a chosen option, to give it media or custom text. Falls back to a plain tag.
-	 * Render a `Tag` with the given `value`, and `role="listitem"`.
+	 * Render a `Tag` with the given `value`.
 	 * @type Snippet<[{ value: string; text: string }]>
 	 */
 	tag?: Snippet<[{ value: string; text: string }]>;
-	/** The props to spread on the group holding the tags. This is where its `aria-label` goes.
+	/** The props to spread on the group holding the tags. This is where its `aria-label` goes, `'Selected options'` by default.
 	 * @type TagGroupProps
 	 */
 	tagGroupProps?: Omit<
@@ -76,7 +87,7 @@ export type TagPickerProps = {
 	querySubmitted?: (e: KeyboardEvent, query: string) => void;
 	/** The options. Leave it out to get a picker without a list. */
 	children?: Snippet;
-} & Omit<HTMLInputAttributes, 'value' | 'type' | 'role' | 'size' | 'disabled' | 'placeholder' | 'children'>;
+} & NativeFieldAttributes<Omit<HTMLSelectAttributes, 'value' | 'multiple' | 'size' | 'disabled' | 'children'>>;
 
 export type OptionType = { id: string; value: string; disabled?: boolean };
 
@@ -110,7 +121,7 @@ export type TagPickerOptionProps = {
 	/** The DOM reference of the option element.
 	 * @bindable
 	 */
-	ref?: HTMLLIElement;
+	ref?: HTMLLIElement | null;
 	/** Takes the option out of reach: it is shown, but the cursor steps over it. */
 	disabled?: boolean;
 } & Omit<ListViewItemProps<'li'>, 'as' | 'value' | 'onAction' | 'checkmark'>;
@@ -122,7 +133,7 @@ export type TagPickerOptionGroupProps = {
 	/** The DOM reference of the group element.
 	 * @bindable
 	 */
-	ref?: HTMLUListElement;
+	ref?: HTMLUListElement | null;
 	/** The options of the group. */
 	children?: Snippet;
 	/** The attributes to spread on the wrapper element.
@@ -132,5 +143,5 @@ export type TagPickerOptionGroupProps = {
 	/** The DOM reference of the wrapper element.
 	 * @bindable
 	 */
-	wrapperRef?: HTMLLIElement;
+	wrapperRef?: HTMLLIElement | null;
 } & Omit<HTMLAttributes<HTMLUListElement>, 'children'>;

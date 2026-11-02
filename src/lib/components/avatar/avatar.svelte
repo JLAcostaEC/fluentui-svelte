@@ -15,7 +15,7 @@
 		color = 'attention',
 		style,
 		activeAppearance = 'ring',
-		ref = $bindable(),
+		ref = $bindable(null),
 		idForColor,
 		badge,
 		...attributes

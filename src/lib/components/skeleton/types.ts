@@ -22,5 +22,5 @@ export type SkeletonProps<Tag extends SkeletonTags = 'div'> = {
 	/** The DOM reference of the skeleton element.
 	 * @bindable
 	 */
-	ref?: HTMLElement;
+	ref?: HTMLElement | null;
 } & PolymorphicProps<Tag>;

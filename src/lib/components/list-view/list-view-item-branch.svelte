@@ -25,7 +25,7 @@
 		expanded = $bindable(false),
 		disabled = false,
 		shape,
-		ref = $bindable(),
+		ref = $bindable(null),
 		class: classes,
 		onclick,
 		onkeydown,

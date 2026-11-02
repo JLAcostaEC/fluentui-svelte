@@ -13,7 +13,7 @@
 		children,
 		class: classes,
 		style,
-		ref = $bindable(),
+		ref = $bindable(null),
 		...attributes
 	}: BadgeProps = $props();
 </script>

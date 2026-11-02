@@ -11,7 +11,7 @@
 		textAlign = 'left',
 		textPosition: dir = 'right',
 		avatarAlign = 'center',
-		element = $bindable(),
+		element = $bindable(null),
 		avatarProps,
 		presence,
 		presenceOnly,

@@ -3,7 +3,7 @@
 	import { getCardContext } from './card-context.svelte.ts';
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		logoSrc,
 		logoAlt = '',
 		class: classes,

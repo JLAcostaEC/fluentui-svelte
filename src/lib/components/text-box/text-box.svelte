@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import DismissFilled from 'fluentui-icons-svelte/DismissFilled.svelte';
 	import SearchFilled from 'fluentui-icons-svelte/SearchFilled.svelte';
 	import EyeShowFilled from 'fluentui-icons-svelte/EyeShowFilled.svelte';
@@ -9,16 +10,18 @@
 
 	const FALLBACK_ID = $props.id();
 
+	const labelContext = claimLabel(() => id);
+
 	let {
-		id = 'input-' + FALLBACK_ID,
+		id = labelContext?.fieldId ?? 'input-' + FALLBACK_ID,
 		readonly,
 		name = id,
 		hideActionButtons,
 		type = 'text',
 		wrapperAttributes,
-		wrapperRef = $bindable(),
-		value = $bindable(),
-		ref = $bindable(),
+		wrapperRef = $bindable(null),
+		value = $bindable(null),
+		ref = $bindable(null),
 		placeholder = 'Fluent TextBox',
 		size = 'medium',
 		contentBefore,
@@ -82,7 +85,7 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 -->
 <div
 	{...wrapperAttributes}
-	class={['fs-textbox', id, `text-box-size-${size}`, wrapperAttributes?.class]}
+	class={['fs-textbox', `text-box-size-${size}`, wrapperAttributes?.class]}
 	bind:this={wrapperRef}
 >
 	{#if contentBefore}
@@ -224,6 +227,11 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 			width: calc(100% + 0.125rem);
 			left: -0.063rem;
 			background-color: var(--fs-accent-fill-default);
+		}
+		&:has(input:is(:user-invalid, [aria-invalid='true'])):after {
+			width: calc(100% + 0.125rem);
+			left: -0.063rem;
+			background-color: var(--fs-system-critical);
 		}
 		&:has(input:focus) {
 			background: var(--fs-control-fill-input-active);

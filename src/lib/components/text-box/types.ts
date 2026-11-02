@@ -14,15 +14,15 @@ export type TextBoxProps = {
 	 * @type string | number
 	 * @bindable
 	 */
-	value?: string | number;
+	value?: string | number | null;
 	/** The DOM reference of the wrapper element.
 	 * @bindable
 	 */
-	wrapperRef?: HTMLDivElement;
+	wrapperRef?: HTMLDivElement | null;
 	/** The DOM reference of the input element.
 	 * @bindable
 	 */
-	ref?: HTMLInputElement;
+	ref?: HTMLInputElement | null;
 	/** The placeholder text for the input.
 	 * @default 'Fluent TextBox'
 	 */

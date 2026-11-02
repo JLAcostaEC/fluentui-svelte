@@ -71,7 +71,7 @@
 <Menu>
   <MenuTrigger>
     {#snippet children({ state, menuTriggerProps, primaryButtonProps })}
-      <SplitButton bind:menuTriggerRef={state.ref} {menuTriggerProps} primaryButtonProps={{ onclick: () => alert('Primary action'), ...primaryButtonProps }}>
+      <SplitButton bind:menuTriggerRef={state.ref} menuTriggerProps={{ ...menuTriggerProps, 'aria-label': 'More options' }} primaryButtonProps={{ onclick: () => alert('Primary action'), ...primaryButtonProps }}>
         Primary Action
       </SplitButton>
     {/snippet}
@@ -97,7 +97,7 @@
 		{#snippet children({ state, menuTriggerProps, primaryButtonProps })}
 			<SplitButton
 				bind:menuTriggerRef={state.ref}
-				{menuTriggerProps}
+				menuTriggerProps={{ ...menuTriggerProps, 'aria-label': 'More options' }}
 				primaryButtonProps={{ onclick: () => alert('Primary action'), ...primaryButtonProps }}
 			>
 				Primary Action

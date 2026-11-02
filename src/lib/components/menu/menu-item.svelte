@@ -11,7 +11,7 @@
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		icon: Icon,
 		secondaryContent,
 		children,

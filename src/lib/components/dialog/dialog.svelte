@@ -7,7 +7,7 @@
 		position = 'middle-center',
 		animation = 'zoom',
 		duration = 'normal',
-		open = $bindable(),
+		open = $bindable(null),
 		onOpenChange,
 		children
 	}: DialogProps = $props();

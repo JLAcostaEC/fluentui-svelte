@@ -20,11 +20,11 @@ export type DropdownSelectProps = {
 	/** The DOM reference of the select element.
 	 * @bindable
 	 */
-	ref?: HTMLSelectElement;
+	ref?: HTMLSelectElement | null;
 	/** The DOM reference of the wrapper element.
 	 * @bindable
 	 */
-	wrapperRef?: HTMLDivElement;
+	wrapperRef?: HTMLDivElement | null;
 	/** The attributes to spread on the wrapper element.
 	 * @type HTMLAttributes
 	 */
@@ -42,7 +42,7 @@ export type DropdownSelectOptionProps = {
 	/** The DOM reference of the option element.
 	 * @bindable
 	 */
-	ref?: HTMLElement;
+	ref?: HTMLElement | null;
 	/** The content of the option, used when no `text` is given. */
 	children?: Snippet;
 } & HTMLOptionAttributes;

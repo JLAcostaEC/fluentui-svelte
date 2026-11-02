@@ -7,7 +7,7 @@
 
 	let {
 		as = 'button' as T,
-		ref = $bindable(),
+		ref = $bindable(null),
 		value = `${COMPONENT_NAME}-${ID}`,
 		icon,
 		disabled,

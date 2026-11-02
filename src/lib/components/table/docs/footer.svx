@@ -124,14 +124,14 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableCellLayoutProps -->
 
-| Name             | Type                         | Default | Description                                                                                |
-| ---------------- | ---------------------------- | ------- | ------------------------------------------------------------------------------------------ |
-| `ref` _bindable_ | `HTMLDivElement`             |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_layout_props_props_ref} />`         |
-| `media`          | `Snippet` &#124; `Component` |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_layout_props_props_media} />`       |
-| `description`    | `string`                     |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_layout_props_props_description} />` |
-| `appearance`     | `'primary'`                  |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_layout_props_props_appearance} />`  |
-| `truncate`       | `boolean`                    |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_layout_props_props_truncate} />`    |
-| HTML Attributes  |                              |         |                                                                                            |
+| Name             | Type                           | Default | Description                                                                                |
+| ---------------- | ------------------------------ | ------- | ------------------------------------------------------------------------------------------ |
+| `ref` _bindable_ | `HTMLDivElement` &#124; `null` |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_layout_props_props_ref} />`         |
+| `media`          | `Snippet` &#124; `Component`   |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_layout_props_props_media} />`       |
+| `description`    | `string`                       |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_layout_props_props_description} />` |
+| `appearance`     | `'primary'`                    |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_layout_props_props_appearance} />`  |
+| `truncate`       | `boolean`                      |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_layout_props_props_truncate} />`    |
+| HTML Attributes  |                                |         |                                                                                            |
 
 <!-- /props:TableCellLayoutProps -->
 
@@ -140,10 +140,10 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableCellActionsProps -->
 
-| Name             | Type             | Default | Description                                                                             |
-| ---------------- | ---------------- | ------- | --------------------------------------------------------------------------------------- |
-| `ref` _bindable_ | `HTMLDivElement` |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_actions_props_props_ref} />`     |
-| `visible`        | `boolean`        |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_actions_props_props_visible} />` |
-| HTML Attributes  |                  |         |                                                                                         |
+| Name             | Type                           | Default | Description                                                                             |
+| ---------------- | ------------------------------ | ------- | --------------------------------------------------------------------------------------- |
+| `ref` _bindable_ | `HTMLDivElement` &#124; `null` |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_actions_props_props_ref} />`     |
+| `visible`        | `boolean`                      |         | `<I18nMarkupMessage message={m.generated_fs_table_cell_actions_props_props_visible} />` |
+| HTML Attributes  |                                |         |                                                                                         |
 
 <!-- /props:TableCellActionsProps -->

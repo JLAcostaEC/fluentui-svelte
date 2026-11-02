@@ -10,7 +10,7 @@
 
 	let {
 		disabled,
-		ref = $bindable(),
+		ref = $bindable(null),
 		id = ID,
 		value = id!,
 		text,

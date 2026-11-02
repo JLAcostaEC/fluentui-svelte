@@ -13,7 +13,11 @@ A TagPicker combines a text field and a dropdown, giving people a way to choose 
 	let selectedOptions = $state([]);
 </script>
 
-<TagPicker bind:selectedOptions aria-label="Select Employees" tagGroupProps={{ 'aria-label': 'Selected Employees' }}>
+<TagPicker
+	bind:selectedOptions
+	inputAttributes={{ 'aria-label': 'Select Employees' }}
+	tagGroupProps={{ 'aria-label': 'Selected Employees' }}
+>
 	{#each options as option (option)}
 		<TagPickerOption value={option}>{option}</TagPickerOption>
 	{/each}
@@ -36,7 +40,7 @@ A TagPicker combines a text field and a dropdown, giving people a way to choose 
 
 ### Default
 
-The `tag` snippet renders the tag of a chosen option, here with an `Avatar` as its media. Render a `Tag` with the given `value` and `role="listitem"`.
+The `tag` snippet renders the tag of a chosen option, here with an `Avatar` as its media. Render a `Tag` with the given `value`.
 
 ```svelte
 <script>
@@ -47,13 +51,13 @@ The `tag` snippet renders the tag of a chosen option, here with an `Avatar` as i
 	{#snippet media()}
 		<Avatar aria-hidden="true" name={text} size={16} color="colorful" />
 	{/snippet}
-	<Tag role="listitem" {value} {media} title={text}>{text}</Tag>
+	<Tag {value} {media} title={text}>{text}</Tag>
 {/snippet}
 
 <TagPicker
 	bind:selectedOptions
 	{tag}
-	aria-label="Select Employees"
+	inputAttributes={{ 'aria-label': 'Select Employees' }}
 	tagGroupProps={{ 'aria-label': 'Selected Employees' }}
 >
 	{#each options as option (option)}
@@ -67,10 +71,14 @@ The `tag` snippet renders the tag of a chosen option, here with an `Avatar` as i
 
 ### Button
 
-Make the input read only with `readonly` to use the TagPicker as a button that opens the list.
+Make the input read only with `inputAttributes={{ readonly: true }}` to use the TagPicker as a button that opens the list.
 
 ```svelte
-<TagPicker bind:selectedOptions placeholder="Select employees" aria-label="Select Employees" readonly>
+<TagPicker
+	bind:selectedOptions
+	placeholder="Select employees"
+	inputAttributes={{ 'aria-label': 'Select Employees', readonly: true }}
+>
 	{#each options as option (option)}
 		<TagPickerOption value={option}>{option}</TagPickerOption>
 	{/each}
@@ -82,7 +90,7 @@ Make the input read only with `readonly` to use the TagPicker as a button that o
 A disabled TagPicker cannot be opened, typed in or changed, and its tags cannot be dismissed.
 
 ```svelte
-<TagPicker disabled selectedOptions={[options[0]]} aria-label="Select Employees">
+<TagPicker disabled selectedOptions={[options[0]]} inputAttributes={{ 'aria-label': 'Select Employees' }}>
 	{#each options as option (option)}
 		<TagPickerOption value={option}>{option}</TagPickerOption>
 	{/each}
@@ -99,10 +107,12 @@ Replace the dropdown arrow with `expandIcon`, a component or a snippet, or remov
 </script>
 
 <!-- A custom icon -->
-<TagPicker bind:selectedOptions expandIcon={ArrowDownFilled} aria-label="Select Employees">...</TagPicker>
+<TagPicker bind:selectedOptions expandIcon={ArrowDownFilled} inputAttributes={{ 'aria-label': 'Select Employees' }}
+	>...</TagPicker
+>
 
 <!-- No icon -->
-<TagPicker bind:selectedOptions expandIcon={null} aria-label="Select Employees">...</TagPicker>
+<TagPicker bind:selectedOptions expandIcon={null} inputAttributes={{ 'aria-label': 'Select Employees' }}>...</TagPicker>
 ```
 
 ### Filtering
@@ -110,7 +120,11 @@ Replace the dropdown arrow with `expandIcon`, a component or a snippet, or remov
 The options are filtered as the user types, and the first match is highlighted so that Enter chooses it. `notFoundText` is shown when no option is left.
 
 ```svelte
-<TagPicker bind:selectedOptions notFoundText="We couldn't find any matches" aria-label="Select Employees">
+<TagPicker
+	bind:selectedOptions
+	notFoundText="We couldn't find any matches"
+	inputAttributes={{ 'aria-label': 'Select Employees' }}
+>
 	{#each options as option (option)}
 		<TagPickerOption value={option}>{option}</TagPickerOption>
 	{/each}
@@ -122,7 +136,7 @@ The options are filtered as the user types, and the first match is highlighted s
 Group options with `TagPickerOptionGroup`. A group with no option left on screen hides itself.
 
 ```svelte
-<TagPicker bind:selectedOptions aria-label="Select Employees">
+<TagPicker bind:selectedOptions inputAttributes={{ 'aria-label': 'Select Employees' }}>
 	<TagPickerOptionGroup label="Managers">
 		{#each managers as option (option)}
 			<TagPickerOption value={option}>{option}</TagPickerOption>
@@ -150,7 +164,7 @@ Leave out the options to get a TagPicker without a list, to let users enter thei
 	bind:selectedOptions
 	bind:value
 	placeholder="Type and press Enter"
-	aria-label="Add Employees"
+	inputAttributes={{ 'aria-label': 'Add Employees' }}
 	querySubmitted={(e, query) => {
 		if (!selectedOptions.includes(query)) selectedOptions = [...selectedOptions, query];
 		value = '';
@@ -167,7 +181,7 @@ Add a button next to the dropdown arrow with the `secondaryAction` snippet.
 	<Button appearance="subtle" onclick={() => (selectedOptions = [])}>All Clear</Button>
 {/snippet}
 
-<TagPicker bind:selectedOptions secondaryAction={allClear} aria-label="Select Employees">
+<TagPicker bind:selectedOptions secondaryAction={allClear} inputAttributes={{ 'aria-label': 'Select Employees' }}>
 	{#each options as option (option)}
 		<TagPickerOption value={option}>{option}</TagPickerOption>
 	{/each}
@@ -179,7 +193,7 @@ Add a button next to the dropdown arrow with the `secondaryAction` snippet.
 With `single` a new choice replaces the current tag and closes the list.
 
 ```svelte
-<TagPicker single bind:selectedOptions aria-label="Select Employee">
+<TagPicker single bind:selectedOptions inputAttributes={{ 'aria-label': 'Select Employee' }}>
 	{#each options as option (option)}
 		<TagPickerOption value={option}>{option}</TagPickerOption>
 	{/each}
@@ -192,7 +206,7 @@ A TagPicker is `medium` by default, or `large` or `extra-large`. The size of the
 
 ```svelte
 {#each ['medium', 'large', 'extra-large'] as size}
-	<TagPicker {size} selectedOptions={[options[0]]} aria-label={size}>
+	<TagPicker {size} selectedOptions={[options[0]]} inputAttributes={{ 'aria-label': size }}>
 		{#each options as option (option)}
 			<TagPickerOption value={option}>{option}</TagPickerOption>
 		{/each}
@@ -206,10 +220,10 @@ A tag that is wider than the control, or than its own `max-width`, shortens its 
 
 ```svelte
 {#snippet tag({ value, text })}
-	<Tag role="listitem" {value} title={text} style="max-width: 100px;">{text}</Tag>
+	<Tag {value} title={text} style="max-width: 100px;">{text}</Tag>
 {/snippet}
 
-<TagPicker bind:selectedOptions {tag} aria-label="Select Employees">
+<TagPicker bind:selectedOptions {tag} inputAttributes={{ 'aria-label': 'Select Employees' }}>
 	{#each [...longOptions, ...options] as option (option)}
 		<TagPickerOption value={option}>
 			<span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;">{option}</span>
@@ -225,27 +239,29 @@ HTML attributes, including class, id and ARIA attributes, apply to the control e
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TagPickerProps -->
 
-| Name                                                                                                 | Type                                               | Default                  | Description                                                                                                                                                   |
-| ---------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `wrapperRef` _bindable_                                                                              | `HTMLDivElement`                                   |                          | The DOM reference of the wrapper element.                                                                                                                     |
-| `ref` _bindable_                                                                                     | `HTMLInputElement`                                 |                          | The DOM reference of the input element.                                                                                                                       |
-| `selectedOptions` _bindable_                                                                         | `string[]`                                         | `[]`                     | The values of the chosen options, shown as tags in the control. A value no option has is shown as it is.                                                      |
-| `value` _bindable_                                                                                   | `string`                                           | `''`                     | The text typed in the input. It filters the options, and is cleared when one is chosen.                                                                       |
-| `open` _bindable_                                                                                    | `boolean`                                          | `false`                  | Controls the open state of the option list.                                                                                                                   |
-| `single`                                                                                             | `boolean`                                          |                          | Limits the picker to one tag: choosing an option replaces the current one and closes the list.                                                                |
-| `disabled`                                                                                           | `boolean`                                          |                          | Disables the user interaction: the input, the tags and the list.                                                                                              |
-| `size`                                                                                               | `'medium'` &#124; `'large'` &#124; `'extra-large'` | `'medium'`               | The size of the control. It also picks the size of the tags.                                                                                                  |
-| `placeholder`                                                                                        | `string`                                           |                          | The placeholder text of the input.                                                                                                                            |
-| `notFoundText`                                                                                       | `string`                                           | `'No options available'` | The message shown in place of the list when there is no option left to choose.                                                                                |
-| `expandIcon`                                                                                         | `Snippet` &#124; `Component` &#124; `null`         | `ChevronDownRegular`     | The dropdown arrow. Pass `null` to remove it.                                                                                                                 |
-| `secondaryAction`                                                                                    | `Snippet`                                          |                          | A button-like element rendered at the end of the control, before the dropdown arrow.                                                                          |
-| `tag`                                                                                                | `Snippet<[{ value: string; text: string }]>`       |                          | Renders the tag of a chosen option, to give it media or custom text. Falls back to a plain tag. Render a `Tag` with the given `value`, and `role="listitem"`. |
-| `tagGroupProps`                                                                                      | `TagGroupProps`                                    |                          | The props to spread on the group holding the tags. This is where its `aria-label` goes.                                                                       |
-| `wrapperAttributes`                                                                                  | `HTMLAttributes`                                   |                          | The attributes to spread on the wrapper element.                                                                                                              |
-| `onSelectionChange`                                                                                  | `(e: Event, selectedOptions: string[]) => void`    |                          | Called when an option is chosen, or a tag is removed.                                                                                                         |
-| `querySubmitted`                                                                                     | `(e: KeyboardEvent, query: string) => void`        |                          | Called when Enter is pressed with text in the input and no option under the cursor. This is where a free-form tag is added.                                   |
-| `children`                                                                                           | `Snippet`                                          |                          | The options. Leave it out to get a picker without a list.                                                                                                     |
-| `HTMLInputAttributes` without `value`, `type`, `role`, `size`, `disabled`, `placeholder`, `children` |                                                    |                          |                                                                                                                                                               |
+| Name                                                                                                                                     | Type                                               | Default                  | Description                                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `wrapperRef` _bindable_                                                                                                                  | `HTMLDivElement` &#124; `null`                     |                          | The DOM reference of the wrapper element.                                                                                              |
+| `ref` _bindable_                                                                                                                         | `HTMLSelectElement` &#124; `null`                  |                          | The DOM reference of the native multiple select that holds the selected options. The other attributes of the picker are applied to it. |
+| `inputRef` _bindable_                                                                                                                    | `HTMLInputElement` &#124; `null`                   |                          | The DOM reference of the text input.                                                                                                   |
+| `inputAttributes`                                                                                                                        | `HTMLInputAttributes`                              |                          | The attributes to spread on the text input.                                                                                            |
+| `selectedOptions` _bindable_                                                                                                             | `string[]`                                         | `[]`                     | The values of the chosen options, shown as tags in the control. A value no option has is shown as it is.                               |
+| `value` _bindable_                                                                                                                       | `string`                                           | `''`                     | The text typed in the input. It filters the options, and is cleared when one is chosen.                                                |
+| `open` _bindable_                                                                                                                        | `boolean`                                          | `false`                  | Controls the open state of the option list.                                                                                            |
+| `single`                                                                                                                                 | `boolean`                                          |                          | Limits the picker to one tag: choosing an option replaces the current one and closes the list.                                         |
+| `disabled`                                                                                                                               | `boolean`                                          |                          | Disables the user interaction: the input, the tags and the list.                                                                       |
+| `size`                                                                                                                                   | `'medium'` &#124; `'large'` &#124; `'extra-large'` | `'medium'`               | The size of the control. It also picks the size of the tags.                                                                           |
+| `placeholder`                                                                                                                            | `string`                                           |                          | The placeholder text of the input.                                                                                                     |
+| `notFoundText`                                                                                                                           | `string`                                           | `'No options available'` | The message shown in place of the list when there is no option left to choose.                                                         |
+| `expandIcon`                                                                                                                             | `Snippet` &#124; `Component` &#124; `null`         | `ChevronDownRegular`     | The dropdown arrow. Pass `null` to remove it.                                                                                          |
+| `secondaryAction`                                                                                                                        | `Snippet`                                          |                          | A button-like element rendered at the end of the control, before the dropdown arrow.                                                   |
+| `tag`                                                                                                                                    | `Snippet<[{ value: string; text: string }]>`       |                          | Renders the tag of a chosen option, to give it media or custom text. Falls back to a plain tag. Render a `Tag` with the given `value`. |
+| `tagGroupProps`                                                                                                                          | `TagGroupProps`                                    |                          | The props to spread on the group holding the tags. This is where its `aria-label` goes.                                                |
+| `wrapperAttributes`                                                                                                                      | `HTMLAttributes`                                   |                          | The attributes to spread on the wrapper element.                                                                                       |
+| `onSelectionChange`                                                                                                                      | `(e: Event, selectedOptions: string[]) => void`    |                          | Called when an option is chosen, or a tag is removed.                                                                                  |
+| `querySubmitted`                                                                                                                         | `(e: KeyboardEvent, query: string) => void`        |                          | Called when Enter is pressed with text in the input and no option under the cursor. This is where a free-form tag is added.            |
+| `children`                                                                                                                               | `Snippet`                                          |                          | The options. Leave it out to get a picker without a list.                                                                              |
+| `NativeFieldAttributes<Omit<HTMLSelectAttributes, 'value'` &#124; `'multiple'` &#124; `'size'` &#124; `'disabled'` &#124; `'children'>>` |                                                    |                          |                                                                                                                                        |
 
 <!-- /props:TagPickerProps -->
 
@@ -254,14 +270,14 @@ HTML attributes, including class, id and ARIA attributes, apply to the control e
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TagPickerOptionProps -->
 
-| Name                                                                     | Type            | Default | Description                                                                                                          |
-| ------------------------------------------------------------------------ | --------------- | ------- | -------------------------------------------------------------------------------------------------------------------- |
-| `value`                                                                  | `string`        |         | The value added to `selectedOptions` when the option is chosen.                                                      |
-| `text`                                                                   | `string`        |         | The text the option is filtered by, and the text of its tag. Falls back to `value`.                                  |
-| `id`                                                                     | `string`        |         | The id of the option element, referenced by the input through `aria-activedescendant`. Falls back to a generated id. |
-| `ref` _bindable_                                                         | `HTMLLIElement` |         | The DOM reference of the option element.                                                                             |
-| `disabled`                                                               | `boolean`       |         | Takes the option out of reach: it is shown, but the cursor steps over it.                                            |
-| `ListViewItemProps<'li'>` without `as`, `value`, `onAction`, `checkmark` |                 |         |                                                                                                                      |
+| Name                                                                     | Type                          | Default | Description                                                                                                          |
+| ------------------------------------------------------------------------ | ----------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------- |
+| `value`                                                                  | `string`                      |         | The value added to `selectedOptions` when the option is chosen.                                                      |
+| `text`                                                                   | `string`                      |         | The text the option is filtered by, and the text of its tag. Falls back to `value`.                                  |
+| `id`                                                                     | `string`                      |         | The id of the option element, referenced by the input through `aria-activedescendant`. Falls back to a generated id. |
+| `ref` _bindable_                                                         | `HTMLLIElement` &#124; `null` |         | The DOM reference of the option element.                                                                             |
+| `disabled`                                                               | `boolean`                     |         | Takes the option out of reach: it is shown, but the cursor steps over it.                                            |
+| `ListViewItemProps<'li'>` without `as`, `value`, `onAction`, `checkmark` |                               |         |                                                                                                                      |
 
 <!-- /props:TagPickerOptionProps -->
 
@@ -270,13 +286,13 @@ HTML attributes, including class, id and ARIA attributes, apply to the control e
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TagPickerOptionGroupProps -->
 
-| Name                                                  | Type               | Default | Description                                      |
-| ----------------------------------------------------- | ------------------ | ------- | ------------------------------------------------ |
-| `label`                                               | `string`           |         | The label of the group.                          |
-| `ref` _bindable_                                      | `HTMLUListElement` |         | The DOM reference of the group element.          |
-| `children`                                            | `Snippet`          |         | The options of the group.                        |
-| `wrapperAttributes`                                   | `HTMLAttributes`   |         | The attributes to spread on the wrapper element. |
-| `wrapperRef` _bindable_                               | `HTMLLIElement`    |         | The DOM reference of the wrapper element.        |
-| `HTMLAttributes<HTMLUListElement>` without `children` |                    |         |                                                  |
+| Name                                                  | Type                             | Default | Description                                      |
+| ----------------------------------------------------- | -------------------------------- | ------- | ------------------------------------------------ |
+| `label`                                               | `string`                         |         | The label of the group.                          |
+| `ref` _bindable_                                      | `HTMLUListElement` &#124; `null` |         | The DOM reference of the group element.          |
+| `children`                                            | `Snippet`                        |         | The options of the group.                        |
+| `wrapperAttributes`                                   | `HTMLAttributes`                 |         | The attributes to spread on the wrapper element. |
+| `wrapperRef` _bindable_                               | `HTMLLIElement` &#124; `null`    |         | The DOM reference of the wrapper element.        |
+| `HTMLAttributes<HTMLUListElement>` without `children` |                                  |         |                                                  |
 
 <!-- /props:TagPickerOptionGroupProps -->

@@ -17,7 +17,7 @@
   {#snippet media()}
     <Avatar aria-hidden="true" name={text} size={16} color="colorful" />
   {/snippet}
-  <Tag role="listitem" {value} {media} title={text}>{text}</Tag>
+  <Tag {value} {media} title={text}>{text}</Tag>
 {/snippet}
 
 <Showcase columns={1} minHeight="0" disablePanZoom showOverflow>
@@ -25,7 +25,7 @@
     <TagPicker
       bind:selectedOptions
       {tag}
-      aria-label="Select Employees"
+      inputAttributes={{ 'aria-label': 'Select Employees' }}
       tagGroupProps={{ 'aria-label': 'Selected Employees' }}
     >
       {#each options as option (option)}
@@ -51,7 +51,7 @@
 
 <TagPicker
 	bind:selectedOptions
-	aria-label="Select Employees"
+	inputAttributes={{ 'aria-label': 'Select Employees' }}
 	tagGroupProps={{ 'aria-label': 'Selected Employees' }}
 >
 	{#each options as option (option)}

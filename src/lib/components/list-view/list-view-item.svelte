@@ -82,13 +82,16 @@
 			: undefined
 	);
 	const cellAttrs = $derived(cellConfig && getTabspotAttributes(cellConfig));
+	// A roving list has one tab stop. Tabspot sets it on mount, so the server HTML gives it to the first item, as Tabspot will.
+	// svelte-ignore state_referenced_locally
+	const holdsTabStop = !CONTEXT.config.roving || (interactive && !disabled && CONTEXT.methods.claimTabStop(ID));
 	const focusAttributes = $derived(
 		nativeAction
 			? disabled && as === 'a'
 				? { tabindex: -1 }
 				: {}
 			: interactive && !tabspotDisabled
-				? { tabindex: disabled ? -1 : 0 }
+				? { tabindex: disabled || !holdsTabStop ? -1 : 0 }
 				: {}
 	);
 

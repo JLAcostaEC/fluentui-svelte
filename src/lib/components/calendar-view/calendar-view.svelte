@@ -46,6 +46,7 @@
 		blackoutBreaksRange,
 		minDate,
 		maxDate,
+		today,
 		locale = 'en-US',
 		weekStart = 1,
 		blackoutDates,
@@ -65,7 +66,9 @@
 
 	let pageAnimationDuration = $state(333);
 
-	let firstValue = $derived(Array.isArray(value) ? value[0] : (value ?? new Date()));
+	const _today = $derived(today ?? new Date());
+
+	let firstValue = $derived(Array.isArray(value) ? value[0] : (value ?? _today));
 
 	// svelte-ignore state_referenced_locally
 	let page = $state(
@@ -204,6 +207,9 @@
 			},
 			get maxDate() {
 				return maxDate;
+			},
+			get today() {
+				return _today;
 			},
 			get locale() {
 				return locale;

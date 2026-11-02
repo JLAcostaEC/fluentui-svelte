@@ -99,6 +99,10 @@ export type CalendarViewProps = {
 	minDate?: Date;
 	/** The latest selectable date. */
 	maxDate?: Date;
+	/** The date the view treats as today: it is highlighted, and the view opens on its month when there is no `value`. Pass it when rendering on the server, so that the server and the browser agree on the day.
+	 * @default new Date()
+	 */
+	today?: Date;
 	/** The calendar page the view opens on.
 	 * @default 'days'
 	 */
@@ -129,6 +133,7 @@ export type CalendarViewContext = FSContext<
 		weekStart: number;
 		minDate?: Date;
 		maxDate?: Date;
+		today: Date;
 		headers?: boolean;
 		blackoutDates?: Date[];
 		selectionMode: CalendarSelectionMode;

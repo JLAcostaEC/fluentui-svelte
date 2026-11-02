@@ -1,5 +1,6 @@
 import { createFSContext } from '$internal';
-import type { SvelteMap, SvelteSet } from 'svelte/reactivity';
+import { SvelteSet } from 'svelte/reactivity';
+import type { SvelteMap } from 'svelte/reactivity';
 import type { TreeViewContext, TreeViewItemContext, TreeViewNode } from './types.js';
 
 export const [getTreeViewContext, setTreeViewContext] = createFSContext<TreeViewContext>();
@@ -115,6 +116,11 @@ export function traversalSync(
 		bubbleCheck(node.id, state, checked, isIndeterminate);
 	}
 
+	syncCheckedItems(state, iterable);
+}
+
+/** Writes the ids of the checked nodes into the set or array of the tree. */
+function syncCheckedItems(state: SvelteMap<string, TreeViewNode>, iterable: SvelteSet<string> | Array<string>) {
 	const checkedItems = Array.from(state.values()).filter((n) => n.checked);
 
 	if (iterable instanceof Set) {
@@ -126,6 +132,21 @@ export function traversalSync(
 		iterable.length = 0;
 		iterable.push(...checkedItems.map(({ id }) => id));
 	}
+}
+
+/**
+ * Gives each branch the state its checked descendants imply, as a click would: a tree can start
+ * with only some of the items of a branch checked. The set or array is written only if it changes.
+ */
+export function syncBranchStates(state: SvelteMap<string, TreeViewNode>, iterable: SvelteSet<string> | Array<string>) {
+	const before = new SvelteSet(iterable);
+
+	for (const node of Array.from(state.values())) {
+		if (node.checked && node.parentId) bubbleCheck(node.id, state, true);
+	}
+
+	const after = Array.from(state.values()).filter((n) => n.checked);
+	if (after.length !== before.size || after.some(({ id }) => !before.has(id))) syncCheckedItems(state, iterable);
 }
 
 export function traversalSyncSingleSelection(

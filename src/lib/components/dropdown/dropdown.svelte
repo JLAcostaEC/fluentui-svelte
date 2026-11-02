@@ -4,10 +4,10 @@
 	import { onClickOutside } from 'runed';
 	import ChevronDownFilled from 'fluentui-icons-svelte/ChevronDownFilled.svelte';
 	import { Flyout, ListView, ListViewItem } from '$lib/index.js';
-	import type { DropdownContext, DropdownProps } from './types.ts';
+	import type { DropdownContext, DropdownOptionLabel, DropdownProps } from './types.ts';
 	import { tick } from 'svelte';
-	import { SvelteMap } from 'svelte/reactivity';
-	import { setTabspotActive, setTabspotAttributes, unsetTabspotSection } from 'tabspot';
+	import { SvelteSet } from 'svelte/reactivity';
+	import { clearTabspotActive, setTabspotActive, setTabspotAttributes, unsetTabspotSection } from 'tabspot';
 	import { PREFIX } from '../../internal/constants.ts';
 	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { setDropdownContext } from './dropdown-context.ts';
@@ -56,16 +56,19 @@
 
 	const OPEN_KEYS = ['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'Enter', ' '];
 
-	// Options only mount while the flyout is open, so we cache the last-known text
-	// for every value here to keep rendering the selection once the list is closed.
-	const optionLabels = new SvelteMap<string, string>();
+	// The list stays in the page while closed, so every option is here from the start, and is read live.
+	const options = new SvelteSet<DropdownOptionLabel>();
+	const optionLabels = $derived(new Map([...options].map((option) => [option.value, option.text])));
 
 	const context: DropdownContext = $state({
 		config: null,
 		state: null,
 		events: null,
 		methods: {
-			registerOption: (optionValue: string, text: string) => optionLabels.set(optionValue, text)
+			registerOption: (option) => {
+				options.add(option);
+				return () => options.delete(option);
+			}
 		}
 	});
 
@@ -156,6 +159,8 @@
 		if (!wrapperRef) return;
 
 		if (!open) {
+			// The list stays in the page once closed: nothing in it reads as chosen.
+			clearTabspotActive(wrapperRef);
 			unsetTabspotSection(wrapperRef, 'root');
 			return;
 		}
@@ -188,6 +193,47 @@
 	class={['fs-dropdown', `square-${roundClass}`, { open, disabled }, wrapperAttributes?.class]}
 	bind:this={wrapperRef}
 >
+	<!-- Hidden while closed, not gone: each option reports its text as it is created, and comes before
+	     the button, so the button shows it before the list ever opens, on the server too. -->
+	<Flyout
+		{...flyoutProps}
+		hidden={!open}
+		style="{flyoutProps?.style ?? ''}; {flyoutMaxHeight ? `max-height: ${flyoutMaxHeight};` : ''}"
+		offset={0}
+		bind:ref={flyoutRef}
+		floating
+		roundCorners="bottom"
+		reference={wrapperRef ?? undefined}
+		id={`${id}-flyout`}
+		onPlacementChange={(place) => {
+			handlePlacementChange(place);
+			flyoutProps?.onPlacementChange?.(place);
+		}}
+		placementConfig={{ allowedPlacements: ['bottom', 'top'] }}
+		class="fs-dropdown-flyout {roundClass === 'top' ? 'top-shadow' : ''} {flyoutProps?.class}"
+	>
+		<ListView
+			{...listboxProps}
+			bind:ref={listboxRef}
+			bind:selectedItems={() => selectedValues, select}
+			selectionMode={multiple ? 'multiselect' : 'single'}
+			toggleOnClick={multiple}
+			onSelectionChange={(event, selected) => {
+				if (!multiple) closeDropdown();
+				listboxProps?.onSelectionChange?.(event, selected);
+			}}
+			navigationMode="items"
+			id={`${id}-listbox`}
+			role="listbox"
+			disableTabspot
+		>
+			{#if !children}
+				<ListViewItem disabled>No options available</ListViewItem>
+			{:else}
+				{@render children?.()}
+			{/if}
+		</ListView>
+	</Flyout>
 	<ChevronDownFilled class="indicator" />
 	<button
 		{...buttonAttributes}
@@ -249,47 +295,6 @@
 				<option {value}>{displayLabel}</option>
 			{/if}
 		</select>
-	{/if}
-
-	{#if open}
-		<Flyout
-			{...flyoutProps}
-			style="{flyoutProps?.style ?? ''}; {flyoutMaxHeight ? `max-height: ${flyoutMaxHeight};` : ''}"
-			offset={0}
-			bind:ref={flyoutRef}
-			floating
-			roundCorners="bottom"
-			reference={wrapperRef}
-			id={`${id}-flyout`}
-			onPlacementChange={(place) => {
-				handlePlacementChange(place);
-				flyoutProps?.onPlacementChange?.(place);
-			}}
-			placementConfig={{ allowedPlacements: ['bottom', 'top'] }}
-			class="fs-dropdown-flyout {roundClass === 'top' ? 'top-shadow' : ''} {flyoutProps?.class}"
-		>
-			<ListView
-				{...listboxProps}
-				bind:ref={listboxRef}
-				bind:selectedItems={() => selectedValues, select}
-				selectionMode={multiple ? 'multiselect' : 'single'}
-				toggleOnClick={multiple}
-				onSelectionChange={(event, selected) => {
-					if (!multiple) closeDropdown();
-					listboxProps?.onSelectionChange?.(event, selected);
-				}}
-				navigationMode="items"
-				id={`${id}-listbox`}
-				role="listbox"
-				disableTabspot
-			>
-				{#if !children}
-					<ListViewItem disabled>No options available</ListViewItem>
-				{:else}
-					{@render children?.()}
-				{/if}
-			</ListView>
-		</Flyout>
 	{/if}
 </div>
 

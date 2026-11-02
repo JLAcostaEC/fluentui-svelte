@@ -22,6 +22,12 @@ const DAY_MS = 86_400_000;
  * `range` or a `value` carrying a time, and a range must not change meaning because
  * one of its ends happens to be half past two.
  */
+/** The local calendar date of a cell as `yyyy-mm-dd`: unlike a timestamp, the server and the browser agree on it. */
+export function dateKey(date: Date) {
+	const pad = (n: number) => String(n).padStart(2, '0');
+	return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
+
 export function startOfDay(date: Date) {
 	return new SvelteDate(date.getFullYear(), date.getMonth(), date.getDate());
 }

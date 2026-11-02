@@ -133,6 +133,12 @@ describe('interaction', () => {
 });
 
 describe('checkbox', () => {
+	it('shows a branch as mixed when only some of its items start checked', async () => {
+		render(TreeViewTestWrapper, { appleChecked: true });
+		const fruits = page.selector('li[role="treeitem"][id="fruits"]');
+		await expect.element(fruits).toHaveAttribute('aria-checked', 'mixed');
+	});
+
 	const checkbox = (id: string) => page.selector(`li[data-value="${id}"] > .fs-tree-view-item-content .fs-checkbox`);
 
 	it('checks the item with a single click', async () => {

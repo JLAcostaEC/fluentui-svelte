@@ -168,6 +168,8 @@ export type TreeViewContext = FSContext<
 		readonly openItems: NonNullable<TreeViewProps['openItems']>;
 		readonly checkedItems: NonNullable<TreeViewProps['checkedItems']>;
 		readonly TREE_NODES: SvelteMap<string, TreeViewNode>;
+		/** The item that holds the tab stop in the server HTML, before Tabspot runs. */
+		readonly tabStop: { id: string | null };
 		forceVirtualRender: boolean;
 	},
 	{

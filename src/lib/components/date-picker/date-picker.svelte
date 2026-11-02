@@ -105,9 +105,11 @@
 
 	// Working selection (actual values). Kept in sync with `value` while the popup is closed,
 	// so each open starts from the committed value and Cancel/dismiss discards edits.
-	let month = $state(new Date().getMonth()); // 0-11
-	let day = $state(new Date().getDate()); // 1-31 (raw intent; clamped for display via effectiveDay)
-	let year = $state(new Date().getFullYear());
+	// It starts from `value`, so a popup rendered open on the server shows it too.
+	const initial = parseValue(value);
+	let month = $state(initial.mo); // 0-11
+	let day = $state(initial.d); // 1-31 (raw intent; clamped for display via effectiveDay)
+	let year = $state(initial.y);
 
 	// Descending list of selectable years within [minYear, maxYear].
 	const yearsList = $derived(Array.from({ length: Math.max(0, maxYear - minYear) + 1 }, (_, i) => maxYear - i));

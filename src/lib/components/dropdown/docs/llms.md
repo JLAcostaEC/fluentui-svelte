@@ -83,9 +83,9 @@ HTML attributes, including class, id and ARIA attributes, apply to the control e
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DropdownOptionProps -->
 
-| Name                      | Type     | Default | Description                                                                                      |
-| ------------------------- | -------- | ------- | ------------------------------------------------------------------------------------------------ |
-| `text`                    | `string` |         | The text shown by the dropdown once the option is selected. Falls back to the rendered children. |
-| `ListViewItemProps<'li'>` |          |         |                                                                                                  |
+| Name                      | Type     | Default | Description                                                                                                                                                          |
+| ------------------------- | -------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `text`                    | `string` |         | The text shown by the dropdown once the option is selected. Falls back to the rendered children, which the server cannot read: pass it when rendering on the server. |
+| `ListViewItemProps<'li'>` |          |         |                                                                                                                                                                      |
 
 <!-- /props:DropdownOptionProps -->

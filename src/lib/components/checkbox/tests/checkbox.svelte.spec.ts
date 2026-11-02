@@ -65,6 +65,15 @@ describe('indeterminate state', () => {
 		const input = page.getByRole('checkbox');
 		expect((input.element() as HTMLInputElement).indeterminate).toBe(true);
 	});
+
+	it('clears the mixed state, attribute included, when it is clicked', async () => {
+		render(Checkbox, { indeterminate: true, 'aria-label': 'Mixed' });
+		const input = page.getByRole('checkbox');
+		await expect.element(input).toHaveAttribute('data-indeterminate');
+		await input.click();
+		await expect.element(input).not.toHaveAttribute('data-indeterminate');
+		expect((input.element() as HTMLInputElement).indeterminate).toBe(false);
+	});
 });
 
 describe('disabled state', () => {

@@ -93,7 +93,7 @@
 		hidden={!opened}
 		onmouseleave={openOnHover ? (e: MouseEvent) => debounced(e) : undefined}
 		{@attach opened && ref ? floating(ref, config) : undefined}
-		style={`--position=${isSubMenu ? 'absolute' : 'fixed'} --min-width=${isRefAnElement && !isSubMenu ? `${boundingElement.rect.width}px` : 'max-content'}`}
+		style={`--min-width: ${isRefAnElement && !isSubMenu ? `${boundingElement.rect.width}px` : 'max-content'};`}
 		in:flyToOffset={opened && isRefAnElement
 			? {
 					...getIntroTransition({ config, anchor: boundingElement.rect, element, ref, isSubMenu }),
@@ -111,7 +111,8 @@
 
 <style>
 	.fs-menu-popover {
-		position: var(--position, fixed);
+		/* Fixed for submenus too: floating-ui places every popover with the fixed strategy. */
+		position: fixed;
 		top: 0;
 		left: 0;
 		width: max-content;

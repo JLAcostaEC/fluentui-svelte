@@ -71,6 +71,9 @@
 		getItem: () => { value: string; disabled: boolean; element: HTMLElement | null };
 	}[] = $state([]);
 
+	// The item that holds the tab stop in the server HTML, before Tabspot runs. Plain, since only the first render reads it.
+	let tabStopId: string | null = null;
+
 	const CONTEXT: ListViewContext = $state({
 		config: {
 			get shape() {
@@ -87,6 +90,9 @@
 			},
 			get disableTabspot() {
 				return tabspotDisabled;
+			},
+			get roving() {
+				return !parent && navigationMode === 'composite';
 			}
 		},
 		state: {
@@ -105,6 +111,7 @@
 		},
 		events: null,
 		methods: {
+			claimTabStop: (id) => (tabStopId ??= id) === id,
 			handleSelection: (e: MouseEvent, value: string, toggle = false) => {
 				if (selectionMode === 'none') return;
 

@@ -91,6 +91,9 @@ export type TagPickerProps = {
 
 export type OptionType = { id: string; value: string; disabled?: boolean };
 
+/** What an option tells its tag, read live. */
+export type OptionLabel = { readonly value: string; readonly text: string };
+
 export type TagPickerContext = FSContext<
 	null,
 	{
@@ -100,8 +103,8 @@ export type TagPickerContext = FSContext<
 	},
 	null,
 	{
-		/** Remembers what the tag of `value` says. Every option calls it, on screen or not. */
-		setLabel: (value: string, text: string) => void;
+		/** Tells the tag of an option what to say. Every option calls it, on screen or not. Returns the call that withdraws the option. */
+		registerLabel: (option: OptionLabel) => () => void;
 		setOption: (option: OptionType) => void;
 		deleteOption: (id: string) => void;
 		chooseOption: (e: Event, id: string) => void;

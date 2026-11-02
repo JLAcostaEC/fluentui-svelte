@@ -43,7 +43,7 @@ describe('rendering', () => {
 		await expect.element(el).toHaveAttribute('aria-controls', list().getByRole('listbox').element().id);
 	});
 
-	it('is initially collapsed (no options in the DOM)', async () => {
+	it('is initially collapsed (no options on screen)', async () => {
 		render(DropdownTestWrapper);
 		const option = list().getByRole('option');
 		await expect.element(option.first()).not.toBeInTheDocument();
@@ -58,13 +58,16 @@ describe('opening', () => {
 		await expect.element(list().getByRole('option', { name: 'Apple' })).toBeInTheDocument();
 	});
 
-	it('closes on Escape', async () => {
+	it('closes on Escape and stops announcing an active option', async () => {
 		render(DropdownTestWrapper);
 		const combobox = trigger();
 		await combobox.click();
 		await expect.element(combobox).toHaveAttribute('aria-expanded', 'true');
+		await expect.element(combobox).toHaveAttribute('aria-activedescendant');
 		await userEvent.keyboard('{Escape}');
 		await expect.element(combobox).toHaveAttribute('aria-expanded', 'false');
+		await expect.element(combobox).not.toHaveAttribute('aria-activedescendant');
+		expect(document.querySelector('.fs-dropdown-flyout [data-active]')).toBeNull();
 	});
 
 	it('shows "No options available" when there are no options', async () => {
@@ -97,13 +100,10 @@ describe('single selection', () => {
 		await expect.element(combobox).toHaveFocus();
 	});
 
-	it('shows the label for an initially selected value', async () => {
+	it('shows the label for an initially selected value, before the list ever opens', async () => {
 		render(DropdownTestWrapper, { value: 'cherry' });
-		// options only mount while open, so open once to let the option register its label
-		const combobox = trigger();
-		await combobox.click();
-		await list().getByRole('option', { name: 'Cherry' }).click();
-		await expect.element(combobox).toHaveTextContent('Cherry');
+		await expect.element(trigger()).toHaveTextContent('Cherry');
+		await expect.element(trigger()).toHaveAttribute('aria-expanded', 'false');
 	});
 
 	it('starts the cursor on the first option when nothing is selected', async () => {

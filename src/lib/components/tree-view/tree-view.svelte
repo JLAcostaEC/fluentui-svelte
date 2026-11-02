@@ -9,6 +9,7 @@
 		setTreeViewContext,
 		setTreeViewDepth,
 		getTreeViewItemContext,
+		syncBranchStates,
 		traversalSync,
 		traversalSyncSingleSelection
 	} from './tree-view.svelte.ts';
@@ -16,6 +17,7 @@
 
 	const CONTEXT = getTreeViewContext();
 	const TREE_NODES = new SvelteMap<string, TreeViewNode>();
+	const TAB_STOP: { id: string | null } = { id: null };
 	const DEPTH = getTreeViewDepth() || 0;
 	const ITEM_CONTEXT = getTreeViewItemContext();
 	const IS_SUB_TREE = $derived(!!CONTEXT);
@@ -66,6 +68,9 @@
 			},
 			get TREE_NODES() {
 				return CONTEXT?.state.TREE_NODES ?? TREE_NODES;
+			},
+			get tabStop() {
+				return CONTEXT?.state.tabStop ?? TAB_STOP;
 			},
 			get forceVirtualRender() {
 				return CONTEXT?.state.forceVirtualRender ?? forceVirtualRender;
@@ -197,6 +202,14 @@
 	};
 
 	// Add tabspot virtualizer for correct focus management
+	// Once every item is registered, the branches show what their checked descendants imply. A
+	// virtualized tree registers only the rows on screen, so it would judge a branch on a part of it.
+	onMount(async () => {
+		if (IS_SUB_TREE || virtualizer || selectionMode === 'single') return;
+		await tick();
+		syncBranchStates(TREE_NODES, checkedItems);
+	});
+
 	onMount(() => {
 		if (!IS_SUB_TREE || !ref || !virtualizer) return;
 		return tabspotVirtual(ref, {

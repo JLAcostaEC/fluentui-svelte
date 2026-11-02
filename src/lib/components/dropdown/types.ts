@@ -79,16 +79,22 @@ export type DropdownProps = {
 
 /** @propsmith DropdownOptionProps */
 export type DropdownOptionProps = {
-	/** The text shown by the dropdown once the option is selected. Falls back to the rendered children. */
+	/** The text shown by the dropdown once the option is selected. Falls back to the rendered children, which the server cannot read: pass it when rendering on the server. */
 	text?: string;
 } & ListViewItemProps<'li'>;
+
+/** What an option tells the trigger, read live. */
+export type DropdownOptionLabel = {
+	readonly value?: string;
+	readonly text?: string;
+};
 
 export type DropdownContext = FSContext<
 	null,
 	null,
 	null,
 	{
-		/** Options report their display text so the trigger can show a label instead of the raw value. */
-		registerOption: (value: string, text: string) => void;
+		/** Options report their display text so the trigger can show a label instead of the raw value. Returns the call that withdraws the option. */
+		registerOption: (option: DropdownOptionLabel) => () => void;
 	}
 >;

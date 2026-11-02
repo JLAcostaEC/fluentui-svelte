@@ -31,6 +31,7 @@
 		headers,
 		maxDate,
 		minDate,
+		today,
 		weekStart,
 		onChange,
 		id = labelContext?.fieldId,
@@ -176,6 +177,7 @@
 			{headers}
 			{maxDate}
 			{minDate}
+			{today}
 			{weekStart}
 		/>
 	{/if}

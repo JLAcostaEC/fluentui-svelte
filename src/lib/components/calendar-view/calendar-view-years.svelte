@@ -4,6 +4,7 @@
 	import CalendarViewItem from './calendar-view-item.svelte';
 	import {
 		compareDates,
+		dateKey,
 		getCalendarViewContext,
 		getCalendarYears,
 		indexOfDate,
@@ -123,11 +124,11 @@
 						{selected}
 						variant="monthYear"
 						outOfRange={!inDecade}
-						current={compareDates(year, new Date(), 'year')}
+						current={compareDates(year, CalendarContext.config.today, 'year')}
 						buttonAttributes={{
 							tabindex: firstFocusableYear && compareDates(firstFocusableYear, year, 'year') ? 0 : -1,
 							'aria-label': yearLabel(year),
-							'data-date': year.getTime(),
+							'data-date': dateKey(year),
 							onclick: (e: MouseEvent) => {
 								selectYear(e, year);
 							}

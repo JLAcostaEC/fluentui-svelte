@@ -113,6 +113,10 @@
 		});
 	}
 
+	// Tabspot sets the tab stop of the tree on mount; until then the server HTML gives it to the first
+	// enabled item, as Tabspot will, so the tree can be reached with Tab.
+	const holdsTabStop = $derived(!itemState.disabled && (context.state.tabStop.id ??= id) === id);
+
 	const isBranch = $derived(type === 'branch');
 	const isVirtualRoot = $derived(config.virtualized && !itemContext);
 
@@ -170,6 +174,7 @@
 	class={['fs-tree-view-item', `fs-tree-item-size-${size}`, { open }, attributes?.class]}
 	style="{attributes?.style ?? ''}; --depth: {depth}"
 	role="treeitem"
+	tabindex={holdsTabStop ? 0 : undefined}
 	aria-expanded={type === 'branch' ? open : undefined}
 	aria-checked={indeterminate ? 'mixed' : checked}
 	aria-level={depth + 1}

@@ -3,7 +3,9 @@
 	import { Button } from '#lib/index.js';
 	import { shiftBackground } from '#site/utils/shift.js';
 	import { m } from '#i18n/messages.js';
-	import { mode } from 'mode-watcher';
+	import banner from '#site/assets/images/banner.png?w=800;400&enhanced';
+	import bannerWhite from '#site/assets/images/banner-white.png?w=800;400&enhanced';
+	import ThemedImage from '#site/components/themed-image/themed-image.svelte';
 	import { localizeHref } from '../i18n/runtime.js';
 	import Seo from '#site/components/seo/seo.svelte';
 </script>
@@ -19,12 +21,15 @@
 <!-- shift background effect -->
 <div class="bg-effect" aria-hidden="true" {@attach shiftBackground}></div>
 <section id="banner">
-	<picture>
-		{#if mode.current === 'dark'}
-			<source srcset="/images/banner-white.png" type="image/png" />
-		{/if}
-		<img src="/images/banner.png" alt="Logo" class="logo" />
-	</picture>
+	<ThemedImage
+		light={banner}
+		dark={bannerWhite}
+		alt="Logo"
+		class="logo"
+		sizes="(max-width: 480px) 280px, (max-width: 1024px) 340px, 400px"
+		loading="eager"
+		fetchpriority="high"
+	/>
 	<h1 class="title">{m.home_title()}</h1>
 	<p>
 		{m.global_library_description()}
@@ -55,7 +60,7 @@
 		gap: 1rem;
 		padding: 0 4rem 8rem 2rem;
 		z-index: 1;
-		& .logo {
+		& :global(.logo) {
 			width: 100%;
 			max-width: 400px;
 			height: auto;
@@ -101,7 +106,7 @@
 			align-items: center;
 			text-align: center;
 			padding: 2rem 2rem 1.5rem;
-			& .logo {
+			& :global(.logo) {
 				max-width: 340px;
 			}
 			& p {
@@ -127,7 +132,7 @@
 		#banner {
 			gap: 0.75rem;
 			padding: 1.5rem 1rem 1rem;
-			& .logo {
+			& :global(.logo) {
 				max-width: 280px;
 			}
 			& .title {

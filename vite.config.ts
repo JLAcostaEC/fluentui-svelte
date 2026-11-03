@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitest/config';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { enhancedImages } from '@sveltejs/enhanced-img';
 import { playwright } from '@vitest/browser-playwright';
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import rehypeSlug from 'rehype-slug';
@@ -34,6 +35,7 @@ const propsmithI18nMarkup = {
 
 export default defineConfig({
 	plugins: [
+		enhancedImages(), // must come before the SvelteKit plugin
 		sveltekit({
 			compilerOptions: {
 				// Force runes mode for the project, except for libraries. Can be removed in svelte 6.
@@ -72,6 +74,8 @@ export default defineConfig({
 				})
 			],
 			adapter: adapter(),
+			// Every docs page pulls many small component stylesheets; inlining them avoids a render-blocking request each.
+			inlineStyleThreshold: 10_000,
 			extensions: ['.svelte', '.svx']
 		}),
 		paraglideVitePlugin({

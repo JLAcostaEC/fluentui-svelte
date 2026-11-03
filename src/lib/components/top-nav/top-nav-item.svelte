@@ -1,5 +1,5 @@
 <script lang="ts" generics="T extends TopNavItemGenerics = 'button'">
-	import { invokeHandlers, RenderSoC } from '$internal';
+	import { invokeHandlers, RenderSoC } from '#internal';
 	import { COMPONENT_NAME, requireTopNavContext } from './top-nav.svelte.ts';
 	import type { TopNavItemElementDOMType, TopNavItemGenerics, TopNavItemProps } from './types.ts';
 

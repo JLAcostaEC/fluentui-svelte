@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { pxToRem, capitalize, RenderSoC } from '$internal';
+	import { pxToRem, capitalize, RenderSoC } from '#internal';
 	import { colors, getIconBadge } from './utils.svelte.ts';
 	import type { BadgeIconProps } from './types.ts';
 

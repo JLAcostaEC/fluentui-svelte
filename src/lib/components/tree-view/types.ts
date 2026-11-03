@@ -1,8 +1,8 @@
 import type { HTMLAttributes } from 'svelte/elements';
-import type { FSContext } from '$internal';
+import type { FSContext } from '#internal';
 import type { Component, Snippet } from 'svelte';
 import type { SvelteMap, SvelteSet } from 'svelte/reactivity';
-import type { Sizes } from '$types';
+import type { Sizes } from '#types';
 
 export type TreeViewNavigation = 'tree' | 'treegrid';
 export type TreeViewSelectionMode = 'single' | 'multiple';

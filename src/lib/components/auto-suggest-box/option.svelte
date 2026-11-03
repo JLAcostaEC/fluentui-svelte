@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { invokeHandlers } from '$internal';
-	import { PREFIX } from '$constants';
-	import ListViewItem from '$lib/components/list-view/list-view-item.svelte';
+	import { invokeHandlers } from '#internal';
+	import { PREFIX } from '#constants';
+	import ListViewItem from '#lib/components/list-view/list-view-item.svelte';
 	import { getAutoSuggestBoxContext } from './auto-suggest-box.ts';
 	import type { AutoSuggestOptionProps } from './types.ts';
 

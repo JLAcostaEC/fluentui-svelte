@@ -1,12 +1,12 @@
 <script lang="ts">
-	import ComponentsFlyout from '$site/components/components-flyout/components-flyout.svelte';
-	import { Button } from '$lib/index.js';
-	import { setup, resize } from '$site/utils/shift.js';
+	import ComponentsFlyout from '#site/components/components-flyout/components-flyout.svelte';
+	import { Button } from '#lib/index.js';
+	import { setup, resize } from '#site/utils/shift.js';
 	import { on } from 'svelte/events';
-	import { m } from '$i18n/messages.js';
+	import { m } from '#i18n/messages.js';
 	import { mode } from 'mode-watcher';
 	import { localizeHref } from '../i18n/runtime.js';
-	import Seo from '$site/components/seo/seo.svelte';
+	import Seo from '#site/components/seo/seo.svelte';
 
 	$effect(() => {
 		let off: () => void;

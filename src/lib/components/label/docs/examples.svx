@@ -1,9 +1,9 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import QuestionCircleRegular from 'fluentui-icons-svelte/QuestionCircleRegular.svelte';
-  import { Label, TextBox, Checkbox, RadioButton, ToggleSwitch, Dropdown, DropdownOption } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
+  import { Label, TextBox, Checkbox, RadioButton, ToggleSwitch, Dropdown, DropdownOption } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
 
   const sizeCode = `
 <Label size="small" label="Small"><TextBox /></Label>

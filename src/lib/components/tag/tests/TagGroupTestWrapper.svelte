@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { FluentUISvelte, Tag, TagGroup } from '$lib/index.js';
-	import type { TagGroupProps, TagProps } from '$lib/components/tag/types.js';
+	import { FluentUISvelte, Tag, TagGroup } from '#lib/index.js';
+	import type { TagGroupProps, TagProps } from '#lib/components/tag/types.js';
 
 	type Item = { value: string; text: string; props?: Partial<TagProps> };
 

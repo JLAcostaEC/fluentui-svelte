@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { Divider } from '$lib/index.js';
+import { Divider } from '#lib/index.js';
 import DividerTestWrapper from './DividerTestWrapper.svelte';
 
 const separator = () => page.getByRole('separator');

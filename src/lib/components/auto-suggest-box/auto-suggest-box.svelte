@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { claimLabel } from '../label/label-context.ts';
+	import { claimLabel } from '../label/label-context.js';
 	import { onMount, tick } from 'svelte';
 	import { SvelteMap } from 'svelte/reactivity';
 	import { on } from 'svelte/events';
 	import { onClickOutside } from 'runed';
-	import { invokeHandlers } from '$internal';
-	import { PREFIX } from '$constants';
-	import { setAutoSuggestBoxContext } from './auto-suggest-box.ts';
-	import { Flyout, TextBox, ListView, ListViewItem } from '$lib/index.js';
+	import { invokeHandlers } from '#internal';
+	import { PREFIX } from '#constants';
+	import { setAutoSuggestBoxContext } from './auto-suggest-box.js';
+	import { Flyout, TextBox, ListView, ListViewItem } from '#lib/index.js';
 	import {
 		clearTabspotActive,
 		setTabspotActive,
@@ -16,8 +16,8 @@
 		type TabspotNavigationEvent,
 		type TabspotNodeOptions
 	} from 'tabspot';
-	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
-	import type { AutoSuggestBoxContext, AutoSuggestBoxProps, OptionType } from './types.ts';
+	import { getGlobalFSContext } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import type { AutoSuggestBoxContext, AutoSuggestBoxProps, OptionType } from './types.js';
 
 	const FALLBACK_ID = $props.id();
 	const ID = `${PREFIX}autosuggestbox-${FALLBACK_ID}`;

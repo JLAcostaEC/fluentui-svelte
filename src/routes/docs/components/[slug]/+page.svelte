@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { ConfigDocs } from '$types';
-	import Seo from '$site/components/seo/seo.svelte';
+	import type { ConfigDocs } from '#types';
+	import Seo from '#site/components/seo/seo.svelte';
 
 	let { data }: { data: ConfigDocs } = $props();
 

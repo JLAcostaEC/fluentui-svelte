@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Badge, InfoBar } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
+  import { Badge, InfoBar } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
   import { AccessibilityRegular } from 'fluentui-icons-svelte';
 
   const appearanceCode = `

@@ -2,9 +2,9 @@
 	import InfoRegular from 'fluentui-icons-svelte/InfoRegular.svelte';
 	import type { Attachment } from 'svelte/attachments';
 	import type { LabelProps } from './types.ts';
-	import { PREFIX } from '$constants';
-	import { RenderSoC } from '$internal';
-	import { Tooltip } from '$lib/index.js';
+	import { PREFIX } from '#constants';
+	import { RenderSoC } from '#internal';
+	import { Tooltip } from '#lib/index.js';
 	import { setLabelContext } from './label-context.ts';
 
 	const FALLBACK_ID = $props.id();

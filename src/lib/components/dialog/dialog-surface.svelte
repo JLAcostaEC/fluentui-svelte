@@ -3,7 +3,7 @@
 	import { on } from 'svelte/events';
 	import type { DialogSurfaceProps } from './types.ts';
 	import { getDialogContext } from './dialog.svelte.ts';
-	import { Button } from '$lib/index.js';
+	import { Button } from '#lib/index.js';
 	import DismissFilled from 'fluentui-icons-svelte/DismissFilled.svelte';
 
 	let { ref = $bindable(null), class: classes, oncancel, children, ...attributes }: DialogSurfaceProps = $props();

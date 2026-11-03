@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { PREFIX } from '$constants';
-	import ListViewItem from '$lib/components/list-view/list-view-item.svelte';
+	import { PREFIX } from '#constants';
+	import ListViewItem from '#lib/components/list-view/list-view-item.svelte';
 	import { getTagPickerContext } from './tag-picker.ts';
 	import type { TagPickerOptionProps } from './types.ts';
 

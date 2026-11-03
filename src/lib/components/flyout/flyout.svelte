@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { computePosition, offset, autoPlacement, hide, autoUpdate, type Placement } from '@floating-ui/dom';
-	import { roundByDPR } from '$internal';
+	import { roundByDPR } from '#internal';
 	import type { FlyoutProps } from './types.ts';
 
 	let {

@@ -1,4 +1,4 @@
-import { createFSContext } from '$internal';
+import { createFSContext } from '#internal';
 import { SvelteSet } from 'svelte/reactivity';
 import type { SvelteMap } from 'svelte/reactivity';
 import type { TreeViewContext, TreeViewItemContext, TreeViewNode } from './types.js';

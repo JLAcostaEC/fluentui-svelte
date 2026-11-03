@@ -1,4 +1,4 @@
-import type { FSContext } from '$internal';
+import type { FSContext } from '#internal';
 import type { Snippet, Component } from 'svelte';
 import type { HTMLAttributes, HTMLButtonAttributes } from 'svelte/elements';
 

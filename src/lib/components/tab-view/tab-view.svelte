@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { invokeHandlers } from '$internal';
+	import { invokeHandlers } from '#internal';
 	import { getTabspotAttributes } from 'tabspot';
 	import AddRegular from 'fluentui-icons-svelte/AddRegular.svelte';
 	import { setTabViewContext, TABSPOT_ITEMS, TABSPOT_SKIP } from './tab-view.svelte.ts';

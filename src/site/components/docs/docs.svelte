@@ -1,19 +1,19 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { AutoSuggestBox, AutoSuggestBoxOption, ListView, ListViewItem, Badge, Button, Tooltip } from '$lib/index.js';
+	import { AutoSuggestBox, AutoSuggestBoxOption, ListView, ListViewItem, Badge, Button, Tooltip } from '#lib/index.js';
 	import { resolve } from '$app/paths';
 	import Toc from '../../components/toc/toc.svelte';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
 	import { fly } from 'svelte/transition';
-	import { dev } from '$app/environment';
+	import { dev } from '$app/env';
 	import EditRegular from 'fluentui-icons-svelte/EditRegular.svelte';
-	import { localizeHref, deLocalizeUrl } from '$i18n/runtime.js';
-	import type { Meta } from '$types';
-	import { GITHUB_REPO_URL } from '$site/constants.js';
-	import { m } from '$i18n/messages.js';
-	import { statusBadge } from '$site/utils/status.js';
-	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { localizeHref, deLocalizeUrl } from '#i18n/runtime.js';
+	import type { Meta } from '#types';
+	import { GITHUB_REPO_URL } from '#site/constants.js';
+	import { m } from '#i18n/messages.js';
+	import { statusBadge } from '#site/utils/status.js';
+	import { getGlobalFSContext } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { MediaQuery } from 'svelte/reactivity';
 
 	const globalContext = getGlobalFSContext();

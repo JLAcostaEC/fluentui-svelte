@@ -1,4 +1,4 @@
-import { createFSContext } from '$internal';
+import { createFSContext } from '#internal';
 
 import type { CardContext } from './types.ts';
 

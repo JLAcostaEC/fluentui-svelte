@@ -2,7 +2,7 @@
 	import { claimLabel } from '../label/label-context.ts';
 	import CheckmarkFilled from 'fluentui-icons-svelte/CheckmarkFilled.svelte';
 	import SubtractFilled from 'fluentui-icons-svelte/SubtractFilled.svelte';
-	import { PREFIX } from '$constants';
+	import { PREFIX } from '#constants';
 	import type { CheckboxProps } from './types.ts';
 
 	const FALLBACK_ID = $props.id();

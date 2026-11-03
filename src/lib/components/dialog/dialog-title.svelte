@@ -1,5 +1,5 @@
 <script lang="ts" generics="T extends DialogTitleTag">
-	import { PREFIX } from '$constants';
+	import { PREFIX } from '#constants';
 	import { getDialogContext } from './dialog.svelte.ts';
 	import { TITLE_TAG } from './utils.ts';
 	import type { DialogTitleProps, DialogTitleTag } from './types.ts';

@@ -1,5 +1,5 @@
 import type { HTMLAttributes, HTMLButtonAttributes } from 'svelte/elements';
-import type { FSContext } from '$internal';
+import type { FSContext } from '#internal';
 import type { Snippet } from 'svelte';
 import type { ComputePositionConfig, VirtualElement } from '@floating-ui/dom';
 

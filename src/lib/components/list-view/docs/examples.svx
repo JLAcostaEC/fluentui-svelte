@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { ListView, ListViewItem, ListViewItemBranch, Card, CardHeader, CardFooter, Button, Hyperlink } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { ListView, ListViewItem, ListViewItemBranch, Card, CardHeader, CardFooter, Button, Hyperlink } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
 
-  import { m } from '$i18n/messages.js';
+  import { m } from '#i18n/messages.js';
 
   const list = ['Apple', 'Banana', 'Cherry'];
   const cards = [

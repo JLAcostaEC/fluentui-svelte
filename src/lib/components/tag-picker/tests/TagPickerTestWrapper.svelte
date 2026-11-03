@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { FluentUISvelte, Tag, TagPicker, TagPickerOption, TagPickerOptionGroup } from '$lib/index.js';
+	import { FluentUISvelte, Tag, TagPicker, TagPickerOption, TagPickerOptionGroup } from '#lib/index.js';
 	import type { ComponentProps } from 'svelte';
 
 	type Option = { value: string; text?: string; disabled?: boolean };

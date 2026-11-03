@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { claimLabel } from '../label/label-context.ts';
-	import { dispatchFieldEvents, invokeHandlers, NativeField } from '$internal';
+	import { dispatchFieldEvents, invokeHandlers, NativeField } from '#internal';
 	import { onClickOutside } from 'runed';
 	import ChevronDownFilled from 'fluentui-icons-svelte/ChevronDownFilled.svelte';
-	import { Flyout, ListView, ListViewItem } from '$lib/index.js';
+	import { Flyout, ListView, ListViewItem } from '#lib/index.js';
 	import type { DropdownContext, DropdownOptionLabel, DropdownProps } from './types.ts';
 	import { tick } from 'svelte';
 	import { SvelteSet } from 'svelte/reactivity';
 	import { clearTabspotActive, setTabspotActive, setTabspotAttributes, unsetTabspotSection } from 'tabspot';
 	import { PREFIX } from '../../internal/constants.ts';
-	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { getGlobalFSContext } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { setDropdownContext } from './dropdown-context.ts';
 
 	const FALLBACK_ID = $props.id();

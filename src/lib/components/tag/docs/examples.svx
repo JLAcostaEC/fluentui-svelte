@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Avatar, Button, InfoBar, Tag, TagGroup } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
+  import { Avatar, Button, InfoBar, Tag, TagGroup } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
   import { CalendarMonthRegular } from 'fluentui-icons-svelte';
   import { fitCard } from './fit-card.js';
 

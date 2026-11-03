@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Button } from '$lib/index.js';
+	import { Button } from '#lib/index.js';
 	import { getMenuContext, COMPONENT_NAME as MENU_COMPONENT_NAME } from './menu.svelte.ts';
-	import { PREFIX } from '$constants';
-	import { invokeHandlers, RenderSoC } from '$internal';
+	import { PREFIX } from '#constants';
+	import { invokeHandlers, RenderSoC } from '#internal';
 	import type { MenuItemProps } from './types.ts';
 	import type { ButtonProps } from '../button/types.ts';
 

@@ -2,7 +2,7 @@ import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { tick } from 'svelte';
-import { DialogSurface, DialogTrigger, DialogTitle, DialogContent, DialogActions } from '$lib/index.js';
+import { DialogSurface, DialogTrigger, DialogTitle, DialogContent, DialogActions } from '#lib/index.js';
 import DialogTestWrapper from './DialogTestWrapper.svelte';
 import type { DialogPosition, DialogType } from '../types.js';
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
-	import { invokeHandlers } from '$internal';
+	import { invokeHandlers } from '#internal';
 	import { SvelteMap, SvelteSet } from 'svelte/reactivity';
 	import { getTabspotAttributes, tabspotVirtual } from 'tabspot';
 	import {

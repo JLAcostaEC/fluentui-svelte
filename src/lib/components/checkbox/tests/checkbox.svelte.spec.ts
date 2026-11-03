@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { Checkbox } from '$lib/index.js';
+import { Checkbox } from '#lib/index.js';
 import CheckboxTestWrapper from './CheckboxTestWrapper.svelte';
 
 describe('rendering', () => {

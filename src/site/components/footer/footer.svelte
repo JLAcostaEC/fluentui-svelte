@@ -1,7 +1,7 @@
 <script>
-	import { Button } from '$lib/index.js';
-	import { m } from '$i18n/messages.js';
-	import { localizeHref } from '$i18n/runtime.js';
+	import { Button } from '#lib/index.js';
+	import { m } from '#i18n/messages.js';
+	import { localizeHref } from '#i18n/runtime.js';
 </script>
 
 <footer id="footer">

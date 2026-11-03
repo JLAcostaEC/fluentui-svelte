@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { CalendarDatePicker, FluentUISvelte } from '$lib/index.js';
-	import type { CalendarDatePickerProps } from '$lib/components/calendar-date-picker/types.js';
+	import { CalendarDatePicker, FluentUISvelte } from '#lib/index.js';
+	import type { CalendarDatePickerProps } from '#lib/components/calendar-date-picker/types.js';
 
 	let { value = $bindable(null), ...props }: Partial<CalendarDatePickerProps> = $props();
 </script>

@@ -1,6 +1,6 @@
 import { on } from 'svelte/events';
-import { DURATION } from '$constants';
-import type { EASING, YDirection } from '$types';
+import { DURATION } from '#constants';
+import type { EASING, YDirection } from '#types';
 
 // Thanks to CSS-Tricks for the Expander example. https://css-tricks.com/how-to-animate-the-details-element/
 export class Expander {

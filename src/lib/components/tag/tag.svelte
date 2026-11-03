@@ -1,7 +1,7 @@
 <script lang="ts">
 	import DismissRegular from 'fluentui-icons-svelte/DismissRegular.svelte';
-	import { RenderSoC } from '$internal';
-	import { PREFIX } from '$constants';
+	import { RenderSoC } from '#internal';
+	import { PREFIX } from '#constants';
 	import { getTagGroupContext } from './tag-group.ts';
 	import type { TagProps } from './types.ts';
 

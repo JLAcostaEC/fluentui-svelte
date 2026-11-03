@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { CalendarView, FluentUISvelte } from '$lib/index.js';
-	import type { CalendarDateRange, CalendarSelectionMode, View } from '$lib/components/calendar-view/types.js';
+	import { CalendarView, FluentUISvelte } from '#lib/index.js';
+	import type { CalendarDateRange, CalendarSelectionMode, View } from '#lib/components/calendar-view/types.js';
 
 	let {
 		value = null,

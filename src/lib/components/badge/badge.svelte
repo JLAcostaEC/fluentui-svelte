@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { pxToRem, RenderSoC } from '$internal';
+	import { pxToRem, RenderSoC } from '#internal';
 	import { shapes } from './utils.svelte.ts';
 	import type { BadgeProps } from './types.ts';
 

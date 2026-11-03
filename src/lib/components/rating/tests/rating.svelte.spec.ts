@@ -2,7 +2,7 @@ import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { HeartFilled, HeartRegular } from 'fluentui-icons-svelte';
-import { Rating, type RatingProps } from '$lib/index.js';
+import { Rating, type RatingProps } from '#lib/index.js';
 
 const radios = () => Array.from(document.querySelectorAll<HTMLInputElement>('.fs-rating input'));
 

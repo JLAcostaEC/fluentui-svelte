@@ -10,9 +10,9 @@
 		MenuGroup,
 		MenuDivider,
 		Button
-	} from '$lib/index.js';
+	} from '#lib/index.js';
 	import { SettingsRegular } from 'fluentui-icons-svelte';
-	import type { MenuProps } from '$lib/components/menu/types.js';
+	import type { MenuProps } from '../types.js';
 
 	let {
 		open,

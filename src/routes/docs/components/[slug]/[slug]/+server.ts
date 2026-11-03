@@ -8,7 +8,7 @@ export const GET = async ({ url, params }) => {
 	const componentName = url.pathname.split('/')[3];
 
 	try {
-		docs = (await import(`$components/${componentName}/docs/llms.md?raw`)).default;
+		docs = (await import(`#components/${componentName}/docs/llms.md?raw`)).default;
 	} catch (err) {
 		error(500, {
 			message: `Error loading llms.md for component ${componentName}: ${err instanceof Error ? err.message : String(err)}`

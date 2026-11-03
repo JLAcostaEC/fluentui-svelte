@@ -2,7 +2,7 @@ import type { HTMLAttributes, HTMLInputAttributes } from 'svelte/elements';
 import type { ComputePositionConfig } from '@floating-ui/dom';
 import type { CalendarViewProps } from '../calendar-view/types.js';
 import type { ButtonProps } from '../button/types.js';
-import type { NativeFieldAttributes } from '$internal';
+import type { NativeFieldAttributes } from '#internal';
 
 /** @propsmith CalendarDatePickerProps */
 export type CalendarDatePickerProps = {

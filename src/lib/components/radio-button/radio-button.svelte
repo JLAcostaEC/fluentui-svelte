@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { claimLabel } from '../label/label-context.ts';
-	import { PREFIX } from '$constants';
+	import { PREFIX } from '#constants';
 	import type { RadioButtonProps } from './types.ts';
 
 	const FALLBACK_ID = $props.id();

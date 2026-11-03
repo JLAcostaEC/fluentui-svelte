@@ -3,7 +3,7 @@
 	import { setTabspotAttributes } from 'tabspot';
 	import { onMount } from 'svelte';
 	import { circOut } from 'svelte/easing';
-	import { Flyout } from '$lib/index.js';
+	import { Flyout } from '#lib/index.js';
 	import CalendarViewDays from './calendar-view-days.svelte';
 	import CalendarViewYears from './calendar-view-years.svelte';
 	import CalendarViewMonths from './calendar-view-months.svelte';
@@ -16,7 +16,7 @@
 		getOffset,
 		fadeScale,
 		reactiveBoundingRect
-	} from '$internal';
+	} from '#internal';
 	import {
 		compareDates,
 		getPageByOffset,
@@ -28,7 +28,7 @@
 	} from './calendar-view.svelte.js';
 	import { CALENDAR_GRID_CONFIG, VIEW_PRECISION, cellDate, focusCalendarView } from './calendar-view-grid.js';
 	import { on } from 'svelte/events';
-	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import type {
 		AnimationDirection,
 		CalendarViewContext,

@@ -1,4 +1,4 @@
-import type { Appearances, PolymorphicProps, XDirection } from '$types';
+import type { Appearances, PolymorphicProps, XDirection } from '#types';
 
 /** @propsmith DividerProps */
 export type DividerProps<Tag extends DividerGenerics = 'div'> = {

@@ -1,8 +1,8 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
-  import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
+  import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
 </script>
 
 # Dialog

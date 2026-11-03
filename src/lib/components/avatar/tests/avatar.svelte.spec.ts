@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { Avatar } from '$lib/index.js';
+import { Avatar } from '#lib/index.js';
 
 describe('rendering', () => {
 	it('renders a div with role="img"', async () => {

@@ -1,4 +1,4 @@
-import { createFSContext } from '$internal';
+import { createFSContext } from '#internal';
 
 export type LabelContext = {
 	/** The id of the label text, which names a visible control that stands in for a native field. */

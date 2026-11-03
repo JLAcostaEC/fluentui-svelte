@@ -21,7 +21,7 @@
 		TextBox,
 		TimePicker,
 		ToggleSwitch
-	} from '$lib/index.js';
+	} from '#lib/index.js';
 	import type { LabelProps } from '../types.ts';
 
 	type Control =

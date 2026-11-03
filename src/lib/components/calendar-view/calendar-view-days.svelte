@@ -13,10 +13,10 @@
 		startOfDay
 	} from './calendar-view.svelte.js';
 	import CalendarViewItem from './calendar-view-item.svelte';
-	import { getGlobalFSContext, getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { getGlobalFSContext, getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 
 	import { cellDate, createCalendarNavigation, DAY_GRID } from './calendar-view-grid.js';
-	import { getCSSDuration } from '$internal';
+	import { getCSSDuration } from '#internal';
 	import { on } from 'svelte/events';
 	import type { CalendarDateRange } from './types.js';
 

@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { Label } from '$lib/index.js';
+import { Label } from '#lib/index.js';
 import LabelTestWrapper from './LabelTestWrapper.svelte';
 
 const label = () => page.selector('.fs-label > label');

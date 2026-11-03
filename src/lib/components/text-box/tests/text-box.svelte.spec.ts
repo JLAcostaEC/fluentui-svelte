@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { TextBox } from '$lib/index.js';
+import { TextBox } from '#lib/index.js';
 
 describe('rendering', () => {
 	it('renders a wrapper with the fs-textbox class', async () => {

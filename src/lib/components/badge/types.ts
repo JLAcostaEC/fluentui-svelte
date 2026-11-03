@@ -1,6 +1,6 @@
 import type { Component, Snippet } from 'svelte';
 import type { SVGAttributes } from 'svelte/elements';
-import type { BeforeOrAfter, Colors, PolymorphicProps, Shapes, Statuses, Variants } from '$types';
+import type { BeforeOrAfter, Colors, PolymorphicProps, Shapes, Statuses, Variants } from '#types';
 
 /** @propsmith BadgeProps */
 export type BadgeProps = {

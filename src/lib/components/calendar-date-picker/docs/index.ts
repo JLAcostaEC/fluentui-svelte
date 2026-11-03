@@ -1,7 +1,7 @@
 import Docs from './docs.svx';
 import Footer from './footer.svx';
 import LLMS from './llms.md?raw';
-import type { ConfigDocs, Meta } from '$types';
+import type { ConfigDocs, Meta } from '#types';
 import { CalendarEditRegular } from 'fluentui-icons-svelte';
 
 export const META: Meta = {

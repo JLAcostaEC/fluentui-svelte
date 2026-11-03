@@ -1,7 +1,7 @@
 import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { TagPickerOption } from '$lib/index.js';
+import { TagPickerOption } from '#lib/index.js';
 import TagPickerTestWrapper from './TagPickerTestWrapper.svelte';
 
 const combobox = () => page.getByRole('combobox');

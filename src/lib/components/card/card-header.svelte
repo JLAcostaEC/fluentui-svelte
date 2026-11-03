@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { CardHeaderProps } from './types.ts';
-	import { RenderSoC } from '$internal';
+	import { RenderSoC } from '#internal';
 	import { getCardContext } from './card-context.svelte.ts';
 
 	let {

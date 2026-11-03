@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { circOut } from 'svelte/easing';
-	import { Flyout } from '$lib/index.js';
+	import { Flyout } from '#lib/index.js';
 	import { COMPONENT_NAME, getIntroTransition, getMenuContext } from './menu.svelte.ts';
 	import { flip, hide, offset, shift } from '@floating-ui/dom';
 	import { useDebounce } from 'runed';
-	import { floating, flyToOffset, getCSSDuration, reactiveBoundingRect } from '$internal';
-	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { floating, flyToOffset, getCSSDuration, reactiveBoundingRect } from '#internal';
+	import { getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import type { MenuPopoverProps } from './types.ts';
 
 	let {

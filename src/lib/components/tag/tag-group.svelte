@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { tick } from 'svelte';
 	import { getTabspotAttributes } from 'tabspot';
-	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { getGlobalFSContext } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { setTagGroupContext } from './tag-group.ts';
 	import type { TagGroupContext, TagGroupProps } from './types.ts';
 

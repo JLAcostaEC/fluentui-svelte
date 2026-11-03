@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { on } from 'svelte/events';
 	import { useDebounce } from 'runed';
-	import { floating, roundByDPR, RenderSoC } from '$internal';
-	import { Flyout } from '$lib/index.js';
-	import { PREFIX } from '$constants';
+	import { floating, roundByDPR, RenderSoC } from '#internal';
+	import { Flyout } from '#lib/index.js';
+	import { PREFIX } from '#constants';
 	import { arrow, flip, hide, offset, shift, type ComputePositionReturn, type Side } from '@floating-ui/dom';
 	import type { Attachment } from 'svelte/attachments';
 	import type { TooltipProps } from './types.ts';

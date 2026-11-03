@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { BadgeIcon } from '$lib/index.js';
-	import { pickColorByWord } from '$css/utils.js';
-	import { getInitials, pxToRem, RenderSoC } from '$internal';
+	import { BadgeIcon } from '#lib/index.js';
+	import { pickColorByWord } from '#css/utils.js';
+	import { getInitials, pxToRem, RenderSoC } from '#internal';
 	import type { AvatarProps } from './type.ts';
 
 	let {

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
-	import { invokeHandlers } from '$internal';
-	import { PREFIX } from '$constants';
+	import { invokeHandlers } from '#internal';
+	import { PREFIX } from '#constants';
 	import {
 		getTreeViewDepth,
 		getTreeViewContext,

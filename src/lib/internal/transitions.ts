@@ -1,4 +1,4 @@
-import { DURATION } from '$constants';
+import { DURATION } from '#constants';
 
 export interface FlyToOffsetOptions {
 	delay?: number;

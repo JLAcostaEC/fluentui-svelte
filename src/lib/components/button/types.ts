@@ -1,5 +1,5 @@
 import type { Component, Snippet } from 'svelte';
-import type { Appearances, BeforeOrAfter, PolymorphicProps, Shapes } from '$types';
+import type { Appearances, BeforeOrAfter, PolymorphicProps, Shapes } from '#types';
 
 export type ButtonGenerics = 'button' | 'a' | 'div';
 

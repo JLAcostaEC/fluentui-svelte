@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Checkbox } from '$lib/index.js';
-	import { RenderSoC } from '$internal';
+	import { Checkbox } from '#lib/index.js';
+	import { RenderSoC } from '#internal';
 	import ChevronRightRegular from 'fluentui-icons-svelte/ChevronRightRegular.svelte';
 	import { getTreeViewContext, getTreeViewItemContext } from './tree-view.svelte.ts';
 	import type { TreeViewItemLayoutProps } from './types.ts';

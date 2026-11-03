@@ -1,6 +1,6 @@
 <script module lang="ts">
 	import { configureI18nMarkup } from '@jlacostaec/paraglide-markup-svelte';
-	import { localizeHref as localizeMarkupHref } from '$i18n/runtime.js';
+	import { localizeHref as localizeMarkupHref } from '#i18n/runtime.js';
 
 	// Configure the I18nMarkup component to use the localized href function on anchor tags
 	configureI18nMarkup({ localizeHref: localizeMarkupHref });
@@ -9,23 +9,23 @@
 <script lang="ts">
 	import '../app.css';
 	import '../shiki.css';
-	import '$css/theme.css';
-	import '$css/class-darkmode.css';
-	import '$css/reset.css';
-	import '$css/typography.css';
+	import '#css/theme.css';
+	import '#css/class-darkmode.css';
+	import '#css/reset.css';
+	import '#css/typography.css';
 
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
 	import { ModeWatcher } from 'mode-watcher';
 	import { PersistedState } from 'runed';
-	import { FluentUISvelte } from '$lib/index.js';
-	import { locales, localizeHref } from '$i18n/runtime.js';
-	import { m } from '$i18n/messages.js';
-	import type { Pathname } from '$app/types';
+	import { FluentUISvelte } from '#lib/index.js';
+	import { locales, localizeHref } from '#i18n/runtime.js';
+	import { m } from '#i18n/messages.js';
+	import type { Path } from '$app/types';
 
-	import Header from '$site/components/header/header.svelte';
-	import Footer from '$site/components/footer/footer.svelte';
-	import { setDisablePanZoom } from '$site/preferences.js';
+	import Header from '#site/components/header/header.svelte';
+	import Footer from '#site/components/footer/footer.svelte';
+	import { setDisablePanZoom } from '#site/preferences.js';
 
 	let { children } = $props();
 
@@ -37,7 +37,7 @@
 
 <div style="display:none">
 	{#each locales as locale (locale)}
-		<a href={resolve(localizeHref(page.url.pathname, { locale }) as Pathname)}>{locale}</a>
+		<a href={resolve(localizeHref(page.url.pathname, { locale }) as Path)}>{locale}</a>
 	{/each}
 </div>
 

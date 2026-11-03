@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { RadioButton } from '$lib/index.js';
+	import { RadioButton } from '#lib/index.js';
 
 	let { group = $bindable('apple'), name = 'fruit' }: { group?: string; name?: string } = $props();
 </script>

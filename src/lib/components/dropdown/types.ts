@@ -2,7 +2,7 @@ import type { Snippet } from 'svelte';
 import type { HTMLAttributes, HTMLButtonAttributes, HTMLSelectAttributes } from 'svelte/elements';
 import type { ListViewProps, ListViewItemProps } from '../list-view/types.ts';
 import type { FlyoutProps } from '../flyout/types.ts';
-import type { FSContext, NativeFieldAttributes } from '$internal';
+import type { FSContext, NativeFieldAttributes } from '#internal';
 
 /** The value shape of a dropdown that allows more than one selection. */
 export type DropdownMultipleValue = {

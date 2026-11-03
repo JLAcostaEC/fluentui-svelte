@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { watch } from 'runed';
 	import CheckmarkFilled from 'fluentui-icons-svelte/CheckmarkFilled.svelte';
-	import { Button } from '$lib/index.js';
-	import { PREFIX } from '$constants';
+	import { Button } from '#lib/index.js';
+	import { PREFIX } from '#constants';
 	import { getMenuContext, COMPONENT_NAME as MENU_COMPONENT_NAME } from './menu.svelte.ts';
-	import { invokeHandlers, RenderSoC } from '$internal';
+	import { invokeHandlers, RenderSoC } from '#internal';
 	import type { MenuItemActionableProps } from './types.ts';
 
 	const FALLBACK_ID = $props.id();

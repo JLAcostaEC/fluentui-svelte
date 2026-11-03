@@ -3,8 +3,8 @@
 	import { on } from 'svelte/events';
 	import { useDebounce } from 'runed';
 	import { COMPONENT_NAME, getMenuContext } from './menu.svelte.ts';
-	import { preventDefault } from '$internal';
-	import { VIRTUAL_ELEMENT } from '$constants';
+	import { preventDefault } from '#internal';
+	import { VIRTUAL_ELEMENT } from '#constants';
 
 	let {
 		disabled,

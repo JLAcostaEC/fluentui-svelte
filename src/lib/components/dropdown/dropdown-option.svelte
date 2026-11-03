@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { ListViewItem } from '$lib/index.js';
-	import { PREFIX } from '$constants';
+	import { ListViewItem } from '#lib/index.js';
+	import { PREFIX } from '#constants';
 	import { getDropdownContext } from './dropdown-context.ts';
 	import type { DropdownOptionProps } from './types.ts';
 

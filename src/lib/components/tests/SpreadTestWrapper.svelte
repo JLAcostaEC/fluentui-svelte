@@ -1,6 +1,6 @@
 <script lang="ts">
 	// Spreads attributes the test replaces, as a form library does with its constraints and errors.
-	import { Checkbox, FluentUISvelte, TagPicker, TagPickerOption, TextBox } from '$lib/index.js';
+	import { Checkbox, FluentUISvelte, TagPicker, TagPickerOption, TextBox } from '#lib/index.js';
 
 	let { attributes = {} }: { attributes?: Record<string, unknown> } = $props();
 </script>

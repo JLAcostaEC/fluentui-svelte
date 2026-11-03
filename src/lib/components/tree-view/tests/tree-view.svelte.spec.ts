@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { TreeViewItem, TreeViewItemContent } from '$lib/index.js';
+import { TreeViewItem, TreeViewItemContent } from '#lib/index.js';
 import TreeViewTestWrapper from './TreeViewTestWrapper.svelte';
 import TreeViewLayoutTestWrapper from './TreeViewLayoutTestWrapper.svelte';
 

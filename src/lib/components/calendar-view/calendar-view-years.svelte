@@ -11,8 +11,8 @@
 		rangeCovers
 	} from './calendar-view.svelte.js';
 	import { createCalendarNavigation, YEAR_GRID } from './calendar-view-grid.js';
-	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
-	import { getCSSDuration } from '$internal';
+	import { getGlobalFSContext } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { getCSSDuration } from '#internal';
 
 	const CalendarContext = getCalendarViewContext();
 

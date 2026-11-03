@@ -1,6 +1,6 @@
 import type { CheckboxProps } from '../checkbox/types.ts';
-import type { FSContext } from '$internal';
-import type { PolymorphicProps, Shapes } from '$types';
+import type { FSContext } from '#internal';
+import type { PolymorphicProps, Shapes } from '#types';
 import type { AriaRole, HTMLButtonAttributes } from 'svelte/elements';
 import type { Snippet } from 'svelte';
 

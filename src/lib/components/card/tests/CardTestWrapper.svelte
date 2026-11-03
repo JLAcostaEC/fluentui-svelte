@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Card, CardPreview, CardHeader, CardFooter } from '$lib/index.js';
-	import type { CardHeaderProps, CardPreviewProps, CardProps } from '$lib/components/card/types.js';
+	import { Card, CardPreview, CardHeader, CardFooter } from '#lib/index.js';
+	import type { CardHeaderProps, CardPreviewProps, CardProps } from '#lib/components/card/types.js';
 
 	const PIXEL = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 

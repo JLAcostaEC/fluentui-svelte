@@ -1,7 +1,7 @@
 <script lang="ts" generics="Tag extends 'th' | 'div' = 'th'">
 	import ArrowUpRegular from 'fluentui-icons-svelte/ArrowUpRegular.svelte';
 	import { on } from 'svelte/events';
-	import { RenderSoC } from '$internal';
+	import { RenderSoC } from '#internal';
 	import { colIndex, focusGroup, getTag, requireTableContext } from './table.svelte.ts';
 	import type { TableDOM, TableHeaderCellProps } from './types.ts';
 

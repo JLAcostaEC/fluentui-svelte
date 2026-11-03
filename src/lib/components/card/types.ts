@@ -1,5 +1,5 @@
-import type { Horientation, PolymorphicProps } from '$types';
-import type { FSContext } from '$internal';
+import type { Horientation, PolymorphicProps } from '#types';
+import type { FSContext } from '#internal';
 import type { HTMLAttributes } from 'svelte/elements';
 import type { Component, Snippet } from 'svelte';
 

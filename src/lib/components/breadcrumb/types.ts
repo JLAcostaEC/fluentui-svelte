@@ -1,4 +1,4 @@
-import type { BeforeOrAfter, PolymorphicProps, Sizes } from '$types';
+import type { BeforeOrAfter, PolymorphicProps, Sizes } from '#types';
 import type { Snippet, Component } from 'svelte';
 import type { HTMLAttributes, HTMLOlAttributes } from 'svelte/elements';
 

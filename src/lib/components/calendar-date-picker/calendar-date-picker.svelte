@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { claimLabel } from '../label/label-context.ts';
-	import { Button, CalendarView } from '$lib/index.js';
+	import { Button, CalendarView } from '#lib/index.js';
 	import { CalendarLtrRegular } from 'fluentui-icons-svelte';
 	import type { CalendarDatePickerProps } from './types.js';
 	import { onMount, tick } from 'svelte';
 	import { on } from 'svelte/events';
-	import { dispatchFieldEvents, invokeHandlers, NativeField } from '$internal';
-	import { PREFIX } from '$constants';
+	import { dispatchFieldEvents, invokeHandlers, NativeField } from '#internal';
+	import { PREFIX } from '#constants';
 	import { flip, hide, offset, shift } from '@floating-ui/dom';
 
 	/** The Label the field is inside, when the label is for it. */

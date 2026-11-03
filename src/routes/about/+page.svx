@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Flyout, Button, InfoBar } from '$lib/index.js';
-  import { m } from '$i18n/messages.js';
+  import { Flyout, Button, InfoBar } from '#lib/index.js';
+  import { m } from '#i18n/messages.js';
 	import { mode } from 'mode-watcher';
-  import Seo from '$site/components/seo/seo.svelte';
+  import Seo from '#site/components/seo/seo.svelte';
 </script>
 
 <Seo title={m.global_about()} description={m.seo_about_description()} keywords={m.seo_about_keywords().split(', ')} />

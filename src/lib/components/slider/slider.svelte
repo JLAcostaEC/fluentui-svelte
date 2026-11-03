@@ -5,8 +5,8 @@
 	import { claimLabel } from '../label/label-context.ts';
 	import { untrack } from 'svelte';
 	import { watch } from 'runed';
-	import { Tooltip } from '$lib/index.js';
-	import { dispatchFieldEvents, invokeHandlers } from '$internal';
+	import { Tooltip } from '#lib/index.js';
+	import { dispatchFieldEvents, invokeHandlers } from '#internal';
 	import type { Attachment } from 'svelte/attachments';
 	import type { MouseOrTouchEvent, SliderProps } from './types.ts';
 

@@ -1,7 +1,7 @@
 import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { Dropdown, DropdownOption } from '$lib/index.js';
+import { Dropdown, DropdownOption } from '#lib/index.js';
 import DropdownTestWrapper from './DropdownTestWrapper.svelte';
 
 /** The button that opens the list. The native select of a single dropdown is a combobox too, after it. */

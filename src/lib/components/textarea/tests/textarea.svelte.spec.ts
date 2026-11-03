@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { TextArea } from '$lib/index.js';
+import { TextArea } from '#lib/index.js';
 import TextAreaTestWrapper from './TextAreaTestWrapper.svelte';
 
 const textarea = () => page.getByRole('textbox');

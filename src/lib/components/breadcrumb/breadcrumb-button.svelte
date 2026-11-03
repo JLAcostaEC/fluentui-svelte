@@ -1,5 +1,5 @@
 <script lang="ts" generics="T extends BreadcrumbItemGenerics = 'button'">
-	import { invokeHandlers, RenderSoC } from '$internal';
+	import { invokeHandlers, RenderSoC } from '#internal';
 	import type { BreadcrumbButtonProps, BreadcrumbItemElementDOMType, BreadcrumbItemGenerics } from './types.ts';
 
 	let {

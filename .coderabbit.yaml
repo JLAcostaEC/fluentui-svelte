@@ -46,7 +46,7 @@ reviews:
     - '!**/.wrangler/**'
     - '!static/**'
     - '!src/i18n/**'
-    - '!src/worker-configuration.d.ts'
+    - '!worker-configuration.d.ts'
     - '!src/site/documentation/index.js'
     - '!project.inlang/cache/**'
     - '!test-results/**'

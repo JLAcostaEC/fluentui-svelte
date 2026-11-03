@@ -6,7 +6,7 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "fluentui-svelte",
 	"compatibility_date": "2026-11-02",
-	"compatibility_flags": ["nodejs_als"],
+	"compatibility_flags": ["nodejs_compat", "nodejs_als"],
 	"pages_build_output_dir": ".svelte-kit/cloudflare",
 	"observability": {
 		"enabled": true

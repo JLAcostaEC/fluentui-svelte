@@ -947,7 +947,9 @@
     },
     "generated_fs_checkbox_props_props_children": {
       "en": "11110e13",
-      "locales": {},
+      "locales": {
+        "es": "11110e13"
+      },
       "source": "src/lib/components/checkbox/types.ts#CheckboxProps.children"
     },
     "generated_fs_checkbox_props_props_disabled": {
@@ -2485,7 +2487,9 @@
     },
     "generated_fs_radio_button_props_props_label": {
       "en": "8209dcc2",
-      "locales": {},
+      "locales": {
+        "es": "8209dcc2"
+      },
       "source": "src/lib/components/radio-button/types.ts#RadioButtonProps.label"
     },
     "generated_fs_radio_button_props_props_ref": {
@@ -3974,7 +3978,9 @@
     },
     "generated_fs_toggle_switch_props_props_label": {
       "en": "8fe110f6",
-      "locales": {},
+      "locales": {
+        "es": "8fe110f6"
+      },
       "source": "src/lib/components/toggle-switch/types.ts#ToggleSwitchProps.label"
     },
     "generated_fs_toggle_switch_props_props_ref": {

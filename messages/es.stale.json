@@ -1,5 +1,0 @@
-{
-  "generated_fs_checkbox_props_props_children": "El contenido de la etiqueta asociada con la casilla. Dentro de un `Label`, no se renderiza: el Label da nombre a la casilla.",
-  "generated_fs_radio_button_props_props_label": "La etiqueta que se muestra junto al radio button. Dentro de un `Label`, no se renderiza: el Label da nombre al radio button.",
-  "generated_fs_toggle_switch_props_props_label": "La etiqueta que se muestra junto al elemento input. Dentro de un `Label`, no se renderiza: el Label da nombre al interruptor."
-}

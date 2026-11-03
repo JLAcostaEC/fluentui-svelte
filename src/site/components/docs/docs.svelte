@@ -73,8 +73,8 @@
 </script>
 
 <section class="container">
-	<aside id="navigation">
-		<div id="search-box" style="width: 100%; max-width: 100%; display: flex; flex-grow: 0;">
+	<div id="navigation">
+		<search id="search-box" style="width: 100%; max-width: 100%; display: flex; flex-grow: 0;">
 			<AutoSuggestBox
 				openOnFocus={isMobile.current}
 				suggestionChosen={(e, item) => handleNav(item)}
@@ -84,7 +84,7 @@
 					<AutoSuggestBoxOption {index} value={suggestion}>{suggestion}</AutoSuggestBoxOption>
 				{/each}
 			</AutoSuggestBox>
-		</div>
+		</search>
 
 		<nav class="navigation-list" aria-label={m.docs_primary_navigation_label()}>
 			{#if primaryNavigation}
@@ -150,7 +150,7 @@
 				</ListView>
 			{/if}
 		</nav>
-	</aside>
+	</div>
 
 	<article id="docs" tabindex="-1">
 		{#key page.url.pathname}
@@ -164,13 +164,13 @@
 		{/key}
 	</article>
 
-	<aside id="table-of-contents">
+	<div id="table-of-contents">
 		<Button as="a" href={editUrl} target="_blank" rel="noopener noreferrer" appearance="subtle">
 			<EditRegular />
 			{m.docs_edit_button()}
 		</Button>
 		<Toc selector="#docs > div" />
-	</aside>
+	</div>
 </section>
 
 <style>

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Hyperlink } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
+  import { Hyperlink } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
 </script>
 
 # Hyperlink

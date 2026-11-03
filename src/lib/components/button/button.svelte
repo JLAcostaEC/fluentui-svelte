@@ -1,5 +1,5 @@
 <script lang="ts" generics="T extends ButtonGenerics = 'button'">
-	import { invokeHandlers, RenderSoC } from '$internal';
+	import { invokeHandlers, RenderSoC } from '#internal';
 	import ChevronDownFilled from 'fluentui-icons-svelte/ChevronDownFilled.svelte';
 	import type { ButtonGenerics, ButtonProps } from './types.ts';
 
@@ -9,7 +9,7 @@
 		class: classes,
 		shape = 'rounded',
 		disabled,
-		ref = $bindable(),
+		ref = $bindable(null),
 		onclick,
 		onkeydown,
 		isMenuButton,
@@ -49,6 +49,7 @@
  -->
 <svelte:element
 	this={_as}
+	{...attributes}
 	bind:this={ref}
 	disabled={disabled && as !== 'div' ? true : undefined}
 	aria-disabled={disabled && as !== 'div' ? true : undefined}
@@ -56,7 +57,6 @@
 	tabindex={_tabIndex ?? (as !== 'div' && (disabledFocusable || disabled) ? -1 : undefined)}
 	onclick={(e: MouseEvent) => invokeHandlers(e, [as === 'div', disabled], [onclick])}
 	onkeydown={(e: KeyboardEvent) => invokeHandlers(e, [as === 'div', disabled], [onkeydown])}
-	{...attributes}
 >
 	{#if isMenuButton && indicatorPosition === 'before'}
 		{#if indicatorIcon}

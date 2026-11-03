@@ -1,32 +1,38 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
-  import { m } from '$i18n/messages.js';
+  import InfoBar from '#lib/components/info-bar/info-bar.svelte';
+  import { m } from '#i18n/messages.js';
 </script>
+
+<InfoBar title={m.form_control_attributes_title()} style="multiline" status="warning" hideCloseButton>
+  <p><I18nMarkupMessage message={m.form_control_attributes_description} /></p>
+</InfoBar>
 
 ## {m.global_component_props()}
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DatePickerProps -->
 
-| Name                          | Type                                 | Default           | Description                                                                                 |
-| ----------------------------- | ------------------------------------ | ----------------- | ------------------------------------------------------------------------------------------- |
-| `value` _bindable_            | `string`                             | `''`              | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_value} />`              |
-| `format`                      | `'MM/dd/yyyy'` &#124; `'dd/MM/yyyy'` | `'dd/MM/yyyy'`    | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_format} />`             |
-| `open` _bindable_             | `boolean`                            | `false`           | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_open} />`               |
-| `hideYears`                   | `boolean`                            | `false`           | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_hide_years} />`         |
-| `hideMonths`                  | `boolean`                            | `false`           | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_hide_months} />`        |
-| `hideDays`                    | `boolean`                            | `false`           | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_hide_days} />`          |
-| `minYear`                     | `number`                             | `Current - 100`   | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_min_year} />`           |
-| `maxYear`                     | `number`                             | `Current + 100`   | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_max_year} />`           |
-| `disabledDates`               | `Date[]`                             | `[]`              | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_disabled_dates} />`     |
-| `disabledMonths`              | `Date[]`                             | `[]`              | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_disabled_months} />`    |
-| `disabledYears`               | `Date[]`                             | `[]`              | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_disabled_years} />`     |
-| `ref` _bindable_              | `HTMLButtonElement`                  |                   | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_ref} />`                |
-| `wrapperRef` _bindable_       | `HTMLDivElement`                     |                   | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_wrapper_ref} />`        |
-| `wrapperAttributes`           | `HTMLAttributes`                     |                   | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_wrapper_attributes} />` |
-| `inputElement` _bindable_     | `HTMLInputElement`                   |                   | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_input_element} />`      |
-| `inputProps`                  | `HTMLInputAttributes`                |                   | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_input_props} />`        |
-| `popupLabel`                  | `string`                             | `'Choose a date'` | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_popup_label} />`        |
-| Element Attributes (`button`) |                                      |                   |                                                                                             |
+| Name                                         | Type                                              | Default                                        | Description                                                                                 |
+| -------------------------------------------- | ------------------------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `value` _bindable_                           | `string`                                          | `''`                                           | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_value} />`              |
+| `format`                                     | `'MM/dd/yyyy'` &#124; `'dd/MM/yyyy'`              | `'dd/MM/yyyy'`                                 | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_format} />`             |
+| `open` _bindable_                            | `boolean`                                         | `false`                                        | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_open} />`               |
+| `hideYears`                                  | `boolean`                                         | `false`                                        | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_hide_years} />`         |
+| `hideMonths`                                 | `boolean`                                         | `false`                                        | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_hide_months} />`        |
+| `hideDays`                                   | `boolean`                                         | `false`                                        | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_hide_days} />`          |
+| `minYear`                                    | `number`                                          | `Current - 100`                                | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_min_year} />`           |
+| `maxYear`                                    | `number`                                          | `Current + 100`                                | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_max_year} />`           |
+| `disabledDates`                              | `Date[]`                                          | `[]`                                           | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_disabled_dates} />`     |
+| `disabledMonths`                             | `Date[]`                                          | `[]`                                           | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_disabled_months} />`    |
+| `disabledYears`                              | `Date[]`                                          | `[]`                                           | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_disabled_years} />`     |
+| `ref` _bindable_                             | `HTMLInputElement` &#124; `null`                  |                                                | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_ref} />`                |
+| `buttonRef` _bindable_                       | `HTMLButtonElement` &#124; `null`                 |                                                | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_button_ref} />`         |
+| `buttonAttributes`                           | `HTMLButtonAttributes`                            |                                                | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_button_attributes} />`  |
+| `wrapperRef` _bindable_                      | `HTMLDivElement` &#124; `null`                    |                                                | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_wrapper_ref} />`        |
+| `wrapperAttributes`                          | `HTMLAttributes`                                  |                                                | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_wrapper_attributes} />` |
+| `popupLabel`                                 | `string`                                          | `'Choose a date'`                              | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_popup_label} />`        |
+| `columnLabels`                               | `{ month?: string; day?: string; year?: string }` | `{ month: 'Month', day: 'Day', year: 'Year' }` | `<I18nMarkupMessage message={m.generated_fs_date_picker_props_props_column_labels} />`      |
+| `NativeFieldAttributes<HTMLInputAttributes>` |                                                   |                                                |                                                                                             |
 
 <!-- /props:DatePickerProps -->

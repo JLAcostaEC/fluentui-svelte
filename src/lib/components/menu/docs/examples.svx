@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Button, SplitButton, Menu, MenuTrigger, ContextMenuTrigger, MenuPopover, MenuList, MenuGroup, MenuItem, MenuDivider, MenuItemCheckbox, MenuItemSwitch, MenuItemRadio } from '$lib/index.js';
+  import { Button, SplitButton, Menu, MenuTrigger, ContextMenuTrigger, MenuPopover, MenuList, MenuGroup, MenuItem, MenuDivider, MenuItemCheckbox, MenuItemSwitch, MenuItemRadio } from '#lib/index.js';
   import { AccessTimeRegular, ChevronRightFilled } from 'fluentui-icons-svelte';
-  import { m } from '$i18n/messages.js';
+  import { m } from '#i18n/messages.js';
 
   let checkedValues = $state({});
   let contextMenuBox: HTMLElement | null = $state(null);
@@ -71,7 +71,7 @@
 <Menu>
   <MenuTrigger>
     {#snippet children({ state, menuTriggerProps, primaryButtonProps })}
-      <SplitButton bind:menuTriggerRef={state.ref} {menuTriggerProps} primaryButtonProps={{ onclick: () => alert('Primary action'), ...primaryButtonProps }}>
+      <SplitButton bind:menuTriggerRef={state.ref} menuTriggerProps={{ ...menuTriggerProps, 'aria-label': 'More options' }} primaryButtonProps={{ onclick: () => alert('Primary action'), ...primaryButtonProps }}>
         Primary Action
       </SplitButton>
     {/snippet}
@@ -97,7 +97,7 @@
 		{#snippet children({ state, menuTriggerProps, primaryButtonProps })}
 			<SplitButton
 				bind:menuTriggerRef={state.ref}
-				{menuTriggerProps}
+				menuTriggerProps={{ ...menuTriggerProps, 'aria-label': 'More options' }}
 				primaryButtonProps={{ onclick: () => alert('Primary action'), ...primaryButtonProps }}
 			>
 				Primary Action

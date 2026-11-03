@@ -1,7 +1,7 @@
 <script lang="ts">
 	import DismissRegular from 'fluentui-icons-svelte/DismissRegular.svelte';
-	import { RenderSoC } from '$internal';
-	import { PREFIX } from '$constants';
+	import { RenderSoC } from '#internal';
+	import { PREFIX } from '#constants';
 	import { getTagGroupContext } from './tag-group.ts';
 	import type { TagProps } from './types.ts';
 
@@ -25,10 +25,10 @@
 		onDismiss,
 		onclick,
 		onkeydown,
-		primaryProps,
-		dismissProps,
+		primaryButtonAttributes,
+		dismissButtonAttributes,
 		class: classes,
-		ref = $bindable(),
+		ref = $bindable(null),
 		children,
 		...attributes
 	}: TagProps = $props();
@@ -44,8 +44,8 @@
 	/** A plain tag is the dismiss button itself when it is dismissible. An interactive one holds its own buttons. */
 	const tag = $derived(interactive ? 'div' : _dismissible ? 'button' : 'span');
 
-	const primaryId = $derived(primaryProps?.id ?? `${FALLBACK_ID}-primary`);
-	const dismissId = $derived(dismissProps?.id ?? `${FALLBACK_ID}-dismiss`);
+	const primaryId = $derived(primaryButtonAttributes?.id ?? `${FALLBACK_ID}-primary`);
+	const dismissId = $derived(dismissButtonAttributes?.id ?? `${FALLBACK_ID}-dismiss`);
 
 	/** The dismiss icon names the button, unless the consumer named the tag itself. */
 	const named = $derived(!!(attributes['aria-label'] || attributes['aria-labelledby']));
@@ -109,6 +109,7 @@
 
 <svelte:element
 	this={tag}
+	{...attributes}
 	bind:this={ref}
 	class={[
 		'fs-tag',
@@ -125,31 +126,31 @@
 	]}
 	type={tag === 'button' ? 'button' : undefined}
 	disabled={tag === 'button' ? _disabled : undefined}
-	{...attributes}
 	onclick={rootClick}
 	onkeydown={handleKeydown}
 >
 	{#if interactive}
 		<button
+			{...primaryButtonAttributes}
 			type="button"
-			class="fs-tag-primary"
+			class={['fs-tag-primary', primaryButtonAttributes?.class]}
 			id={primaryId}
 			disabled={_disabled}
 			aria-pressed={group ? _selected : undefined}
-			{...primaryProps}
 			onclick={handlePrimaryClick}
 		>
 			{@render content()}
 		</button>
 		{#if _dismissible}
 			<button
+				{...dismissButtonAttributes}
 				type="button"
-				class="fs-tag-dismiss"
+				class={['fs-tag-dismiss', dismissButtonAttributes?.class]}
 				id={dismissId}
 				disabled={_disabled}
-				aria-label={dismissLabel}
-				aria-labelledby="{primaryId} {dismissId}"
-				{...dismissProps}
+				aria-label={dismissButtonAttributes?.['aria-label'] ?? dismissLabel}
+				aria-labelledby={dismissButtonAttributes?.['aria-labelledby'] ??
+					(dismissButtonAttributes?.['aria-label'] ? undefined : `${primaryId} ${dismissId}`)}
 				onclick={dismiss}
 			>
 				<RenderSoC SoC={dismissIcon} />

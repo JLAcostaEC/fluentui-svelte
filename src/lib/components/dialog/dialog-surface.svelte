@@ -3,10 +3,10 @@
 	import { on } from 'svelte/events';
 	import type { DialogSurfaceProps } from './types.ts';
 	import { getDialogContext } from './dialog.svelte.ts';
-	import { Button } from '$lib/index.js';
+	import { Button } from '#lib/index.js';
 	import DismissFilled from 'fluentui-icons-svelte/DismissFilled.svelte';
 
-	let { ref = $bindable(), class: classes, oncancel, children, ...attributes }: DialogSurfaceProps = $props();
+	let { ref = $bindable(null), class: classes, oncancel, children, ...attributes }: DialogSurfaceProps = $props();
 
 	const CONTEXT = getDialogContext();
 
@@ -61,13 +61,13 @@
 </script>
 
 <dialog
+	{...attributes}
 	open={_state.open}
 	class={['fs-dialog', `position-${config.position}`, `animation-${config.animation}`, classes]}
 	style:--fs-dialog-duration={duration}
-	aria-labelledby={_state.titleId}
+	aria-labelledby={_state.titleId ?? attributes['aria-labelledby']}
 	bind:this={ref}
 	oncancel={handleCancel}
-	{...attributes}
 >
 	<div class="dialog-wrapper">
 		{#if config.type === 'non-modal'}

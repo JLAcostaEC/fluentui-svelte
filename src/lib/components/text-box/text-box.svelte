@@ -1,33 +1,37 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import DismissFilled from 'fluentui-icons-svelte/DismissFilled.svelte';
 	import SearchFilled from 'fluentui-icons-svelte/SearchFilled.svelte';
 	import EyeShowFilled from 'fluentui-icons-svelte/EyeShowFilled.svelte';
 	import EyeHideFilled from 'fluentui-icons-svelte/EyeHideFilled.svelte';
-	import { TextBoxButton } from '$lib/index.js';
-	import { RenderSoC } from '$internal';
+	import { TextBoxButton } from '#lib/index.js';
+	import { invokeHandlers, RenderSoC } from '#internal';
 	import type { TextBoxProps } from './types.ts';
 
 	const FALLBACK_ID = $props.id();
 
+	const labelContext = claimLabel(() => id);
+
 	let {
-		id = 'input-' + FALLBACK_ID,
+		id = labelContext?.fieldId ?? 'input-' + FALLBACK_ID,
 		readonly,
 		name = id,
 		hideActionButtons,
 		type = 'text',
-		class: classes,
 		wrapperAttributes,
-		wrapperRef = $bindable(),
-		value = $bindable(),
-		ref = $bindable(),
+		wrapperRef = $bindable(null),
+		value = $bindable(null),
+		ref = $bindable(null),
 		placeholder = 'Fluent TextBox',
 		size = 'medium',
 		contentBefore,
 		contentAfter,
 		querySubmitted,
 		textChanged,
-		onkeydown,
+		onkeyup,
 		onClear,
+		onchange,
+		oninput,
 		children,
 		...attributes
 	}: TextBoxProps = $props();
@@ -57,12 +61,11 @@
 		}
 	};
 
-	const handleKeyDown = (e: KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement }) => {
+	const handleKeyUp = (e: KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement }) => {
 		if (e.key === 'Escape') {
 			e.preventDefault();
 			(e.target as HTMLInputElement).blur();
 		}
-		onkeydown?.(e);
 	};
 </script>
 
@@ -80,7 +83,11 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
   <TextBox type="text" placeholder="Enter your name" />
   ```
 -->
-<div class={['fs-textbox', id, `text-box-size-${size}`, classes]} {...wrapperAttributes} bind:this={wrapperRef}>
+<div
+	{...wrapperAttributes}
+	class={['fs-textbox', `text-box-size-${size}`, wrapperAttributes?.class]}
+	bind:this={wrapperRef}
+>
 	{#if contentBefore}
 		<span class="content-before">
 			{#if typeof contentBefore === 'string'}
@@ -91,6 +98,7 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 		</span>
 	{/if}
 	<input
+		{...attributes}
 		{type}
 		{id}
 		{name}
@@ -98,10 +106,9 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 		{readonly}
 		bind:value
 		bind:this={ref}
-		onkeyup={handleKeyDown}
-		oninput={(e) => textChanged?.(e as any, value)}
-		onchange={(e) => textChanged?.(e as any, value)}
-		{...attributes}
+		onkeyup={(e) => invokeHandlers(e, [], [handleKeyUp, onkeyup])}
+		oninput={(e) => invokeHandlers(e, [], [(_e) => textChanged?.(_e, value), oninput])}
+		onchange={(e) => invokeHandlers(e, [], [(_e) => textChanged?.(_e, value), onchange])}
 	/>
 	{#if contentAfter}
 		<span class="content-after">
@@ -221,6 +228,11 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 			left: -0.063rem;
 			background-color: var(--fs-accent-fill-default);
 		}
+		&:has(input:is(:user-invalid, [aria-invalid='true'])):after {
+			width: calc(100% + 0.125rem);
+			left: -0.063rem;
+			background-color: var(--fs-system-critical);
+		}
 		&:has(input:focus) {
 			background: var(--fs-control-fill-input-active);
 			& input::placeholder {
@@ -271,12 +283,14 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 			visibility: hidden;
 		}
 		&.text-box-size-small {
+			--text-box-edge-padding: 0.5rem;
 			& :is(input, .content-after, .content-before) {
 				font-size: var(--fs-body2-font-size);
 				padding: 0.25rem;
 			}
 		}
 		&.text-box-size-medium {
+			--text-box-edge-padding: 0.6875rem;
 			font-size: var(--fs-body-font-size);
 			& :is(input, .content-after, .content-before) {
 				padding: 0.375rem;
@@ -284,6 +298,7 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 			}
 		}
 		&.text-box-size-large {
+			--text-box-edge-padding: 0.9375rem;
 			& :is(input, .content-after, .content-before) {
 				padding: 0.625rem 0.625rem;
 				font-size: var(--fs-subtitle2-font-size);
@@ -293,6 +308,18 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 			}
 			& :global(.clear-button:last-of-type) {
 				margin-right: 0.3125rem;
+			}
+		}
+		/* The outer horizontal edges of the control use the per-size edge padding. */
+		&:is(.text-box-size-small, .text-box-size-medium, .text-box-size-large) {
+			& input:not(.content-before + input) {
+				padding-left: var(--text-box-edge-padding);
+			}
+			& :is(input, .content-after):last-child {
+				padding-right: var(--text-box-edge-padding);
+			}
+			& .content-before {
+				padding-left: var(--text-box-edge-padding);
 			}
 		}
 	}

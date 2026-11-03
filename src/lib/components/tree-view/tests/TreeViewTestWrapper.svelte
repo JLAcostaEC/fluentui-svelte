@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { TreeView, TreeViewItem, TreeViewItemContent } from '$lib/index.js';
-	import type { TreeViewItemProps, TreeViewSelectionMode } from '$lib/components/tree-view/types.js';
-	import type { Sizes } from '$types';
+	import { TreeView, TreeViewItem, TreeViewItemContent } from '#lib/index.js';
+	import type { TreeViewItemProps, TreeViewSelectionMode } from '#lib/components/tree-view/types.js';
+	import type { Sizes } from '#types';
 
 	let {
 		selectionMode,
@@ -12,7 +12,8 @@
 		onAppleCheckedChange,
 		branchOpen,
 		appleChecked,
-		appleIndeterminate
+		appleIndeterminate,
+		checkedItems
 	}: {
 		selectionMode?: TreeViewSelectionMode;
 		size?: Sizes;
@@ -23,10 +24,11 @@
 		branchOpen?: boolean;
 		appleChecked?: boolean;
 		appleIndeterminate?: boolean;
+		checkedItems?: string[];
 	} = $props();
 </script>
 
-<TreeView {selectionMode} {size} {onCheckedChange} {onOpenChange}>
+<TreeView {selectionMode} {size} {onCheckedChange} {onOpenChange} {checkedItems}>
 	<TreeViewItem id="fruits" type="branch" open={branchOpen} onOpenChange={onFruitsOpenChange}>
 		<TreeViewItemContent>Fruits</TreeViewItemContent>
 		<TreeView>

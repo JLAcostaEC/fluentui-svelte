@@ -1,6 +1,6 @@
 import type { Component, Snippet } from 'svelte';
 import type { HTMLAttributes, HTMLInputAttributes } from 'svelte/elements';
-import type { Sizes } from '$types';
+import type { Sizes } from '#types';
 
 export type TextBoxTypes = 'text' | 'search' | 'email' | 'url' | 'tel' | 'password' | 'number';
 
@@ -14,15 +14,15 @@ export type TextBoxProps = {
 	 * @type string | number
 	 * @bindable
 	 */
-	value?: string | number;
+	value?: string | number | null;
 	/** The DOM reference of the wrapper element.
 	 * @bindable
 	 */
-	wrapperRef?: HTMLDivElement;
+	wrapperRef?: HTMLDivElement | null;
 	/** The DOM reference of the input element.
 	 * @bindable
 	 */
-	ref?: HTMLInputElement;
+	ref?: HTMLInputElement | null;
 	/** The placeholder text for the input.
 	 * @default 'Fluent TextBox'
 	 */
@@ -44,7 +44,7 @@ export type TextBoxProps = {
 	 */
 	size?: Sizes;
 	/** Occurs when content changes in the text box. */
-	textChanged?: (e: InputEvent, text: string) => void;
+	textChanged?: (e: Event & unknown, text: string) => void;
 	/** The QuerySubmitted event occurs when:
 	 * 1. The input type is 'search'.
 	 * 2. While the focus is in the text box, press Enter or click the query icon.
@@ -55,7 +55,7 @@ export type TextBoxProps = {
 	onClear?: (e: MouseEvent) => void;
 	/** The children elements to render inside the input. */
 	children?: Snippet;
-	/** The attributes to apply to the wrapper element.
+	/** The attributes to spread on the wrapper element.
 	 * @type HTMLAttributes
 	 */
 	wrapperAttributes?: HTMLAttributes<HTMLDivElement>;

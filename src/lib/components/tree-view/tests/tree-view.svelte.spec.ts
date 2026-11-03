@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { TreeViewItem, TreeViewItemContent } from '$lib/index.js';
+import { TreeViewItem, TreeViewItemContent } from '#lib/index.js';
 import TreeViewTestWrapper from './TreeViewTestWrapper.svelte';
 import TreeViewLayoutTestWrapper from './TreeViewLayoutTestWrapper.svelte';
 
@@ -22,6 +22,12 @@ describe('TreeView', () => {
 		render(TreeViewTestWrapper, { selectionMode: 'single' });
 		const el = page.selector('ul[role="tree"]');
 		await expect.element(el).toHaveAttribute('aria-multiselectable', 'false');
+	});
+
+	it('leaves aria-multiselectable to the tree, where groups do not take it', async () => {
+		render(TreeViewTestWrapper);
+		const el = page.selector('ul.fs-tree-view[role="group"]');
+		await expect.element(el).not.toHaveAttribute('aria-multiselectable');
 	});
 
 	it('renders a nested group', async () => {
@@ -127,6 +133,20 @@ describe('interaction', () => {
 });
 
 describe('checkbox', () => {
+	it('shows a branch as mixed when only some of its items start checked', async () => {
+		render(TreeViewTestWrapper, { appleChecked: true });
+		const fruits = page.selector('li[role="treeitem"][id="fruits"]');
+		await expect.element(fruits).toHaveAttribute('aria-checked', 'mixed');
+	});
+
+	it('keeps the checked ids of items that are not in the tree yet', async () => {
+		const checkedItems = ['apple', 'pear'];
+		render(TreeViewTestWrapper, { checkedItems });
+		const fruits = page.selector('li[role="treeitem"][id="fruits"]');
+		await expect.element(fruits).toHaveAttribute('aria-checked', 'mixed');
+		expect(checkedItems).toEqual(['apple', 'pear']);
+	});
+
 	const checkbox = (id: string) => page.selector(`li[data-value="${id}"] > .fs-tree-view-item-content .fs-checkbox`);
 
 	it('checks the item with a single click', async () => {

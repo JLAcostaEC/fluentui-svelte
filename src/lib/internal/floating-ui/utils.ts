@@ -1,4 +1,4 @@
-import { DEFAULT_OFFSET } from '$constants';
+import { DEFAULT_OFFSET } from '#constants';
 import type { ComputePositionConfig, VirtualElement } from '@floating-ui/dom';
 
 export const getPointerVirtualElement = (e: Event): VirtualElement => {

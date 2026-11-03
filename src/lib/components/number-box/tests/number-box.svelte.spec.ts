@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { NumberBox } from '$lib/index.js';
+import { NumberBox } from '#lib/index.js';
 import NumberBoxTestWrapper from './NumberBoxTestWrapper.svelte';
 
 const input = () => page.getByRole('spinbutton');

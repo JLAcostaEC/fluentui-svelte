@@ -66,7 +66,7 @@ The `as` prop lets you choose the HTML tag used to render the skeleton. Possible
 | `animation`      | `'wave'` &#124; `'pulse'`                         | `'wave'`    | The animation played while the content is loading.            |
 | `shape`          | `'circular'` &#124; `'rounded'` &#124; `'square'` | `'rounded'` | The skeleton can have a circular, rounded or square shape.    |
 | `justify`        | `boolean`                                         |             | The skeleton is justified to the full width of the container. |
-| `ref` _bindable_ | `HTMLElement`                                     |             | The DOM reference of the skeleton element.                    |
+| `ref` _bindable_ | `HTMLElement` &#124; `null`                       |             | The DOM reference of the skeleton element.                    |
 | HTML Attributes  |                                                   |             |                                                               |
 
 <!-- /props:SkeletonProps -->

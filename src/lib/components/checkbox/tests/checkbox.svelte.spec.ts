@@ -1,18 +1,12 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { Checkbox } from '$lib/index.js';
+import { Checkbox } from '#lib/index.js';
 import CheckboxTestWrapper from './CheckboxTestWrapper.svelte';
 
 describe('rendering', () => {
-	it('renders a label wrapper by default, so the children name the input', async () => {
+	it('renders a div wrapper by default', async () => {
 		render(Checkbox);
-		const el = page.selector('label.fs-checkbox');
-		await expect.element(el).toBeInTheDocument();
-	});
-
-	it('renders a div wrapper when wrapperAs="div"', async () => {
-		render(Checkbox, { wrapperAs: 'div' });
 		const el = page.selector('div.fs-checkbox');
 		await expect.element(el).toBeInTheDocument();
 	});
@@ -71,6 +65,15 @@ describe('indeterminate state', () => {
 		const input = page.getByRole('checkbox');
 		expect((input.element() as HTMLInputElement).indeterminate).toBe(true);
 	});
+
+	it('clears the mixed state, attribute included, when it is clicked', async () => {
+		render(Checkbox, { indeterminate: true, 'aria-label': 'Mixed' });
+		const input = page.getByRole('checkbox');
+		await expect.element(input).toHaveAttribute('data-indeterminate');
+		await input.click();
+		await expect.element(input).not.toHaveAttribute('data-indeterminate');
+		expect((input.element() as HTMLInputElement).indeterminate).toBe(false);
+	});
 });
 
 describe('disabled state', () => {
@@ -108,5 +111,13 @@ describe('attributes', () => {
 		render(Checkbox, { wrapperAttributes: { 'data-testid': 'my-wrapper' } });
 		const el = page.getByTestId('my-wrapper');
 		await expect.element(el).toBeInTheDocument();
+	});
+});
+
+describe('separate text label', () => {
+	it('never contains its input in a label', async () => {
+		render(CheckboxTestWrapper, { label: 'Choose me' });
+		expect(document.querySelector('label input')).toBeNull();
+		await expect.element(page.selector('.fs-checkbox > label')).toHaveAttribute('for');
 	});
 });

@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { Hyperlink } from '$lib/index.js';
+import { Hyperlink } from '#lib/index.js';
 import HyperlinkTestWrapper from './HyperlinkTestWrapper.svelte';
 
 const link = () => page.getByRole('link');

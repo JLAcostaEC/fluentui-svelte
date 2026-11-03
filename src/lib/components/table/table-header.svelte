@@ -2,7 +2,7 @@
 	import { getTag, requireTableContext } from './table.svelte.ts';
 	import type { TableDOM, TableHeaderProps } from './types.ts';
 
-	let { as, ref = $bindable(), class: classes, children, ...attributes }: TableHeaderProps<Tag> = $props();
+	let { as, ref = $bindable(null), class: classes, children, ...attributes }: TableHeaderProps<Tag> = $props();
 
 	const context = requireTableContext();
 
@@ -13,10 +13,10 @@
 
 <svelte:element
 	this={_as}
+	{...attributes}
 	bind:this={ref as TableDOM[Tag]}
 	role={_as === 'div' ? 'rowgroup' : undefined}
 	class={['fs-table-header', classes]}
-	{...attributes}
 >
 	{@render children?.()}
 </svelte:element>

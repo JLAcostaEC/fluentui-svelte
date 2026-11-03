@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { BreadcrumbItemProps } from './types.ts';
 
-	let { ref = $bindable(), class: classes, children, ...attributes }: BreadcrumbItemProps = $props();
+	let { ref = $bindable(null), class: classes, children, ...attributes }: BreadcrumbItemProps = $props();
 </script>
 
 <!--
@@ -17,7 +17,7 @@
 	</BreadcrumbItem>
 	```
 -->
-<li bind:this={ref} class={['fs-breadcrumb-item', classes]} {...attributes}>
+<li {...attributes} bind:this={ref} class={['fs-breadcrumb-item', classes]}>
 	{@render children?.()}
 </li>
 

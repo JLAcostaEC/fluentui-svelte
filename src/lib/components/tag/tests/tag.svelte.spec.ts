@@ -175,12 +175,12 @@ describe('Tag', () => {
 			await expect.element(page.getByRole('button', { name: 'Tag 1 Remove' })).toBeInTheDocument();
 		});
 
-		it('lets dismissProps give the dismiss button a name of its own', async () => {
+		it('lets dismissButtonAttributes give the dismiss button a name of its own', async () => {
 			render(TagTestWrapper, {
 				tagProps: {
 					interactive: true,
 					dismissible: true,
-					dismissProps: { 'aria-label': 'Delete tag', 'aria-labelledby': undefined }
+					dismissButtonAttributes: { 'aria-label': 'Delete tag', 'aria-labelledby': undefined }
 				}
 			});
 			await expect.element(page.getByRole('button', { name: 'Delete tag' })).toBeInTheDocument();
@@ -188,14 +188,16 @@ describe('Tag', () => {
 
 		it('names the dismiss button after a custom primary id', async () => {
 			render(TagTestWrapper, {
-				tagProps: { interactive: true, dismissible: true, primaryProps: { id: 'custom-primary' } }
+				tagProps: { interactive: true, dismissible: true, primaryButtonAttributes: { id: 'custom-primary' } }
 			});
 			await expect.element(page.selector('.fs-tag-primary')).toHaveAttribute('id', 'custom-primary');
 			expect(page.selector('.fs-tag-dismiss').element().getAttribute('aria-labelledby')).toContain('custom-primary');
 		});
 
-		it('forwards primaryProps to the primary button', async () => {
-			render(TagTestWrapper, { tagProps: { interactive: true, primaryProps: { 'aria-haspopup': 'dialog' } } });
+		it('forwards primaryButtonAttributes to the primary button', async () => {
+			render(TagTestWrapper, {
+				tagProps: { interactive: true, primaryButtonAttributes: { 'aria-haspopup': 'dialog' } }
+			});
 			await expect.element(page.selector('.fs-tag-primary')).toHaveAttribute('aria-haspopup', 'dialog');
 		});
 

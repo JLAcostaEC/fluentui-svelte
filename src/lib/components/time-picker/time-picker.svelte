@@ -1,13 +1,16 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import type { TimePickerProps } from './types.ts';
-	import { Flyout, Button, Divider } from '$lib/index.js';
+	import { Flyout, Button, Divider } from '#lib/index.js';
 	import { on } from 'svelte/events';
 	import { tick } from 'svelte';
-	import { PREFIX } from '$constants';
-	import { floating } from '$internal';
+	import { PREFIX } from '#constants';
+	import { dispatchFieldEvents, floating, invokeHandlers, NativeField } from '#internal';
 	import { flip, hide, offset, shift } from '@floating-ui/dom';
-	import DynamicCarousel from '$lib/internal/components/dynamic-carousel/dynamic-carousel.svelte';
+	import DynamicCarousel from '#lib/internal/components/dynamic-carousel/dynamic-carousel.svelte';
 	import { CheckmarkRegular, DismissRegular } from 'fluentui-icons-svelte';
+
+	const labelContext = claimLabel(() => id);
 
 	let {
 		format = 24,
@@ -16,24 +19,44 @@
 		hideHours = false,
 		hideMinutes = false,
 		hideSeconds = false,
-		element = $bindable(),
-		wrapperRef = $bindable(),
+		id = labelContext?.fieldId,
+		name = id,
+		ref = $bindable(null),
+		buttonRef = $bindable(null),
+		buttonAttributes,
+		wrapperRef = $bindable(null),
 		wrapperAttributes,
-		inputElement = $bindable(),
-		inputProps,
+		disabled,
+		readonly,
+		step,
+		onfocus,
+		onblur,
 		popupLabel = 'Choose a time',
+		columnLabels,
 		...attributes
 	}: TimePickerProps = $props();
 
 	const FALLBACK_ID = $props.id();
 	const POPUP_ID = `${PREFIX}timepicker-${FALLBACK_ID}-popup`;
 
-	let popupRef: HTMLElement | undefined = $state();
+	let popupRef: HTMLElement | null = $state(null);
+
+	const native = new NativeField(
+		() => ref,
+		() => buttonRef,
+		labelContext
+	);
 
 	/** Closing always hands the focus back, so the keyboard never lands nowhere. */
 	function closePopup() {
 		open = false;
-		element?.focus();
+		buttonRef?.focus();
+	}
+
+	/** A label activates the native input it belongs to, which hands the activation to the button. */
+	function openFromField() {
+		buttonRef?.focus();
+		open = !readonly;
 	}
 
 	// Escape has to work from inside the popup too, and the popup is not a descendant
@@ -64,19 +87,23 @@
 	const HOURS_12 = Array.from({ length: 12 }, (_, i) => pad(i === 0 ? 12 : i)); // 12, 01 … 11
 	const SIXTY = Array.from({ length: 60 }, (_, i) => pad(i));
 	const MERIDIEM = ['AM', 'PM'];
-	const LABELS: Record<Column, string> = {
+	// Name the columns on the trigger while there is no time, and the listboxes of the popup.
+	const labels: Record<Column, string> = $derived({
 		hour: 'Hour',
 		minute: 'Minute',
 		second: 'Second',
-		meridiem: 'AM/PM'
-	};
+		meridiem: 'AM/PM',
+		...columnLabels
+	});
 
 	const hour12 = $derived(format === 12);
 
 	// Working selection — canonical 24h values, synced with `value` while the popup is closed.
-	let hour = $state(new Date().getHours()); // 0-23
-	let minute = $state(new Date().getMinutes()); // 0-59
-	let second = $state(new Date().getSeconds()); // 0-59
+	// It starts from `value`, so a popup rendered open on the server shows it too.
+	const initial = parseValue(value);
+	let hour = $state(initial.h); // 0-23
+	let minute = $state(initial.mi); // 0-59
+	let second = $state(initial.s); // 0-59
 
 	const isPM = $derived(hour >= 12);
 	// 12h wheel index: hour % 12 (0 → "12", 1 → "01", …, 11 → "11").
@@ -93,6 +120,9 @@
 	});
 
 	const hasValue = $derived(/^\d{2}:\d{2}(:\d{2})?$/.test(value ?? ''));
+
+	// Parsed committed value: the closed trigger reads it, since the working selection only catches up in an effect.
+	const committed = $derived(parseValue(value));
 
 	function parseValue(v: string) {
 		const m = /^(\d{2}):(\d{2})(?::(\d{2}))?$/.exec(v ?? '');
@@ -127,7 +157,11 @@
 	}
 
 	function confirm() {
-		value = `${pad(hour)}:${pad(minute)}${hideSeconds ? '' : `:${pad(second)}`}`;
+		const next = `${pad(hour)}:${pad(minute)}${hideSeconds ? '' : `:${pad(second)}`}`;
+		if (next !== value) {
+			value = next;
+			dispatchFieldEvents(ref);
+		}
 		closePopup();
 	}
 
@@ -138,24 +172,29 @@
 	// Trigger label per column: the live selection while open, the committed value once set,
 	// otherwise the placeholder column name.
 	function display(col: Column): string {
-		if (!open && !hasValue) return LABELS[col];
-		if (col === 'hour') return hour12 ? HOURS_12[hour12Index] : pad(hour);
-		if (col === 'minute') return pad(minute);
-		if (col === 'second') return pad(second);
-		return isPM ? 'PM' : 'AM';
+		if (!open && !hasValue) return labels[col];
+		const { h, mi, s } = open ? { h: hour, mi: minute, s: second } : committed;
+		if (col === 'hour') return hour12 ? HOURS_12[h % 12] : pad(h);
+		if (col === 'minute') return pad(mi);
+		if (col === 'second') return pad(s);
+		return h >= 12 ? 'PM' : 'AM';
 	}
 </script>
 
-<div class="fs-time-picker-wrapper" bind:this={wrapperRef} {...wrapperAttributes}>
+<div {...wrapperAttributes} class={['fs-time-picker-wrapper', wrapperAttributes?.class]} bind:this={wrapperRef}>
 	<button
+		{...buttonAttributes}
+		{...native.aria(attributes, buttonAttributes, 'button')}
 		type="button"
-		class="fs-time-picker"
+		class={['fs-time-picker', buttonAttributes?.class]}
+		{disabled}
 		aria-haspopup="dialog"
 		aria-expanded={open}
 		aria-controls={open ? POPUP_ID : undefined}
-		onclick={() => (open = !open)}
-		bind:this={element}
-		{...attributes}
+		onclick={(e) => invokeHandlers(e, [], [() => (open = !readonly && !open), buttonAttributes?.onclick])}
+		onfocus={(e) => invokeHandlers(e, [], [onfocus, buttonAttributes?.onfocus])}
+		onblur={(e) => invokeHandlers(e, [], [onblur, buttonAttributes?.onblur])}
+		bind:this={buttonRef}
 	>
 		{#each columns as col, idx (col)}
 			{#if idx > 0}
@@ -165,13 +204,29 @@
 		{/each}
 	</button>
 
-	<!-- Carries the value into a form. -->
-	<input type="time" hidden step={hideSeconds ? undefined : 1} {value} bind:this={inputElement} {...inputProps} />
+	<!-- The field of the form: submitted, validated and reset like any time input,
+	     behind the button and out of the tab order, since the button is what people use. See `NativeField`.
+	     Seconds need a step of one to be a valid value. -->
+	<input
+		{...attributes}
+		{id}
+		{name}
+		class="native-field"
+		aria-hidden={native.reported ? undefined : 'true'}
+		type="time"
+		tabindex={-1}
+		step={step ?? (hideSeconds ? undefined : 1)}
+		{disabled}
+		{readonly}
+		bind:value
+		bind:this={ref}
+		onclick={openFromField}
+	/>
 </div>
 
 {#if open}
 	<Flyout
-		{@attach floating(element, {
+		{@attach floating(buttonRef, {
 			placement: 'bottom',
 			middleware: [
 				offset(({ rects }) => {
@@ -183,7 +238,7 @@
 			],
 			strategy: 'fixed'
 		})}
-		reference={element}
+		reference={buttonRef}
 		id={POPUP_ID}
 		role="dialog"
 		aria-modal="true"
@@ -198,16 +253,37 @@
 				<div class="carousel-col col-{col}">
 					{#if col === 'hour'}
 						{#if hour12}
-							<DynamicCarousel values={HOURS_12} selectedIndex={hour12Index} onSelected={(_, i) => setHour12(i)} />
+							<DynamicCarousel
+								label={labels.hour}
+								values={HOURS_12}
+								selectedIndex={hour12Index}
+								onSelected={(_, i) => setHour12(i)}
+							/>
 						{:else}
-							<DynamicCarousel values={HOURS_24} selectedIndex={hour} onSelected={(_, i) => (hour = i)} />
+							<DynamicCarousel
+								label={labels.hour}
+								values={HOURS_24}
+								selectedIndex={hour}
+								onSelected={(_, i) => (hour = i)}
+							/>
 						{/if}
 					{:else if col === 'minute'}
-						<DynamicCarousel values={SIXTY} selectedIndex={minute} onSelected={(_, i) => (minute = i)} />
+						<DynamicCarousel
+							label={labels.minute}
+							values={SIXTY}
+							selectedIndex={minute}
+							onSelected={(_, i) => (minute = i)}
+						/>
 					{:else if col === 'second'}
-						<DynamicCarousel values={SIXTY} selectedIndex={second} onSelected={(_, i) => (second = i)} />
+						<DynamicCarousel
+							label={labels.second}
+							values={SIXTY}
+							selectedIndex={second}
+							onSelected={(_, i) => (second = i)}
+						/>
 					{:else}
 						<DynamicCarousel
+							label={labels.meridiem}
 							values={MERIDIEM}
 							selectedIndex={isPM ? 1 : 0}
 							infinite={false}
@@ -230,11 +306,34 @@
 {/if}
 
 <style>
+	/* The box of the button, which the native field covers so its validation message points at the button. */
 	.fs-time-picker-wrapper {
-		display: contents;
+		display: flex;
+		position: relative;
+		inline-size: fit-content;
+	}
+	.fs-time-picker-wrapper:has(> .native-field:is(:user-invalid, [aria-invalid='true'])) {
+		& .picker-content {
+			color: var(--fs-system-critical);
+		}
+		& .fs-time-picker::after,
+		& :global(.fs-divider) {
+			background: var(--fs-system-critical);
+		}
+	}
+	.native-field {
+		position: absolute;
+		inset: 0;
+		inline-size: 100%;
+		block-size: 100%;
+		margin: 0;
+		box-sizing: border-box;
+		opacity: 0;
+		pointer-events: none;
 	}
 	.fs-time-picker {
 		display: flex;
+		flex: 1 1 auto;
 		position: relative;
 		border-radius: var(--fs-control-border-radius);
 		font-size: var(--fs-body-font-size);

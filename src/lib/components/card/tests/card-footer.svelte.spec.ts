@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { CardFooter } from '$lib/index.js';
+import { CardFooter } from '#lib/index.js';
 import CardTestWrapper from './CardTestWrapper.svelte';
 
 describe('rendering', () => {

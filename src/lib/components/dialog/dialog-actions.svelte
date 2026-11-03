@@ -3,7 +3,7 @@
 	import type { DialogActionsProps } from './types.ts';
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		position = 'end',
 		fluid,
 		class: classes,
@@ -20,10 +20,10 @@
 </script>
 
 <div
+	{...attributes}
 	class={['dialog-actions', `justify-${position}`, { fluid }, classes]}
 	bind:this={ref}
 	{...tabspotAttributes}
-	{...attributes}
 >
 	{@render children?.()}
 </div>

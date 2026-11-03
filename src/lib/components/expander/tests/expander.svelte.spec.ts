@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { Expander } from '$lib/index.js';
+import { Expander } from '#lib/index.js';
 import ExpanderTestWrapper from './ExpanderTestWrapper.svelte';
 
 describe('rendering', () => {

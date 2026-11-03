@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { InfoBar } from '$lib/index.js';
+import { InfoBar } from '#lib/index.js';
 import InfoBarTestWrapper from './InfoBarTestWrapper.svelte';
 
 const bar = () => page.selector('.fs-info-bar');
@@ -15,7 +15,12 @@ describe('rendering', () => {
 
 	it('renders the title it is given', async () => {
 		render(InfoBar, { title: 'Update available' });
-		await expect.element(page.getByRole('heading', { name: 'Update available' })).toBeInTheDocument();
+		await expect.element(page.getByRole('heading', { level: 3, name: 'Update available' })).toBeInTheDocument();
+	});
+
+	it('renders the title at the heading level it is given', async () => {
+		render(InfoBar, { title: 'Update available', headingLevel: 2 });
+		await expect.element(page.getByRole('heading', { level: 2, name: 'Update available' })).toBeInTheDocument();
 	});
 
 	it('renders the message passed as children', async () => {

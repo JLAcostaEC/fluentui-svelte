@@ -135,7 +135,7 @@ Other components that can be used within the table include:
 		<TableRow>
 			<TableSelectionCell
 				checked={allSelected ? true : someSelected ? 'mixed' : false}
-				checkboxIndicator={{ 'aria-label': 'Select all rows' }}
+				checkboxProps={{ 'aria-label': 'Select all rows' }}
 				onclick={() => (selected = allSelected ? [] : items.map((item) => item.file))}
 			/>
 			<TableHeaderCell>File</TableHeaderCell>
@@ -149,7 +149,7 @@ Other components that can be used within the table include:
 				appearance={isSelected ? 'brand' : 'none'}
 				onclick={() => toggleRow(item.file)}
 			>
-				<TableSelectionCell checked={isSelected} checkboxIndicator={{ 'aria-label': 'Select row' }} />
+				<TableSelectionCell checked={isSelected} checkboxProps={{ 'aria-label': 'Select row' }} />
 				<TableCell>{item.file}</TableCell>
 			</TableRow>
 		{/each}
@@ -177,11 +177,7 @@ Set `type="radio"` on the selection cell when only one row can be selected at a 
 		{#each items as item (item.file)}
 			{@const isPicked = picked === item.file}
 			<TableRow aria-selected={isPicked} appearance={isPicked ? 'brand' : 'none'} onclick={() => (picked = item.file)}>
-				<TableSelectionCell
-					type="radio"
-					checked={isPicked}
-					radioIndicator={{ name: 'file', 'aria-label': 'Select row' }}
-				/>
+				<TableSelectionCell type="radio" checked={isPicked} radioProps={{ name: 'file', 'aria-label': 'Select row' }} />
 				<TableCell>{item.file}</TableCell>
 			</TableRow>
 		{/each}
@@ -195,7 +191,7 @@ Set `type="radio"` on the selection cell when only one row can be selected at a 
 
 ```svelte
 <TableRow aria-selected={isSelected} appearance={isSelected ? 'brand' : 'none'} onclick={() => toggleSubtle(item.file)}>
-	<TableSelectionCell subtle checked={isSelected} checkboxIndicator={{ 'aria-label': 'Select row' }} />
+	<TableSelectionCell subtle checked={isSelected} checkboxProps={{ 'aria-label': 'Select row' }} />
 	<TableCell>{item.file}</TableCell>
 </TableRow>
 ```
@@ -356,6 +352,15 @@ The table renders whatever you put inside it, so any virtualization library work
 	import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
 
 	const rows = Array.from({ length: 2000 }, (_, i) => ({ id: i, file: `Document ${i + 1}` }));
+
+	// The virtualizer names its viewport a region, which a rowgroup cannot hold between itself and its rows.
+	const presentational = (node) => {
+		const region = node.querySelector('[role="region"]');
+		region?.setAttribute('role', 'none');
+		// A name or a tab stop would keep the role. The rows are reached with the arrow keys of the table.
+		region?.removeAttribute('aria-label');
+		region?.removeAttribute('tabindex');
+	};
 </script>
 
 <Table noNativeElements style="min-width: 520px;" aria-label="Virtualized table" aria-rowcount={rows.length + 1}>
@@ -364,7 +369,7 @@ The table renders whatever you put inside it, so any virtualization library work
 			<TableHeaderCell>File</TableHeaderCell>
 		</TableRow>
 	</TableHeader>
-	<TableBody style="height: 320px;">
+	<TableBody style="height: 320px;" {@attach presentational}>
 		<SvelteVirtualList items={rows} defaultEstimatedItemHeight={44}>
 			{#snippet renderItem(row, index)}
 				<TableRow aria-rowindex={index + 2}>
@@ -487,17 +492,17 @@ The table renders whatever you put inside it, so any virtualization library work
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableSelectionCellProps -->
 
-| Name                | Type                                           | Default      | Description                                                                    |
-| ------------------- | ---------------------------------------------- | ------------ | ------------------------------------------------------------------------------ |
-| `as`                | `'td'` &#124; `'div'`                          | `'td'`       | The HTML element to render the cell as. Inherited from the table by default.   |
-| `ref` _bindable_    | `HTMLTableCellElement` &#124; `HTMLDivElement` |              | The DOM reference of the cell element.                                         |
-| `type`              | `'checkbox'` &#124; `'radio'`                  | `'checkbox'` | A table can have two kinds of selection modes.                                 |
-| `checked`           | `boolean` &#124; `'mixed'`                     | `false`      | Whether the row is selected. `'mixed'` renders the indeterminate state.        |
-| `subtle`            | `boolean`                                      | `false`      | Only shows the indicator when it is checked, or the row is hovered or focused. |
-| `invisible`         | `boolean`                                      | `false`      | Hides the indicator while it keeps taking up the same space.                   |
-| `checkboxIndicator` | `CheckboxProps`                                |              | The props to spread on the checkbox rendered when `type` is `'checkbox'`.      |
-| `radioIndicator`    | `RadioButtonProps`                             |              | The props to spread on the radio button rendered when `type` is `'radio'`.     |
-| HTML Attributes     |                                                |              |                                                                                |
+| Name             | Type                                           | Default      | Description                                                                    |
+| ---------------- | ---------------------------------------------- | ------------ | ------------------------------------------------------------------------------ |
+| `as`             | `'td'` &#124; `'div'`                          | `'td'`       | The HTML element to render the cell as. Inherited from the table by default.   |
+| `ref` _bindable_ | `HTMLTableCellElement` &#124; `HTMLDivElement` |              | The DOM reference of the cell element.                                         |
+| `type`           | `'checkbox'` &#124; `'radio'`                  | `'checkbox'` | A table can have two kinds of selection modes.                                 |
+| `checked`        | `boolean` &#124; `'mixed'`                     | `false`      | Whether the row is selected. `'mixed'` renders the indeterminate state.        |
+| `subtle`         | `boolean`                                      | `false`      | Only shows the indicator when it is checked, or the row is hovered or focused. |
+| `invisible`      | `boolean`                                      | `false`      | Hides the indicator while it keeps taking up the same space.                   |
+| `checkboxProps`  | `CheckboxProps`                                |              | The props to spread on the checkbox rendered when `type` is `'checkbox'`.      |
+| `radioProps`     | `RadioButtonProps`                             |              | The props to spread on the radio button rendered when `type` is `'radio'`.     |
+| HTML Attributes  |                                                |              |                                                                                |
 
 <!-- /props:TableSelectionCellProps -->
 
@@ -506,14 +511,14 @@ The table renders whatever you put inside it, so any virtualization library work
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableCellLayoutProps -->
 
-| Name             | Type                         | Default | Description                                                                    |
-| ---------------- | ---------------------------- | ------- | ------------------------------------------------------------------------------ |
-| `ref` _bindable_ | `HTMLDivElement`             |         | The DOM reference of the layout element.                                       |
-| `media`          | `Snippet` &#124; `Component` |         | An icon, an avatar or any other visual element placed before the main content. |
-| `description`    | `string`                     |         | A second line of text that describes or complements the main content.          |
-| `appearance`     | `'primary'`                  |         | Emphasizes the cell by enlarging the media and bolding the main content.       |
-| `truncate`       | `boolean`                    |         | Clips the content with an ellipsis instead of letting it wrap.                 |
-| HTML Attributes  |                              |         |                                                                                |
+| Name             | Type                           | Default | Description                                                                    |
+| ---------------- | ------------------------------ | ------- | ------------------------------------------------------------------------------ |
+| `ref` _bindable_ | `HTMLDivElement` &#124; `null` |         | The DOM reference of the layout element.                                       |
+| `media`          | `Snippet` &#124; `Component`   |         | An icon, an avatar or any other visual element placed before the main content. |
+| `description`    | `string`                       |         | A second line of text that describes or complements the main content.          |
+| `appearance`     | `'primary'`                    |         | Emphasizes the cell by enlarging the media and bolding the main content.       |
+| `truncate`       | `boolean`                      |         | Clips the content with an ellipsis instead of letting it wrap.                 |
+| HTML Attributes  |                                |         |                                                                                |
 
 <!-- /props:TableCellLayoutProps -->
 
@@ -522,10 +527,10 @@ The table renders whatever you put inside it, so any virtualization library work
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TableCellActionsProps -->
 
-| Name             | Type             | Default | Description                                                                          |
-| ---------------- | ---------------- | ------- | ------------------------------------------------------------------------------------ |
-| `ref` _bindable_ | `HTMLDivElement` |         | The DOM reference of the actions element.                                            |
-| `visible`        | `boolean`        |         | Keeps the actions on screen instead of waiting for the row to be hovered or focused. |
-| HTML Attributes  |                  |         |                                                                                      |
+| Name             | Type                           | Default | Description                                                                          |
+| ---------------- | ------------------------------ | ------- | ------------------------------------------------------------------------------------ |
+| `ref` _bindable_ | `HTMLDivElement` &#124; `null` |         | The DOM reference of the actions element.                                            |
+| `visible`        | `boolean`                      |         | Keeps the actions on screen instead of waiting for the row to be hovered or focused. |
+| HTML Attributes  |                                |         |                                                                                      |
 
 <!-- /props:TableCellActionsProps -->

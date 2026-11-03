@@ -20,7 +20,7 @@ A tab strip expects a `value` on every tab and an `activeTab` to match it agains
 	let activeTab = $state('document');
 </script>
 
-<TabView bind:activeTab listProps={{ 'aria-label': 'Workspaces' }}>
+<TabView bind:activeTab listAttributes={{ 'aria-label': 'Workspaces' }}>
 	<TabViewTab id="tab-document" value="document">Document</TabViewTab>
 	<TabViewTab id="tab-mail" value="mail">Mail</TabViewTab>
 </TabView>
@@ -104,16 +104,16 @@ A disabled tab cannot be selected, and the arrow keys pass over it rather than l
 
 | Name                       | Type                                                    | Default   | Description                                                                                                                                       |
 | -------------------------- | ------------------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ref` _bindable_           | `HTMLDivElement`                                        |           | The DOM reference of the element wrapping the strip.                                                                                              |
-| `listRef` _bindable_       | `HTMLDivElement`                                        |           | The DOM reference of the tab list.                                                                                                                |
-| `listProps`                | `HTMLAttributes`                                        |           | The props to spread on the tab list element, where the `tablist` role and its label belong.                                                       |
+| `ref` _bindable_           | `HTMLDivElement` &#124; `null`                          |           | The DOM reference of the element wrapping the strip.                                                                                              |
+| `listRef` _bindable_       | `HTMLDivElement` &#124; `null`                          |           | The DOM reference of the tab list.                                                                                                                |
+| `listAttributes`           | `HTMLAttributes`                                        |           | The Attributes to spread on the tab list element, where the `tablist` role and its label belong.                                                  |
 | `activeTab` _bindable_     | `string`                                                |           | The value of the selected tab.                                                                                                                    |
 | `onTabChange`              | `(event: Event, value: string) => void`                 |           | Fired when the selected tab changes.                                                                                                              |
 | `closable`                 | `boolean`                                               | `false`   | Every tab shows a close button, unless the tab opts out of it.                                                                                    |
 | `onTabClose`               | `(event: Event, value: string) => void`                 |           | Fired when a tab asks to be closed. Removing the tab is left to the consumer.                                                                     |
 | `showNewTabButton`         | `boolean`                                               | `false`   | Shows the button that adds a new tab at the end of the strip.                                                                                     |
 | `onNewTab`                 | `(event: MouseEvent) => void`                           |           | Fired when the new tab button is activated.                                                                                                       |
-| `newTabButtonProps`        | `HTMLButtonAttributes`                                  |           | The props to spread on the new tab button.                                                                                                        |
+| `newTabButtonAttributes`   | `HTMLButtonAttributes`                                  |           | The props to spread on the new tab button.                                                                                                        |
 | `tabWidthMode`             | `'equal'` &#124; `'size-to-content'` &#124; `'compact'` | `'equal'` | How the tabs take their width: sharing the strip evenly, sizing to their own content, or shrinking to the icon of every tab but the selected one. |
 | `disableTabspot`           | `boolean`                                               | `false`   | Opts the strip out of the tabspot focus management, to wire your own.                                                                             |
 | Element Attributes (`div`) |                                                         |           |                                                                                                                                                   |
@@ -127,7 +127,7 @@ A disabled tab cannot be selected, and the arrow keys pass over it rather than l
 
 | Name                       | Type                                    | Default | Description                                                                             |
 | -------------------------- | --------------------------------------- | ------- | --------------------------------------------------------------------------------------- |
-| `ref` _bindable_           | `HTMLDivElement`                        |         | The DOM reference of the tab element.                                                   |
+| `ref` _bindable_           | `HTMLDivElement` &#124; `null`          |         | The DOM reference of the tab element.                                                   |
 | `value`                    | `string`                                |         | The value that identifies the tab. Defaults to a generated id.                          |
 | `icon`                     | `Snippet` &#124; `Component`            |         | The icon to display before the label.                                                   |
 | `closable`                 | `boolean`                               |         | Shows the close button of the tab. Falls back to the `closable` of the strip.           |
@@ -143,4 +143,4 @@ The strip is a single tab stop. `ArrowLeft` and `ArrowRight` walk the tabs, `Hom
 
 ## Accessibility
 
-The strip renders a `tablist` and every tab a `tab`, so give the list a name through the `aria-label` you pass in `listProps`. Since you render what a tab opens, give that element a `tabpanel` role and point its `aria-labelledby` at the `id` of its tab.
+The strip renders a `tablist` and every tab a `tab`, so give the list a name through the `aria-label` you pass in `listAttributes`. Since you render what a tab opens, give that element a `tabpanel` role and point its `aria-labelledby` at the `id` of its tab.

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { RenderSoC } from '$internal';
+	import { RenderSoC } from '#internal';
 	import type { TableCellLayoutProps } from './types.ts';
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		media: Media,
 		description,
 		appearance,
@@ -25,7 +25,7 @@
 	</TableCell>
 	```
 -->
-<div bind:this={ref} class={['fs-table-cell-layout', appearance, { truncate }, classes]} {...attributes}>
+<div {...attributes} bind:this={ref} class={['fs-table-cell-layout', appearance, { truncate }, classes]}>
 	{#if Media}
 		<span class="media">
 			<RenderSoC SoC={Media} args={{ class: 'fs-table-cell-media' }} />

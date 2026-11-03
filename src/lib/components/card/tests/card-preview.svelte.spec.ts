@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { CardPreview } from '$lib/index.js';
+import { CardPreview } from '#lib/index.js';
 import CardTestWrapper from './CardTestWrapper.svelte';
 
 const PIXEL = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';

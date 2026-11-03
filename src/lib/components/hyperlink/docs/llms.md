@@ -27,11 +27,11 @@ Disables the hyperlink and prevents navigation.
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:HyperlinkProps -->
 
-| Name                     | Type                | Default | Description                              |
-| ------------------------ | ------------------- | ------- | ---------------------------------------- |
-| `href`                   | `string`            | `'#'`   | The URL the hyperlink points to.         |
-| `disabled`               | `boolean`           |         | Disables the user interaction.           |
-| `ref` _bindable_         | `HTMLAnchorElement` |         | The DOM reference of the anchor element. |
-| Element Attributes (`a`) |                     |         |                                          |
+| Name                     | Type                              | Default | Description                              |
+| ------------------------ | --------------------------------- | ------- | ---------------------------------------- |
+| `href`                   | `string`                          | `'#'`   | The URL the hyperlink points to.         |
+| `disabled`               | `boolean`                         |         | Disables the user interaction.           |
+| `ref` _bindable_         | `HTMLAnchorElement` &#124; `null` |         | The DOM reference of the anchor element. |
+| Element Attributes (`a`) |                                   |         |                                          |
 
 <!-- /props:HyperlinkProps -->

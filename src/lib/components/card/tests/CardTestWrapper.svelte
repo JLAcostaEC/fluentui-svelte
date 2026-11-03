@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Card, CardPreview, CardHeader, CardFooter } from '$lib/index.js';
-	import type { CardHeaderProps, CardPreviewProps, CardProps } from '$lib/components/card/types.js';
+	import { Card, CardPreview, CardHeader, CardFooter } from '#lib/index.js';
+	import type { CardHeaderProps, CardPreviewProps, CardProps } from '#lib/components/card/types.js';
 
 	const PIXEL = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
@@ -10,13 +10,14 @@
 		image,
 		imageAlt,
 		description,
+		headingLevel,
 		logoSrc = PIXEL,
 		logoAlt,
 		snippetTitle = false,
 		withAction = false,
 		...props
 	}: Partial<CardProps<'div'>> &
-		Partial<Pick<CardHeaderProps, 'title' | 'image' | 'imageAlt' | 'description'>> &
+		Partial<Pick<CardHeaderProps, 'title' | 'image' | 'imageAlt' | 'description' | 'headingLevel'>> &
 		Partial<Pick<CardPreviewProps, 'logoAlt'>> & {
 			part?: 'content' | 'header' | 'preview' | 'footer' | 'full';
 			logoSrc?: string;
@@ -47,6 +48,7 @@
 			{image}
 			{imageAlt}
 			{description}
+			{headingLevel}
 			action={withAction && part === 'header' ? actionSnippet : undefined}
 			data-testid="card-header"
 		/>

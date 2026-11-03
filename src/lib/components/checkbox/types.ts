@@ -1,33 +1,24 @@
-import type { HTMLInputAttributes } from 'svelte/elements';
-import type { PolymorphicProps } from '$types';
+import type { HTMLAttributes, HTMLInputAttributes } from 'svelte/elements';
 import type { Snippet } from 'svelte';
 
 /** @propsmith CheckboxProps */
-export type CheckboxProps<T extends 'div' | 'label' = 'div'> = {
+export type CheckboxProps = {
 	/** The DOM reference of the checkbox element.
 	 * @bindable
 	 */
-	ref?: HTMLInputElement;
-	/** The DOM element used to wrap the checkbox. `label` associates the children with the
-	 * input; switch to `div` when the field is wrapped in a `<Label>` of its own.
-	 * @default 'label'
-	 * @type 'div' | 'label'
-	 * @default 'div'
-	 */
-	wrapperAs?: T;
+	ref?: HTMLInputElement | null;
 	/** The DOM reference of the checkbox wrapper element.
-	 * @type HTMLDivElement | HTMLLabelElement
 	 * @bindable
 	 */
-	wrapperRef?: WrapperRef[T];
+	wrapperRef?: HTMLDivElement | null;
 	/** The attributes to spread on the wrapper element.
-	 * @type PolymorphicProps
+	 * @type HTMLAttributes
 	 */
-	wrapperAttributes?: PolymorphicProps<T>;
+	wrapperAttributes?: HTMLAttributes<HTMLDivElement>;
 	/** Renders the checkbox in its mixed state, neither checked nor unchecked.
 	 * @bindable
 	 */
-	indeterminate?: boolean;
+	indeterminate?: boolean | null;
 	/** The name submitted with the form. Falls back to the id of the checkbox.
 	 * @default id
 	 */
@@ -37,16 +28,11 @@ export type CheckboxProps<T extends 'div' | 'label' = 'div'> = {
 	/** Whether the checkbox is checked.
 	 * @bindable
 	 */
-	checked?: boolean;
+	checked?: boolean | null;
 	/** Disables the user interaction. */
 	disabled?: boolean;
-	/** The content of the label. Only rendered when wrapperAs is set to label.
+	/** The content of the label associated with the checkbox. Inside a `Label`, it is not rendered
 	 * @type Snippet
 	 */
-	children?: T extends 'label' ? Snippet : never;
+	children?: Snippet;
 } & Omit<HTMLInputAttributes, 'on:' | 'children'>;
-
-export type WrapperRef = {
-	label: HTMLLabelElement;
-	div: HTMLDivElement;
-};

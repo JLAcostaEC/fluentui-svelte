@@ -1,7 +1,7 @@
 import type { Component, Snippet } from 'svelte';
 import type { SVGAttributes } from 'svelte/elements';
 import type { BadgePresence } from '../badge/types.ts';
-import type { ActiveOrInactive, Colors, PolymorphicProps, Shapes } from '$types';
+import type { ActiveOrInactive, Colors, PolymorphicProps, Shapes } from '#types';
 
 /** @propsmith AvatarProps */
 export type AvatarProps = {
@@ -18,7 +18,7 @@ export type AvatarProps = {
 	/** The DOM reference of the avatar element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** Size of the avatar in pixels.
 	 * @default 48
 	 */

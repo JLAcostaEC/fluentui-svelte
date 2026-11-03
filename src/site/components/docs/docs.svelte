@@ -1,19 +1,19 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { AutoSuggestBox, AutoSuggestBoxOption, ListView, ListViewItem, Badge, Button, Tooltip } from '$lib/index.js';
-	import { resolve } from '$app/paths';
+	import { AutoSuggestBox, AutoSuggestBoxOption, ListView, ListViewItem, Badge, Button, Tooltip } from '#lib/index.js';
 	import Toc from '../../components/toc/toc.svelte';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
 	import { fly } from 'svelte/transition';
-	import { dev } from '$app/environment';
+	import { dev } from '$app/env';
 	import EditRegular from 'fluentui-icons-svelte/EditRegular.svelte';
-	import { localizeHref, deLocalizeUrl } from '$i18n/runtime.js';
-	import type { Meta } from '$types';
-	import { GITHUB_REPO_URL } from '$site/constants.js';
-	import { m } from '$i18n/messages.js';
-	import { statusBadge } from '$site/utils/status.js';
-	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { deLocalizeUrl } from '#i18n/runtime.js';
+	import { localizedPath } from '#site/utils/localized-path.js';
+	import type { Meta } from '#types';
+	import { GITHUB_REPO_URL } from '#site/constants.js';
+	import { m } from '#i18n/messages.js';
+	import { statusBadge } from '#site/utils/status.js';
+	import { getGlobalFSContext } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { MediaQuery } from 'svelte/reactivity';
 
 	const globalContext = getGlobalFSContext();
@@ -57,13 +57,15 @@
 		}))
 	);
 
+	const typesUrl = '/docs/types';
+
 	const suggestions = $derived([...primaryNavigation, ...componentLinks].map((nav) => nav.label));
 
 	const handleNav = async (item: string) => {
 		const navItem = [...primaryNavigation, ...componentLinks].find((nav) => nav.label === item);
 
 		if (navItem) {
-			goto(resolve(localizeHref(navItem.url) as any));
+			goto(localizedPath(navItem.url));
 		}
 	};
 
@@ -90,7 +92,7 @@
 					{#each primaryNavigation as nav (nav.label)}
 						<ListViewItem
 							as="a"
-							href={resolve(localizeHref(nav.url) as any)}
+							href={localizedPath(nav.url)}
 							active={page.url.pathname.endsWith(nav.url)}
 							aria-current={page.url.pathname.endsWith(nav.url) ? 'page' : undefined}
 						>
@@ -110,7 +112,7 @@
 						{#if doc.status !== 'Empty' || dev}
 							<ListViewItem
 								as="a"
-								href={resolve(localizeHref(doc.url) as any)}
+								href={localizedPath(doc.url)}
 								active={page.url.pathname.endsWith(doc.url)}
 								aria-current={page.url.pathname.endsWith(doc.url) ? 'page' : undefined}
 							>
@@ -137,6 +139,14 @@
 							</ListViewItem>
 						{/if}
 					{/each}
+					<ListViewItem
+						as="a"
+						href={localizedPath(typesUrl)}
+						active={page.url.pathname.endsWith(typesUrl)}
+						aria-current={page.url.pathname.endsWith(typesUrl) ? 'page' : undefined}
+					>
+						{m.docs_types_reference()}
+					</ListViewItem>
 				</ListView>
 			{/if}
 		</nav>

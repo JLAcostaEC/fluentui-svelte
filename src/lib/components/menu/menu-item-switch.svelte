@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { watch } from 'runed';
-	import { PREFIX } from '$constants';
-	import { Button } from '$lib/index.js';
-	import { invokeHandlers, RenderSoC } from '$internal';
+	import { PREFIX } from '#constants';
+	import { Button } from '#lib/index.js';
+	import { invokeHandlers, RenderSoC } from '#internal';
 	import { getMenuContext, COMPONENT_NAME as MENU_COMPONENT_NAME } from './menu.svelte.ts';
 	import type { MenuItemActionableProps } from './types.ts';
 
@@ -11,11 +11,11 @@
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		icon: Icon,
 		secondaryContent,
 		children,
-		checked = $bindable(),
+		checked = $bindable(null),
 		disabled,
 		id = ID,
 		class: classes,
@@ -23,6 +23,7 @@
 		value = id as string,
 		subText,
 		onclick,
+		onkeydown,
 		...attributes
 	}: MenuItemActionableProps = $props();
 
@@ -62,6 +63,7 @@
     ```
 -->
 <Button
+	{...attributes}
 	{disabled}
 	{id}
 	appearance="subtle"
@@ -70,11 +72,10 @@
 		invokeHandlers(e, [e.key !== 'Enter', !!disabled], [onkeydown, () => toggleCheckbox(e, value, name)])}
 	aria-checked={checked}
 	role="menuitemcheckbox"
-	style={`--margin-left: ${marginLeft}rem;}`}
+	style="{attributes.style ?? ''}; --margin-left: {marginLeft}rem;"
 	aria-label={secondaryContent ? `${secondaryContent}, Use ${secondaryContent}` : undefined}
 	class="fs-menu-item-switch {hasIcons || hasCheckmarks ? 'align' : ''} {checked ? 'checked' : ''} {classes}"
 	bind:ref
-	{...attributes}
 >
 	<span class="label" aria-label="{secondaryContent}, Use {secondaryContent}">
 		{#if Icon}

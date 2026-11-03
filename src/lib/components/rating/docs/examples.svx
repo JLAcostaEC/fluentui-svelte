@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Rating } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { Rating } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
   import { BookmarkFilled, BookmarkRegular, HeartFilled, HeartRegular } from 'fluentui-icons-svelte';
-  import { m } from '$i18n/messages.js';
+  import { m } from '#i18n/messages.js';
 
   let value = $state(3);
 

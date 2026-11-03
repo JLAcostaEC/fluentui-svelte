@@ -1,17 +1,18 @@
 <script lang="ts">
-	import { Button, BadgeIcon } from '$lib/index.js';
+	import { Button, BadgeIcon } from '#lib/index.js';
 	import DismissFilled from 'fluentui-icons-svelte/DismissFilled.svelte';
 	import DismissCircleFilled from 'fluentui-icons-svelte/DismissCircleFilled.svelte';
 	import InfoFilled from 'fluentui-icons-svelte/InfoFilled.svelte';
 	import ErrorCircleFilled from 'fluentui-icons-svelte/ErrorCircleFilled.svelte';
 	import WarningFilled from 'fluentui-icons-svelte/WarningFilled.svelte';
 	import CheckmarkFilled from 'fluentui-icons-svelte/CheckmarkFilled.svelte';
-	import { RenderSoC } from '$internal';
+	import { RenderSoC } from '#internal';
 	import type { InfoBarProps } from './types.ts';
 
 	let {
 		status = 'information',
 		title,
+		headingLevel = 3,
 		icon: Icon,
 		style = 'inline',
 		hideCloseButton,
@@ -55,7 +56,7 @@
 			{/if}
 		</div>
 		<div class="content">
-			{#if title}<h3>{title}</h3>{/if}
+			{#if title}<svelte:element this={`h${headingLevel}`} class="title">{title}</svelte:element>{/if}
 			{@render children?.()}
 		</div>
 		{#if !hideCloseButton}
@@ -120,7 +121,7 @@
 			align-items: center;
 			gap: 0.5rem;
 			width: 100%;
-			& h3 {
+			& .title {
 				font-weight: semibold;
 				font-size: var(--fs-body-font-size);
 				line-height: var(--fs-body-line-height);

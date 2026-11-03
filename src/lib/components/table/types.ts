@@ -1,5 +1,5 @@
-import type { FSContext } from '$internal';
-import type { PolymorphicProps } from '$types';
+import type { FSContext } from '#internal';
+import type { PolymorphicProps } from '#types';
 import type { Component, Snippet } from 'svelte';
 import type { CheckboxProps } from '../checkbox/types.ts';
 import type { RadioButtonProps } from '../radio-button/types.ts';
@@ -31,7 +31,7 @@ export type TableProps<Tag extends 'table' | 'div' = 'table'> = {
 	 * @type HTMLTableElement | HTMLDivElement
 	 * @bindable
 	 */
-	ref?: TableDOM[Tag] | HTMLDivElement;
+	ref?: TableDOM[Tag] | HTMLDivElement | null;
 	/** Affects the sizes of all table subcomponents.
 	 * @default 'medium'
 	 */
@@ -105,7 +105,7 @@ export type TableHeaderProps<Tag extends 'thead' | 'div' = 'thead'> = {
 	 * @type HTMLTableSectionElement | HTMLDivElement
 	 * @bindable
 	 */
-	ref?: TableDOM[Tag] | HTMLDivElement;
+	ref?: TableDOM[Tag] | HTMLDivElement | null;
 } & PolymorphicProps<Tag>;
 
 /** @propsmith TableHeaderCellProps */
@@ -119,7 +119,7 @@ export type TableHeaderCellProps<Tag extends 'th' | 'div' = 'th'> = {
 	 * @type HTMLTableCellElement | HTMLDivElement
 	 * @bindable
 	 */
-	ref?: TableDOM[Tag] | HTMLDivElement;
+	ref?: TableDOM[Tag] | HTMLDivElement | null;
 	/** Whether the column is sortable. Inherited from the table by default. */
 	sortable?: boolean;
 	/** The direction the column is currently sorted in. Also sets `aria-sort`. */
@@ -159,7 +159,7 @@ export type TableBodyProps<Tag extends 'tbody' | 'div' = 'tbody'> = {
 	 * @type HTMLTableSectionElement | HTMLDivElement
 	 * @bindable
 	 */
-	ref?: TableDOM[Tag] | HTMLDivElement;
+	ref?: TableDOM[Tag] | HTMLDivElement | null;
 } & PolymorphicProps<Tag>;
 
 /** @propsmith TableRowProps */
@@ -173,7 +173,7 @@ export type TableRowProps<Tag extends 'tr' | 'div' = 'tr'> = {
 	 * @type HTMLTableRowElement | HTMLDivElement
 	 * @bindable
 	 */
-	ref?: TableDOM[Tag] | HTMLDivElement;
+	ref?: TableDOM[Tag] | HTMLDivElement | null;
 	/** How the row is filled. Intended to mark a selected row.
 	 * @default 'none'
 	 */
@@ -191,7 +191,7 @@ export type TableCellProps<Tag extends 'td' | 'div' = 'td'> = {
 	 * @type HTMLTableCellElement | HTMLDivElement
 	 * @bindable
 	 */
-	ref?: TableDOM[Tag] | HTMLDivElement;
+	ref?: TableDOM[Tag] | HTMLDivElement | null;
 	/** How the arrow keys treat the cell. `'group'` holds the focusable content of the cell out of
 	 * the tab order until `Enter` steps in, and `Escape` steps back out. `'none'` skips the cell
 	 * altogether. Only read when the table sets `enableTabspot`.
@@ -211,7 +211,7 @@ export type TableSelectionCellProps<Tag extends 'td' | 'div' = 'td'> = {
 	 * @type HTMLTableCellElement | HTMLDivElement
 	 * @bindable
 	 */
-	ref?: TableDOM[Tag] | HTMLDivElement;
+	ref?: TableDOM[Tag] | HTMLDivElement | null;
 	/** A table can have two kinds of selection modes.
 	 * @default 'checkbox'
 	 */
@@ -232,11 +232,11 @@ export type TableSelectionCellProps<Tag extends 'td' | 'div' = 'td'> = {
 	/** The props to spread on the checkbox rendered when `type` is `'checkbox'`.
 	 * @type CheckboxProps
 	 */
-	checkboxIndicator?: Omit<CheckboxProps<'div'>, 'wrapperAs' | 'checked' | 'indeterminate' | 'children'>;
+	checkboxProps?: Omit<CheckboxProps, 'checked' | 'indeterminate' | 'children'>;
 	/** The props to spread on the radio button rendered when `type` is `'radio'`.
 	 * @type RadioButtonProps
 	 */
-	radioIndicator?: Omit<RadioButtonProps, 'checked' | 'group'>;
+	radioProps?: Omit<RadioButtonProps, 'checked' | 'group'>;
 } & PolymorphicProps<Tag>;
 
 /** @propsmith TableCellLayoutProps */
@@ -244,7 +244,7 @@ export type TableCellLayoutProps = {
 	/** The DOM reference of the layout element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** An icon, an avatar or any other visual element placed before the main content.
 	 * @type Snippet | Component
 	 */
@@ -262,7 +262,7 @@ export type TableCellActionsProps = {
 	/** The DOM reference of the actions element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** Keeps the actions on screen instead of waiting for the row to be hovered or focused. */
 	visible?: boolean;
 } & PolymorphicProps<'div'>;

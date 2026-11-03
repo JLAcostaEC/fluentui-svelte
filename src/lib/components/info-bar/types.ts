@@ -13,6 +13,10 @@ export type InfoBarProps = {
 	style?: 'inline' | 'multiline';
 	/** The title of the InfoBar. */
 	title?: string;
+	/** The level of the heading that holds the title, to fit the headings of the page around it.
+	 * @default 3
+	 */
+	headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 	/** Custom icon, rendered instead of the one the `status` would pick on its own.
 	 * @type Snippet | Component
 	 */

@@ -15,7 +15,7 @@ export type TooltipProps = {
 	/** The DOM reference of the tooltip element.
 	 * @bindable
 	 */
-	ref?: HTMLElement;
+	ref?: HTMLElement | null;
 	/** The element the tooltip is anchored to. Falls back to the rendered children. */
 	target?: HTMLElement;
 	/** Controls the open state of the tooltip.

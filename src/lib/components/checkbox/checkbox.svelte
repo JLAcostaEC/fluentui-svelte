@@ -1,28 +1,29 @@
-<script lang="ts" generics="T extends 'div' | 'label' = 'label'">
+<script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import CheckmarkFilled from 'fluentui-icons-svelte/CheckmarkFilled.svelte';
 	import SubtractFilled from 'fluentui-icons-svelte/SubtractFilled.svelte';
-	import { PREFIX } from '$constants';
+	import { PREFIX } from '#constants';
 	import type { CheckboxProps } from './types.ts';
-	import type { PolymorphicProps } from '$types';
 
 	const FALLBACK_ID = $props.id();
 	const COMPONENT_NAME = 'checkbox';
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
+	const labelContext = claimLabel(() => id);
+
 	let {
-		ref = $bindable(),
-		wrapperRef = $bindable(),
-		checked = $bindable(),
-		indeterminate = $bindable(),
-		id = ID,
+		ref = $bindable(null),
+		wrapperRef = $bindable(null),
+		checked = $bindable(null),
+		indeterminate = $bindable(null),
+		id = labelContext?.fieldId ?? ID,
 		name = id,
 		'aria-hidden': ariaHidden,
 		disabled,
-		wrapperAs = 'label' as T,
 		wrapperAttributes,
 		children,
 		...attributes
-	}: CheckboxProps<T> = $props();
+	}: CheckboxProps = $props();
 </script>
 
 <!-- 
@@ -38,17 +39,13 @@
     import { Checkbox } from 'fluentui-svelte';
   </script>
 
-  <Checkbox label="Checkbox label" />
+  <Checkbox>Checkbox label</Checkbox>
   ```
  -->
 
-<svelte:element
-	this={wrapperAs}
-	bind:this={wrapperRef}
-	{...wrapperAttributes as PolymorphicProps<T>}
-	class={['fs-checkbox', wrapperAttributes?.class, wrapperAs === 'label' && 'label-wrapper']}
->
+<div {...wrapperAttributes} class={['fs-checkbox', wrapperAttributes?.class]} bind:this={wrapperRef}>
 	<input
+		{...attributes}
 		{id}
 		{name}
 		{disabled}
@@ -56,15 +53,18 @@
 		aria-hidden={ariaHidden}
 		bind:checked
 		bind:this={ref}
-		{indeterminate}
-		{...attributes}
+		bind:indeterminate
+		data-indeterminate={indeterminate || undefined}
 	/>
 	<div style="pointer-events: none;" aria-hidden="true">
 		<SubtractFilled class="indeterminate" />
 		<CheckmarkFilled class="checked" />
 	</div>
-	{@render children?.()}
-</svelte:element>
+	<!-- Inside a Label, the Label names the field instead. -->
+	{#if children && !labelContext}
+		<label for={id}>{@render children()}</label>
+	{/if}
+</div>
 
 <style>
 	.fs-checkbox {
@@ -74,11 +74,10 @@
 		outline: none;
 		cursor: pointer;
 		position: relative;
-		gap: 0.75rem;
 		&:has(input:focus-visible) {
 			outline: 0.125rem var(--fs-focus-stroke-outer) solid;
 			outline-offset: 0.125rem;
-			&.label-wrapper {
+			&:has(> label) {
 				border-radius: 0.063rem;
 				outline-offset: 0.313rem;
 			}
@@ -90,21 +89,27 @@
 			background-color: var(--fs-control-alt-fill-quaternary);
 			border-color: var(--fs-control-strong-disabled);
 		}
+		& > label {
+			padding-inline-start: 0.75rem;
+			cursor: inherit;
+		}
 		& input {
 			position: absolute;
 			inset: 0;
+			width: 1.25rem;
+			margin: 0;
 			border: unset;
 			outline: 0 !important;
 			opacity: 0;
 			appearance: none;
 			-webkit-appearance: none;
 			-moz-appearance: none;
-			&:indeterminate + div :global(svg.indeterminate),
+			&:is(:indeterminate, [data-indeterminate]) + div :global(svg.indeterminate),
 			&:checked + div :global(svg.checked) {
 				mask-size: 100% 100%;
 				transition: var(--fs-slower-duration, 1s) cubic-bezier(0.55, 0, 0, 1) mask-size;
 			}
-			&:is(:checked, :indeterminate) {
+			&:is(:checked, :indeterminate, [data-indeterminate]) {
 				& + div {
 					background-color: var(--fs-accent-fill-default);
 					border-color: var(--fs-accent-fill-default);
@@ -130,7 +135,21 @@
 			&:checked + div :global(svg.checked) {
 				width: 1rem;
 			}
-			&:indeterminate + div :global(svg.indeterminate) {
+			&:is(:user-invalid, [aria-invalid='true']) {
+				& + div {
+					border-color: var(--fs-system-critical);
+					color: var(--fs-system-critical) !important;
+					& + label {
+						color: var(--fs-system-critical);
+					}
+				}
+				&:hover {
+					& + div {
+						border-color: var(--fs-system-critical);
+					}
+				}
+			}
+			&:is(:indeterminate, [data-indeterminate]) + div :global(svg.indeterminate) {
 				width: 0.8rem;
 			}
 		}
@@ -146,11 +165,13 @@
 			justify-content: center;
 			& :global(svg) {
 				width: 0;
-				fill: var(--fs-text-on-accent-primary);
 				transform-origin: 80% 20%;
 				mask-image: linear-gradient(black, black);
 				mask-repeat: no-repeat;
 				mask-size: 0% 100%;
+				& :global(path) {
+					fill: var(--fs-text-on-accent-primary);
+				}
 			}
 		}
 		&:has(input:disabled) {

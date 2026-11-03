@@ -1,19 +1,19 @@
 <script lang="ts">
-  import { DropdownSelect, DropdownSelectOption, Persona } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
+  import { DropdownSelect, DropdownSelectOption, Persona } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
 
   const customCode = `
-<DropdownSelect>
+<DropdownSelect aria-label="Choose an option">
   <DropdownSelectOption value="John Doe" text="John Doe">
-    <Persona name="John Doe" primaryText="Software Engineer" presence={{ status: 'available' }} avatar={{ color: 'colorful', idForColor: '' }} />
+    <Persona name="John Doe" primaryText="Software Engineer" presence={{ status: 'available' }} avatarProps={{ color: 'colorful', idForColor: '' }} />
   </DropdownSelectOption>
   <DropdownSelectOption value="B">Option B</DropdownSelectOption>
   <DropdownSelectOption value="C">Option C</DropdownSelectOption>
 </DropdownSelect>`;
 
   const multipleCode = `
-<DropdownSelect multiple>
+<DropdownSelect multiple aria-label="Choose options">
   <DropdownSelectOption value="A">Option A</DropdownSelectOption>
   <DropdownSelectOption value="B">Option B</DropdownSelectOption>
   <DropdownSelectOption value="C">Option C</DropdownSelectOption>
@@ -25,9 +25,9 @@
 {m.ds_custom_option_description()}
 
 <Showcase columns={1} code={customCode} minHeight="0" disablePanZoom showOverflow>
-  <DropdownSelect>
+  <DropdownSelect aria-label="Choose an option">
     <DropdownSelectOption value="John Doe" text="John Doe">
-      <Persona name="John Doe" primaryText="Software Engineer" presence={{ status: 'available' }} avatar={{ color: 'colorful', idForColor: '' }} />
+      <Persona name="John Doe" primaryText="Software Engineer" presence={{ status: 'available' }} avatarProps={{ color: 'colorful', idForColor: '' }} />
     </DropdownSelectOption>
     <DropdownSelectOption value="B">Option B</DropdownSelectOption>
     <DropdownSelectOption value="C">Option C</DropdownSelectOption>
@@ -39,7 +39,7 @@
 {m.ds_multiple_description()}
 
 <Showcase columns={1} code={multipleCode} minHeight="0" disablePanZoom showOverflow>
-  <DropdownSelect multiple>
+  <DropdownSelect multiple aria-label="Choose options">
     <DropdownSelectOption value="A">Option A</DropdownSelectOption>
     <DropdownSelectOption value="B">Option B</DropdownSelectOption>
     <DropdownSelectOption value="C">Option C</DropdownSelectOption>

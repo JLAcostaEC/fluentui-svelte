@@ -9,7 +9,7 @@ A toggle switch represents a physical switch that allows someone to choose betwe
 	import { ToggleSwitch } from 'fluentui-svelte';
 </script>
 
-<ToggleSwitch />
+<ToggleSwitch aria-label="Notifications" />
 <ToggleSwitch label="Toggle me" />
 <ToggleSwitch label="I'm disabled" disabled />
 ```
@@ -26,18 +26,20 @@ A toggle switch can be labeled, checked, or disabled.
 <ToggleSwitch label="Disabled" disabled />
 ```
 
+HTML attributes, including class, id and ARIA attributes, apply to the control element. Bind ref to access that control. Use wrapperAttributes and wrapperRef for the outer container.
+
 ## Component Props
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:ToggleSwitchProps -->
 
-| Name                          | Type                  | Default | Description                                                |
-| ----------------------------- | --------------------- | ------- | ---------------------------------------------------------- |
-| `checked` _bindable_          | `boolean`             |         | Whether the switch is on.                                  |
-| `ref` _bindable_              | `HTMLInputElement`    |         | The DOM reference of the input element.                    |
-| `label`                       | `string`              |         | The label displayed next to the input element.             |
-| `labelAttributes`             | `HTMLLabelAttributes` |         | The attributes to spread on the label wrapping the switch. |
-| `labelElement`                | `HTMLLabelElement`    |         | The DOM reference of the label element.                    |
-| `SvelteHTMLElements['input']` |                       |         |                                                            |
+| Name                         | Type                             | Default | Description                                                                         |
+| ---------------------------- | -------------------------------- | ------- | ----------------------------------------------------------------------------------- |
+| `checked` _bindable_         | `boolean` &#124; `null`          |         | Whether the switch is on.                                                           |
+| `ref` _bindable_             | `HTMLInputElement` &#124; `null` |         | The DOM reference of the input element.                                             |
+| `label`                      | `string`                         |         | The label displayed next to the input element. Inside a `Label`, it is not rendered |
+| `wrapperAttributes`          | `HTMLAttributes`                 |         | The attributes to spread on the wrapper element.                                    |
+| `wrapperRef` _bindable_      | `HTMLDivElement` &#124; `null`   |         | The DOM reference of the wrapper element.                                           |
+| Element Attributes (`input`) |                                  |         |                                                                                     |
 
 <!-- /props:ToggleSwitchProps -->

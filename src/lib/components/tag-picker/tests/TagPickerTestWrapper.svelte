@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { FluentUISvelte, Tag, TagPicker, TagPickerOption, TagPickerOptionGroup } from '$lib/index.js';
+	import { FluentUISvelte, Tag, TagPicker, TagPickerOption, TagPickerOptionGroup } from '#lib/index.js';
 	import type { ComponentProps } from 'svelte';
 
 	type Option = { value: string; text?: string; disabled?: boolean };
@@ -19,7 +19,6 @@
 		customExpand,
 		withSecondary,
 		onSecondary,
-		inputProps = { 'aria-label': 'Fruits' },
 		...rest
 	}: {
 		options?: Option[];
@@ -55,7 +54,7 @@
 {/snippet}
 
 {#snippet customTag(tag: { value: string; text: string })}
-	<Tag role="listitem" value={tag.value} title={tag.text}>custom {tag.text}</Tag>
+	<Tag value={tag.value} title={tag.text}>custom {tag.text}</Tag>
 {/snippet}
 
 {#snippet expand()}
@@ -72,7 +71,7 @@
 		bind:selectedOptions
 		bind:value
 		bind:open
-		{inputProps}
+		inputAttributes={{ 'aria-label': 'Fruits' }}
 		tag={useTagSnippet ? customTag : undefined}
 		{...rest}
 		{...customExpand ? { expandIcon: expand } : {}}

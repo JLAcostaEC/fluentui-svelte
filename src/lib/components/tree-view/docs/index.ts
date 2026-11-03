@@ -3,7 +3,7 @@ import Docs from './docs.svx';
 import Examples from './examples.svx';
 import Footer from './footer.svx';
 import LLMS from './llms.md?raw';
-import type { ConfigDocs, Meta } from '$types';
+import type { ConfigDocs, Meta } from '#types';
 
 export const META: Meta = {
 	// SEO

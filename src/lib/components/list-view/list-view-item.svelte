@@ -9,7 +9,7 @@
 		setListViewItemContext
 	} from './utils.ts';
 	import Checkbox from '../checkbox/checkbox.svelte';
-	import { invokeHandlers, isObjectEmpty } from '$internal';
+	import { invokeHandlers, isObjectEmpty } from '#internal';
 	import type { ListViewItemProps, ListViewItemDOM } from './types.ts';
 	import { getTabspotAttributes, type TabspotNodeOptions } from 'tabspot';
 
@@ -17,7 +17,7 @@
 
 	let {
 		as = 'li' as T,
-		ref = $bindable(),
+		ref = $bindable(null),
 		shape,
 		disabled,
 		active: _active,
@@ -66,7 +66,7 @@
 	});
 
 	let active = $derived(_state.selectedItems.includes(value));
-	let checkmarkRef = $state<HTMLDivElement>();
+	let checkmarkRef = $state<HTMLDivElement | null>(null);
 
 	// A grid cell contains the secondary controls, independently of the primary row action.
 	const cellConfig: TabspotNodeOptions | undefined = $derived(
@@ -82,13 +82,16 @@
 			: undefined
 	);
 	const cellAttrs = $derived(cellConfig && getTabspotAttributes(cellConfig));
+	// A roving list has one tab stop. Tabspot sets it on mount, so the server HTML gives it to the first item, as Tabspot will.
+	// svelte-ignore state_referenced_locally
+	const holdsTabStop = !CONTEXT.config.roving || (interactive && !disabled && CONTEXT.methods.claimTabStop(ID));
 	const focusAttributes = $derived(
 		nativeAction
 			? disabled && as === 'a'
 				? { tabindex: -1 }
 				: {}
 			: interactive && !tabspotDisabled
-				? { tabindex: disabled ? -1 : 0 }
+				? { tabindex: disabled || !holdsTabStop ? -1 : 0 }
 				: {}
 	);
 
@@ -130,12 +133,13 @@
 {#snippet content()}
 	{#if checkmark}
 		<Checkbox
+			{...!isObjectEmpty(checkmark) ? checkmark : {}}
 			{disabled}
 			bind:checked={active}
 			bind:wrapperRef={checkmarkRef}
 			tabindex={tabspotDisabled ? undefined : -1}
-			aria-label={attributes['aria-label'] ?? value}
-			{...!isObjectEmpty(checkmark) ? checkmark : {}}
+			aria-label={checkmark?.['aria-label'] ?? attributes['aria-label'] ?? value}
+			inert={role === 'option' || undefined}
 		/>
 	{/if}
 	{@render children?.()}
@@ -144,6 +148,7 @@
 {#snippet item()}
 	<svelte:element
 		this={_as}
+		{...attributes}
 		role={wrapped || (nativeAction && role === 'listitem') ? undefined : role}
 		type={as === 'button' ? 'button' : undefined}
 		disabled={as === 'button' ? disabled : undefined}
@@ -168,7 +173,6 @@
 		}}
 		onclick={handleClick}
 		onkeydown={handleKeydown}
-		{...attributes}
 	>
 		{#if role === 'row'}
 			<div role="gridcell" {...cellAttrs} {@attach attachTabspot(cellConfig)}>

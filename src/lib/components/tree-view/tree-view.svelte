@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
+	import { invokeHandlers } from '#internal';
 	import { SvelteMap, SvelteSet } from 'svelte/reactivity';
 	import { getTabspotAttributes, tabspotVirtual } from 'tabspot';
 	import {
@@ -8,6 +9,7 @@
 		setTreeViewContext,
 		setTreeViewDepth,
 		getTreeViewItemContext,
+		syncBranchStates,
 		traversalSync,
 		traversalSyncSingleSelection
 	} from './tree-view.svelte.ts';
@@ -15,6 +17,7 @@
 
 	const CONTEXT = getTreeViewContext();
 	const TREE_NODES = new SvelteMap<string, TreeViewNode>();
+	const TAB_STOP: { id: string | null } = { id: null };
 	const DEPTH = getTreeViewDepth() || 0;
 	const ITEM_CONTEXT = getTreeViewItemContext();
 	const IS_SUB_TREE = $derived(!!CONTEXT);
@@ -26,12 +29,13 @@
 		navigationMode = CONTEXT?.config.navigationMode ?? 'tree',
 		checkedItems = $bindable(CONTEXT?.state.checkedItems ?? (virtualizer !== undefined ? new SvelteSet<string>() : [])),
 		openItems = $bindable(CONTEXT?.state.openItems ?? (virtualizer !== undefined ? new SvelteSet<string>() : [])),
-		ref = $bindable(),
+		ref = $bindable(null),
 		onOpenChange,
 		onCheckedChange,
 		selectionMode = CONTEXT?.state.selectionMode ?? 'multiple',
 		size = 'medium',
 		children,
+		onkeydown,
 		...attributes
 	}: TreeViewProps = $props();
 
@@ -64,6 +68,9 @@
 			},
 			get TREE_NODES() {
 				return CONTEXT?.state.TREE_NODES ?? TREE_NODES;
+			},
+			get tabStop() {
+				return CONTEXT?.state.tabStop ?? TAB_STOP;
 			},
 			get forceVirtualRender() {
 				return CONTEXT?.state.forceVirtualRender ?? forceVirtualRender;
@@ -195,6 +202,14 @@
 	};
 
 	// Add tabspot virtualizer for correct focus management
+	// Once every item is registered, the branches show what their checked descendants imply. A
+	// virtualized tree registers only the rows on screen, so it would judge a branch on a part of it.
+	onMount(async () => {
+		if (IS_SUB_TREE || virtualizer || selectionMode === 'single') return;
+		await tick();
+		syncBranchStates(TREE_NODES, checkedItems);
+	});
+
 	onMount(() => {
 		if (!IS_SUB_TREE || !ref || !virtualizer) return;
 		return tabspotVirtual(ref, {
@@ -207,13 +222,13 @@
 <!-- Render only when necessary (virtualizer perf) -->
 {#if treeViewContext.state.forceVirtualRender || (treeViewContext.config.virtualized && (!IS_SUB_TREE || ITEM_CONTEXT?.open)) || !treeViewContext.config.virtualized}
 	<ul
-		class="fs-tree-view"
+		{...attributes}
+		class={['fs-tree-view', attributes?.class]}
 		role={IS_SUB_TREE ? 'group' : 'tree'}
-		aria-multiselectable={selectionMode !== 'single'}
-		onkeydown={!IS_SUB_TREE ? handleTypeahead : undefined}
+		aria-multiselectable={IS_SUB_TREE ? undefined : selectionMode !== 'single'}
+		onkeydown={(event) => invokeHandlers(event, [], [!IS_SUB_TREE && handleTypeahead, onkeydown])}
 		bind:this={ref}
 		{...tabspotAttributes}
-		{...attributes}
 	>
 		{@render children?.()}
 	</ul>

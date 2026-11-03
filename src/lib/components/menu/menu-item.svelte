@@ -1,17 +1,17 @@
 <script lang="ts">
-	import { Button } from '$lib/index.js';
+	import { Button } from '#lib/index.js';
 	import { getMenuContext, COMPONENT_NAME as MENU_COMPONENT_NAME } from './menu.svelte.ts';
-	import { PREFIX } from '$constants';
-	import { invokeHandlers, RenderSoC } from '$internal';
+	import { PREFIX } from '#constants';
+	import { invokeHandlers, RenderSoC } from '#internal';
 	import type { MenuItemProps } from './types.ts';
-	import type { ComponentProps } from 'svelte';
+	import type { ButtonProps } from '../button/types.ts';
 
 	const FALLBACK_ID = $props.id();
 	const COMPONENT_NAME = 'menu-item';
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		icon: Icon,
 		secondaryContent,
 		children,
@@ -23,7 +23,7 @@
 		onkeydown,
 		subText,
 		...attributes
-	}: MenuItemProps & ComponentProps<typeof Button> = $props();
+	}: MenuItemProps & ButtonProps<'a' | 'button'> = $props();
 
 	const context = getMenuContext();
 
@@ -54,6 +54,7 @@
     ```
 -->
 <Button
+	{...attributes}
 	{href}
 	{disabled}
 	{id}
@@ -63,10 +64,9 @@
 	onkeydown={(e: KeyboardEvent) =>
 		invokeHandlers(e, [e.key !== 'Enter', persistOnItemActivation, disabled], [onkeydown, toggle])}
 	as={href ? 'a' : 'button'}
-	style={`--margin-left: ${marginLeft}rem;`}
+	style="{attributes.style ?? ''}; --margin-left: {marginLeft}rem;"
 	class="fs-menu-item {hasIcons || hasCheckmarks ? 'align' : ''} {classes}"
 	bind:ref
-	{...attributes}
 >
 	<span class="label" aria-label={secondaryContent ? `${secondaryContent}, Use ${secondaryContent}` : undefined}>
 		{#if Icon}

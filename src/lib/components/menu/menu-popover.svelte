@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { circOut } from 'svelte/easing';
-	import { Flyout } from '$lib/index.js';
+	import { Flyout } from '#lib/index.js';
 	import { COMPONENT_NAME, getIntroTransition, getMenuContext } from './menu.svelte.ts';
 	import { flip, hide, offset, shift } from '@floating-ui/dom';
 	import { useDebounce } from 'runed';
-	import { floating, flyToOffset, getCSSDuration, reactiveBoundingRect } from '$internal';
-	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { floating, flyToOffset, getCSSDuration, reactiveBoundingRect } from '#internal';
+	import { getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import type { MenuPopoverProps } from './types.ts';
 
 	let {
 		ref: _ref,
-		open: _open = $bindable(),
+		open: _open = $bindable(null),
 		keepMounted = false,
 		placement,
 		positionConfig: floatingPosition = {
@@ -45,11 +45,15 @@
 
 	let { state: _state } = context;
 
-	// The `placement` prop wins over the one coming from the config
+	// The `placement` prop wins over the one coming from the config. The strategy is always set, since the CSS position follows it.
 	let config = $derived.by(() => {
 		const base = positionConfig ?? floatingPosition;
 
-		return { ...base, placement: placement ?? base.placement ?? (isSubMenu ? 'right-start' : 'bottom-start') };
+		return {
+			...base,
+			strategy: base.strategy ?? 'fixed',
+			placement: placement ?? base.placement ?? (isSubMenu ? 'right-start' : 'bottom-start')
+		};
 	});
 
 	let boundingElement = reactiveBoundingRect();
@@ -93,7 +97,7 @@
 		hidden={!opened}
 		onmouseleave={openOnHover ? (e: MouseEvent) => debounced(e) : undefined}
 		{@attach opened && ref ? floating(ref, config) : undefined}
-		style={`--position=${isSubMenu ? 'absolute' : 'fixed'} --min-width=${isRefAnElement && !isSubMenu ? `${boundingElement.rect.width}px` : 'max-content'}`}
+		style={`--position: ${config.strategy}; --min-width: ${isRefAnElement && !isSubMenu ? `${boundingElement.rect.width}px` : 'max-content'};`}
 		in:flyToOffset={opened && isRefAnElement
 			? {
 					...getIntroTransition({ config, anchor: boundingElement.rect, element, ref, isSubMenu }),

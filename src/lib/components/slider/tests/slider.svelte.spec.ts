@@ -1,13 +1,14 @@
 import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { Slider } from '$lib/index.js';
+import { Slider } from '#lib/index.js';
 
 describe('rendering', () => {
-	it('renders an element with role="slider"', async () => {
+	it('renders a native range input as the slider', async () => {
 		render(Slider);
 		const el = page.getByRole('slider');
 		await expect.element(el).toBeInTheDocument();
+		expect(el.element()).toBeInstanceOf(HTMLInputElement);
 	});
 
 	it('applies the base fs-slider class', async () => {
@@ -16,12 +17,14 @@ describe('rendering', () => {
 		await expect.element(el).toBeInTheDocument();
 	});
 
-	it('renders a hidden range input reflecting min/max/step', async () => {
+	it('keeps the range input in the thumb, out of sight, reflecting min/max/step', async () => {
 		render(Slider, { min: 10, max: 50, step: 5, value: 20 });
 		const input = page.selector('input[type="range"]');
 		await expect.element(input).toHaveAttribute('min', '10');
 		await expect.element(input).toHaveAttribute('max', '50');
 		await expect.element(input).toHaveAttribute('step', '5');
+		expect(input.element().closest('.slider-thumb')).not.toBeNull();
+		expect(getComputedStyle(input.element()).opacity).toBe('0');
 	});
 
 	it('renders the track by default', async () => {
@@ -44,19 +47,28 @@ describe('rendering', () => {
 	});
 });
 
-describe('aria attributes', () => {
-	it('exposes aria-valuemin, aria-valuemax and aria-valuenow', async () => {
+describe('range semantics', () => {
+	it('exposes the range and the value through the native input', async () => {
 		render(Slider, { min: 0, max: 100, value: 40 });
 		const el = page.getByRole('slider');
-		await expect.element(el).toHaveAttribute('aria-valuemin', '0');
-		await expect.element(el).toHaveAttribute('aria-valuemax', '100');
-		await expect.element(el).toHaveAttribute('aria-valuenow', '40');
+		await expect.element(el).toHaveAttribute('min', '0');
+		await expect.element(el).toHaveAttribute('max', '100');
+		await expect.element(el).toHaveValue('40');
 	});
 
-	it('defaults aria-valuenow to 0', async () => {
+	it('defaults the value to 0', async () => {
 		render(Slider);
-		const el = page.getByRole('slider');
-		await expect.element(el).toHaveAttribute('aria-valuenow', '0');
+		await expect.element(page.getByRole('slider')).toHaveValue('0');
+	});
+
+	it('falls back to a generic name when nothing names it', async () => {
+		render(Slider);
+		await expect.element(page.getByRole('slider')).toHaveAccessibleName('Slider');
+	});
+
+	it('announces the prefix and suffix with the value', async () => {
+		render(Slider, { value: 40, prefix: '$', suffix: ' USD' });
+		await expect.element(page.getByRole('slider')).toHaveAttribute('aria-valuetext', '$40 USD');
 	});
 });
 
@@ -65,14 +77,14 @@ describe('value clamping', () => {
 		const onChange = vi.fn();
 		render(Slider, { min: 0, max: 100, value: 150, onChange });
 		const el = page.getByRole('slider');
-		await expect.element(el).toHaveAttribute('aria-valuenow', '100');
+		await expect.element(el).toHaveValue('100');
 		expect(onChange).toHaveBeenCalledWith(100);
 	});
 
 	it('clamps a value below min up to min', async () => {
 		render(Slider, { min: 10, max: 100, value: -5 });
 		const el = page.getByRole('slider');
-		await expect.element(el).toHaveAttribute('aria-valuenow', '10');
+		await expect.element(el).toHaveValue('10');
 	});
 });
 
@@ -88,6 +100,45 @@ describe('orientation', () => {
 		const el = page.selector('.fs-slider');
 		await expect.element(el).toHaveClass('orientation-vertical');
 	});
+
+	it('draws a vertical slider from the bottom up, so the maximum is at the top', async () => {
+		render(Slider, { orientation: 'vertical', value: 100 });
+		const wrapper = page.selector('.fs-slider');
+		await expect.element(wrapper).not.toHaveClass('reverse');
+		const rail = page.selector('.slider-rail').element().getBoundingClientRect();
+		const thumb = page.selector('.slider-thumb').element().getBoundingClientRect();
+		expect(thumb.top + thumb.height / 2).toBeLessThanOrEqual(rail.top + 1);
+	});
+
+	it('draws a vertical slider from the top down with reverse', async () => {
+		render(Slider, { orientation: 'vertical', value: 100, reverse: true });
+		const wrapper = page.selector('.fs-slider');
+		await expect.element(wrapper).toHaveClass('reverse');
+		const rail = page.selector('.slider-rail').element().getBoundingClientRect();
+		const thumb = page.selector('.slider-thumb').element().getBoundingClientRect();
+		expect(thumb.top + thumb.height / 2).toBeGreaterThanOrEqual(rail.bottom - 1);
+	});
+
+	it('takes the value from where the pointer drags a vertical slider', async () => {
+		render(Slider, { orientation: 'vertical', value: 50, wrapperAttributes: { style: 'block-size: 200px' } });
+		const wrapper = page.selector('.fs-slider');
+		const { top } = page.selector('.slider-rail').element().getBoundingClientRect();
+		const { top: wrapperTop } = wrapper.element().getBoundingClientRect();
+		await userEvent.dragAndDrop(page.selector('.slider-thumb'), wrapper, {
+			targetPosition: { x: 16, y: top - wrapperTop }
+		});
+		await expect.element(page.getByRole('slider')).toHaveValue('100');
+	});
+
+	it('keeps its value when a vertical slider has no height to read the pointer on', async () => {
+		render(Slider, { orientation: 'vertical', value: 50 });
+		const thumb = page.selector('.slider-thumb').element();
+		const rail = page.selector('.slider-rail').element().getBoundingClientRect();
+		const { left, top } = thumb.getBoundingClientRect();
+		thumb.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, clientX: left, clientY: top }));
+		window.dispatchEvent(new MouseEvent('mousemove', { clientX: left, clientY: rail.top }));
+		await expect.element(page.getByRole('slider')).toHaveValue('50');
+	});
 });
 
 describe('disabled state', () => {
@@ -97,16 +148,17 @@ describe('disabled state', () => {
 		await expect.element(el).toHaveClass('disabled');
 	});
 
-	it('sets tabindex to -1 when disabled', async () => {
+	it('disables the native input', async () => {
 		render(Slider, { disabled: true });
-		const el = page.getByRole('slider');
-		await expect.element(el).toHaveAttribute('tabindex', '-1');
+		await expect.element(page.getByRole('slider')).toBeDisabled();
 	});
 
-	it('sets tabindex to 0 when enabled', async () => {
+	it('takes the keyboard focus on the native input when enabled', async () => {
 		render(Slider);
-		const el = page.getByRole('slider');
-		await expect.element(el).toHaveAttribute('tabindex', '0');
+		// The first Tab of a test can leave the page, unless something in it was clicked first.
+		await userEvent.click(document.body);
+		await userEvent.tab();
+		await expect.element(page.getByRole('slider')).toHaveFocus();
 	});
 });
 
@@ -117,7 +169,7 @@ describe('keyboard interaction', () => {
 		(el.element() as HTMLElement).focus();
 		await expect.element(el).toHaveFocus();
 		await userEvent.keyboard('{ArrowRight}');
-		await expect.element(el).toHaveAttribute('aria-valuenow', '51');
+		await expect.element(el).toHaveValue('51');
 	});
 
 	it('decrements the value with ArrowLeft', async () => {
@@ -126,7 +178,7 @@ describe('keyboard interaction', () => {
 		(el.element() as HTMLElement).focus();
 		await expect.element(el).toHaveFocus();
 		await userEvent.keyboard('{ArrowLeft}');
-		await expect.element(el).toHaveAttribute('aria-valuenow', '49');
+		await expect.element(el).toHaveValue('49');
 	});
 
 	it('does not step above max', async () => {
@@ -134,7 +186,7 @@ describe('keyboard interaction', () => {
 		const el = page.getByRole('slider');
 		(el.element() as HTMLElement).focus();
 		await userEvent.keyboard('{ArrowRight}');
-		await expect.element(el).toHaveAttribute('aria-valuenow', '100');
+		await expect.element(el).toHaveValue('100');
 	});
 });
 
@@ -147,9 +199,9 @@ describe('validation', () => {
 });
 
 describe('attributes', () => {
-	it('forwards extra attributes to the root element', async () => {
-		render(Slider, { 'data-testid': 'my-slider' });
-		const el = page.getByTestId('my-slider');
-		await expect.element(el).toBeInTheDocument();
+	it('forwards extra attributes to the native input and wrapperAttributes to the drawing', async () => {
+		render(Slider, { 'data-testid': 'my-slider', wrapperAttributes: { 'data-testid': 'my-drawing' } });
+		expect(page.getByTestId('my-slider').element()).toBe(page.getByRole('slider').element());
+		await expect.element(page.getByTestId('my-drawing')).toHaveClass('fs-slider');
 	});
 });

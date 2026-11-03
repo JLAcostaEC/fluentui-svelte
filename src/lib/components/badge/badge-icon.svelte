@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { pxToRem, capitalize, RenderSoC } from '$internal';
+	import { pxToRem, capitalize, RenderSoC } from '#internal';
 	import { colors, getIconBadge } from './utils.svelte.ts';
 	import type { BadgeIconProps } from './types.ts';
 
@@ -11,7 +11,7 @@
 		class: classes,
 		color,
 		style,
-		ref = $bindable(),
+		ref = $bindable(null),
 		...attributes
 	}: BadgeIconProps = $props();
 
@@ -41,12 +41,12 @@
   ```
  -->
 <span
+	{...attributes}
 	bind:this={ref}
 	aria-label={arialabel}
 	role="img"
 	class={['fs-badge-icon', color || colors[status], classes]}
 	style="--badge-size: {pxToRem(size)}; {style}"
-	{...attributes}
 >
 	{#if Icon}
 		<RenderSoC SoC={Icon} args={{ 'aria-hidden': true, width: `${size}px`, height: `${size}px` }} />

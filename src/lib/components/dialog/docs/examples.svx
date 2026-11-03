@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent, DialogActions, Button } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
-  import type { DialogAnimation, DialogPosition } from '$lib/index.js';
+  import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent, DialogActions, Button } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+  import type { DialogAnimation, DialogPosition } from '#lib/index.js';
 
   const animations: DialogAnimation[] = ['fade', 'zoom', 'slide', 'bounce'];
   const animationCode = `

@@ -57,7 +57,7 @@ const markdownToCodeMarkup = (message: string) =>
 const paraglideAdapter = paraglide({
 	project: './project.inlang',
 	key,
-	// Backticks get the tag past propsmith's no-HTML check; svelte.config.js strips them again.
+	// Backticks get the tag past propsmith's no-HTML check; vite.config.ts strips them again.
 	expression: (messageKey) => `\`<I18nMarkupMessage message={m.${messageKey}} />\``
 });
 

@@ -1,5 +1,5 @@
 <script lang="ts" generics="T extends DialogTitleTag">
-	import { PREFIX } from '$constants';
+	import { PREFIX } from '#constants';
 	import { getDialogContext } from './dialog.svelte.ts';
 	import { TITLE_TAG } from './utils.ts';
 	import type { DialogTitleProps, DialogTitleTag } from './types.ts';
@@ -9,7 +9,7 @@
 
 	let {
 		as = 'h3' as T,
-		ref = $bindable(),
+		ref = $bindable(null),
 		id = FALLBACK_ID,
 		class: classes,
 		children,
@@ -38,7 +38,7 @@
 	});
 </script>
 
-<svelte:element this={_as} {id} class={['dialog-title', classes]} bind:this={ref} {...attributes}>
+<svelte:element this={_as} {...attributes} {id} class={['dialog-title', classes]} bind:this={ref}>
 	{@render children?.()}
 </svelte:element>
 

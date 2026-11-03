@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { watch } from 'runed';
 	import CheckmarkFilled from 'fluentui-icons-svelte/CheckmarkFilled.svelte';
-	import { Button } from '$lib/index.js';
-	import { PREFIX } from '$constants';
+	import { Button } from '#lib/index.js';
+	import { PREFIX } from '#constants';
 	import { getMenuContext, COMPONENT_NAME as MENU_COMPONENT_NAME } from './menu.svelte.ts';
-	import { invokeHandlers, RenderSoC } from '$internal';
+	import { invokeHandlers, RenderSoC } from '#internal';
 	import type { MenuItemActionableProps } from './types.ts';
 
 	const FALLBACK_ID = $props.id();
@@ -12,11 +12,11 @@
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		icon: Icon,
 		secondaryContent,
 		children,
-		checked = $bindable(),
+		checked = $bindable(null),
 		disabled,
 		class: classes,
 		id = ID,
@@ -24,6 +24,7 @@
 		value = id as string,
 		subText,
 		onclick,
+		onkeydown,
 		...attributes
 	}: MenuItemActionableProps = $props();
 
@@ -61,6 +62,7 @@
     ```
 -->
 <Button
+	{...attributes}
 	as="button"
 	{disabled}
 	appearance="subtle"
@@ -69,11 +71,10 @@
 		invokeHandlers(e, [e.key !== 'Enter', !!disabled], [onkeydown, () => toggleCheckbox(e, value, name)])}
 	aria-checked={checked}
 	role="menuitemcheckbox"
-	style={`--margin-left: ${hasIcons && !Icon ? 1.5 : 0}rem;}`}
+	style="{attributes.style ?? ''}; --margin-left: {hasIcons && !Icon ? 1.5 : 0}rem;"
 	aria-label={secondaryContent ? `${secondaryContent}, Use ${secondaryContent}` : undefined}
 	class="fs-menu-item-checkbox {hasIcons || hasCheckmarks ? 'align' : ''} {checked ? 'checked' : ''} {classes}"
 	bind:ref
-	{...attributes}
 >
 	<span class="label" aria-label="{secondaryContent}, Use {secondaryContent}">
 		<CheckmarkFilled class="indicator" />

@@ -1,5 +1,5 @@
-import type { Horientation, PolymorphicProps } from '$types';
-import type { FSContext } from '$internal';
+import type { Horientation, PolymorphicProps } from '#types';
+import type { FSContext } from '#internal';
 import type { HTMLAttributes } from 'svelte/elements';
 import type { Component, Snippet } from 'svelte';
 
@@ -11,7 +11,7 @@ export type CardProps<Tag extends CardTagTypes = 'div'> = {
 	 * @type CardElementDOMType[Tag]
 	 * @bindable
 	 */
-	ref?: CardElementDOMType[Tag];
+	ref?: CardElementDOMType[Tag] | null;
 	/** The DOM element to render.
 	 * @type 'div' | 'article' | 'section' | 'a'
 	 * @default 'div'
@@ -85,7 +85,7 @@ export type CardPreviewProps = {
 	/** The DOM reference of the preview element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** The URL of the logo overlaid on the bottom left corner of the preview. */
 	logoSrc: string;
 	/** The alternative text of the logo. Empty by default, which marks the logo as decorative.
@@ -101,11 +101,15 @@ export type CardHeaderProps = {
 	/** The DOM reference of the header element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** The title of the card. A snippet or a component receives the id the floating checkbox is labelled by.
 	 * @type Snippet | Component | string
 	 */
 	title: Snippet<[attrs: { id: string }]> | Component<{ id: string }> | string;
+	/** The level of the heading that holds a string title, to fit the headings of the page around it.
+	 * @default 4
+	 */
+	headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 	/** The image rendered before the title. A string is used as the `src` of an `<img>`.
 	 * @type Snippet | Component | string
 	 */
@@ -129,7 +133,7 @@ export type CardFooterProps = {
 	/** The DOM reference of the footer element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** The actions rendered inside the footer. Not available on selectable cards.
 	 * @type Snippet | Component
 	 */

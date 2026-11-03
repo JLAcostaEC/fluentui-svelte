@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getHighlighter } from '$site/utils/highlighter.js';
+	import { getHighlighter } from '#site/utils/highlighter.js';
 	import { fsShikiCopyButton } from '../../../../scripts/shiki-copy-button.js';
 
 	let {

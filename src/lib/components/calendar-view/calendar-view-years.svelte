@@ -4,14 +4,15 @@
 	import CalendarViewItem from './calendar-view-item.svelte';
 	import {
 		compareDates,
+		dateKey,
 		getCalendarViewContext,
 		getCalendarYears,
 		indexOfDate,
 		rangeCovers
 	} from './calendar-view.svelte.js';
 	import { createCalendarNavigation, YEAR_GRID } from './calendar-view-grid.js';
-	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
-	import { getCSSDuration } from '$internal';
+	import { getGlobalFSContext } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { getCSSDuration } from '#internal';
 
 	const CalendarContext = getCalendarViewContext();
 
@@ -123,11 +124,11 @@
 						{selected}
 						variant="monthYear"
 						outOfRange={!inDecade}
-						current={compareDates(year, new Date(), 'year')}
+						current={compareDates(year, CalendarContext.config.today, 'year')}
 						buttonAttributes={{
 							tabindex: firstFocusableYear && compareDates(firstFocusableYear, year, 'year') ? 0 : -1,
 							'aria-label': yearLabel(year),
-							'data-date': year.getTime(),
+							'data-date': dateKey(year),
 							onclick: (e: MouseEvent) => {
 								selectYear(e, year);
 							}

@@ -1,5 +1,6 @@
-import { createFSContext } from '$internal';
-import type { SvelteMap, SvelteSet } from 'svelte/reactivity';
+import { createFSContext } from '#internal';
+import { SvelteSet } from 'svelte/reactivity';
+import type { SvelteMap } from 'svelte/reactivity';
 import type { TreeViewContext, TreeViewItemContext, TreeViewNode } from './types.js';
 
 export const [getTreeViewContext, setTreeViewContext] = createFSContext<TreeViewContext>();
@@ -115,17 +116,49 @@ export function traversalSync(
 		bubbleCheck(node.id, state, checked, isIndeterminate);
 	}
 
-	const checkedItems = Array.from(state.values()).filter((n) => n.checked);
+	syncCheckedItems(state, iterable);
+}
 
+/** Writes the ids of the checked nodes into the set or array of the tree. */
+function syncCheckedItems(state: SvelteMap<string, TreeViewNode>, iterable: SvelteSet<string> | Array<string>) {
+	writeItems(
+		iterable,
+		Array.from(state.values())
+			.filter((n) => n.checked)
+			.map(({ id }) => id)
+	);
+}
+
+/** Replaces the ids in the set or array of the tree. */
+function writeItems(iterable: SvelteSet<string> | Array<string>, ids: string[]) {
 	if (iterable instanceof Set) {
 		iterable.clear();
-		for (const { id } of checkedItems) {
+		for (const id of ids) {
 			iterable.add(id);
 		}
 	} else if (Array.isArray(iterable)) {
 		iterable.length = 0;
-		iterable.push(...checkedItems.map(({ id }) => id));
+		iterable.push(...ids);
 	}
+}
+
+/**
+ * Gives each branch the state its checked descendants imply, as a click would: a tree can start
+ * with only some of the items of a branch checked. The set or array is written only if it changes,
+ * and keeps the ids of items that are not in the tree yet.
+ */
+export function syncBranchStates(state: SvelteMap<string, TreeViewNode>, iterable: SvelteSet<string> | Array<string>) {
+	for (const node of Array.from(state.values())) {
+		if (node.checked && node.parentId) bubbleCheck(node.id, state, true);
+	}
+
+	const before = Array.from(iterable);
+	const kept = before.filter((id) => state.get(id)?.checked ?? true);
+	const added = Array.from(state.values())
+		.filter((n) => n.checked && !kept.includes(n.id))
+		.map(({ id }) => id);
+
+	if (added.length || kept.length !== before.length) writeItems(iterable, [...kept, ...added]);
 }
 
 export function traversalSyncSingleSelection(

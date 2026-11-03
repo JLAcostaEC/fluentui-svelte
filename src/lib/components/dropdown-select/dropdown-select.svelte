@@ -1,22 +1,29 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
+	import { flushSync } from 'svelte';
 	import ChevronDownFilled from 'fluentui-icons-svelte/ChevronDownFilled.svelte';
 	import { selectDirection } from './dropdown-select.svelte.ts';
 	import type { DropdownSelectProps } from './types.ts';
 
+	const labelContext = claimLabel(() => id);
+
 	let {
 		hidePlaceholder,
 		placeholder = 'Native Select Dropdown',
-		ref = $bindable(),
+		ref = $bindable(null),
 		children,
-		wrapperRef = $bindable(),
-		wrapperProps,
+		wrapperRef = $bindable(null),
+		wrapperAttributes,
 		multiple,
+		class: classes,
 		value = $bindable(multiple ? [] : ''),
+		id = labelContext?.fieldId,
+		name = id,
 		...attributes
 	}: DropdownSelectProps = $props();
 </script>
 
-<div class="fs-dropdown" bind:this={wrapperRef} {...wrapperProps}>
+<div {...wrapperAttributes} class={['fs-dropdown', wrapperAttributes?.class]} bind:this={wrapperRef}>
 	{#if !multiple}
 		<ChevronDownFilled class="indicator" />
 	{/if}
@@ -25,17 +32,40 @@
 		We need to use a if block with the same structure 
 	-->
 	{#if multiple}
-		<select class="fs-dropdown-select" {@attach selectDirection()} multiple bind:value bind:this={ref} {...attributes}>
+		<select
+			{...attributes}
+			{id}
+			{name}
+			class={['fs-dropdown-select', classes]}
+			{@attach selectDirection()}
+			multiple
+			bind:value
+			bind:this={ref}
+		>
 			<button>
 				<selectedcontent></selectedcontent>
 			</button>
 			{#if !hidePlaceholder}
-				<option class="fs-dropdown-placeholder" disabled selected hidden value="">{placeholder}</option>
+				<option class="fs-dropdown-placeholder" disabled selected={!value?.length} hidden value="">{placeholder}</option
+				>
 			{/if}
 			{@render children?.()}
 		</select>
 	{:else}
-		<select class="fs-dropdown-select" {@attach selectDirection()} bind:value bind:this={ref} {...attributes}>
+		<select
+			{...attributes}
+			{id}
+			{name}
+			class={['fs-dropdown-select', classes]}
+			{@attach selectDirection()}
+			bind:value
+			bind:this={ref}
+			oninputcapture={(event) => {
+				// selectedcontent mutates before change; sync the binding before its observer restores the old value.
+				flushSync(() => (value = event.currentTarget.value));
+				attributes.oninputcapture?.(event);
+			}}
+		>
 			<button>
 				<selectedcontent></selectedcontent>
 			</button>
@@ -93,6 +123,11 @@
 			width: calc(100%);
 			left: 0;
 			background-color: var(--fs-accent-fill-default);
+		}
+		&:has(select:is(:user-invalid, [aria-invalid='true'])):after {
+			width: calc(100%);
+			left: 0;
+			background-color: var(--fs-system-critical);
 		}
 		& .fs-dropdown-select {
 			border-radius: 0;

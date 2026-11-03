@@ -80,7 +80,7 @@ describe('ListView nested navigation', () => {
 		await expect.element(page.getByRole('button', { name: 'Projects', exact: true })).toHaveFocus();
 		await userEvent.keyboard('{ArrowDown}');
 		await expect.element(page.getByRole('button', { name: 'Reports' })).toHaveFocus();
-		await expect.element(page.getByRole('status', { name: 'Parent selection' })).toHaveTextContent(/^$/);
+		await expect.element(page.getByRole('status', { name: 'Parent selection' })).toHaveTextContent('');
 	});
 
 	it('retains native tab order in items mode', async () => {

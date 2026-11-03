@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { tick } from 'svelte';
 	import { getTabspotAttributes } from 'tabspot';
-	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { getGlobalFSContext } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { setTagGroupContext } from './tag-group.ts';
 	import type { TagGroupContext, TagGroupProps } from './types.ts';
 
@@ -15,7 +15,7 @@
 		onDismiss,
 		role = 'toolbar',
 		class: classes,
-		ref = $bindable(),
+		ref = $bindable(null),
 		children,
 		...attributes
 	}: TagGroupProps = $props();
@@ -97,7 +97,7 @@
 		</TagGroup>
 		```
 -->
-<div bind:this={ref} class={['fs-tag-group', size ?? 'medium', classes]} {role} {...tabspotAttrs} {...attributes}>
+<div {...attributes} bind:this={ref} class={['fs-tag-group', size ?? 'medium', classes]} {role} {...tabspotAttrs}>
 	{@render children?.()}
 </div>
 

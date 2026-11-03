@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Label } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
+  import { Label, TextBox } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
 </script>
 
 # Label
@@ -9,15 +9,15 @@
 {m.label_description()}
 
 <Showcase columns={1}>
-  <Label label="Label" />
+  <Label label="Label"><TextBox /></Label>
 </Showcase>
 
 ## {m.global_usage()}
 
 ```svelte
 <script>
-	import { Label } from 'fluentui-svelte';
+	import { Label, TextBox } from 'fluentui-svelte';
 </script>
 
-<Label label="Email" />
+<Label label="Email"><TextBox /></Label>
 ```

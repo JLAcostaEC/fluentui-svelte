@@ -1,18 +1,18 @@
 <script lang="ts">
-	import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent, DialogActions } from '$lib/index.js';
+	import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent, DialogActions } from '#lib/index.js';
 	import type {
 		DialogAnimation,
 		DialogDuration,
 		DialogPosition,
 		DialogTitleTag
-	} from '$lib/components/dialog/types.js';
+	} from '#lib/components/dialog/types.js';
 
 	let {
 		type = 'modal',
 		position,
 		animation,
 		duration = 0,
-		open = $bindable(),
+		open = $bindable(null),
 		onOpenChange,
 		titleAs = 'h3',
 		actionsPosition = 'end',
@@ -30,7 +30,7 @@
 		position?: DialogPosition;
 		animation?: DialogAnimation;
 		duration?: DialogDuration;
-		open?: boolean;
+		open?: boolean | null;
 		onOpenChange?: (open: boolean) => void;
 		titleAs?: DialogTitleTag;
 		actionsPosition?: 'start' | 'center' | 'end';
@@ -42,14 +42,14 @@
 		titleProps?: Record<string, unknown>;
 		contentProps?: Record<string, unknown>;
 		actionsProps?: Record<string, unknown>;
-		onRefs?: (refs: Record<'trigger' | 'surface' | 'title' | 'content' | 'actions', Element | undefined>) => void;
+		onRefs?: (refs: Record<'trigger' | 'surface' | 'title' | 'content' | 'actions', Element | null>) => void;
 	} = $props();
 
-	let triggerRef: HTMLButtonElement | undefined = $state();
-	let surfaceRef: HTMLDialogElement | undefined = $state();
-	let titleRef: HTMLDivElement | HTMLHeadingElement | undefined = $state();
-	let contentRef: HTMLDivElement | undefined = $state();
-	let actionsRef: HTMLDivElement | undefined = $state();
+	let triggerRef: HTMLButtonElement | null = $state(null);
+	let surfaceRef: HTMLDialogElement | null = $state(null);
+	let titleRef: HTMLDivElement | HTMLHeadingElement | null = $state(null);
+	let contentRef: HTMLDivElement | null = $state(null);
+	let actionsRef: HTMLDivElement | null = $state(null);
 	let dialog: { openDialog: () => void; closeDialog: () => void } | undefined = $state();
 
 	export function openDialog() {

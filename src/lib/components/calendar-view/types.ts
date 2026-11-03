@@ -1,5 +1,5 @@
 import type { HTMLAttributes, HTMLButtonAttributes } from 'svelte/elements';
-import type { FSContext } from '$internal';
+import type { FSContext } from '#internal';
 import type { Snippet } from 'svelte';
 import type { ComputePositionConfig, VirtualElement } from '@floating-ui/dom';
 
@@ -72,7 +72,7 @@ export type CalendarViewProps = {
 	/** The DOM reference of the calendar element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** The selected date, or an array of dates when `selectionMode` is `'multiple'`. Unused by `'range'`.
 	 * @default null
 	 * @bindable
@@ -99,6 +99,10 @@ export type CalendarViewProps = {
 	minDate?: Date;
 	/** The latest selectable date. */
 	maxDate?: Date;
+	/** The date the view treats as today: it is highlighted, and the view opens on its month when there is no `value`. Pass it when rendering on the server, built from a year, month and day on both sides, as in `new Date(2024, 2, 5)`: the same instant falls on different days in different time zones.
+	 * @default new Date()
+	 */
+	today?: Date;
 	/** The calendar page the view opens on.
 	 * @default 'days'
 	 */
@@ -129,6 +133,7 @@ export type CalendarViewContext = FSContext<
 		weekStart: number;
 		minDate?: Date;
 		maxDate?: Date;
+		today: Date;
 		headers?: boolean;
 		blackoutDates?: Date[];
 		selectionMode: CalendarSelectionMode;

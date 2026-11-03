@@ -2,15 +2,82 @@ import { defineConfig } from 'vitest/config';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { playwright } from '@vitest/browser-playwright';
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
+import rehypeSlug from 'rehype-slug';
+import { mdsvex, escapeSvelte } from 'mdsvex';
+import rehypeClassNames from 'rehype-class-names';
+import adapter from '@sveltejs/adapter-cloudflare';
+import { fsShikiCopyButton } from './scripts/shiki-copy-button.js';
+import { createHighlighter } from 'shiki';
+
+/** @type {(import('shiki').BundledLanguage | import('shiki').LanguageInput | import('shiki').SpecialLanguage)[]} */
+const langs = ['typescript', 'bash', 'css', 'svelte'];
+
+const highlighter = await createHighlighter({
+	themes: ['one-light', 'one-dark-pro'],
+	langs: langs
+});
+
+const PROPSMITH_I18N_MARKUP = /`<I18nMarkupMessage message=\{m\.([A-Za-z_$][\w$]*)\} \/>`/g;
+
+// propsmith can only write <I18nMarkupMessage /> inside backticks; unwrap them so mdsvex renders the component.
+const propsmithI18nMarkup = {
+	name: 'propsmith-i18n-markup',
+	markup: ({ content, filename }: { content: string; filename?: string }) => {
+		if (!filename?.endsWith('.svx') || !content.includes('`<I18nMarkupMessage message={m.')) return;
+
+		PROPSMITH_I18N_MARKUP.lastIndex = 0;
+		const code = content.replace(PROPSMITH_I18N_MARKUP, '<I18nMarkupMessage message={m.$1} />');
+
+		return { code };
+	}
+};
 
 export default defineConfig({
 	plugins: [
-		sveltekit(),
+		sveltekit({
+			compilerOptions: {
+				// Force runes mode for the project, except for libraries. Can be removed in svelte 6.
+				runes: ({ filename }) => (filename.split(/[/\\]/).includes('node_modules') ? undefined : true)
+			},
+			preprocess: [
+				propsmithI18nMarkup,
+				mdsvex({
+					rehypePlugins: [
+						rehypeSlug as any,
+						[
+							rehypeClassNames,
+							{
+								'h1,h2,h3,h4,h5,h6,p,a,ol,ul,table': 'fs-docs'
+							}
+						]
+					],
+					highlight: {
+						highlighter: async (code, lang = 'text') => {
+							const html = escapeSvelte(
+								highlighter.codeToHtml(code, {
+									lang: lang as import('shiki').BundledLanguage | import('shiki').SpecialLanguage,
+									themes: {
+										light: 'one-light',
+										dark: 'one-dark-pro'
+									},
+									defaultColor: 'light-dark()',
+									cssVariablePrefix: '--shiki-',
+									transformers: [fsShikiCopyButton()]
+								})
+							);
+							return `{@html \`${html}\` }`;
+						}
+					},
+					extensions: ['.svx']
+				})
+			],
+			adapter: adapter(),
+			extensions: ['.svelte', '.svx']
+		}),
 		paraglideVitePlugin({
 			project: './project.inlang',
 			outdir: './src/i18n',
 			strategy: ['url', 'cookie', 'baseLocale'],
-			emitGitIgnore: true,
 			emitTsDeclarations: true
 		})
 	],

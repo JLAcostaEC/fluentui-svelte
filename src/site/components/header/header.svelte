@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { resolve } from '$app/paths';
 	import { toggleMode, mode } from 'mode-watcher';
 	import { SettingsRegular, TextAlignRightRegular } from 'fluentui-icons-svelte';
-	import { m } from '$i18n/messages.js';
-	import { getLocale, locales, localizeHref, deLocalizeUrl } from '$i18n/runtime.js';
-	import PageLoader from '$site/components/page-loader/page-loader.svelte';
+	import { m } from '#i18n/messages.js';
+	import { getLocale, locales, localizeHref, deLocalizeUrl } from '#i18n/runtime.js';
+	import { localizedPath } from '#site/utils/localized-path.js';
+	import PageLoader from '#site/components/page-loader/page-loader.svelte';
 	import {
 		Button,
 		Menu,
@@ -15,12 +15,13 @@
 		MenuPopover,
 		MenuTrigger,
 		MenuDivider
-	} from '$lib/index.js';
-	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
-	import { GITHUB_REPO_URL } from '$site/constants.js';
-	import type { Pathname } from '$app/types';
+	} from '#lib/index.js';
+	import { getGlobalFSContext } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { GITHUB_REPO_URL } from '#site/constants.js';
+	import { getDisablePanZoom } from '#site/preferences.js';
 
 	const globalContext = getGlobalFSContext();
+	const disablePanZoom = getDisablePanZoom();
 
 	const { state: globalState, methods } = globalContext!;
 
@@ -82,7 +83,7 @@
 
 <header id="header">
 	<section class="container">
-		<a href={resolve(localizeHref('/') as any)} class="logo-link">
+		<a href={localizedPath('/')} class="logo-link">
 			<picture>
 				{#if mode.current === 'dark'}
 					<source srcset="/images/banner-white.png" type="image/png" />
@@ -153,6 +154,12 @@
 						onclick={() => methods.setReducedMotion(!globalState.reducedMotion)}
 						>{m.header_reduce_motion()}</MenuItemSwitch
 					>
+					<MenuItemSwitch
+						aria-label={m.header_disable_panzoom()}
+						bind:checked={() => disablePanZoom.current, () => null}
+						onclick={() => (disablePanZoom.current = !disablePanZoom.current)}
+						subText={m.header_disable_panzoom_subtext()}>{m.header_disable_panzoom()}</MenuItemSwitch
+					>
 					<MenuItemSwitch bind:checked={() => mode.current === 'dark', () => null} onclick={toggleMode}>
 						{m.header_dark_mode()}
 					</MenuItemSwitch>
@@ -172,7 +179,7 @@
 										as="a"
 										data-sveltekit-reload
 										appearance={_locale === locale ? 'accent' : 'subtle'}
-										href={resolve(localizeHref(page.url.pathname, { locale: _locale }) as Pathname)}
+										href={localizedPath(page.url.pathname, { locale: _locale })}
 									>
 										{@render flag(_locale)}
 										{localeName[0].toUpperCase() + localeName.slice(1)}

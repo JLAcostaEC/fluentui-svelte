@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { ProgressBar } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
+  import { ProgressBar } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
 
   const valueCode = `
 <ProgressBar value={30} />

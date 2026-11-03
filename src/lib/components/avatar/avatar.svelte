@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { BadgeIcon } from '$lib/index.js';
-	import { pickColorByWord } from '$css/utils.js';
-	import { getInitials, pxToRem, RenderSoC } from '$internal';
+	import { BadgeIcon } from '#lib/index.js';
+	import { pickColorByWord } from '#css/utils.js';
+	import { getInitials, pxToRem, RenderSoC } from '#internal';
 	import type { AvatarProps } from './type.ts';
 
 	let {
@@ -15,7 +15,7 @@
 		color = 'attention',
 		style,
 		activeAppearance = 'ring',
-		ref = $bindable(),
+		ref = $bindable(null),
 		idForColor,
 		badge,
 		...attributes
@@ -49,6 +49,7 @@
   ```
 -->
 <div
+	{...attributes}
 	role="img"
 	aria-label={name}
 	bind:this={ref}
@@ -60,9 +61,9 @@
 		active,
 		shape,
 		hideBg && 'hide-bg',
-		(badge?.status || badge?.icon) && 'mask'
+		(badge?.status || badge?.icon) && 'mask',
+		attributes?.class
 	]}
-	{...attributes}
 >
 	<span class="content">
 		{#if image}

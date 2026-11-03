@@ -3,6 +3,7 @@
 	import { circOut } from 'svelte/easing';
 	import {
 		compareDates,
+		dateKey,
 		getCalendarDays,
 		getCalendarViewContext,
 		getMonthLocale,
@@ -12,10 +13,10 @@
 		startOfDay
 	} from './calendar-view.svelte.js';
 	import CalendarViewItem from './calendar-view-item.svelte';
-	import { getGlobalFSContext, getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { getGlobalFSContext, getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 
 	import { cellDate, createCalendarNavigation, DAY_GRID } from './calendar-view-grid.js';
-	import { getCSSDuration } from '$internal';
+	import { getCSSDuration } from '#internal';
 	import { on } from 'svelte/events';
 	import type { CalendarDateRange } from './types.js';
 
@@ -172,13 +173,13 @@
 						{selected}
 						rangePosition={bandRange ? rangePositionOf(day, bandRange) : undefined}
 						outOfRange={!inMonth}
-						current={compareDates(day, new Date(), 'day')}
+						current={compareDates(day, CalendarContext.config.today, 'day')}
 						disabled={isDisabled(day)}
 						blackout={isBlackout(day)}
 						buttonAttributes={{
 							tabindex: inMonth ? 0 : -1,
 							'aria-label': dayLabel(day),
-							'data-date': day.getTime(),
+							'data-date': dateKey(day),
 							onclick: (e: MouseEvent) => {
 								selectDay(e, day);
 							}

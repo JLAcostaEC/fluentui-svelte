@@ -4,7 +4,7 @@
 
 	let {
 		as,
-		ref = $bindable(),
+		ref = $bindable(null),
 		appearance = 'none',
 		class: classes,
 		onclick,
@@ -21,12 +21,12 @@
 
 <svelte:element
 	this={_as}
+	{...attributes}
 	bind:this={ref as TableDOM[Tag]}
 	role={_as === 'div' ? 'row' : undefined}
 	class={['fs-table-row', appearance, { flex: _as === 'div' }, classes]}
 	{@attach onclick ? selectOnSpace : undefined}
 	{onclick}
-	{...attributes}
 >
 	{@render children?.()}
 </svelte:element>

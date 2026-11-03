@@ -1,7 +1,7 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
-  import { m } from '$i18n/messages.js';
-  import Seo from '$site/components/seo/seo.svelte';
+  import { m } from '#i18n/messages.js';
+  import Seo from '#site/components/seo/seo.svelte';
 </script>
 
 <Seo title={m.global_getting_started()} description={m.seo_getting_started_description()} keywords={m.seo_getting_started_keywords().split(', ')} />
@@ -48,6 +48,55 @@ import 'fluentui-svelte/reset.css'; /* Dont use if you already have a reset in y
 import 'fluentui-svelte/typography.css';
 import 'fluentui-svelte/media-darkmode.css'; /* Or:  import 'fluentui-svelte/class-darkmode.css' */
 ```
+
+### {m.gs_optional_font_title()}
+
+{m.gs_optional_font_description()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.gs_optional_font_download_description} /></p>
+
+- <a href="/fonts/selawik/selawk.ttf" download>selawk.ttf</a>
+- <a href="/fonts/selawik/selawksb.ttf" download>selawksb.ttf</a>
+- <a href="/fonts/selawik/selawkb.ttf" download>selawkb.ttf</a>
+- <a href="/fonts/selawik/SIL%20Open%20Font%20License.txt" download>{m.gs_optional_font_license_label()}</a>
+
+<p class="fs-docs"><I18nMarkupMessage message={m.gs_optional_font_configuration_description} /></p>
+
+```css
+@font-face {
+  font-family: 'Selawik';
+  src: url('/fonts/selawik/selawk.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Selawik';
+  src: url('/fonts/selawik/selawksb.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Selawik';
+  src: url('/fonts/selawik/selawkb.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+```
+
+<p class="fs-docs"><I18nMarkupMessage message={m.gs_optional_font_import_description} /></p>
+
+```js
+import 'fluentui-svelte/theme.css';
+import 'fluentui-svelte/typography.css';
+import '../app.css';
+```
+
+<p class="fs-docs"><I18nMarkupMessage message={m.gs_optional_font_fallback_note} /></p>
 
 ## {m.gs_provider_title()}
 

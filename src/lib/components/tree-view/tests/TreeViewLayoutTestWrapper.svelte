@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { TreeView, TreeViewItem, TreeViewItemContent } from '$lib/index.js';
+	import { TreeView, TreeViewItem, TreeViewItemContent } from '#lib/index.js';
 </script>
 
 {#snippet icon()}

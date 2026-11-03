@@ -54,6 +54,11 @@ describe('CalendarView rendering', () => {
 		await expect.element(periodLabel()).toHaveTextContent('January 2026');
 	});
 
+	it('opens on the month of today when a multiple selection is empty', async () => {
+		render(CalendarViewTestWrapper, { selectionMode: 'multiple', value: [], today: JANUARY_2026 });
+		await expect.element(periodLabel()).toHaveTextContent('January 2026');
+	});
+
 	it('renders seven weekday headers', async () => {
 		render(CalendarViewTestWrapper, { value: JANUARY_2026 });
 		await expect.element(page.selector('.fs-calendar-view-header')).toBeInTheDocument();
@@ -289,7 +294,7 @@ describe('CalendarView grid edges', () => {
 		focusCell(0);
 		await userEvent.keyboard('{ArrowLeft}');
 
-		await expect.element(periodLabel()).toHaveTextContent('2010');
+		await expect.element(periodLabel()).toMatchTextContent('2010');
 		await expect.element(cell(7)).toHaveFocus();
 		await expect.element(cell(7)).toHaveTextContent('2017');
 	});
@@ -678,13 +683,13 @@ describe('CalendarView range accessibility', () => {
 		await expect.element(liveRegion()).toHaveAttribute('aria-live', 'polite');
 
 		await cell(jan(20)).click();
-		await expect.element(liveRegion()).toHaveTextContent('Choose the end date');
+		await expect.element(liveRegion()).toMatchTextContent('Choose the end date');
 
 		await cell(jan(23)).click();
-		await expect.element(liveRegion()).toHaveTextContent('4 days');
+		await expect.element(liveRegion()).toMatchTextContent('4 days');
 
 		await clearButton().click();
-		await expect.element(liveRegion()).toHaveTextContent('Date range cleared');
+		await expect.element(liveRegion()).toMatchTextContent('Date range cleared');
 	});
 
 	it('marks every month the range passes through', async () => {
@@ -789,7 +794,7 @@ describe('CalendarView month navigation', () => {
 		focusCell(0);
 		await userEvent.keyboard('{Control>}{ArrowUp}{/Control}');
 
-		await expect.element(periodLabel()).toHaveTextContent('2020');
+		await expect.element(periodLabel()).toMatchTextContent('2020');
 	});
 });
 
@@ -829,7 +834,7 @@ describe('CalendarView year navigation', () => {
 		focusCell(2);
 		await userEvent.keyboard('{ArrowUp}');
 
-		await expect.element(periodLabel()).toHaveTextContent('2010');
+		await expect.element(periodLabel()).toMatchTextContent('2010');
 		await expect.element(cell(6)).toHaveFocus();
 		await expect.element(cell(6)).toHaveTextContent('2016');
 	});

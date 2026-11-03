@@ -120,6 +120,8 @@
 		const startingPos =
 			orientation === 'horizontal' ? (directionAwareReverse ? right : left) : directionAwareReverse ? top : bottom;
 		const length = orientation === 'horizontal' ? width : height;
+		// A rail without length (e.g. a vertical slider in a parent with no height) has no scale to read the pointer on.
+		if (!length) return;
 
 		let nextStep =
 			min +

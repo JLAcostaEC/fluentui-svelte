@@ -6,7 +6,7 @@ export type AppWindowProps = {
 	/** The DOM reference of the window element.
 	 * @bindable
 	 */
-	ref?: HTMLElement;
+	ref?: HTMLElement | null;
 	/** The width of the window. A number is in pixels, a string is any CSS length.
 	 * @default '100%'
 	 */

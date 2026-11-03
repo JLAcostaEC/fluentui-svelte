@@ -1,6 +1,6 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
-  import { m } from '$i18n/messages.js';
+  import { m } from '#i18n/messages.js';
 </script>
 
 ## {m.title_bar_component_props_titlebar_title()}
@@ -19,7 +19,7 @@
 | `searchMaxWidth`                                 | `number` &#124; `string` | `480`      | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search_max_width} />`  |
 | `searchCollapsed` _bindable_                     | `boolean`                | `false`    | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search_collapsed} />`  |
 | `searchLabel`                                    | `string`                 | `'Search'` | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search_label} />`      |
-| `tabbable`                                       | `boolean`                | `false`    | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_tabbable} />`          |
+| `tabbable`                                       | `boolean`                | `true`     | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_tabbable} />`          |
 | `dragRegionProps`                                | `HTMLAttributes`         |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_drag_region_props} />` |
 | `HTMLAttributes<HTMLElement>` without `children` |                          |            |                                                                                          |
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Avatar, Button } from '$lib/index.js';
+	import { Avatar, Button } from '#lib/index.js';
 	import DismissRegular from 'fluentui-icons-svelte/DismissRegular.svelte';
 	import SquareMultipleRegular from 'fluentui-icons-svelte/SquareMultipleRegular.svelte';
 	import SquareRegular from 'fluentui-icons-svelte/SquareRegular.svelte';
@@ -8,7 +8,7 @@
 	import type { TitleBarRightControlsProps } from './types.ts';
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		hideMinimize = false,
 		hideWindowToggle = false,
 		hideClose = false,

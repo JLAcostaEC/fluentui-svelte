@@ -4124,9 +4124,9 @@
       "source": "src/lib/components/title-bar/types.ts#TitleBarLeftControlsProps.releaseTag"
     },
     "generated_fs_title_bar_props_props_drag_region_props": {
-      "en": "e12510a3",
+      "en": "dd9d1655",
       "locales": {
-        "es": "e12510a3"
+        "es": "dd9d1655"
       },
       "source": "src/lib/components/title-bar/types.ts#TitleBarProps.dragRegionProps"
     },
@@ -4159,9 +4159,9 @@
       "source": "src/lib/components/title-bar/types.ts#TitleBarProps.search"
     },
     "generated_fs_title_bar_props_props_search_collapsed": {
-      "en": "3a1acfd9",
+      "en": "8a85d541",
       "locales": {
-        "es": "3a1acfd9"
+        "es": "8a85d541"
       },
       "source": "src/lib/components/title-bar/types.ts#TitleBarProps.searchCollapsed"
     },
@@ -4187,9 +4187,9 @@
       "source": "src/lib/components/title-bar/types.ts#TitleBarProps.searchMinWidth"
     },
     "generated_fs_title_bar_props_props_tabbable": {
-      "en": "c527905e",
+      "en": "9f659609",
       "locales": {
-        "es": "c527905e"
+        "es": "9f659609"
       },
       "source": "src/lib/components/title-bar/types.ts#TitleBarProps.tabbable"
     },

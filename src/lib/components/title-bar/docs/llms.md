@@ -136,7 +136,7 @@ The `search` snippet sits at the center of the bar and takes up the width the ba
 
 ### Collapsed Search
 
-`searchCollapsed` folds the search into a button, for a window too narrow to hold it. Pressing the button expands the search and moves the focus into it. Bind it to follow the state.
+`searchCollapsed` manually folds the search into a button; resizing does not collapse it automatically. Pressing the button expands the search and moves the focus into the first available control. Bind it to follow the state. Leave enough room for the expanded search and the side controls, or lower `searchMinWidth`. Long app names are truncated, but navigation and window buttons still need room.
 
 ```svelte
 <script>
@@ -276,7 +276,7 @@ The accessible names of the buttons default to English. Pass `backLabel`, `globa
 
 ### Tab Order
 
-The buttons of the bar are out of the tab order by default, like the ones of a window title bar, though they can still be pressed with the pointer. Set `tabbable` to let the Tab key reach them. The content you place in the snippets is yours to manage, so it keeps the tab order it has.
+The buttons of the bar are in the tab order by default. Set `tabbable={false}` only when a desktop host provides an alternative keyboard route to these actions. The content you place in the snippets keeps its own tab order.
 
 ```svelte
 <TitleBar tabbable>
@@ -291,7 +291,7 @@ The buttons of the bar are out of the tab order by default, like the ones of a w
 
 ### Drag Region
 
-`dragRegionProps` is spread on the bar and on its start and end areas, so a host that moves the window can tell where to grab the bar. Use `data-tauri-drag-region` for Tauri, or a pointer handler for any other host.
+`dragRegionProps` is spread on the bar, its start and end areas, and the app identity, so a host that moves the window can tell where to grab the bar. Use `data-tauri-drag-region` for Tauri, or a pointer handler for any other host.
 
 ```svelte
 <TitleBar dragRegionProps={{ 'data-tauri-drag-region': true }}>...</TitleBar>
@@ -306,20 +306,20 @@ The buttons of the bar are out of the tab order by default, like the ones of a w
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TitleBarProps -->
 
-| Name                                             | Type                     | Default    | Description                                                                                                                                                                                                                            |
-| ------------------------------------------------ | ------------------------ | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ref` _bindable_                                 | `HTMLElement`            |            | The DOM reference of the title bar element.                                                                                                                                                                                            |
-| `leftControls`                                   | `Snippet`                |            | The controls at the start of the bar: back, navigation, and the identity of the app. Render a `TitleBarLeftControls` here, which only works inside a `TitleBar`.                                                                       |
-| `search`                                         | `Snippet`                |            | The search at the center of the bar, which grows and shrinks with the window between `searchMinWidth` and `searchMaxWidth`.                                                                                                            |
-| `rightControls`                                  | `Snippet`                |            | The controls at the end of the bar: custom menus, the person picture, and the window buttons. Render a `TitleBarRightControls` here, which only works inside a `TitleBar`.                                                             |
-| `tall`                                           | `boolean`                |            | Uses the tall bar, which leaves a search room to breathe. It is on by default when `search` is provided.                                                                                                                               |
-| `searchMinWidth`                                 | `number` &#124; `string` | `200`      | The narrowest the search gets while the window shrinks. A number is in pixels, a string is any CSS length.                                                                                                                             |
-| `searchMaxWidth`                                 | `number` &#124; `string` | `480`      | The widest the search gets while the window grows. A number is in pixels, a string is any CSS length.                                                                                                                                  |
-| `searchCollapsed` _bindable_                     | `boolean`                | `false`    | Collapses the search into a button. Pressing the button expands the search again and moves the focus into it.                                                                                                                          |
-| `searchLabel`                                    | `string`                 | `'Search'` | The accessible name of the button that stands in for a collapsed search.                                                                                                                                                               |
-| `tabbable`                                       | `boolean`                | `false`    | Lets the Tab key reach the buttons of the bar, which are skipped by default, as the buttons of a window title bar are. They can still be pressed and focused with the pointer. The content you render in the snippets is not affected. |
-| `dragRegionProps`                                | `HTMLAttributes`         |            | The attributes that make the bar draggable for the host that moves the window, such as `data-tauri-drag-region` for Tauri. They are spread on the bar and on its start and end areas.                                                  |
-| `HTMLAttributes<HTMLElement>` without `children` |                          |            |                                                                                                                                                                                                                                        |
+| Name                                             | Type                     | Default    | Description                                                                                                                                                                                                                                                                  |
+| ------------------------------------------------ | ------------------------ | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                 | `HTMLElement`            |            | The DOM reference of the title bar element.                                                                                                                                                                                                                                  |
+| `leftControls`                                   | `Snippet`                |            | The controls at the start of the bar: back, navigation, and the identity of the app. Render a `TitleBarLeftControls` here, which only works inside a `TitleBar`.                                                                                                             |
+| `search`                                         | `Snippet`                |            | The search at the center of the bar, which grows and shrinks with the window between `searchMinWidth` and `searchMaxWidth`.                                                                                                                                                  |
+| `rightControls`                                  | `Snippet`                |            | The controls at the end of the bar: custom menus, the person picture, and the window buttons. Render a `TitleBarRightControls` here, which only works inside a `TitleBar`.                                                                                                   |
+| `tall`                                           | `boolean`                |            | Uses the tall bar, which leaves a search room to breathe. It is on by default when `search` is provided.                                                                                                                                                                     |
+| `searchMinWidth`                                 | `number` &#124; `string` | `200`      | The narrowest the search gets while the window shrinks. A number is in pixels, a string is any CSS length.                                                                                                                                                                   |
+| `searchMaxWidth`                                 | `number` &#124; `string` | `480`      | The widest the search gets while the window grows. A number is in pixels, a string is any CSS length.                                                                                                                                                                        |
+| `searchCollapsed` _bindable_                     | `boolean`                | `false`    | Manually collapses the search into a button; it does not collapse automatically on resize. Pressing the button expands the search again and moves the focus into the first available control. The host must leave enough room for the expanded search and the side controls. |
+| `searchLabel`                                    | `string`                 | `'Search'` | The accessible name of the button that stands in for a collapsed search.                                                                                                                                                                                                     |
+| `tabbable`                                       | `boolean`                | `true`     | Lets the Tab key reach the buttons of the bar. Set to false only when the desktop host provides an alternative keyboard route to these actions. The content you render in the snippets is not affected.                                                                      |
+| `dragRegionProps`                                | `HTMLAttributes`         |            | The attributes that make the bar draggable for the host that moves the window, such as `data-tauri-drag-region` for Tauri. They are spread on the bar, its start and end areas, and the app identity.                                                                        |
+| `HTMLAttributes<HTMLElement>` without `children` |                          |            |                                                                                                                                                                                                                                                                              |
 
 <!-- /props:TitleBarProps -->
 

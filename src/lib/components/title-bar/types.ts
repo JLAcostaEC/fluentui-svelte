@@ -1,6 +1,6 @@
 import type { Component, Snippet } from 'svelte';
 import type { HTMLAttributes, MouseEventHandler, SVGAttributes } from 'svelte/elements';
-import type { FSContext } from '$internal';
+import type { FSContext } from '#internal';
 import type { AvatarProps } from '../avatar/type.ts';
 
 export type TitleBarContext = FSContext<
@@ -18,7 +18,7 @@ export type TitleBarProps = {
 	/** The DOM reference of the title bar element.
 	 * @bindable
 	 */
-	ref?: HTMLElement;
+	ref?: HTMLElement | null;
 	/** The controls at the start of the bar: back, navigation, and the identity of the app. Render a `TitleBarLeftControls` here, which only works inside a `TitleBar`.
 	 * @type Snippet
 	 */
@@ -42,7 +42,7 @@ export type TitleBarProps = {
 	 * @default 480
 	 */
 	searchMaxWidth?: number | string;
-	/** Collapses the search into a button. Pressing the button expands the search again and moves the focus into it.
+	/** Manually collapses the search into a button; it does not collapse automatically on resize. Pressing the button expands the search again and moves the focus into the first available control. The host must leave enough room for the expanded search and the side controls.
 	 * @default false
 	 * @bindable
 	 */
@@ -51,12 +51,12 @@ export type TitleBarProps = {
 	 * @default 'Search'
 	 */
 	searchLabel?: string;
-	/** Lets the Tab key reach the buttons of the bar, which are skipped by default, as the buttons of a window title bar are. They can still be pressed and focused with the pointer. The content you render in the snippets is not affected.
-	 * @default false
+	/** Lets the Tab key reach the buttons of the bar. Set to false only when the desktop host provides an alternative keyboard route to these actions. The content you render in the snippets is not affected.
+	 * @default true
 	 */
 	tabbable?: boolean;
 	/** The attributes that make the bar draggable for the host that moves the window, such as `data-tauri-drag-region` for Tauri.
-	 * They are spread on the bar and on its start and end areas.
+	 * They are spread on the bar, its start and end areas, and the app identity.
 	 * @type HTMLAttributes
 	 */
 	dragRegionProps?: HTMLAttributes<HTMLElement>;
@@ -67,7 +67,7 @@ export type TitleBarLeftControlsProps = {
 	/** The DOM reference of the controls element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** Shows the back button.
 	 * @default false
 	 */
@@ -118,7 +118,7 @@ export type TitleBarRightControlsProps = {
 	/** The DOM reference of the controls element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** Hides the minimize button.
 	 * @default false
 	 */

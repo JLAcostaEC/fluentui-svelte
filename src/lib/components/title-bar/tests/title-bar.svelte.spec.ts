@@ -3,8 +3,8 @@ import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { createRawSnippet } from 'svelte';
 import { AppsRegular } from 'fluentui-icons-svelte';
-import { TitleBar, TitleBarLeftControls, TitleBarRightControls } from '$lib/index.js';
-import type { TitleBarLeftControlsProps, TitleBarRightControlsProps } from '$lib/index.js';
+import { TitleBar, TitleBarLeftControls, TitleBarRightControls } from '#lib/index.js';
+import type { TitleBarLeftControlsProps, TitleBarRightControlsProps } from '#lib/index.js';
 import TitleBarTestWrapper from './TitleBarTestWrapper.svelte';
 
 const raw = (html: string) => createRawSnippet(() => ({ render: () => html }));
@@ -109,6 +109,23 @@ describe('the collapsed search', () => {
 		await expect.element(bar()).not.toHaveClass('collapsed');
 		expect(page.getByRole('button', { name: 'Search' }).elements()).toHaveLength(0);
 	});
+
+	it('skips unavailable controls when moving focus into the expanded search', async () => {
+		render(TitleBar, {
+			searchCollapsed: true,
+			search: raw(`<div>
+				<input type="hidden" />
+				<input aria-label="Disabled" disabled />
+				<fieldset disabled><input aria-label="Disabled by fieldset" /></fieldset>
+				<div hidden><input aria-label="Hidden" /></div>
+				<div style="visibility: hidden"><button>Invisible</button></div>
+				<div inert><input aria-label="Inert" /></div>
+				<input type="search" aria-label="Available search" />
+			</div>`)
+		});
+		await page.getByRole('button', { name: 'Search' }).click();
+		await expect.element(page.getByRole('searchbox', { name: 'Available search' })).toHaveFocus();
+	});
 });
 
 describe('the layout of the search', () => {
@@ -128,19 +145,38 @@ describe('the layout of the search', () => {
 		expect(Math.abs(before - after)).toBeLessThan(1.5);
 	});
 
-	it('is the only one to shrink when the bar narrows, down to its minimum', async () => {
+	it('keeps the search above its minimum while the bar narrows', async () => {
 		const screen = await render(TitleBarTestWrapper, {
 			withSearch: true,
 			style: 'inline-size: 1000px',
 			left: { appName: 'FluentUI App' },
 			right: {}
 		});
-		const left = rect('.fs-title-bar-left').width;
-		const right = rect('.fs-title-bar-right').width;
-		await screen.rerender({ style: 'inline-size: 320px' });
-		expect(rect('.fs-title-bar-search').width).toBeCloseTo(200, 0);
-		expect(rect('.fs-title-bar-left').width).toBeCloseTo(left, 0);
-		expect(rect('.fs-title-bar-right').width).toBeCloseTo(right, 0);
+		await screen.rerender({ style: 'inline-size: 600px' });
+		expect(rect('.fs-title-bar-search').width).toBeGreaterThanOrEqual(200);
+		expect(rect('.fs-title-bar-search').width).toBeLessThan(480);
+		expect(rect('.fs-title-bar-right').right).toBeLessThanOrEqual(rect('.fs-title-bar').right);
+	});
+
+	it('keeps the buttons visible in a narrow AppWindow with a collapsed search and a long app name', async () => {
+		render(TitleBarTestWrapper, {
+			withWindow: true,
+			withSearch: true,
+			searchCollapsed: true,
+			left: { back: true, globalNav: true, appName: 'A very long application name that must be truncated' },
+			right: {}
+		});
+		const window = document.querySelector('.fs-app-window')!;
+		const bounds = window.getBoundingClientRect();
+		for (const button of document.querySelectorAll('header button')) {
+			const rect = button.getBoundingClientRect();
+			expect(rect.left).toBeGreaterThanOrEqual(bounds.left);
+			expect(rect.right).toBeLessThanOrEqual(bounds.right);
+		}
+		const name = document.querySelector('.fs-title-bar-app-name')!;
+		expect(name.scrollWidth).toBeGreaterThan(name.clientWidth);
+		expect(rect('.fs-title-bar').height).toBe(48);
+		expect(window.scrollWidth).toBeLessThanOrEqual(window.clientWidth);
 	});
 
 	it('follows the limits it is given', async () => {
@@ -180,15 +216,15 @@ describe('the tab order', () => {
 		right: { personPic: { name: 'Ada Lovelace' }, onPersonPicClick: () => {} }
 	};
 
-	it('keeps every button of the bar out of it by default', async () => {
-		render(TitleBarTestWrapper, everyButton);
+	it('keeps every button of the bar out of it when tabbable is false', async () => {
+		render(TitleBarTestWrapper, { ...everyButton, tabbable: false });
 		// Back, navigation, search, person picture, minimize, maximize and close.
 		expect(buttons()).toHaveLength(7);
 		for (const button of buttons()) expect(button).toHaveAttribute('tabindex', '-1');
 	});
 
-	it('lets the Tab key walk past the bar', async () => {
-		render(TitleBarTestWrapper, everyButton);
+	it('lets the Tab key walk past the bar when the desktop host opts out', async () => {
+		render(TitleBarTestWrapper, { ...everyButton, tabbable: false });
 		await userEvent.tab();
 		expect(document.querySelector('header')!.contains(document.activeElement)).toBe(false);
 	});
@@ -200,11 +236,13 @@ describe('the tab order', () => {
 		expect(onClose).toHaveBeenCalledOnce();
 	});
 
-	it('brings the buttons into it when tabbable', async () => {
-		render(TitleBarTestWrapper, { ...everyButton, tabbable: true });
+	it('makes every built-in button reachable with Tab by default', async () => {
+		render(TitleBarTestWrapper, everyButton);
 		for (const button of buttons()) expect(button).not.toHaveAttribute('tabindex');
-		await userEvent.tab();
-		await expect.element(page.getByRole('button', { name: 'Back' })).toHaveFocus();
+		for (const name of ['Back', 'Navigation menu', 'Search', 'Ada Lovelace', 'Minimize', 'Maximize', 'Close']) {
+			await userEvent.tab();
+			await expect.element(page.getByRole('button', { name })).toHaveFocus();
+		}
 	});
 });
 
@@ -215,7 +253,7 @@ describe('the drag region', () => {
 			left: { appName: 'FluentUI App' },
 			right: { personPic: { name: 'Ada Lovelace' } }
 		});
-		const regions = ['.fs-title-bar', '.fs-title-bar-left', '.fs-title-bar-right'];
+		const regions = ['.fs-title-bar', '.fs-title-bar-left', '.fs-title-bar-right', '.fs-title-bar-identity'];
 		for (const region of regions) {
 			expect(document.querySelector(region), region).toHaveAttribute('data-tauri-drag-region');
 		}

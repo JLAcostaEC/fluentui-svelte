@@ -2,8 +2,8 @@ import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { createRawSnippet } from 'svelte';
-import '$css/theme.css';
-import { AppSurface } from '$lib/index.js';
+import '#css/theme.css';
+import { AppSurface } from '#lib/index.js';
 
 const children = createRawSnippet(() => ({ render: () => '<p>Inside</p>' }));
 

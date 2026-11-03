@@ -1,5 +1,7 @@
 <script lang="ts">
 	import {
+		AppSurface,
+		AppWindow,
 		Button,
 		Menu,
 		MenuItem,
@@ -9,8 +11,8 @@
 		TitleBar,
 		TitleBarLeftControls,
 		TitleBarRightControls
-	} from '$lib/index.js';
-	import type { TitleBarLeftControlsProps, TitleBarProps, TitleBarRightControlsProps } from '$lib/index.js';
+	} from '#lib/index.js';
+	import type { TitleBarLeftControlsProps, TitleBarProps, TitleBarRightControlsProps } from '#lib/index.js';
 	import { SettingsRegular } from 'fluentui-icons-svelte';
 
 	let {
@@ -18,11 +20,13 @@
 		withSearch = false,
 		withSnippets = false,
 		withMenu = false,
+		withWindow = false,
 		left,
 		right,
 		...props
 	}: {
 		withSearch?: boolean;
+		withWindow?: boolean;
 		/** Provides the `globalNav`, `releaseTag`, children and `customMenu` snippets. */
 		withSnippets?: boolean;
 		/** Provides a `customMenu` with a `Menu` that opens from an icon button. */
@@ -84,11 +88,22 @@
 	<TitleBarRightControls customMenu={withMenu ? realMenuSnippet : withSnippets ? menuSnippet : undefined} {...right} />
 {/snippet}
 
-<TitleBar
-	bind:searchCollapsed
-	search={withSearch ? searchContent : undefined}
-	leftControls={left ? leftSnippet : undefined}
-	rightControls={right ? rightSnippet : undefined}
-	aria-label="App"
-	{...props}
-/>
+{#snippet titleBar()}
+	<TitleBar
+		bind:searchCollapsed
+		search={withSearch ? searchContent : undefined}
+		leftControls={left ? leftSnippet : undefined}
+		rightControls={right ? rightSnippet : undefined}
+		aria-label="App"
+		{...props}
+	/>
+{/snippet}
+
+{#if withWindow}
+	<AppWindow width={320} height={160}>
+		{@render titleBar()}
+		<AppSurface>Window content</AppSurface>
+	</AppWindow>
+{:else}
+	{@render titleBar()}
+{/if}

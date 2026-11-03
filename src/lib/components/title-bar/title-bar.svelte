@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { tick } from 'svelte';
-	import { Button } from '$lib/index.js';
-	import { pxToRem } from '$internal';
+	import { Button } from '#lib/index.js';
+	import { pxToRem } from '#internal';
 	import SearchRegular from 'fluentui-icons-svelte/SearchRegular.svelte';
 	import { setTitleBarContext } from './title-bar.ts';
 	import type { TitleBarContext, TitleBarProps } from './types.ts';
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		leftControls,
 		search,
 		rightControls,
@@ -16,7 +16,7 @@
 		searchMaxWidth = 480,
 		searchCollapsed = $bindable(false),
 		searchLabel = 'Search',
-		tabbable = false,
+		tabbable = true,
 		dragRegionProps,
 		class: classes,
 		...attributes
@@ -51,7 +51,11 @@
 	const expandSearch = async () => {
 		searchCollapsed = false;
 		await tick();
-		searchRef?.querySelector<HTMLElement>(FOCUSABLE)?.focus();
+		for (const element of searchRef?.querySelectorAll<HTMLElement>(FOCUSABLE) ?? []) {
+			// Hidden, disabled and inert elements ignore focus; try the next candidate.
+			element.focus();
+			if (element.ownerDocument.activeElement === element) break;
+		}
 	};
 </script>
 
@@ -124,6 +128,7 @@
 		box-sizing: border-box;
 		inline-size: 100%;
 		block-size: var(--fs-title-bar-height);
+		flex-shrink: 0;
 		padding-inline-start: 0.5rem;
 		color: var(--fs-text-primary);
 		font-family: var(--fs-font-family-base);
@@ -146,10 +151,13 @@
 		justify-content: flex-end;
 		margin-inline-start: auto;
 	}
+	.fs-title-bar-left {
+		flex: 0 1 auto;
+		min-inline-size: 0;
+	}
 	/*
-	 * The search is the one that gives: it shrinks toward its minimum before anything else, and stops
-	 * growing at its maximum. What is left over goes to its auto margins, which keeps it centered
-	 * between the left and the right controls.
+	 * The search shrinks toward its minimum and stops growing at its maximum. App names can
+	 * also shrink to preserve room for the controls. Auto margins center the search between them.
 	 */
 	.fs-title-bar-search {
 		display: flex;

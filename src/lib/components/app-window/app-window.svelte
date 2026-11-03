@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { Flyout } from '$lib/index.js';
-	import { pxToRem } from '$internal';
+	import { Flyout } from '#lib/index.js';
+	import { pxToRem } from '#internal';
 	import type { AppWindowProps } from './types.ts';
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		width = '100%',
 		height = '100%',
 		active = false,

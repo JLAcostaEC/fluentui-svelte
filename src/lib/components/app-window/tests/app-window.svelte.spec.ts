@@ -2,8 +2,8 @@ import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { createRawSnippet } from 'svelte';
-import '$css/theme.css';
-import { AppWindow } from '$lib/index.js';
+import '#css/theme.css';
+import { AppWindow } from '#lib/index.js';
 
 const children = createRawSnippet(() => ({ render: () => '<p>Inside</p>' }));
 
@@ -28,7 +28,7 @@ describe('rendering', () => {
 	});
 
 	it('forwards the class, the attributes and the ref', async () => {
-		let ref: HTMLElement | undefined;
+		let ref: HTMLElement | null = null;
 		render(AppWindow, {
 			'data-testid': 'window',
 			class: 'custom',

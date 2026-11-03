@@ -7,10 +7,10 @@
     TitleBarLeftControls,
     TitleBarRightControls,
     ToggleSwitch
-  } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
+  } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
   import { AppsRegular } from 'fluentui-icons-svelte';
-  import { m } from '$i18n/messages.js';
+  import { m } from '#i18n/messages.js';
 
   let active = $state(false);
 

@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { Badge, Button } from '$lib/index.js';
-	import { RenderSoC } from '$internal';
+	import { Badge, Button } from '#lib/index.js';
+	import { RenderSoC } from '#internal';
 	import ArrowLeftRegular from 'fluentui-icons-svelte/ArrowLeftRegular.svelte';
 	import NavigationRegular from 'fluentui-icons-svelte/NavigationRegular.svelte';
 	import { requireTitleBarContext } from './title-bar.ts';
 	import type { TitleBarLeftControlsProps } from './types.ts';
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		back = false,
 		backDisabled = false,
 		onBack,
@@ -80,7 +80,7 @@
 		</Button>
 	{/if}
 	{#if hasIdentity}
-		<div class="fs-title-bar-identity">
+		<div class="fs-title-bar-identity" {...context.config.dragRegionProps}>
 			{#if appIcon}
 				<span class="fs-title-bar-app-icon" aria-hidden="true">
 					{#if typeof appIcon === 'string'}
@@ -113,6 +113,7 @@
 		align-items: center;
 		gap: 0.25rem;
 		block-size: 100%;
+		min-inline-size: 0;
 		& :global(.fs-title-bar-button) {
 			flex: none;
 			inline-size: 2.5rem;
@@ -127,6 +128,7 @@
 	}
 	.fs-title-bar-identity {
 		display: flex;
+		min-inline-size: 0;
 		align-items: center;
 		gap: 0.5rem;
 		/* Breathing room after the buttons, and from the edge of the bar when there are none. */
@@ -149,7 +151,8 @@
 		}
 	}
 	.fs-title-bar-app-name {
-		flex: none;
+		flex: 0 1 auto;
+		min-inline-size: 0;
 		max-inline-size: 16rem;
 		overflow: hidden;
 		white-space: nowrap;

@@ -23,6 +23,6 @@ export const META: Meta = {
 	},
 	// Library-only
 	slug: 'dropdown-select',
-	status: 'Prototype',
+	status: 'New',
 	icon: ArrowAutofitDownRegular
 };

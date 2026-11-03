@@ -26,6 +26,6 @@ export const META: Meta = {
 	},
 	// Library-only
 	slug: 'label',
-	status: '',
+	status: 'New',
 	icon: BookmarkRegular
 };

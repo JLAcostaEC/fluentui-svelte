@@ -23,6 +23,6 @@ export const META: Meta = {
 	},
 	// Library-only
 	slug: 'auto-suggest-box',
-	status: 'Beta',
+	status: 'New',
 	icon: AutofitContentRegular
 };

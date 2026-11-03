@@ -14,12 +14,6 @@ import { DropdownSelect } from 'fluentui-svelte';
 
 {m.ds_description()}
 
-<InfoBar status="critical" style="multiline" title={m.global_early_access_title()} hideCloseButton>
-  <p>
-    {m.global_early_access_description()}
-  </p>
-</InfoBar>
-
 <InfoBar status="warning" style="multiline" title={m.ds_browser_compatibility_title()} hideCloseButton>
   <p><I18nMarkupMessage message={m.ds_browser_compatibility_description} /></p>
   <p><I18nMarkupMessage message={m.ds_browser_compatibility_multiple} /></p>

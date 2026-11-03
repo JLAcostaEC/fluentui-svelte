@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { toggleMode, mode } from 'mode-watcher';
+	import logo from '#site/assets/images/banner.png?w=300;150&enhanced';
+	import logoWhite from '#site/assets/images/banner-white.png?w=300;150&enhanced';
+	import ThemedImage from '#site/components/themed-image/themed-image.svelte';
 	import { SettingsRegular, TextAlignRightRegular } from 'fluentui-icons-svelte';
 	import { m } from '#i18n/messages.js';
 	import { getLocale, locales, localizeHref, deLocalizeUrl } from '#i18n/runtime.js';
@@ -84,12 +87,14 @@
 <header id="header">
 	<section class="container">
 		<a href={localizedPath('/')} class="logo-link">
-			<picture>
-				{#if mode.current === 'dark'}
-					<source srcset="/images/banner-white.png" type="image/png" />
-				{/if}
-				<img src="/images/banner.png" alt="Logo" class="logo" />
-			</picture>
+			<ThemedImage
+				light={logo}
+				dark={logoWhite}
+				alt="Logo"
+				class="logo"
+				sizes="(max-width: 768px) 120px, 150px"
+				loading="eager"
+			/>
 		</a>
 		<nav>
 			<div class="nav-links">
@@ -219,7 +224,7 @@
 				&:hover {
 					color: var(--fs-accent-text-primary);
 				}
-				& .logo {
+				& :global(.logo) {
 					max-width: 150px;
 					height: auto;
 				}
@@ -241,7 +246,7 @@
 				flex-wrap: wrap;
 				gap: 0.5rem;
 				align-items: center;
-				& .logo-link .logo {
+				& .logo-link :global(.logo) {
 					max-width: 120px;
 				}
 				& nav {

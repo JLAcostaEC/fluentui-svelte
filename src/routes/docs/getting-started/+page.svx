@@ -55,10 +55,12 @@ import 'fluentui-svelte/media-darkmode.css'; /* Or:  import 'fluentui-svelte/cla
 
 <p class="fs-docs"><I18nMarkupMessage message={m.gs_optional_font_download_description} /></p>
 
-- <a href="/fonts/selawik/selawk.ttf" download>selawk.ttf</a>
-- <a href="/fonts/selawik/selawksb.ttf" download>selawksb.ttf</a>
-- <a href="/fonts/selawik/selawkb.ttf" download>selawkb.ttf</a>
-- <a href="/fonts/selawik/SIL%20Open%20Font%20License.txt" download>{m.gs_optional_font_license_label()}</a>
+<ul class="font-downloads">
+  <li><a href="/fonts/selawik/selawk.ttf" download>selawk.ttf</a></li>
+  <li><a href="/fonts/selawik/selawksb.ttf" download>selawksb.ttf</a></li>
+  <li><a href="/fonts/selawik/selawkb.ttf" download>selawkb.ttf</a></li>
+  <li><a href="/fonts/selawik/SIL%20Open%20Font%20License.txt" download>{m.gs_optional_font_license_label()}</a></li>
+</ul>
 
 <p class="fs-docs"><I18nMarkupMessage message={m.gs_optional_font_configuration_description} /></p>
 
@@ -144,3 +146,18 @@ import '../app.css';
 </FluentUISvelte.Button>
 ```
 
+<style>
+  .font-downloads {
+    padding-inline-start: 1.5rem;
+    & li {
+      list-style: disc;
+    }
+    & a {
+      display: inline-flex;
+      align-items: center;
+      /* Touch targets need at least 24px, with room around them, to be tapped reliably on mobile. */
+      min-block-size: 44px;
+      padding-inline: 0.25rem;
+    }
+  }
+</style>

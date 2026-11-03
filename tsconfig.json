@@ -3,7 +3,7 @@
 	"compilerOptions": {
 		"strict": true,
 		"rewriteRelativeImportExtensions": true,
-		"types": ["$app/types", "node", "./worker-configuration.d.ts"]
+		"types": ["$app/types", "node", "@sveltejs/enhanced-img", "./worker-configuration.d.ts"]
 	},
 	"include": ["src", "vite.config.ts", "prettier.config.js", "eslint.config.js", "playwright.config.ts"],
 	"exclude": ["src/i18n/**/*.js"],

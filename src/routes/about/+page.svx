@@ -1,7 +1,9 @@
 <script lang="ts">
   import { Flyout, Button, InfoBar } from '#lib/index.js';
   import { m } from '#i18n/messages.js';
-	import { mode } from 'mode-watcher';
+  import aboutBanner from '#site/assets/images/about-banner.png?w=1472;736&enhanced';
+  import aboutBannerWhite from '#site/assets/images/about-banner-white.png?w=1472;736&enhanced';
+  import ThemedImage from '#site/components/themed-image/themed-image.svelte';
   import Seo from '#site/components/seo/seo.svelte';
 </script>
 
@@ -15,12 +17,16 @@
 
 <strong>{m.about_intro_bold()}</strong> {m.about_intro_after_bold()}
 
-<picture>
-  {#if mode.current === 'dark'}
-    <source srcset="/images/about-banner-white.png" type="image/png" />
-  {/if}
-  <img class="about-image" src="/images/about-banner.png" style="border-radius: var(--fs-control-border-radius)" alt={m.about_hero_image_alt()} />
-</picture>
+<ThemedImage
+  light={aboutBanner}
+  dark={aboutBannerWhite}
+  class="about-image"
+  style="border-radius: var(--fs-control-border-radius)"
+  alt={m.about_hero_image_alt()}
+  sizes="(min-width: 800px) 736px, calc(100vw - 4rem)"
+  loading="eager"
+  fetchpriority="high"
+/>
 
 <InfoBar status="warning" title={m.about_disclaimer_title()} hideCloseButton style="multiline">
   {m.about_disclaimer_text()}
@@ -47,7 +53,13 @@
 
 {m.about_tauri_text()}
 
-<img class="about-image" src="/images/app-blur.jpg" alt={m.about_showcase_image_alt()} />
+<enhanced:img
+  class="about-image"
+  src="#site/assets/images/app-blur.jpg"
+  alt={m.about_showcase_image_alt()}
+  sizes="(min-width: 800px) 736px, calc(100vw - 4rem)"
+  loading="lazy"
+/>
 
 ## {m.about_help_title()}
 
@@ -92,7 +104,7 @@
       margin-top: 1rem;
       margin-bottom: 1rem;
     }
-    & .about-image {
+    & :global(.about-image) {
       width: 100%;
       max-width: 100%;
       height: auto;

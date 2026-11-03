@@ -533,9 +533,9 @@
       "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.calendarPosition"
     },
     "generated_fs_calendar_date_picker_props_props_format": {
-      "en": "5e67d1e2",
+      "en": "1342b3a3",
       "locales": {
-        "es": "5e67d1e2"
+        "es": "1342b3a3"
       },
       "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.format"
     },
@@ -750,9 +750,9 @@
       "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.selectionMode"
     },
     "generated_fs_calendar_view_props_props_today": {
-      "en": "c8d33d22",
+      "en": "43fb5d02",
       "locales": {
-        "es": "c8d33d22"
+        "es": "43fb5d02"
       },
       "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.today"
     },

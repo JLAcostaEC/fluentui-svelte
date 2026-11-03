@@ -149,7 +149,7 @@
 					}
 				}
 			}
-			&:indeterminate + div :global(svg.indeterminate) {
+			&:is(:indeterminate, [data-indeterminate]) + div :global(svg.indeterminate) {
 				width: 0.8rem;
 			}
 		}

@@ -15,6 +15,7 @@
 		weekStart = 1,
 		locale = 'en-US',
 		popup,
+		today,
 		onChange,
 		onRangeChange,
 		onViewChange
@@ -32,6 +33,7 @@
 		locale?: string;
 		/** Render the calendar the way a date picker does, as a floating popup. */
 		popup?: boolean;
+		today?: Date;
 		onChange?: (event: Event, value: Date | Date[] | null) => void;
 		onRangeChange?: (event: Event, range: CalendarDateRange) => void;
 		onViewChange?: (event: Event, view: View) => void;
@@ -51,6 +53,7 @@
 		{headers}
 		{weekStart}
 		{locale}
+		{today}
 		{onChange}
 		{onRangeChange}
 		{onViewChange}

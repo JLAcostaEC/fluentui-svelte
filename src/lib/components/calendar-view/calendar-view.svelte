@@ -68,7 +68,7 @@
 
 	const _today = $derived(today ?? new Date());
 
-	let firstValue = $derived(Array.isArray(value) ? value[0] : (value ?? _today));
+	let firstValue = $derived((Array.isArray(value) ? value[0] : value) ?? _today);
 
 	// svelte-ignore state_referenced_locally
 	let page = $state(

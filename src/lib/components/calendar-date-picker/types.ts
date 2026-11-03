@@ -15,7 +15,7 @@ export type CalendarDatePickerProps = {
 	 * @bindable
 	 */
 	value?: Date | null;
-	/** The options used to format the date rendered on the trigger. When rendering on the server, give it a `timeZone`, or the server and the browser may show different days.
+	/** The options used to format the date rendered on the trigger. When rendering on the server, give it the `timeZone` of the visitor: the calendar picks dates at the visitor's midnight, and the server would format them in its own time zone.
 	 * @default { year: 'numeric', month: 'numeric', day: 'numeric' }
 	 */
 	format?: Intl.DateTimeFormatOptions;

@@ -93,7 +93,7 @@ Pass `tooltipContent`, as text, a snippet or a component, to show more about the
 
 Label renders its text and field as siblings, and is for the first field inside it, which takes the id of the label when it has none of its own. Pass for to point the label at another field. HTML attributes, class and ref apply to the label text element; wrapperAttributes and wrapperRef apply to the container. Size and weight affect only the label text.
 
-A control inside Label needs no id or for. The own text of a Checkbox, RadioButton or ToggleSwitch inside it is not rendered: the Label names the control. A native `<label for>` outside a Label names a picker (Dropdown, TagPicker, DatePicker, TimePicker, CalendarDatePicker) only once the page hydrates, because the picker reads it from the page: when rendering on the server, use Label or pass `aria-labelledby`.
+A control inside Label needs no id or for. The own text of a Checkbox, RadioButton or ToggleSwitch inside it is not rendered: the Label names the control. A native `<label for>` outside a Label names a picker (Dropdown, TagPicker, DatePicker, TimePicker, CalendarDatePicker) only once the page hydrates, because the picker reads it from the page: when rendering on the server, use Label or pass `aria-labelledby`. A field with an id of its own keeps it: when the text comes before the field (`labelPosition` `'before'` or `'above'`, the default), pass that id to `for` too, or the label the server writes points at no field until the page hydrates.
 
 ## Component Props
 

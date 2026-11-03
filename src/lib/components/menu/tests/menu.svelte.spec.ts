@@ -73,6 +73,16 @@ describe('opening', () => {
 		await expect.element(popover).toBeInTheDocument();
 		expect(popover.element()).toBe(mountedPopover);
 	});
+
+	it.each([
+		[undefined, 'fixed'],
+		[{ strategy: 'absolute' as const }, 'absolute']
+	])('positions the popover the way its strategy computes it (%o)', async (positionConfig, position) => {
+		render(MenuTestWrapper, { open: true, positionConfig });
+		const wrapper = page.selector('div.fs-menu-popover').first();
+		await expect.element(wrapper).toBeInTheDocument();
+		expect(getComputedStyle(wrapper.element()).position).toBe(position);
+	});
 });
 
 describe('MenuItem', () => {

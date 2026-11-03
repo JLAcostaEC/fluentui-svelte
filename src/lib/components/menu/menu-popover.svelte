@@ -45,11 +45,15 @@
 
 	let { state: _state } = context;
 
-	// The `placement` prop wins over the one coming from the config
+	// The `placement` prop wins over the one coming from the config. The strategy is always set, since the CSS position follows it.
 	let config = $derived.by(() => {
 		const base = positionConfig ?? floatingPosition;
 
-		return { ...base, placement: placement ?? base.placement ?? (isSubMenu ? 'right-start' : 'bottom-start') };
+		return {
+			...base,
+			strategy: base.strategy ?? 'fixed',
+			placement: placement ?? base.placement ?? (isSubMenu ? 'right-start' : 'bottom-start')
+		};
 	});
 
 	let boundingElement = reactiveBoundingRect();
@@ -93,7 +97,7 @@
 		hidden={!opened}
 		onmouseleave={openOnHover ? (e: MouseEvent) => debounced(e) : undefined}
 		{@attach opened && ref ? floating(ref, config) : undefined}
-		style={`--min-width: ${isRefAnElement && !isSubMenu ? `${boundingElement.rect.width}px` : 'max-content'};`}
+		style={`--position: ${config.strategy}; --min-width: ${isRefAnElement && !isSubMenu ? `${boundingElement.rect.width}px` : 'max-content'};`}
 		in:flyToOffset={opened && isRefAnElement
 			? {
 					...getIntroTransition({ config, anchor: boundingElement.rect, element, ref, isSubMenu }),
@@ -111,8 +115,7 @@
 
 <style>
 	.fs-menu-popover {
-		/* Fixed for submenus too: floating-ui places every popover with the fixed strategy. */
-		position: fixed;
+		position: var(--position, fixed);
 		top: 0;
 		left: 0;
 		width: max-content;

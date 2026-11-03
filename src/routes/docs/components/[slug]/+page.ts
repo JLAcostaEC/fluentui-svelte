@@ -9,7 +9,7 @@ export const load = async ({ params }) => {
 		console.log(error);
 	}
 
-	if (!docs) error(404, { message: 'Not found' });
+	if (!docs) error(404, 'Not found');
 
 	return { ...docs };
 };

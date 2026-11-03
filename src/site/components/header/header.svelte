@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { resolve } from '$app/paths';
 	import { toggleMode, mode } from 'mode-watcher';
 	import { SettingsRegular, TextAlignRightRegular } from 'fluentui-icons-svelte';
 	import { m } from '#i18n/messages.js';
 	import { getLocale, locales, localizeHref, deLocalizeUrl } from '#i18n/runtime.js';
+	import { localizedPath } from '#site/utils/localized-path.js';
 	import PageLoader from '#site/components/page-loader/page-loader.svelte';
 	import {
 		Button,
@@ -19,7 +19,6 @@
 	import { getGlobalFSContext } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { GITHUB_REPO_URL } from '#site/constants.js';
 	import { getDisablePanZoom } from '#site/preferences.js';
-	import type { Path } from '$app/types';
 
 	const globalContext = getGlobalFSContext();
 	const disablePanZoom = getDisablePanZoom();
@@ -84,7 +83,7 @@
 
 <header id="header">
 	<section class="container">
-		<a href={resolve(localizeHref('/') as any)} class="logo-link">
+		<a href={localizedPath('/')} class="logo-link">
 			<picture>
 				{#if mode.current === 'dark'}
 					<source srcset="/images/banner-white.png" type="image/png" />
@@ -180,7 +179,7 @@
 										as="a"
 										data-sveltekit-reload
 										appearance={_locale === locale ? 'accent' : 'subtle'}
-										href={resolve(localizeHref(page.url.pathname, { locale: _locale }) as Path)}
+										href={localizedPath(page.url.pathname, { locale: _locale })}
 									>
 										{@render flag(_locale)}
 										{localeName[0].toUpperCase() + localeName.slice(1)}

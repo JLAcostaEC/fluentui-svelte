@@ -135,7 +135,7 @@ reviews:
       instructions: >-
         Documentation. Check for broken links, code blocks that do not compile
         against the current API, and consistency with the README.
-    - path: '{wrangler.jsonc,vite.config.ts,svelte.config.js,eslint.config.js,tsconfig.json}'
+    - path: '{wrangler.jsonc,vite.config.ts,eslint.config.js,tsconfig.json}'
       instructions: >-
         Build and deployment configuration (Cloudflare Pages/Workers). Flag
         changes that could break `pnpm build`, `pnpm prepack` or the deploy,

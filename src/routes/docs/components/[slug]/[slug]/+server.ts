@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 
 export const GET = async ({ url, params }) => {
-	if (!params.slug.endsWith('llms') && !params.slug.endsWith('llms.md')) error(404, { message: 'Not found' });
+	if (!params.slug.endsWith('llms') && !params.slug.endsWith('llms.md')) error(404, 'Not found');
 
 	let docs;
 
@@ -10,12 +10,13 @@ export const GET = async ({ url, params }) => {
 	try {
 		docs = (await import(`#components/${componentName}/docs/llms.md?raw`)).default;
 	} catch (err) {
-		error(500, {
-			message: `Error loading llms.md for component ${componentName}: ${err instanceof Error ? err.message : String(err)}`
-		});
+		error(
+			500,
+			`Error loading llms.md for component ${componentName}: ${err instanceof Error ? err.message : String(err)}`
+		);
 	}
 
-	if (!docs) error(404, { message: 'Not found' });
+	if (!docs) error(404, 'Not found');
 
 	return new Response(String(docs), {
 		headers: {

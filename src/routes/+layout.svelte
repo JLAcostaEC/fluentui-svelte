@@ -15,13 +15,12 @@
 	import '#css/typography.css';
 
 	import { page } from '$app/state';
-	import { resolve } from '$app/paths';
 	import { ModeWatcher } from 'mode-watcher';
 	import { PersistedState } from 'runed';
 	import { FluentUISvelte } from '#lib/index.js';
-	import { locales, localizeHref } from '#i18n/runtime.js';
+	import { locales } from '#i18n/runtime.js';
 	import { m } from '#i18n/messages.js';
-	import type { Path } from '$app/types';
+	import { localizedPath } from '#site/utils/localized-path.js';
 
 	import Header from '#site/components/header/header.svelte';
 	import Footer from '#site/components/footer/footer.svelte';
@@ -37,7 +36,7 @@
 
 <div style="display:none">
 	{#each locales as locale (locale)}
-		<a href={resolve(localizeHref(page.url.pathname, { locale }) as Path)}>{locale}</a>
+		<a href={localizedPath(page.url.pathname, { locale })}>{locale}</a>
 	{/each}
 </div>
 

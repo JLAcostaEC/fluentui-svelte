@@ -176,7 +176,7 @@ describe('native fields of custom controls', () => {
 		await page.getByRole('button', { name: 'Submit' }).click();
 		await userEvent.keyboard('{ArrowDown}');
 
-		await expect.element(page.selector(popup)).toBeInTheDocument();
+		await expect.element(page.selector(popup)).toBeVisible();
 	});
 
 	it('hides again a field that checkValidity found invalid, since nothing reports it', async () => {
@@ -231,7 +231,7 @@ describe('disabled fieldset', () => {
 
 		control.click();
 
-		expect(document.querySelector('.fs-tagpicker-flyout')).toBeNull();
+		expect(document.querySelector<HTMLElement>('.fs-tagpicker-flyout')!.hidden).toBe(true);
 		expect(getComputedStyle(control).cursor).toBe('not-allowed');
 	});
 });
@@ -309,12 +309,12 @@ describe('form reset', () => {
 		['Slider', { value: 40, defaultValue: 10 }, ['10'], '']
 	])('%s returns to its default, on screen too', async (control, props, expected, text) => {
 		render(FormControlsTestWrapper, { control, fieldProps: props });
-		const visible = document.querySelector('form > :first-child')!;
+		const visible = document.querySelector<HTMLElement>('form > :first-child')!;
 
 		await page.getByRole('button', { name: 'Reset' }).click();
 
 		await expect.poll(submitted).toEqual(expected);
-		if (text) await expect.poll(() => visible.textContent?.replace(/\s/g, '')).toBe(text.replace(/\s/g, ''));
+		if (text) await expect.poll(() => visible.innerText.replace(/\s/g, '')).toBe(text.replace(/\s/g, ''));
 		if (control === 'TagPicker') expect(document.querySelector('.fs-tag')).toBeNull();
 		if (control === 'Rating') expect(document.querySelector('.rating-icon.selected')).toBeNull();
 		if (control === 'Slider')

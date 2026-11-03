@@ -54,6 +54,11 @@ describe('CalendarView rendering', () => {
 		await expect.element(periodLabel()).toHaveTextContent('January 2026');
 	});
 
+	it('opens on the month of today when a multiple selection is empty', async () => {
+		render(CalendarViewTestWrapper, { selectionMode: 'multiple', value: [], today: JANUARY_2026 });
+		await expect.element(periodLabel()).toHaveTextContent('January 2026');
+	});
+
 	it('renders seven weekday headers', async () => {
 		render(CalendarViewTestWrapper, { value: JANUARY_2026 });
 		await expect.element(page.selector('.fs-calendar-view-header')).toBeInTheDocument();

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { claimLabel } from '../label/label-context.ts';
 	import { tick } from 'svelte';
-	import { SvelteMap } from 'svelte/reactivity';
+	import { SvelteMap, SvelteSet } from 'svelte/reactivity';
 	import { onClickOutside } from 'runed';
 	import ChevronDownRegular from 'fluentui-icons-svelte/ChevronDownRegular.svelte';
 	import { PREFIX } from '$constants';
@@ -17,7 +17,7 @@
 	} from 'tabspot';
 	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import type { TagSize } from '../tag/types.ts';
-	import type { OptionType, TagPickerContext, TagPickerProps, TagPickerSizes } from './types.ts';
+	import type { OptionLabel, OptionType, TagPickerContext, TagPickerProps, TagPickerSizes } from './types.ts';
 
 	const FALLBACK_ID = $props.id();
 	const ID = `${PREFIX}-tagpicker-${FALLBACK_ID}`;
@@ -87,8 +87,9 @@
 	/** The options on screen, by id. */
 	const options = new SvelteMap<string, OptionType>();
 
-	/** What the tag of each value says. It outlives its option, which leaves the screen when filtered or chosen. */
-	const labels = new SvelteMap<string, string>();
+	/** What the tag of each value says. The list stays in the page while closed, so every option is here, read live. */
+	const optionLabels = new SvelteSet<OptionLabel>();
+	const labels = $derived(new Map([...optionLabels].map((option) => [option.value, option.text])));
 
 	let listViewRef = $state<HTMLUListElement | null>(null);
 
@@ -127,8 +128,9 @@
 		},
 		events: null,
 		methods: {
-			setLabel: (v, text) => {
-				labels.set(v, text);
+			registerLabel: (option) => {
+				optionLabels.add(option);
+				return () => optionLabels.delete(option);
 			},
 			setOption: (option) => {
 				options.set(option.id, option);
@@ -310,16 +312,24 @@
 	$effect(() => {
 		if (!_picker.open || !listViewRef) return;
 
-		setTabspotAttributes({ element: listViewRef, config: NAVIGATION });
+		const list = listViewRef;
 
-		return globalContext?.state.tabspotInstance?.subscribe(listViewRef, navigate);
+		setTabspotAttributes({ element: list, config: NAVIGATION });
+
+		const unsubscribe = globalContext?.state.tabspotInstance?.subscribe(list, navigate);
+
+		// The list stays in the page once closed: nothing in it reads as chosen.
+		return () => {
+			clearTabspotActive(list);
+			unsubscribe?.();
+		};
 	});
 
 	// Tabspot does not notice an option that left the list, so it learns the options that are left.
 	$effect(() => {
 		void [...options.keys()];
 
-		if (listViewRef) globalContext?.state.tabspotInstance?.rebuild(listViewRef);
+		if (_picker.open && listViewRef) globalContext?.state.tabspotInstance?.rebuild(listViewRef);
 	});
 </script>
 
@@ -346,6 +356,38 @@ A text field and a dropdown that give people a way to choose several options fro
 	class={['fs-tagpicker', `size-${size}`, { disabled: _picker.disabled, open: _picker.open }, wrapperAttributes?.class]}
 	bind:this={wrapperRef}
 >
+	{#if _picker.hasList}
+		<!-- Hidden while closed, not gone: each option still tells its tag what to say, and comes before
+		     the tags, so the server writes them too. It shows once it has the wrapper to be placed against. -->
+		<Flyout
+			floating
+			hidden={!_picker.open || !wrapperRef}
+			offset={0}
+			reference={wrapperRef ?? undefined}
+			roundCorners="bottom"
+			placementConfig={{ allowedPlacements: ['bottom', 'top'] }}
+			onPlacementChange={(place) => handlePlacementChange(place)}
+			class={['fs-tagpicker-flyout', roundClass === 'top' && 'top-shadow']}
+		>
+			<ListView
+				role="listbox"
+				selectionMode={_picker.single ? 'single' : 'multiselect'}
+				navigationMode="items"
+				disableTabspot
+				id={LIST_ID}
+				aria-multiselectable={_picker.single ? undefined : 'true'}
+				aria-label={aria['aria-label']}
+				aria-labelledby={aria['aria-labelledby']}
+				bind:ref={listViewRef}
+				onmousedown={(e: MouseEvent) => e.preventDefault()}
+			>
+				{#if options.size === 0}
+					<ListViewItem role="option" disabled>{notFoundText}</ListViewItem>
+				{/if}
+				{@render children?.()}
+			</ListView>
+		</Flyout>
+	{/if}
 	<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
 	<div class={['control', _picker.open && `square-${roundClass}`]} onclick={handleControlClick} onmousedown={keepFocus}>
 		<div class="content">
@@ -423,40 +465,6 @@ A text field and a dropdown that give people a way to choose several options fro
 			<option value={option}>{labels.get(option) ?? option}</option>
 		{/each}
 	</select>
-	{#if _picker.open && wrapperRef}
-		<Flyout
-			floating
-			offset={0}
-			reference={wrapperRef}
-			roundCorners="bottom"
-			placementConfig={{ allowedPlacements: ['bottom', 'top'] }}
-			onPlacementChange={(place) => handlePlacementChange(place)}
-			class={['fs-tagpicker-flyout', roundClass === 'top' && 'top-shadow']}
-		>
-			<ListView
-				role="listbox"
-				selectionMode={_picker.single ? 'single' : 'multiselect'}
-				navigationMode="items"
-				disableTabspot
-				id={LIST_ID}
-				aria-multiselectable={_picker.single ? undefined : 'true'}
-				aria-label={aria['aria-label']}
-				aria-labelledby={aria['aria-labelledby']}
-				bind:ref={listViewRef}
-				onmousedown={(e: MouseEvent) => e.preventDefault()}
-			>
-				{#if options.size === 0}
-					<ListViewItem role="option" disabled>{notFoundText}</ListViewItem>
-				{/if}
-				{@render children?.()}
-			</ListView>
-		</Flyout>
-	{:else if children}
-		<!-- Nobody sees the options, but each one still tells its tag what to say. -->
-		<ListView hidden>
-			{@render children()}
-		</ListView>
-	{/if}
 </div>
 
 <style>

@@ -533,9 +533,9 @@
       "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.calendarPosition"
     },
     "generated_fs_calendar_date_picker_props_props_format": {
-      "en": "7aa28633",
+      "en": "1342b3a3",
       "locales": {
-        "es": "7aa28633"
+        "es": "1342b3a3"
       },
       "source": "src/lib/components/calendar-date-picker/types.ts#CalendarDatePickerProps.format"
     },
@@ -748,6 +748,13 @@
         "es": "742e5e01"
       },
       "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.selectionMode"
+    },
+    "generated_fs_calendar_view_props_props_today": {
+      "en": "43fb5d02",
+      "locales": {
+        "es": "43fb5d02"
+      },
+      "source": "src/lib/components/calendar-view/types.ts#CalendarViewProps.today"
     },
     "generated_fs_calendar_view_props_props_value": {
       "en": "7bc52610",
@@ -1266,9 +1273,9 @@
       "source": "src/lib/components/divider/types.ts#DividerProps.vertical"
     },
     "generated_fs_dropdown_option_props_props_text": {
-      "en": "c35ce2c9",
+      "en": "5564aaad",
       "locales": {
-        "es": "c35ce2c9"
+        "es": "5564aaad"
       },
       "source": "src/lib/components/dropdown/types.ts#DropdownOptionProps.text"
     },

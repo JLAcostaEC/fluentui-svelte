@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { PREFIX } from '$constants';
 	import ListViewItem from '$lib/components/list-view/list-view-item.svelte';
 	import { getTagPickerContext } from './tag-picker.ts';
@@ -37,8 +38,18 @@
 		if (!disabled) methods.chooseOption(e, id);
 	}
 
-	// The tag of the option keeps its text even when the option itself is not on screen.
-	$effect(() => methods.setLabel(value, label));
+	// The tag of the option keeps its text even when the option itself is not on screen. It is
+	// reported as the option is created, ahead of the tags, so the server writes it too.
+	const withdraw = methods.registerLabel({
+		get value() {
+			return value;
+		},
+		get text() {
+			return label;
+		}
+	});
+
+	onMount(() => withdraw);
 
 	// An option counts only while it is on screen: that is what makes the empty list detectable
 	// and keeps keyboard navigation off options nobody can see.

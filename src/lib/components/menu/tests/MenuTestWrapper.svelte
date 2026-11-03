@@ -12,6 +12,7 @@
 		Button
 	} from '$lib/index.js';
 	import { SettingsRegular } from 'fluentui-icons-svelte';
+	import type { MenuProps } from '$lib/components/menu/types.js';
 
 	let {
 		open,
@@ -23,7 +24,8 @@
 		onOpenChange,
 		onCheckedValueChange,
 		variant = 'items',
-		groupHeader = 'Section'
+		groupHeader = 'Section',
+		positionConfig
 	}: {
 		open?: boolean;
 		keepMounted?: boolean;
@@ -37,10 +39,11 @@
 		variant?: 'items' | 'checkbox' | 'radio' | 'group';
 		/** The header of the group variant. */
 		groupHeader?: string;
+		positionConfig?: MenuProps['positionConfig'];
 	} = $props();
 </script>
 
-<Menu {open} {hasIcons} {hasCheckmarks} {checkedValues} {onOpenChange} {onCheckedValueChange}>
+<Menu {open} {hasIcons} {hasCheckmarks} {checkedValues} {onOpenChange} {onCheckedValueChange} {positionConfig}>
 	<MenuTrigger>
 		{#snippet children({ state, menuTriggerProps })}
 			<Button

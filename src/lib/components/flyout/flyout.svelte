@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { computePosition, offset, autoPlacement, hide, autoUpdate, type Placement } from '@floating-ui/dom';
 	import { roundByDPR } from '$internal';
 	import type { FlyoutProps } from './types.ts';
@@ -14,6 +13,7 @@
 		placementConfig,
 		roundCorners = 'all',
 		offset: offsetValue = 8,
+		hidden,
 		class: classes,
 		...attributes
 	}: FlyoutProps = $props();
@@ -37,9 +37,12 @@
 		return 'round-all';
 	}
 
-	onMount(() => {
-		if (floating && reference && ref) {
+	// A hidden flyout stays in the page unplaced, and is placed again once it shows.
+	$effect(() => {
+		if (floating && reference && ref && !hidden) {
 			const middleware = [offset(offsetValue), autoPlacement(placementConfig), hide()];
+			// A position that arrives once the flyout is hidden or gone is dropped.
+			let placing = true;
 			const update = async () => {
 				if (!reference || !ref) return;
 
@@ -53,6 +56,8 @@
 					middleware
 				});
 
+				if (!placing || !ref) return;
+
 				Object.assign(ref.style, {
 					transform: `translate(${roundByDPR(x)}px, ${roundByDPR(y)}px)`,
 					visibility: middlewareData.hide?.referenceHidden ? 'hidden' : 'visible'
@@ -64,7 +69,10 @@
 				}
 			};
 			const cleanup = autoUpdate(reference, ref, update);
-			return () => cleanup();
+			return () => {
+				placing = false;
+				cleanup();
+			};
 		}
 	});
 </script>
@@ -85,7 +93,7 @@ A contextual popup that displays a set of actions or options. It appears when us
   </Flyout>
     ```
 -->
-<div {...attributes} class={['fs-flyout', roundClass, classes, { floating }]} bind:this={ref}>
+<div {...attributes} {hidden} class={['fs-flyout', roundClass, classes, { floating }]} bind:this={ref}>
 	{@render children?.()}
 </div>
 
@@ -100,6 +108,9 @@ A contextual popup that displays a set of actions or options. It appears when us
 		border: 1px solid var(--fs-control-surface-stroke-flyout);
 		background-clip: padding-box;
 		color: var(--fs-text-primary);
+		&[hidden] {
+			display: none;
+		}
 		&.floating {
 			position: absolute;
 			top: 0;

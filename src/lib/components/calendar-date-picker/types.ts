@@ -15,7 +15,7 @@ export type CalendarDatePickerProps = {
 	 * @bindable
 	 */
 	value?: Date | null;
-	/** The options used to format the date rendered on the trigger.
+	/** The options used to format the date rendered on the trigger. When rendering on the server, give it the `timeZone` of the visitor: the calendar picks dates at the visitor's midnight, and the server would format them in its own time zone.
 	 * @default { year: 'numeric', month: 'numeric', day: 'numeric' }
 	 */
 	format?: Intl.DateTimeFormatOptions;
@@ -48,5 +48,5 @@ export type CalendarDatePickerProps = {
 	 * @bindable
 	 */
 	popupRef?: HTMLDivElement | null;
-} & Pick<CalendarViewProps, 'locale' | 'blackoutDates' | 'headers' | 'minDate' | 'maxDate' | 'weekStart'> &
+} & Pick<CalendarViewProps, 'locale' | 'blackoutDates' | 'headers' | 'minDate' | 'maxDate' | 'today' | 'weekStart'> &
 	NativeFieldAttributes<HTMLInputAttributes>;

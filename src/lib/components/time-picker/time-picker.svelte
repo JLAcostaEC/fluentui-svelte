@@ -99,9 +99,11 @@
 	const hour12 = $derived(format === 12);
 
 	// Working selection — canonical 24h values, synced with `value` while the popup is closed.
-	let hour = $state(new Date().getHours()); // 0-23
-	let minute = $state(new Date().getMinutes()); // 0-59
-	let second = $state(new Date().getSeconds()); // 0-59
+	// It starts from `value`, so a popup rendered open on the server shows it too.
+	const initial = parseValue(value);
+	let hour = $state(initial.h); // 0-23
+	let minute = $state(initial.mi); // 0-59
+	let second = $state(initial.s); // 0-59
 
 	const isPM = $derived(hour >= 12);
 	// 12h wheel index: hour % 12 (0 → "12", 1 → "01", …, 11 → "11").
@@ -118,6 +120,9 @@
 	});
 
 	const hasValue = $derived(/^\d{2}:\d{2}(:\d{2})?$/.test(value ?? ''));
+
+	// Parsed committed value: the closed trigger reads it, since the working selection only catches up in an effect.
+	const committed = $derived(parseValue(value));
 
 	function parseValue(v: string) {
 		const m = /^(\d{2}):(\d{2})(?::(\d{2}))?$/.exec(v ?? '');
@@ -168,10 +173,11 @@
 	// otherwise the placeholder column name.
 	function display(col: Column): string {
 		if (!open && !hasValue) return labels[col];
-		if (col === 'hour') return hour12 ? HOURS_12[hour12Index] : pad(hour);
-		if (col === 'minute') return pad(minute);
-		if (col === 'second') return pad(second);
-		return isPM ? 'PM' : 'AM';
+		const { h, mi, s } = open ? { h: hour, mi: minute, s: second } : committed;
+		if (col === 'hour') return hour12 ? HOURS_12[h % 12] : pad(h);
+		if (col === 'minute') return pad(mi);
+		if (col === 'second') return pad(s);
+		return h >= 12 ? 'PM' : 'AM';
 	}
 </script>
 

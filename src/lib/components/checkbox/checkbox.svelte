@@ -53,7 +53,8 @@
 		aria-hidden={ariaHidden}
 		bind:checked
 		bind:this={ref}
-		{indeterminate}
+		bind:indeterminate
+		data-indeterminate={indeterminate || undefined}
 	/>
 	<div style="pointer-events: none;" aria-hidden="true">
 		<SubtractFilled class="indeterminate" />
@@ -103,12 +104,12 @@
 			appearance: none;
 			-webkit-appearance: none;
 			-moz-appearance: none;
-			&:indeterminate + div :global(svg.indeterminate),
+			&:is(:indeterminate, [data-indeterminate]) + div :global(svg.indeterminate),
 			&:checked + div :global(svg.checked) {
 				mask-size: 100% 100%;
 				transition: var(--fs-slower-duration, 1s) cubic-bezier(0.55, 0, 0, 1) mask-size;
 			}
-			&:is(:checked, :indeterminate) {
+			&:is(:checked, :indeterminate, [data-indeterminate]) {
 				& + div {
 					background-color: var(--fs-accent-fill-default);
 					border-color: var(--fs-accent-fill-default);
@@ -148,7 +149,7 @@
 					}
 				}
 			}
-			&:indeterminate + div :global(svg.indeterminate) {
+			&:is(:indeterminate, [data-indeterminate]) + div :global(svg.indeterminate) {
 				width: 0.8rem;
 			}
 		}

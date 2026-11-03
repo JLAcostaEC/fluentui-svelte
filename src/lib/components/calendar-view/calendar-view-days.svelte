@@ -3,6 +3,7 @@
 	import { circOut } from 'svelte/easing';
 	import {
 		compareDates,
+		dateKey,
 		getCalendarDays,
 		getCalendarViewContext,
 		getMonthLocale,
@@ -172,13 +173,13 @@
 						{selected}
 						rangePosition={bandRange ? rangePositionOf(day, bandRange) : undefined}
 						outOfRange={!inMonth}
-						current={compareDates(day, new Date(), 'day')}
+						current={compareDates(day, CalendarContext.config.today, 'day')}
 						disabled={isDisabled(day)}
 						blackout={isBlackout(day)}
 						buttonAttributes={{
 							tabindex: inMonth ? 0 : -1,
 							'aria-label': dayLabel(day),
-							'data-date': day.getTime(),
+							'data-date': dateKey(day),
 							onclick: (e: MouseEvent) => {
 								selectDay(e, day);
 							}

@@ -121,7 +121,7 @@
 
 ### {m.label_controls_title()}
 
-{m.label_controls_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.label_controls_description} /></p>
 
 <Showcase columns={1} code={controlsCode} disablePanZoom showOverflow>
   <Label label="Accept terms" labelPosition="after"><Checkbox /></Label>

@@ -128,6 +128,8 @@ export type ListViewContextConfig = {
 	selectionMode: SelectionMode;
 	role: AriaRole | undefined;
 	disableTabspot: boolean;
+	/** Whether the list keeps a single tab stop that the arrow keys move. */
+	roving: boolean;
 };
 
 export type ListViewContextState = {
@@ -140,6 +142,8 @@ export type ListViewContextMethods = {
 	getChildrenRole: (tag: 'li' | 'a' | 'button' | 'div') => 'listitem' | 'option' | 'row' | undefined;
 	registerItem: (id: string, getItem: () => { value: string; disabled: boolean; element: HTMLElement | null }) => void;
 	unregisterItem: (id: string) => void;
+	/** True for the first item to ask: it holds the tab stop until Tabspot takes the stop over on mount. */
+	claimTabStop: (id: string) => boolean;
 };
 
 export type ListViewContext = FSContext<ListViewContextConfig, ListViewContextState, null, ListViewContextMethods>;

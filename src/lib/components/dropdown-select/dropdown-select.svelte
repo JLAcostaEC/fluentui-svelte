@@ -46,7 +46,8 @@
 				<selectedcontent></selectedcontent>
 			</button>
 			{#if !hidePlaceholder}
-				<option class="fs-dropdown-placeholder" disabled selected hidden value="">{placeholder}</option>
+				<option class="fs-dropdown-placeholder" disabled selected={!value?.length} hidden value="">{placeholder}</option
+				>
 			{/if}
 			{@render children?.()}
 		</select>

@@ -8,6 +8,7 @@ import { mdsvex, escapeSvelte } from 'mdsvex';
 import rehypeClassNames from 'rehype-class-names';
 import adapter from '@sveltejs/adapter-cloudflare';
 import { fsShikiCopyButton } from './scripts/shiki-copy-button.js';
+import { fsShikiFocusableCode } from './scripts/shiki-focusable-code.js';
 import { createHighlighter } from 'shiki';
 
 /** @type {(import('shiki').BundledLanguage | import('shiki').LanguageInput | import('shiki').SpecialLanguage)[]} */
@@ -64,7 +65,8 @@ export default defineConfig({
 									},
 									defaultColor: 'light-dark()',
 									cssVariablePrefix: '--shiki-',
-									transformers: [fsShikiCopyButton()]
+									tabindex: false,
+									transformers: [fsShikiCopyButton(), fsShikiFocusableCode()]
 								})
 							);
 							return `{@html \`${html}\` }`;

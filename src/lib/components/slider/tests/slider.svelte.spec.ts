@@ -100,6 +100,35 @@ describe('orientation', () => {
 		const el = page.selector('.fs-slider');
 		await expect.element(el).toHaveClass('orientation-vertical');
 	});
+
+	it('draws a vertical slider from the bottom up, so the maximum is at the top', async () => {
+		render(Slider, { orientation: 'vertical', value: 100 });
+		const wrapper = page.selector('.fs-slider');
+		await expect.element(wrapper).not.toHaveClass('reverse');
+		const rail = page.selector('.slider-rail').element().getBoundingClientRect();
+		const thumb = page.selector('.slider-thumb').element().getBoundingClientRect();
+		expect(thumb.top + thumb.height / 2).toBeLessThanOrEqual(rail.top + 1);
+	});
+
+	it('draws a vertical slider from the top down with reverse', async () => {
+		render(Slider, { orientation: 'vertical', value: 100, reverse: true });
+		const wrapper = page.selector('.fs-slider');
+		await expect.element(wrapper).toHaveClass('reverse');
+		const rail = page.selector('.slider-rail').element().getBoundingClientRect();
+		const thumb = page.selector('.slider-thumb').element().getBoundingClientRect();
+		expect(thumb.top + thumb.height / 2).toBeGreaterThanOrEqual(rail.bottom - 1);
+	});
+
+	it('takes the value from where the pointer drags a vertical slider', async () => {
+		render(Slider, { orientation: 'vertical', value: 50 });
+		const wrapper = page.selector('.fs-slider');
+		const { top } = page.selector('.slider-rail').element().getBoundingClientRect();
+		const { top: wrapperTop } = wrapper.element().getBoundingClientRect();
+		await userEvent.dragAndDrop(page.selector('.slider-thumb'), wrapper, {
+			targetPosition: { x: 16, y: top - wrapperTop }
+		});
+		await expect.element(page.getByRole('slider')).toHaveValue('100');
+	});
 });
 
 describe('disabled state', () => {

@@ -1,5 +1,5 @@
 <script lang="ts" generics="T extends TopNavItemGenerics = 'button'">
-	import { invokeHandlers, RenderSoC } from '$internal';
+	import { invokeHandlers, RenderSoC } from '#internal';
 	import { COMPONENT_NAME, requireTopNavContext } from './top-nav.svelte.ts';
 	import type { TopNavItemElementDOMType, TopNavItemGenerics, TopNavItemProps } from './types.ts';
 
@@ -7,7 +7,7 @@
 
 	let {
 		as = 'button' as T,
-		ref = $bindable(),
+		ref = $bindable(null),
 		value = `${COMPONENT_NAME}-${ID}`,
 		icon,
 		disabled,
@@ -54,6 +54,7 @@
 -->
 <svelte:element
 	this={_as}
+	{...attributes}
 	bind:this={ref as TopNavItemElementDOMType[T]}
 	type={_as === 'button' ? 'button' : undefined}
 	role="tab"
@@ -73,7 +74,6 @@
 			() => context.config.selectTabOnFocus && context.methods.selectTab(e, value),
 			onfocus
 		])}
-	{...attributes}
 >
 	{#if icon}
 		<span class="fs-top-nav-item-icon">

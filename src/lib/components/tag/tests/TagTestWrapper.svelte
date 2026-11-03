@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Tag } from '$lib/index.js';
+	import { Tag } from '#lib/index.js';
 	import InfoFilled from 'fluentui-icons-svelte/InfoFilled.svelte';
-	import type { TagProps } from '$lib/components/tag/types.js';
+	import type { TagProps } from '#lib/components/tag/types.js';
 
 	let {
 		text = 'Tag 1',

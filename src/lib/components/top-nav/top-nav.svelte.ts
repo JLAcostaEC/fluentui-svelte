@@ -1,5 +1,5 @@
-import { PREFIX } from '$constants';
-import { createFSContext } from '$internal';
+import { PREFIX } from '#constants';
+import { createFSContext } from '#internal';
 import type { TopNavContext } from './types.ts';
 
 export const COMPONENT_NAME = `${PREFIX}-top-nav`;

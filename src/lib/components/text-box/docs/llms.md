@@ -29,6 +29,31 @@ The `type` prop specifies the type of input element. It can be set to various ty
 <TextBox type="number" placeholder="Number" />
 ```
 
+### Size
+
+The `size` prop sets the height, the font size and the horizontal padding of the input. It can be set to `small`, `medium` or `large`. The default is `medium`.
+
+```svelte
+<TextBox size="small" placeholder="Small" />
+<TextBox size="medium" placeholder="Medium" />
+<TextBox size="large" placeholder="Large" />
+```
+
+### Content Before and After
+
+`contentBefore` and `contentAfter` render content inside the wrapper, before and after the input. They accept a string, a snippet or a component such as an icon.
+
+```svelte
+<script>
+	import { MailRegular } from 'fluentui-icons-svelte';
+</script>
+
+<TextBox contentBefore="https://" placeholder="Website" />
+<TextBox contentAfter=".com" placeholder="Domain" />
+<TextBox contentBefore="$" contentAfter=".00" type="number" placeholder="Price" />
+<TextBox contentBefore={MailRegular} placeholder="Email" />
+```
+
 ### Input Element
 
 The `ref` prop allows you to bind a reference to the underlying HTML input element (`bind:ref`). This can be useful for direct DOM manipulations or accessing native input properties. The wrapper element can be bound via `wrapperRef`.
@@ -65,6 +90,8 @@ The `textChanged` event is triggered whenever the content of the text box change
 
 The `onClear` event is triggered when the input is cleared, allowing you to handle any necessary actions when the user removes the input value.
 
+HTML attributes, including class, id and ARIA attributes, apply to the control element. Bind ref to access that control. Use wrapperAttributes and wrapperRef for the outer container.
+
 ## Component Props
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
@@ -74,19 +101,19 @@ The `onClear` event is triggered when the input is cleared, allowing you to hand
 | ------------------------------------ | ---------------------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `type`                               | [`TextBoxTypes`](https://fluentui-svelte.dev/docs/types/#textboxtypes) | `'text'`           | The type of the input element.                                                                                                                   |
 | `value` _bindable_                   | `string` &#124; `number`                                               |                    | The current value of the input.                                                                                                                  |
-| `wrapperRef` _bindable_              | `HTMLDivElement`                                                       |                    | The DOM reference of the wrapper element.                                                                                                        |
-| `ref` _bindable_                     | `HTMLInputElement`                                                     |                    | The DOM reference of the input element.                                                                                                          |
+| `wrapperRef` _bindable_              | `HTMLDivElement` &#124; `null`                                         |                    | The DOM reference of the wrapper element.                                                                                                        |
+| `ref` _bindable_                     | `HTMLInputElement` &#124; `null`                                       |                    | The DOM reference of the input element.                                                                                                          |
 | `placeholder`                        | `string`                                                               | `'Fluent TextBox'` | The placeholder text for the input.                                                                                                              |
 | `hideActionButtons`                  | `boolean`                                                              |                    | Whether to hide the extra action buttons in the input.                                                                                           |
 | `justify`                            | `boolean`                                                              |                    | Make the input fill the full width of the container.                                                                                             |
 | `contentBefore`                      | `string` &#124; `Snippet` &#124; `Component`                           |                    | Content rendered before the input, inside the wrapper.                                                                                           |
 | `contentAfter`                       | `string` &#124; `Snippet` &#124; `Component`                           |                    | Content rendered after the input, inside the wrapper.                                                                                            |
 | `size`                               | `'small'` &#124; `'medium'` &#124; `'large'`                           | `'medium'`         | The size of the input element.                                                                                                                   |
-| `textChanged`                        | `(e: InputEvent, text: string) => void`                                |                    | Occurs when content changes in the text box.                                                                                                     |
+| `textChanged`                        | `(e: Event & unknown, text: string) => void`                           |                    | Occurs when content changes in the text box.                                                                                                     |
 | `querySubmitted`                     | `(e: MouseEvent` &#124; `KeyboardEvent, query: string) => void`        |                    | The QuerySubmitted event occurs when: 1. The input type is 'search'. 2. While the focus is in the text box, press Enter or click the query icon. |
 | `onClear`                            | `(e: MouseEvent) => void`                                              |                    | Occurs when the clear button is clicked.                                                                                                         |
 | `children`                           | `Snippet`                                                              |                    | The children elements to render inside the input.                                                                                                |
-| `wrapperAttributes`                  | `HTMLAttributes`                                                       |                    | The attributes to apply to the wrapper element.                                                                                                  |
+| `wrapperAttributes`                  | `HTMLAttributes`                                                       |                    | The attributes to spread on the wrapper element.                                                                                                 |
 | `HTMLInputAttributes` without `size` |                                                                        |                    |                                                                                                                                                  |
 
 <!-- /props:TextBoxProps -->

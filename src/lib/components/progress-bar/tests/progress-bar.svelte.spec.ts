@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { ProgressBar } from '$lib/index.js';
+import { ProgressBar } from '#lib/index.js';
 
 const bar = () => page.getByRole('progressbar');
 

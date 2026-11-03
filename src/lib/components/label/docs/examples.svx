@@ -1,54 +1,88 @@
 <script lang="ts">
-  import { Label } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import QuestionCircleRegular from 'fluentui-icons-svelte/QuestionCircleRegular.svelte';
+  import { Label, TextBox, Checkbox, RadioButton, ToggleSwitch, Dropdown, DropdownOption } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
 
   const sizeCode = `
-<Label size="small" label="Small" />
-<Label size="medium" label="Medium" />
-<Label size="large" label="Large" />`;
+<Label size="small" label="Small"><TextBox /></Label>
+<Label size="medium" label="Medium"><TextBox /></Label>
+<Label size="large" label="Large"><TextBox /></Label>`;
 
   const weightCode = `
-<Label weight="regular" label="Regular" />
-<Label weight="semibold" label="Semibold" />`;
+<Label weight="regular" label="Regular"><TextBox /></Label>
+<Label weight="semibold" label="Semibold"><TextBox /></Label>`;
 
   const positionCode = `
-<Label labelPosition="before" label="Before" />
-<Label labelPosition="after" label="After" />
-<Label labelPosition="above" label="Above" />
-<Label labelPosition="below" label="Below" />`;
+<Label labelPosition="before" label="Before"><TextBox /></Label>
+<Label labelPosition="after" label="After"><TextBox /></Label>
+<Label labelPosition="above" label="Above"><TextBox /></Label>
+<Label labelPosition="below" label="Below"><TextBox /></Label>`;
 
-  const requiredCode = `<Label label="Email" required={{ message: 'Required field' }} />`;
+  const tooltipCode = `
+<Label
+  label="Bank"
+  labelPosition="above"
+  required={{ message: 'Required field' }}
+  tooltipContent="The bank that holds the account the payments come from."
+>
+  <Dropdown placeholder="Bank Name">
+    <DropdownOption value="pichincha">Banco Pichincha</DropdownOption>
+    <DropdownOption value="guayaquil">Banco Guayaquil</DropdownOption>
+  </Dropdown>
+</Label>
+<Label
+  label="IBAN"
+  labelPosition="above"
+  tooltipBadge={QuestionCircleRegular}
+  tooltipContent="The international number of the account, as your bank prints it."
+>
+  <TextBox placeholder="EC00 0000 0000 0000" />
+</Label>`;
+
+  const requiredCode = `<Label label="Email" required={{ message: 'Required field' }}><TextBox required /></Label>`;
+
+  const controlsCode = `
+<Label label="Accept terms" labelPosition="after"><Checkbox /></Label>
+<Label label="Email updates" labelPosition="after"><ToggleSwitch /></Label>
+<Label label="Standard plan" labelPosition="after"><RadioButton name="plan" value="standard" /></Label>
+<Label label="Country" labelPosition="above">
+  <Dropdown>
+    <DropdownOption value="bo">Bolivia</DropdownOption>
+    <DropdownOption value="ec">Ecuador</DropdownOption>
+  </Dropdown>
+</Label>`;
 </script>
 
 ### {m.global_size()}
 
 {m.label_size_description()}
 
-<Showcase code={sizeCode}>
-  <Label size="small" label="Small" />
-  <Label size="medium" label="Medium" />
-  <Label size="large" label="Large" />
+<Showcase columns={1} code={sizeCode}>
+  <Label size="small" label="Small"><TextBox /></Label>
+  <Label size="medium" label="Medium"><TextBox /></Label>
+  <Label size="large" label="Large"><TextBox /></Label>
 </Showcase>
 
 ### {m.label_weight_title()}
 
 {m.label_weight_description()}
 
-<Showcase code={weightCode}>
-  <Label weight="regular" label="Regular" />
-  <Label weight="semibold" label="Semibold" />
+<Showcase columns={1} code={weightCode}>
+  <Label weight="regular" label="Regular"><TextBox /></Label>
+  <Label weight="semibold" label="Semibold"><TextBox /></Label>
 </Showcase>
 
 ### {m.label_position_title()}
 
 {m.label_position_description()}
 
-<Showcase columns={2} code={positionCode}>
-  <Label labelPosition="before" label="Before" />
-  <Label labelPosition="after" label="After" />
-  <Label labelPosition="above" label="Above" />
-  <Label labelPosition="below" label="Below" />
+<Showcase columns={1} code={positionCode}>
+  <Label labelPosition="before" label="Before"><TextBox /></Label>
+  <Label labelPosition="after" label="After"><TextBox /></Label>
+  <Label labelPosition="above" label="Above"><TextBox /></Label>
+  <Label labelPosition="below" label="Below"><TextBox /></Label>
 </Showcase>
 
 ### {m.label_required_title()}
@@ -56,5 +90,47 @@
 {m.label_required_description()}
 
 <Showcase columns={1} code={requiredCode}>
-  <Label label="Email" required={{ message: 'Required field' }} />
+  <Label label="Email" required={{ message: 'Required field' }}><TextBox required /></Label>
+</Showcase>
+
+### {m.label_tooltip_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.label_tooltip_description} /></p>
+
+<Showcase columns={1} code={tooltipCode} disablePanZoom showOverflow>
+  <Label
+    label="Bank"
+    labelPosition="above"
+    required={{ message: 'Required field' }}
+    tooltipContent="The bank that holds the account the payments come from."
+  >
+    <Dropdown placeholder="Bank Name">
+      <DropdownOption value="pichincha">Banco Pichincha</DropdownOption>
+      <DropdownOption value="guayaquil">Banco Guayaquil</DropdownOption>
+    </Dropdown>
+  </Label>
+  <Label
+    label="IBAN"
+    labelPosition="above"
+    tooltipBadge={QuestionCircleRegular}
+    tooltipContent="The international number of the account, as your bank prints it."
+  >
+    <TextBox placeholder="EC00 0000 0000 0000" />
+  </Label>
+</Showcase>
+
+### {m.label_controls_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.label_controls_description} /></p>
+
+<Showcase columns={1} code={controlsCode} disablePanZoom showOverflow>
+  <Label label="Accept terms" labelPosition="after"><Checkbox /></Label>
+  <Label label="Email updates" labelPosition="after"><ToggleSwitch /></Label>
+  <Label label="Standard plan" labelPosition="after"><RadioButton name="plan" value="standard" /></Label>
+  <Label label="Country" labelPosition="above">
+    <Dropdown>
+      <DropdownOption value="bo">Bolivia</DropdownOption>
+      <DropdownOption value="ec">Ecuador</DropdownOption>
+    </Dropdown>
+  </Label>
 </Showcase>

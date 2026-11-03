@@ -13,7 +13,7 @@
 
 	let {
 		as = 'ul' as Tag,
-		ref = $bindable(),
+		ref = $bindable(null),
 		selectionMode = 'none',
 		navigationMode = 'items',
 		shape = 'rounded',
@@ -22,6 +22,7 @@
 		disableTabspot = false,
 		toggleOnClick = false,
 		children,
+		class: classes,
 		...attributes
 	}: ListViewProps<Tag> = $props();
 
@@ -70,6 +71,9 @@
 		getItem: () => { value: string; disabled: boolean; element: HTMLElement | null };
 	}[] = $state([]);
 
+	// The item that holds the tab stop in the server HTML, before Tabspot runs. Plain, since only the first render reads it.
+	let tabStopId: string | null = null;
+
 	const CONTEXT: ListViewContext = $state({
 		config: {
 			get shape() {
@@ -86,6 +90,9 @@
 			},
 			get disableTabspot() {
 				return tabspotDisabled;
+			},
+			get roving() {
+				return !parent && navigationMode === 'composite';
 			}
 		},
 		state: {
@@ -104,6 +111,7 @@
 		},
 		events: null,
 		methods: {
+			claimTabStop: (id) => (tabStopId ??= id) === id,
 			handleSelection: (e: MouseEvent, value: string, toggle = false) => {
 				if (selectionMode === 'none') return;
 
@@ -158,12 +166,12 @@
 
 <svelte:element
 	this={_as}
+	{...attributes}
 	bind:this={ref as ListViewDOM[Tag]}
-	class="fs-list-view"
+	class={['fs-list-view', classes]}
 	role={ROLE}
 	aria-multiselectable={((ROLE === 'grid' || ROLE === 'listbox') && MULTISELECTABLE) || undefined}
 	{...tabspotAttrs}
-	{...attributes}
 	{@attach attachTabspot(tabspotConfig)}
 >
 	{@render children?.()}

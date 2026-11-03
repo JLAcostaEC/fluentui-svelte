@@ -1,12 +1,13 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import { tick } from 'svelte';
-	import { SvelteMap } from 'svelte/reactivity';
+	import { SvelteMap, SvelteSet } from 'svelte/reactivity';
 	import { onClickOutside } from 'runed';
 	import ChevronDownRegular from 'fluentui-icons-svelte/ChevronDownRegular.svelte';
-	import { PREFIX } from '$constants';
-	import { RenderSoC } from '$internal';
+	import { PREFIX } from '#constants';
+	import { dispatchFieldEvents, invokeHandlers, NativeField, RenderSoC } from '#internal';
 	import { setTagPickerContext } from './tag-picker.ts';
-	import { Flyout, ListView, ListViewItem, Tag, TagGroup } from '$lib/index.js';
+	import { Flyout, ListView, ListViewItem, Tag, TagGroup } from '#lib/index.js';
 	import {
 		clearTabspotActive,
 		setTabspotActive,
@@ -14,9 +15,9 @@
 		type TabspotNavigationEvent,
 		type TabspotNodeOptions
 	} from 'tabspot';
-	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { getGlobalFSContext } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import type { TagSize } from '../tag/types.ts';
-	import type { OptionType, TagPickerContext, TagPickerProps, TagPickerSizes } from './types.ts';
+	import type { OptionLabel, OptionType, TagPickerContext, TagPickerProps, TagPickerSizes } from './types.ts';
 
 	const FALLBACK_ID = $props.id();
 	const ID = `${PREFIX}-tagpicker-${FALLBACK_ID}`;
@@ -25,9 +26,16 @@
 	/** The tag is one step smaller than the control around it. */
 	const TAG_SIZES: Record<TagPickerSizes, TagSize> = { medium: 'extra-small', large: 'small', 'extra-large': 'medium' };
 
+	const labelContext = claimLabel(() => id);
+
 	let {
-		ref = $bindable(),
-		inputRef = $bindable(),
+		wrapperRef = $bindable(null),
+		id = labelContext?.fieldId,
+		name = id,
+		class: classes,
+		ref = $bindable(null),
+		inputRef = $bindable(null),
+		inputAttributes,
 		selectedOptions = $bindable([]),
 		value = $bindable(''),
 		open = $bindable(false),
@@ -40,15 +48,28 @@
 		secondaryAction,
 		tag,
 		tagGroupProps,
-		inputProps,
+		wrapperAttributes,
+		onfocus,
+		onblur,
 		onSelectionChange,
 		querySubmitted,
-		class: classes,
 		children,
 		...attributes
 	}: TagPickerProps = $props();
 
-	const INPUT_ID = $derived(inputProps?.id ?? `${ID}-input`);
+	const INPUT_ID = $derived(inputAttributes?.id ?? `${ID}-input`);
+	const INPUT_NAME = $derived(inputAttributes?.name ?? INPUT_ID);
+
+	const native = new NativeField(
+		() => ref,
+		() => inputRef,
+		labelContext
+	);
+
+	const aria = $derived(native.aria(attributes, inputAttributes));
+
+	/** A `fieldset` disables the picker without its `disabled` prop, and only the native field knows. */
+	const blocked = () => _picker.disabled || !!ref?.matches(':disabled');
 
 	/**
 	 * The props the invariants rule over. The markup and the context read them through here, so
@@ -66,10 +87,11 @@
 	/** The options on screen, by id. */
 	const options = new SvelteMap<string, OptionType>();
 
-	/** What the tag of each value says. It outlives its option, which leaves the screen when filtered or chosen. */
-	const labels = new SvelteMap<string, string>();
+	/** What the tag of each value says. The list stays in the page while closed, so every option is here, read live. */
+	const optionLabels = new SvelteSet<OptionLabel>();
+	const labels = $derived(new Map([...optionLabels].map((option) => [option.value, option.text])));
 
-	let listViewRef = $state<HTMLUListElement>();
+	let listViewRef = $state<HTMLUListElement | null>(null);
 
 	let roundClass = $state('bottom');
 
@@ -106,8 +128,9 @@
 		},
 		events: null,
 		methods: {
-			setLabel: (v, text) => {
-				labels.set(v, text);
+			registerLabel: (option) => {
+				optionLabels.add(option);
+				return () => optionLabels.delete(option);
 			},
 			setOption: (option) => {
 				options.set(option.id, option);
@@ -118,11 +141,12 @@
 			chooseOption: async (e, id) => {
 				const option = options.get(id);
 
-				if (!option || option.disabled || selectedOptions.includes(option.value)) return;
+				if (!option || option.disabled || blocked() || selectedOptions.includes(option.value)) return;
 
 				selectedOptions = _picker.single ? [option.value] : [...selectedOptions, option.value];
 				value = '';
 				activeOption = null;
+				dispatchFieldEvents(ref);
 				onSelectionChange?.(e, selectedOptions);
 
 				if (_picker.single) open = false;
@@ -218,6 +242,7 @@
 				if (_picker.disabled || value !== '' || selectedOptions.length === 0) return;
 
 				selectedOptions = selectedOptions.slice(0, -1);
+				dispatchFieldEvents(ref);
 				onSelectionChange?.(e, selectedOptions);
 				break;
 		}
@@ -236,13 +261,14 @@
 
 	function handleDismiss(e: MouseEvent | KeyboardEvent, data: { value: string }) {
 		selectedOptions = selectedOptions.filter((v) => v !== data.value);
+		dispatchFieldEvents(ref);
 		onSelectionChange?.(e, selectedOptions);
 		inputRef?.focus();
 	}
 
 	function handleControlClick(e: MouseEvent) {
 		// Tags and the aside have a job of their own.
-		if (_picker.disabled || (e.target as Element).closest('.fs-tag, .fs-tagpicker-aside')) return;
+		if (blocked() || (e.target as Element).closest('.fs-tag, .fs-tagpicker-aside')) return;
 
 		inputRef?.focus();
 
@@ -250,7 +276,7 @@
 	}
 
 	function handleChevronClick() {
-		if (_picker.disabled) return;
+		if (blocked()) return;
 
 		inputRef?.focus();
 
@@ -272,7 +298,7 @@
 	}
 
 	onClickOutside(
-		() => ref,
+		() => wrapperRef,
 		() => (open = false)
 	);
 
@@ -286,16 +312,24 @@
 	$effect(() => {
 		if (!_picker.open || !listViewRef) return;
 
-		setTabspotAttributes({ element: listViewRef, config: NAVIGATION });
+		const list = listViewRef;
 
-		return globalContext?.state.tabspotInstance?.subscribe(listViewRef, navigate);
+		setTabspotAttributes({ element: list, config: NAVIGATION });
+
+		const unsubscribe = globalContext?.state.tabspotInstance?.subscribe(list, navigate);
+
+		// The list stays in the page once closed: nothing in it reads as chosen.
+		return () => {
+			clearTabspotActive(list);
+			unsubscribe?.();
+		};
 	});
 
 	// Tabspot does not notice an option that left the list, so it learns the options that are left.
 	$effect(() => {
 		void [...options.keys()];
 
-		if (listViewRef) globalContext?.state.tabspotInstance?.rebuild(listViewRef);
+		if (_picker.open && listViewRef) globalContext?.state.tabspotInstance?.rebuild(listViewRef);
 	});
 </script>
 
@@ -311,55 +345,91 @@ A text field and a dropdown that give people a way to choose several options fro
     let selectedOptions = $state([]);
   </script>
 
-  <TagPicker bind:selectedOptions inputProps={{ 'aria-label': 'Fruits' }}>
+  <TagPicker bind:selectedOptions name="fruits" inputAttributes={{ 'aria-label': 'Fruits' }}>
     <TagPickerOption value="Apple">Apple</TagPickerOption>
     <TagPickerOption value="Banana">Banana</TagPickerOption>
   </TagPicker>
   ```
 -->
 <div
-	class={['fs-tagpicker', `size-${size}`, { disabled: _picker.disabled, open: _picker.open }, classes]}
-	bind:this={ref}
-	{...attributes}
+	{...wrapperAttributes}
+	class={['fs-tagpicker', `size-${size}`, { disabled: _picker.disabled, open: _picker.open }, wrapperAttributes?.class]}
+	bind:this={wrapperRef}
 >
+	{#if _picker.hasList}
+		<!-- Hidden while closed, not gone: each option still tells its tag what to say, and comes before
+		     the tags, so the server writes them too. It shows once it has the wrapper to be placed against. -->
+		<Flyout
+			floating
+			hidden={!_picker.open || !wrapperRef}
+			offset={0}
+			reference={wrapperRef ?? undefined}
+			roundCorners="bottom"
+			placementConfig={{ allowedPlacements: ['bottom', 'top'] }}
+			onPlacementChange={(place) => handlePlacementChange(place)}
+			class={['fs-tagpicker-flyout', roundClass === 'top' && 'top-shadow']}
+		>
+			<ListView
+				role="listbox"
+				selectionMode={_picker.single ? 'single' : 'multiselect'}
+				navigationMode="items"
+				disableTabspot
+				id={LIST_ID}
+				aria-multiselectable={_picker.single ? undefined : 'true'}
+				aria-label={aria['aria-label']}
+				aria-labelledby={aria['aria-labelledby']}
+				bind:ref={listViewRef}
+				onmousedown={(e: MouseEvent) => e.preventDefault()}
+			>
+				{#if options.size === 0}
+					<ListViewItem role="option" disabled>{notFoundText}</ListViewItem>
+				{/if}
+				{@render children?.()}
+			</ListView>
+		</Flyout>
+	{/if}
 	<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
 	<div class={['control', _picker.open && `square-${roundClass}`]} onclick={handleControlClick} onmousedown={keepFocus}>
 		<div class="content">
 			{#if selectedOptions.length > 0}
 				<TagGroup
-					role="list"
+					aria-label="Selected options"
+					{...tagGroupProps}
 					size={tagSize}
 					disabled={_picker.disabled}
 					dismissible
 					onDismiss={handleDismiss}
-					{...tagGroupProps}
 				>
 					{#each selectedOptions as v (v)}
 						{@const text = labels.get(v) ?? v}
 						{#if tag}
 							{@render tag({ value: v, text })}
 						{:else}
-							<Tag role="listitem" value={v} title={text}>{text}</Tag>
+							<Tag value={v} title={text}>{text}</Tag>
 						{/if}
 					{/each}
 				</TagGroup>
 			{/if}
 			<input
+				{...inputAttributes}
+				{...aria}
+				autocomplete="off"
 				bind:this={inputRef}
 				type="text"
-				autocomplete="off"
 				{placeholder}
 				id={INPUT_ID}
+				name={INPUT_NAME}
 				disabled={_picker.disabled}
 				role={_picker.hasList ? 'combobox' : undefined}
 				aria-expanded={_picker.hasList ? _picker.open : undefined}
 				aria-haspopup={_picker.hasList ? 'listbox' : undefined}
 				aria-autocomplete={_picker.hasList ? 'list' : undefined}
 				aria-controls={_picker.open ? LIST_ID : undefined}
-				{...inputProps}
 				bind:value
-				oninput={handleInput}
-				onkeydown={handleKeyDown}
+				oninput={(e) => invokeHandlers(e, [disabled], [handleInput, inputAttributes?.oninput])}
+				onkeydown={(e) => invokeHandlers(e, [disabled], [handleKeyDown, inputAttributes?.onkeydown])}
+				onfocus={(e) => invokeHandlers(e, [], [onfocus, inputAttributes?.onfocus])}
+				onblur={(e) => invokeHandlers(e, [], [onblur, inputAttributes?.onblur])}
 			/>
 		</div>
 		{#if secondaryAction || (expandIcon && _picker.hasList)}
@@ -375,39 +445,26 @@ A text field and a dropdown that give people a way to choose several options fro
 			</span>
 		{/if}
 	</div>
-	{#if _picker.open && ref}
-		<Flyout
-			floating
-			offset={0}
-			reference={ref}
-			roundCorners="bottom"
-			placementConfig={{ allowedPlacements: ['bottom', 'top'] }}
-			onPlacementChange={(place) => handlePlacementChange(place)}
-			class={['fs-tagpicker-flyout', roundClass === 'top' && 'top-shadow']}
-		>
-			<ListView
-				role="listbox"
-				navigationMode="items"
-				disableTabspot
-				id={LIST_ID}
-				aria-multiselectable={_picker.single ? undefined : 'true'}
-				aria-label={inputProps?.['aria-label']}
-				aria-labelledby={inputProps?.['aria-labelledby']}
-				bind:ref={listViewRef}
-				onmousedown={(e: MouseEvent) => e.preventDefault()}
-			>
-				{#if options.size === 0}
-					<ListViewItem role="option" disabled>{notFoundText}</ListViewItem>
-				{/if}
-				{@render children?.()}
-			</ListView>
-		</Flyout>
-	{:else if children}
-		<!-- Nobody sees the options, but each one still tells its tag what to say. -->
-		<ListView hidden>
-			{@render children()}
-		</ListView>
-	{/if}
+	<!-- The field of the form: it holds the chosen options, never the typed text, so it is
+	     submitted, validated and reset like any multiple select, behind the control and out of
+	     the tab order. See `NativeField`. -->
+	<select
+		{...attributes}
+		{id}
+		{name}
+		class={['native-field', classes]}
+		aria-hidden={native.reported ? undefined : 'true'}
+		multiple
+		tabindex={-1}
+		disabled={_picker.disabled}
+		bind:value={selectedOptions}
+		bind:this={ref}
+		onclick={() => inputRef?.focus()}
+	>
+		{#each selectedOptions as option (option)}
+			<option value={option}>{labels.get(option) ?? option}</option>
+		{/each}
+	</select>
 </div>
 
 <style>
@@ -522,6 +579,21 @@ A text field and a dropdown that give people a way to choose several options fro
 			color: var(--fs-text-tertiary);
 		}
 	}
+	.fs-tagpicker > .native-field {
+		position: absolute;
+		inset: 0;
+		inline-size: 100%;
+		block-size: 100%;
+		margin: 0;
+		box-sizing: border-box;
+		opacity: 0;
+		pointer-events: none;
+	}
+	.fs-tagpicker:has(> .native-field:is(:user-invalid, [aria-invalid='true'])) .control::after {
+		inline-size: calc(100% + 0.125rem);
+		inset-inline-start: -0.063rem;
+		background-color: var(--fs-system-critical);
+	}
 
 	.content {
 		display: flex;
@@ -605,7 +677,7 @@ A text field and a dropdown that give people a way to choose several options fro
 		}
 	}
 
-	.disabled .control {
+	.fs-tagpicker:is(.disabled, :has(> .native-field:disabled)) .control {
 		cursor: not-allowed;
 		background: var(--fs-control-fill-disabled);
 		&::before {

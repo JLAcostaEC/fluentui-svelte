@@ -1,12 +1,13 @@
 <script lang="ts">
 	import type { CardHeaderProps } from './types.ts';
-	import { RenderSoC } from '$internal';
+	import { RenderSoC } from '#internal';
 	import { getCardContext } from './card-context.svelte.ts';
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		class: classes,
 		title,
+		headingLevel = 4,
 		image,
 		imageAlt = '',
 		description,
@@ -31,7 +32,7 @@
 	});
 </script>
 
-<div bind:this={ref} class={['fs-card-header', showFloatingAction && 'with-action', classes]} {...attributes}>
+<div {...attributes} bind:this={ref} class={['fs-card-header', showFloatingAction && 'with-action', classes]}>
 	{#if typeof image === 'string'}
 		<img src={image} alt={imageAlt} />
 	{:else if image}
@@ -40,7 +41,7 @@
 	{#if description}
 		<div class="fs-card-header-content">
 			{#if typeof title === 'string'}
-				<h4 class="body" id={`${id}-title`}>{title}</h4>
+				<svelte:element this={`h${headingLevel}`} class="body" id={`${id}-title`}>{title}</svelte:element>
 			{:else if title}
 				<RenderSoC SoC={title} args={{ id: `${id}-title` }} />
 			{/if}
@@ -51,7 +52,7 @@
 			{/if}
 		</div>
 	{:else if typeof title === 'string'}
-		<h4 class="body" id={`${id}-title`}>{title}</h4>
+		<svelte:element this={`h${headingLevel}`} class="body" id={`${id}-title`}>{title}</svelte:element>
 	{:else if title}
 		<RenderSoC SoC={title} args={{ id: `${id}-title` }} />
 	{/if}

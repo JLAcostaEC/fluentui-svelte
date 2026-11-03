@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { TimePicker } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
+  import { TimePicker } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
 
   const formatCode = `
 <TimePicker format={24} />

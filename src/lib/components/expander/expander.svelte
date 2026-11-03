@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Button } from '$lib/index.js';
-	import { Expander, invokeHandlers, RenderSoC } from '$internal';
-	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { Button } from '#lib/index.js';
+	import { Expander, invokeHandlers, RenderSoC } from '#internal';
+	import { getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import ChevronUpFilled from 'fluentui-icons-svelte/ChevronUpFilled.svelte';
 	import type { Action } from 'svelte/action';
 	import type { ExpanderProps } from './types.ts';
@@ -13,12 +13,12 @@
 		direction = 'down',
 		animation,
 		justify = false,
-		ref = $bindable(),
+		ref = $bindable(null),
 		expanded = $bindable(false),
 		children,
 		Icon,
-		summaryRef = $bindable(),
-		summaryProps,
+		summaryRef = $bindable(null),
+		summaryAttributes,
 		...attributes
 	}: ExpanderProps = $props();
 
@@ -66,17 +66,22 @@ improve the user experience.
 ```
 -->
 <details
+	{...attributes}
 	bind:this={ref}
 	bind:open={expanded}
 	use:expander
-	class={['fs-expander', direction, { disabled, justify }]}
-	{...attributes}
+	class={['fs-expander', direction, { disabled, justify }, attributes?.class]}
 >
 	<summary
-		class="fs-summary"
-		onclick={(e) => invokeHandlers(e, [disabled], [supportInterpolation && (() => e.preventDefault()), handleClick])}
+		{...summaryAttributes}
+		class={['fs-summary', summaryAttributes?.class]}
+		onclick={(e) =>
+			invokeHandlers(
+				e,
+				[disabled],
+				[supportInterpolation && (() => e.preventDefault()), handleClick, summaryAttributes?.onclick]
+			)}
 		bind:this={summaryRef}
-		{...summaryProps}
 	>
 		<span class="row">
 			{#if Icon}

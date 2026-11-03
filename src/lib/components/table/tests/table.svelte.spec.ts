@@ -2,7 +2,7 @@ import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { SvelteSet } from 'svelte/reactivity';
-import { TableBody, TableCell, TableCellActions, TableHeader, TableHeaderCell, TableRow } from '$lib/index.js';
+import { TableBody, TableCell, TableCellActions, TableHeader, TableHeaderCell, TableRow } from '#lib/index.js';
 import TableTestWrapper from './TableTestWrapper.svelte';
 import TableVirtualTestWrapper from './TableVirtualTestWrapper.svelte';
 

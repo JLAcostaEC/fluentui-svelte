@@ -1,5 +1,5 @@
-import { PREFIX } from '$constants';
-import { createFSContext } from '$internal';
+import { PREFIX } from '#constants';
+import { createFSContext } from '#internal';
 import { on } from 'svelte/events';
 import type { Attachment } from 'svelte/attachments';
 import type { TableContext } from './types.ts';

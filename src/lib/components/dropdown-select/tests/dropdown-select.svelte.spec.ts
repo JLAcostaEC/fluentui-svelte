@@ -1,5 +1,5 @@
-import { page } from 'vitest/browser';
-import { describe, expect, it } from 'vitest';
+import { page, userEvent } from 'vitest/browser';
+import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import DropdownSelectTestWrapper from './DropdownSelectTestWrapper.svelte';
 
@@ -90,9 +90,48 @@ describe('multiple', () => {
 });
 
 describe('attributes', () => {
-	it('forwards wrapperProps to the wrapper element', async () => {
-		render(DropdownSelectTestWrapper, { wrapperProps: { 'data-testid': 'my-select' } });
+	it('forwards wrapperAttributes to the wrapper element', async () => {
+		render(DropdownSelectTestWrapper, { wrapperAttributes: { 'data-testid': 'my-select' } });
 		const el = page.getByTestId('my-select');
 		await expect.element(el).toBeInTheDocument();
+	});
+});
+
+describe('user selection', () => {
+	it('keeps a clicked option selected and updates the bound value and trigger text', async () => {
+		const onchange = vi.fn();
+		const oninputcapture = vi.fn();
+		await render(DropdownSelectTestWrapper, { attributes: { onchange, oninputcapture } });
+		const select = page.selector('select.fs-dropdown-select');
+		await select.click();
+		await page.getByRole('option', { name: 'Banana', exact: true }).click();
+		await expect.element(select).toHaveValue('banana');
+		await expect.element(page.getByTestId('selected-value')).toHaveTextContent('"banana"');
+		await expect.element(page.selector('selectedcontent .value-text')).toBeVisible();
+		await expect.element(page.selector('selectedcontent .value-text')).toHaveTextContent('Banana');
+		expect(onchange).toHaveBeenCalledTimes(1);
+		expect(oninputcapture).toHaveBeenCalledTimes(1);
+	});
+
+	it('selects an option from the keyboard without restoring the placeholder', async () => {
+		await render(DropdownSelectTestWrapper);
+		await userEvent.tab();
+		await userEvent.keyboard('{ArrowDown}{ArrowDown}{Enter}');
+		await expect.element(page.selector('select.fs-dropdown-select')).toHaveValue('banana');
+		await expect.element(page.getByTestId('selected-value')).toHaveTextContent('"banana"');
+	});
+
+	it('keeps every selected value in multiple mode', async () => {
+		await render(DropdownSelectTestWrapper, { multiple: true, value: ['apple'] });
+		await page.getByRole('option', { name: 'Banana', exact: true }).click();
+		await expect.element(page.getByTestId('selected-value')).toHaveTextContent('["apple","banana"]');
+		await expect.element(page.selector('select.fs-dropdown-select')).toHaveValue(['apple', 'banana']);
+	});
+
+	it('updates the selected option when its value changes from the parent', async () => {
+		const view = await render(DropdownSelectTestWrapper, { value: 'apple' });
+		await view.rerender({ value: 'cherry' });
+		await expect.element(page.selector('select.fs-dropdown-select')).toHaveValue('cherry');
+		await expect.element(page.selector('selectedcontent .value-text')).toHaveTextContent('Cherry');
 	});
 });

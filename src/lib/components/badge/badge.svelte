@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { pxToRem, RenderSoC } from '$internal';
+	import { pxToRem, RenderSoC } from '#internal';
 	import { shapes } from './utils.svelte.ts';
 	import type { BadgeProps } from './types.ts';
 
@@ -13,7 +13,7 @@
 		children,
 		class: classes,
 		style,
-		ref = $bindable(),
+		ref = $bindable(null),
 		...attributes
 	}: BadgeProps = $props();
 </script>
@@ -36,10 +36,10 @@
   ```
  -->
 <span
+	{...attributes}
 	bind:this={ref}
 	class={['fs-badge', shape, appearance, color, classes]}
 	style="--badge-shapes: {shapes[shape]}; --badge-size: {pxToRem(size)}; {style}"
-	{...attributes}
 >
 	{#if iconPosition === 'after'}
 		{@render children?.()}

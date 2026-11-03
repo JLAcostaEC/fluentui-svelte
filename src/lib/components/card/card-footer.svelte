@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { CardFooterProps } from './types.ts';
-	import { RenderSoC } from '$internal';
+	import { RenderSoC } from '#internal';
 	import { getCardContext } from './card-context.svelte.ts';
 
-	let { ref = $bindable(), class: classes, action, ...attributes }: CardFooterProps = $props();
+	let { ref = $bindable(null), class: classes, action, ...attributes }: CardFooterProps = $props();
 
 	const context = getCardContext();
 
@@ -21,7 +21,7 @@
 	});
 </script>
 
-<div bind:this={ref} class={['fs-card-footer', showFloatingAction && 'with-action', classes]} {...attributes}>
+<div {...attributes} bind:this={ref} class={['fs-card-footer', showFloatingAction && 'with-action', classes]}>
 	{#if _action}
 		<RenderSoC SoC={_action} />
 	{/if}

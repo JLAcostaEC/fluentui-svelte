@@ -1,37 +1,52 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
+	import { dispatchFieldEvents, invokeHandlers, NativeField } from '#internal';
 	import { onClickOutside } from 'runed';
 	import ChevronDownFilled from 'fluentui-icons-svelte/ChevronDownFilled.svelte';
-	import { Flyout, ListView, ListViewItem } from '$lib/index.js';
-	import type { DropdownContext, DropdownProps } from './types.ts';
+	import { Flyout, ListView, ListViewItem } from '#lib/index.js';
+	import type { DropdownContext, DropdownOptionLabel, DropdownProps } from './types.ts';
 	import { tick } from 'svelte';
-	import { SvelteMap } from 'svelte/reactivity';
-	import { setTabspotAttributes, unsetTabspotSection } from 'tabspot';
+	import { SvelteSet } from 'svelte/reactivity';
+	import { clearTabspotActive, setTabspotActive, setTabspotAttributes, unsetTabspotSection } from 'tabspot';
 	import { PREFIX } from '../../internal/constants.ts';
-	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { getGlobalFSContext } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { setDropdownContext } from './dropdown-context.ts';
 
 	const FALLBACK_ID = $props.id();
 	const ID = `${PREFIX}-dropdown-${FALLBACK_ID}`;
 
+	const labelContext = claimLabel(() => id);
+
 	let {
-		id = ID,
-		name = id,
+		id = labelContext?.fieldId ?? ID,
+		name,
 		placeholder = 'Select an option',
 		multiple,
 		value = $bindable(multiple ? [] : ''),
 		disabled,
 		flyoutMaxHeight,
-		ref = $bindable(),
-		wrapperProps,
-		buttonRef = $bindable(),
-		buttonProps,
-		flyoutRef = $bindable(),
+		wrapperRef = $bindable(null),
+		wrapperAttributes,
+		ref = $bindable(null),
+		buttonRef = $bindable(null),
+		buttonAttributes,
+		flyoutRef = $bindable(null),
 		flyoutProps,
-		listboxRef = $bindable(),
+		listboxRef = $bindable(null),
 		listboxProps,
-		onclick,
-		children
+		onfocus,
+		onblur,
+		children,
+		...attributes
 	}: DropdownProps = $props();
+
+	const BUTTON_ID = $derived(buttonAttributes?.id ?? `${id}-button`);
+
+	const native = new NativeField(
+		() => ref,
+		() => buttonRef,
+		labelContext
+	);
 
 	let open = $state(false);
 
@@ -41,16 +56,19 @@
 
 	const OPEN_KEYS = ['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'Enter', ' '];
 
-	// Options only mount while the flyout is open, so we cache the last-known text
-	// for every value here to keep rendering the selection once the list is closed.
-	const optionLabels = new SvelteMap<string, string>();
+	// The list stays in the page while closed, so every option is here from the start, and is read live.
+	const options = new SvelteSet<DropdownOptionLabel>();
+	const optionLabels = $derived(new Map([...options].map((option) => [option.value, option.text])));
 
 	const context: DropdownContext = $state({
 		config: null,
 		state: null,
 		events: null,
 		methods: {
-			registerOption: (optionValue: string, text: string) => optionLabels.set(optionValue, text)
+			registerOption: (option) => {
+				options.add(option);
+				return () => options.delete(option);
+			}
 		}
 	});
 
@@ -65,8 +83,11 @@
 	);
 
 	onClickOutside(
-		() => ref,
-		() => closeDropdown()
+		() => wrapperRef,
+		(event) => {
+			if (event.target instanceof Element && event.target.closest('label')?.control === ref) return;
+			closeDropdown();
+		}
 	);
 
 	function handlePlacementChange(newPlacement: string) {
@@ -77,7 +98,12 @@
 		if (disabled || open) return;
 		open = true;
 		await tick();
-		globalFSContext?.state?.tabspotInstance?.rebuild(ref);
+		globalFSContext?.state?.tabspotInstance?.rebuild(wrapperRef ?? undefined);
+		// The cursor starts on the selection, or on the first option, so it is announced on open.
+		const start =
+			listboxRef?.querySelector<HTMLElement>('.fs-list-view-item[aria-selected="true"]:not([aria-disabled="true"])') ??
+			listboxRef?.querySelector<HTMLElement>('.fs-list-view-item:not([aria-disabled="true"])');
+		if (start) setTabspotActive(start, { nearest: true });
 	}
 
 	function closeDropdown() {
@@ -91,6 +117,13 @@
 
 		const { key } = e;
 
+		if (open && (key === 'Enter' || key === ' ')) {
+			e.preventDefault();
+			// Focus stays on the button, so the option under the cursor never sees the key: click it here.
+			listboxRef?.querySelector<HTMLElement>('[data-active="true"]')?.click();
+			return;
+		}
+
 		if (OPEN_KEYS.includes(key)) {
 			e.preventDefault();
 			await openDropdown();
@@ -103,18 +136,32 @@
 		}
 	}
 
-	async function handleClick(e: MouseEvent) {
+	async function handleClick() {
 		if (open) closeDropdown();
 		else await openDropdown();
-		onclick?.(e);
+	}
+
+	/** A label activates the native select it belongs to, which hands the activation to the button. */
+	async function openFromField() {
+		buttonRef?.focus();
+		await openDropdown();
+	}
+
+	function select(items: string[] | undefined) {
+		const next = multiple ? (items ?? []) : (items?.[0] ?? '');
+		if (!multiple && next === value) return;
+		value = next;
+		dispatchFieldEvents(ref);
 	}
 
 	// Force rebuild of tabspot handling tree
 	$effect(() => {
-		if (!ref) return;
+		if (!wrapperRef) return;
 
 		if (!open) {
-			unsetTabspotSection(ref, 'root');
+			// The list stays in the page once closed: nothing in it reads as chosen.
+			clearTabspotActive(wrapperRef);
+			unsetTabspotSection(wrapperRef, 'root');
 			return;
 		}
 
@@ -127,7 +174,7 @@
 					axis: 'vertical',
 					items: '.fs-list-view-item',
 					activation: {
-						controller: `#${id}-button`,
+						controller: `#${CSS.escape(BUTTON_ID)}`,
 						mode: 'activedescendant',
 						mark: {
 							attribute: 'data-active'
@@ -135,83 +182,119 @@
 					}
 				}
 			},
-			element: ref,
+			element: wrapperRef,
 			merge: true
 		});
 	});
 </script>
 
-<div class={['fs-dropdown', `square-${roundClass}`, { open, disabled }]} bind:this={ref} {...wrapperProps}>
+<div
+	{...wrapperAttributes}
+	class={['fs-dropdown', `square-${roundClass}`, { open, disabled }, wrapperAttributes?.class]}
+	bind:this={wrapperRef}
+>
+	<!-- Hidden while closed, not gone: each option reports its text as it is created, and comes before
+	     the button, so the button shows it before the list ever opens, on the server too. -->
+	<Flyout
+		{...flyoutProps}
+		hidden={!open}
+		style="{flyoutProps?.style ?? ''}; {flyoutMaxHeight ? `max-height: ${flyoutMaxHeight};` : ''}"
+		offset={0}
+		bind:ref={flyoutRef}
+		floating
+		roundCorners="bottom"
+		reference={wrapperRef ?? undefined}
+		id={`${id}-flyout`}
+		onPlacementChange={(place) => {
+			handlePlacementChange(place);
+			flyoutProps?.onPlacementChange?.(place);
+		}}
+		placementConfig={{ allowedPlacements: ['bottom', 'top'] }}
+		class="fs-dropdown-flyout {roundClass === 'top' ? 'top-shadow' : ''} {flyoutProps?.class}"
+	>
+		<ListView
+			{...listboxProps}
+			bind:ref={listboxRef}
+			bind:selectedItems={() => selectedValues, select}
+			selectionMode={multiple ? 'multiselect' : 'single'}
+			toggleOnClick={multiple}
+			onSelectionChange={(event, selected) => {
+				if (!multiple) closeDropdown();
+				listboxProps?.onSelectionChange?.(event, selected);
+			}}
+			navigationMode="items"
+			id={`${id}-listbox`}
+			role="listbox"
+			disableTabspot
+		>
+			{#if !children}
+				<ListViewItem disabled>No options available</ListViewItem>
+			{:else}
+				{@render children?.()}
+			{/if}
+		</ListView>
+	</Flyout>
 	<ChevronDownFilled class="indicator" />
 	<button
+		{...buttonAttributes}
+		{...native.aria(attributes, buttonAttributes)}
 		bind:this={buttonRef}
 		type="button"
 		role="combobox"
-		onclick={handleClick}
-		onkeydown={handleKeyDown}
-		aria-controls={`${id}-listbox`}
+		onclick={(e) => invokeHandlers(e, [disabled], [handleClick, buttonAttributes?.onclick])}
+		onkeydown={(e) => invokeHandlers(e, [disabled], [handleKeyDown, buttonAttributes?.onkeydown])}
+		onfocus={(e) => invokeHandlers(e, [], [onfocus, buttonAttributes?.onfocus])}
+		onblur={(e) => invokeHandlers(e, [], [onblur, buttonAttributes?.onblur])}
+		aria-controls={open ? `${id}-listbox` : undefined}
 		aria-expanded={open}
-		id={`${id}-button`}
+		id={BUTTON_ID}
 		aria-haspopup="listbox"
 		{disabled}
-		class={['fs-dropdown-button', hasValue && 'has-value']}
-		{...buttonProps}
+		class={['fs-dropdown-button', hasValue && 'has-value', buttonAttributes?.class]}
 	>
 		{displayLabel}
 	</button>
 
-	<input type="hidden" {name} {value} {id} {disabled} />
-
-	{#if open}
-		<Flyout
-			style={flyoutMaxHeight ? `max-height: ${flyoutMaxHeight};` : ''}
-			offset={0}
-			bind:ref={flyoutRef}
-			{...flyoutProps}
-			floating
-			roundCorners="bottom"
-			reference={ref}
-			id={`${id}-flyout`}
-			onPlacementChange={(place) => handlePlacementChange(place)}
-			placementConfig={{ allowedPlacements: ['bottom', 'top'] }}
-			class="fs-dropdown-flyout {roundClass === 'top' ? 'top-shadow' : ''} {flyoutProps?.class}"
+	<!-- The field of the form: submitted, validated and reset like any select input,
+	     behind the button and out of the tab order, since the button is what people use. See `NativeField`. -->
+	<!-- Svelte needs a static `multiple` to bind a select, hence the two branches. This is the native form -->
+	{#if multiple}
+		<select
+			{...attributes}
+			class="native-field"
+			aria-hidden={native.reported ? undefined : 'true'}
+			multiple
+			tabindex={-1}
+			{id}
+			{name}
+			{disabled}
+			bind:value
+			bind:this={ref}
+			onclick={openFromField}
 		>
-			<ListView
-				bind:ref={listboxRef}
-				bind:selectedItems={
-					() => {
-						if (multiple) {
-							return (value as string[]) || [];
-						} else {
-							return value ? [value as string] : [];
-						}
-					},
-					(v) => {
-						if (multiple) {
-							value = v || [];
-						} else {
-							value = v?.[0] || '';
-						}
-					}
-				}
-				selectionMode={multiple ? 'multiselect' : 'single'}
-				toggleOnClick={multiple}
-				onSelectionChange={() => {
-					if (!multiple) closeDropdown();
-				}}
-				navigationMode="items"
-				id={`${id}-listbox`}
-				role="listbox"
-				disableTabspot
-				{...listboxProps}
-			>
-				{#if !children}
-					<ListViewItem disabled>No options available</ListViewItem>
-				{:else}
-					{@render children?.()}
-				{/if}
-			</ListView>
-		</Flyout>
+			{#each selectedValues as option (option)}
+				<option value={option}>{optionLabels.get(option) ?? option}</option>
+			{/each}
+		</select>
+	{:else}
+		<select
+			{...attributes}
+			class="native-field"
+			aria-hidden={native.reported ? undefined : 'true'}
+			tabindex={-1}
+			{id}
+			{name}
+			{disabled}
+			bind:value
+			bind:this={ref}
+			onclick={openFromField}
+		>
+			<!-- The placeholder makes an empty value missing for `required`, and is what a reset returns to. -->
+			<option value="" hidden></option>
+			{#if hasValue}
+				<option {value}>{displayLabel}</option>
+			{/if}
+		</select>
 	{/if}
 </div>
 
@@ -299,6 +382,21 @@
 			width: calc(100% + 0.125rem);
 			left: -0.063rem;
 			background-color: var(--fs-accent-fill-default);
+		}
+		&:has(> .native-field:is(:user-invalid, [aria-invalid='true'])):after {
+			width: calc(100% + 0.125rem);
+			left: -0.063rem;
+			background-color: var(--fs-system-critical);
+		}
+		& .native-field {
+			position: absolute;
+			inset: 0;
+			inline-size: 100%;
+			block-size: 100%;
+			margin: 0;
+			box-sizing: border-box;
+			opacity: 0;
+			pointer-events: none;
 		}
 		& :global(> .indicator) {
 			width: 1rem;

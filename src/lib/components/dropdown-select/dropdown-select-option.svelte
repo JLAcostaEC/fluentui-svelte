@@ -6,14 +6,14 @@
 		value,
 		text,
 		disabled,
-		ref = $bindable(),
+		ref = $bindable(null),
 		class: classes,
 		children,
 		...attributes
 	}: DropdownSelectOptionProps = $props();
 </script>
 
-<option class="fs-dropdown-select-option {classes}" {value} {disabled} bind:this={ref} {...attributes}>
+<option {...attributes} class="fs-dropdown-select-option {classes}" {value} {disabled} bind:this={ref}>
 	<span class="option-content">
 		<CheckmarkFilled class="checkmark" width="16" height="16" />
 		{#if text}

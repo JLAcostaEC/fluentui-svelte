@@ -1,19 +1,19 @@
-import type { FSContext } from '$internal';
+import type { FSContext } from '#internal';
 import type { TextBoxProps } from '../text-box/types.ts';
 import type { ListViewItemProps } from '../list-view/types.ts';
 import type { FlyoutProps } from '../flyout/types.ts';
-import type { HTMLAttributes } from 'svelte/elements';
+import type { HTMLAttributes, HTMLInputAttributes } from 'svelte/elements';
 
 /** @propsmith AutoSuggestBoxProps */
 export type AutoSuggestBoxProps = {
 	/** The DOM reference of the wrapper element.
 	 * @bindable
 	 */
-	ref?: HTMLElement;
+	wrapperRef?: HTMLDivElement | null;
 	/** The DOM reference of the text box element.
 	 * @bindable
 	 */
-	inputRef?: HTMLInputElement;
+	ref?: HTMLInputElement | null;
 	/** The current text of the box.
 	 * @default ''
 	 * @bindable
@@ -51,7 +51,8 @@ export type AutoSuggestBoxProps = {
 	 */
 	suggestionChosen?: (e: Event, selection: string) => void;
 	/** Called when Enter is pressed with no suggestion under the cursor, or when the search
-	 * button is clicked. This is where a fresh set of suggestions is fetched.
+	 * button is clicked. This is where a fresh set of suggestions is fetched. Enter then also
+	 * submits the form with the typed text, unless the event is prevented.
 	 */
 	querySubmitted?: (e: MouseEvent | KeyboardEvent, query: string) => void;
 	/** Bridge to a windowed list, for suggestion sets too long to render whole.
@@ -62,18 +63,14 @@ export type AutoSuggestBoxProps = {
 	 * @default 6
 	 */
 	maxItemsInView?: number;
-	/** The DOM reference of the underlying text box input.
-	 * @bindable
+	/** The attributes to spread on the wrapper element.
+	 * @type HTMLAttributes
 	 */
-	textBoxRef?: HTMLInputElement;
-	/** The props to spread on the text box.
-	 * @type TextBoxProps
-	 */
-	textBoxProps?: Omit<TextBoxProps, 'type' | 'ref' | 'placeholder' | 'hideActionButtons' | 'textChanged'>;
+	wrapperAttributes?: HTMLAttributes<HTMLDivElement>;
 	/** The DOM reference of the flyout holding the suggestion list.
 	 * @bindable
 	 */
-	flyoutRef?: HTMLElement;
+	flyoutRef?: HTMLElement | null;
 	/** The props to spread on the flyout.
 	 * @type FlyoutProps
 	 */
@@ -81,13 +78,13 @@ export type AutoSuggestBoxProps = {
 	/** The DOM reference of the suggestion list.
 	 * @bindable
 	 */
-	listViewRef?: HTMLUListElement;
+	listViewRef?: HTMLUListElement | null;
 	/** The props to spread on the suggestion list.
 	 * @type ListViewItemProps
 	 */
 	listViewProps?: Omit<ListViewItemProps, 'as' | 'role' | 'ref' | 'navigationMode' | 'selectedItems'>;
-} & Pick<TextBoxProps, 'type' | 'placeholder' | 'hideActionButtons' | 'textChanged'> &
-	HTMLAttributes<HTMLDivElement>;
+} & Pick<TextBoxProps, 'type' | 'placeholder' | 'hideActionButtons' | 'textChanged' | 'onClear'> &
+	Omit<HTMLInputAttributes, 'value' | 'type' | 'role' | 'size' | 'placeholder'>;
 
 /**
  * Bridge to a windowed list. `size` is the total number of suggestions, not the
@@ -109,7 +106,7 @@ export type AutoSuggestBoxContext = FSContext<
 	},
 	{
 		readonly searchValue?: string;
-		readonly textBoxRef?: HTMLInputElement;
+		readonly textBoxRef?: HTMLInputElement | null;
 		readonly lastTypedValue?: string;
 		open?: boolean;
 		activeOption?: OptionType | null;
@@ -137,7 +134,7 @@ export type AutoSuggestOptionProps = {
 	/** The DOM reference of the option element.
 	 * @bindable
 	 */
-	ref?: HTMLLIElement;
+	ref?: HTMLLIElement | null;
 	/** Takes the suggestion out of reach: it is shown, but the cursor steps over it. */
 	disabled?: boolean;
 	/** Where the suggestion sits in the whole set. A windowed list needs the real index,

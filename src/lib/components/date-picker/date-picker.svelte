@@ -1,13 +1,16 @@
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import type { DatePickerProps } from './types.ts';
-	import { Flyout, Button, Divider } from '$lib/index.js';
+	import { Flyout, Button, Divider } from '#lib/index.js';
 	import { on } from 'svelte/events';
 	import { tick } from 'svelte';
-	import { PREFIX } from '$constants';
-	import { floating } from '$internal';
+	import { PREFIX } from '#constants';
+	import { dispatchFieldEvents, floating, invokeHandlers, NativeField } from '#internal';
 	import { flip, hide, offset, shift } from '@floating-ui/dom';
-	import DynamicCarousel from '$lib/internal/components/dynamic-carousel/dynamic-carousel.svelte';
+	import DynamicCarousel from '#lib/internal/components/dynamic-carousel/dynamic-carousel.svelte';
 	import { CheckmarkRegular, DismissRegular } from 'fluentui-icons-svelte';
+
+	const labelContext = claimLabel(() => id);
 
 	let {
 		format = 'dd/MM/yyyy',
@@ -21,24 +24,43 @@
 		disabledDates = [],
 		disabledMonths = [],
 		disabledYears = [],
-		ref = $bindable(),
-		wrapperRef = $bindable(),
+		id = labelContext?.fieldId,
+		name = id,
+		ref = $bindable(null),
+		buttonRef = $bindable(null),
+		buttonAttributes,
+		wrapperRef = $bindable(null),
 		wrapperAttributes,
-		inputElement = $bindable(),
-		inputProps,
+		disabled,
+		readonly,
+		onfocus,
+		onblur,
 		popupLabel = 'Choose a date',
+		columnLabels,
 		...attributes
 	}: DatePickerProps = $props();
 
 	const FALLBACK_ID = $props.id();
 	const POPUP_ID = `${PREFIX}datepicker-${FALLBACK_ID}-popup`;
 
-	let popupRef: HTMLElement | undefined = $state();
+	let popupRef: HTMLElement | null = $state(null);
+
+	const native = new NativeField(
+		() => ref,
+		() => buttonRef,
+		labelContext
+	);
 
 	/** Closing always hands the focus back, so the keyboard never lands nowhere. */
 	function closePopup() {
 		open = false;
-		ref?.focus();
+		buttonRef?.focus();
+	}
+
+	/** A label activates the native input it belongs to, which hands the activation to the button. */
+	function openFromField() {
+		buttonRef?.focus();
+		open = !readonly;
 	}
 
 	// Escape has to work from inside the popup too, and the popup is not a descendant
@@ -78,13 +100,16 @@
 		'November',
 		'December'
 	];
-	const LABELS: Record<Column, string> = { month: 'Month', day: 'Day', year: 'Year' };
+	// Name the columns on the trigger while there is no date, and the listboxes of the popup.
+	const labels: Record<Column, string> = $derived({ month: 'Month', day: 'Day', year: 'Year', ...columnLabels });
 
 	// Working selection (actual values). Kept in sync with `value` while the popup is closed,
 	// so each open starts from the committed value and Cancel/dismiss discards edits.
-	let month = $state(new Date().getMonth()); // 0-11
-	let day = $state(new Date().getDate()); // 1-31 (raw intent; clamped for display via effectiveDay)
-	let year = $state(new Date().getFullYear());
+	// It starts from `value`, so a popup rendered open on the server shows it too.
+	const initial = parseValue(value);
+	let month = $state(initial.mo); // 0-11
+	let day = $state(initial.d); // 1-31 (raw intent; clamped for display via effectiveDay)
+	let year = $state(initial.y);
 
 	// Descending list of selectable years within [minYear, maxYear].
 	const yearsList = $derived(Array.from({ length: Math.max(0, maxYear - minYear) + 1 }, (_, i) => maxYear - i));
@@ -156,7 +181,11 @@
 	});
 
 	function confirm() {
-		value = `${year}-${pad(month + 1)}-${pad(effectiveDay)}`;
+		const next = `${year}-${pad(month + 1)}-${pad(effectiveDay)}`;
+		if (next !== value) {
+			value = next;
+			dispatchFieldEvents(ref);
+		}
 		closePopup();
 	}
 
@@ -166,25 +195,27 @@
 
 	// Trigger label per column
 	function display(col: Column): string {
-		if (!hasValue) return LABELS[col];
+		if (!hasValue) return labels[col];
 		if (col === 'month') return MONTH_NAMES[committed.mo];
 		if (col === 'day') return pad(committed.d);
 		return String(committed.y);
 	}
 </script>
 
-<div class="fs-date-picker-wrapper" bind:this={wrapperRef} {...wrapperAttributes}>
-	<!-- A real button: Enter and Space, the disabled state and High Contrast styling all
-	     come for free, and the hidden input cannot live inside it. -->
+<div {...wrapperAttributes} class={['fs-date-picker-wrapper', wrapperAttributes?.class]} bind:this={wrapperRef}>
 	<button
+		{...buttonAttributes}
+		{...native.aria(attributes, buttonAttributes, 'button')}
 		type="button"
-		class="fs-date-picker"
+		class={['fs-date-picker', buttonAttributes?.class]}
+		{disabled}
 		aria-haspopup="dialog"
 		aria-expanded={open}
 		aria-controls={open ? POPUP_ID : undefined}
-		onclick={() => (open = !open)}
-		bind:this={ref}
-		{...attributes}
+		onclick={(e) => invokeHandlers(e, [], [() => (open = !readonly && !open), buttonAttributes?.onclick])}
+		onfocus={(e) => invokeHandlers(e, [], [onfocus, buttonAttributes?.onfocus])}
+		onblur={(e) => invokeHandlers(e, [], [onblur, buttonAttributes?.onblur])}
+		bind:this={buttonRef}
 	>
 		{#each columns as col, idx (col)}
 			{#if idx > 0}
@@ -194,17 +225,33 @@
 		{/each}
 	</button>
 
-	<!-- Carries the value into a form. `hidden` keeps it out of the tab order and out of
-	     the accessibility tree, and a hidden control is still submitted. -->
-	<input type="date" hidden {value} bind:this={inputElement} {...inputProps} />
+	<!-- The field of the form: submitted, validated and reset like any date input,
+	     behind the button and out of the tab order, since the button is what people use. See `NativeField`. -->
+	<input
+		{...attributes}
+		{name}
+		{id}
+		min={attributes.min ?? `${String(minYear).padStart(4, '0')}-01-01`}
+		max={attributes.max ?? `${String(maxYear).padStart(4, '0')}-12-31`}
+		class="native-field"
+		aria-hidden={native.reported ? undefined : 'true'}
+		type="date"
+		tabindex={-1}
+		{disabled}
+		{readonly}
+		bind:value
+		bind:this={ref}
+		onclick={openFromField}
+	/>
 </div>
 
 {#if open}
 	<Flyout
-		{@attach floating(ref, {
+		{@attach floating(buttonRef, {
 			placement: 'bottom',
 			middleware: [
 				offset(({ rects }) => {
+					// Place over the reference element
 					return -rects.reference.height / 2 - rects.floating.height / 2;
 				}),
 				flip(),
@@ -213,7 +260,6 @@
 			],
 			strategy: 'fixed'
 		})}
-		reference={ref}
 		id={POPUP_ID}
 		role="dialog"
 		aria-modal="true"
@@ -228,6 +274,7 @@
 				<div class="carousel-col col-{col}">
 					{#if col === 'month'}
 						<DynamicCarousel
+							label={labels.month}
 							values={MONTH_NAMES}
 							selectedIndex={month}
 							disabledIndices={disabledMonthIdx}
@@ -236,6 +283,7 @@
 					{:else if col === 'day'}
 						{#key `${year}-${month}`}
 							<DynamicCarousel
+								label={labels.day}
 								values={dayList}
 								selectedIndex={effectiveDay - 1}
 								disabledIndices={disabledDayIdx}
@@ -244,6 +292,7 @@
 						{/key}
 					{:else}
 						<DynamicCarousel
+							label={labels.year}
 							values={yearStrings}
 							selectedIndex={yearIdx}
 							disabledIndices={disabledYearIdx}
@@ -265,12 +314,34 @@
 {/if}
 
 <style>
-	/* Layout-neutral: the button keeps the box the wrapper used to have. */
+	/* The box of the button, which the native field covers so its validation message points at the button. */
 	.fs-date-picker-wrapper {
-		display: contents;
+		display: flex;
+		position: relative;
+		inline-size: fit-content;
+	}
+	.fs-date-picker-wrapper:has(> .native-field:is(:user-invalid, [aria-invalid='true'])) {
+		& .picker-content {
+			color: var(--fs-system-critical);
+		}
+		& .fs-date-picker::after,
+		& :global(.fs-divider) {
+			background: var(--fs-system-critical);
+		}
+	}
+	.native-field {
+		position: absolute;
+		inset: 0;
+		inline-size: 100%;
+		block-size: 100%;
+		margin: 0;
+		box-sizing: border-box;
+		opacity: 0;
+		pointer-events: none;
 	}
 	.fs-date-picker {
 		display: flex;
+		flex: 1 1 auto;
 		position: relative;
 		border-radius: var(--fs-control-border-radius);
 		font-size: var(--fs-body-font-size);

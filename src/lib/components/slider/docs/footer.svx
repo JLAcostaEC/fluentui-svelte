@@ -1,40 +1,46 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
-  import { m } from '$i18n/messages.js';
+  import InfoBar from '#lib/components/info-bar/info-bar.svelte';
+  import { m } from '#i18n/messages.js';
 </script>
+
+<InfoBar title={m.form_control_attributes_title()} style="multiline" status="warning" hideCloseButton>
+  <p><I18nMarkupMessage message={m.form_control_root_description} /></p>
+</InfoBar>
 
 ## {m.global_component_props()}
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:SliderProps -->
 
-| Name                       | Type                                          | Default        | Description                                                                           |
-| -------------------------- | --------------------------------------------- | -------------- | ------------------------------------------------------------------------------------- |
-| `value` _bindable_         | `number`                                      | `0`            | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_value} />`             |
-| `min`                      | `number`                                      | `0`            | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_min} />`               |
-| `max`                      | `number`                                      | `100`          | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_max} />`               |
-| `step`                     | `number`                                      | `1`            | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_step} />`              |
-| `ticks`                    | `number[]`                                    | `[]`           | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_ticks} />`             |
-| `tickPlacement`            | `'around'` &#124; `'before'` &#124; `'after'` | `'around'`     | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_tick_placement} />`    |
-| `prefix`                   | `string`                                      | `''`           | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_prefix} />`            |
-| `suffix`                   | `string`                                      | `''`           | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_suffix} />`            |
-| `track`                    | `boolean`                                     | `true`         | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_track} />`             |
-| `orientation`              | `'horizontal'` &#124; `'vertical'`            | `'horizontal'` | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_orientation} />`       |
-| `reverse`                  | `boolean`                                     | `false`        | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_reverse} />`           |
-| `disabled`                 | `boolean`                                     | `false`        | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_disabled} />`          |
-| `sync`                     | `boolean`                                     |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_sync} />`              |
-| `tooltip`                  | `boolean`                                     | `true`         | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_tooltip} />`           |
-| `tooltipPlacement`         | `Placement`                                   | `'top'`        | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_tooltip_placement} />` |
-| `tooltipContent`           | `string` &#124; `Snippet` &#124; `Component`  |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_tooltip_content} />`   |
-| `onChange`                 | `(value: number) => void`                     |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_on_change} />`         |
-| `class`                    | `string`                                      |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_class} />`             |
-| `ref` _bindable_           | `HTMLElement`                                 |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_ref} />`               |
-| `inputRef` _bindable_      | `HTMLInputElement`                            |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_input_ref} />`         |
-| `thumbRef` _bindable_      | `HTMLElement`                                 |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_thumb_ref} />`         |
-| `tooltipRef` _bindable_    | `HTMLElement`                                 |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_tooltip_ref} />`       |
-| `railRef` _bindable_       | `HTMLElement`                                 |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_rail_ref} />`          |
-| `trackRef` _bindable_      | `HTMLElement`                                 |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_track_ref} />`         |
-| `tickBarRef` _bindable_    | `HTMLElement`                                 |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_tick_bar_ref} />`      |
-| Element Attributes (`div`) |                                               |                |                                                                                       |
+| Name                                         | Type                                          | Default        | Description                                                                            |
+| -------------------------------------------- | --------------------------------------------- | -------------- | -------------------------------------------------------------------------------------- |
+| `value` _bindable_                           | `number`                                      | `0`            | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_value} />`              |
+| `defaultValue`                               | `number`                                      | `min`          | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_default_value} />`      |
+| `min`                                        | `number`                                      | `0`            | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_min} />`                |
+| `max`                                        | `number`                                      | `100`          | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_max} />`                |
+| `step`                                       | `number`                                      | `1`            | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_step} />`               |
+| `ticks`                                      | `number[]`                                    | `[]`           | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_ticks} />`              |
+| `tickPlacement`                              | `'around'` &#124; `'before'` &#124; `'after'` | `'around'`     | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_tick_placement} />`     |
+| `prefix`                                     | `string`                                      | `''`           | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_prefix} />`             |
+| `suffix`                                     | `string`                                      | `''`           | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_suffix} />`             |
+| `track`                                      | `boolean`                                     | `true`         | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_track} />`              |
+| `orientation`                                | `'horizontal'` &#124; `'vertical'`            | `'horizontal'` | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_orientation} />`        |
+| `reverse`                                    | `boolean`                                     | `false`        | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_reverse} />`            |
+| `disabled`                                   | `boolean`                                     | `false`        | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_disabled} />`           |
+| `sync`                                       | `boolean`                                     |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_sync} />`               |
+| `tooltip`                                    | `boolean`                                     | `true`         | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_tooltip} />`            |
+| `tooltipPlacement`                           | `Placement`                                   | `'top'`        | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_tooltip_placement} />`  |
+| `tooltipContent`                             | `string` &#124; `Snippet` &#124; `Component`  |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_tooltip_content} />`    |
+| `onChange`                                   | `(value: number) => void`                     |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_on_change} />`          |
+| `ref` _bindable_                             | `HTMLInputElement` &#124; `null`              |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_ref} />`                |
+| `wrapperRef` _bindable_                      | `HTMLDivElement` &#124; `null`                |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_wrapper_ref} />`        |
+| `wrapperAttributes`                          | `HTMLAttributes`                              |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_wrapper_attributes} />` |
+| `thumbRef` _bindable_                        | `HTMLElement` &#124; `null`                   |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_thumb_ref} />`          |
+| `tooltipRef` _bindable_                      | `HTMLElement` &#124; `null`                   |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_tooltip_ref} />`        |
+| `railRef` _bindable_                         | `HTMLElement` &#124; `null`                   |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_rail_ref} />`           |
+| `trackRef` _bindable_                        | `HTMLElement` &#124; `null`                   |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_track_ref} />`          |
+| `tickBarRef` _bindable_                      | `HTMLElement` &#124; `null`                   |                | `<I18nMarkupMessage message={m.generated_fs_slider_props_props_tick_bar_ref} />`       |
+| `HiddenInputAttributes<HTMLInputAttributes>` |                                               |                |                                                                                        |
 
 <!-- /props:SliderProps -->

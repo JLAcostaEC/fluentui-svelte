@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { RenderSoC } from '$internal';
+	import { RenderSoC } from '#internal';
 	import RenderSoCIcon from './RenderSoCIcon.svelte';
 
 	let { as }: { as: 'snippet' | 'component' | 'snippet-no-args' } = $props();

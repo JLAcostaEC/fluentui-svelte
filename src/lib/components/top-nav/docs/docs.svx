@@ -1,9 +1,9 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
-  import { TopNav, TopNavItem } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { TopNav, TopNavItem } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
   import { AirplaneRegular, AirplaneTakeOffRegular, CalendarMonthRegular } from 'fluentui-icons-svelte';
-  import { m } from '$i18n/messages.js';
+  import { m } from '#i18n/messages.js';
 
   let selectedValue = $state('arrivals');
 </script>

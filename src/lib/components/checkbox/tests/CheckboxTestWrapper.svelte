@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Checkbox } from '$lib/index.js';
-	import type { CheckboxProps } from '$lib/components/checkbox/types.js';
+	import { Checkbox } from '#lib/index.js';
+	import type { CheckboxProps } from '#lib/components/checkbox/types.js';
 
-	let { label = 'Checkbox', ...props }: Partial<CheckboxProps<'label'>> & { label?: string } = $props();
+	let { label = 'Checkbox', ...props }: Partial<CheckboxProps> & { label?: string } = $props();
 </script>
 
-<Checkbox wrapperAs="label" {...props}>{label}</Checkbox>
+<Checkbox {...props}>{label}</Checkbox>

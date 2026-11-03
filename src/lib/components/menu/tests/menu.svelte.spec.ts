@@ -1,7 +1,7 @@
 import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { MenuItem, MenuTrigger, MenuDivider } from '$lib/index.js';
+import { MenuItem, MenuTrigger, MenuDivider } from '#lib/index.js';
 import MenuTestWrapper from './MenuTestWrapper.svelte';
 
 describe('MenuTrigger', () => {
@@ -72,6 +72,16 @@ describe('opening', () => {
 		await expect.element(wrapper).toHaveAttribute('hidden');
 		await expect.element(popover).toBeInTheDocument();
 		expect(popover.element()).toBe(mountedPopover);
+	});
+
+	it.each([
+		[undefined, 'fixed'],
+		[{ strategy: 'absolute' as const }, 'absolute']
+	])('positions the popover the way its strategy computes it (%o)', async (positionConfig, position) => {
+		render(MenuTestWrapper, { open: true, positionConfig });
+		const wrapper = page.selector('div.fs-menu-popover').first();
+		await expect.element(wrapper).toBeInTheDocument();
+		expect(getComputedStyle(wrapper.element()).position).toBe(position);
 	});
 });
 
@@ -161,6 +171,19 @@ describe('MenuGroup', () => {
 		const group = page.getByRole('group');
 		await expect.element(group).toBeInTheDocument();
 		await expect.element(page.getByText('Section')).toBeInTheDocument();
+	});
+
+	it('names the group with its header, which is not a heading among the items', async () => {
+		render(MenuTestWrapper, { open: true, variant: 'group' });
+		await expect.element(page.getByRole('group', { name: 'Section' })).toBeInTheDocument();
+		expect(page.getByRole('menu').getByRole('heading').elements()).toHaveLength(0);
+	});
+
+	it('renders no label when the group has no header', async () => {
+		render(MenuTestWrapper, { open: true, variant: 'group', groupHeader: '' });
+		const group = page.getByRole('group');
+		await expect.element(group).not.toHaveAttribute('aria-labelledby');
+		expect(group.element().querySelector('.group-name')).toBeNull();
 	});
 });
 

@@ -1,5 +1,5 @@
-import { createFSContext, getOffset } from '$internal';
-import type { FlyToOffsetOptions } from '$internal';
+import { createFSContext, getOffset } from '#internal';
+import type { FlyToOffsetOptions } from '#internal';
 import type { Alignment, ComputePositionConfig, Placement, Side, VirtualElement } from '@floating-ui/dom';
 import type { MenuContext } from './types.ts';
 

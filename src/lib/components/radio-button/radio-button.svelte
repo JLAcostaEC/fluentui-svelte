@@ -1,22 +1,36 @@
 <script lang="ts">
-	import { PREFIX } from '$constants';
+	import { claimLabel } from '../label/label-context.ts';
+	import { PREFIX } from '#constants';
 	import type { RadioButtonProps } from './types.ts';
 
 	const FALLBACK_ID = $props.id();
 	const COMPONENT_NAME = 'radio-button';
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
+	const labelContext = claimLabel(() => id);
+
 	let {
-		ref = $bindable(),
-		group = $bindable(undefined),
-		id = ID,
+		ref = $bindable(null),
+		wrapperRef = $bindable(null),
+		group = $bindable(null),
+		id = labelContext?.fieldId ?? ID,
 		label,
 		name = id,
 		value,
-		checked = $bindable(false),
-		labelAttributes,
+		checked = $bindable(null),
+		wrapperAttributes,
 		...attributes
 	}: RadioButtonProps = $props();
+
+	/** What `bind:group` reads and writes. Without a group, `checked` decides: an empty group (`null`) matches no value. */
+	const binding = {
+		get group() {
+			return group ?? (checked ? value : null);
+		},
+		set group(selected) {
+			group = selected;
+		}
+	};
 </script>
 
 <!-- 
@@ -37,12 +51,13 @@
   ```
  -->
 
-<label class="fs-radio-button" {...labelAttributes}>
-	<input type="radio" {id} {name} {value} {checked} bind:this={ref} bind:group {...attributes} />
-	{#if label}
-		<span>{label}</span>
+<div {...wrapperAttributes} class={['fs-radio-button', wrapperAttributes?.class]} bind:this={wrapperRef}>
+	<input {...attributes} type="radio" {id} {name} {value} {checked} bind:this={ref} bind:group={binding.group} />
+	<!-- Inside a Label, the Label names the field instead. -->
+	{#if label && !labelContext}
+		<label for={id}>{label}</label>
 	{/if}
-</label>
+</div>
 
 <style>
 	.fs-radio-button {
@@ -100,6 +115,15 @@
 					}
 				}
 			}
+			&:is(:user-invalid, [aria-invalid='true']) {
+				border-color: var(--fs-system-critical);
+				&:hover {
+					border-color: var(--fs-system-critical);
+				}
+				& + label {
+					color: var(--fs-system-critical);
+				}
+			}
 		}
 		&:has(input:disabled) {
 			pointer-events: none;
@@ -115,12 +139,14 @@
 		&:has(input:focus-visible) {
 			outline: 0.125rem var(--fs-focus-stroke-outer) solid;
 			outline-offset: 0.125rem;
-			&:has(span) {
+			&:has(> label) {
 				border-radius: 0.063rem;
 				outline-offset: 0.313rem;
 			}
 		}
-		& span {
+		& > label {
+			flex-grow: 1;
+			cursor: pointer;
 			font-size: inherit;
 			color: inherit;
 			padding: 0px 0.75rem;

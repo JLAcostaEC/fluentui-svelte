@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Breadcrumb, BreadcrumbButton, BreadcrumbDivider, BreadcrumbItem, FluentUISvelte } from '$lib/index.js';
+	import { Breadcrumb, BreadcrumbButton, BreadcrumbDivider, BreadcrumbItem, FluentUISvelte } from '#lib/index.js';
 	import { FolderRegular } from 'fluentui-icons-svelte';
 	import type { BreadcrumbButtonProps, BreadcrumbProps } from '../types.ts';
 

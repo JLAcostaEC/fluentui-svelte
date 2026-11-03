@@ -1,7 +1,7 @@
 import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { Card } from '$lib/index.js';
+import { Card } from '#lib/index.js';
 import CardTestWrapper from './CardTestWrapper.svelte';
 
 describe('element type', () => {

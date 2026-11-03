@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { FluentUISvelte, TopNav, TopNavItem } from '$lib/index.js';
+	import { FluentUISvelte, TopNav, TopNavItem } from '#lib/index.js';
 	import { AirplaneRegular } from 'fluentui-icons-svelte';
 	import type { TopNavItemGenerics, TopNavItemProps, TopNavProps } from '../types.ts';
 

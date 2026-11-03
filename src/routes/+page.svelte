@@ -1,40 +1,35 @@
 <script lang="ts">
-	import ComponentsFlyout from '$site/components/components-flyout/components-flyout.svelte';
-	import { Button } from '$lib/index.js';
-	import { setup, resize } from '$site/utils/shift.js';
-	import { on } from 'svelte/events';
-	import { m } from '$i18n/messages.js';
-	import { mode } from 'mode-watcher';
+	import ComponentsFlyout from '#site/components/components-flyout/components-flyout.svelte';
+	import { Button } from '#lib/index.js';
+	import { shiftBackground } from '#site/utils/shift.js';
+	import { m } from '#i18n/messages.js';
+	import banner from '#site/assets/images/banner.png?w=800;400&enhanced';
+	import bannerWhite from '#site/assets/images/banner-white.png?w=800;400&enhanced';
+	import ThemedImage from '#site/components/themed-image/themed-image.svelte';
 	import { localizeHref } from '../i18n/runtime.js';
-
-	$effect(() => {
-		let off: () => void;
-		let destroy: () => void;
-		if (!document.querySelector('.bg-effect canvas')) {
-			destroy = setup();
-			off = on(window, 'resize', resize);
-		}
-
-		return () => {
-			off?.();
-			destroy?.();
-			const canvas = document.querySelector('.bg-effect canvas');
-			if (canvas) {
-				canvas.remove();
-			}
-		};
-	});
+	import Seo from '#site/components/seo/seo.svelte';
 </script>
 
+<Seo
+	title={m.seo_home_title()}
+	titleTemplate="%s"
+	description={m.seo_home_description()}
+	keywords={m.seo_home_keywords().split(', ')}
+	openGraph={{ type: 'website' }}
+/>
+
 <!-- shift background effect -->
-<div class="bg-effect"></div>
+<div class="bg-effect" aria-hidden="true" {@attach shiftBackground}></div>
 <section id="banner">
-	<picture>
-		{#if mode.current === 'dark'}
-			<source srcset="/images/banner-white.png" type="image/png" />
-		{/if}
-		<img src="/images/banner.png" alt="Logo" class="logo" />
-	</picture>
+	<ThemedImage
+		light={banner}
+		dark={bannerWhite}
+		alt="Logo"
+		class="logo"
+		sizes="(max-width: 480px) 280px, (max-width: 1024px) 340px, 400px"
+		loading="eager"
+		fetchpriority="high"
+	/>
 	<h1 class="title">{m.home_title()}</h1>
 	<p>
 		{m.global_library_description()}
@@ -65,7 +60,7 @@
 		gap: 1rem;
 		padding: 0 4rem 8rem 2rem;
 		z-index: 1;
-		& .logo {
+		& :global(.logo) {
 			width: 100%;
 			max-width: 400px;
 			height: auto;
@@ -98,10 +93,10 @@
 
 	.bg-effect {
 		position: fixed;
-		top: -1000px;
-		left: -1000px;
-		width: 0;
-		height: 0;
+		inset: 0;
+		z-index: -1;
+		background: hsl(0, 0%, 5%);
+		pointer-events: none;
 	}
 
 	/* Tablet: the two halves stop fitting side by side, so stack them. */
@@ -111,7 +106,7 @@
 			align-items: center;
 			text-align: center;
 			padding: 2rem 2rem 1.5rem;
-			& .logo {
+			& :global(.logo) {
 				max-width: 340px;
 			}
 			& p {
@@ -137,7 +132,7 @@
 		#banner {
 			gap: 0.75rem;
 			padding: 1.5rem 1rem 1rem;
-			& .logo {
+			& :global(.logo) {
 				max-width: 280px;
 			}
 			& .title {

@@ -65,19 +65,19 @@ The status prop allows you to set the status of the progress ring for visual fee
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:ProgressRingProps -->
 
-| Name                      | Type                        | Default | Description                                                        |
-| ------------------------- | --------------------------- | ------- | ------------------------------------------------------------------ |
-| `value` _bindable_        | `number`                    | `0`     | The current value of the progress ring.                            |
-| `min`                     | `number`                    | `0`     | The minimum value of the progress ring.                            |
-| `max`                     | `number`                    | `100`   | The maximum value of the progress ring.                            |
-| `indeterminate`           | `boolean`                   |         | Spins the ring continuously instead of reporting a value.          |
-| `hideRail`                | `boolean`                   |         | Whether to hide the rail element.                                  |
-| `size`                    | `number`                    | `32`    | The size of the progress ring in pixels.                           |
-| `ref` _bindable_          | `SVGElement`                |         | The DOM reference of the progress ring element.                    |
-| `railElement` _bindable_  | `SVGCircleElement`          |         | The DOM reference of the rail element.                             |
-| `trackElement` _bindable_ | `SVGCircleElement`          |         | The DOM reference of the track element.                            |
-| `status`                  | `'paused'` &#124; `'error'` |         | The current status of the progress ring, which recolors the track. |
-| `class`                   | `string`                    |         | The class to apply to the progress ring.                           |
-| Element Attributes        |                             |         |                                                                    |
+| Name                      | Type                             | Default | Description                                                        |
+| ------------------------- | -------------------------------- | ------- | ------------------------------------------------------------------ |
+| `value` _bindable_        | `number`                         | `0`     | The current value of the progress ring.                            |
+| `min`                     | `number`                         | `0`     | The minimum value of the progress ring.                            |
+| `max`                     | `number`                         | `100`   | The maximum value of the progress ring.                            |
+| `indeterminate`           | `boolean`                        |         | Spins the ring continuously instead of reporting a value.          |
+| `hideRail`                | `boolean`                        |         | Whether to hide the rail element.                                  |
+| `size`                    | `number`                         | `32`    | The size of the progress ring in pixels.                           |
+| `ref` _bindable_          | `SVGElement` &#124; `null`       |         | The DOM reference of the progress ring element.                    |
+| `railElement` _bindable_  | `SVGCircleElement` &#124; `null` |         | The DOM reference of the rail element.                             |
+| `trackElement` _bindable_ | `SVGCircleElement` &#124; `null` |         | The DOM reference of the track element.                            |
+| `status`                  | `'paused'` &#124; `'error'`      |         | The current status of the progress ring, which recolors the track. |
+| `class`                   | `string`                         |         | The class to apply to the progress ring.                           |
+| Element Attributes        |                                  |         |                                                                    |
 
 <!-- /props:ProgressRingProps -->

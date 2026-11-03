@@ -8,9 +8,6 @@ bun.lockb
 # Miscellaneous
 /static/
 
-# Cloudflare
-src/worker-configuration.d.ts
-
 # Skills & AI
 .github/skills/*
 .github/agents/*
@@ -18,3 +15,4 @@ src/worker-configuration.d.ts
 # Generated files
 propsmith.lock.json
 messages/*.json
+worker-configuration.d.ts

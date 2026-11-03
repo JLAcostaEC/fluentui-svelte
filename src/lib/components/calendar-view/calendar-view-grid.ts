@@ -1,6 +1,6 @@
 import { tick } from 'svelte';
 import { SvelteDate } from 'svelte/reactivity';
-import { compareDates } from './calendar-view.svelte.js';
+import { compareDates, dateKey } from './calendar-view.svelte.js';
 import type { TabspotEventListener, TabspotNavigationEvent, TabspotNodeOptions } from 'tabspot';
 import type { CalendarGrid, CalendarNavigationOptions, DateComparisonPrecision, View } from './types.js';
 
@@ -61,7 +61,9 @@ function amountFor(direction: TabspotNavigationEvent['direction'], columns: numb
 /** The date a rendered cell stands for. */
 export function cellDate(element: Element | null): Date | null {
 	const value = element?.getAttribute?.('data-date');
-	return value ? new SvelteDate(Number(value)) : null;
+	if (!value) return null;
+	const [year, month, day] = value.split('-').map(Number);
+	return new SvelteDate(year, month - 1, day);
 }
 
 /** Precision at which a date names exactly one cell of a view. */
@@ -139,7 +141,9 @@ export function createCalendarNavigation({
 			await tick();
 		}
 
-		body()?.querySelector<HTMLButtonElement>(`button[data-date="${target.getTime()}"]`)?.focus();
+		body()
+			?.querySelector<HTMLButtonElement>(`button[data-date="${dateKey(target)}"]`)
+			?.focus();
 	}
 
 	return (event) => {

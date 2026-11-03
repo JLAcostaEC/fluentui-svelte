@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Avatar, InfoBar, Tag, TagPicker, TagPickerOption } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import StatusBadge from '$site/components/status-badge/status-badge.svelte';
-  import { m } from '$i18n/messages.js';
+  import { Avatar, InfoBar, Tag, TagPicker, TagPickerOption } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import { m } from '#i18n/messages.js';
 
   const options = ['John Doe', 'Jane Doe', 'Max Mustermann', 'Erika Mustermann', 'Pierre Dupont', 'Amelie Dupont'];
 
@@ -17,7 +17,7 @@
   {#snippet media()}
     <Avatar aria-hidden="true" name={text} size={16} color="colorful" />
   {/snippet}
-  <Tag role="listitem" {value} {media} title={text}>{text}</Tag>
+  <Tag {value} {media} title={text}>{text}</Tag>
 {/snippet}
 
 <Showcase columns={1} minHeight="0" disablePanZoom showOverflow>
@@ -25,7 +25,7 @@
     <TagPicker
       bind:selectedOptions
       {tag}
-      inputProps={{ 'aria-label': 'Select Employees' }}
+      inputAttributes={{ 'aria-label': 'Select Employees' }}
       tagGroupProps={{ 'aria-label': 'Selected Employees' }}
     >
       {#each options as option (option)}
@@ -51,7 +51,7 @@
 
 <TagPicker
 	bind:selectedOptions
-	inputProps={{ 'aria-label': 'Select Employees' }}
+	inputAttributes={{ 'aria-label': 'Select Employees' }}
 	tagGroupProps={{ 'aria-label': 'Selected Employees' }}
 >
 	{#each options as option (option)}

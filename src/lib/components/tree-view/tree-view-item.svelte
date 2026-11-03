@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
-	import { PREFIX } from '$constants';
+	import { invokeHandlers } from '#internal';
+	import { PREFIX } from '#constants';
 	import {
 		getTreeViewDepth,
 		getTreeViewContext,
@@ -35,6 +36,8 @@
 		onCheckedChange,
 		onOpenChange,
 		children,
+		onclick,
+		onkeydown,
 		...attributes
 	}: TreeViewItemProps = $props();
 
@@ -110,6 +113,10 @@
 		});
 	}
 
+	// Tabspot sets the tab stop of the tree on mount; until then the server HTML gives it to the first
+	// enabled item, as Tabspot will, so the tree can be reached with Tab.
+	const holdsTabStop = $derived(!itemState.disabled && (context.state.tabStop.id ??= id) === id);
+
 	const isBranch = $derived(type === 'branch');
 	const isVirtualRoot = $derived(config.virtualized && !itemContext);
 
@@ -162,10 +169,12 @@
 </script>
 
 <li
+	{...attributes}
 	{id}
-	class={['fs-tree-view-item', `fs-tree-item-size-${size}`, { open }]}
-	style="--depth: {depth}"
+	class={['fs-tree-view-item', `fs-tree-item-size-${size}`, { open }, attributes?.class]}
+	style="{attributes?.style ?? ''}; --depth: {depth}"
 	role="treeitem"
+	tabindex={holdsTabStop ? 0 : undefined}
 	aria-expanded={type === 'branch' ? open : undefined}
 	aria-checked={indeterminate ? 'mixed' : checked}
 	aria-level={depth + 1}
@@ -173,10 +182,9 @@
 	data-index={isVirtualRoot ? index : undefined}
 	data-value={value}
 	aria-disabled={itemState.disabled ? 'true' : undefined}
-	onclick={handleClick}
-	onkeydown={handleKeydown}
+	onclick={(event) => invokeHandlers(event, itemState.disabled, [handleClick, onclick])}
+	onkeydown={(event) => invokeHandlers(event, itemState.disabled, [handleKeydown, onkeydown])}
 	bind:this={ref}
-	{...attributes}
 >
 	{@render children?.()}
 </li>

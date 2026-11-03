@@ -2,7 +2,7 @@
 	import ChevronDownRegular from 'fluentui-icons-svelte/ChevronDownRegular.svelte';
 	import { getTabspotAttributes, type TabspotNavigationEvent, type TabspotNodeOptions } from 'tabspot';
 	import { getGlobalFSContext } from '../../providers/fluentui-svelte/fluentui-svelte.ts';
-	import { invokeHandlers } from '$internal';
+	import { invokeHandlers } from '#internal';
 	import {
 		attachTabspot,
 		getListViewContext,
@@ -25,7 +25,7 @@
 		expanded = $bindable(false),
 		disabled = false,
 		shape,
-		ref = $bindable(),
+		ref = $bindable(null),
 		class: classes,
 		onclick,
 		onkeydown,

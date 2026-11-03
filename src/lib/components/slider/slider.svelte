@@ -2,12 +2,15 @@
 </script>
 
 <script lang="ts">
+	import { claimLabel } from '../label/label-context.ts';
 	import { untrack } from 'svelte';
 	import { watch } from 'runed';
-	import { Tooltip } from '$lib/index.js';
-	import { preventDefault } from '$internal';
+	import { Tooltip } from '#lib/index.js';
+	import { dispatchFieldEvents, invokeHandlers } from '#internal';
 	import type { Attachment } from 'svelte/attachments';
 	import type { MouseOrTouchEvent, SliderProps } from './types.ts';
+
+	const labelContext = claimLabel(() => id);
 
 	let {
 		value = $bindable(0),
@@ -27,15 +30,17 @@
 		tooltipPlacement = 'top',
 		tooltipContent,
 		onChange,
-		class: classes,
-		ref = $bindable(),
-		inputRef = $bindable(),
-		thumbRef = $bindable(),
-		tooltipRef = $bindable(),
-		railRef = $bindable(),
-		trackRef = $bindable(),
-		tickBarRef = $bindable(),
-		'aria-label': ariaLabel = 'Slider',
+		id = labelContext?.fieldId,
+		ref = $bindable(null),
+		wrapperRef = $bindable(null),
+		wrapperAttributes,
+		thumbRef = $bindable(null),
+		tooltipRef = $bindable(null),
+		railRef = $bindable(null),
+		trackRef = $bindable(null),
+		tickBarRef = $bindable(null),
+		defaultValue = min,
+		onkeydown,
 		...attributes
 	}: SliderProps = $props();
 
@@ -63,15 +68,23 @@
 		}
 	);
 
+	/** A slider that nothing else names falls back to a generic name. */
+	const named = $derived(
+		!!(attributes['aria-label'] || attributes['aria-labelledby'] || ref?.labels?.length || labelContext)
+	);
+
+	/** A `fieldset` disables the slider without its `disabled` prop, and only the native input knows. */
+	const inert = () => disabled || !!ref?.matches(':disabled');
+
 	let dragging = $state(false);
 	let holding = $state(false);
+	/** Whether the pointer moved the value since it was pressed, which the release reports as a `change`. */
+	let moved = false;
 	let thumbClientWidth = $state(20);
 	let percentage = $derived(valueToPercentage(value));
 	let directionAwareReverse = $derived(
-		ref && window
-			? window.getComputedStyle(ref)?.direction === 'ltr' && orientation === 'horizontal'
-				? reverse
-				: !reverse
+		wrapperRef && orientation === 'horizontal' && window.getComputedStyle(wrapperRef).direction === 'rtl'
+			? !reverse
 			: reverse
 	);
 
@@ -80,6 +93,8 @@
 	}
 
 	function cancelMove() {
+		if (moved) dispatchFieldEvents(ref, ['change']);
+		moved = false;
 		holding = false;
 		dragging = false;
 	}
@@ -92,7 +107,7 @@
 	}
 
 	function calculateValue(event: MouseOrTouchEvent) {
-		if (disabled || !railRef) return;
+		if (inert() || !railRef) return;
 		const { top, bottom, left, right, width, height } = railRef.getBoundingClientRect();
 		const percentageX = (event as TouchEvent).touches
 			? (event as TouchEvent).touches[0].clientX
@@ -105,6 +120,8 @@
 		const startingPos =
 			orientation === 'horizontal' ? (directionAwareReverse ? right : left) : directionAwareReverse ? top : bottom;
 		const length = orientation === 'horizontal' ? width : height;
+		// A rail without length (e.g. a vertical slider in a parent with no height) has no scale to read the pointer on.
+		if (!length) return;
 
 		let nextStep =
 			min +
@@ -117,26 +134,31 @@
 			) *
 				step;
 
+		nextStep = Math.min(Math.max(nextStep, min), max);
+		if (nextStep === value) return;
+
 		value = nextStep;
+		moved = true;
+		dispatchFieldEvents(ref, ['input']);
 	}
 
+	/** The arrows follow the direction the slider is drawn in, so they replace the stepping of the native input. */
 	function handleArrowKeys(event: KeyboardEvent) {
 		const { key } = event;
+		const increase = key === 'ArrowRight' || key === 'ArrowUp';
 
-		if (key === 'ArrowDown' || key === 'ArrowUp') event.preventDefault();
-		if (key === 'ArrowLeft' || (key === 'ArrowDown' && !disabled)) {
-			if (reverse) {
-				stepUp();
-			} else {
-				stepDown();
-			}
-		} else if (key === 'ArrowRight' || (key === 'ArrowUp' && !disabled)) {
-			if (reverse) {
-				stepDown();
-			} else {
-				stepUp();
-			}
+		if (!increase && key !== 'ArrowLeft' && key !== 'ArrowDown') return;
+
+		event.preventDefault();
+		const previous = value;
+
+		if (increase !== reverse) {
+			stepUp();
+		} else {
+			stepDown();
 		}
+
+		if (value !== previous) dispatchFieldEvents(ref);
 	}
 
 	function handleTouchStart(event: TouchEvent) {
@@ -179,7 +201,7 @@
 	});
 </script>
 
-<!-- 
+<!--
 	@component
 	A slider allows users to select a value from a continuous or discrete range by moving a thumb along a track. It supports horizontal and vertical orientations, ticks, tooltips, and reverse direction.
 
@@ -192,8 +214,6 @@
 	<Slider value={50} min={0} max={100} />
 	<Slider orientation="vertical" step={10} ticks={[0, 25, 50, 75, 100]} />
 	```
-
-	@status WIP
 -->
 <svelte:window
 	onmousemove={handleMove}
@@ -203,27 +223,34 @@
 	ontouchcancel={cancelMove}
 />
 
+<!-- The pointer works on the drawing; the keyboard, assistive technologies and forms work on the native input inside the thumb. -->
 <div
-	class={['fs-slider', `orientation-${orientation}`, classes, { disabled }, directionAwareReverse && 'reverse']}
-	bind:this={ref}
-	tabindex={disabled ? -1 : 0}
-	role="slider"
-	aria-label={ariaLabel}
-	aria-orientation={orientation}
-	aria-valuemin={_range.min}
-	aria-valuemax={_range.max}
-	aria-valuenow={value}
-	aria-valuetext={prefix || suffix ? `${prefix}${value}${suffix}` : undefined}
-	aria-disabled={disabled || undefined}
-	ontouchstart={handleTouchStart}
-	onkeydown={handleArrowKeys}
-	onmousedown={preventDefault(() => {
-		holding = true;
-		dragging = true;
-	})}
+	{...wrapperAttributes}
+	class={[
+		'fs-slider',
+		`orientation-${orientation}`,
+		{ disabled },
+		directionAwareReverse && 'reverse',
+		wrapperAttributes?.class
+	]}
+	bind:this={wrapperRef}
+	ontouchstart={(e) => invokeHandlers(e, [inert()], [handleTouchStart, wrapperAttributes?.ontouchstart])}
+	onmousedown={(e) =>
+		invokeHandlers(
+			e,
+			[inert()],
+			[
+				() => {
+					e.preventDefault();
+					ref?.focus();
+					holding = true;
+					dragging = true;
+				},
+				wrapperAttributes?.onmousedown
+			]
+		)}
 	style="--slider-percentage: {percentage}%; --slider-thumb-offset: {thumbClientWidth / 2 -
-		linearScale([0, 50], [6, thumbClientWidth / 2])(percentage)}px;"
-	{...attributes}
+		linearScale([0, 50], [6, thumbClientWidth / 2])(percentage)}px; {wrapperAttributes?.style ?? ''}"
 >
 	{#if tooltip && !disabled}
 		<Tooltip
@@ -236,8 +263,8 @@
 			class="slider-tooltip"
 			animationFrame
 		>
-			{#snippet children(args, ref)}
-				{@render sliderThumb(args, ref)}
+			{#snippet children(args, attach)}
+				{@render sliderThumb(args, attach)}
 			{/snippet}
 		</Tooltip>
 	{:else}
@@ -257,17 +284,38 @@
 			{/each}
 		</div>
 	{/if}
-	<input type="range" hidden {min} {max} {step} {disabled} {value} bind:this={inputRef} />
 </div>
 
-{#snippet sliderThumb(attrs: Record<string, unknown> | undefined = undefined, ref: Attachment | undefined = undefined)}
+{#snippet sliderThumb(
+	attrs: Record<string, unknown> | undefined = undefined,
+	attach: Attachment | undefined = undefined
+)}
 	<div
-		class="slider-thumb"
 		{...attrs}
-		{@attach ref ? ref : undefined}
+		class={['slider-thumb', attrs?.class]}
+		{@attach attach}
 		bind:this={thumbRef}
 		bind:clientWidth={thumbClientWidth}
-	></div>
+	>
+		<!-- The field: where the thumb is, so its focus and validation message are too. -->
+		<input
+			{...attributes}
+			{id}
+			class="native-field"
+			type="range"
+			min={_range.min}
+			max={_range.max}
+			step={_range.step}
+			{disabled}
+			aria-label={named ? attributes['aria-label'] : 'Slider'}
+			aria-orientation={orientation}
+			aria-valuetext={prefix || suffix ? `${prefix}${value}${suffix}` : attributes['aria-valuetext']}
+			{defaultValue}
+			bind:value
+			bind:this={ref}
+			onkeydown={(e) => invokeHandlers(e, [disabled], [handleArrowKeys, onkeydown])}
+		/>
+	</div>
 {/snippet}
 
 <style>
@@ -280,9 +328,16 @@
 		min-inline-size: 32px;
 		min-block-size: 32px;
 
-		& :focus-visible {
-			outline: none;
-			box-shadow: var(--fs-focus-stroke-outer);
+		& .slider-thumb:has(> .native-field:focus-visible) {
+			outline: 0.125rem var(--fs-focus-stroke-outer) solid;
+			outline-offset: 0.125rem;
+		}
+
+		&:has(.native-field:is(:user-invalid, [aria-invalid='true'])) {
+			& .slider-track,
+			& .slider-thumb::before {
+				background-color: var(--fs-system-critical);
+			}
 		}
 
 		&.orientation-horizontal {
@@ -387,7 +442,7 @@
 			}
 		}
 
-		&.disabled {
+		&:is(.disabled, :has(.native-field:disabled)) {
 			& .slider-rail {
 				background-color: var(--fs-accent-fill-disabled);
 			}
@@ -448,6 +503,16 @@
 		&::after {
 			content: '';
 		}
+	}
+
+	.native-field {
+		position: absolute;
+		inset: 0;
+		inline-size: 100%;
+		block-size: 100%;
+		margin: 0;
+		opacity: 0;
+		pointer-events: none;
 	}
 
 	.slider-thumb {

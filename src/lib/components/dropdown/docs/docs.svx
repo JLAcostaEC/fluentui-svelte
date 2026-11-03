@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Dropdown, DropdownOption } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
+  import { Dropdown, DropdownOption } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
 </script>
 
 # Dropdown
@@ -13,7 +13,7 @@ import { Dropdown } from 'fluentui-svelte';
 {m.dd_description()}
 
 <Showcase columns={1} minHeight="0" disablePanZoom showOverflow>
-  <Dropdown>
+  <Dropdown aria-label="Choose an option">
     <DropdownOption value="A" text="Option A">Option A</DropdownOption>
     <DropdownOption value="B" text="Option B">Option B</DropdownOption>
     <DropdownOption value="C" text="Option C">Option C</DropdownOption>
@@ -27,7 +27,7 @@ import { Dropdown } from 'fluentui-svelte';
 	import { Dropdown, DropdownOption } from 'fluentui-svelte';
 </script>
 
-<Dropdown>
+<Dropdown aria-label="Choose an option">
 	<DropdownOption value="A" text="Option A">Option A</DropdownOption>
 	<DropdownOption value="B" text="Option B">Option B</DropdownOption>
 </Dropdown>

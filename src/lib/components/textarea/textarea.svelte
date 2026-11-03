@@ -1,23 +1,26 @@
 <script lang="ts">
-	import { PREFIX } from '$constants';
-	import { invokeHandlers } from '$internal';
+	import { claimLabel } from '../label/label-context.ts';
+	import { PREFIX } from '#constants';
+	import { invokeHandlers } from '#internal';
 	import type { TextAreaProps } from './types.ts';
 
 	const FALLBACK_ID = $props.id();
 	const COMPONENT_NAME = 'textarea';
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
+	const labelContext = claimLabel(() => id);
+
 	let {
-		id = ID,
+		id = labelContext?.fieldId ?? ID,
 		name = id,
 		value = $bindable(''),
-		ref = $bindable(),
+		ref = $bindable(null),
 		resize = 'vertical',
 		style,
 		wrapperAttributes,
 		onchange,
 		disabled = false,
-		wrapperRef = $bindable(),
+		wrapperRef = $bindable(null),
 		...attributes
 	}: TextAreaProps = $props();
 </script>
@@ -36,16 +39,16 @@
 	<TextArea resize="none" disabled />
 	```
 -->
-<div class="fs-textarea" {...wrapperAttributes} bind:this={wrapperRef}>
+<div {...wrapperAttributes} class={['fs-textarea', wrapperAttributes?.class]} bind:this={wrapperRef}>
 	<textarea
+		{...attributes}
 		{name}
 		{id}
 		{disabled}
 		onchange={(e) => invokeHandlers(e, [disabled], [onchange])}
 		style="resize: {resize}; {style}"
 		bind:this={ref}
-		bind:value
-		{...attributes}></textarea>
+		bind:value></textarea>
 </div>
 
 <style>
@@ -127,6 +130,11 @@
 			width: calc(100% + 0.125rem);
 			left: -0.063rem;
 			background: var(--fs-accent-fill-default);
+		}
+		&:has(textarea:is(:user-invalid, [aria-invalid='true'])):after {
+			width: calc(100% + 0.125rem);
+			left: -0.063rem;
+			background: var(--fs-system-critical);
 		}
 		&:has(textarea:focus) {
 			background: var(--fs-control-fill-input-active);

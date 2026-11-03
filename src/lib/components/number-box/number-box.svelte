@@ -1,38 +1,36 @@
 <script lang="ts">
-	import { on } from 'svelte/events';
-	import { floating } from '$internal';
+	import { claimLabel } from '../label/label-context.ts';
+	import { floating } from '#internal';
 	import { offset, shift } from '@floating-ui/dom';
-	import { Flyout, TextBoxButton, TextBox } from '$lib/index.js';
+	import { Flyout, TextBoxButton, TextBox } from '#lib/index.js';
 	import { ChevronUpFilled, ChevronDownFilled, ChevronUpDownFilled } from 'fluentui-icons-svelte';
 	import type { NumberBoxProps } from './types.ts';
+	import { onClickOutside } from 'runed';
 
 	const ID = $props.id();
+	/** Half of the width of the button that opens the flyout of the compact variant. */
+	const BUTTON_HALF_WIDTH = 16;
+
+	const label = claimLabel(() => id);
 
 	let {
-		id = 'input-' + ID,
+		id = label?.fieldId ?? 'input-' + ID,
 		name = id,
-		value = $bindable(),
+		value = $bindable(null),
 		variant = 'inline',
-		ref = $bindable(),
+		ref = $bindable(null),
+		wrapperRef = $bindable(null),
+		wrapperAttributes,
 		placeholder = '',
-		class: classes,
 		...attributes
 	}: NumberBoxProps = $props();
 
 	let openFlyout = $state(false);
-	let cleanEvent: () => void;
 
-	let handler = (e: Event) => {
-		if (!(e.target as HTMLElement).closest(`.${id}`)) {
-			openFlyout = false;
-			cleanEvent();
-		}
-	};
-
-	const compactToggler = () => {
-		openFlyout = true;
-		cleanEvent = on(document, 'click', handler);
-	};
+	onClickOutside(
+		() => wrapperRef,
+		() => (openFlyout = false)
+	);
 </script>
 
 <!-- @component
@@ -46,7 +44,18 @@
     <NumberBox />
     ```
 -->
-<TextBox class={['fs-number-box', classes]} type="number" {id} {name} {placeholder} bind:value bind:ref {...attributes}>
+<TextBox
+	{...attributes}
+	bind:wrapperRef
+	wrapperAttributes={{ ...wrapperAttributes, class: ['fs-number-box', wrapperAttributes?.class] }}
+	type="number"
+	{id}
+	{name}
+	{placeholder}
+	bind:value
+	bind:ref
+	inputmode="numeric"
+>
 	{#if variant === 'inline'}
 		<TextBoxButton aria-label="Increase Number" onclick={() => (value = value ? ++value : 1)}>
 			<ChevronUpFilled />
@@ -55,22 +64,19 @@
 			<ChevronDownFilled />
 		</TextBoxButton>
 	{:else}
-		<TextBoxButton aria-label="Open" onclick={() => compactToggler()}>
+		<TextBoxButton aria-label="Open" onclick={() => (openFlyout = !openFlyout)}>
 			<ChevronUpDownFilled />
 		</TextBoxButton>
 		{#if openFlyout}
 			<div
 				class="flyout-absolute"
-				{@attach ref
-					? floating(ref, {
+				{@attach wrapperRef
+					? floating(wrapperRef, {
 							placement: 'right',
 							middleware: [
-								shift({
-									crossAxis: true
-								}),
-								offset(({ rects }) => {
-									return -rects.reference.width / 1.4;
-								})
+								// Centers the flyout on the button that opened it, whatever the width of the box.
+								offset(({ rects }) => -(rects.floating.width / 2 + BUTTON_HALF_WIDTH)),
+								shift({ crossAxis: true, padding: 8 })
 							]
 						})
 					: undefined}
@@ -93,9 +99,9 @@
 <style>
 	.flyout-absolute {
 		position: absolute;
-		right: 0;
+		left: 0;
 		top: 0;
-		z-index: 2;
+		z-index: 3;
 		& :global(.fs-flyout) {
 			padding: 8px;
 		}

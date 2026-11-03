@@ -1,5 +1,5 @@
 import type { Component, Snippet } from 'svelte';
-import type { Appearances, BeforeOrAfter, PolymorphicProps, Shapes } from '$types';
+import type { Appearances, BeforeOrAfter, PolymorphicProps, Shapes } from '#types';
 
 export type ButtonGenerics = 'button' | 'a' | 'div';
 
@@ -9,7 +9,7 @@ export type ButtonProps<T extends ButtonGenerics = 'button'> = {
 	 * @type ButtonElementDOMType[T]
 	 * @bindable
 	 */
-	ref?: ButtonElementDOMType[T];
+	ref?: ButtonElementDOMType[T] | null;
 	/** The DOM element to render.
 	 * @type 'button' | 'a' | 'div'
 	 * @default 'button'
@@ -69,20 +69,20 @@ export type SplitButtonProps = {
 	 * @type ButtonProps
 	 */
 	primaryButtonProps: ButtonProps<'button'>;
-	/** The props to spread on the button that opens the menu.
+	/** The props to spread on the button that opens the menu. It shows only an arrow, so give it an `aria-label`.
 	 * @type ButtonProps
 	 */
 	menuTriggerProps: ButtonProps<'button'>;
 	/** The DOM reference of the element wrapping both buttons.
 	 * @bindable
 	 */
-	wrapperRef?: HTMLDivElement;
+	wrapperRef?: HTMLDivElement | null;
 	/** The DOM reference of the primary button.
 	 * @bindable
 	 */
-	primaryButtonRef?: HTMLButtonElement;
+	primaryButtonRef?: HTMLButtonElement | null;
 	/** The DOM reference of the button that opens the menu.
 	 * @bindable
 	 */
-	menuTriggerRef?: HTMLButtonElement;
+	menuTriggerRef?: HTMLButtonElement | null;
 } & PolymorphicProps<'div'>;

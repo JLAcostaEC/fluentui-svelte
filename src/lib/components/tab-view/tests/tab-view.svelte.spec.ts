@@ -1,8 +1,11 @@
 import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { TabViewTab } from '$lib/index.js';
+import { TabViewTab } from '#lib/index.js';
 import TabViewTestWrapper from './TabViewTestWrapper.svelte';
+
+/** The close buttons are for the pointer only, so they are found by class rather than by role. */
+const closeButtons = () => page.selector('.fs-tab-view-tab-close');
 
 describe('TabView', () => {
 	it('renders a named tablist with one tab per child', async () => {
@@ -51,12 +54,19 @@ describe('TabView', () => {
 describe('TabView closing', () => {
 	it('shows no close button until the strip asks for one', async () => {
 		render(TabViewTestWrapper);
-		expect(page.getByRole('button', { name: 'Close tab' }).elements()).toHaveLength(0);
+		expect(closeButtons().elements()).toHaveLength(0);
 	});
 
 	it('gives every tab a close button when the strip is closable', async () => {
 		render(TabViewTestWrapper, { closable: true });
-		expect(page.getByRole('button', { name: 'Close tab' }).elements()).toHaveLength(3);
+		expect(closeButtons().elements()).toHaveLength(3);
+	});
+
+	it('keeps the close button out of the tab, and announces Delete instead', async () => {
+		render(TabViewTestWrapper, { closable: true });
+		await expect.element(closeButtons().first()).toHaveAttribute('aria-hidden', 'true');
+		expect(page.getByRole('tab').getByRole('button').elements()).toHaveLength(0);
+		await expect.element(page.getByRole('tab').first()).toHaveAttribute('aria-keyshortcuts', 'Delete');
 	});
 
 	it('lets a single tab opt out of the close button', async () => {
@@ -68,13 +78,13 @@ describe('TabView closing', () => {
 				{ value: 'b', label: 'B', props: { closable: false } }
 			]
 		});
-		expect(page.getByRole('button', { name: 'Close tab' }).elements()).toHaveLength(1);
+		expect(closeButtons().elements()).toHaveLength(1);
 	});
 
 	it('reports the close without selecting the tab underneath', async () => {
 		const onTabClose = vi.fn();
 		render(TabViewTestWrapper, { closable: true, onTabClose });
-		await page.getByRole('button', { name: 'Close tab' }).nth(1).click();
+		await closeButtons().nth(1).click();
 		expect(onTabClose).toHaveBeenCalledWith(expect.anything(), 'mail');
 		await expect.element(page.getByRole('tab', { name: 'Document' })).toHaveAttribute('aria-selected', 'true');
 	});
@@ -86,7 +96,7 @@ describe('TabView closing', () => {
 			activeTab: 'a',
 			tabs: [{ value: 'a', label: 'A', props: { onClose } }]
 		});
-		await page.getByRole('button', { name: 'Close tab' }).click();
+		await closeButtons().click();
 		expect(onClose).toHaveBeenCalledWith(expect.anything(), 'a');
 	});
 });

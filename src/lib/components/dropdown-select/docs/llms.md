@@ -11,7 +11,7 @@ The Dropdown Select is a dropdown built on the native `<select>` element. It let
 	import { DropdownSelect, DropdownSelectOption } from 'fluentui-svelte';
 </script>
 
-<DropdownSelect>
+<DropdownSelect aria-label="Choose an option">
 	<DropdownSelectOption value="A">Option A</DropdownSelectOption>
 	<DropdownSelectOption value="B">Option B</DropdownSelectOption>
 	<DropdownSelectOption value="C">Option C</DropdownSelectOption>
@@ -25,13 +25,13 @@ The Dropdown Select is a dropdown built on the native `<select>` element. It let
 Options can render rich content such as a `Persona`. Provide a `text` prop for the plain-text selection label.
 
 ```svelte
-<DropdownSelect>
+<DropdownSelect aria-label="Choose an option">
 	<DropdownSelectOption value="John Doe" text="John Doe">
 		<Persona
 			name="John Doe"
 			primaryText="Software Engineer"
 			presence={{ status: 'available' }}
-			avatar={{ color: 'colorful', idForColor: '' }}
+			avatarProps={{ color: 'colorful', idForColor: '' }}
 		/>
 	</DropdownSelectOption>
 	<DropdownSelectOption value="B">Option B</DropdownSelectOption>
@@ -44,28 +44,30 @@ Options can render rich content such as a `Persona`. Provide a `text` prop for t
 Set the `multiple` prop to allow selecting more than one option.
 
 ```svelte
-<DropdownSelect multiple>
+<DropdownSelect multiple aria-label="Choose options">
 	<DropdownSelectOption value="A">Option A</DropdownSelectOption>
 	<DropdownSelectOption value="B">Option B</DropdownSelectOption>
 	<DropdownSelectOption value="C">Option C</DropdownSelectOption>
 </DropdownSelect>
 ```
 
+HTML attributes, including class, id and ARIA attributes, apply to the control element. Bind ref to access that control. Use wrapperAttributes and wrapperRef for the outer container.
+
 ## Component Props
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DropdownSelectProps -->
 
-| Name                          | Type                       | Default                    | Description                                                            |
-| ----------------------------- | -------------------------- | -------------------------- | ---------------------------------------------------------------------- |
-| `value` _bindable_            | `string` &#124; `string[]` | `multiple ? [] : ''`       | The selected value. An array of values when `multiple` is set.         |
-| `multiple`                    | `boolean`                  |                            | Allows more than one option to be selected at a time.                  |
-| `placeholder`                 | `string`                   | `'Native Select Dropdown'` | The text shown while no option is selected.                            |
-| `hidePlaceholder`             | `boolean`                  |                            | Keeps the placeholder out of the option list once a value is selected. |
-| `ref` _bindable_              | `HTMLSelectElement`        |                            | The DOM reference of the select element.                               |
-| `wrapperRef` _bindable_       | `HTMLDivElement`           |                            | The DOM reference of the wrapper element.                              |
-| `wrapperProps`                | `HTMLAttributes`           |                            | The attributes to spread on the wrapper element.                       |
-| Element Attributes (`select`) |                            |                            |                                                                        |
+| Name                          | Type                              | Default                    | Description                                                            |
+| ----------------------------- | --------------------------------- | -------------------------- | ---------------------------------------------------------------------- |
+| `value` _bindable_            | `string` &#124; `string[]`        | `multiple ? [] : ''`       | The selected value. An array of values when `multiple` is set.         |
+| `multiple`                    | `boolean`                         |                            | Allows more than one option to be selected at a time.                  |
+| `placeholder`                 | `string`                          | `'Native Select Dropdown'` | The text shown while no option is selected.                            |
+| `hidePlaceholder`             | `boolean`                         |                            | Keeps the placeholder out of the option list once a value is selected. |
+| `ref` _bindable_              | `HTMLSelectElement` &#124; `null` |                            | The DOM reference of the select element.                               |
+| `wrapperRef` _bindable_       | `HTMLDivElement` &#124; `null`    |                            | The DOM reference of the wrapper element.                              |
+| `wrapperAttributes`           | `HTMLAttributes`                  |                            | The attributes to spread on the wrapper element.                       |
+| Element Attributes (`select`) |                                   |                            |                                                                        |
 
 <!-- /props:DropdownSelectProps -->
 
@@ -74,13 +76,13 @@ Set the `multiple` prop to allow selecting more than one option.
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DropdownSelectOptionProps -->
 
-| Name                          | Type          | Default | Description                                                   |
-| ----------------------------- | ------------- | ------- | ------------------------------------------------------------- |
-| `value`                       | `string`      |         | The value reported to the select when the option is picked.   |
-| `text`                        | `string`      |         | The label of the option. Falls back to the rendered children. |
-| `disabled`                    | `boolean`     |         | Disables the user interaction.                                |
-| `ref` _bindable_              | `HTMLElement` |         | The DOM reference of the option element.                      |
-| `children`                    | `Snippet`     |         | The content of the option, used when no `text` is given.      |
-| Element Attributes (`option`) |               |         |                                                               |
+| Name                          | Type                        | Default | Description                                                   |
+| ----------------------------- | --------------------------- | ------- | ------------------------------------------------------------- |
+| `value`                       | `string`                    |         | The value reported to the select when the option is picked.   |
+| `text`                        | `string`                    |         | The label of the option. Falls back to the rendered children. |
+| `disabled`                    | `boolean`                   |         | Disables the user interaction.                                |
+| `ref` _bindable_              | `HTMLElement` &#124; `null` |         | The DOM reference of the option element.                      |
+| `children`                    | `Snippet`                   |         | The content of the option, used when no `text` is given.      |
+| Element Attributes (`option`) |                             |         |                                                               |
 
 <!-- /props:DropdownSelectOptionProps -->

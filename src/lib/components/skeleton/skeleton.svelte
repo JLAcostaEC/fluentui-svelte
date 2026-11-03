@@ -1,5 +1,5 @@
 <script lang="ts" generics="Tag extends SkeletonTags = 'div'">
-	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import type { SkeletonProps, SkeletonTags } from './types.ts';
 
 	let {
@@ -8,7 +8,7 @@
 		shape = 'rounded',
 		justify,
 		class: classes,
-		ref = $bindable(),
+		ref = $bindable(null),
 		...attributes
 	}: SkeletonProps<Tag> = $props();
 
@@ -36,10 +36,10 @@
  -->
 <svelte:element
 	this={as}
+	{...attributes}
 	bind:this={ref}
 	aria-hidden="true"
 	class={['fs-skeleton', animation, shape, classes, { justify }]}
-	{...attributes}
 ></svelte:element>
 
 <style>

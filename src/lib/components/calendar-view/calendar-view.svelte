@@ -3,7 +3,7 @@
 	import { setTabspotAttributes } from 'tabspot';
 	import { onMount } from 'svelte';
 	import { circOut } from 'svelte/easing';
-	import { Flyout } from '$lib/index.js';
+	import { Flyout } from '#lib/index.js';
 	import CalendarViewDays from './calendar-view-days.svelte';
 	import CalendarViewYears from './calendar-view-years.svelte';
 	import CalendarViewMonths from './calendar-view-months.svelte';
@@ -16,7 +16,7 @@
 		getOffset,
 		fadeScale,
 		reactiveBoundingRect
-	} from '$internal';
+	} from '#internal';
 	import {
 		compareDates,
 		getPageByOffset,
@@ -28,7 +28,7 @@
 	} from './calendar-view.svelte.js';
 	import { CALENDAR_GRID_CONFIG, VIEW_PRECISION, cellDate, focusCalendarView } from './calendar-view-grid.js';
 	import { on } from 'svelte/events';
-	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import type {
 		AnimationDirection,
 		CalendarViewContext,
@@ -38,7 +38,7 @@
 	} from './types.js';
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		value = $bindable(null),
 		range = $bindable({ start: null, end: null }),
 		view = 'days',
@@ -46,6 +46,7 @@
 		blackoutBreaksRange,
 		minDate,
 		maxDate,
+		today,
 		locale = 'en-US',
 		weekStart = 1,
 		blackoutDates,
@@ -65,7 +66,9 @@
 
 	let pageAnimationDuration = $state(333);
 
-	let firstValue = $derived(Array.isArray(value) ? value[0] : (value ?? new Date()));
+	const _today = $derived(today ?? new Date());
+
+	let firstValue = $derived((Array.isArray(value) ? value[0] : value) ?? _today);
 
 	// svelte-ignore state_referenced_locally
 	let page = $state(
@@ -205,6 +208,9 @@
 			get maxDate() {
 				return maxDate;
 			},
+			get today() {
+				return _today;
+			},
 			get locale() {
 				return locale;
 			},
@@ -340,7 +346,8 @@ A calendar view lets a user view and interact with a calendar that they can navi
 This implementation is originally made by Tropix126 in his FluentSvelte library, I have changed several things but thanks to him for the original work.
 -->
 <div
-	class={['fs-calendar-view', { floating }]}
+	{...attributes}
+	class={['fs-calendar-view', { floating }, attributes?.class]}
 	bind:this={ref}
 	in:flyToOffset={floating && floating.ref
 		? {
@@ -356,7 +363,6 @@ This implementation is originally made by Tropix126 in his FluentSvelte library,
 			}
 		: undefined}
 	{@attach floating?.ref ? _floating(floating.ref, floating.positionConfig) : undefined}
-	{...attributes}
 >
 	<Flyout>
 		<CalendarViewControls />
@@ -418,6 +424,7 @@ This implementation is originally made by Tropix126 in his FluentSvelte library,
 			position: absolute;
 			top: 0;
 			left: 0;
+			z-index: 110;
 		}
 		& .calendar-wrapper {
 			overflow: hidden;

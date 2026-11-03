@@ -2,12 +2,6 @@
 // for information about these interfaces
 declare global {
 	namespace App {
-		interface Platform {
-			env: Env;
-			ctx: ExecutionContext;
-			caches: CacheStorage;
-			cf?: IncomingRequestCfProperties;
-		}
 		// interface PageData {}
 		// interface PageState {}
 		// interface Error {}
@@ -29,6 +23,13 @@ declare global {
 		import type { Component } from 'svelte';
 		const component: Component;
 		export default component;
+	}
+
+	// enhanced-img only types `?enhanced`, not the ones that carry directives like `?w=300;150&enhanced`.
+	declare module '*&enhanced' {
+		import type { Picture } from '@sveltejs/enhanced-img';
+		const value: Picture;
+		export default value;
 	}
 }
 

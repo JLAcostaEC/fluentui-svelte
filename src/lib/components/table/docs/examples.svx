@@ -2,10 +2,11 @@
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
   import { SvelteSet } from 'svelte/reactivity';
-  import { Button, Table, TableHeader, TableHeaderCell, TableBody, TableRow, TableCell, TableCellLayout, TableCellActions, TableSelectionCell } from '$lib/index.js';
+  import type { Attachment } from 'svelte/attachments';
+  import { Button, Table, TableHeader, TableHeaderCell, TableBody, TableRow, TableCell, TableCellLayout, TableCellActions, TableSelectionCell } from '#lib/index.js';
   import { DocumentRegular, FolderRegular, VideoRegular, DocumentPdfRegular, EditRegular, MoreHorizontalRegular } from 'fluentui-icons-svelte';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
   import type { SortDirection, TableSize } from '../types.ts';
 
   const items = [
@@ -120,7 +121,7 @@
     <TableRow>
       <TableSelectionCell
         checked={allSelected ? true : someSelected ? 'mixed' : false}
-        checkboxIndicator={{ 'aria-label': 'Select all rows' }}
+        checkboxProps={{ 'aria-label': 'Select all rows' }}
         onclick={() => (selected = allSelected ? [] : items.map((item) => item.file))}
       />
       <TableHeaderCell>File</TableHeaderCell>
@@ -134,7 +135,7 @@
         appearance={isSelected ? 'brand' : 'none'}
         onclick={() => toggleRow(item.file)}
       >
-        <TableSelectionCell checked={isSelected} checkboxIndicator={{ 'aria-label': 'Select row' }} />
+        <TableSelectionCell checked={isSelected} checkboxProps={{ 'aria-label': 'Select row' }} />
         <TableCell>{item.file}</TableCell>
       </TableRow>
     {/each}
@@ -167,7 +168,7 @@
         <TableSelectionCell
           type="radio"
           checked={isPicked}
-          radioIndicator={{ name: 'file', 'aria-label': 'Select row' }}
+          radioProps={{ name: 'file', 'aria-label': 'Select row' }}
         />
         <TableCell>{item.file}</TableCell>
       </TableRow>
@@ -186,7 +187,7 @@
 
   const subtleCode = `
 <TableRow aria-selected={isSelected} appearance={isSelected ? 'brand' : 'none'} onclick={() => toggleSubtle(item.file)}>
-  <TableSelectionCell subtle checked={isSelected} checkboxIndicator={{ 'aria-label': 'Select row' }} />
+  <TableSelectionCell subtle checked={isSelected} checkboxProps={{ 'aria-label': 'Select row' }} />
   <TableCell>{item.file}</TableCell>
 </TableRow>`;
 
@@ -311,6 +312,15 @@
 
   let virtualListRef = $state<ReturnType<typeof SvelteVirtualList> | null>(null);
 
+  // The virtualizer names its viewport a region, which a rowgroup cannot hold between itself and its rows.
+  const presentational: Attachment<HTMLElement> = (node) => {
+    const region = node.querySelector('[role="region"]');
+    region?.setAttribute('role', 'none');
+    // A name or a tab stop would keep the role. The rows are reached with the arrow keys of the table.
+    region?.removeAttribute('aria-label');
+    region?.removeAttribute('tabindex');
+  };
+
   const toggleVirtualRow = (id: number) => {
     if (virtualSelected.has(id)) virtualSelected.delete(id);
     else virtualSelected.add(id);
@@ -328,6 +338,15 @@
   let listRef = $state(null);
 
   const toggleRow = (id) => (selected.has(id) ? selected.delete(id) : selected.add(id));
+
+  // The virtualizer names its viewport a region, which a rowgroup cannot hold between itself and its rows.
+  const presentational = (node) => {
+    const region = node.querySelector('[role="region"]');
+    region?.setAttribute('role', 'none');
+    // A name or a tab stop would keep the role. The rows are reached with the arrow keys of the table.
+    region?.removeAttribute('aria-label');
+    region?.removeAttribute('tabindex');
+  };
 <\/script>
 
 <!--
@@ -352,7 +371,7 @@
       <TableHeaderCell>File</TableHeaderCell>
     </TableRow>
   </TableHeader>
-  <TableBody style="height: 320px;">
+  <TableBody style="height: 320px;" {@attach presentational}>
     <SvelteVirtualList items={rows} bind:this={listRef} defaultEstimatedItemHeight={44}>
       {#snippet renderItem(row, index)}
         {@const isSelected = selected.has(row.id)}
@@ -362,7 +381,7 @@
           appearance={isSelected ? 'brand' : 'none'}
           onclick={() => toggleRow(row.id)}
         >
-          <TableSelectionCell checked={isSelected} checkboxIndicator={{ 'aria-label': \`Select \${row.file}\` }} />
+          <TableSelectionCell checked={isSelected} checkboxProps={{ 'aria-label': \`Select \${row.file}\` }} />
           <TableCell>{row.file}</TableCell>
         </TableRow>
       {/snippet}
@@ -435,7 +454,7 @@
   <Table aria-label="Table with multiselect">
     <TableHeader>
       <TableRow>
-        <TableSelectionCell checked={allSelected ? true : someSelected ? 'mixed' : false} checkboxIndicator={{ 'aria-label': 'Select all rows' }} onclick={toggleAll} />
+        <TableSelectionCell checked={allSelected ? true : someSelected ? 'mixed' : false} checkboxProps={{ 'aria-label': 'Select all rows' }} onclick={toggleAll} />
         <TableHeaderCell>File</TableHeaderCell>
         <TableHeaderCell>Author</TableHeaderCell>
       </TableRow>
@@ -444,7 +463,7 @@
       {#each items as item (item.file)}
         {@const isSelected = selected.includes(item.file)}
         <TableRow aria-selected={isSelected} appearance={isSelected ? 'brand' : 'none'} onclick={() => toggleRow(item.file)}>
-          <TableSelectionCell checked={isSelected} checkboxIndicator={{ 'aria-label': 'Select row' }} />
+          <TableSelectionCell checked={isSelected} checkboxProps={{ 'aria-label': 'Select row' }} />
           <TableCell>
             <TableCellLayout media={item.icon}>{item.file}</TableCellLayout>
           </TableCell>
@@ -472,7 +491,7 @@
       {#each items as item (item.file)}
         {@const isPicked = picked === item.file}
         <TableRow aria-selected={isPicked} appearance={isPicked ? 'brand' : 'none'} onclick={() => (picked = item.file)}>
-          <TableSelectionCell type="radio" checked={isPicked} radioIndicator={{ name: 'picked-file', 'aria-label': 'Select row' }} />
+          <TableSelectionCell type="radio" checked={isPicked} radioProps={{ name: 'picked-file', 'aria-label': 'Select row' }} />
           <TableCell>
             <TableCellLayout media={item.icon}>{item.file}</TableCellLayout>
           </TableCell>
@@ -500,7 +519,7 @@
       {#each items as item (item.file)}
         {@const isSelected = subtlySelected.includes(item.file)}
         <TableRow aria-selected={isSelected} appearance={isSelected ? 'brand' : 'none'} onclick={() => toggleSubtle(item.file)}>
-          <TableSelectionCell subtle checked={isSelected} checkboxIndicator={{ 'aria-label': 'Select row' }} />
+          <TableSelectionCell subtle checked={isSelected} checkboxProps={{ 'aria-label': 'Select row' }} />
           <TableCell>
             <TableCellLayout media={item.icon}>{item.file}</TableCellLayout>
           </TableCell>
@@ -703,12 +722,12 @@
         <TableHeaderCell>Last updated</TableHeaderCell>
       </TableRow>
     </TableHeader>
-    <TableBody style="height: 320px;">
+    <TableBody style="height: 320px;" {@attach presentational}>
       <SvelteVirtualList items={rows} bind:this={virtualListRef as any} defaultEstimatedItemHeight={44}>
         {#snippet renderItem(row: (typeof rows)[number], index: number)}
           {@const isSelected = virtualSelected.has(row.id)}
           <TableRow aria-rowindex={index + 2} aria-selected={isSelected} appearance={isSelected ? 'brand' : 'none'} onclick={() => toggleVirtualRow(row.id)}>
-            <TableSelectionCell checked={isSelected} checkboxIndicator={{ 'aria-label': `Select ${row.file}` }} />
+            <TableSelectionCell checked={isSelected} checkboxProps={{ 'aria-label': `Select ${row.file}` }} />
             <TableCell>
               <TableCellLayout media={DocumentRegular}>{row.file}</TableCellLayout>
             </TableCell>

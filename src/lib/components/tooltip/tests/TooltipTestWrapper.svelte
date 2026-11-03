@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Tooltip } from '$lib/index.js';
-	import type { TooltipProps } from '$lib/components/tooltip/types.js';
+	import { Tooltip } from '#lib/index.js';
+	import type { TooltipProps } from '#lib/components/tooltip/types.js';
 
 	let {
 		open = $bindable(false),

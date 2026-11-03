@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { getHighlighter } from '$site/utils/highlighter.js';
+	import { getHighlighter } from '#site/utils/highlighter.js';
 	import { fsShikiCopyButton } from '../../../../scripts/shiki-copy-button.js';
+	import { fsShikiFocusableCode } from '../../../../scripts/shiki-focusable-code.js';
 
 	let {
 		code,
@@ -24,7 +25,8 @@
 				},
 				defaultColor: 'light-dark()',
 				cssVariablePrefix: '--shiki-',
-				transformers: [fsShikiCopyButton()]
+				tabindex: false,
+				transformers: [fsShikiCopyButton(), fsShikiFocusableCode()]
 			})
 		)
 	);

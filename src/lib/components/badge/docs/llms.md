@@ -90,7 +90,7 @@ Use the icon prop to render an icon inside the badge. You can pass the icon as a
 | `iconPosition`   | `'before'` &#124; `'after'`                                    | `'before'`      | The position of the icon relative to the badge content.                                   |
 | `color`          | [`Colors`](https://fluentui-svelte.dev/docs/types/#colors)     | `'information'` | The color of the badge. For now it only supports system colors.                           |
 | `icon`           | `Snippet` &#124; `Component`                                   |                 | Icon to render inside the badge.                                                          |
-| `ref` _bindable_ | `HTMLSpanElement`                                              |                 | The DOM reference of the badge element.                                                   |
+| `ref` _bindable_ | `HTMLSpanElement` &#124; `null`                                |                 | The DOM reference of the badge element.                                                   |
 | HTML Attributes  |                                                                |                 |                                                                                           |
 
 <!-- /props:BadgeProps -->
@@ -140,7 +140,7 @@ By default, Avatar uses an instance of BadgeIcon. As you can see, the first exam
 | `size`           | `number`                                                       | `20`          | The size of the badge in pixels.                                                   |
 | `color`          | [`Colors`](https://fluentui-svelte.dev/docs/types/#colors)     |               | Overrides the color the status would pick on its own.                              |
 | `icon`           | `Snippet` &#124; `Component`                                   |               | Custom icon, rendered instead of the one the status would pick on its own.         |
-| `ref` _bindable_ | `HTMLSpanElement`                                              |               | The DOM reference of the badge element.                                            |
+| `ref` _bindable_ | `HTMLSpanElement` &#124; `null`                                |               | The DOM reference of the badge element.                                            |
 | HTML Attributes  |                                                                |               |                                                                                    |
 
 <!-- /props:BadgeIconProps -->

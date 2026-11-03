@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { navigating } from '$app/state';
 	import { watch } from 'runed';
-	import { ProgressBar } from '$lib/index.js';
+	import { ProgressBar } from '#lib/index.js';
 
 	let loading = $state();
 	let fakeProgress = $state(1);

@@ -1,6 +1,6 @@
-import { createFSContext, type FSContext } from '$internal';
+import { createFSContext, type FSContext } from '#internal';
 import { prefersReducedMotion } from 'svelte/motion';
-import type { THEME } from '$lib/types/index.js';
+import type { THEME } from '#lib/types/index.js';
 import type { TabspotInstance } from 'tabspot';
 
 export type FSProviderContext = FSContext<

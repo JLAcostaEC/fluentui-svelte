@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Card, CardPreview, CardHeader, CardFooter, Button } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
+  import { Card, CardPreview, CardHeader, CardFooter, Button } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
 </script>
 
 # Card
@@ -21,6 +21,7 @@
     <CardHeader
       image="https://placehold.co/48x48?text=FS"
       title="FluentUI Svelte"
+      headingLevel={2}
       description="5h ago · About us - Overview"
     />
     <p style="padding: 0.5rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>

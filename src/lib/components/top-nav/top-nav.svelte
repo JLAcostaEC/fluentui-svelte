@@ -4,7 +4,7 @@
 	import type { TopNavContext, TopNavProps } from './types.ts';
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		selectedValue = $bindable(''),
 		onTabSelect,
 		appearance = 'transparent',
@@ -172,12 +172,12 @@
 	```
 -->
 <div
+	{...attributes}
 	bind:this={ref}
 	role="tablist"
 	aria-orientation={vertical ? 'vertical' : undefined}
 	class={['fs-top-nav', appearance, size, { vertical }, classes]}
 	{...tabspotAttributes}
-	{...attributes}
 >
 	{@render children?.()}
 	{#if hasIndicator && measured}

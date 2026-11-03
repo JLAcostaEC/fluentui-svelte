@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { CardHeader } from '$lib/index.js';
+import { CardHeader } from '#lib/index.js';
 import CardTestWrapper from './CardTestWrapper.svelte';
 
 const PIXEL = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -59,6 +59,11 @@ describe('rendering', () => {
 		render(CardTestWrapper, { part: 'header', title: 'My title', description: 'A description', id: 'my-card' });
 		const el = page.selector('.fs-card-header-content h4.body');
 		await expect.element(el).toHaveAttribute('id', 'my-card-title');
+	});
+
+	it('renders the string title at the heading level it is given', async () => {
+		render(CardTestWrapper, { part: 'header', title: 'My title', headingLevel: 2 });
+		await expect.element(page.getByRole('heading', { level: 2, name: 'My title' })).toBeInTheDocument();
 	});
 
 	it('gives the string title the id even without a description', async () => {

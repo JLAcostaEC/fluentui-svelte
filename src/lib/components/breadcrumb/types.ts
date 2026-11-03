@@ -1,4 +1,4 @@
-import type { BeforeOrAfter, PolymorphicProps, Sizes } from '$types';
+import type { BeforeOrAfter, PolymorphicProps, Sizes } from '#types';
 import type { Snippet, Component } from 'svelte';
 import type { HTMLAttributes, HTMLOlAttributes } from 'svelte/elements';
 
@@ -17,15 +17,15 @@ export type BreadcrumbProps = {
 	/** The DOM reference of the `nav`.
 	 * @bindable
 	 */
-	ref?: HTMLElement;
+	ref?: HTMLElement | null;
 	/** The DOM reference of the list.
 	 * @bindable
 	 */
-	listRef?: HTMLOListElement;
-	/** The props to spread on the list element.
+	listRef?: HTMLOListElement | null;
+	/** The attributes to spread on the list element.
 	 * @type HTMLOlAttributes
 	 */
-	listProps?: HTMLOlAttributes;
+	listAttributes?: HTMLOlAttributes;
 	/** The size of every step and divider of the trail.
 	 * @default 'medium'
 	 */
@@ -42,7 +42,7 @@ export type BreadcrumbItemProps = {
 	/** The DOM reference of the item.
 	 * @bindable
 	 */
-	ref?: HTMLLIElement;
+	ref?: HTMLLIElement | null;
 } & HTMLAttributes<HTMLLIElement>;
 
 /** @propsmith BreadcrumbButtonProps */
@@ -51,7 +51,7 @@ export type BreadcrumbButtonProps<T extends BreadcrumbItemGenerics = 'button'> =
 	 * @type BreadcrumbItemElementDOMType[T]
 	 * @bindable
 	 */
-	ref?: BreadcrumbItemElementDOMType[T];
+	ref?: BreadcrumbItemElementDOMType[T] | null;
 	/** The DOM element to render. A step that goes somewhere is an anchor and takes `href`.
 	 * @type 'button' | 'a'
 	 * @default 'button'
@@ -83,5 +83,5 @@ export type BreadcrumbDividerProps = {
 	/** The DOM reference of the divider.
 	 * @bindable
 	 */
-	ref?: HTMLLIElement;
+	ref?: HTMLLIElement | null;
 } & HTMLAttributes<HTMLLIElement>;

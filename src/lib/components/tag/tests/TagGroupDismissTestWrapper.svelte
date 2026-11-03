@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { FluentUISvelte, Tag, TagGroup } from '$lib/index.js';
+	import { FluentUISvelte, Tag, TagGroup } from '#lib/index.js';
 
 	let { disabled = [] }: { disabled?: string[] } = $props();
 

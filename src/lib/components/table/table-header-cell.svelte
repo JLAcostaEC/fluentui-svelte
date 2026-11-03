@@ -1,13 +1,13 @@
 <script lang="ts" generics="Tag extends 'th' | 'div' = 'th'">
 	import ArrowUpRegular from 'fluentui-icons-svelte/ArrowUpRegular.svelte';
 	import { on } from 'svelte/events';
-	import { RenderSoC } from '$internal';
+	import { RenderSoC } from '#internal';
 	import { colIndex, focusGroup, getTag, requireTableContext } from './table.svelte.ts';
 	import type { TableDOM, TableHeaderCellProps } from './types.ts';
 
 	let {
 		as,
-		ref = $bindable(),
+		ref = $bindable(null),
 		sortable,
 		sortDirection,
 		sortIcon,
@@ -87,6 +87,7 @@
 
 <svelte:element
 	this={_as}
+	{...attributes}
 	bind:this={ref as TableDOM[Tag]}
 	role={_as === 'div' ? 'columnheader' : undefined}
 	scope={_as === 'th' ? 'col' : undefined}
@@ -96,7 +97,6 @@
 	style:width={width === undefined ? undefined : `${width}px`}
 	{@attach enableTabspot || _resizable ? colIndex((i) => (index = i)) : undefined}
 	{@attach enableTabspot && _focusMode === 'group' ? focusGroup : undefined}
-	{...attributes}
 >
 	<span class="inner">
 		{#if _sortable}

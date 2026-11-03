@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { watch } from 'runed';
 	import CheckmarkFilled from 'fluentui-icons-svelte/CheckmarkFilled.svelte';
-	import { Button } from '$lib/index.js';
-	import { PREFIX } from '$constants';
-	import { invokeHandlers, RenderSoC } from '$internal';
+	import { Button } from '#lib/index.js';
+	import { PREFIX } from '#constants';
+	import { invokeHandlers, RenderSoC } from '#internal';
 	import { getMenuContext, COMPONENT_NAME as MENU_COMPONENT_NAME } from './menu.svelte.ts';
 	import type { MenuItemActionableProps } from './types.ts';
 
@@ -12,17 +12,18 @@
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		icon: Icon,
 		secondaryContent,
 		children,
-		checked = $bindable(),
+		checked = $bindable(null),
 		disabled,
 		class: classes,
 		id = ID,
 		name = id as string,
 		value = id as string,
 		onclick,
+		onkeydown,
 		subText,
 		...attributes
 	}: MenuItemActionableProps = $props();
@@ -61,6 +62,7 @@
     ```
 -->
 <Button
+	{...attributes}
 	{disabled}
 	appearance="subtle"
 	onclick={(e: MouseEvent) =>
@@ -73,11 +75,10 @@
 		)}
 	aria-checked={checked}
 	role="menuitemradio"
-	style={`--margin-left: ${hasIcons && !Icon ? 1.5 : 0}rem;}`}
+	style="{attributes.style ?? ''}; --margin-left: {hasIcons && !Icon ? 1.5 : 0}rem;"
 	aria-label={secondaryContent ? `${secondaryContent}, Use ${secondaryContent}` : undefined}
 	class="fs-menu-item-radio {hasIcons ? 'align' : ''} {checked ? 'checked' : ''} {classes}"
 	bind:ref
-	{...attributes}
 >
 	<span class="label" aria-label="{secondaryContent}, Use {secondaryContent}">
 		<CheckmarkFilled class="indicator" />

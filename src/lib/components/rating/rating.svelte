@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { PREFIX } from '$constants';
+	import { claimLabel } from '../label/label-context.ts';
+	import { invokeHandlers } from '#internal';
+	import { PREFIX } from '#constants';
 	import StarFilled from 'fluentui-icons-svelte/StarFilled.svelte';
 	import StarHalfRegular from 'fluentui-icons-svelte/StarHalfRegular.svelte';
 	import StarOneQuarterRegular from 'fluentui-icons-svelte/StarOneQuarterRegular.svelte';
@@ -12,6 +14,8 @@
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 	const VALUE_ID = `${ID}-value`;
 
+	const labelContext = claimLabel(() => undefined);
+
 	let {
 		value = $bindable(0),
 		max = 5,
@@ -19,12 +23,15 @@
 		size = 'extra-large',
 		iconFilled,
 		iconOutline,
-		name = ID,
+		id = ID,
+		class: classes,
+		name = id,
 		itemLabel = (rating) => `${rating}`,
 		onChange,
-		class: classes,
-		ref = $bindable(),
-		role = 'radiogroup',
+		wrapperRef = $bindable(null),
+		wrapperAttributes,
+		onclick,
+		onpointerenter,
 		...attributes
 	}: RatingProps = $props();
 
@@ -62,6 +69,19 @@
 		value = next;
 		onChange?.(next);
 	}
+
+	/** The value of the checked radio. Clicks select, the arrow keys included; a form reset unchecks every radio, which the binding reports as `null`. */
+	let checked = $derived<number | null>(checkedValue);
+
+	$effect(() => {
+		if (checked !== null) return;
+		rated = false;
+		value = 0;
+	});
+
+	function hover(event: PointerEvent & { currentTarget: HTMLInputElement }, item: number) {
+		invokeHandlers(event, [], [() => (hovered = item), onpointerenter]);
+	}
 </script>
 
 <!-- 
@@ -81,13 +101,15 @@
 	```
 -->
 <div
-	class={['fs-rating', `size-${size}`, classes]}
-	bind:this={ref}
-	{role}
-	onpointerleave={() => (hovered = undefined)}
-	{...attributes}
-	aria-label={attributes['aria-label'] ?? (attributes['aria-labelledby'] ? undefined : 'Rating')}
-	aria-describedby={[attributes['aria-describedby'], VALUE_ID].filter(Boolean).join(' ')}
+	{...wrapperAttributes}
+	class={['fs-rating', `size-${size}`, wrapperAttributes?.class]}
+	bind:this={wrapperRef}
+	role="radiogroup"
+	onpointerleave={(e) => invokeHandlers(e, [], [() => (hovered = undefined), wrapperAttributes?.onpointerleave])}
+	aria-labelledby={wrapperAttributes?.['aria-labelledby'] ?? labelContext?.labelId}
+	aria-label={wrapperAttributes?.['aria-label'] ??
+		(wrapperAttributes?.['aria-labelledby'] || labelContext ? undefined : 'Rating')}
+	aria-describedby={[wrapperAttributes?.['aria-describedby'], VALUE_ID].filter(Boolean).join(' ')}
 >
 	<span id={VALUE_ID} hidden>Current rating: {value} out of {_max}.</span>
 	{#each items as item (item)}
@@ -106,25 +128,29 @@
 			{/if}
 			{#if step === 0.5}
 				<input
-					class="half-value"
-					type="radio"
+					{...attributes}
+					{id}
 					{name}
+					class={['half-value', classes]}
+					type="radio"
 					value={item - 0.5}
-					checked={checkedValue === item - 0.5}
 					aria-label={itemLabel(item - 0.5)}
-					onclick={() => value !== item - 0.5 && select(item - 0.5)}
-					onpointerenter={() => (hovered = item - 0.5)}
+					bind:group={checked}
+					onclick={(e) => invokeHandlers(e, [], [() => value !== item - 0.5 && select(item - 0.5), onclick])}
+					onpointerenter={(e) => hover(e, item - 0.5)}
 				/>
 			{/if}
 			<input
-				class="full-value"
-				type="radio"
+				{...attributes}
 				{name}
+				{id}
+				class={['full-value', classes]}
+				type="radio"
 				value={item}
-				checked={checkedValue === item}
 				aria-label={itemLabel(item)}
-				onclick={() => value !== item && select(item)}
-				onpointerenter={() => (hovered = item)}
+				bind:group={checked}
+				onclick={(e) => invokeHandlers(e, [], [() => value !== item && select(item), onclick])}
+				onpointerenter={(e) => hover(e, item)}
 			/>
 		</span>
 	{/each}
@@ -147,6 +173,17 @@
 
 		&.size-large {
 			--rating-size: 20px;
+		}
+
+		&:is([aria-invalid='true'], :has(input:user-invalid)) .rating-icon {
+			color: var(--fs-system-critical);
+		}
+
+		&:has(input:disabled) .rating-icon {
+			color: var(--fs-text-disabled);
+			& .filled {
+				color: inherit;
+			}
 		}
 	}
 

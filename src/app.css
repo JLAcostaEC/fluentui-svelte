@@ -5,6 +5,7 @@
 		url('/fonts/cascadia-code/cascadia-code.woff2') format('woff2');
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 @font-face {
 	font-family: 'Selawik';
@@ -13,6 +14,7 @@
 		url('/fonts/selawik/selawk.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 @font-face {
 	font-family: 'Selawik Bold';
@@ -21,6 +23,7 @@
 		url('/fonts/selawik/selawkb.ttf') format('truetype');
 	font-weight: bold;
 	font-style: normal;
+	font-display: swap;
 }
 @font-face {
 	font-family: 'Selawik Light';
@@ -29,6 +32,7 @@
 		url('/fonts/selawik/selawkl.ttf') format('truetype');
 	font-weight: 200;
 	font-style: normal;
+	font-display: swap;
 }
 html {
 	scroll-behavior: smooth;

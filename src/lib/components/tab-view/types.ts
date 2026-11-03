@@ -1,4 +1,4 @@
-import type { FSContext } from '$internal';
+import type { FSContext } from '#internal';
 import type { Snippet, Component } from 'svelte';
 import type { HTMLAttributes, HTMLButtonAttributes } from 'svelte/elements';
 
@@ -25,15 +25,15 @@ export type TabViewProps = {
 	/** The DOM reference of the element wrapping the strip.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** The DOM reference of the tab list.
 	 * @bindable
 	 */
-	listRef?: HTMLDivElement;
-	/** The props to spread on the tab list element, where the `tablist` role and its label belong.
+	listRef?: HTMLDivElement | null;
+	/** The Attributes to spread on the tab list element, where the `tablist` role and its label belong.
 	 * @type HTMLAttributes
 	 */
-	listProps?: HTMLAttributes<HTMLDivElement>;
+	listAttributes?: HTMLAttributes<HTMLDivElement>;
 	/** The value of the selected tab.
 	 * @bindable
 	 */
@@ -55,7 +55,7 @@ export type TabViewProps = {
 	/** The props to spread on the new tab button.
 	 * @type HTMLButtonAttributes
 	 */
-	newTabButtonProps?: HTMLButtonAttributes;
+	newTabButtonAttributes?: HTMLButtonAttributes;
 	/** How the tabs take their width: sharing the strip evenly, sizing to their own content, or
 	 * shrinking to the icon of every tab but the selected one.
 	 * @default 'equal'
@@ -72,7 +72,7 @@ export type TabViewTabProps = {
 	/** The DOM reference of the tab element.
 	 * @bindable
 	 */
-	ref?: HTMLDivElement;
+	ref?: HTMLDivElement | null;
 	/** The value that identifies the tab. Defaults to a generated id. */
 	value?: string;
 	/** The icon to display before the label.

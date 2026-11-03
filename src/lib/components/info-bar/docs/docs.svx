@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { InfoBar } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
+  import { InfoBar } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
 </script>
 
 # InfoBar
@@ -9,13 +9,13 @@
 {m.ib_description()}
 
 <Showcase columns={1} minHeight="280px">
-  <InfoBar status="attention" title="Attention">
+  <InfoBar status="attention" headingLevel={2} title="Attention">
     <p>This is an attention message.</p>
   </InfoBar>
-  <InfoBar status="warning" title="Warning">
+  <InfoBar status="warning" headingLevel={2} title="Warning">
     <p>This is a warning message.</p>
   </InfoBar>
-  <InfoBar status="success" title="Success">
+  <InfoBar status="success" headingLevel={2} title="Success">
     <p>This is a success message.</p>
   </InfoBar>
 </Showcase>

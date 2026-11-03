@@ -1,19 +1,22 @@
 <script lang="ts">
-	import { PREFIX } from '$constants';
+	import { claimLabel } from '../label/label-context.ts';
+	import { PREFIX } from '#constants';
 	import type { ToggleSwitchProps } from './types.ts';
 
 	const FALLBACK_ID = $props.id();
 	const COMPONENT_NAME = 'toggle-switch';
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
+	const labelContext = claimLabel(() => id);
+
 	let {
-		ref = $bindable(),
-		checked = $bindable(),
-		id = ID,
+		ref = $bindable(null),
+		checked = $bindable(null),
+		id = labelContext?.fieldId ?? ID,
 		name = id,
 		label,
-		labelAttributes,
-		labelElement,
+		wrapperAttributes,
+		wrapperRef = $bindable(null),
 		...attributes
 	}: ToggleSwitchProps = $props();
 </script>
@@ -33,17 +36,18 @@
   <ToggleSwitch label="Toggle Switch" />
   ```
 -->
-<label class="fs-toggle-switch" {...labelAttributes} bind:this={labelElement}>
-	<input type="checkbox" role="switch" {id} {name} bind:checked bind:this={ref} {...attributes} />
-	{#if label}
-		<span>
+<div {...wrapperAttributes} class={['fs-toggle-switch', wrapperAttributes?.class]} bind:this={wrapperRef}>
+	<input {...attributes} type="checkbox" role="switch" {id} {name} bind:checked bind:this={ref} />
+	<!-- Inside a Label, the Label names the field instead. -->
+	{#if label && !labelContext}
+		<label for={id}>
 			{label}
-		</span>
+		</label>
 	{/if}
-</label>
+</div>
 
 <style>
-	label {
+	.fs-toggle-switch {
 		display: flex;
 		align-items: center;
 		border-radius: 1.125rem;
@@ -53,7 +57,7 @@
 		&:has(input:focus-visible) {
 			outline: 0.125rem var(--fs-focus-stroke-outer) solid;
 			outline-offset: 0.125rem;
-			&:has(span) {
+			&:has(> label) {
 				border-radius: 0.063rem;
 				outline-offset: 0.313rem;
 			}
@@ -130,6 +134,9 @@
 			&:active::after {
 				width: 1rem;
 			}
+			&:is(:user-invalid, [aria-invalid='true']) {
+				border-color: var(--fs-system-critical);
+			}
 			&:checked {
 				background-color: var(--fs-accent-fill-default);
 				border-color: var(--fs-accent-fill-default);
@@ -142,7 +149,9 @@
 				}
 			}
 		}
-		& span {
+		& > label {
+			flex-grow: 1;
+			cursor: pointer;
 			font-size: inherit;
 			color: inherit;
 			padding-inline: 0.8rem;

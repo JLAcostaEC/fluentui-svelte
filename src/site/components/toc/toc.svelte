@@ -2,10 +2,10 @@
 	import { page } from '$app/state';
 	import { blur } from 'svelte/transition';
 	import { useIntersectionObserver } from 'runed';
-	import { ListView, ListViewItem } from '$lib/index.js';
+	import { ListView, ListViewItem } from '#lib/index.js';
 	import { getLinks, type TocLink, type TocProps } from './toc.ts';
-	import { m } from '$i18n/messages.js';
-	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { m } from '#i18n/messages.js';
+	import { getGlobalFSContext } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 
 	const globalContext = getGlobalFSContext();
 

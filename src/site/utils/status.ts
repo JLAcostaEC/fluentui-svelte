@@ -1,5 +1,5 @@
-import { m } from '$i18n/messages.js';
-import type { Colors, Variants } from '$types';
+import { m } from '#i18n/messages.js';
+import type { Colors, Variants } from '#types';
 
 export type StatusBadge = {
 	appearance: Variants;

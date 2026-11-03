@@ -1,9 +1,10 @@
 <script lang="ts">
 	import panzoom from 'panzoom';
-	import ToggleSwitch from '$components/toggle-switch/toggle-switch.svelte';
-	import RenderShiki from '$site/components/render-shiki/render-shiki.svelte';
-	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
-	import { m } from '$i18n/messages.js';
+	import ToggleSwitch from '#components/toggle-switch/toggle-switch.svelte';
+	import RenderShiki from '#site/components/render-shiki/render-shiki.svelte';
+	import { getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { m } from '#i18n/messages.js';
+	import { getDisablePanZoom } from '#site/preferences.js';
 	import type { Snippet } from 'svelte';
 	import type { PanZoomOptions } from 'panzoom';
 	import type { Attachment } from 'svelte/attachments';
@@ -45,20 +46,39 @@
 
 	const _panzoom = (options: PanZoomOptions): Attachment<HTMLElement> => {
 		return (element) => {
+			const transform = element.style.transform;
+			const transformOrigin = element.style.transformOrigin;
+			const restoreTransform = () => {
+				element.style.transform = transform;
+				element.style.transformOrigin = transformOrigin;
+			};
+			const parent = element.parentElement;
+			const tabIndex = parent?.getAttribute('tabindex');
 			const instance = panzoom(element, {
 				...options,
 				// returning false leaves the touch alone, so the tap reaches the control
 				onTouch: (event: TouchEvent) => !isInteractive(event.target)
 			});
+			const changedTabIndex = parent?.getAttribute('tabindex') !== tabIndex;
 
 			return () => {
+				instance.on('transform', restoreTransform);
+				instance.zoomTo(0, 0, 1);
 				instance.dispose();
+				restoreTransform();
+				if (parent && changedTabIndex) {
+					if (tabIndex == null) parent.removeAttribute('tabindex');
+					else parent.setAttribute('tabindex', tabIndex);
+				}
 			};
 		};
 	};
 
 	let showCode = $state(false);
-	let reducedMotion = $derived(getReducedMotion()());
+	const sharedDisablePanZoom = getDisablePanZoom();
+	const getMotionPreference = getReducedMotion();
+	let reducedMotion = $derived(getMotionPreference());
+	let effectiveDisabled = $derived(disablePanZoom || sharedDisablePanZoom.current);
 </script>
 
 <div class={['showcase-wrapper', code && 'has-code']}>
@@ -66,7 +86,7 @@
 		<ToggleSwitch
 			label={m.showcase_view_code()}
 			bind:checked={showCode}
-			labelAttributes={{ class: `switch-view ${showCode ? 'show' : ''}` }}
+			wrapperAttributes={{ class: `switch-view ${showCode ? 'show' : ''}` }}
 		/>
 		<div style={`display: ${code && showCode ? 'block' : 'none'};`}>
 			<RenderShiki {code} />
@@ -76,49 +96,47 @@
 		class="showcase"
 		style={`display: ${!showCode ? 'block' : 'none'};; min-height: ${minHeight}; overflow: ${showOverflow ? 'visible' : 'hidden'}`}
 	>
-		{#key reducedMotion}
+		<div
+			{@attach !effectiveDisabled &&
+				!reducedMotion &&
+				_panzoom({
+					minZoom,
+					maxZoom,
+					bounds: true,
+					initialZoom,
+					smoothScroll: true,
+					autocenter: autoCenter,
+					boundsPadding: 0
+				})}
+			class="inner"
+		>
+			{#if !effectiveDisabled}
+				<svg class="showcase-backdrop">
+					<pattern
+						id="showcase-backdrop-pattern"
+						x="5.800038310074086"
+						y="6.229276141719765"
+						width="11.17258097342026"
+						height="11.17258097342026"
+						patternUnits="userSpaceOnUse"
+					>
+						<circle
+							cx="0.2979354926245403"
+							cy="0.2979354926245403"
+							r="0.2979354926245403"
+							fill="var(--fds-text-disabled)"
+						></circle>
+					</pattern>
+					<rect x="0" y="0" width="100%" height="100%" fill="url(#showcase-backdrop-pattern)"></rect>
+				</svg>
+			{/if}
 			<div
-				{@attach !disablePanZoom &&
-					!reducedMotion &&
-					_panzoom({
-						minZoom,
-						maxZoom,
-						bounds: true,
-						initialZoom,
-						smoothScroll: true,
-						autocenter: autoCenter,
-						boundsPadding: 0
-					})}
-				class="inner"
+				class="showcase-grid"
+				style={`grid-template-columns: ${(columnWidth + ' ').repeat(columns)}; grid-auto-rows: auto; grid-gap: ${gap};`}
 			>
-				{#if !disablePanZoom}
-					<svg class="showcase-backdrop">
-						<pattern
-							id="showcase-backdrop-pattern"
-							x="5.800038310074086"
-							y="6.229276141719765"
-							width="11.17258097342026"
-							height="11.17258097342026"
-							patternUnits="userSpaceOnUse"
-						>
-							<circle
-								cx="0.2979354926245403"
-								cy="0.2979354926245403"
-								r="0.2979354926245403"
-								fill="var(--fds-text-disabled)"
-							></circle>
-						</pattern>
-						<rect x="0" y="0" width="100%" height="100%" fill="url(#showcase-backdrop-pattern)"></rect>
-					</svg>
-				{/if}
-				<div
-					class="showcase-grid"
-					style={`grid-template-columns: ${(columnWidth + ' ').repeat(columns)}; grid-auto-rows: auto; grid-gap: ${gap};`}
-				>
-					{@render children?.()}
-				</div>
+				{@render children?.()}
 			</div>
-		{/key}
+		</div>
 	</div>
 </div>
 
@@ -142,7 +160,6 @@
 		background-color: var(--fs-card-background-default);
 		border: 1px solid var(--fs-card-stroke-default);
 		box-shadow: var(--fs-shadow-card);
-		z-index: 1;
 	}
 	.inner {
 		display: flex;

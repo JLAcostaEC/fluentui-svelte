@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Docs from '$site/components/docs/docs.svelte';
-	import { m } from '$i18n/messages.js';
+	import Docs from '#site/components/docs/docs.svelte';
+	import { m } from '#i18n/messages.js';
 	// Imported directly (not via a server load) because each META may carry an
 	// `icon` Svelte component, which is not serializable across the load boundary.
-	import componentsMeta from '$site/utils/components-index.js';
+	import componentsMeta from '#site/utils/components-index.js';
 
 	let { children } = $props();
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button } from '$lib/index.js';
+	import { Button } from '#lib/index.js';
 	import { CaretDownFilled, CaretUpFilled, DismissRegular } from 'fluentui-icons-svelte';
 	import { getCalendarViewContext } from './calendar-view.svelte.js';
 

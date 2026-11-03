@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Checkbox } from '$lib/index.js';
-	import { RenderSoC } from '$internal';
+	import { Checkbox } from '#lib/index.js';
+	import { RenderSoC } from '#internal';
 	import ChevronRightRegular from 'fluentui-icons-svelte/ChevronRightRegular.svelte';
 	import { getTreeViewContext, getTreeViewItemContext } from './tree-view.svelte.ts';
 	import type { TreeViewItemLayoutProps } from './types.ts';
@@ -24,10 +24,10 @@
 <!-- Presentational row. The interactive element is the parent treeitem (`<li>`); this
 	div is plain markup so it is not exposed as a separate control. -->
 <div
-	class={['fs-tree-view-item-content', `size-${size}`, ITEM_CONTEXT.disabled && 'disabled']}
-	style="--depth: {ITEM_CONTEXT.depth}"
-	bind:this={ref}
 	{...attributes}
+	class={['fs-tree-view-item-content', `size-${size}`, ITEM_CONTEXT.disabled && 'disabled', attributes?.class]}
+	style="{attributes?.style ?? ''}; --depth: {ITEM_CONTEXT.depth}"
+	bind:this={ref}
 >
 	{#if expandIcon}
 		<span class="fs-tree-view-item-expand-icon">

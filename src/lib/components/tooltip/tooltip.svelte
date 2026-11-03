@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { on } from 'svelte/events';
 	import { useDebounce } from 'runed';
-	import { floating, roundByDPR, RenderSoC } from '$internal';
-	import { Flyout } from '$lib/index.js';
-	import { PREFIX } from '$constants';
+	import { floating, roundByDPR, RenderSoC } from '#internal';
+	import { Flyout } from '#lib/index.js';
+	import { PREFIX } from '#constants';
 	import { arrow, flip, hide, offset, shift, type ComputePositionReturn, type Side } from '@floating-ui/dom';
 	import type { Attachment } from 'svelte/attachments';
 	import type { TooltipProps } from './types.ts';
@@ -13,7 +13,7 @@
 	const ID = `${PREFIX}${COMPONENT_NAME}-${FALLBACK_ID}`;
 
 	let {
-		ref = $bindable(),
+		ref = $bindable(null),
 		content = 'I am a tooltip',
 		placement,
 		target,
@@ -75,7 +75,7 @@
 		placement: placement ?? _config?.placement ?? 'top',
 		strategy: 'fixed' as const,
 		middleware: [
-			...(_config?.middleware ?? [offset(8), flip(), shift({ padding: 8 }), hide()]),
+			...(_config?.middleware ?? [offset(8), flip({ padding: 100 }), shift({ padding: 100 }), hide()]),
 			...(withArrow && arrowElement ? [arrow({ element: arrowElement })] : [])
 		]
 	});
@@ -174,11 +174,11 @@
     ``` 
 -->
 <Flyout
+	{...attributes}
 	{id}
 	class={['fs-tooltip', !open && 'tooltip-hidden', classes]}
 	role="tooltip"
 	bind:ref
-	{...attributes}
 	{@attach triggerElement && open
 		? floating(triggerElement, positionConfig, {
 				onComputed: withArrow ? arrowComputeCallback : undefined,
@@ -207,7 +207,8 @@
 		position: fixed !important;
 		top: 0;
 		left: 0;
-		z-index: 50;
+		z-index: 110;
+		padding: 0.5rem !important;
 		& .fs-tooltip-arrow {
 			position: absolute;
 			width: 16px;

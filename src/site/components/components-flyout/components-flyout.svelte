@@ -10,7 +10,8 @@
 		ToggleSwitch,
 		Expander,
 		Flyout,
-		Button
+		Button,
+		Label
 	} from '#lib/index.js';
 </script>
 
@@ -31,22 +32,28 @@
 			size={64}
 			presence={{ status: 'available' }}
 		/>
-		<TextBox />
-		<TextBox type="search" placeholder="Search TextBox" />
-		<TextBox type="password" placeholder="Password TextBox" />
-		<NumberBox />
-		<NumberBox variant="compact" />
+		<Label label="TextBox" labelPosition="above" wrapperAttributes={{ class: 'field' }}><TextBox /></Label>
+		<Label label="Search" labelPosition="above" wrapperAttributes={{ class: 'field' }}>
+			<TextBox type="search" placeholder="Search TextBox" />
+		</Label>
+		<Label label="Password" labelPosition="above" wrapperAttributes={{ class: 'field' }}>
+			<TextBox type="password" placeholder="Password TextBox" />
+		</Label>
+		<Label label="NumberBox" labelPosition="above" wrapperAttributes={{ class: 'field' }}><NumberBox /></Label>
+		<Label label="Compact NumberBox" labelPosition="above" wrapperAttributes={{ class: 'field' }}>
+			<NumberBox variant="compact" />
+		</Label>
 		<div class="rings">
 			<ProgressRing value={50} />
 			<ProgressRing value={50} hideRail />
 			<ProgressRing indeterminate />
 			<ProgressRing indeterminate hideRail />
 		</div>
-		<InfoBar title="Info Title" status="attention">
+		<InfoBar title="Info Title" status="attention" headingLevel={2}>
 			<p>A good message here...</p>
 		</InfoBar>
 		<Expander header="Expander Label" description="A description of the expander">
-			<h1>Content</h1>
+			<h3>Content</h3>
 			<p>
 				Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur ipsa consequatur voluptates minima esse
 				modi soluta commodi sit facere. Dolore, autem suscipit voluptatem pariatur corporis velit sint quaerat ipsa
@@ -80,6 +87,7 @@
 		:global(.components-flyout) {
 			gap: 0.75rem;
 			justify-content: center;
+			& :global(.field),
 			& :global(.fs-textbox),
 			& :global(.fs-info-bar),
 			& :global(.fs-expander) {

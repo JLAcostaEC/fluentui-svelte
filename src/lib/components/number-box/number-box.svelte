@@ -8,6 +8,8 @@
 	import { onClickOutside } from 'runed';
 
 	const ID = $props.id();
+	/** Half of the width of the button that opens the flyout of the compact variant. */
+	const BUTTON_HALF_WIDTH = 16;
 
 	const label = claimLabel(() => id);
 
@@ -68,16 +70,13 @@
 		{#if openFlyout}
 			<div
 				class="flyout-absolute"
-				{@attach ref
-					? floating(ref, {
+				{@attach wrapperRef
+					? floating(wrapperRef, {
 							placement: 'right',
 							middleware: [
-								shift({
-									crossAxis: true
-								}),
-								offset(({ rects }) => {
-									return -rects.reference.width / 1.4;
-								})
+								// Centers the flyout on the button that opened it, whatever the width of the box.
+								offset(({ rects }) => -(rects.floating.width / 2 + BUTTON_HALF_WIDTH)),
+								shift({ crossAxis: true, padding: 8 })
 							]
 						})
 					: undefined}
@@ -100,7 +99,7 @@
 <style>
 	.flyout-absolute {
 		position: absolute;
-		right: 0;
+		left: 0;
 		top: 0;
 		z-index: 3;
 		& :global(.fs-flyout) {

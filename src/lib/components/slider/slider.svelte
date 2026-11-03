@@ -83,10 +83,8 @@
 	let thumbClientWidth = $state(20);
 	let percentage = $derived(valueToPercentage(value));
 	let directionAwareReverse = $derived(
-		wrapperRef && window
-			? window.getComputedStyle(wrapperRef)?.direction === 'ltr' && orientation === 'horizontal'
-				? reverse
-				: !reverse
+		wrapperRef && orientation === 'horizontal' && window.getComputedStyle(wrapperRef).direction === 'rtl'
+			? !reverse
 			: reverse
 	);
 

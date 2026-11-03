@@ -1,7 +1,7 @@
 import type { Component, Snippet } from 'svelte';
 import type { HTMLAttributes, HTMLButtonAttributes, SVGAttributes } from 'svelte/elements';
-import type { FSContext } from '$internal';
-import type { PolymorphicProps, Shapes } from '$types';
+import type { FSContext } from '#internal';
+import type { PolymorphicProps, Shapes } from '#types';
 
 export type TagAppearance = 'filled' | 'outline' | 'brand';
 

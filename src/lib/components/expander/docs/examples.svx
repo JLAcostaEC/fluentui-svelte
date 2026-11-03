@@ -1,9 +1,9 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
-  import { Expander } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { Expander } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
   import { InfoRegular } from 'fluentui-icons-svelte';
-  import { m } from '$i18n/messages.js';
+  import { m } from '#i18n/messages.js';
 
   const controllingExpansionCode = `
 <Expander header="Expander Title" expanded>

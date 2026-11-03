@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FluentUISvelte from '$lib/providers/fluentui-svelte/fluentui-svelte.svelte';
+	import FluentUISvelte from '#lib/providers/fluentui-svelte/fluentui-svelte.svelte';
 	import ListView from '../list-view.svelte';
 	import ListViewItem from '../list-view-item.svelte';
 	import type { NavigationMode, SelectionMode } from '../types.ts';

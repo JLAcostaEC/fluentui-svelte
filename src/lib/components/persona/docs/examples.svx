@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Persona } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
+  import { Persona } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
 
   const textAlignCode = `
 <Persona name="Alex Johnson" avatarProps={{ initials: 'AJ' }} secondaryText="Available" />

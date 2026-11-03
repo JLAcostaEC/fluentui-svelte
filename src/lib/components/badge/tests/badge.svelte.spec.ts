@@ -2,7 +2,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { Badge, BadgeIcon } from '$lib/index.js';
+import { Badge, BadgeIcon } from '#lib/index.js';
 
 describe('Badge', () => {
 	it('renders as a span element', async () => {

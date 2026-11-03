@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { claimLabel } from '../label/label-context.ts';
-	import { invokeHandlers } from '$internal';
-	import { PREFIX } from '$constants';
+	import { invokeHandlers } from '#internal';
+	import { PREFIX } from '#constants';
 	import StarFilled from 'fluentui-icons-svelte/StarFilled.svelte';
 	import StarHalfRegular from 'fluentui-icons-svelte/StarHalfRegular.svelte';
 	import StarOneQuarterRegular from 'fluentui-icons-svelte/StarOneQuarterRegular.svelte';

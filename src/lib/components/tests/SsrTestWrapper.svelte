@@ -15,7 +15,7 @@
 		TreeView,
 		TreeViewItem,
 		TreeViewItemContent
-	} from '$lib/index.js';
+	} from '#lib/index.js';
 
 	/** The case to render: the server renders one component at a time. */
 	let { name }: { name: string } = $props();

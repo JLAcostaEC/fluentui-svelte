@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Avatar, InfoBar, Tag, TagPicker, TagPickerOption } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import StatusBadge from '$site/components/status-badge/status-badge.svelte';
-  import { m } from '$i18n/messages.js';
+  import { Avatar, InfoBar, Tag, TagPicker, TagPickerOption } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import { m } from '#i18n/messages.js';
 
   const options = ['John Doe', 'Jane Doe', 'Max Mustermann', 'Erika Mustermann', 'Pierre Dupont', 'Amelie Dupont'];
 

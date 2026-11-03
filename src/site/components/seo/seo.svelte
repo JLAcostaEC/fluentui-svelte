@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { MetaTags } from 'svelte-meta-tags';
 	import { page } from '$app/state';
-	import { baseLocale, deLocalizeUrl, getLocale, locales, localizeHref } from '$i18n/runtime.js';
-	import { SITE_NAME } from '$site/constants.js';
-	import type { SeoMeta } from '$types';
+	import { baseLocale, deLocalizeUrl, getLocale, locales, localizeHref } from '#i18n/runtime.js';
+	import { SITE_NAME } from '#site/constants.js';
+	import type { SeoMeta } from '#types';
 
 	type Props = Pick<SeoMeta, 'title' | 'description'> &
 		Partial<Omit<SeoMeta, 'title' | 'description' | 'locale'>> & {
@@ -33,7 +33,7 @@
 	const toAbsolute = (url: string) => new URL(url, page.url.origin).href;
 	const hrefFor = (target: (typeof locales)[number]) => toAbsolute(localizeHref(path, { locale: target }));
 
-	const canonicalUrl = $derived(isAbsolute ? canonical : hrefFor(locale));
+	const canonicalUrl = $derived(isAbsolute ? canonical : hrefFor(locale as any));
 	const languageAlternates = $derived(
 		isAbsolute
 			? []

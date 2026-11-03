@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { watch } from 'runed';
-	import { PREFIX } from '$constants';
-	import { Button } from '$lib/index.js';
-	import { invokeHandlers, RenderSoC } from '$internal';
+	import { PREFIX } from '#constants';
+	import { Button } from '#lib/index.js';
+	import { invokeHandlers, RenderSoC } from '#internal';
 	import { getMenuContext, COMPONENT_NAME as MENU_COMPONENT_NAME } from './menu.svelte.ts';
 	import type { MenuItemActionableProps } from './types.ts';
 

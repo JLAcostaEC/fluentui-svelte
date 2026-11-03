@@ -10,7 +10,7 @@
 		TableRow,
 		TableCell,
 		TableSelectionCell
-	} from '$lib/index.js';
+	} from '#lib/index.js';
 
 	let {
 		count = 500,

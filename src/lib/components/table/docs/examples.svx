@@ -3,10 +3,10 @@
   import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
   import { SvelteSet } from 'svelte/reactivity';
   import type { Attachment } from 'svelte/attachments';
-  import { Button, Table, TableHeader, TableHeaderCell, TableBody, TableRow, TableCell, TableCellLayout, TableCellActions, TableSelectionCell } from '$lib/index.js';
+  import { Button, Table, TableHeader, TableHeaderCell, TableBody, TableRow, TableCell, TableCellLayout, TableCellActions, TableSelectionCell } from '#lib/index.js';
   import { DocumentRegular, FolderRegular, VideoRegular, DocumentPdfRegular, EditRegular, MoreHorizontalRegular } from 'fluentui-icons-svelte';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
   import type { SortDirection, TableSize } from '../types.ts';
 
   const items = [

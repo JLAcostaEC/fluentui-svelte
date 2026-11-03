@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { invokeHandlers } from '$internal';
+	import { invokeHandlers } from '#internal';
 	import type { HyperlinkProps } from './types.ts';
 
 	let {

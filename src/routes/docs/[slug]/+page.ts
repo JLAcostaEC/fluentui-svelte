@@ -6,13 +6,13 @@ export const load = async ({ params }) => {
 	let docs;
 
 	try {
-		docs = (await import(`$site/pages/${slug}.svx`)).default;
+		docs = (await import(`#site/pages/${slug}.svx`)).default;
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	} catch (_error) {
 		// console.log(_error);
 	}
 
-	if (!docs) error(404, { message: 'Not found' });
+	if (!docs) error(404, 'Not found');
 
 	return { docs: docs };
 };

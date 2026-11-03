@@ -1,5 +1,5 @@
-import type { FSContext } from '$internal';
-import type { PolymorphicProps, Sizes } from '$types';
+import type { FSContext } from '#internal';
+import type { PolymorphicProps, Sizes } from '#types';
 import type { Snippet, Component } from 'svelte';
 import type { HTMLAttributes } from 'svelte/elements';
 

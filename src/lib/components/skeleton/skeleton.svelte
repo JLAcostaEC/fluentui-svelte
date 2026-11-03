@@ -1,5 +1,5 @@
 <script lang="ts" generics="Tag extends SkeletonTags = 'div'">
-	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import type { SkeletonProps, SkeletonTags } from './types.ts';
 
 	let {

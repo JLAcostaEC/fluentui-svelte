@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { FluentUISvelte, TabView, TabViewTab } from '$lib/index.js';
+	import { FluentUISvelte, TabView, TabViewTab } from '#lib/index.js';
 	import { DocumentRegular } from 'fluentui-icons-svelte';
 	import type { TabViewProps, TabViewTabProps } from '../types.ts';
 

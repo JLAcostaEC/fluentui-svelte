@@ -2,7 +2,7 @@ import { cdp, page } from 'vitest/browser';
 import { flushSync } from 'svelte';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { cleanup, render } from 'vitest-browser-svelte';
-import { Expander, fadeScale, flyToOffset } from '$internal';
+import { Expander, fadeScale, flyToOffset } from '#internal';
 import ReducedMotionProbe from './ReducedMotionProbe.svelte';
 import ReducedMotionTestWrapper from './ReducedMotionTestWrapper.svelte';
 

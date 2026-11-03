@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PREFIX } from '$constants';
+	import { PREFIX } from '#constants';
 	import type { TagPickerOptionGroupProps } from './types.ts';
 
 	const FALLBACK_ID = $props.id();

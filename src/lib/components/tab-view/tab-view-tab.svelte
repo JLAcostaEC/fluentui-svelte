@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { invokeHandlers, RenderSoC } from '$internal';
+	import { invokeHandlers, RenderSoC } from '#internal';
 	import DismissRegular from 'fluentui-icons-svelte/DismissRegular.svelte';
 	import { COMPONENT_NAME, requireTabViewContext } from './tab-view.svelte.ts';
 	import type { TabViewTabProps } from './types.ts';

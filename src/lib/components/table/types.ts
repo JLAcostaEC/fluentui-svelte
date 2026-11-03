@@ -1,5 +1,5 @@
-import type { FSContext } from '$internal';
-import type { PolymorphicProps } from '$types';
+import type { FSContext } from '#internal';
+import type { PolymorphicProps } from '#types';
 import type { Component, Snippet } from 'svelte';
 import type { CheckboxProps } from '../checkbox/types.ts';
 import type { RadioButtonProps } from '../radio-button/types.ts';

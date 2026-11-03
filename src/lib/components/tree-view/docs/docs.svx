@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { TreeView, TreeViewItem, TreeViewItemContent } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import { m } from '$i18n/messages.js';
-  import StatusBadge from '$site/components/status-badge/status-badge.svelte';
+  import { TreeView, TreeViewItem, TreeViewItemContent } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
 </script>
 
 # Tree View <StatusBadge />

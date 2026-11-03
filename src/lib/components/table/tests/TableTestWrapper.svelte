@@ -11,7 +11,7 @@
 		TableCellActions,
 		TableCellLayout,
 		TableSelectionCell
-	} from '$lib/index.js';
+	} from '#lib/index.js';
 	import type {
 		CellFocusMode,
 		ColumnSizing,

@@ -1,8 +1,8 @@
 import type { Snippet } from 'svelte';
-import type { FSContext } from '$internal';
+import type { FSContext } from '#internal';
 import type { HTMLAttributes } from 'svelte/elements';
 import type { ButtonProps } from '../button/types.ts';
-import type { PolymorphicProps, XDirection } from '$types';
+import type { PolymorphicProps, XDirection } from '#types';
 
 export type DialogType = 'modal' | 'non-modal' | 'alert';
 export type DialogAnimation = 'fade' | 'zoom' | 'slide' | 'bounce';

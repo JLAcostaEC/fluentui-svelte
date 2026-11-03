@@ -1,5 +1,5 @@
 <script lang="ts" generics="Tag extends CardTagTypes = 'div'">
-	import type { Horientation } from '$types';
+	import type { Horientation } from '#types';
 	import { invokeHandlers } from '../../internal/utils.ts';
 	import { setCardContext } from './card-context.svelte.ts';
 	import Checkbox from '../checkbox/checkbox.svelte';

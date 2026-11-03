@@ -1,6 +1,6 @@
-import { PREFIX } from '$constants';
+import { PREFIX } from '#constants';
 import type { ListViewContext, NavigationMode, SelectionMode } from './types.ts';
-import { createFSContext } from '$internal';
+import { createFSContext } from '#internal';
 import type { Attachment } from 'svelte/attachments';
 import {
 	setTabspotAttributes,

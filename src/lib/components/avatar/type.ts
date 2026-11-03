@@ -1,7 +1,7 @@
 import type { Component, Snippet } from 'svelte';
 import type { SVGAttributes } from 'svelte/elements';
 import type { BadgePresence } from '../badge/types.ts';
-import type { ActiveOrInactive, Colors, PolymorphicProps, Shapes } from '$types';
+import type { ActiveOrInactive, Colors, PolymorphicProps, Shapes } from '#types';
 
 /** @propsmith AvatarProps */
 export type AvatarProps = {

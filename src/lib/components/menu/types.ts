@@ -1,7 +1,7 @@
 import type { ComputePositionConfig, VirtualElement } from '@floating-ui/dom';
-import type { FSContext } from '$internal';
+import type { FSContext } from '#internal';
 import type { Component, Snippet } from 'svelte';
-import type { NoUndefinedField, Shapes } from '$types';
+import type { NoUndefinedField, Shapes } from '#types';
 import type { ButtonProps } from '../button/types.ts';
 
 export type MenuContext = FSContext<

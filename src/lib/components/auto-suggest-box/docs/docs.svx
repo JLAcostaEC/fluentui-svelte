@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { AutoSuggestBox, AutoSuggestBoxOption, InfoBar } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
-  import StatusBadge from '$site/components/status-badge/status-badge.svelte';
-  import { m } from '$i18n/messages.js';
+  import { AutoSuggestBox, AutoSuggestBoxOption, InfoBar } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import { m } from '#i18n/messages.js';
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
 </script>
 

@@ -1,5 +1,5 @@
 import type { HTMLAttributes, HTMLButtonAttributes, HTMLInputAttributes } from 'svelte/elements';
-import type { NativeFieldAttributes } from '$internal';
+import type { NativeFieldAttributes } from '#internal';
 
 /** @propsmith TimePickerProps */
 export type TimePickerProps = {

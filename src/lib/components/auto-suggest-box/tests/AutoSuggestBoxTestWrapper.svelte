@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AutoSuggestBox, AutoSuggestBoxOption, FluentUISvelte } from '$lib/index.js';
+	import { AutoSuggestBox, AutoSuggestBoxOption, FluentUISvelte } from '#lib/index.js';
 
 	type Option = { value: string; text: string; disabled?: boolean };
 

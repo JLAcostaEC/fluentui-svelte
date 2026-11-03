@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { CardFooterProps } from './types.ts';
-	import { RenderSoC } from '$internal';
+	import { RenderSoC } from '#internal';
 	import { getCardContext } from './card-context.svelte.ts';
 
 	let { ref = $bindable(null), class: classes, action, ...attributes }: CardFooterProps = $props();

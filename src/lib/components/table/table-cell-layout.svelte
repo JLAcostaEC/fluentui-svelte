@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { RenderSoC } from '$internal';
+	import { RenderSoC } from '#internal';
 	import type { TableCellLayoutProps } from './types.ts';
 
 	let {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { FluentUISvelte, Label, TextBox } from '$lib/index.js';
+	import { FluentUISvelte, Label, TextBox } from '#lib/index.js';
 	import type { LabelProps } from '../types.ts';
 
 	let {

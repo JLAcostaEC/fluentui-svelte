@@ -4,8 +4,8 @@
 	import SearchFilled from 'fluentui-icons-svelte/SearchFilled.svelte';
 	import EyeShowFilled from 'fluentui-icons-svelte/EyeShowFilled.svelte';
 	import EyeHideFilled from 'fluentui-icons-svelte/EyeHideFilled.svelte';
-	import { TextBoxButton } from '$lib/index.js';
-	import { invokeHandlers, RenderSoC } from '$internal';
+	import { TextBoxButton } from '#lib/index.js';
+	import { invokeHandlers, RenderSoC } from '#internal';
 	import type { TextBoxProps } from './types.ts';
 
 	const FALLBACK_ID = $props.id();

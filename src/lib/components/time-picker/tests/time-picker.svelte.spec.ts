@@ -1,7 +1,7 @@
 import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { TimePicker } from '$lib/index.js';
+import { TimePicker } from '#lib/index.js';
 import TimePickerTestWrapper from './TimePickerTestWrapper.svelte';
 
 const picker = () => page.selector('.fs-time-picker');

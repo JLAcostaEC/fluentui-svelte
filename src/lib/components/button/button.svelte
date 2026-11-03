@@ -1,5 +1,5 @@
 <script lang="ts" generics="T extends ButtonGenerics = 'button'">
-	import { invokeHandlers, RenderSoC } from '$internal';
+	import { invokeHandlers, RenderSoC } from '#internal';
 	import ChevronDownFilled from 'fluentui-icons-svelte/ChevronDownFilled.svelte';
 	import type { ButtonGenerics, ButtonProps } from './types.ts';
 

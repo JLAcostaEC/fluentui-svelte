@@ -1,10 +1,10 @@
 <script lang="ts">
 	import panzoom from 'panzoom';
-	import ToggleSwitch from '$components/toggle-switch/toggle-switch.svelte';
-	import RenderShiki from '$site/components/render-shiki/render-shiki.svelte';
-	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
-	import { m } from '$i18n/messages.js';
-	import { getDisablePanZoom } from '$site/preferences.js';
+	import ToggleSwitch from '#components/toggle-switch/toggle-switch.svelte';
+	import RenderShiki from '#site/components/render-shiki/render-shiki.svelte';
+	import { getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { m } from '#i18n/messages.js';
+	import { getDisablePanZoom } from '#site/preferences.js';
 	import type { Snippet } from 'svelte';
 	import type { PanZoomOptions } from 'panzoom';
 	import type { Attachment } from 'svelte/attachments';

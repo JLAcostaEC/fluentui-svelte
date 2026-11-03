@@ -1,7 +1,7 @@
 import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { TabViewTab } from '$lib/index.js';
+import { TabViewTab } from '#lib/index.js';
 import TabViewTestWrapper from './TabViewTestWrapper.svelte';
 
 /** The close buttons are for the pointer only, so they are found by class rather than by role. */

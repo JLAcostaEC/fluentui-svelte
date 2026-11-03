@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { Button, BadgeIcon } from '$lib/index.js';
+	import { Button, BadgeIcon } from '#lib/index.js';
 	import DismissFilled from 'fluentui-icons-svelte/DismissFilled.svelte';
 	import DismissCircleFilled from 'fluentui-icons-svelte/DismissCircleFilled.svelte';
 	import InfoFilled from 'fluentui-icons-svelte/InfoFilled.svelte';
 	import ErrorCircleFilled from 'fluentui-icons-svelte/ErrorCircleFilled.svelte';
 	import WarningFilled from 'fluentui-icons-svelte/WarningFilled.svelte';
 	import CheckmarkFilled from 'fluentui-icons-svelte/CheckmarkFilled.svelte';
-	import { RenderSoC } from '$internal';
+	import { RenderSoC } from '#internal';
 	import type { InfoBarProps } from './types.ts';
 
 	let {

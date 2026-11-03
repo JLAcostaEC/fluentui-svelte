@@ -1,6 +1,6 @@
 <script lang="ts">
 	import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
-	import { AutoSuggestBox, AutoSuggestBoxOption, FluentUISvelte } from '$lib/index.js';
+	import { AutoSuggestBox, AutoSuggestBoxOption, FluentUISvelte } from '#lib/index.js';
 
 	let {
 		count = 60,

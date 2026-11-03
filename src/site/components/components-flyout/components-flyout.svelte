@@ -11,7 +11,7 @@
 		Expander,
 		Flyout,
 		Button
-	} from '$lib/index.js';
+	} from '#lib/index.js';
 </script>
 
 <div class="components-flyout-wrapper">

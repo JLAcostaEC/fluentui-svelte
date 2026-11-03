@@ -1,6 +1,6 @@
 import type { Component, Snippet } from 'svelte';
 import type { HTMLAttributes, HTMLInputAttributes, HTMLSelectAttributes, SVGAttributes } from 'svelte/elements';
-import type { FSContext, NativeFieldAttributes } from '$internal';
+import type { FSContext, NativeFieldAttributes } from '#internal';
 import type { ListViewItemProps } from '../list-view/types.ts';
 import type { TagGroupProps } from '../tag/types.ts';
 

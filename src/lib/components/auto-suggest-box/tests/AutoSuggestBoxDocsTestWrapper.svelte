@@ -2,8 +2,8 @@
 	// A copy of the virtualized example in docs.svx, down to the UUID ids and the
 	// every-tenth-disabled rule, so the tests exercise what the docs site runs.
 	import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
-	import { AutoSuggestBox, AutoSuggestBoxOption, FluentUISvelte } from '$lib/index.js';
-	import { fake } from '$site/fake.js';
+	import { AutoSuggestBox, AutoSuggestBoxOption, FluentUISvelte } from '#lib/index.js';
+	import { fake } from '#site/fake.js';
 
 	let {
 		suggestionChosen,

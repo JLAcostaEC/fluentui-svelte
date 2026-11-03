@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { claimLabel } from '../label/label-context.ts';
-	import { PREFIX } from '$constants';
-	import { invokeHandlers } from '$internal';
+	import { PREFIX } from '#constants';
+	import { invokeHandlers } from '#internal';
 	import type { TextAreaProps } from './types.ts';
 
 	const FALLBACK_ID = $props.id();

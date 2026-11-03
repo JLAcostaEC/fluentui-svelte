@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { ProgressRing } from '$lib/index.js';
+import { ProgressRing } from '#lib/index.js';
 
 const ring = () => page.selector('svg.progress-ring');
 

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { claimLabel } from '../label/label-context.ts';
-	import { floating } from '$internal';
+	import { floating } from '#internal';
 	import { offset, shift } from '@floating-ui/dom';
-	import { Flyout, TextBoxButton, TextBox } from '$lib/index.js';
+	import { Flyout, TextBoxButton, TextBox } from '#lib/index.js';
 	import { ChevronUpFilled, ChevronDownFilled, ChevronUpDownFilled } from 'fluentui-icons-svelte';
 	import type { NumberBoxProps } from './types.ts';
 	import { onClickOutside } from 'runed';

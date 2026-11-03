@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Avatar, BadgeIcon } from '$lib/index.js';
+	import { Avatar, BadgeIcon } from '#lib/index.js';
 	import type { PersonaProps } from './types.ts';
 
 	let {

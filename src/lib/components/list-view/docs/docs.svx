@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { ListView, ListViewItem } from '$lib/index.js';
-  import Showcase from '$site/components/showcase/showcase.svelte';
+  import { ListView, ListViewItem } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
-  import { m } from '$i18n/messages.js';
-  import StatusBadge from '$site/components/status-badge/status-badge.svelte';
+  import { m } from '#i18n/messages.js';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
 
   const list = ['Chile', 'Colombia', 'Dominican Republic', 'Costa Rica', 'Venezuela'];
   const selected = ['Chile', 'Dominican Republic', 'Venezuela'];

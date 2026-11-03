@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { claimLabel } from '../label/label-context.ts';
 	import type { TimePickerProps } from './types.ts';
-	import { Flyout, Button, Divider } from '$lib/index.js';
+	import { Flyout, Button, Divider } from '#lib/index.js';
 	import { on } from 'svelte/events';
 	import { tick } from 'svelte';
-	import { PREFIX } from '$constants';
-	import { dispatchFieldEvents, floating, invokeHandlers, NativeField } from '$internal';
+	import { PREFIX } from '#constants';
+	import { dispatchFieldEvents, floating, invokeHandlers, NativeField } from '#internal';
 	import { flip, hide, offset, shift } from '@floating-ui/dom';
-	import DynamicCarousel from '$lib/internal/components/dynamic-carousel/dynamic-carousel.svelte';
+	import DynamicCarousel from '#lib/internal/components/dynamic-carousel/dynamic-carousel.svelte';
 	import { CheckmarkRegular, DismissRegular } from 'fluentui-icons-svelte';
 
 	const labelContext = claimLabel(() => id);

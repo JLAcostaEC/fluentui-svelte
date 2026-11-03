@@ -1,5 +1,5 @@
 import type { SVGAttributes } from 'svelte/elements';
-import type { ProgressStatus } from '$types';
+import type { ProgressStatus } from '#types';
 
 /** @propsmith ProgressRingProps */
 export type ProgressRingProps = {

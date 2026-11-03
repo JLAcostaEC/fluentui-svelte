@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { DropdownSelect, DropdownSelectOption } from '$lib/index.js';
+	import { DropdownSelect, DropdownSelectOption } from '#lib/index.js';
 	import type { HTMLSelectAttributes } from 'svelte/elements';
 
 	type Option = { value: string; text: string; disabled?: boolean };

@@ -1,7 +1,7 @@
 import type { Placement } from '@floating-ui/dom';
 import type { Component, Snippet } from 'svelte';
 import type { HTMLAttributes, HTMLInputAttributes } from 'svelte/elements';
-import type { HiddenInputAttributes } from '$internal';
+import type { HiddenInputAttributes } from '#internal';
 
 /** @propsmith SliderProps */
 export type SliderProps = {

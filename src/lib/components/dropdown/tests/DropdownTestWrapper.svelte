@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Dropdown, DropdownOption, FluentUISvelte } from '$lib/index.js';
+	import { Dropdown, DropdownOption, FluentUISvelte } from '#lib/index.js';
 
 	type Option = { value: string; text: string; disabled?: boolean };
 

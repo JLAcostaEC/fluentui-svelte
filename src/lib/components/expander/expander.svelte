@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Button } from '$lib/index.js';
-	import { Expander, invokeHandlers, RenderSoC } from '$internal';
-	import { getReducedMotion } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { Button } from '#lib/index.js';
+	import { Expander, invokeHandlers, RenderSoC } from '#internal';
+	import { getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import ChevronUpFilled from 'fluentui-icons-svelte/ChevronUpFilled.svelte';
 	import type { Action } from 'svelte/action';
 	import type { ExpanderProps } from './types.ts';

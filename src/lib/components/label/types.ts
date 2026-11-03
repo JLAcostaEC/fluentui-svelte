@@ -1,6 +1,6 @@
 import type { Component, Snippet } from 'svelte';
 import type { HTMLAttributes, HTMLButtonAttributes, HTMLLabelAttributes } from 'svelte/elements';
-import type { Sizes } from '$types';
+import type { Sizes } from '#types';
 import type { TooltipProps } from '../tooltip/types.ts';
 
 /** @propsmith LabelProps */

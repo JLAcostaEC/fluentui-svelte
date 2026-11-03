@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Button } from '$lib/index.js';
-	import { invokeHandlers } from '$internal';
+	import { Button } from '#lib/index.js';
+	import { invokeHandlers } from '#internal';
 	import { getDialogContext } from './dialog.svelte.ts';
 	import type { DialogTriggerProps } from './types.ts';
 

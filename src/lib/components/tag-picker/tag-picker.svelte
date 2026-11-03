@@ -4,10 +4,10 @@
 	import { SvelteMap, SvelteSet } from 'svelte/reactivity';
 	import { onClickOutside } from 'runed';
 	import ChevronDownRegular from 'fluentui-icons-svelte/ChevronDownRegular.svelte';
-	import { PREFIX } from '$constants';
-	import { dispatchFieldEvents, invokeHandlers, NativeField, RenderSoC } from '$internal';
+	import { PREFIX } from '#constants';
+	import { dispatchFieldEvents, invokeHandlers, NativeField, RenderSoC } from '#internal';
 	import { setTagPickerContext } from './tag-picker.ts';
-	import { Flyout, ListView, ListViewItem, Tag, TagGroup } from '$lib/index.js';
+	import { Flyout, ListView, ListViewItem, Tag, TagGroup } from '#lib/index.js';
 	import {
 		clearTabspotActive,
 		setTabspotActive,
@@ -15,7 +15,7 @@
 		type TabspotNavigationEvent,
 		type TabspotNodeOptions
 	} from 'tabspot';
-	import { getGlobalFSContext } from '$lib/providers/fluentui-svelte/fluentui-svelte.js';
+	import { getGlobalFSContext } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import type { TagSize } from '../tag/types.ts';
 	import type { OptionLabel, OptionType, TagPickerContext, TagPickerProps, TagPickerSizes } from './types.ts';
 

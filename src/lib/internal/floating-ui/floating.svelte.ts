@@ -9,8 +9,8 @@ import {
 	type ComputePositionReturn,
 	type VirtualElement
 } from '@floating-ui/dom';
-import { roundByDPR } from '$internal';
-import { DEFAULT_OFFSET } from '$constants';
+import { roundByDPR } from '#internal';
+import { DEFAULT_OFFSET } from '#constants';
 import type { Attachment } from 'svelte/attachments';
 
 export interface FloatingOptions {

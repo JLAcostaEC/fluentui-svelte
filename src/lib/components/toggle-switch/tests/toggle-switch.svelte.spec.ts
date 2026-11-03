@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { ToggleSwitch } from '$lib/index.js';
+import { ToggleSwitch } from '#lib/index.js';
 import ToggleSwitchTestWrapper from './ToggleSwitchTestWrapper.svelte';
 
 const toggle = () => page.getByRole('switch');

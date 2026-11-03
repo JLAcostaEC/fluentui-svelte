@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent, DialogActions } from '$lib/index.js';
+	import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent, DialogActions } from '#lib/index.js';
 	import type {
 		DialogAnimation,
 		DialogDuration,
 		DialogPosition,
 		DialogTitleTag
-	} from '$lib/components/dialog/types.js';
+	} from '#lib/components/dialog/types.js';
 
 	let {
 		type = 'modal',

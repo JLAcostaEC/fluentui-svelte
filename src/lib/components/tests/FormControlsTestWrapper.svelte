@@ -27,7 +27,7 @@
 		TagPickerOption,
 		TextBox,
 		TimePicker
-	} from '$lib/index.js';
+	} from '#lib/index.js';
 
 	let {
 		control,

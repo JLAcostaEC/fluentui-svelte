@@ -2,8 +2,8 @@
 	import type { Snippet } from 'svelte';
 	import CaretDownFilled from 'fluentui-icons-svelte/CaretDownFilled.svelte';
 	import CaretUpFilled from 'fluentui-icons-svelte/CaretUpFilled.svelte';
-	import { Button } from '$lib/index.js';
-	import { PREFIX } from '$constants';
+	import { Button } from '#lib/index.js';
+	import { PREFIX } from '#constants';
 	import { on } from 'svelte/events';
 
 	let {

@@ -1,4 +1,4 @@
-import type { FSContext } from '$internal';
+import type { FSContext } from '#internal';
 import type { TextBoxProps } from '../text-box/types.ts';
 import type { ListViewItemProps } from '../list-view/types.ts';
 import type { FlyoutProps } from '../flyout/types.ts';

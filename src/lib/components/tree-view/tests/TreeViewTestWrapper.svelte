@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { TreeView, TreeViewItem, TreeViewItemContent } from '$lib/index.js';
-	import type { TreeViewItemProps, TreeViewSelectionMode } from '$lib/components/tree-view/types.js';
-	import type { Sizes } from '$types';
+	import { TreeView, TreeViewItem, TreeViewItemContent } from '#lib/index.js';
+	import type { TreeViewItemProps, TreeViewSelectionMode } from '#lib/components/tree-view/types.js';
+	import type { Sizes } from '#types';
 
 	let {
 		selectionMode,

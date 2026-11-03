@@ -9,7 +9,7 @@
 		setListViewItemContext
 	} from './utils.ts';
 	import Checkbox from '../checkbox/checkbox.svelte';
-	import { invokeHandlers, isObjectEmpty } from '$internal';
+	import { invokeHandlers, isObjectEmpty } from '#internal';
 	import type { ListViewItemProps, ListViewItemDOM } from './types.ts';
 	import { getTabspotAttributes, type TabspotNodeOptions } from 'tabspot';
 

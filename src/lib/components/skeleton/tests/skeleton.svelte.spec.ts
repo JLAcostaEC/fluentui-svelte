@@ -1,7 +1,7 @@
 import { page } from 'vitest/browser';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { Skeleton } from '$lib/index.js';
+import { Skeleton } from '#lib/index.js';
 
 const skeleton = () => page.selector('.fs-skeleton');
 

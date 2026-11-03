@@ -1,4 +1,4 @@
-import type { PolymorphicProps, Shapes } from '$types';
+import type { PolymorphicProps, Shapes } from '#types';
 
 export type SkeletonTags = 'div' | 'span';
 

@@ -1,6 +1,6 @@
 import type { Component, Snippet } from 'svelte';
 import type { HTMLAttributes, HTMLInputAttributes } from 'svelte/elements';
-import type { Sizes } from '$types';
+import type { Sizes } from '#types';
 
 export type TextBoxTypes = 'text' | 'search' | 'email' | 'url' | 'tel' | 'password' | 'number';
 

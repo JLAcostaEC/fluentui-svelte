@@ -1,6 +1,6 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
-  import { AppWindow, TitleBar, TitleBarLeftControls, TitleBarRightControls } from '#lib/index.js';
+  import { AppSurface, AppWindow, TitleBar, TitleBarLeftControls, TitleBarRightControls } from '#lib/index.js';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { AppsRegular } from 'fluentui-icons-svelte';
   import { m } from '#i18n/messages.js';
@@ -20,7 +20,7 @@
         <TitleBarRightControls />
       {/snippet}
     </TitleBar>
-    <p style="margin: 0; padding: 1rem">This is the content of the window.</p>
+    <AppSurface style="padding: 1rem">This is the content of the window.</AppSurface>
   </AppWindow>
 </Showcase>
 
@@ -30,7 +30,7 @@
 
 ```svelte
 <script>
-	import { AppWindow, TitleBar, TitleBarLeftControls, TitleBarRightControls } from 'fluentui-svelte';
+	import { AppSurface, AppWindow, TitleBar, TitleBarLeftControls, TitleBarRightControls } from 'fluentui-svelte';
 	import { AppsRegular } from 'fluentui-icons-svelte';
 </script>
 
@@ -43,6 +43,6 @@
 			<TitleBarRightControls />
 		{/snippet}
 	</TitleBar>
-	<p>This is the content of the window.</p>
+	<AppSurface style="padding: 1rem">This is the content of the window.</AppSurface>
 </AppWindow>
 ```

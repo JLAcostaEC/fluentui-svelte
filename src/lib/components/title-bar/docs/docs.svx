@@ -37,7 +37,9 @@
 <script>
 	import { TitleBar, TitleBarLeftControls, TitleBarRightControls } from 'fluentui-svelte';
 	import { AppsRegular } from 'fluentui-icons-svelte';
+	import { getCurrentWindow } from '@tauri-apps/api/window';
 
+	const appWindow = getCurrentWindow();
 	let maximized = $state(false);
 </script>
 
@@ -50,7 +52,10 @@
 			{maximized}
 			personPic={{ name: 'Ada Lovelace' }}
 			onMinimize={() => appWindow.minimize()}
-			onWindowToggle={() => appWindow.toggleMaximize()}
+			onWindowToggle={async () => {
+				await appWindow.toggleMaximize();
+				maximized = await appWindow.isMaximized();
+			}}
 			onClose={() => appWindow.close()}
 		/>
 	{/snippet}

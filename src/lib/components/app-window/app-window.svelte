@@ -21,11 +21,12 @@
 	@component
 	An app window is the surface of an app: a Mica window with its own border and a shell shadow that tells whether it is
 	the active window. It is a `Flyout` underneath, sized with `width` and `height`, which are `100%` unless you say otherwise.
+	Place page content in an `AppSurface` or another scrollable container; the window itself clips overflow.
 
 	- Usage:
 	```tsx
 	<script>
-		import { AppWindow, TitleBar, TitleBarRightControls } from 'fluentui-svelte';
+		import { AppSurface, AppWindow, TitleBar, TitleBarRightControls } from 'fluentui-svelte';
 	</script>
 
 	<AppWindow width={480} height={320}>
@@ -34,6 +35,7 @@
 				<TitleBarRightControls />
 			{/snippet}
 		</TitleBar>
+		<AppSurface>The content of the app.</AppSurface>
 	</AppWindow>
 	```
 -->

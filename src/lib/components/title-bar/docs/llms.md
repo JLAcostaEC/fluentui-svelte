@@ -16,7 +16,9 @@ Compose the bar from its three areas through the `leftControls`, `search` and `r
 <script>
 	import { TitleBar, TitleBarLeftControls, TitleBarRightControls } from 'fluentui-svelte';
 	import { AppsRegular } from 'fluentui-icons-svelte';
+	import { getCurrentWindow } from '@tauri-apps/api/window';
 
+	const appWindow = getCurrentWindow();
 	let maximized = $state(false);
 </script>
 
@@ -29,7 +31,10 @@ Compose the bar from its three areas through the `leftControls`, `search` and `r
 			{maximized}
 			personPic={{ name: 'Ada Lovelace' }}
 			onMinimize={() => appWindow.minimize()}
-			onWindowToggle={() => appWindow.toggleMaximize()}
+			onWindowToggle={async () => {
+				await appWindow.toggleMaximize();
+				maximized = await appWindow.isMaximized();
+			}}
 			onClose={() => appWindow.close()}
 		/>
 	{/snippet}
@@ -127,7 +132,7 @@ The `search` snippet sits at the center of the bar and takes up the width the ba
 
 ### Search Width
 
-`searchMinWidth` and `searchMaxWidth` set how far the search shrinks and grows. A number is in pixels and a string is any CSS length.
+`searchMinWidth` and `searchMaxWidth` set how far the search shrinks and grows. Numbers are pixel values converted to rem using the current root font size, with a 16px fallback during SSR. For example, 200 becomes 10rem at a 20px root and still renders as 200px. A string is any CSS length.
 
 ```svelte
 <TitleBar searchMinWidth={100} searchMaxWidth={180}>...</TitleBar>
@@ -306,20 +311,20 @@ The buttons of the bar are in the tab order by default. Set `tabbable={false}` o
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TitleBarProps -->
 
-| Name                                             | Type                     | Default    | Description                                                                                                                                                                                                                                                                  |
-| ------------------------------------------------ | ------------------------ | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ref` _bindable_                                 | `HTMLElement`            |            | The DOM reference of the title bar element.                                                                                                                                                                                                                                  |
-| `leftControls`                                   | `Snippet`                |            | The controls at the start of the bar: back, navigation, and the identity of the app. Render a `TitleBarLeftControls` here, which only works inside a `TitleBar`.                                                                                                             |
-| `search`                                         | `Snippet`                |            | The search at the center of the bar, which grows and shrinks with the window between `searchMinWidth` and `searchMaxWidth`.                                                                                                                                                  |
-| `rightControls`                                  | `Snippet`                |            | The controls at the end of the bar: custom menus, the person picture, and the window buttons. Render a `TitleBarRightControls` here, which only works inside a `TitleBar`.                                                                                                   |
-| `tall`                                           | `boolean`                |            | Uses the tall bar, which leaves a search room to breathe. It is on by default when `search` is provided.                                                                                                                                                                     |
-| `searchMinWidth`                                 | `number` &#124; `string` | `200`      | The narrowest the search gets while the window shrinks. A number is in pixels, a string is any CSS length.                                                                                                                                                                   |
-| `searchMaxWidth`                                 | `number` &#124; `string` | `480`      | The widest the search gets while the window grows. A number is in pixels, a string is any CSS length.                                                                                                                                                                        |
-| `searchCollapsed` _bindable_                     | `boolean`                | `false`    | Manually collapses the search into a button; it does not collapse automatically on resize. Pressing the button expands the search again and moves the focus into the first available control. The host must leave enough room for the expanded search and the side controls. |
-| `searchLabel`                                    | `string`                 | `'Search'` | The accessible name of the button that stands in for a collapsed search.                                                                                                                                                                                                     |
-| `tabbable`                                       | `boolean`                | `true`     | Lets the Tab key reach the buttons of the bar. Set to false only when the desktop host provides an alternative keyboard route to these actions. The content you render in the snippets is not affected.                                                                      |
-| `dragRegionProps`                                | `HTMLAttributes`         |            | The attributes that make the bar draggable for the host that moves the window, such as `data-tauri-drag-region` for Tauri. They are spread on the bar, its start and end areas, and the app identity.                                                                        |
-| `HTMLAttributes<HTMLElement>` without `children` |                          |            |                                                                                                                                                                                                                                                                              |
+| Name                                             | Type                        | Default    | Description                                                                                                                                                                                                                                                                  |
+| ------------------------------------------------ | --------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                 | `HTMLElement` &#124; `null` |            | The DOM reference of the title bar element.                                                                                                                                                                                                                                  |
+| `leftControls`                                   | `Snippet`                   |            | The controls at the start of the bar: back, navigation, and the identity of the app. Render a `TitleBarLeftControls` here, which only works inside a `TitleBar`.                                                                                                             |
+| `search`                                         | `Snippet`                   |            | The search at the center of the bar, which grows and shrinks with the window between `searchMinWidth` and `searchMaxWidth`.                                                                                                                                                  |
+| `rightControls`                                  | `Snippet`                   |            | The controls at the end of the bar: custom menus, the person picture, and the window buttons. Render a `TitleBarRightControls` here, which only works inside a `TitleBar`.                                                                                                   |
+| `tall`                                           | `boolean`                   |            | Uses the tall bar, which leaves a search room to breathe. It is on by default when `search` is provided.                                                                                                                                                                     |
+| `searchMinWidth`                                 | `number` &#124; `string`    | `200`      | The narrowest the search gets while the window shrinks. A number is in pixels, converted to rem using the current root font size, with a 16px fallback during SSR. A string is any CSS length.                                                                               |
+| `searchMaxWidth`                                 | `number` &#124; `string`    | `480`      | The widest the search gets while the window grows. A number is in pixels, converted to rem using the current root font size, with a 16px fallback during SSR. A string is any CSS length.                                                                                    |
+| `searchCollapsed` _bindable_                     | `boolean`                   | `false`    | Manually collapses the search into a button; it does not collapse automatically on resize. Pressing the button expands the search again and moves the focus into the first available control. The host must leave enough room for the expanded search and the side controls. |
+| `searchLabel`                                    | `string`                    | `'Search'` | The accessible name of the button that stands in for a collapsed search.                                                                                                                                                                                                     |
+| `tabbable`                                       | `boolean`                   | `true`     | Lets the Tab key reach the buttons of the bar. Set to false only when the desktop host provides an alternative keyboard route to these actions. The content you render in the snippets is not affected.                                                                      |
+| `dragRegionProps`                                | `HTMLAttributes`            |            | The attributes that make the bar draggable for the host that moves the window, such as `data-tauri-drag-region` for Tauri. They are spread on the bar, its start and end areas, and the app identity.                                                                        |
+| `HTMLAttributes<HTMLElement>` without `children` |                             |            |                                                                                                                                                                                                                                                                              |
 
 <!-- /props:TitleBarProps -->
 
@@ -328,22 +333,23 @@ The buttons of the bar are in the tab order by default. Set `tabbable={false}` o
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TitleBarLeftControlsProps -->
 
-| Name                                                | Type                                         | Default             | Description                                                                                        |
-| --------------------------------------------------- | -------------------------------------------- | ------------------- | -------------------------------------------------------------------------------------------------- |
-| `ref` _bindable_                                    | `HTMLDivElement`                             |                     | The DOM reference of the controls element.                                                         |
-| `back`                                              | `boolean`                                    | `false`             | Shows the back button.                                                                             |
-| `backDisabled`                                      | `boolean`                                    | `false`             | Disables the back button, for when there is nowhere to go back to.                                 |
-| `onBack`                                            | `MouseEventHandler<HTMLButtonElement>`       |                     | Called when the back button is pressed.                                                            |
-| `backLabel`                                         | `string`                                     | `'Back'`            | The accessible name of the back button.                                                            |
-| `globalNav`                                         | `boolean` &#124; `Snippet`                   | `false`             | Shows the global navigation button, or replaces it with the snippet you provide.                   |
-| `globalNavExpanded`                                 | `boolean`                                    | `false`             | Whether the navigation the global navigation button controls is expanded.                          |
-| `onGlobalNav`                                       | `MouseEventHandler<HTMLButtonElement>`       |                     | Called when the global navigation button is pressed.                                               |
-| `globalNavLabel`                                    | `string`                                     | `'Navigation menu'` | The accessible name of the global navigation button.                                               |
-| `appIcon`                                           | `string` &#124; `Snippet` &#124; `Component` |                     | The icon of the app: the URL of an image, an icon component, or a snippet that draws a custom SVG. |
-| `appName`                                           | `string`                                     |                     | The name of the app.                                                                               |
-| `releaseTag`                                        | `string` &#124; `Snippet`                    |                     | The release status of the app, such as `PREVIEW` or `BETA`.                                        |
-| `children`                                          | `Snippet`                                    |                     | More content after the release tag, such as a subtitle.                                            |
-| `HTMLAttributes<HTMLDivElement>` without `children` |                                              |                     |                                                                                                    |
+| Name                                                | Type                                         | Default             | Description                                                                                                     |
+| --------------------------------------------------- | -------------------------------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLDivElement` &#124; `null`               |                     | The DOM reference of the controls element.                                                                      |
+| `back`                                              | `boolean`                                    | `false`             | Shows the back button.                                                                                          |
+| `backDisabled`                                      | `boolean`                                    | `false`             | Disables the back button, for when there is nowhere to go back to.                                              |
+| `onBack`                                            | `MouseEventHandler<HTMLButtonElement>`       |                     | Called when the back button is pressed.                                                                         |
+| `backLabel`                                         | `string`                                     | `'Back'`            | The accessible name of the back button.                                                                         |
+| `globalNav`                                         | `boolean` &#124; `Snippet`                   | `false`             | Shows the global navigation button, or replaces it with the snippet you provide.                                |
+| `globalNavExpanded`                                 | `boolean`                                    | `false`             | Whether the navigation the global navigation button controls is expanded.                                       |
+| `onGlobalNav`                                       | `MouseEventHandler<HTMLButtonElement>`       |                     | Called when the global navigation button is pressed.                                                            |
+| `globalNavLabel`                                    | `string`                                     | `'Navigation menu'` | The accessible name of the global navigation button.                                                            |
+| `appIcon`                                           | `string` &#124; `Snippet` &#124; `Component` |                     | The icon of the app: the URL of an image, an icon component, or a snippet that draws a custom SVG.              |
+| `appIconLabel`                                      | `string`                                     | `'Application'`     | The accessible name of the app icon when appName is absent. Set it to the app's name for an icon-only identity. |
+| `appName`                                           | `string`                                     |                     | The name of the app.                                                                                            |
+| `releaseTag`                                        | `string` &#124; `Snippet`                    |                     | The release status of the app, such as `PREVIEW` or `BETA`.                                                     |
+| `children`                                          | `Snippet`                                    |                     | More content after the release tag, such as a subtitle.                                                         |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                                              |                     |                                                                                                                 |
 
 <!-- /props:TitleBarLeftControlsProps -->
 
@@ -354,7 +360,7 @@ The buttons of the bar are in the tab order by default. Set `tabbable={false}` o
 
 | Name                                                | Type                                   | Default      | Description                                                                             |
 | --------------------------------------------------- | -------------------------------------- | ------------ | --------------------------------------------------------------------------------------- |
-| `ref` _bindable_                                    | `HTMLDivElement`                       |              | The DOM reference of the controls element.                                              |
+| `ref` _bindable_                                    | `HTMLDivElement` &#124; `null`         |              | The DOM reference of the controls element.                                              |
 | `hideMinimize`                                      | `boolean`                              | `false`      | Hides the minimize button.                                                              |
 | `hideWindowToggle`                                  | `boolean`                              | `false`      | Hides the maximize and restore button.                                                  |
 | `hideClose`                                         | `boolean`                              | `false`      | Hides the close button.                                                                 |

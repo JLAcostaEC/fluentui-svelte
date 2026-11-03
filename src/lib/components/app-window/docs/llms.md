@@ -4,11 +4,18 @@ An app window is the surface of an app: a Mica window with its own border and a 
 
 ## Usage
 
-Put the content of the window inside it, starting with a `TitleBar` if it has one. The window is `100%` wide and tall unless you give it a `width` and a `height`.
+Start with a `TitleBar` if the window has one, then place page content in an `AppSurface` or another scrollable container. The window itself clips overflow. It is `100%` wide and tall unless you give it a `width` and a `height`.
 
 ```svelte
 <script>
-	import { AppWindow, TitleBar, TitleBarLeftControls, TitleBarRightControls } from 'fluentui-svelte';
+	import {
+		AppSurface,
+		AppWindow,
+		AutoSuggestBox,
+		TitleBar,
+		TitleBarLeftControls,
+		TitleBarRightControls
+	} from 'fluentui-svelte';
 	import { AppsRegular } from 'fluentui-icons-svelte';
 </script>
 
@@ -21,7 +28,7 @@ Put the content of the window inside it, starting with a `TitleBar` if it has on
 			<TitleBarRightControls />
 		{/snippet}
 	</TitleBar>
-	<p>This is the content of the window.</p>
+	<AppSurface style="padding: 1rem">This is the content of the window.</AppSurface>
 </AppWindow>
 ```
 
@@ -69,7 +76,7 @@ The window paints the Mica background, so a `TitleBar` inside it stays transpare
 			<TitleBarRightControls />
 		{/snippet}
 	</TitleBar>
-	<p style="padding: 1rem">This is the content of the window.</p>
+	<AppSurface style="padding: 1rem">This is the content of the window.</AppSurface>
 </AppWindow>
 ```
 
@@ -78,13 +85,13 @@ The window paints the Mica background, so a `TitleBar` inside it stays transpare
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:AppWindowProps -->
 
-| Name                                                | Type                     | Default  | Description                                                                                                                           |
-| --------------------------------------------------- | ------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `ref` _bindable_                                    | `HTMLElement`            |          | The DOM reference of the window element.                                                                                              |
-| `width`                                             | `number` &#124; `string` | `'100%'` | The width of the window. A number is in pixels, a string is any CSS length.                                                           |
-| `height`                                            | `number` &#124; `string` | `'100%'` | The height of the window. A number is in pixels, a string is any CSS length.                                                          |
-| `active`                                            | `boolean`                | `false`  | Whether the window is the active one, which picks the shell shadow it casts: a deeper one while active, a lighter one while inactive. |
-| `children`                                          | `Snippet`                |          | The content of the window, such as a `TitleBar` and the page below it.                                                                |
-| `HTMLAttributes<HTMLDivElement>` without `children` |                          |          |                                                                                                                                       |
+| Name                                                | Type                        | Default  | Description                                                                                                                           |
+| --------------------------------------------------- | --------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLElement` &#124; `null` |          | The DOM reference of the window element.                                                                                              |
+| `width`                                             | `number` &#124; `string`    | `'100%'` | The width of the window. A number is in pixels, a string is any CSS length.                                                           |
+| `height`                                            | `number` &#124; `string`    | `'100%'` | The height of the window. A number is in pixels, a string is any CSS length.                                                          |
+| `active`                                            | `boolean`                   | `false`  | Whether the window is the active one, which picks the shell shadow it casts: a deeper one while active, a lighter one while inactive. |
+| `children`                                          | `Snippet`                   |          | The content of the window, such as a `TitleBar` and the page below it.                                                                |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                             |          |                                                                                                                                       |
 
 <!-- /props:AppWindowProps -->

@@ -4039,6 +4039,13 @@
       },
       "source": "src/lib/components/title-bar/types.ts#TitleBarLeftControlsProps.appIcon"
     },
+    "generated_fs_title_bar_left_controls_props_props_app_icon_label": {
+      "en": "3d2440e9",
+      "locales": {
+        "es": "3d2440e9"
+      },
+      "source": "src/lib/components/title-bar/types.ts#TitleBarLeftControlsProps.appIconLabel"
+    },
     "generated_fs_title_bar_left_controls_props_props_app_name": {
       "en": "3ba6184c",
       "locales": {
@@ -4173,16 +4180,16 @@
       "source": "src/lib/components/title-bar/types.ts#TitleBarProps.searchLabel"
     },
     "generated_fs_title_bar_props_props_search_max_width": {
-      "en": "4acc036d",
+      "en": "873bd153",
       "locales": {
-        "es": "4acc036d"
+        "es": "873bd153"
       },
       "source": "src/lib/components/title-bar/types.ts#TitleBarProps.searchMaxWidth"
     },
     "generated_fs_title_bar_props_props_search_min_width": {
-      "en": "7a436617",
+      "en": "978be508",
       "locales": {
-        "es": "7a436617"
+        "es": "978be508"
       },
       "source": "src/lib/components/title-bar/types.ts#TitleBarProps.searchMinWidth"
     },

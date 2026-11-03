@@ -8,20 +8,20 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:TitleBarProps -->
 
-| Name                                             | Type                     | Default    | Description                                                                              |
-| ------------------------------------------------ | ------------------------ | ---------- | ---------------------------------------------------------------------------------------- |
-| `ref` _bindable_                                 | `HTMLElement`            |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_ref} />`               |
-| `leftControls`                                   | `Snippet`                |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_left_controls} />`     |
-| `search`                                         | `Snippet`                |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search} />`            |
-| `rightControls`                                  | `Snippet`                |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_right_controls} />`    |
-| `tall`                                           | `boolean`                |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_tall} />`              |
-| `searchMinWidth`                                 | `number` &#124; `string` | `200`      | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search_min_width} />`  |
-| `searchMaxWidth`                                 | `number` &#124; `string` | `480`      | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search_max_width} />`  |
-| `searchCollapsed` _bindable_                     | `boolean`                | `false`    | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search_collapsed} />`  |
-| `searchLabel`                                    | `string`                 | `'Search'` | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search_label} />`      |
-| `tabbable`                                       | `boolean`                | `true`     | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_tabbable} />`          |
-| `dragRegionProps`                                | `HTMLAttributes`         |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_drag_region_props} />` |
-| `HTMLAttributes<HTMLElement>` without `children` |                          |            |                                                                                          |
+| Name                                             | Type                        | Default    | Description                                                                              |
+| ------------------------------------------------ | --------------------------- | ---------- | ---------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                 | `HTMLElement` &#124; `null` |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_ref} />`               |
+| `leftControls`                                   | `Snippet`                   |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_left_controls} />`     |
+| `search`                                         | `Snippet`                   |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search} />`            |
+| `rightControls`                                  | `Snippet`                   |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_right_controls} />`    |
+| `tall`                                           | `boolean`                   |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_tall} />`              |
+| `searchMinWidth`                                 | `number` &#124; `string`    | `200`      | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search_min_width} />`  |
+| `searchMaxWidth`                                 | `number` &#124; `string`    | `480`      | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search_max_width} />`  |
+| `searchCollapsed` _bindable_                     | `boolean`                   | `false`    | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search_collapsed} />`  |
+| `searchLabel`                                    | `string`                    | `'Search'` | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_search_label} />`      |
+| `tabbable`                                       | `boolean`                   | `true`     | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_tabbable} />`          |
+| `dragRegionProps`                                | `HTMLAttributes`            |            | `<I18nMarkupMessage message={m.generated_fs_title_bar_props_props_drag_region_props} />` |
+| `HTMLAttributes<HTMLElement>` without `children` |                             |            |                                                                                          |
 
 <!-- /props:TitleBarProps -->
 
@@ -32,7 +32,7 @@
 
 | Name                                                | Type                                         | Default             | Description                                                                                              |
 | --------------------------------------------------- | -------------------------------------------- | ------------------- | -------------------------------------------------------------------------------------------------------- |
-| `ref` _bindable_                                    | `HTMLDivElement`                             |                     | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_ref} />`                 |
+| `ref` _bindable_                                    | `HTMLDivElement` &#124; `null`               |                     | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_ref} />`                 |
 | `back`                                              | `boolean`                                    | `false`             | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_back} />`                |
 | `backDisabled`                                      | `boolean`                                    | `false`             | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_back_disabled} />`       |
 | `onBack`                                            | `MouseEventHandler<HTMLButtonElement>`       |                     | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_on_back} />`             |
@@ -42,6 +42,7 @@
 | `onGlobalNav`                                       | `MouseEventHandler<HTMLButtonElement>`       |                     | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_on_global_nav} />`       |
 | `globalNavLabel`                                    | `string`                                     | `'Navigation menu'` | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_global_nav_label} />`    |
 | `appIcon`                                           | `string` &#124; `Snippet` &#124; `Component` |                     | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_app_icon} />`            |
+| `appIconLabel`                                      | `string`                                     | `'Application'`     | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_app_icon_label} />`      |
 | `appName`                                           | `string`                                     |                     | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_app_name} />`            |
 | `releaseTag`                                        | `string` &#124; `Snippet`                    |                     | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_release_tag} />`         |
 | `children`                                          | `Snippet`                                    |                     | `<I18nMarkupMessage message={m.generated_fs_title_bar_left_controls_props_props_children} />`            |
@@ -56,7 +57,7 @@
 
 | Name                                                | Type                                   | Default      | Description                                                                                               |
 | --------------------------------------------------- | -------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------- |
-| `ref` _bindable_                                    | `HTMLDivElement`                       |              | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_ref} />`                 |
+| `ref` _bindable_                                    | `HTMLDivElement` &#124; `null`         |              | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_ref} />`                 |
 | `hideMinimize`                                      | `boolean`                              | `false`      | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_hide_minimize} />`       |
 | `hideWindowToggle`                                  | `boolean`                              | `false`      | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_hide_window_toggle} />`  |
 | `hideClose`                                         | `boolean`                              | `false`      | `<I18nMarkupMessage message={m.generated_fs_title_bar_right_controls_props_props_hide_close} />`          |

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import {
+    AppSurface,
     AppWindow,
     AutoSuggestBox,
     TitleBar,
@@ -42,7 +43,7 @@
       <TitleBarRightControls />
     {/snippet}
   </TitleBar>
-  <p style="padding: 1rem">This is the content of the window.</p>
+  <AppSurface style="padding: 1rem">This is the content of the window.</AppSurface>
 </AppWindow>`;
 </script>
 
@@ -88,6 +89,6 @@
         <TitleBarRightControls />
       {/snippet}
     </TitleBar>
-    <p style="margin: 0; padding: 1rem">This is the content of the window.</p>
+    <AppSurface style="padding: 1rem">This is the content of the window.</AppSurface>
   </AppWindow>
 </Showcase>

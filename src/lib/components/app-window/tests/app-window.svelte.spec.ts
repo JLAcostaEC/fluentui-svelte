@@ -83,6 +83,24 @@ describe('size', () => {
 		expect(height).toBe(240);
 	});
 
+	it('keeps numeric dimensions in pixels when the root font size changes', async () => {
+		const root = document.documentElement;
+		const fontSize = root.style.getPropertyValue('font-size');
+		const priority = root.style.getPropertyPriority('font-size');
+		try {
+			root.style.setProperty('font-size', '20px');
+			render(AppWindow, { 'data-testid': 'window', width: 400.25, height: 240.5 });
+			expect(windowElement().style.width).toBe('20.0125rem');
+			expect(windowElement().style.height).toBe('12.025rem');
+			const { width, height } = windowElement().getBoundingClientRect();
+			expect(width).toBe(400.25);
+			expect(height).toBe(240.5);
+		} finally {
+			if (fontSize) root.style.setProperty('font-size', fontSize, priority);
+			else root.style.removeProperty('font-size');
+		}
+	});
+
 	it('takes a string as any CSS length', async () => {
 		render(AppWindow, { 'data-testid': 'window', width: '25rem', height: '50vh' });
 		expect(windowElement().style.width).toBe('25rem');

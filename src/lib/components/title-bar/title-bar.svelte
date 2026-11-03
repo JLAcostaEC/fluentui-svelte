@@ -25,6 +25,7 @@
 	const FOCUSABLE = 'input, textarea, select, button, a[href], [tabindex]:not([tabindex="-1"])';
 
 	let searchRef = $state<HTMLDivElement>();
+	let searchButtonRef = $state<HTMLButtonElement | null>(null);
 
 	const hasSearch = $derived(!!search);
 	const collapsed = $derived(hasSearch && searchCollapsed);
@@ -47,6 +48,12 @@
 	};
 
 	setTitleBarContext(context);
+
+	$effect.pre(() => {
+		if (collapsed && searchRef?.contains(searchRef.ownerDocument.activeElement)) {
+			void tick().then(() => searchButtonRef?.focus());
+		}
+	});
 
 	const expandSearch = async () => {
 		searchCollapsed = false;
@@ -97,6 +104,7 @@
 		{#if collapsed}
 			<div class="fs-title-bar-search">
 				<Button
+					bind:ref={searchButtonRef}
 					class="fs-title-bar-search-button"
 					appearance="subtle"
 					aria-label={searchLabel}

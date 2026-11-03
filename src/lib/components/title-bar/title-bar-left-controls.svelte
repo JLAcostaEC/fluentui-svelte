@@ -17,6 +17,7 @@
 		onGlobalNav,
 		globalNavLabel = 'Navigation menu',
 		appIcon,
+		appIconLabel = 'Application',
 		appName,
 		releaseTag,
 		children,
@@ -82,7 +83,12 @@
 	{#if hasIdentity}
 		<div class="fs-title-bar-identity" {...context.config.dragRegionProps}>
 			{#if appIcon}
-				<span class="fs-title-bar-app-icon" aria-hidden="true">
+				<span
+					class="fs-title-bar-app-icon"
+					role={appName ? undefined : 'img'}
+					aria-label={appName ? undefined : appIconLabel}
+					aria-hidden={appName ? true : undefined}
+				>
 					{#if typeof appIcon === 'string'}
 						<img src={appIcon} alt="" />
 					{:else}

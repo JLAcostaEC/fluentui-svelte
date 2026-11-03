@@ -47,8 +47,8 @@ describe('TitleBar', () => {
 	it('hands the search its width limits, a number in pixels and a string as is', async () => {
 		render(TitleBarTestWrapper, { withSearch: true });
 		const style = (bar().element() as HTMLElement).style;
-		expect(style.getPropertyValue('--fs-title-bar-search-min')).toBe('12.50rem');
-		expect(style.getPropertyValue('--fs-title-bar-search-max')).toBe('30.00rem');
+		expect(style.getPropertyValue('--fs-title-bar-search-min')).toBe('12.5rem');
+		expect(style.getPropertyValue('--fs-title-bar-search-max')).toBe('30rem');
 	});
 
 	it('takes the width limits of the search as any CSS length', async () => {
@@ -65,7 +65,7 @@ describe('TitleBar', () => {
 	});
 
 	it('forwards the class, the attributes and the ref', async () => {
-		let ref: HTMLElement | undefined;
+		let ref: HTMLElement | null = null;
 		render(TitleBar, {
 			class: 'custom',
 			'data-testid': 'bar',
@@ -110,6 +110,21 @@ describe('the collapsed search', () => {
 		expect(page.getByRole('button', { name: 'Search' }).elements()).toHaveLength(0);
 	});
 
+	it('moves focus to the search button when a focused search collapses', async () => {
+		const screen = await render(TitleBarTestWrapper, { withSearch: true, tabbable: false });
+		(page.getByRole('searchbox', { name: 'Find' }).element() as HTMLElement).focus();
+		await expect.element(page.getByRole('searchbox', { name: 'Find' })).toHaveFocus();
+		await screen.rerender({ searchCollapsed: true });
+		await expect.element(page.getByRole('button', { name: 'Search' })).toHaveFocus();
+	});
+
+	it('does not move focus from another control when the search collapses', async () => {
+		const screen = await render(TitleBarTestWrapper, { withSearch: true, left: { back: true } });
+		(page.getByRole('button', { name: 'Back' }).element() as HTMLElement).focus();
+		await screen.rerender({ searchCollapsed: true });
+		await expect.element(page.getByRole('button', { name: 'Back' })).toHaveFocus();
+	});
+
 	it('skips unavailable controls when moving focus into the expanded search', async () => {
 		render(TitleBar, {
 			searchCollapsed: true,
@@ -130,6 +145,22 @@ describe('the collapsed search', () => {
 
 describe('the layout of the search', () => {
 	const rect = (selector: string) => document.querySelector(selector)!.getBoundingClientRect();
+
+	it('converts numeric search limits using the current root font size', async () => {
+		const root = document.documentElement;
+		const fontSize = root.style.getPropertyValue('font-size');
+		const priority = root.style.getPropertyPriority('font-size');
+		try {
+			root.style.setProperty('font-size', '20px');
+			render(TitleBarTestWrapper, { withSearch: true });
+			const search = document.querySelector<HTMLElement>('.fs-title-bar-search')!;
+			expect(getComputedStyle(search).minWidth).toBe('200px');
+			expect(getComputedStyle(search).maxWidth).toBe('480px');
+		} finally {
+			if (fontSize) root.style.setProperty('font-size', fontSize, priority);
+			else root.style.removeProperty('font-size');
+		}
+	});
 
 	it('grows up to its maximum and sits centered between the controls', async () => {
 		render(TitleBarTestWrapper, {
@@ -358,6 +389,16 @@ describe('TitleBarLeftControls', () => {
 			expect(document.querySelector('.fs-title-bar-app-icon svg')).not.toBeNull();
 		});
 
+		it('names an icon-only identity with appIconLabel', async () => {
+			renderLeft({ appIcon: AppsRegular, appIconLabel: 'Contoso' });
+			await expect.element(page.getByRole('img', { name: 'Contoso' })).toBeInTheDocument();
+		});
+
+		it('provides a default accessible name for an icon-only identity', async () => {
+			renderLeft({ appIcon: AppsRegular });
+			await expect.element(page.getByRole('img', { name: 'Application' })).toBeInTheDocument();
+		});
+
 		it('draws an icon snippet', async () => {
 			renderLeft({ appIcon: raw('<svg data-testid="custom" viewBox="0 0 1 1"></svg>') });
 			expect(document.querySelector('.fs-title-bar-app-icon [data-testid="custom"]')).not.toBeNull();
@@ -477,9 +518,9 @@ describe('TitleBarRightControls', () => {
 		it('sizes the avatar to 24 unless told otherwise', async () => {
 			const screen = await renderRight({ personPic: { name: 'Ada Lovelace' } });
 			const avatar = page.getByRole('img', { name: 'Ada Lovelace' });
-			expect((avatar.element() as HTMLElement).style.getPropertyValue('--av-size')).toBe('1.50rem');
+			expect((avatar.element() as HTMLElement).style.getPropertyValue('--av-size')).toBe('1.5rem');
 			await screen.rerender({ right: { personPic: { name: 'Ada Lovelace', size: 32 } } });
-			expect((avatar.element() as HTMLElement).style.getPropertyValue('--av-size')).toBe('2.00rem');
+			expect((avatar.element() as HTMLElement).style.getPropertyValue('--av-size')).toBe('2rem');
 		});
 
 		it('is not a button unless it has somewhere to go', async () => {

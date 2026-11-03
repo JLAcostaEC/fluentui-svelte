@@ -34,11 +34,11 @@ export type TitleBarProps = {
 	/** Uses the tall bar, which leaves a search room to breathe. It is on by default when `search` is provided.
 	 */
 	tall?: boolean;
-	/** The narrowest the search gets while the window shrinks. A number is in pixels, a string is any CSS length.
+	/** The narrowest the search gets while the window shrinks. A number is in pixels, converted to rem using the current root font size, with a 16px fallback during SSR. A string is any CSS length.
 	 * @default 200
 	 */
 	searchMinWidth?: number | string;
-	/** The widest the search gets while the window grows. A number is in pixels, a string is any CSS length.
+	/** The widest the search gets while the window grows. A number is in pixels, converted to rem using the current root font size, with a 16px fallback during SSR. A string is any CSS length.
 	 * @default 480
 	 */
 	searchMaxWidth?: number | string;
@@ -101,6 +101,10 @@ export type TitleBarLeftControlsProps = {
 	 * @type string | Snippet | Component
 	 */
 	appIcon?: string | Snippet<[SVGAttributes<SVGElement>]> | Component<SVGAttributes<SVGElement>>;
+	/** The accessible name of the app icon when appName is absent. Set it to the app's name for an icon-only identity.
+	 * @default 'Application'
+	 */
+	appIconLabel?: string;
 	/** The name of the app. */
 	appName?: string;
 	/** The release status of the app, such as `PREVIEW` or `BETA`.

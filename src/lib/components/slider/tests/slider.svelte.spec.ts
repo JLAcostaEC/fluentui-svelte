@@ -120,7 +120,7 @@ describe('orientation', () => {
 	});
 
 	it('takes the value from where the pointer drags a vertical slider', async () => {
-		render(Slider, { orientation: 'vertical', value: 50 });
+		render(Slider, { orientation: 'vertical', value: 50, wrapperAttributes: { style: 'block-size: 200px' } });
 		const wrapper = page.selector('.fs-slider');
 		const { top } = page.selector('.slider-rail').element().getBoundingClientRect();
 		const { top: wrapperTop } = wrapper.element().getBoundingClientRect();
@@ -128,6 +128,16 @@ describe('orientation', () => {
 			targetPosition: { x: 16, y: top - wrapperTop }
 		});
 		await expect.element(page.getByRole('slider')).toHaveValue('100');
+	});
+
+	it('keeps its value when a vertical slider has no height to read the pointer on', async () => {
+		render(Slider, { orientation: 'vertical', value: 50 });
+		const thumb = page.selector('.slider-thumb').element();
+		const rail = page.selector('.slider-rail').element().getBoundingClientRect();
+		const { left, top } = thumb.getBoundingClientRect();
+		thumb.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, clientX: left, clientY: top }));
+		window.dispatchEvent(new MouseEvent('mousemove', { clientX: left, clientY: rail.top }));
+		await expect.element(page.getByRole('slider')).toHaveValue('50');
 	});
 });
 

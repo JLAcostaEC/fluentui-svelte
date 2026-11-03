@@ -2,4 +2,4 @@
 'fluentui-svelte': patch
 ---
 
-fix: prvent inverted `Slider` when `vertical=true`
+fix: prevent inverted `Slider` when `vertical=true`

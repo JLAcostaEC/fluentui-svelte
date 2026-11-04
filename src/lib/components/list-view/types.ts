@@ -1,8 +1,9 @@
 import type { CheckboxProps } from '../checkbox/types.ts';
 import type { FSContext } from '#internal';
 import type { PolymorphicProps, Shapes } from '#types';
-import type { AriaRole, HTMLButtonAttributes } from 'svelte/elements';
-import type { Snippet } from 'svelte';
+import type { AriaRole, HTMLAttributes, HTMLButtonAttributes } from 'svelte/elements';
+import type { Component, Snippet } from 'svelte';
+import type { TabspotRootOptions } from 'tabspot';
 
 export type SelectionMode = 'none' | 'single' | 'multiselect' | 'extended';
 export type NavigationMode = 'items' | 'composite';
@@ -19,6 +20,11 @@ export type ListViewProps<T extends 'ul' | 'ol' | 'div'> = {
 	 * @default 'items'
 	 */
 	navigationMode?: NavigationMode;
+	/** Which special keys Tabspot handles at the root. Set individual keys to leave Escape to an enclosing panel. Omitted keys in an object are off.
+	 * @type boolean | TabspotRootOptions['manageSpecialKeys']
+	 * @default true
+	 */
+	manageSpecialKeys?: TabspotRootOptions['manageSpecialKeys'];
 	/** The values of the selected items.
 	 * @bindable
 	 */
@@ -100,6 +106,10 @@ export type ListViewItemDOM = {
 export type ListViewItemBranchProps = {
 	/** The accessible label rendered in the disclosure button. */
 	label: string;
+	/** The decorative icon before the label.
+	 * @type Snippet | Component
+	 */
+	icon?: Snippet | Component;
 	/** Whether the nested content is visible. Branches only expand or collapse and are never selectable.
 	 * @default false
 	 * @bindable
@@ -118,6 +128,15 @@ export type ListViewItemBranchProps = {
 	 * @bindable
 	 */
 	ref?: HTMLButtonElement | null;
+	/** The DOM reference of the wrapper element, the list item that holds the button and the nested list.
+	 * @type HTMLLIElement | HTMLDivElement
+	 * @bindable
+	 */
+	wrapperRef?: HTMLLIElement | HTMLDivElement | null;
+	/** The attributes to spread on the wrapper element.
+	 * @type HTMLAttributes
+	 */
+	wrapperAttributes?: HTMLAttributes<HTMLLIElement | HTMLDivElement>;
 	/** Nested ListView content, kept mounted while collapsed to preserve its selection. */
 	children?: Snippet;
 } & Omit<HTMLButtonAttributes, 'children' | 'role' | 'type' | 'value' | 'aria-expanded' | 'aria-controls'>;

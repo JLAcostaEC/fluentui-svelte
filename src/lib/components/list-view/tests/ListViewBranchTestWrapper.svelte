@@ -17,7 +17,7 @@
 		onGrandchildSelectionChange
 	}: {
 		listProps?: Partial<ListViewProps<'ul'>>;
-		branchProps?: Partial<Omit<ListViewItemBranchProps, 'children' | 'expanded' | 'ref'>>;
+		branchProps?: Partial<Omit<ListViewItemBranchProps, 'children' | 'expanded' | 'ref' | 'wrapperRef'>>;
 		expanded?: boolean;
 		nestedExpanded?: boolean;
 		includeBeforeLeaf?: boolean;
@@ -31,6 +31,7 @@
 	let childSelected = $state<string[]>([]);
 	let grandchildSelected = $state<string[]>([]);
 	let triggerRef = $state<HTMLButtonElement | null>(null);
+	let wrapperRef = $state<HTMLLIElement | HTMLDivElement | null>(null);
 </script>
 
 <FluentUISvelte>
@@ -38,7 +39,7 @@
 	<ListView aria-label="Navigation" {...listProps} bind:selectedItems={selected} {onSelectionChange}>
 		{#if includeBeforeLeaf}<ListViewItem as="button" value="before">Before leaf</ListViewItem>{/if}
 		{#if !lateBranch || mounted}
-			<ListViewItemBranch label="Projects" {...branchProps} bind:expanded bind:ref={triggerRef}>
+			<ListViewItemBranch label="Projects" {...branchProps} bind:expanded bind:ref={triggerRef} bind:wrapperRef>
 				<ListView
 					role="list"
 					selectionMode="single"
@@ -73,4 +74,5 @@
 	<output aria-label="Grandchild selection">{grandchildSelected.join(',')}</output>
 	<output aria-label="Expanded">{String(expanded)}</output>
 	<output aria-label="Trigger tag">{triggerRef?.tagName}</output>
+	<output aria-label="Wrapper tag">{wrapperRef?.tagName}</output>
 </FluentUISvelte>

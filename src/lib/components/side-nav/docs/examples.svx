@@ -1,0 +1,183 @@
+<script lang="ts">
+  import {
+    AppSurface,
+    AppWindow,
+    SideNav,
+    SideNavBranch,
+    SideNavItem,
+    TextBox,
+    TitleBar,
+    TitleBarLeftControls,
+    TitleBarRightControls
+  } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { FolderRegular, HomeRegular, SettingsRegular } from 'fluentui-icons-svelte';
+  import { m } from '#i18n/messages.js';
+
+  let collapsed = $state(true);
+  let customCollapsed = $state(false);
+
+  const collapsedCode = `
+<script>
+  let collapsed = $state(true);
+<\/script>
+
+<SideNav bind:collapsed header="Workspace">
+  <SideNavItem href="#home" label="Home" icon={HomeRegular} />
+  <SideNavItem href="#documents" label="Documents" icon={FolderRegular} />
+</SideNav>`;
+
+  const floatingCode = `
+<div style="position: relative">
+  <SideNav floating collapsed header="Workspace">
+    <SideNavItem href="#home" label="Home" icon={HomeRegular} />
+    <SideNavItem href="#documents" label="Documents" icon={FolderRegular} />
+  </SideNav>
+  <p style="padding-inline-start: 3rem">Page content</p>
+</div>`;
+
+  const positionCode = `
+<AppWindow width={480} height={200}>
+  <SideNav position="right" header="Workspace">
+    <SideNavItem href="#home" label="Home" icon={HomeRegular} />
+    <SideNavItem href="#documents" label="Documents" icon={FolderRegular} />
+  </SideNav>
+  <AppSurface style="padding: 1rem">Page content</AppSurface>
+</AppWindow>`;
+
+  const titleBarCode = `
+<AppWindow width={480} height={200}>
+  <TitleBar>
+    {#snippet leftControls()}
+      <TitleBarLeftControls globalNav appName="Workspace" />
+    {/snippet}
+    {#snippet rightControls()}
+      <TitleBarRightControls />
+    {/snippet}
+  </TitleBar>
+  <SideNav>
+    <SideNavItem href="#home" label="Home" icon={HomeRegular} />
+    <SideNavItem href="#documents" label="Documents" icon={FolderRegular} />
+  </SideNav>
+  <AppSurface style="padding: 1rem">Page content</AppSurface>
+</AppWindow>`;
+
+  const branchCode = `
+<SideNav header="Workspace">
+  <SideNavBranch label="Projects" icon={FolderRegular}>
+    <SideNavItem href="#one" label="Project one" />
+    <SideNavItem href="#two" label="Project two" />
+  </SideNavBranch>
+  {#snippet footer()}
+    <SideNavItem href="#settings" label="Settings" icon={SettingsRegular} />
+  {/snippet}
+</SideNav>`;
+
+  const customCode = `
+<script>
+  let collapsed = $state(false);
+<\/script>
+
+<SideNav bind:collapsed header="Workspace">
+  {#snippet topContent()}
+    {#if !collapsed}
+      <TextBox type="search" placeholder="Search" aria-label="Search" />
+    {/if}
+  {/snippet}
+  <SideNavItem href="#home" label="Home" icon={HomeRegular} />
+</SideNav>`;
+</script>
+
+### {m.side_nav_collapsed_title()}
+
+{m.side_nav_collapsed_description()}
+
+<Showcase columns={1} columnWidth="260px" minHeight="0" disablePanZoom showOverflow code={collapsedCode}>
+  <SideNav bind:collapsed header="Workspace">
+    <SideNavItem href="#home" label="Home" icon={HomeRegular} />
+    <SideNavItem href="#documents" label="Documents" icon={FolderRegular} />
+  </SideNav>
+</Showcase>
+
+### {m.side_nav_floating_title()}
+
+{m.side_nav_floating_description()}
+
+<Showcase columns={1} columnWidth="320px" minHeight="0" disablePanZoom showOverflow code={floatingCode}>
+  <div style="position: relative; min-height: 8rem">
+    <SideNav floating collapsed header="Workspace">
+      <SideNavItem href="#home" label="Home" icon={HomeRegular} />
+      <SideNavItem href="#documents" label="Documents" icon={FolderRegular} />
+    </SideNav>
+    <p style="padding-inline-start: 3rem">Page content</p>
+  </div>
+</Showcase>
+
+### {m.side_nav_position_title()}
+
+{m.side_nav_position_description()}
+
+<Showcase columns={1} columnWidth="480px" minHeight="0" disablePanZoom showOverflow code={positionCode}>
+  <AppWindow width={480} height={200}>
+    <SideNav position="right" header="Workspace">
+      <SideNavItem href="#home" label="Home" icon={HomeRegular} />
+      <SideNavItem href="#documents" label="Documents" icon={FolderRegular} />
+    </SideNav>
+    <AppSurface style="padding: 1rem">Page content</AppSurface>
+  </AppWindow>
+</Showcase>
+
+### {m.side_nav_title_bar_title()}
+
+{m.side_nav_title_bar_description()}
+
+<Showcase columns={1} columnWidth="480px" minHeight="0" disablePanZoom showOverflow code={titleBarCode}>
+  <AppWindow width={480} height={200}>
+    <TitleBar>
+      {#snippet leftControls()}
+        <TitleBarLeftControls globalNav appName="Workspace" />
+      {/snippet}
+      {#snippet rightControls()}
+        <TitleBarRightControls />
+      {/snippet}
+    </TitleBar>
+    <SideNav>
+      <SideNavItem href="#home" label="Home" icon={HomeRegular} />
+      <SideNavItem href="#documents" label="Documents" icon={FolderRegular} />
+    </SideNav>
+    <AppSurface style="padding: 1rem">Page content</AppSurface>
+  </AppWindow>
+</Showcase>
+
+### {m.side_nav_branches_title()}
+
+{m.side_nav_branches_description()}
+
+<Showcase columns={1} columnWidth="260px" minHeight="0" disablePanZoom showOverflow code={branchCode}>
+  <div style="display: flex; height: 15rem">
+    <SideNav header="Workspace">
+      <SideNavBranch label="Projects" icon={FolderRegular}>
+        <SideNavItem href="#one" label="Project one" />
+        <SideNavItem href="#two" label="Project two" />
+      </SideNavBranch>
+      {#snippet footer()}
+        <SideNavItem href="#settings" label="Settings" icon={SettingsRegular} />
+      {/snippet}
+    </SideNav>
+  </div>
+</Showcase>
+
+### {m.side_nav_custom_title()}
+
+{m.side_nav_custom_description()}
+
+<Showcase columns={1} columnWidth="260px" minHeight="0" disablePanZoom showOverflow code={customCode}>
+  <SideNav bind:collapsed={customCollapsed} header="Workspace">
+    {#snippet topContent()}
+      {#if !customCollapsed}
+        <TextBox type="search" placeholder="Search" aria-label="Search" />
+      {/if}
+    {/snippet}
+    <SideNavItem href="#home" label="Home" icon={HomeRegular} />
+  </SideNav>
+</Showcase>

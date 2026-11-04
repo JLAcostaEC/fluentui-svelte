@@ -1,0 +1,31 @@
+import type { Meta } from '#types';
+import { LayerRegular } from 'fluentui-icons-svelte';
+
+export const META: Meta = {
+	// SEO
+	title: 'AppSurface',
+	description:
+		'The area of an app that holds its content: a layer over the window or its Mica, with rounded corners next to a SideNav, in the colors of an active or an inactive window.',
+	keywords: ['app surface', 'surface', 'content area', 'layer', 'mica', 'app shell', 'windows 11', 'svelte'],
+	canonical: '/docs/components/app-surface',
+	robots: 'index, follow',
+	locale: 'en_US',
+	openGraph: {
+		title: 'AppSurface — Fluent UI Svelte',
+		description:
+			'A Fluent UI Svelte app surface: a layer or Mica content area that rounds its corners next to a SideNav, with active and inactive colors.',
+		type: 'article',
+		url: '/docs/components/app-surface',
+		siteName: 'Fluent UI Svelte'
+	},
+	twitter: {
+		card: 'summary_large_image',
+		title: 'AppSurface — Fluent UI Svelte',
+		description:
+			'A Fluent UI Svelte app surface: a layer or Mica content area that rounds its corners next to a SideNav, with active and inactive colors.'
+	},
+	// Library-only
+	slug: 'app-surface',
+	status: 'New',
+	icon: LayerRegular
+};

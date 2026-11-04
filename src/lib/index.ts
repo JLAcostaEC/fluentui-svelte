@@ -1,3 +1,20 @@
+// Start AppSurface Component
+export { default as AppSurface } from './components/app-surface/app-surface.svelte';
+export type { AppSurfaceProps } from './components/app-surface/types.js';
+// End AppSurface Component
+
+// Start AppWindow Component
+export { default as AppWindow } from './components/app-window/app-window.svelte';
+export { getAppWindowContext } from './components/app-window/app-window.ts';
+export type {
+	AppWindowProps,
+	AppWindowContext,
+	AppWindowPart,
+	AppWindowSideNav,
+	AppWindowGlobalNav
+} from './components/app-window/types.js';
+// End AppWindow Component
+
 // Start AutoSuggestBox Component
 export { default as AutoSuggestBox } from './components/auto-suggest-box/auto-suggest-box.svelte';
 export { default as AutoSuggestBoxOption } from './components/auto-suggest-box/option.svelte';
@@ -199,6 +216,31 @@ export { default as TextBoxButton } from './components/text-box/text-box-button.
 // Start TimePicker Component
 export { default as TimePicker } from './components/time-picker/time-picker.svelte';
 // End TimePicker Component
+
+// Start SideNav Component
+export { default as SideNav } from './components/side-nav/side-nav.svelte';
+export { default as SideNavItem } from './components/side-nav/side-nav-item.svelte';
+export { default as SideNavBranch } from './components/side-nav/side-nav-branch.svelte';
+export type {
+	SideNavProps,
+	SideNavItemProps,
+	SideNavBranchProps,
+	SideNavContent,
+	SideNavRenderState,
+	SideNavListViewProps
+} from './components/side-nav/types.ts';
+// End SideNav Component
+
+// Start TitleBar Component
+export { default as TitleBar } from './components/title-bar/title-bar.svelte';
+export { default as TitleBarLeftControls } from './components/title-bar/title-bar-left-controls.svelte';
+export { default as TitleBarRightControls } from './components/title-bar/title-bar-right-controls.svelte';
+export type {
+	TitleBarProps,
+	TitleBarLeftControlsProps,
+	TitleBarRightControlsProps
+} from './components/title-bar/types.js';
+// End TitleBar Component
 
 // Start ToggleSwitch Component
 export { default as ToggleSwitch } from './components/toggle-switch/toggle-switch.svelte';

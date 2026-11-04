@@ -20,6 +20,21 @@ describe('ListViewItemBranch', () => {
 		await expect.element(page.getByRole('link', { name: 'Inbox' })).toBeVisible();
 	});
 
+	it('exposes the wrapper through wrapperRef and wrapperAttributes', async () => {
+		const onkeydown = vi.fn();
+		await render(ListViewBranchTestWrapper, {
+			branchProps: { wrapperAttributes: { class: 'custom-wrapper', 'data-testid': 'wrapper', onkeydown } }
+		});
+		await expect.element(page.getByRole('status', { name: 'Wrapper tag' })).toHaveTextContent('LI');
+		const wrapper = page.getByTestId('wrapper');
+		await expect.element(wrapper).toHaveClass('fs-list-view-item-branch', 'custom-wrapper');
+		expect(wrapper.element()).toBe(projects().element().closest('li'));
+		await projects().click();
+		await userEvent.keyboard('{Escape}');
+		expect(onkeydown).toHaveBeenCalled();
+		await expect.element(projects()).toHaveAttribute('aria-expanded', 'false');
+	});
+
 	it('keeps list items and nested lists semantic', async () => {
 		await render(ListViewBranchTestWrapper, { expanded: true });
 		expect(projects().element().closest('li')?.parentElement?.tagName).toBe('UL');
@@ -183,6 +198,25 @@ describe('ListViewItemBranch', () => {
 		await userEvent.keyboard('{Escape}');
 		await expect.element(projects()).toHaveAttribute('aria-expanded', 'true');
 		await expect.element(projects()).toHaveFocus();
+		expect(onExpandedChange).not.toHaveBeenCalled();
+	});
+
+	it('honors Escape canceled by the wrapper attributes', async () => {
+		const onExpandedChange = vi.fn();
+		await render(ListViewBranchTestWrapper, {
+			branchProps: {
+				onExpandedChange,
+				wrapperAttributes: {
+					onkeydown: (event) => {
+						if (event.key === 'Escape') event.preventDefault();
+					}
+				}
+			}
+		});
+		await projects().click();
+		onExpandedChange.mockClear();
+		await userEvent.keyboard('{Escape}');
+		await expect.element(projects()).toHaveAttribute('aria-expanded', 'true');
 		expect(onExpandedChange).not.toHaveBeenCalled();
 	});
 

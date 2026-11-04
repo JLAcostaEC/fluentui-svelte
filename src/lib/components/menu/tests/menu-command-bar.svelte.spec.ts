@@ -99,9 +99,12 @@ describe('MenuCommandBar', () => {
 		const cut = item('Cut');
 		await expect.element(cut).toHaveAttribute('title', 'Cut');
 		await expect.element(cut).not.toHaveTextContent('Cut');
-		const { width, height } = cut.element().getBoundingClientRect();
-		expect(width).toBe(height);
-		expect(width).toBeGreaterThanOrEqual(40);
+		// Layout sizes, which neither the intro transition nor subpixel rounding can skew.
+		const size = () => {
+			const { offsetWidth, offsetHeight } = cut.element() as HTMLElement;
+			return { square: offsetWidth === offsetHeight, atLeast40: offsetWidth >= 40 };
+		};
+		await expect.poll(size).toEqual({ square: true, atLeast40: true });
 	});
 
 	it('shows the labels below the icons when asked to', async () => {

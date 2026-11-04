@@ -16,6 +16,7 @@ import { GET as aliasGET } from '../routes/docs/components/[slug]/[file]/+server
 
 const components = readComponents();
 const skill = fs.readFileSync(SKILL_PATH, 'utf-8');
+const guide = (slug: string) => fs.readFileSync(`src/lib/components/${slug}/docs/llms.md`, 'utf-8');
 
 describe('agent skill', () => {
 	it('has the front matter the skills CLI needs', () => {
@@ -88,19 +89,19 @@ describe('published Markdown', () => {
 		for (const meta of llmsComponents) expect(index).toContain(`(${SITE_URL}/docs/components/${meta.slug}.md)`);
 	});
 
-	it('serves each component guide by slug', async () => {
-		for (const meta of llmsComponents) {
-			const markdown = await componentMarkdown(meta.slug);
-			expect(markdown, meta.slug).toMatch(/^# /);
-		}
+	it('serves a component guide by slug', async () => {
+		expect(await componentMarkdown('button')).toBe(guide('button'));
 		expect(await componentMarkdown('not-a-component')).toBeNull();
 	});
 
-	it('puts the global guide and every component in /llms-full.txt', async () => {
+	// The only test that loads every guide. Each first load goes through the whole Vite pipeline, which takes
+	// seconds on a CI runner that also drives the browser tests, hence the timeout.
+	it('puts the global guide and every component in /llms-full.txt', { timeout: 60_000 }, async () => {
 		const full = await llmsFull();
 
 		expect(full.startsWith('# fluentui-svelte\n')).toBe(true);
-		for (const meta of llmsComponents) expect(full).toContain((await componentMarkdown(meta.slug))!.trim());
+		// Read from disk: a component whose guide the site cannot load would be missing here.
+		for (const meta of llmsComponents) expect(full, meta.slug).toContain(guide(meta.slug).trim());
 	});
 
 	it('keeps the old /docs/components/<slug>/llms URLs and rejects other names', async () => {

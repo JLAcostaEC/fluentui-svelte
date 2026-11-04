@@ -206,7 +206,7 @@
   const tabbableCode = `
 <TitleBar tabbable>
   {#snippet leftControls()}
-    <TitleBarLeftControls back globalNav appName="Contoso" />
+    <TitleBarLeftControls back globalNav appName="FluentUI App" />
   {/snippet}
   {#snippet rightControls()}
     <TitleBarRightControls />
@@ -500,7 +500,7 @@
   <div style="width: 100%">
     <TitleBar tabbable>
       {#snippet leftControls()}
-        <TitleBarLeftControls back globalNav appName="Contoso" />
+        <TitleBarLeftControls back globalNav appName="FluentUI App" />
       {/snippet}
       {#snippet rightControls()}
         <TitleBarRightControls />

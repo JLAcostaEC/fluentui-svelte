@@ -19,7 +19,7 @@ export type TitleBarProps = {
 	 * @bindable
 	 */
 	ref?: HTMLElement | null;
-	/** The controls at the start of the bar: back, navigation, and the identity of the app. Render a `TitleBarLeftControls` here, which only works inside a `TitleBar`.
+	/** The controls at the start of the bar: back, navigation, and the identity of the app. Render a `TitleBarLeftControls` here.
 	 * @type Snippet
 	 */
 	leftControls?: Snippet;
@@ -27,7 +27,7 @@ export type TitleBarProps = {
 	 * @type Snippet
 	 */
 	search?: Snippet;
-	/** The controls at the end of the bar: custom menus, the person picture, and the window buttons. Render a `TitleBarRightControls` here, which only works inside a `TitleBar`.
+	/** The controls at the end of the bar: custom menus, the person picture, and the window buttons. Render a `TitleBarRightControls` here.
 	 * @type Snippet
 	 */
 	rightControls?: Snippet;
@@ -87,11 +87,11 @@ export type TitleBarLeftControlsProps = {
 	 * @default false
 	 */
 	globalNav?: boolean | Snippet;
-	/** Whether the navigation the global navigation button controls is expanded.
+	/** Whether the navigation the global navigation button controls is expanded. Inside an AppWindow with a SideNav, it follows the SideNav and the button expands and collapses it.
 	 * @default false
 	 */
 	globalNavExpanded?: boolean;
-	/** Called when the global navigation button is pressed. */
+	/** Called when the global navigation button is pressed. Call `preventDefault()` to keep it from toggling the SideNav of the window. */
 	onGlobalNav?: MouseEventHandler<HTMLButtonElement>;
 	/** The accessible name of the global navigation button.
 	 * @default 'Navigation menu'
@@ -135,7 +135,7 @@ export type TitleBarRightControlsProps = {
 	 * @default false
 	 */
 	hideClose?: boolean;
-	/** Whether the window is maximized, which turns the maximize button into a restore button.
+	/** Whether the window is maximized, which turns the maximize button into a restore button. Inherits AppWindow's maximized state when omitted, or false when standalone.
 	 * @default false
 	 */
 	maximized?: boolean;

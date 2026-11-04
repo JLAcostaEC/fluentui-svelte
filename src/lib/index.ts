@@ -5,7 +5,14 @@ export type { AppSurfaceProps } from './components/app-surface/types.js';
 
 // Start AppWindow Component
 export { default as AppWindow } from './components/app-window/app-window.svelte';
-export type { AppWindowProps } from './components/app-window/types.js';
+export { getAppWindowContext } from './components/app-window/app-window.ts';
+export type {
+	AppWindowProps,
+	AppWindowContext,
+	AppWindowPart,
+	AppWindowSideNav,
+	AppWindowGlobalNav
+} from './components/app-window/types.js';
 // End AppWindow Component
 
 // Start AutoSuggestBox Component
@@ -209,6 +216,20 @@ export { default as TextBoxButton } from './components/text-box/text-box-button.
 // Start TimePicker Component
 export { default as TimePicker } from './components/time-picker/time-picker.svelte';
 // End TimePicker Component
+
+// Start SideNav Component
+export { default as SideNav } from './components/side-nav/side-nav.svelte';
+export { default as SideNavItem } from './components/side-nav/side-nav-item.svelte';
+export { default as SideNavBranch } from './components/side-nav/side-nav-branch.svelte';
+export type {
+	SideNavProps,
+	SideNavItemProps,
+	SideNavBranchProps,
+	SideNavContent,
+	SideNavRenderState,
+	SideNavListViewProps
+} from './components/side-nav/types.ts';
+// End SideNav Component
 
 // Start TitleBar Component
 export { default as TitleBar } from './components/title-bar/title-bar.svelte';

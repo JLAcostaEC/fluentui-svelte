@@ -1,10 +1,12 @@
 <script lang="ts">
+	import { untrack } from 'svelte';
 	import { Avatar, Button } from '#lib/index.js';
 	import DismissRegular from 'fluentui-icons-svelte/DismissRegular.svelte';
 	import SquareMultipleRegular from 'fluentui-icons-svelte/SquareMultipleRegular.svelte';
 	import SquareRegular from 'fluentui-icons-svelte/SquareRegular.svelte';
 	import SubtractRegular from 'fluentui-icons-svelte/SubtractRegular.svelte';
-	import { requireTitleBarContext } from './title-bar.ts';
+	import { getTitleBarContext } from './title-bar.ts';
+	import { getAppWindowContext } from '../app-window/app-window.ts';
 	import type { TitleBarRightControlsProps } from './types.ts';
 
 	let {
@@ -12,7 +14,7 @@
 		hideMinimize = false,
 		hideWindowToggle = false,
 		hideClose = false,
-		maximized = false,
+		maximized,
 		onMinimize,
 		onWindowToggle,
 		onClose,
@@ -27,11 +29,14 @@
 		...attributes
 	}: TitleBarRightControlsProps = $props();
 
-	const context = requireTitleBarContext();
+	const context = getTitleBarContext();
+	const appWindow = getAppWindowContext();
+	const effectiveMaximized = $derived(maximized ?? appWindow?.state.maximized ?? false);
 
-	const tabindex = $derived(context.config.tabbable ? undefined : -1);
+	// Outside a TitleBar the controls are always reachable.
+	const tabindex = $derived(context && !context.config.tabbable ? -1 : undefined);
 
-	const windowToggleLabel = $derived(maximized ? restoreLabel : maximizeLabel);
+	const windowToggleLabel = $derived(effectiveMaximized ? restoreLabel : maximizeLabel);
 	const hasActions = $derived(!!(customMenu || personPic));
 	const hasWindowControls = $derived(!(hideMinimize && hideWindowToggle && hideClose));
 </script>
@@ -40,7 +45,7 @@
 	@component
 	The controls at the end of a `TitleBar`: custom menus, the picture of the person, and the minimize, maximize and close
 	buttons of the window. The window buttons only report the press, since moving the window is up to the host of your app.
-	It must be rendered inside a `TitleBar`, which it reads its context from.
+	Inside a `TitleBar` it follows its `tabbable` setting; it also works on its own.
 
 	- Usage:
 	```tsx
@@ -60,7 +65,16 @@
 	</TitleBar>
 	```
 -->
-<div bind:this={ref} class={['fs-title-bar-right-controls', classes]} {...attributes}>
+<div
+	{@attach (element) => {
+		if (untrack(() => ref) !== element) ref = element;
+		return () => {
+			if (ref === element) ref = null;
+		};
+	}}
+	class={['fs-title-bar-right-controls', classes]}
+	{...attributes}
+>
 	{#if hasActions}
 		<div class="fs-title-bar-actions">
 			{@render customMenu?.()}
@@ -106,7 +120,7 @@
 					{tabindex}
 					onclick={onWindowToggle}
 				>
-					{#if maximized}
+					{#if effectiveMaximized}
 						<SquareMultipleRegular aria-hidden="true" />
 					{:else}
 						<SquareRegular aria-hidden="true" />

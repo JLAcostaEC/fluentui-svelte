@@ -2,7 +2,7 @@
 	import ChevronDownRegular from 'fluentui-icons-svelte/ChevronDownRegular.svelte';
 	import { getTabspotAttributes, type TabspotNavigationEvent, type TabspotNodeOptions } from 'tabspot';
 	import { getGlobalFSContext } from '../../providers/fluentui-svelte/fluentui-svelte.ts';
-	import { invokeHandlers } from '#internal';
+	import { invokeHandlers, RenderSoC } from '#internal';
 	import {
 		attachTabspot,
 		getListViewContext,
@@ -22,10 +22,13 @@
 
 	let {
 		label,
+		icon,
 		expanded = $bindable(false),
 		disabled = false,
 		shape,
 		ref = $bindable(null),
+		wrapperRef = $bindable(null),
+		wrapperAttributes,
 		class: classes,
 		onclick,
 		onkeydown,
@@ -33,8 +36,9 @@
 		children,
 		...attributes
 	}: ListViewItemBranchProps = $props();
-	let wrapperRef: HTMLElement | undefined;
+
 	let regionRef: HTMLDivElement | undefined;
+
 	const wrapperTag = $derived.by(() => {
 		if (context.config.role !== undefined && context.config.role !== 'list') {
 			throw new Error('ListViewItemBranch requires a native list. Set role="list" on selectable navigation lists.');
@@ -44,11 +48,13 @@
 		}
 		return context.config.as === 'div' ? 'div' : 'li';
 	});
+
 	setListViewItemContext({
 		get as() {
 			return wrapperTag;
 		}
 	});
+
 	const tabspotConfig: TabspotNodeOptions | undefined = $derived(
 		context.config.disableTabspot
 			? undefined
@@ -62,7 +68,9 @@
 					}
 				}
 	);
+
 	const tabspotAttributes = $derived(tabspotConfig && getTabspotAttributes(tabspotConfig));
+
 	const canceledKeys = new WeakSet<KeyboardEvent>();
 
 	function changeExpanded(event: Event, next: boolean) {
@@ -93,7 +101,12 @@
 	}
 
 	function handleEscape(event: KeyboardEvent) {
-		if (event.key !== 'Escape' || (event.target as Element).closest('.fs-list-view-item-branch') !== wrapperRef) return;
+		if (
+			!expanded ||
+			event.key !== 'Escape' ||
+			(event.target as Element).closest('.fs-list-view-item-branch') !== wrapperRef
+		)
+			return;
 		if (disabled || canceledKeys.has(event) || (context.config.disableTabspot && event.defaultPrevented)) return;
 		event.preventDefault();
 		event.stopPropagation();
@@ -102,27 +115,24 @@
 	}
 
 	function guardEscape(event: TabspotNavigationEvent) {
-		if (event.direction === 'escape' && event.from?.closest('.fs-list-view-item-branch') === wrapperRef)
+		if (expanded && event.direction === 'escape' && event.from?.closest('.fs-list-view-item-branch') === wrapperRef)
 			event.preventDefault();
 	}
 
 	function restoreFocusBeforeCollapse() {
 		if (!expanded && regionRef?.contains(document.activeElement)) ref?.focus();
 	}
+
 	$effect.pre(restoreFocusBeforeCollapse);
 </script>
 
 <svelte:element
 	this={wrapperTag}
 	role={wrapperTag === 'div' ? 'listitem' : undefined}
-	{@attach (element: HTMLElement) => {
-		wrapperRef = element;
-		return () => {
-			wrapperRef = undefined;
-		};
-	}}
-	class="fs-list-view-item-branch"
-	onkeydown={handleEscape}
+	{...wrapperAttributes}
+	bind:this={wrapperRef}
+	class={['fs-list-view-item-branch', wrapperAttributes?.class]}
+	onkeydown={(event: KeyboardEvent) => invokeHandlers(event, [], [wrapperAttributes?.onkeydown, handleEscape])}
 	{...tabspotAttributes}
 	{@attach attachTabspot(tabspotConfig, guardEscape, globalContext?.state.tabspotInstance)}
 >
@@ -146,7 +156,12 @@
 		}}
 		onkeydown={handleKeydown}
 	>
-		<span>{label}</span>
+		{#if icon}
+			<span class="branch-icon" aria-hidden="true">
+				<RenderSoC SoC={icon} />
+			</span>
+		{/if}
+		<span class="fs-list-view-branch-label">{label}</span>
 		<ChevronDownRegular aria-hidden="true" width="1rem" height="1rem" class={['branch-chevron', { expanded }]} />
 	</button>
 	<div
@@ -167,13 +182,13 @@
 <style>
 	.fs-list-view-item-branch {
 		list-style: none;
-		margin: 0.3rem 0;
 	}
 	.fs-list-view-item-branch-trigger {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		gap: 0.5rem;
+		margin: 0.3rem 0;
 		width: 100%;
 		box-sizing: border-box;
 		padding: 0.275rem 0.713rem 0.4rem;
@@ -207,10 +222,24 @@
 		}
 		& :global(.branch-chevron) {
 			flex-shrink: 0;
+			margin-inline-start: auto;
 			font-size: 1rem;
 		}
 		& :global(.branch-chevron.expanded) {
 			rotate: 180deg;
+		}
+	}
+	.branch-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex: none;
+		inline-size: 1rem;
+		/* As tall as a line of text, so a branch is as tall with its label as without it. */
+		block-size: 1lh;
+		& :global(svg) {
+			inline-size: 1rem;
+			block-size: 1rem;
 		}
 	}
 	.fs-list-view-item-branch-region > :global(.fs-list-view) {

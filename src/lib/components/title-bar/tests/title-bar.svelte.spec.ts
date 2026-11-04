@@ -217,8 +217,8 @@ describe('the layout of the search', () => {
 			searchMinWidth: 100,
 			searchMaxWidth: '25%'
 		});
-		// A percentage is of the room inside the bar, which is 8 pixels short of it for the start padding.
-		expect(rect('.fs-title-bar-search').width).toBeCloseTo(248, 0);
+		// A percentage is of the room inside the bar, which is 4 pixels short of it for the start padding.
+		expect(rect('.fs-title-bar-search').width).toBeCloseTo(249, 0);
 	});
 
 	it('leaves the right controls at the end of a bar without a search', async () => {
@@ -297,9 +297,17 @@ describe('the drag region', () => {
 });
 
 describe('the controls outside a TitleBar', () => {
-	it('fail loudly instead of rendering without the context', async () => {
-		await expect(render(TitleBarLeftControls)).rejects.toThrow('No TitleBarContext found for fs-title-bar.');
-		await expect(render(TitleBarRightControls)).rejects.toThrow('No TitleBarContext found for fs-title-bar.');
+	it('render on their own, and stay reachable by Tab', async () => {
+		render(TitleBarLeftControls, { back: true, appName: 'FluentUI App' });
+		await expect.element(page.getByRole('button', { name: 'Back', exact: true })).not.toHaveAttribute('tabindex');
+		await expect.element(page.getByText('FluentUI App')).toBeVisible();
+	});
+
+	it('render the window buttons on their own', async () => {
+		const onClose = vi.fn();
+		render(TitleBarRightControls, { onClose });
+		await page.getByRole('button', { name: 'Close', exact: true }).click();
+		expect(onClose).toHaveBeenCalledOnce();
 	});
 });
 
@@ -390,8 +398,8 @@ describe('TitleBarLeftControls', () => {
 		});
 
 		it('names an icon-only identity with appIconLabel', async () => {
-			renderLeft({ appIcon: AppsRegular, appIconLabel: 'Contoso' });
-			await expect.element(page.getByRole('img', { name: 'Contoso' })).toBeInTheDocument();
+			renderLeft({ appIcon: AppsRegular, appIconLabel: 'FluentUI App' });
+			await expect.element(page.getByRole('img', { name: 'FluentUI App' })).toBeInTheDocument();
 		});
 
 		it('provides a default accessible name for an icon-only identity', async () => {

@@ -1,9 +1,9 @@
 {
   "keys": {
     "generated_fs_app_surface_props_props_active": {
-      "en": "89b6f266",
+      "en": "d569d42a",
       "locales": {
-        "es": "89b6f266"
+        "es": "d569d42a"
       },
       "source": "src/lib/components/app-surface/types.ts#AppSurfaceProps.active"
     },
@@ -48,6 +48,20 @@
         "es": "358fe0c8"
       },
       "source": "src/lib/components/app-window/types.ts#AppWindowProps.height"
+    },
+    "generated_fs_app_window_props_props_maximized": {
+      "en": "dd20582f",
+      "locales": {
+        "es": "dd20582f"
+      },
+      "source": "src/lib/components/app-window/types.ts#AppWindowProps.maximized"
+    },
+    "generated_fs_app_window_props_props_minimized": {
+      "en": "8d1ea6c3",
+      "locales": {
+        "es": "8d1ea6c3"
+      },
+      "source": "src/lib/components/app-window/types.ts#AppWindowProps.minimized"
     },
     "generated_fs_app_window_props_props_ref": {
       "en": "d65236d3",
@@ -1897,6 +1911,13 @@
       },
       "source": "src/lib/components/list-view/types.ts#ListViewItemBranchProps.expanded"
     },
+    "generated_fs_list_view_item_branch_props_props_icon": {
+      "en": "1a60abbe",
+      "locales": {
+        "es": "1a60abbe"
+      },
+      "source": "src/lib/components/list-view/types.ts#ListViewItemBranchProps.icon"
+    },
     "generated_fs_list_view_item_branch_props_props_label": {
       "en": "f25036f5",
       "locales": {
@@ -1924,6 +1945,20 @@
         "es": "f89095c3"
       },
       "source": "src/lib/components/list-view/types.ts#ListViewItemBranchProps.shape"
+    },
+    "generated_fs_list_view_item_branch_props_props_wrapper_attributes": {
+      "en": "0a0dad7a",
+      "locales": {
+        "es": "0a0dad7a"
+      },
+      "source": "src/lib/components/list-view/types.ts#ListViewItemBranchProps.wrapperAttributes"
+    },
+    "generated_fs_list_view_item_branch_props_props_wrapper_ref": {
+      "en": "cacba309",
+      "locales": {
+        "es": "cacba309"
+      },
+      "source": "src/lib/components/list-view/types.ts#ListViewItemBranchProps.wrapperRef"
     },
     "generated_fs_list_view_item_props_props_active": {
       "en": "ec049c65",
@@ -2008,6 +2043,13 @@
         "es": "30d0b0f2"
       },
       "source": "src/lib/components/list-view/types.ts#ListViewProps.disableTabspot"
+    },
+    "generated_fs_list_view_props_props_manage_special_keys": {
+      "en": "b0eb777a",
+      "locales": {
+        "es": "b0eb777a"
+      },
+      "source": "src/lib/components/list-view/types.ts#ListViewProps.manageSpecialKeys"
     },
     "generated_fs_list_view_props_props_navigation_mode": {
       "en": "b242251a",
@@ -2645,6 +2687,167 @@
         "es": "bc50a20c"
       },
       "source": "src/lib/components/rating/types.ts#RatingProps.wrapperRef"
+    },
+    "generated_fs_side_nav_item_props_props_as": {
+      "en": "170b6e45",
+      "locales": {
+        "es": "170b6e45"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavItemProps.as"
+    },
+    "generated_fs_side_nav_item_props_props_children": {
+      "en": "af625cbc",
+      "locales": {
+        "es": "af625cbc"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavItemProps.children"
+    },
+    "generated_fs_side_nav_item_props_props_icon": {
+      "en": "094b78cc",
+      "locales": {
+        "es": "094b78cc"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavItemProps.icon"
+    },
+    "generated_fs_side_nav_item_props_props_label": {
+      "en": "0b97278b",
+      "locales": {
+        "es": "0b97278b"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavItemProps.label"
+    },
+    "generated_fs_side_nav_item_props_props_ref": {
+      "en": "13e98d0a",
+      "locales": {
+        "es": "13e98d0a"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavItemProps.ref"
+    },
+    "generated_fs_side_nav_props_props_children": {
+      "en": "a74e70d0",
+      "locales": {
+        "es": "a74e70d0"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.children"
+    },
+    "generated_fs_side_nav_props_props_close_on_select": {
+      "en": "218d5705",
+      "locales": {
+        "es": "218d5705"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.closeOnSelect"
+    },
+    "generated_fs_side_nav_props_props_collapse_label": {
+      "en": "dd05587b",
+      "locales": {
+        "es": "dd05587b"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.collapseLabel"
+    },
+    "generated_fs_side_nav_props_props_collapsed": {
+      "en": "70e03640",
+      "locales": {
+        "es": "70e03640"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.collapsed"
+    },
+    "generated_fs_side_nav_props_props_expand_label": {
+      "en": "519e3073",
+      "locales": {
+        "es": "519e3073"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.expandLabel"
+    },
+    "generated_fs_side_nav_props_props_floating": {
+      "en": "3fc91ef5",
+      "locales": {
+        "es": "3fc91ef5"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.floating"
+    },
+    "generated_fs_side_nav_props_props_footer": {
+      "en": "9e8ae341",
+      "locales": {
+        "es": "9e8ae341"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.footer"
+    },
+    "generated_fs_side_nav_props_props_footer_content": {
+      "en": "6856e9bd",
+      "locales": {
+        "es": "6856e9bd"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.footerContent"
+    },
+    "generated_fs_side_nav_props_props_header": {
+      "en": "2fd54890",
+      "locales": {
+        "es": "2fd54890"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.header"
+    },
+    "generated_fs_side_nav_props_props_label": {
+      "en": "d02054b0",
+      "locales": {
+        "es": "d02054b0"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.label"
+    },
+    "generated_fs_side_nav_props_props_list_view_props": {
+      "en": "fbe3c112",
+      "locales": {
+        "es": "fbe3c112"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.listViewProps"
+    },
+    "generated_fs_side_nav_props_props_on_collapsed_change": {
+      "en": "158ee613",
+      "locales": {
+        "es": "158ee613"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.onCollapsedChange"
+    },
+    "generated_fs_side_nav_props_props_position": {
+      "en": "db777b76",
+      "locales": {
+        "es": "db777b76"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.position"
+    },
+    "generated_fs_side_nav_props_props_ref": {
+      "en": "be6dd926",
+      "locales": {
+        "es": "be6dd926"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.ref"
+    },
+    "generated_fs_side_nav_props_props_selected_items": {
+      "en": "4b414ee4",
+      "locales": {
+        "es": "4b414ee4"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.selectedItems"
+    },
+    "generated_fs_side_nav_props_props_show_toggle": {
+      "en": "232ae9b0",
+      "locales": {
+        "es": "232ae9b0"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.showToggle"
+    },
+    "generated_fs_side_nav_props_props_top_content": {
+      "en": "ec826136",
+      "locales": {
+        "es": "ec826136"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.topContent"
+    },
+    "generated_fs_side_nav_props_props_width": {
+      "en": "99a297c0",
+      "locales": {
+        "es": "99a297c0"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavProps.width"
     },
     "generated_fs_skeleton_props_props_animation": {
       "en": "9aac831a",
@@ -4089,9 +4292,9 @@
       "source": "src/lib/components/title-bar/types.ts#TitleBarLeftControlsProps.globalNav"
     },
     "generated_fs_title_bar_left_controls_props_props_global_nav_expanded": {
-      "en": "b03cb74b",
+      "en": "614a7bef",
       "locales": {
-        "es": "b03cb74b"
+        "es": "614a7bef"
       },
       "source": "src/lib/components/title-bar/types.ts#TitleBarLeftControlsProps.globalNavExpanded"
     },
@@ -4110,9 +4313,9 @@
       "source": "src/lib/components/title-bar/types.ts#TitleBarLeftControlsProps.onBack"
     },
     "generated_fs_title_bar_left_controls_props_props_on_global_nav": {
-      "en": "da63f686",
+      "en": "1002d67f",
       "locales": {
-        "es": "da63f686"
+        "es": "1002d67f"
       },
       "source": "src/lib/components/title-bar/types.ts#TitleBarLeftControlsProps.onGlobalNav"
     },
@@ -4138,9 +4341,9 @@
       "source": "src/lib/components/title-bar/types.ts#TitleBarProps.dragRegionProps"
     },
     "generated_fs_title_bar_props_props_left_controls": {
-      "en": "0ed1bcb0",
+      "en": "a9b42a55",
       "locales": {
-        "es": "0ed1bcb0"
+        "es": "a9b42a55"
       },
       "source": "src/lib/components/title-bar/types.ts#TitleBarProps.leftControls"
     },
@@ -4152,9 +4355,9 @@
       "source": "src/lib/components/title-bar/types.ts#TitleBarProps.ref"
     },
     "generated_fs_title_bar_props_props_right_controls": {
-      "en": "ba77c5e5",
+      "en": "01d259eb",
       "locales": {
-        "es": "ba77c5e5"
+        "es": "01d259eb"
       },
       "source": "src/lib/components/title-bar/types.ts#TitleBarProps.rightControls"
     },
@@ -4250,9 +4453,9 @@
       "source": "src/lib/components/title-bar/types.ts#TitleBarRightControlsProps.maximizeLabel"
     },
     "generated_fs_title_bar_right_controls_props_props_maximized": {
-      "en": "93d7c6fc",
+      "en": "e58c1b38",
       "locales": {
-        "es": "93d7c6fc"
+        "es": "e58c1b38"
       },
       "source": "src/lib/components/title-bar/types.ts#TitleBarRightControlsProps.maximized"
     },

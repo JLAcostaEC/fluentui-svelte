@@ -1,0 +1,61 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '#i18n/messages.js';
+</script>
+
+## {m.global_component_props()} (SideNav)
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:SideNavProps -->
+
+| Name                                             | Type                                         | Default                 | Description                                                                               |
+| ------------------------------------------------ | -------------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                 | `HTMLElement` &#124; `null`                  |                         | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_ref} />`                 |
+| `label`                                          | `string`                                     | `'Main navigation'`     | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_label} />`               |
+| `collapsed` _bindable_                           | `boolean`                                    | `false`                 | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_collapsed} />`           |
+| `position`                                       | `'left'` &#124; `'right'`                    | `'left'`                | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_position} />`            |
+| `showToggle`                                     | `boolean`                                    | `Automatic`             | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_show_toggle} />`         |
+| `floating`                                       | `boolean`                                    | `false`                 | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_floating} />`            |
+| `width`                                          | `number` &#124; `string`                     | `200`                   | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_width} />`               |
+| `expandLabel`                                    | `string`                                     | `'Expand navigation'`   | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_expand_label} />`        |
+| `collapseLabel`                                  | `string`                                     | `'Collapse navigation'` | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_collapse_label} />`      |
+| `closeOnSelect`                                  | `boolean`                                    | `true`                  | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_close_on_select} />`     |
+| `onCollapsedChange`                              | `(event: Event, collapsed: boolean) => void` |                         | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_on_collapsed_change} />` |
+| `selectedItems` _bindable_                       | `string[]`                                   |                         | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_selected_items} />`      |
+| `listViewProps`                                  | `SideNavListViewProps`                       |                         | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_list_view_props} />`     |
+| `header`                                         | `string`                                     |                         | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_header} />`              |
+| `topContent`                                     | `string` &#124; `Snippet` &#124; `Component` |                         | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_top_content} />`         |
+| `footerContent`                                  | `string` &#124; `Snippet` &#124; `Component` |                         | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_footer_content} />`      |
+| `footer`                                         | `Snippet`                                    |                         | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_footer} />`              |
+| `children`                                       | `Snippet`                                    |                         | `<I18nMarkupMessage message={m.generated_fs_side_nav_props_props_children} />`            |
+| `HTMLAttributes<HTMLElement>` without `children` |                                              |                         |                                                                                           |
+
+<!-- /props:SideNavProps -->
+
+## {m.global_component_props()} (SideNavItem)
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:SideNavItemProps -->
+
+| Name                                                                                                        | Type                                                                                          | Default | Description                                                                         |
+| ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------- |
+| `as`                                                                                                        | `'li'` &#124; `'a'` &#124; `'button'` &#124; `'div'`                                          | `'a'`   | `<I18nMarkupMessage message={m.generated_fs_side_nav_item_props_props_as} />`       |
+| `ref` _bindable_                                                                                            | `HTMLLIElement` &#124; `HTMLAnchorElement` &#124; `HTMLButtonElement` &#124; `HTMLDivElement` |         | `<I18nMarkupMessage message={m.generated_fs_side_nav_item_props_props_ref} />`      |
+| `label`                                                                                                     | `string`                                                                                      |         | `<I18nMarkupMessage message={m.generated_fs_side_nav_item_props_props_label} />`    |
+| `icon`                                                                                                      | `Snippet` &#124; `Component`                                                                  |         | `<I18nMarkupMessage message={m.generated_fs_side_nav_item_props_props_icon} />`     |
+| `children`                                                                                                  | `Snippet`                                                                                     |         | `<I18nMarkupMessage message={m.generated_fs_side_nav_item_props_props_children} />` |
+| `shape`, `value`, `active`, `role`, `disabled`, `checkmark`, `onAction`, `onfocus` from `ListViewItemProps` |                                                                                               |         |                                                                                     |
+| HTML Attributes                                                                                             |                                                                                               |         |                                                                                     |
+
+<!-- /props:SideNavItemProps -->
+
+## {m.global_component_props()} (SideNavBranch)
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:SideNavBranchProps -->
+
+| Name                      | Type | Default | Description |
+| ------------------------- | ---- | ------- | ----------- |
+| `ListViewItemBranchProps` |      |         |             |
+
+<!-- /props:SideNavBranchProps -->

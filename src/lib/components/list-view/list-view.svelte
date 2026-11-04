@@ -16,6 +16,7 @@
 		ref = $bindable(null),
 		selectionMode = 'none',
 		navigationMode = 'items',
+		manageSpecialKeys = true,
 		shape = 'rounded',
 		selectedItems = $bindable([]),
 		onSelectionChange,
@@ -51,7 +52,7 @@
 			: {
 					...(parent
 						? { grouper: { enterDirection: 'right', exitDirection: 'left' } }
-						: { root: { manageSpecialKeys: true } }),
+						: { root: { manageSpecialKeys } }),
 					mover: {
 						axis: 'vertical',
 						items:

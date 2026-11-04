@@ -22,7 +22,7 @@ Start with a `TitleBar` if the window has one, then place page content in an `Ap
 <AppWindow width={400} height={200}>
 	<TitleBar>
 		{#snippet leftControls()}
-			<TitleBarLeftControls appIcon={AppsRegular} appName="Contoso" />
+			<TitleBarLeftControls appIcon={AppsRegular} appName="FluentUI App" />
 		{/snippet}
 		{#snippet rightControls()}
 			<TitleBarRightControls />
@@ -67,7 +67,7 @@ The window paints the Mica background, so a `TitleBar` inside it stays transpare
 <AppWindow width={400} height={220}>
 	<TitleBar searchMinWidth={120}>
 		{#snippet leftControls()}
-			<TitleBarLeftControls appIcon={AppsRegular} appName="Contoso" />
+			<TitleBarLeftControls appIcon={AppsRegular} appName="FluentUI App" />
 		{/snippet}
 		{#snippet search()}
 			<AutoSuggestBox placeholder="Search" aria-label="Search" />
@@ -80,18 +80,40 @@ The window paints the Mica background, so a `TitleBar` inside it stays transpare
 </AppWindow>
 ```
 
+## Shared window context
+
+AppWindow creates a context per instance. Descendant components can call the exported `getAppWindowContext()` during initialization; it returns null outside AppWindow. Call it inside a child component, rather than in the parent that renders AppWindow.
+
+`config.width` and `config.height` expose window dimensions. `state` contains the window `ref`, `active`, `maximized`, `minimized`, and registered `sideNav`, `titleBar`, `globalNav` and `appSurface` parts. Parts are null until mounted and are cleared on unmount. SideNav exposes live `collapsed`, `floating`, `position` and `ref` getters, and `setCollapsed(event, collapsed)`. `globalNav` is the global navigation button of the TitleBar (`TitleBarLeftControls`): its `ref` and `enabled`, which tells SideNav to hide its own hamburger. Nested AppWindow instances have independent contexts.
+
+The host reports maximized/minimized through AppWindow props; these flags do not invoke native APIs or hide the window. TitleBarRightControls inherits maximized unless explicitly overridden. AppSurface inherits active unless overridden and removes its corner radii while its window's SideNav is floating and collapsed.
+
+```svelte
+<!-- WindowStatus.svelte -->
+<script>
+	import { getAppWindowContext } from 'fluentui-svelte';
+	const appWindow = getAppWindowContext();
+</script>
+
+<p>Maximized: {appWindow?.state.maximized ?? false}</p>
+<p>Minimized: {appWindow?.state.minimized ?? false}</p>
+<p>Navigation collapsed: {appWindow?.state.sideNav?.collapsed ?? false}</p>
+```
+
 ## Component Props
 
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:AppWindowProps -->
 
-| Name                                                | Type                        | Default  | Description                                                                                                                           |
-| --------------------------------------------------- | --------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `ref` _bindable_                                    | `HTMLElement` &#124; `null` |          | The DOM reference of the window element.                                                                                              |
-| `width`                                             | `number` &#124; `string`    | `'100%'` | The width of the window. A number is in pixels, a string is any CSS length.                                                           |
-| `height`                                            | `number` &#124; `string`    | `'100%'` | The height of the window. A number is in pixels, a string is any CSS length.                                                          |
-| `active`                                            | `boolean`                   | `false`  | Whether the window is the active one, which picks the shell shadow it casts: a deeper one while active, a lighter one while inactive. |
-| `children`                                          | `Snippet`                   |          | The content of the window, such as a `TitleBar` and the page below it.                                                                |
-| `HTMLAttributes<HTMLDivElement>` without `children` |                             |          |                                                                                                                                       |
+| Name                                                | Type                        | Default  | Description                                                                                                                                           |
+| --------------------------------------------------- | --------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLElement` &#124; `null` |          | The DOM reference of the window element.                                                                                                              |
+| `width`                                             | `number` &#124; `string`    | `'100%'` | The width of the window. A number is in pixels, a string is any CSS length.                                                                           |
+| `height`                                            | `number` &#124; `string`    | `'100%'` | The height of the window. A number is in pixels, a string is any CSS length.                                                                          |
+| `active`                                            | `boolean`                   | `false`  | Whether the window is the active one, which picks the shell shadow it casts: a deeper one while active, a lighter one while inactive.                 |
+| `maximized` _bindable_                              | `boolean`                   | `false`  | The maximized state reported by the host. Shared through AppWindow context and inherited by TitleBarRightControls when its maximized prop is omitted. |
+| `minimized` _bindable_                              | `boolean`                   | `false`  | The minimized state reported by the host. Shared with window descendants; it does not call a native window API or hide the component.                 |
+| `children`                                          | `Snippet`                   |          | The content of the window, such as a `TitleBar` and the page below it.                                                                                |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                             |          |                                                                                                                                                       |
 
 <!-- /props:AppWindowProps -->

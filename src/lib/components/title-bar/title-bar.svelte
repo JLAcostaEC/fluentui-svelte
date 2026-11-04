@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { tick } from 'svelte';
+	import { onDestroy, tick } from 'svelte';
+	import { getAppWindowContext } from '../app-window/app-window.ts';
 	import { Button } from '#lib/index.js';
-	import { pxToRem } from '#internal';
+	import { toLength } from '#internal';
 	import SearchRegular from 'fluentui-icons-svelte/SearchRegular.svelte';
 	import { setTitleBarContext } from './title-bar.ts';
 	import type { TitleBarContext, TitleBarProps } from './types.ts';
@@ -31,8 +32,6 @@
 	const collapsed = $derived(hasSearch && searchCollapsed);
 	const _tall = $derived(tall ?? hasSearch);
 
-	const toLength = (value: number | string) => (typeof value === 'number' ? pxToRem(value) : value);
-
 	const context: TitleBarContext = {
 		config: {
 			get tabbable() {
@@ -48,12 +47,20 @@
 	};
 
 	setTitleBarContext(context);
+	const appWindow = getAppWindowContext();
+	const unregister = appWindow?.methods.registerTitleBar({
+		get ref() {
+			return ref ?? null;
+		}
+	});
+	onDestroy(() => unregister?.());
 
-	$effect.pre(() => {
+	function restoreSearchFocus() {
 		if (collapsed && searchRef?.contains(searchRef.ownerDocument.activeElement)) {
 			void tick().then(() => searchButtonRef?.focus());
 		}
-	});
+	}
+	$effect.pre(restoreSearchFocus);
 
 	const expandSearch = async () => {
 		searchCollapsed = false;
@@ -71,7 +78,7 @@
 	A title bar is the top bar of an app shell, laid out like the one of a Windows 11 app: the identity of the app
 	and its navigation at the start, a search that grows and shrinks at the center, and the window controls at the end.
 	It paints no background of its own, since it sits on the component that renders the window. The controls it holds,
-	`TitleBarLeftControls` and `TitleBarRightControls`, must be rendered inside it to read its context.
+	`TitleBarLeftControls` and `TitleBarRightControls`, follow its settings when they are rendered inside it, and work on their own.
 
 	- Usage:
 	```tsx
@@ -90,7 +97,12 @@
 	```
 -->
 <header
-	bind:this={ref}
+	{@attach (element) => {
+		ref = element;
+		return () => {
+			ref = null;
+		};
+	}}
 	class={['fs-title-bar', _tall && 'tall', hasSearch && 'has-search', collapsed && 'collapsed', classes]}
 	style:--fs-title-bar-search-min={toLength(searchMinWidth)}
 	style:--fs-title-bar-search-max={toLength(searchMaxWidth)}
@@ -117,7 +129,15 @@
 				</Button>
 			</div>
 		{:else}
-			<div class="fs-title-bar-search" bind:this={searchRef}>
+			<div
+				class="fs-title-bar-search"
+				{@attach (element) => {
+					searchRef = element;
+					return () => {
+						searchRef = undefined;
+					};
+				}}
+			>
 				{@render search()}
 			</div>
 		{/if}
@@ -137,7 +157,7 @@
 		inline-size: 100%;
 		block-size: var(--fs-title-bar-height);
 		flex-shrink: 0;
-		padding-inline-start: 0.5rem;
+		padding-inline-start: 0.25rem;
 		color: var(--fs-text-primary);
 		font-family: var(--fs-font-family-base);
 		font-size: var(--fs-caption-font-size);

@@ -5,7 +5,7 @@ export const META: Meta = {
 	// SEO
 	title: 'AppSurface',
 	description:
-		'The area of an app that holds its content: a layer over the window or its Mica, with the top-left and bottom-right corners rounded, in the colors of an active or an inactive window.',
+		'The area of an app that holds its content: a layer over the window or its Mica, with rounded corners next to a SideNav, in the colors of an active or an inactive window.',
 	keywords: ['app surface', 'surface', 'content area', 'layer', 'mica', 'app shell', 'windows 11', 'svelte'],
 	canonical: '/docs/components/app-surface',
 	robots: 'index, follow',
@@ -13,7 +13,7 @@ export const META: Meta = {
 	openGraph: {
 		title: 'AppSurface — Fluent UI Svelte',
 		description:
-			'A Fluent UI Svelte app surface: a layer or Mica content area with two rounded corners and active and inactive colors.',
+			'A Fluent UI Svelte app surface: a layer or Mica content area that rounds its corners next to a SideNav, with active and inactive colors.',
 		type: 'article',
 		url: '/docs/components/app-surface',
 		siteName: 'Fluent UI Svelte'
@@ -22,7 +22,7 @@ export const META: Meta = {
 		card: 'summary_large_image',
 		title: 'AppSurface — Fluent UI Svelte',
 		description:
-			'A Fluent UI Svelte app surface: a layer or Mica content area with two rounded corners and active and inactive colors.'
+			'A Fluent UI Svelte app surface: a layer or Mica content area that rounds its corners next to a SideNav, with active and inactive colors.'
 	},
 	// Library-only
 	slug: 'app-surface',

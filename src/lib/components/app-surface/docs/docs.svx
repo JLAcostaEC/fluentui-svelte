@@ -20,7 +20,7 @@
   <AppWindow width={400} height={200}>
     <TitleBar>
       {#snippet leftControls()}
-        <TitleBarLeftControls appIcon={AppsRegular} appName="Contoso" />
+        <TitleBarLeftControls appIcon={AppsRegular} appName="FluentUI App" />
       {/snippet}
       {#snippet rightControls()}
         <TitleBarRightControls />

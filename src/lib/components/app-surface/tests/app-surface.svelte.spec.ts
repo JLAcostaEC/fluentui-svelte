@@ -4,6 +4,7 @@ import { render } from 'vitest-browser-svelte';
 import { createRawSnippet } from 'svelte';
 import '#css/theme.css';
 import { AppSurface } from '#lib/index.js';
+import NavWrapper from './AppSurfaceNavTestWrapper.svelte';
 
 const children = createRawSnippet(() => ({ render: () => '<p>Inside</p>' }));
 
@@ -62,24 +63,42 @@ describe('rendering', () => {
 
 describe('corners', () => {
 	const radius = () => resolve('borderTopLeftRadius', 'var(--fs-control-overlay-border-radius)');
-
-	it('rounds the top left and the bottom right', async () => {
-		render(AppSurface, { 'data-testid': 'surface' });
+	const corners = () => {
 		const style = getComputedStyle(surface());
+		return {
+			topLeft: style.borderTopLeftRadius,
+			topRight: style.borderTopRightRadius,
+			bottomLeft: style.borderBottomLeftRadius,
+			bottomRight: style.borderBottomRightRadius
+		};
+	};
+	const square = { topLeft: '0px', topRight: '0px', bottomLeft: '0px', bottomRight: '0px' };
+
+	it('is square on its own', async () => {
+		render(AppSurface, { 'data-testid': 'surface' });
+		expect(corners()).toEqual(square);
+	});
+
+	it('is square in a window without a SideNav', async () => {
+		render(NavWrapper, { withNav: false });
+		expect(corners()).toEqual(square);
+	});
+
+	it('rounds the corner that faces a SideNav on the left, and the one across from it', async () => {
+		render(NavWrapper, { navProps: { position: 'left' } });
 		expect(radius()).not.toBe('0px');
-		expect(style.borderTopLeftRadius).toBe(radius());
-		expect(style.borderBottomRightRadius).toBe(radius());
-		expect(style.borderTopRightRadius).toBe('0px');
-		expect(style.borderBottomLeftRadius).toBe('0px');
+		await expect.poll(corners).toEqual({ ...square, topLeft: radius(), bottomRight: radius() });
+	});
+
+	it('rounds the opposite corners when the SideNav is on the right', async () => {
+		const screen = await render(NavWrapper, { navProps: { position: 'left' } });
+		await screen.rerender({ navProps: { position: 'right' } });
+		await expect.poll(corners).toEqual({ ...square, topRight: radius(), bottomLeft: radius() });
 	});
 
 	it('swaps the rounded corners when it is written right to left', async () => {
-		render(AppSurface, { 'data-testid': 'surface', dir: 'rtl' });
-		const style = getComputedStyle(surface());
-		expect(style.borderTopRightRadius).toBe(radius());
-		expect(style.borderBottomLeftRadius).toBe(radius());
-		expect(style.borderTopLeftRadius).toBe('0px');
-		expect(style.borderBottomRightRadius).toBe('0px');
+		render(NavWrapper, { surfaceProps: { dir: 'rtl' } });
+		await expect.poll(corners).toEqual({ ...square, topRight: radius(), bottomLeft: radius() });
 	});
 });
 

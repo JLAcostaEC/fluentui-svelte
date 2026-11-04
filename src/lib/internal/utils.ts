@@ -14,6 +14,9 @@ export const pxToRem = (px: number | string | (() => number | string), base?: nu
 	return `${(typeof px === 'string' ? parseFloat(px) : px) / resolvedBase}rem`;
 };
 
+/** A number is a length in pixels, converted to rem; a string is any CSS length and is used as it is. */
+export const toLength = (value: number | string) => (typeof value === 'number' ? pxToRem(value) : value);
+
 /** Rounds a pixel value to the nearest physical pixel based on the device pixel ratio. */
 export const roundByDPR = (value: number, element?: Element) => {
 	const dpr = element?.ownerDocument.defaultView?.devicePixelRatio || window.devicePixelRatio || 1;

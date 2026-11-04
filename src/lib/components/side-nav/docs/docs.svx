@@ -1,0 +1,56 @@
+<script lang="ts">
+  import { AppSurface, AppWindow, SideNav, SideNavItem } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { FolderRegular, HomeRegular, SettingsRegular } from 'fluentui-icons-svelte';
+  import { m } from '#i18n/messages.js';
+
+  const usageCode = `
+<script>
+  import { AppWindow, AppSurface, SideNav, SideNavItem } from 'fluentui-svelte';
+  import { HomeRegular, FolderRegular, SettingsRegular } from 'fluentui-icons-svelte';
+<\/script>
+
+<AppWindow width={480} height={240}>
+  <SideNav header="Workspace">
+    <SideNavItem href="#home" label="Home" icon={HomeRegular} active />
+    <SideNavItem href="#documents" label="Documents" icon={FolderRegular} />
+    <SideNavItem href="#settings" label="Settings" icon={SettingsRegular} />
+  </SideNav>
+  <AppSurface style="padding: 1rem">Page content</AppSurface>
+</AppWindow>`;
+</script>
+
+# SideNav
+
+{m.side_nav_description()}
+
+<Showcase columns={1} columnWidth="480px" minHeight="0" disablePanZoom showOverflow code={usageCode}>
+  <AppWindow width={480} height={240}>
+    <SideNav header="Workspace">
+      <SideNavItem href="#home" label="Home" icon={HomeRegular} active />
+      <SideNavItem href="#documents" label="Documents" icon={FolderRegular} />
+      <SideNavItem href="#settings" label="Settings" icon={SettingsRegular} />
+    </SideNav>
+    <AppSurface style="padding: 1rem">Page content</AppSurface>
+  </AppWindow>
+</Showcase>
+
+## {m.global_usage()}
+
+{m.side_nav_usage_description()}
+
+```svelte
+<script>
+	import { AppWindow, AppSurface, SideNav, SideNavItem } from 'fluentui-svelte';
+	import { HomeRegular, FolderRegular, SettingsRegular } from 'fluentui-icons-svelte';
+</script>
+
+<AppWindow width={480} height={240}>
+	<SideNav header="Workspace">
+		<SideNavItem href="#home" label="Home" icon={HomeRegular} active />
+		<SideNavItem href="#documents" label="Documents" icon={FolderRegular} />
+		<SideNavItem href="#settings" label="Settings" icon={SettingsRegular} />
+	</SideNav>
+	<AppSurface style="padding: 1rem">Page content</AppSurface>
+</AppWindow>
+```

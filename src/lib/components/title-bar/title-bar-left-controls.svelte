@@ -3,7 +3,9 @@
 	import { RenderSoC } from '#internal';
 	import ArrowLeftRegular from 'fluentui-icons-svelte/ArrowLeftRegular.svelte';
 	import NavigationRegular from 'fluentui-icons-svelte/NavigationRegular.svelte';
-	import { requireTitleBarContext } from './title-bar.ts';
+	import { onDestroy } from 'svelte';
+	import { getAppWindowContext } from '../app-window/app-window.ts';
+	import { getTitleBarContext } from './title-bar.ts';
 	import type { TitleBarLeftControlsProps } from './types.ts';
 
 	let {
@@ -13,7 +15,7 @@
 		onBack,
 		backLabel = 'Back',
 		globalNav = false,
-		globalNavExpanded = false,
+		globalNavExpanded,
 		onGlobalNav,
 		globalNavLabel = 'Navigation menu',
 		appIcon,
@@ -25,9 +27,31 @@
 		...attributes
 	}: TitleBarLeftControlsProps = $props();
 
-	const context = requireTitleBarContext();
+	const context = getTitleBarContext();
 
-	const tabindex = $derived(context.config.tabbable ? undefined : -1);
+	// Outside a TitleBar the controls are always reachable.
+	const tabindex = $derived(context && !context.config.tabbable ? -1 : undefined);
+
+	let globalNavRef = $state<HTMLButtonElement | null>(null);
+
+	// The button controls the SideNav of its window, when it has one.
+	const appWindow = getAppWindowContext();
+	const sideNav = $derived(appWindow?.state.sideNav);
+	const expanded = $derived(globalNavExpanded ?? (sideNav ? !sideNav.collapsed : false));
+	const unregister = appWindow?.methods.registerGlobalNav({
+		get ref() {
+			return globalNavRef;
+		},
+		get enabled() {
+			return !!globalNav;
+		}
+	});
+	onDestroy(() => unregister?.());
+
+	function handleGlobalNav(event: MouseEvent & { currentTarget: HTMLButtonElement }) {
+		onGlobalNav?.(event);
+		if (!event.defaultPrevented) sideNav?.setCollapsed(event, !sideNav.collapsed);
+	}
 
 	const hasIdentity = $derived(!!(appIcon || appName || releaseTag || children));
 </script>
@@ -35,7 +59,7 @@
 <!--
 	@component
 	The controls at the start of a `TitleBar`: a back button, a global navigation button, and the identity of the app,
-	which is its icon, its name and its release tag. It must be rendered inside a `TitleBar`, which it reads its context from.
+	which is its icon, its name and its release tag. Inside a `TitleBar` it follows its `tabbable` setting and its drag region; it also works on its own.
 
 	- Usage:
 	```tsx
@@ -69,19 +93,20 @@
 		{@render globalNav()}
 	{:else if globalNav}
 		<Button
+			bind:ref={globalNavRef}
 			class="fs-title-bar-button"
 			appearance="subtle"
 			aria-label={globalNavLabel}
 			title={globalNavLabel}
 			{tabindex}
-			aria-expanded={globalNavExpanded}
-			onclick={onGlobalNav}
+			aria-expanded={expanded}
+			onclick={handleGlobalNav}
 		>
 			<NavigationRegular aria-hidden="true" />
 		</Button>
 	{/if}
 	{#if hasIdentity}
-		<div class="fs-title-bar-identity" {...context.config.dragRegionProps}>
+		<div class="fs-title-bar-identity" {...context?.config.dragRegionProps}>
 			{#if appIcon}
 				<span
 					class="fs-title-bar-app-icon"
@@ -120,11 +145,16 @@
 		gap: 0.25rem;
 		block-size: 100%;
 		min-inline-size: 0;
+		/* The same space above as at the start of the bar, which the window controls on the right do not have. */
+		padding-block-start: 0.25rem;
+		/* The buttons are the size of the ones of a SideNav: the same padding around an icon, and the same line of text under it. */
 		& :global(.fs-title-bar-button) {
 			flex: none;
-			inline-size: 2.5rem;
-			block-size: 2rem;
-			padding: 0;
+			padding: 0.275rem 0.5rem 0.4rem;
+			font-size: var(--fs-body2-font-size);
+			/* The line of a SideNav, not the caption one of the bar. */
+			line-height: 1.4;
+			min-block-size: calc(1lh + 0.675rem);
 			background: var(--fs-subtle-fill-transparent);
 		}
 		& :global(.fs-title-bar-button svg) {

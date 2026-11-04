@@ -1,8 +1,10 @@
 # AppSurface
 
-An app surface is the area of an app that holds its content, next to the navigation. It rounds its top-left and bottom-right corners, and it is either a `layer` over the window or the `mica` of the window itself, in the colors of an active or an inactive window.
+An app surface is the area of an app that holds its content, next to the navigation. It is square on its own; next to a SideNav it rounds the corner that faces it and the one across from it. It is either a `layer` over the window or the `mica` of the window itself, in the colors of an active or an inactive window.
 
 ## Usage
+
+Inside AppWindow, the surface inherits the window's active state unless active is explicitly set. Without a SideNav in the window, or on its own, it has no corner radius. With one it rounds the corner that faces the SideNav and the one across from it, following its `position`; a floating and collapsed SideNav removes the radii until either state changes.
 
 Put the content of the app inside the surface, usually in the space an `AppWindow` has left once the navigation takes its place. The surface grows to fill the room its container leaves it, scrolls its content when it does not fit, and is a `layer` unless you set another `mode`.
 
@@ -60,12 +62,12 @@ Put the content of the app inside the surface, usually in the space an `AppWindo
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:AppSurfaceProps -->
 
-| Name                                                | Type                      | Default   | Description                                                                                      |
-| --------------------------------------------------- | ------------------------- | --------- | ------------------------------------------------------------------------------------------------ |
-| `ref` _bindable_                                    | `HTMLElement`             |           | The DOM reference of the surface element.                                                        |
-| `mode`                                              | `'layer'` &#124; `'mica'` | `'layer'` | The material of the surface: a `layer` over the window, or the `mica` of the window itself.      |
-| `active`                                            | `boolean`                 | `false`   | Whether the window the surface lives in is the active one, which picks the color of the surface. |
-| `children`                                          | `Snippet`                 |           | The content of the surface.                                                                      |
-| `HTMLAttributes<HTMLDivElement>` without `children` |                           |           |                                                                                                  |
+| Name                                                | Type                      | Default   | Description                                                                                                                                                 |
+| --------------------------------------------------- | ------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLElement`             |           | The DOM reference of the surface element.                                                                                                                   |
+| `mode`                                              | `'layer'` &#124; `'mica'` | `'layer'` | The material of the surface: a `layer` over the window, or the `mica` of the window itself.                                                                 |
+| `active`                                            | `boolean`                 | `false`   | Whether the window the surface lives in is active, which picks the surface color. Inherits AppWindow's active state when omitted, or false when standalone. |
+| `children`                                          | `Snippet`                 |           | The content of the surface.                                                                                                                                 |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                           |           |                                                                                                                                                             |
 
 <!-- /props:AppSurfaceProps -->

@@ -11,7 +11,7 @@ export type AppSurfaceProps = {
 	 * @default 'layer'
 	 */
 	mode?: 'layer' | 'mica';
-	/** Whether the window the surface lives in is the active one, which picks the color of the surface.
+	/** Whether the window the surface lives in is active, which picks the surface color. Inherits AppWindow's active state when omitted, or false when standalone.
 	 * @default false
 	 */
 	active?: boolean;

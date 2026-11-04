@@ -123,7 +123,7 @@
 		z-index: 110;
 		& :global(.fs-flyout),
 		& :global(.fs-flyout::before) {
-			border-radius: var(--fs-control-border-radius);
+			border-radius: var(--fs-control-overlay-border-radius);
 		}
 		& :global(.fs-flyout) {
 			padding: 0;

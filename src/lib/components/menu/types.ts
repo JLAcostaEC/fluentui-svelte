@@ -2,6 +2,7 @@ import type { ComputePositionConfig, VirtualElement } from '@floating-ui/dom';
 import type { FSContext } from '#internal';
 import type { Component, Snippet } from 'svelte';
 import type { NoUndefinedField, Shapes } from '#types';
+import type { AriaAttributes, HTMLAttributes, HTMLButtonAttributes } from 'svelte/elements';
 import type { ButtonProps } from '../button/types.ts';
 
 export type MenuContext = FSContext<
@@ -155,3 +156,56 @@ export type MenuItemActionableProps = {
 	name?: string;
 } & Omit<MenuItemProps, 'href'> &
 	ButtonProps<'button'>;
+/** @propsmith MenuCommandBarProps */
+export type MenuCommandBarProps = {
+	/** The DOM reference of the command bar element.
+	 * @bindable
+	 */
+	ref?: HTMLDivElement | null;
+	/** Where the bar sits in the menu. A bar at the top has its divider below it, and one at the bottom has it above.
+	 * @type 'top' | 'bottom'
+	 * @default 'top'
+	 */
+	position?: 'top' | 'bottom';
+	/** The accessible name of the group of commands.
+	 * @default 'Commands'
+	 */
+	label?: string;
+	/** The accessible name of the button that opens the overflow.
+	 * @default 'More options'
+	 */
+	overflowLabel?: string;
+	/** The secondary commands. When present, a "more" button at the end of the bar opens them in a submenu. */
+	overflow?: Snippet;
+	/** Shows the label of every command below its icon. Without labels, every command is a square.
+	 * @default false
+	 */
+	showLabels?: boolean;
+	/** Draws a divider between every two commands.
+	 * @default false
+	 */
+	showDividers?: boolean;
+	/** The primary commands, as `MenuCommandBarItem`s. */
+	children?: Snippet;
+} & Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'role'>;
+
+/** @propsmith MenuCommandBarItemProps */
+export type MenuCommandBarItemProps = {
+	/** The DOM reference of the button element.
+	 * @bindable
+	 */
+	ref?: HTMLButtonElement | null;
+	/** The icon of the command.
+	 * @type Snippet | Component
+	 */
+	icon: Snippet<[{ class: string }]> | Component<{ class: string }>;
+	/** The name of the command. Without visible labels it is the accessible name of the button and shows as its tooltip; with them it shows below the icon. */
+	label: string;
+	/** Disables the user interaction. */
+	disabled?: boolean;
+	/** Called when the command is activated. The menu closes afterwards, unless it persists on item activation.
+	 * @type (e: MouseEvent) => void
+	 */
+	onclick?: (e: MouseEvent) => void;
+} & Omit<AriaAttributes, 'aria-label'> &
+	Pick<HTMLButtonAttributes, 'id' | 'class' | 'onkeydown' | 'onfocus' | 'onblur'>;

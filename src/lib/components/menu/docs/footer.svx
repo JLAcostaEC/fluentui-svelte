@@ -96,3 +96,39 @@
 | `children`       | `Snippet`                      |         | `<I18nMarkupMessage message={m.generated_fs_menu_group_props_props_children} />` |
 
 <!-- /props:MenuGroupProps -->
+
+## {m.menu_component_props_menucommandbar_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:MenuCommandBarProps -->
+
+| Name                                                        | Type                           | Default          | Description                                                                                  |
+| ----------------------------------------------------------- | ------------------------------ | ---------------- | -------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                            | `HTMLDivElement` &#124; `null` |                  | `<I18nMarkupMessage message={m.generated_fs_menu_command_bar_props_props_ref} />`            |
+| `position`                                                  | `'top'` &#124; `'bottom'`      | `'top'`          | `<I18nMarkupMessage message={m.generated_fs_menu_command_bar_props_props_position} />`       |
+| `label`                                                     | `string`                       | `'Commands'`     | `<I18nMarkupMessage message={m.generated_fs_menu_command_bar_props_props_label} />`          |
+| `overflowLabel`                                             | `string`                       | `'More options'` | `<I18nMarkupMessage message={m.generated_fs_menu_command_bar_props_props_overflow_label} />` |
+| `overflow`                                                  | `Snippet`                      |                  | `<I18nMarkupMessage message={m.generated_fs_menu_command_bar_props_props_overflow} />`       |
+| `showLabels`                                                | `boolean`                      | `false`          | `<I18nMarkupMessage message={m.generated_fs_menu_command_bar_props_props_show_labels} />`    |
+| `showDividers`                                              | `boolean`                      | `false`          | `<I18nMarkupMessage message={m.generated_fs_menu_command_bar_props_props_show_dividers} />`  |
+| `children`                                                  | `Snippet`                      |                  | `<I18nMarkupMessage message={m.generated_fs_menu_command_bar_props_props_children} />`       |
+| `HTMLAttributes<HTMLDivElement>` without `children`, `role` |                                |                  |                                                                                              |
+
+<!-- /props:MenuCommandBarProps -->
+
+## {m.menu_component_props_menucommandbaritem_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:MenuCommandBarItemProps -->
+
+| Name                                                                        | Type                              | Default | Description                                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------- | ------- | ------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                                            | `HTMLButtonElement` &#124; `null` |         | `<I18nMarkupMessage message={m.generated_fs_menu_command_bar_item_props_props_ref} />`      |
+| `icon`                                                                      | `Snippet` &#124; `Component`      |         | `<I18nMarkupMessage message={m.generated_fs_menu_command_bar_item_props_props_icon} />`     |
+| `label`                                                                     | `string`                          |         | `<I18nMarkupMessage message={m.generated_fs_menu_command_bar_item_props_props_label} />`    |
+| `disabled`                                                                  | `boolean`                         |         | `<I18nMarkupMessage message={m.generated_fs_menu_command_bar_item_props_props_disabled} />` |
+| `onclick`                                                                   | `(e: MouseEvent) => void`         |         | `<I18nMarkupMessage message={m.generated_fs_menu_command_bar_item_props_props_onclick} />`  |
+| `AriaAttributes` without `aria-label`                                       |                                   |         |                                                                                             |
+| `id`, `class`, `onkeydown`, `onfocus`, `onblur` from `HTMLButtonAttributes` |                                   |         |                                                                                             |
+
+<!-- /props:MenuCommandBarItemProps -->

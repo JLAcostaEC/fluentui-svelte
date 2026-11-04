@@ -1,5 +1,7 @@
 # AppSurface
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 An app surface is the area of an app that holds its content, next to the navigation. It is square on its own; next to a SideNav it rounds the corner that faces it and the one across from it. It is either a `layer` over the window or the `mica` of the window itself, in the colors of an active or an inactive window.
 
 ## Usage

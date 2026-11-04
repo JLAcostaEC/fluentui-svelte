@@ -1,5 +1,7 @@
 # InfoBar
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 The InfoBar control is for displaying app-wide status messages to users that are highly visible yet non-intrusive. There are built-in severity levels to easily indicate the type of message shown, as well as the option to include your own call to action or hyperlink button. Since the InfoBar is inline with other UI content, it can remain visible or be dismissed by the user.
 
 ## Usage

@@ -1,5 +1,7 @@
 # Expander
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 Control that displays a header and a collapsible content area.
 
 ## Usage
@@ -53,7 +55,7 @@ You can easily add an icon to an expander's header using the `Icon` prop. You ca
 <script>
 	import { Expander } from 'fluentui-svelte';
 	/** As component */
-	import { InfoRegular } from 'fluentui-icons-svelte';
+	import InfoRegular from 'fluentui-icons-svelte/InfoRegular.svelte';
 </script>
 
 <!-- As Snippet -->

@@ -1,5 +1,7 @@
 # Dropdown
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 The Dropdown lets users select one or more options from a list of `DropdownOption` children. Options can render rich content, such as a `Persona`, and the current selection is exposed through a bindable `value`.
 
 ## Usage

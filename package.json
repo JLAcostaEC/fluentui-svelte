@@ -42,9 +42,9 @@
 		"test": "pnpm run test:unit -- --run && npm run test:e2e",
 		"test:e2e": "playwright install && playwright test",
 		"deploy": "pnpm run build:site && wrangler deploy",
-		"urls": "node scripts/gen-urls.js",
+		"urls": "node scripts/gen-urls.js && node scripts/gen-llms.js",
 		"cf-typegen": "wrangler types",
-		"changeset:version": "changeset version && git add --all",
+		"changeset:version": "changeset version && node scripts/gen-llms.js && git add --all",
 		"changeset:publish": "changeset publish"
 	},
 	"files": [
@@ -53,7 +53,8 @@
 		"!dist/**/*.test.*",
 		"!dist/**/*.spec.*",
 		"!dist/**/docs/**",
-		"dist/**/docs/llms.md"
+		"dist/**/docs/llms.md",
+		"skills"
 	],
 	"sideEffects": [
 		"**/*.css"

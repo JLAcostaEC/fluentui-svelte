@@ -1,5 +1,7 @@
 # Persona
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 A Persona is a visual representation of a person that combines an avatar, presence status, and up to three lines of descriptive text.
 
 ## Usage

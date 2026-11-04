@@ -1,5 +1,7 @@
 # Tooltip
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 A tooltip displays additional information about another component. The information is displayed above and near the target component.
 
 ## Usage

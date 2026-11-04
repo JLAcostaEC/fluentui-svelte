@@ -1,5 +1,7 @@
 # Table
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 A table displays sets of two dimensional data. Every part is a primitive that can be composed freely, so the table itself stays unopinionated about where the data comes from.
 
 The components are deliberately low level: sorting, selection and filtering are not built in. The table renders what you hand it and reports the state you give it, so any data layer — plain runes, a store, a server load function — drives it without fighting an internal engine.

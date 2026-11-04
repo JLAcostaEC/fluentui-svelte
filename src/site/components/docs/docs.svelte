@@ -7,6 +7,9 @@
 	import { fly } from 'svelte/transition';
 	import { dev } from '$app/env';
 	import EditRegular from 'fluentui-icons-svelte/EditRegular.svelte';
+	import CopyRegular from 'fluentui-icons-svelte/CopyRegular.svelte';
+	import CheckmarkRegular from 'fluentui-icons-svelte/CheckmarkRegular.svelte';
+	import MarkdownRegular from 'fluentui-icons-svelte/MarkdownRegular.svelte';
 	import { deLocalizeUrl } from '#i18n/runtime.js';
 	import { localizedPath } from '#site/utils/localized-path.js';
 	import type { Meta } from '#types';
@@ -29,10 +32,50 @@
 			return `${GITHUB_REPO_URL}/tree/main/src/lib/components/${componentSlug[1]}/docs`;
 		}
 
-		const filePath =
-			pathname === '/docs/getting-started' ? 'src/routes/docs/getting-started/+page.svx' : 'src/routes/docs/+page.svx';
+		const filePath = PAGE_FILES[pathname] ?? 'src/routes/docs/+page.svx';
 		return `${GITHUB_REPO_URL}/edit/main/${filePath}`;
 	});
+
+	const PAGE_FILES: Record<string, string> = {
+		'/docs/getting-started': 'src/routes/docs/getting-started/+page.svx',
+		'/docs/llms': 'src/routes/docs/llms/+page.svx'
+	};
+
+	// The Markdown version of the current page, published for AI agents. Pages without one get null.
+	const markdownUrl = $derived.by(() => {
+		const pathname = deLocalizeUrl(page.url).pathname;
+		const componentSlug = pathname.match(/^\/docs\/components\/([^/]+)$/);
+
+		if (componentSlug) return `/docs/components/${componentSlug[1]}.md`;
+		return pathname === '/docs/llms' ? '/docs/llms.md' : null;
+	});
+
+	let copyStatus = $state<'idle' | 'done' | 'failed'>('idle');
+	let copyTimer: ReturnType<typeof setTimeout> | undefined;
+
+	const copyMarkdown = async () => {
+		if (!markdownUrl) return;
+		clearTimeout(copyTimer);
+
+		try {
+			const response = await fetch(markdownUrl);
+			if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+			await navigator.clipboard.writeText(await response.text());
+			copyStatus = 'done';
+		} catch {
+			copyStatus = 'failed';
+		}
+
+		copyTimer = setTimeout(() => (copyStatus = 'idle'), 2000);
+	};
+
+	const copyLabel = $derived(
+		copyStatus === 'done'
+			? m.docs_copy_markdown_done()
+			: copyStatus === 'failed'
+				? m.docs_copy_markdown_failed()
+				: m.docs_copy_markdown()
+	);
 
 	type NavLink = {
 		label: string;
@@ -169,6 +212,22 @@
 			<EditRegular />
 			{m.docs_edit_button()}
 		</Button>
+		{#if markdownUrl}
+			<Button appearance="subtle" onclick={copyMarkdown}>
+				{#if copyStatus === 'done'}
+					<CheckmarkRegular />
+				{:else}
+					<CopyRegular />
+				{/if}
+				{copyLabel}
+			</Button>
+			<span class="copy-status" role="status">{copyStatus === 'idle' ? '' : copyLabel}</span>
+			<!-- A server route, not a page: the client router must not try to render it. -->
+			<Button as="a" href={markdownUrl} target="_blank" rel="noopener" data-sveltekit-reload appearance="subtle">
+				<MarkdownRegular />
+				{m.docs_view_markdown()}
+			</Button>
+		{/if}
 		<Toc selector="#docs > div" />
 	</div>
 </section>
@@ -258,6 +317,15 @@
 			& :global(.fs-button svg) {
 				width: 1rem;
 				height: auto;
+			}
+			/* Announces the copy result without showing it twice. */
+			& .copy-status {
+				position: absolute;
+				width: 1px;
+				height: 1px;
+				overflow: hidden;
+				clip-path: inset(50%);
+				white-space: nowrap;
 			}
 		}
 

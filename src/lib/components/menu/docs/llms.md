@@ -1,5 +1,7 @@
 # Menu
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 Menu is a component for displaying a list of actions or options in a dropdown format. It can be used in various contexts, such as navigation, settings, or context menus.
 
 This component relies on the Floating UI library for positioning. It provides a flexible API for creating complex menu structures, including nested menus, checkable items, and disabled items.

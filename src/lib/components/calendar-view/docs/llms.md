@@ -1,5 +1,7 @@
 # Calendar View
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 An inline calendar for browsing days, months, and years and selecting one date, several
 dates, or a range.
 

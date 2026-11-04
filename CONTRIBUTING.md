@@ -38,6 +38,11 @@ either provide a Spanish translation or leave a note that one is needed.
   navigation) used by similar components.
 - Keep styling consistent with the existing design tokens (CSS custom
   properties prefixed with `--fs-`).
+- Write `docs/llms.md` for AI agents: plain Markdown, English, no Svelte
+  markup. `pnpm urls` adds the component to the index of the agent skill
+  (`skills/fluentui-svelte/SKILL.md`) and the pointer to the global guide under
+  the title. Conventions shared by every component belong in the prose of
+  `SKILL.md`, not in each `llms.md`.
 
 ## Pull requests
 

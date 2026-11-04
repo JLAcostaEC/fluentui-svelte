@@ -128,6 +128,5 @@ export type ConfigDocs = {
 	examples: Component[];
 	/** End of the page. The first element must be the component props table; extra info may follow. */
 	footer: Component;
-	/** Raw Markdown context for AI agents (union of docs/examples/footer, i18n resolved to English, no Svelte). */
-	llms: string;
+	// The Markdown for AI agents (`docs/llms.md`) is not loaded with the page: `/docs/components/<slug>.md` serves it.
 };

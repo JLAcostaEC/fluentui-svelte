@@ -1,5 +1,7 @@
 # TextArea
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 Textarea allows the user to enter and edit multiline text.
 
 ## Usage

@@ -40,6 +40,9 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
         timeout-minutes: 5
 
+      - name: Check agent docs are up to date
+        run: node scripts/gen-llms.js --check
+
       - name: Generate URLs
         run: pnpm urls
 

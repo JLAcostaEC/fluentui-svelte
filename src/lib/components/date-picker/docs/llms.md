@@ -1,5 +1,7 @@
 # Date Picker
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 An input for selecting a date from carousel-style day, month, and year columns. The value uses the `YYYY-MM-DD` format.
 
 ## Usage

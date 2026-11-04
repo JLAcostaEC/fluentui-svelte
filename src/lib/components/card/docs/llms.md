@@ -1,5 +1,7 @@
 # Card
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 A card is a container that groups content and actions about a single topic, and can optionally be selected.
 
 ## Usage
@@ -98,7 +100,7 @@ a heading; a snippet or a component receives the id the floating checkbox is lab
 ```svelte
 <script>
 	import { Card, CardHeader, Button } from 'fluentui-svelte';
-	import { MoreHorizontalRegular } from 'fluentui-icons-svelte';
+	import MoreHorizontalRegular from 'fluentui-icons-svelte/MoreHorizontalRegular.svelte';
 </script>
 
 {#snippet title(attrs)}

@@ -1,5 +1,7 @@
 # Breadcrumb
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 A breadcrumb shows where a page sits in the hierarchy above it, and gives the reader a way back up. It renders a `nav` landmark around an ordered list, so a screen reader can jump straight to it.
 
 The landmark names itself `Breadcrumb`, the trail is an `ol` so its order is part of the markup rather than of the styling, the last step carries `aria-current="page"`, and the dividers are held out of the accessibility tree — a trail of three steps reads as three, not as five. Every one of those can be overridden: pass your own `aria-label`, or an `aria-labelledby`, and the default steps aside.

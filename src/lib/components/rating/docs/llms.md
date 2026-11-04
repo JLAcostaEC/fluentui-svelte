@@ -1,5 +1,7 @@
 # Rating
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 A rating lets users give a value to an item by selecting one of a row of stars. It supports half-filled stars, four sizes and a custom number of items.
 
 ## Usage
@@ -65,7 +67,8 @@ Use `iconFilled` and `iconOutline` to replace the stars with any other icon comp
 
 ```svelte
 <script>
-	import { HeartFilled, HeartRegular } from 'fluentui-icons-svelte';
+	import HeartFilled from 'fluentui-icons-svelte/HeartFilled.svelte';
+	import HeartRegular from 'fluentui-icons-svelte/HeartRegular.svelte';
 </script>
 
 <Rating value={3} iconFilled={HeartFilled} iconOutline={HeartRegular} />

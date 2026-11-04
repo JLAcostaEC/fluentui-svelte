@@ -1,5 +1,7 @@
 # Flyout
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 The Flyout component is a floating panel that can be used to display additional information or options in a non-intrusive way. It is fully accessible and follows Fluent UI design principles for a seamless user experience.
 
 ## Usage

@@ -12,7 +12,7 @@ import { fsShikiFocusableCode } from './scripts/shiki-focusable-code.js';
 import { createHighlighter } from 'shiki';
 
 /** @type {(import('shiki').BundledLanguage | import('shiki').LanguageInput | import('shiki').SpecialLanguage)[]} */
-const langs = ['typescript', 'bash', 'css', 'svelte'];
+const langs = ['typescript', 'bash', 'css', 'svelte', 'json', 'markdown'];
 
 const highlighter = await createHighlighter({
 	themes: ['one-light', 'one-dark-pro'],

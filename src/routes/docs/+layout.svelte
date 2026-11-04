@@ -17,6 +17,11 @@
 			label: m.global_getting_started(),
 			url: '/docs/getting-started',
 			status: ''
+		},
+		{
+			label: m.global_llms(),
+			url: '/docs/llms',
+			status: ''
 		}
 	];
 </script>

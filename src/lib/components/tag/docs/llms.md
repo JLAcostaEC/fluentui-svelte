@@ -1,5 +1,7 @@
 # Tag
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 A tag is a visual representation of an attribute, person or asset. It can be dismissed, and with `interactive` it becomes an interaction tag that has a primary action of its own. A `TagGroup` holds several tags, gives them a shared size, appearance and disabled state, and handles their selection and keyboard navigation.
 
 ## Usage
@@ -7,7 +9,7 @@ A tag is a visual representation of an attribute, person or asset. It can be dis
 ```svelte
 <script>
 	import { Tag, TagGroup } from 'fluentui-svelte';
-	import { CalendarMonthRegular } from 'fluentui-icons-svelte';
+	import CalendarMonthRegular from 'fluentui-icons-svelte/CalendarMonthRegular.svelte';
 </script>
 
 <Tag icon={CalendarMonthRegular}>Primary text</Tag>

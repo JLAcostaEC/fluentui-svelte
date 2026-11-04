@@ -1,5 +1,7 @@
 # Time Picker
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 An input for selecting a time from carousel-style hour, minute, and second columns, in 12- or 24-hour format.
 
 ## Usage

@@ -88,6 +88,9 @@
 	// The global navigation button of the title bar controls the navigation, and takes the place of its own toggle.
 	const globalNav = $derived(appWindow?.state.globalNav);
 	const toggleVisible = $derived(showToggle ?? !globalNav?.enabled);
+	// Without a toggle, the navigation itself is where the focus lands when a floating one closes: it takes focus, but is not a tab stop.
+	const focusTarget = $derived(toggleVisible ? {} : { tabindex: -1 });
+
 	const unregister = appWindow?.methods.registerSideNav({
 		get ref() {
 			return ref;
@@ -107,7 +110,8 @@
 
 	// The body of a floating navigation hides when it closes, so the focus moves to the button that opens it first.
 	$effect.pre(() => {
-		if (floating && collapsed && ref?.contains(ref.ownerDocument.activeElement)) (toggleRef ?? globalNav?.ref)?.focus();
+		if (floating && collapsed && ref?.contains(ref.ownerDocument.activeElement))
+			(toggleRef ?? globalNav?.ref ?? ref)?.focus();
 	});
 
 	/** The button of the title bar that opens and closes the navigation is not outside it: its own click toggles it. */
@@ -171,6 +175,7 @@
 -->
 <nav
 	aria-label={label}
+	{...focusTarget}
 	{...attributes}
 	bind:this={ref}
 	class={[

@@ -54,8 +54,18 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:SideNavBranchProps -->
 
-| Name                      | Type | Default | Description |
-| ------------------------- | ---- | ------- | ----------- |
-| `ListViewItemBranchProps` |      |         |             |
+| Name                                                                                                 | Type                                    | Default | Description                                                                                     |
+| ---------------------------------------------------------------------------------------------------- | --------------------------------------- | ------- | ----------------------------------------------------------------------------------------------- |
+| `label`                                                                                              | `string`                                |         | `<I18nMarkupMessage message={m.generated_fs_side_nav_branch_props_props_label} />`              |
+| `icon`                                                                                               | `Snippet` &#124; `Component`            |         | `<I18nMarkupMessage message={m.generated_fs_side_nav_branch_props_props_icon} />`               |
+| `expanded` _bindable_                                                                                | `boolean`                               | `false` | `<I18nMarkupMessage message={m.generated_fs_side_nav_branch_props_props_expanded} />`           |
+| `onExpandedChange`                                                                                   | `(e: Event, expanded: boolean) => void` |         | `<I18nMarkupMessage message={m.generated_fs_side_nav_branch_props_props_on_expanded_change} />` |
+| `disabled`                                                                                           | `boolean`                               | `false` | `<I18nMarkupMessage message={m.generated_fs_side_nav_branch_props_props_disabled} />`           |
+| `ref` _bindable_                                                                                     | `HTMLButtonElement`                     |         | `<I18nMarkupMessage message={m.generated_fs_side_nav_branch_props_props_ref} />`                |
+| `wrapperRef` _bindable_                                                                              | `HTMLLIElement` &#124; `HTMLDivElement` |         | `<I18nMarkupMessage message={m.generated_fs_side_nav_branch_props_props_wrapper_ref} />`        |
+| `wrapperAttributes`                                                                                  | `HTMLAttributes`                        |         | `<I18nMarkupMessage message={m.generated_fs_side_nav_branch_props_props_wrapper_attributes} />` |
+| `shape`                                                                                              | `ListViewItemBranchProps['shape']`      |         | `<I18nMarkupMessage message={m.generated_fs_side_nav_branch_props_props_shape} />`              |
+| `children`                                                                                           | `Snippet`                               |         | `<I18nMarkupMessage message={m.generated_fs_side_nav_branch_props_props_children} />`           |
+| `HTMLButtonAttributes` without `children`, `role`, `type`, `value`, `aria-expanded`, `aria-controls` |                                         |         |                                                                                                 |
 
 <!-- /props:SideNavBranchProps -->

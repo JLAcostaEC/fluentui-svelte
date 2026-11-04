@@ -75,7 +75,12 @@
 	</TitleBar>
 	```
 -->
-<div bind:this={ref} class={['fs-title-bar-left-controls', classes]} {...attributes}>
+<div
+	bind:this={ref}
+	class={['fs-title-bar-left-controls', classes]}
+	{...context?.config.dragRegionProps}
+	{...attributes}
+>
 	{#if back}
 		<Button
 			class="fs-title-bar-button"

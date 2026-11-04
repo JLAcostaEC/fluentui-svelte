@@ -79,19 +79,22 @@
 		onExpandedChange?.(event, expanded);
 	}
 
-	function handleKeydown(event: KeyboardEvent) {
-		// Tabspot prevents Escape before native handlers. Record further cancellation by the consumer.
+	// Tabspot prevents Escape before native handlers. Record further cancellation by the consumer.
+	function trackCancellation(event: KeyboardEvent, run: () => void) {
 		const preventDefault = event.preventDefault;
-		if (onkeydown)
-			event.preventDefault = () => {
-				canceledKeys.add(event);
-				preventDefault.call(event);
-			};
+		event.preventDefault = () => {
+			canceledKeys.add(event);
+			preventDefault.call(event);
+		};
 		try {
-			invokeHandlers(event, disabled, [onkeydown]);
+			run();
 		} finally {
 			event.preventDefault = preventDefault;
 		}
+	}
+
+	function handleKeydown(event: KeyboardEvent) {
+		if (onkeydown) trackCancellation(event, () => invokeHandlers(event, disabled, [onkeydown]));
 		if (event.defaultPrevented || disabled) return;
 		if (context.config.disableTabspot && (event.key === 'ArrowRight' || event.key === 'ArrowLeft')) return;
 		if ((event.key === 'ArrowRight' && !expanded) || (event.key === 'ArrowLeft' && expanded)) {
@@ -132,7 +135,12 @@
 	{...wrapperAttributes}
 	bind:this={wrapperRef}
 	class={['fs-list-view-item-branch', wrapperAttributes?.class]}
-	onkeydown={(event: KeyboardEvent) => invokeHandlers(event, [], [wrapperAttributes?.onkeydown, handleEscape])}
+	onkeydown={(event: KeyboardEvent) => {
+		const wrapperKeydown = wrapperAttributes?.onkeydown;
+		if (typeof wrapperKeydown === 'function')
+			trackCancellation(event, () => invokeHandlers(event, [], [wrapperKeydown]));
+		handleEscape(event);
+	}}
 	{...tabspotAttributes}
 	{@attach attachTabspot(tabspotConfig, guardEscape, globalContext?.state.tabspotInstance)}
 >

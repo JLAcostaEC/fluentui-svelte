@@ -20,6 +20,7 @@ Compose the bar from its three areas through the `leftControls`, `search` and `r
 
 	const appWindow = getCurrentWindow();
 	let maximized = $state(false);
+	appWindow.isMaximized().then((value) => (maximized = value));
 </script>
 
 <TitleBar>
@@ -65,7 +66,7 @@ Compose the bar from its three areas through the `leftControls`, `search` and `r
 
 ### App Icon
 
-`appIcon` takes the URL of an image, a Fluent icon component, or a snippet that draws a custom SVG. It is decorative, so the name of the app is what identifies it.
+`appIcon` takes the URL of an image, a Fluent icon component, or a snippet that draws a custom SVG. With `appName` it is decorative and the name of the app identifies it. Without `appName` it has `role="img"` and `appIconLabel` names it.
 
 ```svelte
 <TitleBar>
@@ -199,6 +200,7 @@ While `maximized` is set, the maximize button becomes a restore button, with the
 ```svelte
 <script>
 	let maximized = $state(false);
+	appWindow.isMaximized().then((value) => (maximized = value));
 </script>
 
 <TitleBar>

@@ -17,6 +17,8 @@
 	}: SideNavBranchProps = $props();
 
 	const context = getSideNavContext();
+	// The rail hides the branch, so the branch reports collapsed there without losing its own state.
+	const visiblyExpanded = () => expanded && !context?.state.compact;
 </script>
 
 {#snippet initial()}<span>{label.slice(0, 1)}</span>{/snippet}
@@ -28,7 +30,7 @@
 	icon={icon ?? (context?.state.compact ? initial : undefined)}
 	bind:ref
 	bind:wrapperRef
-	bind:expanded
+	bind:expanded={visiblyExpanded, (value) => (expanded = value)}
 	onclick={(event) => {
 		onclick?.(event);
 		// A branch cannot open inside the rail, so the rail opens first.

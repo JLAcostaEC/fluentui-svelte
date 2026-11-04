@@ -1,5 +1,5 @@
 import type { Component, Snippet } from 'svelte';
-import type { HTMLAttributes } from 'svelte/elements';
+import type { HTMLAttributes, HTMLButtonAttributes } from 'svelte/elements';
 import type { FSContext } from '#internal';
 import type { PolymorphicProps } from '#types';
 import type { ListViewItemBranchProps, ListViewItemDOM, ListViewItemProps, ListViewProps } from '../list-view/types.ts';
@@ -101,7 +101,43 @@ export type SideNavItemProps<T extends 'li' | 'a' | 'button' | 'div' = 'a'> = {
 	PolymorphicProps<T, 'children' | 'ref' | 'onfocus'>;
 
 /** @propsmith SideNavBranchProps */
-export type SideNavBranchProps = ListViewItemBranchProps;
+export type SideNavBranchProps = {
+	/** The accessible label of the disclosure button. In the compact rail, its initial stands in when there is no icon. */
+	label: string;
+	/** The decorative icon before the label.
+	 * @type Snippet | Component
+	 */
+	icon?: Snippet | Component;
+	/** Whether the nested items are visible. Branches only expand or collapse and are never selectable. The compact rail reports a branch as collapsed, and opens the navigation when one is pressed.
+	 * @default false
+	 * @bindable
+	 */
+	expanded?: boolean;
+	/** Called when a user expands or collapses the branch. */
+	onExpandedChange?: (e: Event, expanded: boolean) => void;
+	/** Disables the disclosure button.
+	 * @default false
+	 */
+	disabled?: boolean;
+	/** The DOM reference of the native disclosure button. Additional HTML attributes, including class and id, also target this button.
+	 * @type HTMLButtonElement
+	 * @bindable
+	 */
+	ref?: HTMLButtonElement | null;
+	/** The DOM reference of the wrapper element, the list item that holds the button and the nested list.
+	 * @type HTMLLIElement | HTMLDivElement
+	 * @bindable
+	 */
+	wrapperRef?: HTMLLIElement | HTMLDivElement | null;
+	/** The attributes to spread on the wrapper element.
+	 * @type HTMLAttributes
+	 */
+	wrapperAttributes?: HTMLAttributes<HTMLLIElement | HTMLDivElement>;
+	/** The disclosure button shape. Inherited from the list by default. */
+	shape?: ListViewItemBranchProps['shape'];
+	/** The nested SideNavItem and SideNavBranch content. */
+	children?: Snippet;
+} & Omit<HTMLButtonAttributes, 'children' | 'role' | 'type' | 'value' | 'aria-expanded' | 'aria-controls'>;
 
 export type SideNavContext = FSContext<
 	{ readonly floating: boolean; readonly listViewProps: SideNavListViewProps | undefined },

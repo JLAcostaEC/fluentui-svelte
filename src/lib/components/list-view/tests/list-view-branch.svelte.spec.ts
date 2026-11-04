@@ -201,6 +201,25 @@ describe('ListViewItemBranch', () => {
 		expect(onExpandedChange).not.toHaveBeenCalled();
 	});
 
+	it('honors Escape canceled by the wrapper attributes', async () => {
+		const onExpandedChange = vi.fn();
+		await render(ListViewBranchTestWrapper, {
+			branchProps: {
+				onExpandedChange,
+				wrapperAttributes: {
+					onkeydown: (event) => {
+						if (event.key === 'Escape') event.preventDefault();
+					}
+				}
+			}
+		});
+		await projects().click();
+		onExpandedChange.mockClear();
+		await userEvent.keyboard('{Escape}');
+		await expect.element(projects()).toHaveAttribute('aria-expanded', 'true');
+		expect(onExpandedChange).not.toHaveBeenCalled();
+	});
+
 	it('opts out of arrow management while retaining native disclosure activation', async () => {
 		await render(ListViewBranchTestWrapper, { listProps: { disableTabspot: true } });
 		await page.getByRole('button', { name: 'Before list' }).click();

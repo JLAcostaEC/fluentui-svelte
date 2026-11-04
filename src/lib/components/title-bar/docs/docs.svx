@@ -41,6 +41,7 @@
 
 	const appWindow = getCurrentWindow();
 	let maximized = $state(false);
+	appWindow.isMaximized().then((value) => (maximized = value));
 </script>
 
 <TitleBar>

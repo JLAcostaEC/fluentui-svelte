@@ -349,6 +349,30 @@ describe('global navigation button', () => {
 	});
 });
 
+describe('without its own toggle', () => {
+	it('moves the focus to the navigation when a floating one closes', async () => {
+		render(Wrapper, { floating: true, showToggle: false });
+		const home = page.getByRole('link', { name: 'Home', exact: true });
+		home.element().focus();
+		await userEvent.keyboard('{Escape}');
+		await expect.element(nav()).toHaveFocus();
+		await expect.element(nav()).toHaveAttribute('tabindex', '-1');
+	});
+});
+
+describe('branches in the compact rail', () => {
+	it('report collapsed while the rail hides them, and keep their state', async () => {
+		render(Wrapper);
+		const projects = page.getByRole('button', { name: 'Projects', exact: true });
+		(projects.element() as HTMLElement).click();
+		await expect.element(projects).toHaveAttribute('aria-expanded', 'true');
+		(collapse().element() as HTMLElement).click();
+		await expect.element(projects).toHaveAttribute('aria-expanded', 'false');
+		(expand().element() as HTMLElement).click();
+		await expect.element(projects).toHaveAttribute('aria-expanded', 'true');
+	});
+});
+
 describe('on its own', () => {
 	it('works without an AppWindow around it', async () => {
 		const onCollapsedChange = vi.fn();

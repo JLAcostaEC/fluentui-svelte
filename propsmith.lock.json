@@ -2688,6 +2688,76 @@
       },
       "source": "src/lib/components/rating/types.ts#RatingProps.wrapperRef"
     },
+    "generated_fs_side_nav_branch_props_props_children": {
+      "en": "71c3a225",
+      "locales": {
+        "es": "71c3a225"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavBranchProps.children"
+    },
+    "generated_fs_side_nav_branch_props_props_disabled": {
+      "en": "5a99160c",
+      "locales": {
+        "es": "5a99160c"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavBranchProps.disabled"
+    },
+    "generated_fs_side_nav_branch_props_props_expanded": {
+      "en": "f51ac732",
+      "locales": {
+        "es": "f51ac732"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavBranchProps.expanded"
+    },
+    "generated_fs_side_nav_branch_props_props_icon": {
+      "en": "1a60abbe",
+      "locales": {
+        "es": "1a60abbe"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavBranchProps.icon"
+    },
+    "generated_fs_side_nav_branch_props_props_label": {
+      "en": "d172445f",
+      "locales": {
+        "es": "d172445f"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavBranchProps.label"
+    },
+    "generated_fs_side_nav_branch_props_props_on_expanded_change": {
+      "en": "d70098e5",
+      "locales": {
+        "es": "d70098e5"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavBranchProps.onExpandedChange"
+    },
+    "generated_fs_side_nav_branch_props_props_ref": {
+      "en": "3c64b41e",
+      "locales": {
+        "es": "3c64b41e"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavBranchProps.ref"
+    },
+    "generated_fs_side_nav_branch_props_props_shape": {
+      "en": "f89095c3",
+      "locales": {
+        "es": "f89095c3"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavBranchProps.shape"
+    },
+    "generated_fs_side_nav_branch_props_props_wrapper_attributes": {
+      "en": "0a0dad7a",
+      "locales": {
+        "es": "0a0dad7a"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavBranchProps.wrapperAttributes"
+    },
+    "generated_fs_side_nav_branch_props_props_wrapper_ref": {
+      "en": "cacba309",
+      "locales": {
+        "es": "cacba309"
+      },
+      "source": "src/lib/components/side-nav/types.ts#SideNavBranchProps.wrapperRef"
+    },
     "generated_fs_side_nav_item_props_props_as": {
       "en": "170b6e45",
       "locales": {

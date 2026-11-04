@@ -284,7 +284,15 @@ describe('the drag region', () => {
 			left: { appName: 'FluentUI App' },
 			right: { personPic: { name: 'Ada Lovelace' } }
 		});
-		const regions = ['.fs-title-bar', '.fs-title-bar-left', '.fs-title-bar-right', '.fs-title-bar-identity'];
+		const regions = [
+			'.fs-title-bar',
+			'.fs-title-bar-left',
+			'.fs-title-bar-left-controls',
+			'.fs-title-bar-right',
+			'.fs-title-bar-right-controls',
+			'.fs-title-bar-actions',
+			'.fs-title-bar-identity'
+		];
 		for (const region of regions) {
 			expect(document.querySelector(region), region).toHaveAttribute('data-tauri-drag-region');
 		}

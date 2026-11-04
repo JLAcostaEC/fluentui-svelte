@@ -73,10 +73,11 @@
 		};
 	}}
 	class={['fs-title-bar-right-controls', classes]}
+	{...context?.config.dragRegionProps}
 	{...attributes}
 >
 	{#if hasActions}
-		<div class="fs-title-bar-actions">
+		<div class="fs-title-bar-actions" {...context?.config.dragRegionProps}>
 			{@render customMenu?.()}
 			{#if personPic}
 				{#if onPersonPicClick}

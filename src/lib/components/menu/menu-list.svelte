@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { getTabspotAttributes } from 'tabspot';
+	import { getTabspotAttributes, setTabspotAttributes, unsetTabspotSection } from 'tabspot';
+	import type { Attachment } from 'svelte/attachments';
 	import { getMenuContext } from './menu.svelte.ts';
 
 	let { children } = $props();
@@ -7,6 +8,13 @@
 	const context = getMenuContext();
 
 	let isSubMenu = $derived(context?.config.isSubMenu);
+
+	// The list mounts when the menu opens, after Tabspot has scanned the page, so the root menu
+	// registers itself to get arrow key navigation. A submenu is a grouper inside it instead.
+	const registerRoot: Attachment<HTMLElement> = (element) => {
+		setTabspotAttributes({ element, config: { root: {} }, merge: true });
+		return () => unsetTabspotSection(element, 'root');
+	};
 </script>
 
 <div
@@ -21,6 +29,7 @@
 				}
 			: undefined
 	})}
+	{@attach isSubMenu ? undefined : registerRoot}
 >
 	{@render children()}
 </div>

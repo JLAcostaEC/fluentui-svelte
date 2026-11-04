@@ -140,6 +140,8 @@ export { default as MenuList } from './components/menu/menu-list.svelte';
 export { default as MenuItemCheckbox } from './components/menu/menu-item-checkbox.svelte';
 export { default as MenuItemRadio } from './components/menu/menu-item-radio.svelte';
 export { default as MenuItemSwitch } from './components/menu/menu-item-switch.svelte';
+export { default as MenuCommandBar } from './components/menu/menu-command-bar.svelte';
+export { default as MenuCommandBarItem } from './components/menu/menu-command-bar-item.svelte';
 export { default as ContextMenuTrigger } from './components/menu/context-menu-trigger.svelte';
 // End Menu Component
 

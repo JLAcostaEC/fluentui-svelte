@@ -125,3 +125,11 @@ export const getIntroTransition = ({
 		css: `top: ${top}px; left: ${left}px;`
 	};
 };
+
+/** What a `MenuCommandBar` tells its items about how they are laid out. */
+export type MenuCommandBarContext = {
+	/** The items show their label below the icon, and are no longer squares. */
+	readonly showLabels: boolean;
+};
+
+export const [getMenuCommandBarContext, setMenuCommandBarContext] = createFSContext<MenuCommandBarContext>();

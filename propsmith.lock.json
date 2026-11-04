@@ -2107,6 +2107,97 @@
       },
       "source": "src/lib/components/list-view/types.ts#ListViewProps.toggleOnClick"
     },
+    "generated_fs_menu_command_bar_item_props_props_disabled": {
+      "en": "b99cb72f",
+      "locales": {
+        "es": "b99cb72f"
+      },
+      "source": "src/lib/components/menu/types.ts#MenuCommandBarItemProps.disabled"
+    },
+    "generated_fs_menu_command_bar_item_props_props_icon": {
+      "en": "911740a1",
+      "locales": {
+        "es": "911740a1"
+      },
+      "source": "src/lib/components/menu/types.ts#MenuCommandBarItemProps.icon"
+    },
+    "generated_fs_menu_command_bar_item_props_props_label": {
+      "en": "fa096369",
+      "locales": {
+        "es": "fa096369"
+      },
+      "source": "src/lib/components/menu/types.ts#MenuCommandBarItemProps.label"
+    },
+    "generated_fs_menu_command_bar_item_props_props_onclick": {
+      "en": "cdf018ed",
+      "locales": {
+        "es": "cdf018ed"
+      },
+      "source": "src/lib/components/menu/types.ts#MenuCommandBarItemProps.onclick"
+    },
+    "generated_fs_menu_command_bar_item_props_props_ref": {
+      "en": "184bd4e4",
+      "locales": {
+        "es": "184bd4e4"
+      },
+      "source": "src/lib/components/menu/types.ts#MenuCommandBarItemProps.ref"
+    },
+    "generated_fs_menu_command_bar_props_props_children": {
+      "en": "d78ec74c",
+      "locales": {
+        "es": "d78ec74c"
+      },
+      "source": "src/lib/components/menu/types.ts#MenuCommandBarProps.children"
+    },
+    "generated_fs_menu_command_bar_props_props_label": {
+      "en": "39023559",
+      "locales": {
+        "es": "39023559"
+      },
+      "source": "src/lib/components/menu/types.ts#MenuCommandBarProps.label"
+    },
+    "generated_fs_menu_command_bar_props_props_overflow": {
+      "en": "6de9c636",
+      "locales": {
+        "es": "6de9c636"
+      },
+      "source": "src/lib/components/menu/types.ts#MenuCommandBarProps.overflow"
+    },
+    "generated_fs_menu_command_bar_props_props_overflow_label": {
+      "en": "c444e948",
+      "locales": {
+        "es": "c444e948"
+      },
+      "source": "src/lib/components/menu/types.ts#MenuCommandBarProps.overflowLabel"
+    },
+    "generated_fs_menu_command_bar_props_props_position": {
+      "en": "abdd7e36",
+      "locales": {
+        "es": "abdd7e36"
+      },
+      "source": "src/lib/components/menu/types.ts#MenuCommandBarProps.position"
+    },
+    "generated_fs_menu_command_bar_props_props_ref": {
+      "en": "0c6ef9d6",
+      "locales": {
+        "es": "0c6ef9d6"
+      },
+      "source": "src/lib/components/menu/types.ts#MenuCommandBarProps.ref"
+    },
+    "generated_fs_menu_command_bar_props_props_show_dividers": {
+      "en": "0d7ef3c4",
+      "locales": {
+        "es": "0d7ef3c4"
+      },
+      "source": "src/lib/components/menu/types.ts#MenuCommandBarProps.showDividers"
+    },
+    "generated_fs_menu_command_bar_props_props_show_labels": {
+      "en": "d6b7ec27",
+      "locales": {
+        "es": "d6b7ec27"
+      },
+      "source": "src/lib/components/menu/types.ts#MenuCommandBarProps.showLabels"
+    },
     "generated_fs_menu_group_props_props_children": {
       "en": "c233c4d9",
       "locales": {

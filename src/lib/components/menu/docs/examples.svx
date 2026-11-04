@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Button, SplitButton, Menu, MenuTrigger, ContextMenuTrigger, MenuPopover, MenuList, MenuGroup, MenuItem, MenuDivider, MenuItemCheckbox, MenuItemSwitch, MenuItemRadio } from '#lib/index.js';
-  import { AccessTimeRegular, ChevronRightFilled } from 'fluentui-icons-svelte';
+  import { Button, SplitButton, Menu, MenuTrigger, ContextMenuTrigger, MenuPopover, MenuList, MenuGroup, MenuItem, MenuDivider, MenuItemCheckbox, MenuItemSwitch, MenuItemRadio, MenuCommandBar, MenuCommandBarItem } from '#lib/index.js';
+  import { AccessTimeRegular, ChevronRightFilled, CutRegular, CopyRegular, ClipboardPasteRegular, DeleteRegular, ShareRegular } from 'fluentui-icons-svelte';
   import { m } from '#i18n/messages.js';
 
   let checkedValues = $state({});
@@ -111,6 +111,118 @@
 		</MenuList>
 	</MenuPopover>
 </Menu>
+```
+
+### {m.menu_command_bar_title()}
+
+{m.menu_command_bar_description()}
+
+{m.menu_command_bar_keyboard_description()}
+
+{#snippet commands()}
+  <MenuCommandBarItem icon={CutRegular} label="Cut" />
+  <MenuCommandBarItem icon={CopyRegular} label="Copy" />
+  <MenuCommandBarItem icon={ClipboardPasteRegular} label="Paste" />
+  <MenuCommandBarItem icon={ShareRegular} label="Share" />
+  <MenuCommandBarItem icon={DeleteRegular} label="Delete" />
+{/snippet}
+
+{#snippet secondary()}
+  <MenuItem>Select all</MenuItem>
+  <MenuItem>Rename</MenuItem>
+{/snippet}
+
+<div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+  <Menu>
+    <MenuTrigger>
+      {#snippet children({ state, menuTriggerProps })}
+        <Button bind:ref={state.ref} {...menuTriggerProps}>Commands on top</Button>
+      {/snippet}
+    </MenuTrigger>
+    <MenuPopover>
+      <MenuList>
+        <MenuCommandBar overflow={secondary}>
+          {@render commands()}
+        </MenuCommandBar>
+        <MenuItem>Open</MenuItem>
+        <MenuItem>Open with</MenuItem>
+        <MenuItem>Properties</MenuItem>
+      </MenuList>
+    </MenuPopover>
+  </Menu>
+  <Menu>
+    <MenuTrigger>
+      {#snippet children({ state, menuTriggerProps })}
+        <Button bind:ref={state.ref} {...menuTriggerProps}>Commands at the bottom</Button>
+      {/snippet}
+    </MenuTrigger>
+    <MenuPopover>
+      <MenuList>
+        <MenuItem>Open</MenuItem>
+        <MenuItem>Open with</MenuItem>
+        <MenuItem>Properties</MenuItem>
+        <MenuCommandBar position="bottom" overflow={secondary}>
+          {@render commands()}
+        </MenuCommandBar>
+      </MenuList>
+    </MenuPopover>
+  </Menu>
+  <Menu>
+    <MenuTrigger>
+      {#snippet children({ state, menuTriggerProps })}
+        <Button bind:ref={state.ref} {...menuTriggerProps}>Labels and dividers</Button>
+      {/snippet}
+    </MenuTrigger>
+    <MenuPopover>
+      <MenuList>
+        <MenuCommandBar showLabels showDividers>
+          {@render commands()}
+        </MenuCommandBar>
+        <MenuItem>Open</MenuItem>
+        <MenuItem>Open with</MenuItem>
+        <MenuItem>Properties</MenuItem>
+      </MenuList>
+    </MenuPopover>
+  </Menu>
+</div>
+
+```svelte
+<Menu>
+	<MenuTrigger>
+		{#snippet children({ state, menuTriggerProps })}
+			<Button bind:ref={state.ref} {...menuTriggerProps}>Commands on top</Button>
+		{/snippet}
+	</MenuTrigger>
+	<MenuPopover>
+		<MenuList>
+			<!-- position="bottom" when the bar comes after the items -->
+			<MenuCommandBar>
+				<MenuCommandBarItem icon={CutRegular} label="Cut" />
+				<MenuCommandBarItem icon={CopyRegular} label="Copy" />
+				<MenuCommandBarItem icon={ClipboardPasteRegular} label="Paste" />
+				{#snippet overflow()}
+					<MenuItem>Select all</MenuItem>
+					<MenuItem>Rename</MenuItem>
+				{/snippet}
+			</MenuCommandBar>
+			<MenuItem>Open</MenuItem>
+			<MenuItem>Open with</MenuItem>
+			<MenuItem>Properties</MenuItem>
+		</MenuList>
+	</MenuPopover>
+</Menu>
+```
+
+{m.menu_command_bar_labels_description()}
+
+```svelte
+<MenuCommandBar showLabels showDividers>
+	<MenuCommandBarItem icon={CutRegular} label="Cut" />
+	<MenuCommandBarItem icon={CopyRegular} label="Copy" />
+	<MenuCommandBarItem icon={EditRegular} label="Rename" />
+	<MenuCommandBarItem icon={ShareRegular} label="Share" />
+	<MenuCommandBarItem icon={DeleteRegular} label="Delete" />
+</MenuCommandBar>
 ```
 
 ## {m.menu_context_menu_title()}

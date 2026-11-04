@@ -47,6 +47,8 @@
 - `MenuItemCheckbox`: {m.menu_component_menuitemcheckbox_description()}
 - `MenuItemSwitch`: {m.menu_component_menuitemswitch_description()}
 - `MenuItemRadio`: {m.menu_component_menuitemradio_description()}
+- `MenuCommandBar`: {m.menu_component_menucommandbar_description()}
+- `MenuCommandBarItem`: {m.menu_component_menucommandbaritem_description()}
 
 ## {m.global_usage()}
 

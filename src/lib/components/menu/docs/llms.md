@@ -21,6 +21,8 @@ Other components that can be used within the menu include:
 - `MenuItemCheckbox`: A menu item that can be checked or unchecked.
 - `MenuItemSwitch`: A menu item that can be toggled on or off.
 - `MenuItemRadio`: A menu item that can be selected as part of a group of radio items.
+- `MenuCommandBar`: A row of icon-only commands placed at the top or at the bottom of the menu, with an optional overflow submenu.
+- `MenuCommandBarItem`: A square, icon-only command of a MenuCommandBar, with a label that names it and shows as its tooltip.
 
 ## Usage
 
@@ -101,6 +103,51 @@ To correctly attach events to the trigger element, you should wrap the element w
 		</MenuList>
 	</MenuPopover>
 </Menu>
+```
+
+### Menu with a command bar
+
+A command bar flyout pairs a row of square, icon-only primary commands with the items of the menu. Place a `MenuCommandBar` at the top or at the bottom of the `MenuList` and set its `position` to match. Fill it with `MenuCommandBarItem`, each with an `icon` and a `label` that names it and shows as its tooltip. The `overflow` snippet adds a "more" button at the end of the row that opens the secondary commands in a submenu.
+
+Left and Right move along the bar. Up and Down move between the bar and the items of the menu.
+
+```svelte
+<Menu>
+	<MenuTrigger>
+		{#snippet children({ state, menuTriggerProps })}
+			<Button bind:ref={state.ref} {...menuTriggerProps}>Commands on top</Button>
+		{/snippet}
+	</MenuTrigger>
+	<MenuPopover>
+		<MenuList>
+			<!-- position="bottom" when the bar comes after the items -->
+			<MenuCommandBar>
+				<MenuCommandBarItem icon={CutRegular} label="Cut" />
+				<MenuCommandBarItem icon={CopyRegular} label="Copy" />
+				<MenuCommandBarItem icon={ClipboardPasteRegular} label="Paste" />
+				{#snippet overflow()}
+					<MenuItem>Select all</MenuItem>
+					<MenuItem>Rename</MenuItem>
+				{/snippet}
+			</MenuCommandBar>
+			<MenuItem>Open</MenuItem>
+			<MenuItem>Open with</MenuItem>
+			<MenuItem>Properties</MenuItem>
+		</MenuList>
+	</MenuPopover>
+</Menu>
+```
+
+By default every command is a square that shows only its icon. `showLabels` shows the label of every command below its icon, and `showDividers` draws a divider between every two commands; with either of them the commands share the width of the bar evenly.
+
+```svelte
+<MenuCommandBar showLabels showDividers>
+	<MenuCommandBarItem icon={CutRegular} label="Cut" />
+	<MenuCommandBarItem icon={CopyRegular} label="Copy" />
+	<MenuCommandBarItem icon={EditRegular} label="Rename" />
+	<MenuCommandBarItem icon={ShareRegular} label="Share" />
+	<MenuCommandBarItem icon={DeleteRegular} label="Delete" />
+</MenuCommandBar>
 ```
 
 ## Context Menu
@@ -212,3 +259,39 @@ This variant of the `MenuTrigger` component allows you to create context menus t
 | `children`       | `Snippet`                      |         | The items of the group.                 |
 
 <!-- /props:MenuGroupProps -->
+
+## Component Props (MenuCommandBar)
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:MenuCommandBarProps -->
+
+| Name                                                        | Type                           | Default          | Description                                                                                                    |
+| ----------------------------------------------------------- | ------------------------------ | ---------------- | -------------------------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                            | `HTMLDivElement` &#124; `null` |                  | The DOM reference of the command bar element.                                                                  |
+| `position`                                                  | `'top'` &#124; `'bottom'`      | `'top'`          | Where the bar sits in the menu. A bar at the top has its divider below it, and one at the bottom has it above. |
+| `label`                                                     | `string`                       | `'Commands'`     | The accessible name of the group of commands.                                                                  |
+| `overflowLabel`                                             | `string`                       | `'More options'` | The accessible name of the button that opens the overflow.                                                     |
+| `overflow`                                                  | `Snippet`                      |                  | The secondary commands. When present, a "more" button at the end of the bar opens them in a submenu.           |
+| `showLabels`                                                | `boolean`                      | `false`          | Shows the label of every command below its icon. Without labels, every command is a square.                    |
+| `showDividers`                                              | `boolean`                      | `false`          | Draws a divider between every two commands.                                                                    |
+| `children`                                                  | `Snippet`                      |                  | The primary commands, as `MenuCommandBarItem`s.                                                                |
+| `HTMLAttributes<HTMLDivElement>` without `children`, `role` |                                |                  |                                                                                                                |
+
+<!-- /props:MenuCommandBarProps -->
+
+## Component Props (MenuCommandBarItem)
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:MenuCommandBarItemProps -->
+
+| Name                                                                        | Type                              | Default | Description                                                                                                                                          |
+| --------------------------------------------------------------------------- | --------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                                            | `HTMLButtonElement` &#124; `null` |         | The DOM reference of the button element.                                                                                                             |
+| `icon`                                                                      | `Snippet` &#124; `Component`      |         | The icon of the command.                                                                                                                             |
+| `label`                                                                     | `string`                          |         | The name of the command. Without visible labels it is the accessible name of the button and shows as its tooltip; with them it shows below the icon. |
+| `disabled`                                                                  | `boolean`                         |         | Disables the user interaction.                                                                                                                       |
+| `onclick`                                                                   | `(e: MouseEvent) => void`         |         | Called when the command is activated. The menu closes afterwards, unless it persists on item activation.                                             |
+| `AriaAttributes` without `aria-label`                                       |                                   |         |                                                                                                                                                      |
+| `id`, `class`, `onkeydown`, `onfocus`, `onblur` from `HTMLButtonAttributes` |                                   |         |                                                                                                                                                      |
+
+<!-- /props:MenuCommandBarItemProps -->

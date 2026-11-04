@@ -18,6 +18,11 @@
 	twitter={data.meta.twitter}
 />
 
+<svelte:head>
+	<!-- The same page as Markdown, for AI agents. -->
+	<link rel="alternate" type="text/markdown" href="/docs/components/{data.meta.slug}.md" />
+</svelte:head>
+
 <Docs />
 
 {#each data.examples as Example, index (index)}

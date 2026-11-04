@@ -1,5 +1,7 @@
 # Progress Ring
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 A circular progress indicator that shows determinate or indeterminate progress, with paused and error states.
 
 ## Usage

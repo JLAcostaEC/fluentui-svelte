@@ -109,6 +109,26 @@ Every component is exported from the package root. Prop tables live next to each
 `src/lib/components/<name>/docs/`, and the same content is published for AI agents as
 `llms.md` inside the package.
 
+## AI agents
+
+The library ships an [agent skill](./skills/fluentui-svelte/SKILL.md) with the setup, the conventions every
+component shares, the common pitfalls and an index of the components. It works with Claude Code, Codex, Cursor,
+GitHub Copilot and the other agents the [skills CLI](https://skills.sh) supports:
+
+```sh
+npx skills add JLAcostaEC/fluentui-svelte --skill fluentui-svelte
+```
+
+(`--skill` picks it out of the repository, which also holds the Svelte skills its contributors use.)
+
+The skill also ships inside the npm package, so `npx skills experimental_sync` can link it into your project and
+keep it in step with the installed version (the command is a preview of the skills CLI).
+
+The docs site publishes the same content as Markdown, following [llms.txt](https://llmstxt.org):
+`/llms.txt` (index), `/llms-full.txt` (everything in one file), `/docs/llms.md` (the global guide) and
+`/docs/components/<name>.md` for each component. Inside the package, every component has its guide at
+`dist/components/<name>/docs/llms.md`.
+
 ### Running the documentation site
 
 The docs site is the reference while the hosted version is being built:

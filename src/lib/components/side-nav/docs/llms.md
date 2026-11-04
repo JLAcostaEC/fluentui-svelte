@@ -1,5 +1,7 @@
 # SideNav
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 App navigation built on ListView. SideNavItem renders an anchor by default. Use `as="button"` for actions, or `as="li"` / `as="div"` for content with multiple controls. The navigation owns no router: set href and active from your app's current route.
 
 ## Usage
@@ -7,7 +9,9 @@ App navigation built on ListView. SideNavItem renders an anchor by default. Use 
 ```svelte
 <script>
 	import { AppWindow, AppSurface, SideNav, SideNavItem } from 'fluentui-svelte';
-	import { HomeRegular, FolderRegular, SettingsRegular } from 'fluentui-icons-svelte';
+	import HomeRegular from 'fluentui-icons-svelte/HomeRegular.svelte';
+	import FolderRegular from 'fluentui-icons-svelte/FolderRegular.svelte';
+	import SettingsRegular from 'fluentui-icons-svelte/SettingsRegular.svelte';
 </script>
 
 <AppWindow width={480} height={240}>

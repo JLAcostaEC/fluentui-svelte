@@ -1,8 +1,8 @@
 # Tree View
 
-The Tree View displays hierarchical data in a nested list where each item can be expanded, checked or selected. Items are composed with the TreeViewItem and TreeViewItemContent components — the tree does not accept a data prop.
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
 
-> **Early access:** The API, features, and behavior of the component are subject to significant changes. We strongly advise against using this component in production environments at this time.
+The Tree View displays hierarchical data in a nested list where each item can be expanded, checked or selected. Items are composed with the TreeViewItem and TreeViewItemContent components — the tree does not accept a data prop.
 
 ## Usage
 

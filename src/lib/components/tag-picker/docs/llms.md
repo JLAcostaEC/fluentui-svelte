@@ -1,5 +1,7 @@
 # TagPicker
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 A TagPicker combines a text field and a dropdown, giving people a way to choose several options from a list or to enter their own choice. Every choice becomes a dismissible `Tag` shown in the control. It is made of `TagPicker`, `TagPickerOption` and `TagPickerOptionGroup`.
 
 ## Usage
@@ -103,7 +105,7 @@ Replace the dropdown arrow with `expandIcon`, a component or a snippet, or remov
 
 ```svelte
 <script>
-	import { ArrowDownFilled } from 'fluentui-icons-svelte';
+	import ArrowDownFilled from 'fluentui-icons-svelte/ArrowDownFilled.svelte';
 </script>
 
 <!-- A custom icon -->

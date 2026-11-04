@@ -1,5 +1,7 @@
 # Slider
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 A slider lets users select a value from a continuous or discrete range by dragging a thumb along a track. It supports horizontal and vertical orientations, tick marks, a value tooltip and reverse direction.
 
 ## Usage

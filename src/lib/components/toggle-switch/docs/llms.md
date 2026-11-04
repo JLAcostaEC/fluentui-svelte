@@ -1,5 +1,7 @@
 # Toggle Switch
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 A toggle switch represents a physical switch that allows someone to choose between two mutually exclusive options. For example, 'On/Off' and 'Show/Hide'. Choosing an option should produce an immediate result.
 
 ## Usage

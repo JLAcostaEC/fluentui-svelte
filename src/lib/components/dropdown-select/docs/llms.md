@@ -1,8 +1,12 @@
 # Dropdown Select
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 The Dropdown Select is a dropdown built on the native `<select>` element. It lets users choose one option, or several with the `multiple` prop, from a list of `DropdownSelectOption` children.
 
-> **Early access:** The API, features, and behavior of the component are subject to significant changes. This component will be rebuilt using the FloatingUI Svelte package, which is still under active development. We strongly advise against using this component in production environments at this time.
+> **Browser compatibility:** Custom styling uses `appearance: base-select`, `::picker(select)` and `<selectedcontent>`. Single-select styling requires Chrome or Edge 135+, or Safari / iOS Safari 27+. Firefox (including 158) does not yet support the complete feature by default. Earlier Chrome / Edge and Safari versions use the native select appearance; rich option content and custom picker styling are unavailable.
+>
+> Custom styling for `multiple` requires Chrome or Edge 145+. Safari / iOS Safari 27 and Firefox 158 do not support customizable listboxes and use the native listbox. Browser compatibility verified on October 16, 2026.
 
 ## Usage
 

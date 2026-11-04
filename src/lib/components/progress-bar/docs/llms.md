@@ -1,5 +1,7 @@
 # Progress Bar
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 A progress bar is a horizontal indicator that communicates the progress of an operation. Set `value` for determinate progress, or omit it for an indeterminate animation when the duration is unknown.
 
 ## Usage

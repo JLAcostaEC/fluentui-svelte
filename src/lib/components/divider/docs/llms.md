@@ -1,5 +1,7 @@
 # Divider
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 The Divider component is used to visually separate content within a layout. It can be oriented horizontally or vertically.
 
 ## Usage

@@ -1,5 +1,7 @@
 # Checkbox
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 Represents a control that a user can select (check) or clear (uncheck). A CheckBox can also report its value as indeterminate.
 
 ## Usage

@@ -34,6 +34,7 @@ project.inlang/cache/
 
 # Auto-generated files
 src/site/utils/components-index.js
+src/site/utils/llms-index.js
 
 # AI
 .claude/*.local.*

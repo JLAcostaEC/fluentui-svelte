@@ -1,5 +1,7 @@
 # TextBox
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 The TextBox control lets a user type text into an app. It's typically used to capture a single line of text, but can be configured to capture multiple lines of text. The text displays on the screen in a simple, uniform, plaintext format.
 
 ## Usage
@@ -45,7 +47,7 @@ The `size` prop sets the height, the font size and the horizontal padding of the
 
 ```svelte
 <script>
-	import { MailRegular } from 'fluentui-icons-svelte';
+	import MailRegular from 'fluentui-icons-svelte/MailRegular.svelte';
 </script>
 
 <TextBox contentBefore="https://" placeholder="Website" />

@@ -1,0 +1,98 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '#i18n/messages.js';
+  import Seo from '#site/components/seo/seo.svelte';
+</script>
+
+<svelte:head>
+  <link rel="alternate" type="text/markdown" href="/docs/llms.md" />
+</svelte:head>
+
+<Seo title={m.global_llms()} description={m.seo_llms_description()} keywords={m.seo_llms_keywords().split(', ')} />
+
+# {m.global_llms()}
+
+{m.llms_description()}
+
+## {m.llms_skill_title()}
+
+{m.llms_skill_description()}
+
+```bash
+npx skills add JLAcostaEC/fluentui-svelte --skill fluentui-svelte
+```
+
+<p class="fs-docs"><I18nMarkupMessage message={m.llms_skill_version_note} /></p>
+
+### {m.llms_sync_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.llms_sync_description} /></p>
+
+```bash
+npx skills experimental_sync
+```
+
+<p class="fs-docs"><I18nMarkupMessage message={m.llms_sync_prepare} /></p>
+
+```json
+{
+  "scripts": {
+    "prepare": "svelte-kit sync && skills experimental_sync -y"
+  }
+}
+```
+
+{m.llms_sync_experimental_note()}
+
+## {m.llms_files_title()}
+
+{m.llms_files_description()}
+
+<!-- Server routes, not pages: `data-sveltekit-reload` keeps the client router from rendering them as a 404 page. -->
+<table class="fs-docs">
+  <thead>
+    <tr>
+      <th>{m.llms_files_url()}</th>
+      <th>{m.llms_files_content()}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="/llms.txt" data-sveltekit-reload><code>/llms.txt</code></a></td>
+      <td>{m.llms_files_index()}</td>
+    </tr>
+    <tr>
+      <td><a href="/llms-full.txt" data-sveltekit-reload><code>/llms-full.txt</code></a></td>
+      <td>{m.llms_files_full()}</td>
+    </tr>
+    <tr>
+      <td><a href="/docs/llms.md" data-sveltekit-reload><code>/docs/llms.md</code></a></td>
+      <td>{m.llms_files_guide()}</td>
+    </tr>
+    <tr>
+      <td><a href="/docs/components/button.md" data-sveltekit-reload><code>/docs/components/&lt;name&gt;.md</code></a></td>
+      <td><I18nMarkupMessage message={m.llms_files_component} /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="fs-docs"><I18nMarkupMessage message={m.llms_pages_description} /></p>
+
+## {m.llms_package_title()}
+
+{m.llms_package_description()}
+
+```text
+node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+node_modules/fluentui-svelte/dist/components/<name>/docs/llms.md
+```
+
+## {m.llms_instructions_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.llms_instructions_description} /></p>
+
+```markdown
+This project uses fluentui-svelte for its UI. Before writing UI code, read
+node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md, then the
+docs/llms.md of every component you use (that file lists where they are).
+```

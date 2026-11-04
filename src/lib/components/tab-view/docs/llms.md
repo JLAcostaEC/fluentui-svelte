@@ -1,5 +1,7 @@
 # TabView
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 TabView lays a set of tabs out as a strip, in the shape a browser gives its document tabs. Every tab can carry an icon and a close button, and a new tab button can sit at the end of the strip.
 
 The strip owns the selection and nothing else. What a tab opens is rendered by you, wherever it belongs on the page, so a tab can open a panel underneath it, swap a region somewhere else, or drive a route.

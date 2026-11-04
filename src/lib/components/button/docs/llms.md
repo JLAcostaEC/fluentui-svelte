@@ -1,5 +1,7 @@
 # Button
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 A button triggers an action or event when activated and supports three visual appearances: accent, standard, and subtle.
 
 ## Usage

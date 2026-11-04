@@ -1,5 +1,7 @@
 # ListView
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 The ListView is a component for rendering a set of vertically stacked items. These items can be focusable, selectable, have one primary action and one or more secondary actions, and support keyboard navigation and accessibility features.
 
 ## Usage

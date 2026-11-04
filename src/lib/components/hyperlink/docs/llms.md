@@ -1,5 +1,7 @@
 # Hyperlink
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 The Hyperlink component is used to create clickable links that navigate to a specified URL. It follows Fluent UI design principles and ensures accessibility and smooth user interactions.
 
 ## Usage

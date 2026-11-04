@@ -1,5 +1,7 @@
 # Badge
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 A badge is a visual decoration for UI elements used to display notifications, status indicators, or counts. It supports different colors and styles to match various UI needs.
 
 ## Usage
@@ -71,7 +73,7 @@ Use the icon prop to render an icon inside the badge. You can pass the icon as a
 ```svelte
 <script>
 	import { Badge } from 'fluentui-svelte';
-	import { AccessibilityRegular } from 'fluentui-icons-svelte';
+	import AccessibilityRegular from 'fluentui-icons-svelte/AccessibilityRegular.svelte';
 </script>
 
 <Badge color="attention" size={96} icon={AccessibilityRegular} />
@@ -104,7 +106,7 @@ This component is useful when you want to show an icon in the form of a Badge so
 ```svelte
 <script>
 	import { BadgeIcon } from 'fluentui-svelte';
-	import { AccessibilityRegular } from 'fluentui-icons-svelte';
+	import AccessibilityRegular from 'fluentui-icons-svelte/AccessibilityRegular.svelte';
 </script>
 
 <BadgeIcon size={96} icon={AccessibilityRegular} />
@@ -117,7 +119,7 @@ By default, Avatar uses an instance of BadgeIcon. As you can see, the first exam
 ```svelte
 <script>
 	import { Avatar, Badge } from 'fluentui-svelte';
-	import { AccessibilityRegular } from 'fluentui-icons-svelte';
+	import AccessibilityRegular from 'fluentui-icons-svelte/AccessibilityRegular.svelte';
 </script>
 
 <!-- args: [size: number, shape: string] -->

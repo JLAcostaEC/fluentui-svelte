@@ -1,5 +1,7 @@
 # TopNav
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 TopNav gives a single selection from a row of items, with a bar that marks the selected one. Each item carries a short label and often an icon.
 
 The bar belongs to the strip rather than to any one item: when the selection moves it travels to the item that took it, staying on screen the whole way instead of disappearing from one and reappearing under the next.
@@ -75,7 +77,8 @@ A top nav expects a `value` on every item and a `selectedValue` to match it agai
 ```svelte
 <script>
 	import { TopNav, TopNavItem } from 'fluentui-svelte';
-	import { AirplaneRegular, AirplaneTakeOffRegular } from 'fluentui-icons-svelte';
+	import AirplaneRegular from 'fluentui-icons-svelte/AirplaneRegular.svelte';
+	import AirplaneTakeOffRegular from 'fluentui-icons-svelte/AirplaneTakeOffRegular.svelte';
 </script>
 
 <TopNav bind:selectedValue>

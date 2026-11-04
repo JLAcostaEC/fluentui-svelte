@@ -1,5 +1,7 @@
 # AppWindow
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 An app window is the surface of an app: a Mica window with its own border and a shell shadow that tells the active window from the inactive ones. It is built on the Flyout, so it takes its content the same way, and it fills the space around it unless you give it a size.
 
 ## Usage
@@ -16,7 +18,7 @@ Start with a `TitleBar` if the window has one, then place page content in an `Ap
 		TitleBarLeftControls,
 		TitleBarRightControls
 	} from 'fluentui-svelte';
-	import { AppsRegular } from 'fluentui-icons-svelte';
+	import AppsRegular from 'fluentui-icons-svelte/AppsRegular.svelte';
 </script>
 
 <AppWindow width={400} height={200}>

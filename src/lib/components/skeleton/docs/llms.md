@@ -1,5 +1,7 @@
 # Skeleton
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 The skeleton component provides a placeholder for content that is loading, giving users a visual indication of where content will appear once it has loaded.
 
 ## Usage

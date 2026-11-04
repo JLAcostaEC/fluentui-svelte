@@ -1,5 +1,7 @@
 # TitleBar
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 A title bar is the top bar of an app shell, laid out like the one of a Windows 11 app: the identity of the app and its navigation at the start, a search that grows and shrinks at the center, and the person picture and window controls at the end. It paints no background of its own, since it sits on the component that renders the window.
 
 To create a title bar, you will need to use the following components:
@@ -15,7 +17,7 @@ Compose the bar from its three areas through the `leftControls`, `search` and `r
 ```svelte
 <script>
 	import { TitleBar, TitleBarLeftControls, TitleBarRightControls } from 'fluentui-svelte';
-	import { AppsRegular } from 'fluentui-icons-svelte';
+	import AppsRegular from 'fluentui-icons-svelte/AppsRegular.svelte';
 	import { getCurrentWindow } from '@tauri-apps/api/window';
 
 	const appWindow = getCurrentWindow();

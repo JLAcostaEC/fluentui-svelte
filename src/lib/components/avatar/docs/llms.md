@@ -1,5 +1,7 @@
 # Avatar
 
+> Part of fluentui-svelte. Read the global guide first (setup, rules and pitfalls): https://fluentui-svelte.dev/docs/llms.md, also shipped as node_modules/fluentui-svelte/skills/fluentui-svelte/SKILL.md
+
 An Avatar is a graphical representation of a user, team, or entity.
 
 Avatar can display an image, icon, or initials, and supports different sizes, shapes, and status indicators.
@@ -40,7 +42,7 @@ An avatar can display an icon. The icon will only be shown when there is no imag
 
 ```svelte
 <script>
-	import { ClockRegular } from 'fluentui-icons-svelte';
+	import ClockRegular from 'fluentui-icons-svelte/ClockRegular.svelte';
 </script>
 
 <Avatar active="active" size={56} name="FluentUI Svelte" icon={ClockRegular} color="information" />

@@ -94,13 +94,15 @@ describe('enableTabspot', () => {
 
 	it('gives the grid a single tab stop and walks the cells with the arrows', async () => {
 		render(TableTestWrapper, { enableTabspot: true });
+		const headers = page.getByRole('columnheader');
 		const cells = page.getByRole('gridcell');
-		await cells.first().click();
-		await expect.element(cells.first()).toHaveFocus();
+		await expect.element(headers.first()).toHaveAttribute('tabindex', '0');
+		await userEvent.tab();
+		await expect.element(headers.first()).toHaveFocus();
 		await userEvent.keyboard('{ArrowRight}');
-		await expect.element(cells.nth(1)).toHaveFocus();
+		await expect.element(headers.nth(1)).toHaveFocus();
 		await userEvent.keyboard('{ArrowDown}');
-		await expect.element(cells.nth(3)).toHaveFocus();
+		await expect.element(cells.nth(1)).toHaveFocus();
 	});
 });
 

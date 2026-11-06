@@ -590,7 +590,7 @@
 
 <p class="fs-docs"><I18nMarkupMessage message={m.table_keyboard_navigation_description} /></p>
 
-<Showcase columns={1} minHeight="260px" code={tabspotCode}>
+<Showcase columns={1} minHeight="260px" disablePanZoom code={tabspotCode}>
   <Table enableTabspot aria-label="Table with keyboard navigation">
     <TableHeader>
       <TableRow>

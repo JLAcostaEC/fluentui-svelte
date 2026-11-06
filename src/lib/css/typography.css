@@ -9,8 +9,8 @@ p.body2,
 p,
 .body,
 body {
-	font-size: var(--fs-body-large-font-size);
-	line-height: var(--fs-body-large-line-height);
+	font-size: var(--fs-body-font-size);
+	line-height: var(--fs-body-line-height);
 }
 .caption2 {
 	font-size: var(--fs-caption2-font-size);

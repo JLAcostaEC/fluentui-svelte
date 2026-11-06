@@ -1,5 +1,11 @@
 # fluentui-svelte
 
+## 0.7.2
+
+### Patch Changes
+
+- fix: correct theme CSS values ​​and typography ([#127](https://github.com/JLAcostaEC/fluentui-svelte/pull/127))
+
 ## 0.7.1
 
 ### Patch Changes

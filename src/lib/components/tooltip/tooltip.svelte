@@ -41,10 +41,6 @@
 		'aria-describedby': relationship === 'description' ? id : undefined
 	});
 
-	/**
-	 * One timer for both directions, so the last request wins: a pointer that crosses the trigger faster than
-	 * `openDelay` asks to open and then to close, and the close replaces the open still waiting.
-	 */
 	let timer: ReturnType<typeof setTimeout> | undefined;
 	const schedule = (action: () => void, delay: number) => {
 		clearTimeout(timer);

@@ -3045,6 +3045,13 @@
       },
       "source": "src/lib/components/skeleton/types.ts#SkeletonProps.shape"
     },
+    "generated_fs_slider_props_props_buffer": {
+      "en": "928f4ae7",
+      "locales": {
+        "es": "928f4ae7"
+      },
+      "source": "src/lib/components/slider/types.ts#SliderProps.buffer"
+    },
     "generated_fs_slider_props_props_default_value": {
       "en": "605ccccd",
       "locales": {
@@ -3184,6 +3191,13 @@
         "es": "b59b62b8"
       },
       "source": "src/lib/components/slider/types.ts#SliderProps.tooltipPlacement"
+    },
+    "generated_fs_slider_props_props_tooltip_position_config": {
+      "en": "c7d20418",
+      "locales": {
+        "es": "c7d20418"
+      },
+      "source": "src/lib/components/slider/types.ts#SliderProps.tooltipPositionConfig"
     },
     "generated_fs_slider_props_props_tooltip_ref": {
       "en": "cfee9a35",

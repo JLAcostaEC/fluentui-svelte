@@ -12,6 +12,9 @@
   const verticalCode = `
 <Slider value={40} orientation="vertical" />`;
 
+  const bufferCode = `
+<Slider value={30} buffer={65} />`;
+
   const disabledCode = `
 <Slider value={30} disabled />`;
 </script>
@@ -43,6 +46,16 @@
 <Showcase columns={1} code={verticalCode} minHeight="0" disablePanZoom showOverflow>
   <div style="height: 200px;">
     <Slider value={40} orientation="vertical"/>
+  </div>
+</Showcase>
+
+### {m.slider_buffer_title()}
+
+{m.slider_buffer_description()}
+
+<Showcase columns={1} code={bufferCode} minHeight="0" disablePanZoom showOverflow>
+  <div style="width: 200px;">
+    <Slider value={30} buffer={65}/>
   </div>
 </Showcase>
 

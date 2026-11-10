@@ -22,6 +22,7 @@
 		prefix = '',
 		suffix = '',
 		track = true,
+		buffer,
 		orientation = 'horizontal',
 		reverse = false,
 		sync,
@@ -29,6 +30,7 @@
 		tooltip = true,
 		tooltipPlacement = 'top',
 		tooltipContent,
+		tooltipPositionConfig,
 		onChange,
 		id = labelContext?.fieldId,
 		ref = $bindable(null),
@@ -82,6 +84,9 @@
 	let moved = false;
 	let thumbClientWidth = $state(20);
 	let percentage = $derived(valueToPercentage(value));
+	let bufferPercentage = $derived(
+		buffer === undefined ? undefined : Math.min(Math.max(valueToPercentage(buffer), 0), 100)
+	);
 	let directionAwareReverse = $derived(
 		wrapperRef && orientation === 'horizontal' && window.getComputedStyle(wrapperRef).direction === 'rtl'
 			? !reverse
@@ -164,6 +169,7 @@
 	function handleTouchStart(event: TouchEvent) {
 		if (event.cancelable) event.preventDefault();
 		holding = true;
+		calculateValue(event);
 	}
 
 	function linearScale(input: readonly [number, number], output: readonly [number, number]) {
@@ -245,6 +251,8 @@
 					ref?.focus();
 					holding = true;
 					dragging = true;
+					// A press moves the thumb to the pointer, so a single click on the rail sets the value.
+					calculateValue(e);
 				},
 				wrapperAttributes?.onmousedown
 			]
@@ -256,6 +264,7 @@
 		<Tooltip
 			content={tooltipContent ?? `${prefix}${value}${suffix}`}
 			placement={tooltipPlacement}
+			positionConfig={tooltipPositionConfig}
 			relationship="description"
 			bind:preventClose={dragging}
 			bind:ref={tooltipRef}
@@ -272,6 +281,9 @@
 	{/if}
 
 	<div class="slider-rail" bind:this={railRef}>
+		{#if bufferPercentage !== undefined}
+			<div class="slider-buffer" style="--slider-buffer-percentage: {bufferPercentage}%"></div>
+		{/if}
 		{#if track}
 			<div class="slider-track" bind:this={trackRef}></div>
 		{/if}
@@ -465,6 +477,7 @@
 
 	.slider-rail {
 		display: flex;
+		position: relative;
 		align-items: center;
 		overflow: hidden;
 		border-radius: 50px;
@@ -472,7 +485,35 @@
 	}
 
 	.slider-track {
+		position: relative;
 		background-color: var(--fs-accent-fill-default);
+	}
+
+	/* The buffer starts where the track starts, under it. */
+	.slider-buffer {
+		position: absolute;
+		background-color: var(--fs-text-secondary);
+		.orientation-horizontal & {
+			inset-block: 0;
+			inset-inline-start: 0;
+			inline-size: var(--slider-buffer-percentage);
+		}
+		.orientation-horizontal.reverse & {
+			inset-inline-start: auto;
+			inset-inline-end: 0;
+		}
+		.orientation-vertical & {
+			inset-inline: 0;
+			inset-block-end: 0;
+			block-size: var(--slider-buffer-percentage);
+		}
+		.orientation-vertical.reverse & {
+			inset-block-end: auto;
+			inset-block-start: 0;
+		}
+		.disabled & {
+			background-color: var(--fs-control-strong-disabled);
+		}
 	}
 
 	.slider-tick-bar {
@@ -520,7 +561,7 @@
 		justify-content: center;
 		align-items: center;
 		position: absolute;
-		z-index: 10;
+		z-index: 1;
 		border-radius: 100%;
 		background-color: var(--fs-control-solid);
 		box-shadow: 0 0 0 1px var(--fs-control-stroke-default);

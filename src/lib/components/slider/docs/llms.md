@@ -44,6 +44,14 @@ Set `orientation="vertical"` to lay the slider out vertically.
 <Slider value={40} orientation="vertical" />
 ```
 
+### Buffer
+
+Set `buffer` to draw a second value on the rail, behind the track, such as how much of a media has loaded. It takes the scale of `value` and does not move the thumb.
+
+```svelte
+<Slider value={30} buffer={65} />
+```
+
 ### Disabled
 
 Set the `disabled` prop to prevent interaction with the slider.
@@ -71,6 +79,7 @@ The root is the control element. HTML attributes, class and ref apply to that el
 | `prefix`                                     | `string`                                      | `''`           | Text prepended to the value in the tooltip.                                                                                                                                                                        |
 | `suffix`                                     | `string`                                      | `''`           | Text appended to the value in the tooltip.                                                                                                                                                                         |
 | `track`                                      | `boolean`                                     | `true`         | Whether to fill the rail up to the current value.                                                                                                                                                                  |
+| `buffer`                                     | `number`                                      |                | A second value drawn on the rail behind the track, such as how much of a media has loaded. It takes the scale of `value` and does not move the thumb.                                                              |
 | `orientation`                                | `'horizontal'` &#124; `'vertical'`            | `'horizontal'` | The direction the slider runs in.                                                                                                                                                                                  |
 | `reverse`                                    | `boolean`                                     | `false`        | Runs the slider from the maximum to the minimum instead.                                                                                                                                                           |
 | `disabled`                                   | `boolean`                                     | `false`        | Disables the user interaction.                                                                                                                                                                                     |
@@ -78,6 +87,7 @@ The root is the control element. HTML attributes, class and ref apply to that el
 | `tooltip`                                    | `boolean`                                     | `true`         | Whether to show the value in a tooltip while dragging.                                                                                                                                                             |
 | `tooltipPlacement`                           | `Placement`                                   | `'top'`        | Where the tooltip is placed relative to the thumb.                                                                                                                                                                 |
 | `tooltipContent`                             | `string` &#124; `Snippet` &#124; `Component`  |                | Custom content for the tooltip, replacing the plain value.                                                                                                                                                         |
+| `tooltipPositionConfig`                      | `Partial<ComputePositionConfig>`              |                | The position configuration handed over to floating-ui for the tooltip, as in Tooltip.                                                                                                                              |
 | `onChange`                                   | `(value: number) => void`                     |                | Called whenever the value changes.                                                                                                                                                                                 |
 | `ref` _bindable_                             | `HTMLInputElement` &#124; `null`              |                | The DOM reference of the native range input that holds the value and takes the keyboard focus. The other attributes of the slider are applied to it.                                                               |
 | `wrapperRef` _bindable_                      | `HTMLDivElement` &#124; `null`                |                | The DOM reference of the element that draws the slider.                                                                                                                                                            |

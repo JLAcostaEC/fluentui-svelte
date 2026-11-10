@@ -390,7 +390,8 @@
 		{name}
 		bind:value
 		bind:ref
-		querySubmitted={(e) => querySubmitted?.(e, value)}
+		// Enter is handled by `handleKeyDown`, so only the search icon submits through here.
+		querySubmitted={(e) => e instanceof MouseEvent && querySubmitted?.(e, value)}
 		textChanged={(e) => handleTextChanged(e, value)}
 		onClear={(e) => invokeHandlers(e, [], [handleClear, onClear])}
 		onfocus={(e) => invokeHandlers(e, [], [handleFocus, onfocus])}

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { on } from 'svelte/events';
-	import { useDebounce } from 'runed';
 	import { floating, roundByDPR, RenderSoC } from '#internal';
 	import { Flyout } from '#lib/index.js';
 	import { PREFIX } from '#constants';
@@ -42,22 +41,30 @@
 		'aria-describedby': relationship === 'description' ? id : undefined
 	});
 
-	const handleOpen = useDebounce(
-		() => {
+	/**
+	 * One timer for both directions, so the last request wins: a pointer that crosses the trigger faster than
+	 * `openDelay` asks to open and then to close, and the close replaces the open still waiting.
+	 */
+	let timer: ReturnType<typeof setTimeout> | undefined;
+	const schedule = (action: () => void, delay: number) => {
+		clearTimeout(timer);
+		timer = setTimeout(action, delay);
+	};
+
+	const handleOpen = () =>
+		schedule(() => {
 			open = true;
 			onVisibleChange?.(true);
-		},
-		() => openDelay
-	);
+		}, openDelay);
 
-	const handleClose = useDebounce(
-		() => {
+	const handleClose = () =>
+		schedule(() => {
 			if (preventClose || hoveringTooltip) return;
 			open = false;
 			onVisibleChange?.(false);
-		},
-		() => hideDelay
-	);
+		}, hideDelay);
+
+	$effect(() => () => clearTimeout(timer));
 
 	const triggerRef: Attachment = (node) => {
 		explicitTrigger = node as HTMLElement;
@@ -119,10 +126,10 @@
 		if (!triggerElement) return;
 
 		const cleanups = [
-			on(triggerElement, 'mouseenter', () => handleOpen()),
-			on(triggerElement, 'mouseleave', () => handleClose()),
-			on(triggerElement, 'focusin', () => handleOpen()),
-			on(triggerElement, 'focusout', () => handleClose())
+			on(triggerElement, 'mouseenter', handleOpen),
+			on(triggerElement, 'mouseleave', handleClose),
+			on(triggerElement, 'focusin', handleOpen),
+			on(triggerElement, 'focusout', handleClose)
 		];
 
 		return () => cleanups.forEach((c) => c());

@@ -177,3 +177,25 @@ describe('relationship', () => {
 		expect(document.getElementById(described!)).toHaveClass('fs-tooltip');
 	});
 });
+
+describe('a pointer crossing the trigger', () => {
+	it('does not open the tooltip once the pointer has left', async () => {
+		render(TooltipTestWrapper, { openDelay: 100, hideDelay: 0 });
+		const button = trigger().element();
+		// The trigger names itself by its own tooltip, and listens from an effect that runs after the first render.
+		const own = () => document.getElementById(button.getAttribute('aria-labelledby') ?? '');
+		await vi.waitFor(() => expect(own()).not.toBeNull());
+		// The real pointer, wherever an earlier test left it, must not hover the trigger: only the events below count.
+		button.style.pointerEvents = 'none';
+		vi.useFakeTimers();
+
+		try {
+			button.dispatchEvent(new MouseEvent('mouseenter'));
+			button.dispatchEvent(new MouseEvent('mouseleave'));
+			await vi.advanceTimersByTimeAsync(500);
+			expect(own()?.classList.contains('tooltip-hidden')).toBe(true);
+		} finally {
+			vi.useRealTimers();
+		}
+	});
+});

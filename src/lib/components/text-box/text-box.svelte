@@ -72,7 +72,9 @@
 
 	const handleKeyDown = (e: KeyboardEvent) => {
 		// `isComposing`: Enter that confirms an IME composition is not a submission.
-		if (type === 'search' && !readonly && e.key === 'Enter' && !e.isComposing) querySubmitted?.(e, value);
+		// `defaultPrevented`: a handler before this one already used the Enter.
+		if (type !== 'search' || readonly || e.key !== 'Enter' || e.isComposing || e.defaultPrevented) return;
+		querySubmitted?.(e, value);
 	};
 </script>
 
@@ -113,7 +115,7 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 		{readonly}
 		bind:value
 		bind:this={ref}
-		onkeydown={(e) => invokeHandlers(e, [], [handleKeyDown, onkeydown])}
+		onkeydown={(e) => invokeHandlers(e, [], [onkeydown, handleKeyDown])}
 		onkeyup={(e) => invokeHandlers(e, [], [handleKeyUp, onkeyup])}
 		oninput={(e) => invokeHandlers(e, [], [(_e) => textChanged?.(_e, value), oninput])}
 		onchange={(e) => invokeHandlers(e, [], [(_e) => textChanged?.(_e, value), onchange])}

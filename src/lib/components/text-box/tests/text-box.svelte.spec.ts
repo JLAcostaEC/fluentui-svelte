@@ -1,4 +1,4 @@
-import { page } from 'vitest/browser';
+import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { TextBox } from '#lib/index.js';
@@ -110,6 +110,15 @@ describe('value binding and events', () => {
 });
 
 describe('clear button', () => {
+	it('fires input and change on the native field when it clears', async () => {
+		const oninput = vi.fn();
+		const onchange = vi.fn();
+		render(TextBox, { value: 'clear me', oninput, onchange });
+		await page.getByRole('button', { name: 'Delete Text' }).click();
+		expect(oninput).toHaveBeenCalledOnce();
+		expect(onchange).toHaveBeenCalledOnce();
+	});
+
 	it('shows a clear button when there is a value', async () => {
 		render(TextBox, { value: 'some text' });
 		const clear = page.getByRole('button', { name: 'Delete Text' });
@@ -147,6 +156,22 @@ describe('search type', () => {
 		await expect.element(search).toBeInTheDocument();
 		await search.click();
 		expect(querySubmitted).toHaveBeenCalledOnce();
+	});
+
+	it('calls querySubmitted with the query when Enter is pressed', async () => {
+		const querySubmitted = vi.fn();
+		render(TextBox, { type: 'search', value: 'fluent', querySubmitted });
+		await page.getByRole('searchbox').click();
+		await userEvent.keyboard('{Enter}');
+		expect(querySubmitted).toHaveBeenCalledExactlyOnceWith(expect.any(KeyboardEvent), 'fluent');
+	});
+
+	it('does not submit on Enter when the input is not a search box', async () => {
+		const querySubmitted = vi.fn();
+		render(TextBox, { querySubmitted });
+		await page.getByRole('textbox').click();
+		await userEvent.keyboard('{Enter}');
+		expect(querySubmitted).not.toHaveBeenCalled();
 	});
 });
 

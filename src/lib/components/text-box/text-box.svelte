@@ -5,7 +5,7 @@
 	import EyeShowFilled from 'fluentui-icons-svelte/EyeShowFilled.svelte';
 	import EyeHideFilled from 'fluentui-icons-svelte/EyeHideFilled.svelte';
 	import { TextBoxButton } from '#lib/index.js';
-	import { invokeHandlers, RenderSoC } from '#internal';
+	import { dispatchFieldEvents, invokeHandlers, RenderSoC } from '#internal';
 	import type { TextBoxProps } from './types.ts';
 
 	const FALLBACK_ID = $props.id();
@@ -29,6 +29,7 @@
 		querySubmitted,
 		textChanged,
 		onkeyup,
+		onkeydown,
 		onClear,
 		onchange,
 		oninput,
@@ -50,6 +51,7 @@
 		} else {
 			value = 0;
 		}
+		dispatchFieldEvents(ref);
 		onClear?.(e);
 	};
 
@@ -66,6 +68,11 @@
 			e.preventDefault();
 			(e.target as HTMLInputElement).blur();
 		}
+	};
+
+	const handleKeyDown = (e: KeyboardEvent) => {
+		// `isComposing`: Enter that confirms an IME composition is not a submission.
+		if (type === 'search' && !readonly && e.key === 'Enter' && !e.isComposing) querySubmitted?.(e, value);
 	};
 </script>
 
@@ -106,6 +113,7 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 		{readonly}
 		bind:value
 		bind:this={ref}
+		onkeydown={(e) => invokeHandlers(e, [], [handleKeyDown, onkeydown])}
 		onkeyup={(e) => invokeHandlers(e, [], [handleKeyUp, onkeyup])}
 		oninput={(e) => invokeHandlers(e, [], [(_e) => textChanged?.(_e, value), oninput])}
 		onchange={(e) => invokeHandlers(e, [], [(_e) => textChanged?.(_e, value), onchange])}

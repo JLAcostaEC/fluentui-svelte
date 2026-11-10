@@ -1,5 +1,5 @@
 import { page } from 'vitest/browser';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { NumberBox } from '#lib/index.js';
 import NumberBoxTestWrapper from './NumberBoxTestWrapper.svelte';
@@ -91,6 +91,66 @@ describe('the compact variant', () => {
 		await increase().click();
 
 		await expect.element(value()).toHaveTextContent('5');
+	});
+});
+
+describe('native events', () => {
+	it('fires input and change on the native field when a stepper is used', async () => {
+		const oninput = vi.fn();
+		const onchange = vi.fn();
+		render(NumberBox, { value: 4, oninput, onchange });
+
+		await increase().click();
+
+		expect(oninput).toHaveBeenCalledOnce();
+		expect(onchange).toHaveBeenCalledOnce();
+		await expect.element(input()).toHaveValue(5);
+	});
+
+	it('stays within max and fires nothing when it cannot step', async () => {
+		const onchange = vi.fn();
+		render(NumberBoxTestWrapper, { value: 10, max: 10, onchange });
+
+		await increase().click();
+
+		await expect.element(value()).toHaveTextContent('10');
+		expect(onchange).not.toHaveBeenCalled();
+	});
+
+	it('honors step', async () => {
+		render(NumberBoxTestWrapper, { value: 10, step: 5 });
+
+		await decrease().click();
+
+		await expect.element(value()).toHaveTextContent('5');
+	});
+});
+
+describe('locked and hidden steppers', () => {
+	it('disables the steppers when the input is readonly', async () => {
+		render(NumberBox, { value: 4, readonly: true });
+
+		await expect.element(increase()).toBeDisabled();
+		await expect.element(decrease()).toBeDisabled();
+	});
+
+	it('disables the compact toggle when the input is disabled', async () => {
+		render(NumberBox, { variant: 'compact', disabled: true });
+
+		await expect.element(page.getByRole('button', { name: 'Open' })).toBeDisabled();
+	});
+
+	it('hides the steppers with hideActionButtons', async () => {
+		render(NumberBox, { hideActionButtons: true });
+
+		await expect.element(increase()).not.toBeInTheDocument();
+		await expect.element(decrease()).not.toBeInTheDocument();
+	});
+
+	it('hides the compact toggle with hideActionButtons', async () => {
+		render(NumberBox, { variant: 'compact', hideActionButtons: true });
+
+		await expect.element(page.getByRole('button', { name: 'Open' })).not.toBeInTheDocument();
 	});
 });
 

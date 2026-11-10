@@ -205,3 +205,42 @@ describe('attributes', () => {
 		await expect.element(page.getByTestId('my-drawing')).toHaveClass('fs-slider');
 	});
 });
+
+describe('pressing the rail', () => {
+	it('moves the value to the pointer with a single press', async () => {
+		const onchange = vi.fn();
+		render(Slider, { value: 0, onchange });
+		const wrapper = page.selector('.fs-slider').element();
+		const rail = page.selector('.slider-rail').element().getBoundingClientRect();
+		const at = { bubbles: true, cancelable: true, clientX: rail.left + rail.width * 0.75, clientY: rail.top };
+
+		wrapper.dispatchEvent(new MouseEvent('mousedown', at));
+		window.dispatchEvent(new MouseEvent('mouseup', at));
+
+		await expect.element(page.getByRole('slider')).toHaveValue('75');
+		expect(onchange).toHaveBeenCalledOnce();
+	});
+});
+
+describe('buffer', () => {
+	it('draws no buffer without one', async () => {
+		render(Slider);
+		await expect.element(page.getByRole('slider')).toBeInTheDocument();
+		expect(document.querySelector('.slider-buffer')).toBeNull();
+	});
+
+	it('fills the rail up to the buffer, on the scale of the value', async () => {
+		render(Slider, { value: 10, min: 0, max: 200, buffer: 100 });
+		await expect.element(page.getByRole('slider')).toBeInTheDocument();
+		const buffer = document.querySelector('.slider-buffer') as HTMLElement;
+		const rail = page.selector('.slider-rail').element().getBoundingClientRect();
+		expect(buffer.getBoundingClientRect().width).toBeCloseTo(rail.width / 2, 0);
+	});
+
+	it('keeps the buffer inside the rail', async () => {
+		render(Slider, { buffer: 500 });
+		await expect.element(page.getByRole('slider')).toBeInTheDocument();
+		const buffer = document.querySelector('.slider-buffer') as HTMLElement;
+		expect(buffer.style.getPropertyValue('--slider-buffer-percentage')).toBe('100%');
+	});
+});

@@ -1,4 +1,4 @@
-import type { Placement } from '@floating-ui/dom';
+import type { ComputePositionConfig, Placement } from '@floating-ui/dom';
 import type { Component, Snippet } from 'svelte';
 import type { HTMLAttributes, HTMLInputAttributes } from 'svelte/elements';
 import type { HiddenInputAttributes } from '#internal';
@@ -46,6 +46,8 @@ export type SliderProps = {
 	 * @default true
 	 */
 	track?: boolean;
+	/** A second value drawn on the rail behind the track, such as how much of a media has loaded. It takes the scale of `value` and does not move the thumb. */
+	buffer?: number;
 	/** The direction the slider runs in.
 	 * @default 'horizontal'
 	 */
@@ -72,6 +74,10 @@ export type SliderProps = {
 	 * @type string | Snippet | Component
 	 */
 	tooltipContent?: string | Snippet | Component;
+	/** The position configuration handed over to floating-ui for the tooltip, as in Tooltip.
+	 * @type Partial<ComputePositionConfig>
+	 */
+	tooltipPositionConfig?: Partial<ComputePositionConfig>;
 	/** Called whenever the value changes. */
 	onChange?: (value: number) => void;
 	/** The DOM reference of the native range input that holds the value and takes the keyboard focus. The other attributes of the slider are applied to it.

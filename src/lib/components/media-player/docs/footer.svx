@@ -1,0 +1,59 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '#i18n/messages.js';
+</script>
+
+## {m.global_component_props()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:MediaPlayerProps -->
+
+| Name                                                                          | Type                                           | Default                              | Description                                                                                     |
+| ----------------------------------------------------------------------------- | ---------------------------------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| `src`                                                                         | `string`                                       |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_src} />`                   |
+| `poster`                                                                      | `string`                                       |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_poster} />`                |
+| `tracks`                                                                      | `MediaPlayerTrack[]`                           |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_tracks} />`                |
+| `layout`                                                                      | `'standard'` &#124; `'compact'`                | `'standard'`                         | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_layout} />`                |
+| `deferred`                                                                    | `'click'` &#124; `'intent'` &#124; `'visible'` |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_deferred} />`              |
+| `aspectRatio`                                                                 | `string`                                       | `'16 / 9'`                           | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_aspect_ratio} />`          |
+| `volumeOrientation`                                                           | `'horizontal'` &#124; `'vertical'`             | `'horizontal'`                       | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_volume_orientation} />`    |
+| `autoHideControls`                                                            | `boolean`                                      | `true`                               | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_auto_hide_controls} />`    |
+| `autoHideWhenPaused`                                                          | `boolean`                                      |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_auto_hide_when_paused} />` |
+| `subtitlesAppearance`                                                         | `'acrylic'` &#124; `'translucent'`             | `'acrylic'`                          | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_subtitles_appearance} />`  |
+| `subtitlesSize`                                                               | `'small'` &#124; `'medium'` &#124; `'large'`   | `'medium'`                           | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_subtitles_size} />`        |
+| `loop` _bindable_                                                             | `boolean`                                      |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_loop} />`                  |
+| `showRepeat`                                                                  | `boolean`                                      |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_show_repeat} />`           |
+| `skipBackward`                                                                | `0` &#124; `10` &#124; `15`                    | `10`                                 | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_skip_backward} />`         |
+| `skipForward`                                                                 | `0` &#124; `10` &#124; `15` &#124; `30`        | `30`                                 | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_skip_forward} />`          |
+| `playbackRates`                                                               | `number[]`                                     | `[0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]` | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_playback_rates} />`        |
+| `onPrevious`                                                                  | `() => void`                                   |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_on_previous} />`           |
+| `onNext`                                                                      | `() => void`                                   |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_on_next} />`               |
+| `startContent`                                                                | `Snippet` &#124; `Component`                   |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_start_content} />`         |
+| `centerContent`                                                               | `Snippet` &#124; `Component`                   |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_center_content} />`        |
+| `endContent`                                                                  | `Snippet` &#124; `Component`                   |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_end_content} />`           |
+| `moreContent`                                                                 | `Snippet` &#124; `Component`                   |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_more_content} />`          |
+| `label`                                                                       | `string`                                       | `'Media player'`                     | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_label} />`                 |
+| `labels`                                                                      | `Partial<MediaPlayerLabels>`                   |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_labels} />`                |
+| `ref` _bindable_                                                              | `HTMLVideoElement` &#124; `null`               |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_ref} />`                   |
+| `playerRef` _bindable_                                                        | `VideoPlayerElement`                           |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_player_ref} />`            |
+| `wrapperAttributes`                                                           | `HTMLAttributes`                               |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_wrapper_attributes} />`    |
+| `children`                                                                    | `Snippet`                                      |                                      | `<I18nMarkupMessage message={m.generated_fs_media_player_props_props_children} />`              |
+| `HTMLVideoAttributes` without `src`, `poster`, `controls`, `children`, `loop` |                                                |                                      |                                                                                                 |
+
+<!-- /props:MediaPlayerProps -->
+
+### MediaPlayerButton
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:MediaPlayerButtonProps -->
+
+| Name                                                            | Type                              | Default | Description                                                                                        |
+| --------------------------------------------------------------- | --------------------------------- | ------- | -------------------------------------------------------------------------------------------------- |
+| `label`                                                         | `string`                          |         | `<I18nMarkupMessage message={m.generated_fs_media_player_button_props_props_label} />`             |
+| `tooltipPlacement`                                              | `Placement`                       | `'top'` | `<I18nMarkupMessage message={m.generated_fs_media_player_button_props_props_tooltip_placement} />` |
+| `hideTooltip`                                                   | `boolean`                         |         | `<I18nMarkupMessage message={m.generated_fs_media_player_button_props_props_hide_tooltip} />`      |
+| `ref` _bindable_                                                | `HTMLButtonElement` &#124; `null` |         | `<I18nMarkupMessage message={m.generated_fs_media_player_button_props_props_ref} />`               |
+| `children`                                                      | `Snippet`                         |         | `<I18nMarkupMessage message={m.generated_fs_media_player_button_props_props_children} />`          |
+| `ButtonProps<'button'>` without `ref`, `children`, `appearance` |                                   |         |                                                                                                    |
+
+<!-- /props:MediaPlayerButtonProps -->

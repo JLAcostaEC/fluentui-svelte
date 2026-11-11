@@ -129,6 +129,21 @@ export type {
 } from './components/list-view/types.ts';
 // End ListView Component
 
+// Start MediaPlayer Component
+export { default as MediaPlayer } from './components/media-player/media-player.svelte';
+export { default as MediaPlayerButton } from './components/media-player/media-player-button.svelte';
+export { MEDIA_PLAYER_LABELS } from './components/media-player/utils.ts';
+export type {
+	MediaPlayerProps,
+	MediaPlayerButtonProps,
+	MediaPlayerLabels,
+	MediaPlayerTrack,
+	MediaPlayerContent,
+	MediaPlayerRenderState,
+	MediaPlayerStore
+} from './components/media-player/types.ts';
+// End MediaPlayer Component
+
 // Start Menu Component
 export { default as Menu } from './components/menu/menu.svelte';
 export { default as MenuItem } from './components/menu/menu-item.svelte';

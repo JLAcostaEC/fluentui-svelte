@@ -1,0 +1,32 @@
+<script lang="ts">
+  import { MediaPlayer } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+  import { docsLabels } from './labels.ts';
+
+  const labels = { ...docsLabels(), player: m.media_player_label_player() };
+</script>
+
+# Media Player
+{m.media_player_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow fluid>
+
+    <MediaPlayer
+      {labels}
+      label={labels.player}
+      src="https://stream.mux.com/BV3YZtogl89mg9VcNBhhnHm02Y34zI1nlMuMQfAbl3dM/highest.mp4"
+      poster="https://image.mux.com/BV3YZtogl89mg9VcNBhhnHm02Y34zI1nlMuMQfAbl3dM/thumbnail.webp"
+      preload="metadata"
+      wrapperAttributes={{ style: 'max-width: 40rem' }}
+    />
+</Showcase>
+
+## {m.global_usage()}
+```svelte
+<script>
+	import { MediaPlayer } from 'fluentui-svelte';
+</script>
+
+<MediaPlayer src="video.mp4" poster="poster.jpg" />
+```

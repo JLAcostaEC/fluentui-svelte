@@ -1,0 +1,39 @@
+<script lang="ts">
+  import { FileUploader, Label } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import { m } from '#i18n/messages.js';
+  import { docsLabels } from './labels.ts';
+
+  const labels = docsLabels();
+</script>
+
+# File Uploader <StatusBadge />
+
+{m.fu_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow fluid>
+    <Label label={m.fu_label_upload()} labelPosition="above" wrapperAttributes={{ style: 'inline-size: min(100%, 40rem)' }}>
+      <FileUploader {labels} accept=".jpg,.jpeg,.png,.pdf,.mp4" maxFileSize={50 * 1024 * 1024} description={m.fu_hint()} />
+    </Label>
+</Showcase>
+
+## {m.global_usage()}
+
+```svelte
+<script>
+	import { FileUploader, Label } from 'fluentui-svelte';
+
+	let files = $state([]);
+</script>
+
+<Label label="Upload" labelPosition="above">
+	<FileUploader
+		bind:files
+		name="attachments"
+		accept=".jpg,.jpeg,.png,.pdf,.mp4"
+		maxFileSize={50 * 1024 * 1024}
+		description="JPEG, PNG, PDF, and MP4 formats, up to 50 MB."
+	/>
+</Label>
+```

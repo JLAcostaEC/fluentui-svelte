@@ -1,0 +1,45 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import InfoBar from '#lib/components/info-bar/info-bar.svelte';
+  import { m } from '#i18n/messages.js';
+</script>
+
+<InfoBar title={m.form_control_attributes_title()} style="multiline" status="warning" hideCloseButton>
+  <p><I18nMarkupMessage message={m.form_control_attributes_description} /></p>
+</InfoBar>
+
+## {m.global_component_props()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:FileUploaderProps -->
+
+| Name                                         | Type                                                      | Default                                   | Description                                                                                    |
+| -------------------------------------------- | --------------------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `files` _bindable_                           | `FileUploaderFile[]`                                      | `[]`                                      | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_files} />`               |
+| `sources`                                    | `(FileUploaderSource` &#124; `FileUploaderDrive)[]`       | `['local']`                               | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_sources} />`             |
+| `upload`                                     | `FileUploaderUploadOptions`                               |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_upload} />`              |
+| `autoUpload`                                 | `boolean`                                                 | `false`                                   | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_auto_upload} />`         |
+| `fetchLink`                                  | `(url: string, signal: AbortSignal) => Promise<Response>` | `(url, signal) => fetch(url, { signal })` | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_fetch_link} />`          |
+| `uploadedValue`                              | `(file: FileUploaderFile) => string`                      | `(file) => file.key`                      | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_uploaded_value} />`      |
+| `accept`                                     | `string`                                                  |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_accept} />`              |
+| `maxFiles`                                   | `number`                                                  |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_max_files} />`           |
+| `maxFileSize`                                | `number`                                                  |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_max_file_size} />`       |
+| `minFileSize`                                | `number`                                                  |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_min_file_size} />`       |
+| `maxTotalFileSize`                           | `number`                                                  |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_max_total_file_size} />` |
+| `description`                                | `string` &#124; `Snippet`                                 |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_description} />`         |
+| `showLimits`                                 | `boolean`                                                 |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_show_limits} />`         |
+| `labels`                                     | `Partial<FileUploaderLabels>`                             |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_labels} />`              |
+| `uploader` _bindable_                        | `UpupCore` &#124; `null`                                  |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_uploader} />`            |
+| `onFilesAdded`                               | `(files: FileUploaderFile[]) => void`                     |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_on_files_added} />`      |
+| `onFileRemoved`                              | `(file: FileUploaderFile) => void`                        |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_on_file_removed} />`     |
+| `onReject`                                   | `(rejections: FileUploaderRejection[]) => void`           |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_on_reject} />`           |
+| `onUploadComplete`                           | `(files: FileUploaderFile[]) => void`                     |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_on_upload_complete} />`  |
+| `onUploadError`                              | `(error: Error, file?: FileUploaderFile) => void`         |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_on_upload_error} />`     |
+| `ref` _bindable_                             | `HTMLInputElement` &#124; `null`                          |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_ref} />`                 |
+| `buttonRef` _bindable_                       | `HTMLButtonElement` &#124; `null`                         |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_button_ref} />`          |
+| `buttonAttributes`                           | `HTMLButtonAttributes`                                    |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_button_attributes} />`   |
+| `wrapperRef` _bindable_                      | `HTMLDivElement` &#124; `null`                            |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_wrapper_ref} />`         |
+| `wrapperAttributes`                          | `HTMLAttributes`                                          |                                           | `<I18nMarkupMessage message={m.generated_fs_file_uploader_props_props_wrapper_attributes} />`  |
+| `NativeFieldAttributes<FileInputAttributes>` |                                                           |                                           |                                                                                                |
+
+<!-- /props:FileUploaderProps -->

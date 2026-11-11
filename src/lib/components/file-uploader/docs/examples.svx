@@ -1,0 +1,290 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { Button, FileUploader, Label, TextBox, ToggleSwitch } from '#lib/index.js';
+  import type { FileUploaderFile } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { DEMO_UPLOAD_ENDPOINT, useDemoUpload } from '#site/utils/demo-upload.js';
+  import { m } from '#i18n/messages.js';
+  import { docsLabels } from './labels.ts';
+
+  const labels = docsLabels();
+  const MB = 1024 * 1024;
+
+  // The live upload demo answers its requests in the page while it is shown.
+  $effect(useDemoUpload);
+
+  let autoUpload = $state(false);
+  let submitted: string[] = $state([]);
+
+  // Labels: only the texts given change; the rest keep the language of the site here, English by default.
+  const customLabels = {
+    ...labels,
+    dropTitle: () => m.fu_labels_demo_title(),
+    browse: m.fu_labels_demo_browse()
+  };
+
+  // State and events.
+  let eventFiles: FileUploaderFile[] = $state([]);
+  let events: string[] = $state([]);
+  const log = (entry: string) => (events = [entry, ...events].slice(0, 6));
+  const totalSize = $derived(eventFiles.reduce((sum, file) => sum + file.size, 0));
+  const eventSize = $derived(`${(totalSize / MB).toFixed(1)} MB`);
+
+  function submit(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
+    event.preventDefault();
+    submitted = [...new FormData(event.currentTarget)].map(([key, value]) =>
+      typeof value === 'string' ? `${key}: ${value}` : `${key}: ${value.name}`
+    );
+  }
+
+  const multipleCode = `<FileUploader
+	maxFiles={5}
+	maxFileSize={10 * 1024 * 1024}
+	maxTotalFileSize={30 * 1024 * 1024}
+	accept="image/*"
+	showLimits
+/>`;
+
+  const sourcesCode = `<script>
+	import { FileUploader, googleDriveSource, oneDriveSource, dropboxSource, boxSource } from 'fluentui-svelte';
+<\/script>
+
+<FileUploader
+	multiple
+	sources={[
+		'local',
+		'url',
+		'camera',
+		'microphone',
+		'screen',
+		googleDriveSource({ clientId: '...', apiKey: '...', appId: '...' }),
+		oneDriveSource({ clientId: '...' }),
+		dropboxSource({ clientId: '...' }),
+		boxSource({ clientId: '...' })
+	]}
+/>`;
+
+  const uploadCode = `<FileUploader
+	name="attachments"
+	multiple
+	upload={{ provider: 'aws', uploadEndpoint: '/api/upload-token' }}
+	autoUpload
+	onUploadComplete={(files) => console.log(files.map((file) => file.key))}
+/>`;
+
+  const formCode = `<form method="POST" enctype="multipart/form-data">
+	<Label label="Name" labelPosition="above">
+		<TextBox name="name" required />
+	</Label>
+	<Label label="Attachments" labelPosition="above">
+		<FileUploader name="attachments" multiple required showLimits maxFiles={3} maxFileSize={5 * 1024 * 1024} />
+	</Label>
+	<Button appearance="accent" type="submit">Send</Button>
+	<Button type="reset">Reset</Button>
+</form>`;
+  const labelsCode = `<script>
+	import { FileUploader } from 'fluentui-svelte';
+
+	// Only the texts given change; the others keep the English of FILE_UPLOADER_LABELS.
+	const labels = {
+		dropTitle: () => 'Drop your résumé here',
+		browse: 'Choose a résumé',
+		remove: (name) => \`Remove \${name}\`,
+		tooLarge: (name, max) => \`\${name} is over \${max}.\`
+	};
+<\/script>
+
+<FileUploader {labels} accept=".pdf,.docx" maxFileSize={2 * 1024 * 1024} description="PDF or Word, up to 2 MB." />`;
+
+  const eventsCode = `<script>
+	import { FileUploader } from 'fluentui-svelte';
+
+	let files = $state([]);
+	let events = $state([]);
+	const log = (entry) => (events = [entry, ...events]);
+<\/script>
+
+<FileUploader
+	bind:files
+	multiple
+	accept="image/*"
+	onFilesAdded={(added) => log(\`onFilesAdded: \${added.map((file) => file.name).join(', ')}\`)}
+	onFileRemoved={(file) => log(\`onFileRemoved: \${file.name}\`)}
+	onReject={(rejections) => log(\`onReject: \${rejections.map((r) => \`\${r.file.name} (\${r.reason})\`).join(', ')}\`)}
+/>
+<p>{files.length} files</p>`;
+</script>
+
+### {m.global_multiple_selection()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.fu_multiple_description} /></p>
+
+<Showcase columns={1} code={multipleCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <div style="inline-size: min(100%, 40rem)">
+    <FileUploader {labels} maxFiles={5} maxFileSize={10 * MB} maxTotalFileSize={30 * MB} accept="image/*" showLimits />
+  </div>
+</Showcase>
+
+### {m.fu_sources_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.fu_sources_description} /></p>
+
+<Showcase columns={1} code={sourcesCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <div style="display: flex; flex-direction: column; gap: 0.75rem; inline-size: min(100%, 40rem)">
+    <FileUploader
+      {labels}
+      multiple
+      sources={['local', 'url', 'camera', 'microphone', 'screen']}
+      upload={{ provider: 'aws', uploadEndpoint: DEMO_UPLOAD_ENDPOINT }}
+      autoUpload
+    />
+    <small>{m.fu_upload_demo_note()}</small>
+  </div>
+</Showcase>
+
+<p class="fs-docs"><I18nMarkupMessage message={m.fu_fetch_link_description} /></p>
+
+```svelte
+<FileUploader
+	sources={['local', 'url']}
+	fetchLink={(url, signal) => fetch(`/api/fetch-link?url=${encodeURIComponent(url)}`, { signal })}
+/>
+```
+
+```ts
+// src/routes/api/fetch-link/+server.ts
+import { error } from '@sveltejs/kit';
+
+const ALLOWED_HOSTS = ['images.example.com', 'files.example.com'];
+
+export async function GET({ url, fetch }) {
+	const link = new URL(url.searchParams.get('url') ?? '');
+	if (link.protocol !== 'https:' || !ALLOWED_HOSTS.includes(link.hostname)) error(400, 'Link not allowed');
+	// A redirect could lead to a host out of the list: it fails instead.
+	const response = await fetch(link, { redirect: 'error' }).catch(() => error(502, 'The file could not be fetched'));
+	if (!response.ok) error(502, 'The file could not be fetched');
+	return new Response(response.body, {
+		headers: {
+			'content-type': response.headers.get('content-type') ?? 'application/octet-stream',
+			'content-disposition': response.headers.get('content-disposition') ?? ''
+		}
+	});
+}
+```
+
+### {m.fu_upload_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.fu_upload_description} /></p>
+
+<Showcase columns={1} code={uploadCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <div style="display: flex; flex-direction: column; gap: 0.75rem; inline-size: min(100%, 40rem)">
+    <ToggleSwitch label={m.fu_auto_upload()} bind:checked={autoUpload} />
+    <FileUploader
+      {labels}
+      multiple
+      maxFiles={10}
+      maxFileSize={50 * MB}
+      showLimits
+      upload={{ provider: 'aws', uploadEndpoint: DEMO_UPLOAD_ENDPOINT }}
+      {autoUpload}
+    />
+    <small>{m.fu_upload_demo_note()}</small>
+  </div>
+</Showcase>
+
+<p class="fs-docs"><I18nMarkupMessage message={m.fu_upload_endpoint_description} /></p>
+
+```ts
+// src/routes/api/upload-token/+server.ts
+import { json } from '@sveltejs/kit';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+
+const s3 = new S3Client({ region: 'us-east-1' });
+
+export async function POST({ request }) {
+	const { name, type } = await request.json();
+	const key = `uploads/${crypto.randomUUID()}-${name}`;
+	const uploadUrl = await getSignedUrl(s3, new PutObjectCommand({ Bucket: 'my-bucket', Key: key, ContentType: type }), {
+		expiresIn: 300
+	});
+	return json({ key, uploadUrl });
+}
+```
+
+### {m.fu_forms_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.fu_forms_description} /></p>
+
+<Showcase columns={1} code={formCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <form
+    style="display: flex; flex-direction: column; gap: 0.75rem; inline-size: min(100%, 40rem)"
+    onsubmit={submit}
+    onreset={() => (submitted = [])}
+  >
+    <Label label={m.fu_form_name()} labelPosition="above">
+      <TextBox name="name" required />
+    </Label>
+    <Label label={m.fu_form_attachments()} labelPosition="above">
+      <FileUploader {labels} name="attachments" multiple required showLimits maxFiles={3} maxFileSize={5 * MB} />
+    </Label>
+    <div style="display: flex; gap: 0.5rem">
+      <Button appearance="accent" type="submit">{m.fu_form_submit()}</Button>
+      <Button type="reset">{m.fu_form_reset()}</Button>
+    </div>
+    {#if submitted.length > 0}
+      <div>
+        <strong>{m.fu_form_submitted()}</strong>
+        <ul>
+          {#each submitted as entry, index (index)}
+            <li>{entry}</li>
+          {/each}
+        </ul>
+      </div>
+    {/if}
+  </form>
+</Showcase>
+
+### {m.fu_labels_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.fu_labels_description} /></p>
+
+<Showcase columns={1} code={labelsCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <div style="inline-size: min(100%, 40rem)">
+    <FileUploader
+      labels={customLabels}
+      accept=".pdf,.docx"
+      maxFileSize={2 * MB}
+      description={m.fu_labels_demo_description()}
+    />
+  </div>
+</Showcase>
+
+### {m.fu_events_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.fu_events_description} /></p>
+
+<Showcase columns={1} code={eventsCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <div style="display: flex; flex-direction: column; gap: 0.75rem; inline-size: min(100%, 40rem)">
+    <FileUploader
+      {labels}
+      bind:files={eventFiles}
+      multiple
+      accept="image/*"
+      onFilesAdded={(added) => log(`onFilesAdded: ${added.map((file) => file.name).join(', ')}`)}
+      onFileRemoved={(file) => log(`onFileRemoved: ${file.name}`)}
+      onReject={(rejections) =>
+        log(`onReject: ${rejections.map((rejection) => `${rejection.file.name} (${rejection.reason})`).join(', ')}`)}
+    />
+    <span>{eventFiles.length === 1
+        ? m.fu_events_files_one({ size: eventSize })
+        : m.fu_events_files({ count: eventFiles.length, size: eventSize })}</span>
+    {#if events.length > 0}
+      <ul style="margin: 0; font-family: var(--fs-font-family-monospace); font-size: var(--fs-caption-font-size)">
+        {#each events as event, index (index)}
+          <li>{event}</li>
+        {/each}
+      </ul>
+    {/if}
+  </div>
+</Showcase>

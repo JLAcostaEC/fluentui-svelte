@@ -1,0 +1,137 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { Button, PillButton } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+  import { fitCard } from '../../tag/docs/fit-card.js';
+  import { exampleCode, row, column } from './example-code.ts';
+
+  let filters = $state({ unread: true, flagged: false, attachments: false });
+  let submitted = $state('');
+  let externalSubmitted = $state('');
+  let accepted = $state(false);
+  let attempted = $state(false);
+
+  const groupCode = exampleCode(`<fieldset>
+  <legend>Message filters</legend>
+  <PillButton name="filter" value="unread" bind:checked={filters.unread}>Unread</PillButton>
+  <PillButton name="filter" value="flagged" bind:checked={filters.flagged}>Flagged</PillButton>
+  <PillButton name="filter" value="attachments" bind:checked={filters.attachments}>Attachments</PillButton>
+</fieldset>
+<output>{JSON.stringify(filters)}</output>`,
+    '  let filters = $state({ unread: true, flagged: false, attachments: false });');
+
+  const submitSetup = `  let submitted = $state('');
+  function submit(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
+    event.preventDefault();
+    submitted = JSON.stringify(new FormData(event.currentTarget).getAll('filter'));
+  }`;
+
+  const formCode = exampleCode(`<form onsubmit={submit}>
+  <PillButton name="filter" value="unread" defaultChecked>Unread</PillButton>
+  <PillButton name="filter" value="flagged">Flagged</PillButton>
+  <Button type="submit">Submit filters</Button>
+</form>
+<output aria-live="polite">{submitted}</output>`, submitSetup, 'PillButton, Button');
+
+  const externalCode = exampleCode(`<form id="filters-form" onsubmit={submit}>
+  <Button type="submit">Submit filters</Button>
+  <Button type="reset" appearance="standard">Reset</Button>
+</form>
+<PillButton form="filters-form" name="filter" value="unread" defaultChecked>Unread</PillButton>
+<output aria-live="polite">{submitted}</output>`, submitSetup, 'PillButton, Button');
+
+  const validationCode = exampleCode(`<form onsubmit={(event) => event.preventDefault()}>
+  <PillButton
+    name="accepted"
+    value="yes"
+    required
+    bind:checked={accepted}
+    aria-invalid={attempted && !accepted ? 'true' : undefined}
+    aria-describedby={attempted && !accepted ? 'accept-error' : undefined}
+    oninvalid={() => (attempted = true)}
+  >Accept notifications</PillButton>
+  <Button type="submit">Continue</Button>
+</form>
+{#if attempted && !accepted}
+  <p id="accept-error" role="alert" style="color: var(--fs-system-critical);">Select this option to continue.</p>
+{/if}`, '  let accepted = $state(false);\n  let attempted = $state(false);', 'PillButton, Button');
+</script>
+
+### {m.pill_button_group_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.pill_button_group_description} /></p>
+
+<Showcase columns={1} code={groupCode} minHeight="0" disablePanZoom>
+  <div style={column} {@attach fitCard}>
+    <fieldset style="min-inline-size: 0;">
+      <legend>{m.pill_button_message_filters()}</legend>
+      <div style={row}>
+        <PillButton name="filter" value="unread" bind:checked={filters.unread}>{m.pill_button_unread()}</PillButton>
+        <PillButton name="filter" value="flagged" bind:checked={filters.flagged}>{m.pill_button_flagged()}</PillButton>
+        <PillButton name="filter" value="attachments" bind:checked={filters.attachments}>{m.pill_button_attachments()}</PillButton>
+      </div>
+    </fieldset>
+    <output style="max-width: 100%; overflow-wrap: anywhere;">{JSON.stringify(filters)}</output>
+  </div>
+</Showcase>
+
+### {m.pill_button_forms_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.pill_button_forms_description} /></p>
+
+<Showcase columns={1} code={formCode} minHeight="0" disablePanZoom>
+  <div style={column} {@attach fitCard}>
+    <form onsubmit={(event) => {
+      event.preventDefault();
+      submitted = JSON.stringify(new FormData(event.currentTarget).getAll('filter'));
+    }} style={row}>
+      <PillButton name="filter" value="unread" defaultChecked>{m.pill_button_unread()}</PillButton>
+      <PillButton name="filter" value="flagged">{m.pill_button_flagged()}</PillButton>
+      <Button type="submit">{m.pill_button_submit()}</Button>
+    </form>
+    <output aria-live="polite">{submitted}</output>
+  </div>
+</Showcase>
+
+### {m.pill_button_external_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.pill_button_external_description} /></p>
+
+<Showcase columns={1} code={externalCode} minHeight="0" disablePanZoom>
+  <div style={column} {@attach fitCard}>
+    <form id="pill-docs-external" onsubmit={(event) => {
+      event.preventDefault();
+      externalSubmitted = JSON.stringify(new FormData(event.currentTarget).getAll('filter'));
+    }} style={row}>
+      <Button type="submit">{m.pill_button_submit()}</Button>
+      <Button type="reset" appearance="standard">{m.pill_button_reset()}</Button>
+    </form>
+    <PillButton form="pill-docs-external" name="filter" value="unread" defaultChecked>{m.pill_button_unread()}</PillButton>
+    <output aria-live="polite">{externalSubmitted}</output>
+  </div>
+</Showcase>
+
+### {m.pill_button_validation_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.pill_button_validation_description} /></p>
+
+<Showcase columns={1} code={validationCode} minHeight="0" disablePanZoom>
+  <div style={column} {@attach fitCard}>
+    <form onsubmit={(event) => event.preventDefault()} style={row}>
+      <PillButton
+        name="accepted"
+        value="yes"
+        required
+        bind:checked={accepted}
+        aria-invalid={attempted && !accepted ? 'true' : undefined}
+        aria-describedby={attempted && !accepted ? 'pill-docs-error' : undefined}
+        oninvalid={() => (attempted = true)}
+      >{m.pill_button_accept()}</PillButton>
+      <Button type="submit">{m.pill_button_continue()}</Button>
+    </form>
+    {#if attempted && !accepted}
+      <p id="pill-docs-error" role="alert" style="color: var(--fs-system-critical);">{m.pill_button_error()}</p>
+    {/if}
+  </div>
+</Showcase>

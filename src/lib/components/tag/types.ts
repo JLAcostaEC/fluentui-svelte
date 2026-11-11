@@ -2,10 +2,17 @@ import type { Component, Snippet } from 'svelte';
 import type { HTMLAttributes, HTMLButtonAttributes, SVGAttributes } from 'svelte/elements';
 import type { FSContext } from '#internal';
 import type { PolymorphicProps, Shapes } from '#types';
+import type { PillButtonAppearance } from '../pill-button/types.ts';
 
-export type TagAppearance = 'filled' | 'outline' | 'brand';
+export type TagAppearance = PillButtonAppearance;
 
 export type TagSize = 'extra-small' | 'small' | 'medium';
+
+/** Props passed to the tag's media snippet or component. */
+export type TagMediaProps = {
+	/** The current shape configured on Tag. */
+	shape: Shapes;
+};
 
 /** @propsmith TagProps */
 export type TagProps = {
@@ -45,10 +52,10 @@ export type TagProps = {
 	 * @type Snippet | Component
 	 */
 	icon?: Snippet<[SVGAttributes<SVGElement>]> | Component<SVGAttributes<SVGElement>>;
-	/** A visual element rendered before the text, usually an `Avatar`. Do not use it together with `icon`.
+	/** A visual element rendered before the text, usually an `Avatar`. Receives the tag's current `shape`; forward it to the media component. Do not use it together with `icon`.
 	 * @type Snippet | Component
 	 */
-	media?: Snippet | Component;
+	media?: Snippet<[TagMediaProps]> | Component<TagMediaProps>;
 	/** A second line of text that describes or complements the main text.
 	 * @type string | Snippet
 	 */

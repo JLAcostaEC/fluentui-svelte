@@ -1,18 +1,20 @@
 <script lang="ts">
-	import { Tag } from '#lib/index.js';
+	import { Avatar, Tag } from '#lib/index.js';
 	import InfoFilled from 'fluentui-icons-svelte/InfoFilled.svelte';
-	import type { TagProps } from '#lib/components/tag/types.js';
+	import type { TagMediaProps, TagProps } from '#lib/components/tag/types.js';
 
 	let {
 		text = 'Tag 1',
 		withIcon = false,
 		withMedia = false,
+		withAvatar = false,
 		withSecondarySnippet = false,
 		tagProps = {}
 	}: {
 		text?: string;
 		withIcon?: boolean;
 		withMedia?: boolean;
+		withAvatar?: boolean;
 		withSecondarySnippet?: boolean;
 		tagProps?: Partial<TagProps>;
 	} = $props();
@@ -26,11 +28,19 @@
 	<em data-testid="secondary-snippet">Snippet secondary</em>
 {/snippet}
 
+{#snippet avatar({ shape }: TagMediaProps)}
+	<Avatar data-testid="avatar" name="Alex" size={28} {shape} />
+{/snippet}
+
 <Tag
 	icon={withIcon ? InfoFilled : undefined}
-	media={withMedia ? media : undefined}
+	media={withAvatar ? avatar : withMedia ? media : undefined}
 	secondaryText={withSecondarySnippet ? secondary : undefined}
 	{...tagProps}
 >
 	{text}
 </Tag>
+
+{#if withAvatar}
+	<button onclick={() => (tagProps = { ...tagProps, shape: 'square' })}>Use square shape</button>
+{/if}

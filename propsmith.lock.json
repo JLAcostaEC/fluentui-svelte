@@ -1750,6 +1750,181 @@
       },
       "source": "src/lib/components/expander/types.ts#ExpanderProps.summaryRef"
     },
+    "generated_fs_file_uploader_props_props_accept": {
+      "en": "4f6c6e9f",
+      "locales": {
+        "es": "4f6c6e9f"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.accept"
+    },
+    "generated_fs_file_uploader_props_props_auto_upload": {
+      "en": "6968f050",
+      "locales": {
+        "es": "6968f050"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.autoUpload"
+    },
+    "generated_fs_file_uploader_props_props_button_attributes": {
+      "en": "86e5ac41",
+      "locales": {
+        "es": "86e5ac41"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.buttonAttributes"
+    },
+    "generated_fs_file_uploader_props_props_button_ref": {
+      "en": "cf50e095",
+      "locales": {
+        "es": "cf50e095"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.buttonRef"
+    },
+    "generated_fs_file_uploader_props_props_description": {
+      "en": "e332452d",
+      "locales": {
+        "es": "e332452d"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.description"
+    },
+    "generated_fs_file_uploader_props_props_fetch_link": {
+      "en": "a8cbccd7",
+      "locales": {
+        "es": "a8cbccd7"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.fetchLink"
+    },
+    "generated_fs_file_uploader_props_props_files": {
+      "en": "be9cfdc6",
+      "locales": {
+        "es": "be9cfdc6"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.files"
+    },
+    "generated_fs_file_uploader_props_props_labels": {
+      "en": "b42d4079",
+      "locales": {
+        "es": "b42d4079"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.labels"
+    },
+    "generated_fs_file_uploader_props_props_max_file_size": {
+      "en": "87ced420",
+      "locales": {
+        "es": "87ced420"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.maxFileSize"
+    },
+    "generated_fs_file_uploader_props_props_max_files": {
+      "en": "1a91364a",
+      "locales": {
+        "es": "1a91364a"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.maxFiles"
+    },
+    "generated_fs_file_uploader_props_props_max_total_file_size": {
+      "en": "eeeb28b2",
+      "locales": {
+        "es": "eeeb28b2"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.maxTotalFileSize"
+    },
+    "generated_fs_file_uploader_props_props_min_file_size": {
+      "en": "66f9d8ea",
+      "locales": {
+        "es": "66f9d8ea"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.minFileSize"
+    },
+    "generated_fs_file_uploader_props_props_on_file_removed": {
+      "en": "6248aefb",
+      "locales": {
+        "es": "6248aefb"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.onFileRemoved"
+    },
+    "generated_fs_file_uploader_props_props_on_files_added": {
+      "en": "88897b55",
+      "locales": {
+        "es": "88897b55"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.onFilesAdded"
+    },
+    "generated_fs_file_uploader_props_props_on_reject": {
+      "en": "2cd16718",
+      "locales": {
+        "es": "2cd16718"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.onReject"
+    },
+    "generated_fs_file_uploader_props_props_on_upload_complete": {
+      "en": "dedbadba",
+      "locales": {
+        "es": "dedbadba"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.onUploadComplete"
+    },
+    "generated_fs_file_uploader_props_props_on_upload_error": {
+      "en": "6e1688ad",
+      "locales": {
+        "es": "6e1688ad"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.onUploadError"
+    },
+    "generated_fs_file_uploader_props_props_ref": {
+      "en": "0236fcc9",
+      "locales": {
+        "es": "0236fcc9"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.ref"
+    },
+    "generated_fs_file_uploader_props_props_show_limits": {
+      "en": "7f3bcfde",
+      "locales": {
+        "es": "7f3bcfde"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.showLimits"
+    },
+    "generated_fs_file_uploader_props_props_sources": {
+      "en": "3d50551f",
+      "locales": {
+        "es": "3d50551f"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.sources"
+    },
+    "generated_fs_file_uploader_props_props_upload": {
+      "en": "91cc01ef",
+      "locales": {
+        "es": "91cc01ef"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.upload"
+    },
+    "generated_fs_file_uploader_props_props_uploaded_value": {
+      "en": "0ba6bd53",
+      "locales": {
+        "es": "0ba6bd53"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.uploadedValue"
+    },
+    "generated_fs_file_uploader_props_props_uploader": {
+      "en": "cd990cab",
+      "locales": {
+        "es": "cd990cab"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.uploader"
+    },
+    "generated_fs_file_uploader_props_props_wrapper_attributes": {
+      "en": "0a0dad7a",
+      "locales": {
+        "es": "0a0dad7a"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.wrapperAttributes"
+    },
+    "generated_fs_file_uploader_props_props_wrapper_ref": {
+      "en": "cd9a3eca",
+      "locales": {
+        "es": "cd9a3eca"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.wrapperRef"
+    },
     "generated_fs_flyout_props_props_children": {
       "en": "d95ba4c0",
       "locales": {
@@ -2226,6 +2401,237 @@
       },
       "source": "src/lib/components/list-view/types.ts#ListViewProps.toggleOnClick"
     },
+    "generated_fs_media_player_button_props_props_children": {
+      "en": "af4d914b",
+      "locales": {
+        "es": "af4d914b"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerButtonProps.children"
+    },
+    "generated_fs_media_player_button_props_props_hide_tooltip": {
+      "en": "687515fe",
+      "locales": {
+        "es": "687515fe"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerButtonProps.hideTooltip"
+    },
+    "generated_fs_media_player_button_props_props_label": {
+      "en": "03b329cd",
+      "locales": {
+        "es": "03b329cd"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerButtonProps.label"
+    },
+    "generated_fs_media_player_button_props_props_ref": {
+      "en": "184bd4e4",
+      "locales": {
+        "es": "184bd4e4"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerButtonProps.ref"
+    },
+    "generated_fs_media_player_button_props_props_tooltip_placement": {
+      "en": "55f85547",
+      "locales": {
+        "es": "55f85547"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerButtonProps.tooltipPlacement"
+    },
+    "generated_fs_media_player_props_props_aspect_ratio": {
+      "en": "2d3c01b2",
+      "locales": {
+        "es": "2d3c01b2"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.aspectRatio"
+    },
+    "generated_fs_media_player_props_props_auto_hide_controls": {
+      "en": "626f4075",
+      "locales": {
+        "es": "626f4075"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.autoHideControls"
+    },
+    "generated_fs_media_player_props_props_auto_hide_when_paused": {
+      "en": "c14788fd",
+      "locales": {
+        "es": "c14788fd"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.autoHideWhenPaused"
+    },
+    "generated_fs_media_player_props_props_center_content": {
+      "en": "b7993de7",
+      "locales": {
+        "es": "b7993de7"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.centerContent"
+    },
+    "generated_fs_media_player_props_props_children": {
+      "en": "b48ed1f4",
+      "locales": {
+        "es": "b48ed1f4"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.children"
+    },
+    "generated_fs_media_player_props_props_deferred": {
+      "en": "4f01bffc",
+      "locales": {
+        "es": "4f01bffc"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.deferred"
+    },
+    "generated_fs_media_player_props_props_end_content": {
+      "en": "5f3e7568",
+      "locales": {
+        "es": "5f3e7568"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.endContent"
+    },
+    "generated_fs_media_player_props_props_label": {
+      "en": "60ea607e",
+      "locales": {
+        "es": "60ea607e"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.label"
+    },
+    "generated_fs_media_player_props_props_labels": {
+      "en": "33861bd5",
+      "locales": {
+        "es": "33861bd5"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.labels"
+    },
+    "generated_fs_media_player_props_props_layout": {
+      "en": "67dbb402",
+      "locales": {
+        "es": "67dbb402"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.layout"
+    },
+    "generated_fs_media_player_props_props_loop": {
+      "en": "9b600a19",
+      "locales": {
+        "es": "9b600a19"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.loop"
+    },
+    "generated_fs_media_player_props_props_more_content": {
+      "en": "7aca37d3",
+      "locales": {
+        "es": "7aca37d3"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.moreContent"
+    },
+    "generated_fs_media_player_props_props_on_next": {
+      "en": "d25ec163",
+      "locales": {
+        "es": "d25ec163"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.onNext"
+    },
+    "generated_fs_media_player_props_props_on_previous": {
+      "en": "8cb62a56",
+      "locales": {
+        "es": "8cb62a56"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.onPrevious"
+    },
+    "generated_fs_media_player_props_props_playback_rates": {
+      "en": "4962c53a",
+      "locales": {
+        "es": "4962c53a"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.playbackRates"
+    },
+    "generated_fs_media_player_props_props_player_ref": {
+      "en": "9269d06c",
+      "locales": {
+        "es": "9269d06c"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.playerRef"
+    },
+    "generated_fs_media_player_props_props_poster": {
+      "en": "e6db7c44",
+      "locales": {
+        "es": "e6db7c44"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.poster"
+    },
+    "generated_fs_media_player_props_props_ref": {
+      "en": "2b2e1994",
+      "locales": {
+        "es": "2b2e1994"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.ref"
+    },
+    "generated_fs_media_player_props_props_show_repeat": {
+      "en": "5996cda8",
+      "locales": {
+        "es": "5996cda8"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.showRepeat"
+    },
+    "generated_fs_media_player_props_props_skip_backward": {
+      "en": "dcc177b2",
+      "locales": {
+        "es": "dcc177b2"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.skipBackward"
+    },
+    "generated_fs_media_player_props_props_skip_forward": {
+      "en": "351d0a04",
+      "locales": {
+        "es": "351d0a04"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.skipForward"
+    },
+    "generated_fs_media_player_props_props_src": {
+      "en": "c2dbe7f2",
+      "locales": {
+        "es": "c2dbe7f2"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.src"
+    },
+    "generated_fs_media_player_props_props_start_content": {
+      "en": "be4ebdce",
+      "locales": {
+        "es": "be4ebdce"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.startContent"
+    },
+    "generated_fs_media_player_props_props_subtitles_appearance": {
+      "en": "6337744f",
+      "locales": {
+        "es": "6337744f"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.subtitlesAppearance"
+    },
+    "generated_fs_media_player_props_props_subtitles_size": {
+      "en": "dc235b99",
+      "locales": {
+        "es": "dc235b99"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.subtitlesSize"
+    },
+    "generated_fs_media_player_props_props_tracks": {
+      "en": "82fd64bb",
+      "locales": {
+        "es": "82fd64bb"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.tracks"
+    },
+    "generated_fs_media_player_props_props_volume_orientation": {
+      "en": "70220b44",
+      "locales": {
+        "es": "70220b44"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.volumeOrientation"
+    },
+    "generated_fs_media_player_props_props_wrapper_attributes": {
+      "en": "5ce6c849",
+      "locales": {
+        "es": "5ce6c849"
+      },
+      "source": "src/lib/components/media-player/types.ts#MediaPlayerProps.wrapperAttributes"
+    },
     "generated_fs_menu_command_bar_item_props_props_disabled": {
       "en": "b99cb72f",
       "locales": {
@@ -2638,6 +3044,76 @@
         "es": "1f2d476b"
       },
       "source": "src/lib/components/persona/types.ts#PersonaProps.textPosition"
+    },
+    "generated_fs_pill_button_props_props_appearance": {
+      "en": "5495a7d9",
+      "locales": {
+        "es": "5495a7d9"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.appearance"
+    },
+    "generated_fs_pill_button_props_props_checked": {
+      "en": "92e03e40",
+      "locales": {
+        "es": "92e03e40"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.checked"
+    },
+    "generated_fs_pill_button_props_props_children": {
+      "en": "d8340315",
+      "locales": {
+        "es": "d8340315"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.children"
+    },
+    "generated_fs_pill_button_props_props_icon": {
+      "en": "7546bdcc",
+      "locales": {
+        "es": "7546bdcc"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.icon"
+    },
+    "generated_fs_pill_button_props_props_media": {
+      "en": "96bb19e6",
+      "locales": {
+        "es": "96bb19e6"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.media"
+    },
+    "generated_fs_pill_button_props_props_ref": {
+      "en": "c5f59e59",
+      "locales": {
+        "es": "c5f59e59"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.ref"
+    },
+    "generated_fs_pill_button_props_props_shape": {
+      "en": "3470c80e",
+      "locales": {
+        "es": "3470c80e"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.shape"
+    },
+    "generated_fs_pill_button_props_props_size": {
+      "en": "9717c463",
+      "locales": {
+        "es": "9717c463"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.size"
+    },
+    "generated_fs_pill_button_props_props_wrapper_attributes": {
+      "en": "72c7ca4c",
+      "locales": {
+        "es": "72c7ca4c"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.wrapperAttributes"
+    },
+    "generated_fs_pill_button_props_props_wrapper_ref": {
+      "en": "ff3395c1",
+      "locales": {
+        "es": "ff3395c1"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.wrapperRef"
     },
     "generated_fs_progress_bar_props_props_class": {
       "en": "d374eae3",
@@ -4208,9 +4684,9 @@
       "source": "src/lib/components/tag/types.ts#TagProps.interactive"
     },
     "generated_fs_tag_props_props_media": {
-      "en": "8159b507",
+      "en": "f01bc52b",
       "locales": {
-        "es": "8159b507"
+        "es": "f01bc52b"
       },
       "source": "src/lib/components/tag/types.ts#TagProps.media"
     },

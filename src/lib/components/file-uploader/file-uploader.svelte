@@ -12,7 +12,7 @@
 	import { PREFIX } from '#constants';
 	import { tick, untrack } from 'svelte';
 	import { on } from 'svelte/events';
-	import { SvelteMap } from 'svelte/reactivity';
+	import { SvelteMap, SvelteSet } from 'svelte/reactivity';
 	import { UpupCore } from '@useupup/core';
 	import { collectDroppedFiles } from '@useupup/core/internal';
 	import ArrowClockwiseRegular from 'fluentui-icons-svelte/ArrowClockwiseRegular.svelte';
@@ -147,7 +147,7 @@
 	/** An upload asked for while a run goes on, started when it ends. */
 	let queued = false;
 	/** Failed files to try again, one run each: upup joins a run that goes on instead of starting another. */
-	const retries = new Set<string>();
+	const retries = new SvelteSet<string>();
 	/** Whether the run that goes on reported a failed file. */
 	let fileFailed = false;
 

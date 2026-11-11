@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import type { TagMediaProps } from '#lib/index.js';
   import { Avatar, Button, InfoBar, Tag, TagGroup } from '#lib/index.js';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
@@ -68,8 +70,12 @@
 <Tag icon={CalendarMonthRegular}>Primary text</Tag>`;
 
   const mediaCode = `
-{#snippet avatar()}
-  <Avatar name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
+<script lang="ts">
+  import { Avatar, Tag, type TagMediaProps } from 'fluentui-svelte';
+<\/script>
+
+{#snippet avatar({ shape }: TagMediaProps)}
+  <Avatar {shape} name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
 {/snippet}
 
 <Tag media={avatar}>Primary text</Tag>`;
@@ -83,8 +89,12 @@
 <Tag selected appearance="brand" secondaryText="appearance=brand" icon={CalendarMonthRegular} dismissible>Selected</Tag>`;
 
   const shapeCode = `
-{#snippet avatar()}
-  <Avatar name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
+<script lang="ts">
+  import { Avatar, Tag, type TagMediaProps } from 'fluentui-svelte';
+<\/script>
+
+{#snippet avatar({ shape }: TagMediaProps)}
+  <Avatar {shape} name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
 {/snippet}
 
 <Tag media={avatar}>Circular</Tag>
@@ -96,14 +106,18 @@
 <Tag shape="square" dismissible icon={CalendarMonthRegular} secondaryText="Secondary text">Square</Tag>`;
 
   const sizeCode = `
-{#snippet avatar()}
-  <Avatar name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
+<script lang="ts">
+  import { Avatar, Tag, type TagMediaProps } from 'fluentui-svelte';
+<\/script>
+
+{#snippet avatar({ shape }: TagMediaProps)}
+  <Avatar {shape} name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
 {/snippet}
-{#snippet smallAvatar()}
-  <Avatar name="Katri Athokas" size={20} badge={{ status: 'busy' }} />
+{#snippet smallAvatar({ shape }: TagMediaProps)}
+  <Avatar {shape} name="Katri Athokas" size={20} badge={{ status: 'busy' }} />
 {/snippet}
-{#snippet extraSmallAvatar()}
-  <Avatar name="Katri Athokas" size={16} badge={{ status: 'busy' }} />
+{#snippet extraSmallAvatar({ shape }: TagMediaProps)}
+  <Avatar {shape} name="Katri Athokas" size={16} badge={{ status: 'busy' }} />
 {/snippet}
 
 <Tag>Medium</Tag>
@@ -315,14 +329,14 @@
 
 ### {m.tag_media_title()}
 
-{m.tag_media_description()}
+<p class="fs-docs"><I18nMarkupMessage message={m.tag_media_description} /></p>
 
 <InfoBar status="warning" style="multiline" title={m.tag_media_icon_title()} hideCloseButton>
   <p>{m.tag_media_icon_description()}</p>
 </InfoBar>
 
-{#snippet avatar()}
-  <Avatar name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
+{#snippet avatar({ shape }: TagMediaProps)}
+  <Avatar {shape} name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
 {/snippet}
 
 <Showcase columns={1} code={mediaCode} minHeight="0" disablePanZoom>
@@ -372,12 +386,12 @@
 
 {m.tag_size_description()}
 
-{#snippet smallAvatar()}
-  <Avatar name="Katri Athokas" size={20} badge={{ status: 'busy' }} />
+{#snippet smallAvatar({ shape }: TagMediaProps)}
+  <Avatar {shape} name="Katri Athokas" size={20} badge={{ status: 'busy' }} />
 {/snippet}
 
-{#snippet extraSmallAvatar()}
-  <Avatar name="Katri Athokas" size={16} badge={{ status: 'busy' }} />
+{#snippet extraSmallAvatar({ shape }: TagMediaProps)}
+  <Avatar {shape} name="Katri Athokas" size={16} badge={{ status: 'busy' }} />
 {/snippet}
 
 <Showcase columns={1} code={sizeCode} minHeight="0" disablePanZoom>

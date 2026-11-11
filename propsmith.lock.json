@@ -2520,6 +2520,76 @@
       },
       "source": "src/lib/components/persona/types.ts#PersonaProps.textPosition"
     },
+    "generated_fs_pill_button_props_props_appearance": {
+      "en": "5495a7d9",
+      "locales": {
+        "es": "5495a7d9"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.appearance"
+    },
+    "generated_fs_pill_button_props_props_checked": {
+      "en": "92e03e40",
+      "locales": {
+        "es": "92e03e40"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.checked"
+    },
+    "generated_fs_pill_button_props_props_children": {
+      "en": "d8340315",
+      "locales": {
+        "es": "d8340315"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.children"
+    },
+    "generated_fs_pill_button_props_props_icon": {
+      "en": "7546bdcc",
+      "locales": {
+        "es": "7546bdcc"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.icon"
+    },
+    "generated_fs_pill_button_props_props_media": {
+      "en": "96bb19e6",
+      "locales": {
+        "es": "96bb19e6"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.media"
+    },
+    "generated_fs_pill_button_props_props_ref": {
+      "en": "c5f59e59",
+      "locales": {
+        "es": "c5f59e59"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.ref"
+    },
+    "generated_fs_pill_button_props_props_shape": {
+      "en": "3470c80e",
+      "locales": {
+        "es": "3470c80e"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.shape"
+    },
+    "generated_fs_pill_button_props_props_size": {
+      "en": "9717c463",
+      "locales": {
+        "es": "9717c463"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.size"
+    },
+    "generated_fs_pill_button_props_props_wrapper_attributes": {
+      "en": "72c7ca4c",
+      "locales": {
+        "es": "72c7ca4c"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.wrapperAttributes"
+    },
+    "generated_fs_pill_button_props_props_wrapper_ref": {
+      "en": "ff3395c1",
+      "locales": {
+        "es": "ff3395c1"
+      },
+      "source": "src/lib/components/pill-button/types.ts#PillButtonProps.wrapperRef"
+    },
     "generated_fs_progress_bar_props_props_class": {
       "en": "d374eae3",
       "locales": {
@@ -4089,10 +4159,8 @@
       "source": "src/lib/components/tag/types.ts#TagProps.interactive"
     },
     "generated_fs_tag_props_props_media": {
-      "en": "8159b507",
-      "locales": {
-        "es": "8159b507"
-      },
+      "en": "f01bc52b",
+      "locales": {},
       "source": "src/lib/components/tag/types.ts#TagProps.media"
     },
     "generated_fs_tag_props_props_on_dismiss": {

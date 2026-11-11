@@ -21,6 +21,7 @@
 		code,
 		disablePanZoom = false,
 		showOverflow = false,
+		fluid = false,
 		children
 	}: {
 		columns: number;
@@ -34,6 +35,8 @@
 		code: string;
 		disablePanZoom?: boolean;
 		showOverflow?: boolean;
+		/** Lets the content shrink with the card, for components that fill the width they are given, instead of sizing the card to the content. */
+		fluid?: boolean;
 		children: Snippet;
 	} = $props();
 
@@ -108,7 +111,7 @@
 					autocenter: autoCenter,
 					boundsPadding: 0
 				})}
-			class="inner"
+			class={['inner', { fluid }]}
 		>
 			{#if !effectiveDisabled}
 				<svg class="showcase-backdrop">
@@ -131,8 +134,8 @@
 				</svg>
 			{/if}
 			<div
-				class="showcase-grid"
-				style={`grid-template-columns: ${(columnWidth + ' ').repeat(columns)}; grid-auto-rows: auto; grid-gap: ${gap};`}
+				class={['showcase-grid', { fluid }]}
+				style={`grid-template-columns: ${((fluid ? 'minmax(0, 1fr)' : columnWidth) + ' ').repeat(columns)}; grid-auto-rows: auto; grid-gap: ${gap};`}
 			>
 				{@render children?.()}
 			</div>
@@ -174,6 +177,13 @@
 		min-width: max-content;
 		min-height: 100%;
 		max-width: 100%;
+	}
+	.inner.fluid {
+		min-width: 0;
+	}
+	.showcase-grid.fluid {
+		flex: 1;
+		min-width: 0;
 	}
 	.showcase-grid {
 		transform-origin: 40% 40%;

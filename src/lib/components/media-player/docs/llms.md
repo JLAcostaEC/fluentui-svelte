@@ -128,7 +128,8 @@ Pass WebVTT files in `tracks`. The player draws the subtitles itself, in a Fluen
 ```svelte
 <script>
 	import { MediaPlayer, MediaPlayerButton, MenuItem } from 'fluentui-svelte';
-	import { ArrowDownloadRegular, ShareRegular } from 'fluentui-icons-svelte';
+	import ArrowDownloadRegular from 'fluentui-icons-svelte/ArrowDownloadRegular.svelte';
+	import ShareRegular from 'fluentui-icons-svelte/ShareRegular.svelte';
 
 	/** Copies a link to the current moment of the video. */
 	const share = (time = 0) => navigator.clipboard.writeText(`${location.href}#t=${Math.floor(time)}`);

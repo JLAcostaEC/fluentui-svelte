@@ -63,9 +63,12 @@ describe('component llms.md', () => {
 		}
 	});
 
-	it('imports icons from their own file, as the skill tells agents to', () => {
+	it('imports each icon from its own file', () => {
 		for (const { llmsPath } of components) {
-			expect(fs.readFileSync(llmsPath!, 'utf-8'), llmsPath!).not.toMatch(/from 'fluentui-icons-svelte'/);
+			expect(
+				fs.readFileSync(llmsPath!, 'utf-8'),
+				`${llmsPath}: import each icon from its own file (fluentui-icons-svelte/<Name>.svelte)`
+			).not.toMatch(/from 'fluentui-icons-svelte'/);
 		}
 	});
 });

@@ -124,7 +124,10 @@
 		const cleanups = [
 			on(triggerElement, 'mouseenter', handleOpen),
 			on(triggerElement, 'mouseleave', handleClose),
-			on(triggerElement, 'focusin', handleOpen),
+			// Only a focus the keyboard gave shows the tooltip: one that follows a click, or that code moved, does not.
+			on(triggerElement, 'focusin', (e) => {
+				if ((e.target as Element).matches(':focus-visible')) handleOpen();
+			}),
 			on(triggerElement, 'focusout', handleClose)
 		];
 

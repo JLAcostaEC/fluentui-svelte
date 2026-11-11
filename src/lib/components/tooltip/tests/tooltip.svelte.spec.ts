@@ -199,3 +199,37 @@ describe('a pointer crossing the trigger', () => {
 		}
 	});
 });
+
+describe('focus', () => {
+	it('opens for a focus the keyboard gave', async () => {
+		render(TooltipTestWrapper, { openDelay: 0 });
+		await expect.element(trigger()).toBeInTheDocument();
+		// The first Tab of a test can leave the page, unless something in it was clicked first.
+		await userEvent.click(document.body);
+
+		await userEvent.keyboard('{Tab}');
+
+		await expect.element(trigger()).toHaveFocus();
+		await vi.waitFor(() => expect(isHidden()).toBe(false));
+	});
+
+	it('stays closed for a focus that code moved after a click', async () => {
+		render(TooltipTestWrapper, { openDelay: 0 });
+		const button = trigger().element() as HTMLElement;
+		// The real pointer must not hover the trigger: only the focus counts here.
+		button.style.pointerEvents = 'none';
+		const own = () => document.getElementById(button.getAttribute('aria-labelledby') ?? '');
+		await vi.waitFor(() => expect(own()).not.toBeNull());
+
+		// A pointer press on another button first, which then hands the focus to the trigger, as a control may do.
+		const other = document.createElement('button');
+		other.textContent = 'Other';
+		document.body.appendChild(other);
+		await page.elementLocator(other).click();
+		button.focus();
+		other.remove();
+		await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
+		expect(own()?.classList.contains('tooltip-hidden')).toBe(true);
+	});
+});

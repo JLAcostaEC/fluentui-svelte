@@ -1,0 +1,183 @@
+<script lang="ts">
+  import { ColorPicker, Button, Label } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '#i18n/messages.js';
+
+  let color = $state('#0078d4');
+  let submitted = $state('');
+
+  const shapesCode = `<script>
+  import { ColorPicker } from 'fluentui-svelte';
+<\/script>
+
+<ColorPicker shape="square" defaultValue="#0078d4" />
+<ColorPicker shape="rounded" defaultValue="#107c10" />
+<ColorPicker shape="circular" defaultValue="#d83b01" />`;
+  const orientationCode = `<script>
+  import { ColorPicker } from 'fluentui-svelte';
+<\/script>
+
+<ColorPicker orientation="horizontal" defaultValue="#107c10" alpha />`;
+  const alphaCode = `<script>
+  import { ColorPicker } from 'fluentui-svelte';
+<\/script>
+
+<ColorPicker shape="circular" defaultValue="#0078d480" alpha />`;
+  const formatCode = `<script>
+  import { ColorPicker } from 'fluentui-svelte';
+<\/script>
+
+<ColorPicker defaultValue="#8764b8" format="hsv" />`;
+  const collapsedCode = `<script>
+  import { ColorPicker } from 'fluentui-svelte';
+<\/script>
+
+<ColorPicker defaultValue="#d83b01" collapsed />
+<ColorPicker shape="circular" defaultValue="#0078d4" collapsed alpha />`;
+  const controlledCode = `<script>
+  import { ColorPicker, Button } from 'fluentui-svelte';
+  let color = $state('#0078d4');
+<\/script>
+
+<ColorPicker bind:value={color} />
+<output>{color}</output>
+<Button onclick={() => color = '#107c10'}>Set green</Button>`;
+  const labelCode = `<script>
+  import { ColorPicker, Label } from 'fluentui-svelte';
+<\/script>
+
+<Label label="Accent color">
+  <ColorPicker name="accent" defaultValue="#0078d4" />
+</Label>`;
+  const formCode = `<script>
+  import { ColorPicker, Button, Label } from 'fluentui-svelte';
+  let submitted = $state('');
+<\/script>
+
+<form onsubmit={(event) => {
+  event.preventDefault();
+  submitted = String(new FormData(event.currentTarget).get('accent'));
+}}>
+  <Label label="Accent color" required>
+    <ColorPicker name="accent" defaultValue="#0078d4" required />
+  </Label>
+  <Button type="submit">Submit</Button>
+  <Button type="reset">Reset</Button>
+</form>
+<output>{submitted}</output>`;
+  const disabledCode = `<script>
+  import { ColorPicker } from 'fluentui-svelte';
+<\/script>
+
+<ColorPicker defaultValue="#0078d4" disabled />
+<ColorPicker defaultValue="#d83b01" readonly />`;
+</script>
+
+### {m.color_picker_shapes_title()}
+
+<p><I18nMarkupMessage message={m.color_picker_shapes_description} /></p>
+
+<Showcase columns={1} code={shapesCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <div class="variants">
+  <ColorPicker shape="square" defaultValue="#0078d4" />
+  <ColorPicker shape="rounded" defaultValue="#107c10" />
+  <ColorPicker shape="circular" defaultValue="#d83b01" />
+  </div>
+</Showcase>
+
+### {m.color_picker_orientation_title()}
+
+<p><I18nMarkupMessage message={m.color_picker_orientation_description} /></p>
+
+<Showcase columns={1} code={orientationCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <ColorPicker orientation="horizontal" defaultValue="#107c10" alpha />
+</Showcase>
+
+### {m.color_picker_alpha_title()}
+
+<p><I18nMarkupMessage message={m.color_picker_alpha_description} /></p>
+
+<Showcase columns={1} code={alphaCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <ColorPicker shape="circular" defaultValue="#0078d480" alpha />
+</Showcase>
+
+### {m.color_picker_format_title()}
+
+<p><I18nMarkupMessage message={m.color_picker_format_description} /></p>
+
+<Showcase columns={1} code={formatCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <ColorPicker defaultValue="#8764b8" format="hsv" />
+</Showcase>
+
+### {m.color_picker_collapsed_title()}
+
+<p><I18nMarkupMessage message={m.color_picker_collapsed_description} /></p>
+
+<Showcase columns={1} code={collapsedCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <div class="variants">
+  <ColorPicker defaultValue="#d83b01" collapsed />
+  <ColorPicker shape="circular" defaultValue="#0078d4" collapsed alpha />
+  </div>
+</Showcase>
+
+### {m.color_picker_controlled_title()}
+
+<p><I18nMarkupMessage message={m.color_picker_controlled_description} /></p>
+
+<Showcase columns={1} code={controlledCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <div class="stack">
+    <ColorPicker bind:value={color} />
+    <output>{color}</output>
+    <Button onclick={() => color = '#107c10'}>{m.color_picker_set_green()}</Button>
+  </div>
+</Showcase>
+
+### {m.color_picker_label_title()}
+
+<p><I18nMarkupMessage message={m.color_picker_label_description} /></p>
+
+<Showcase columns={1} code={labelCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <Label label={m.color_picker_accent_label()}>
+    <ColorPicker name="accent" defaultValue="#0078d4" />
+  </Label>
+</Showcase>
+
+### {m.color_picker_form_title()}
+
+<p><I18nMarkupMessage message={m.color_picker_form_description} /></p>
+
+<Showcase columns={1} code={formCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <div class="stack">
+    <form class="stack" onsubmit={(event) => {
+      event.preventDefault();
+      submitted = String(new FormData(event.currentTarget).get('accent'));
+    }}>
+      <Label label={m.color_picker_accent_label()} required>
+        <ColorPicker name="accent" defaultValue="#0078d4" required />
+      </Label>
+      <div class="actions">
+        <Button type="submit">{m.color_picker_submit()}</Button>
+        <Button type="reset">{m.color_picker_reset()}</Button>
+      </div>
+    </form>
+    <output aria-live="polite">{submitted}</output>
+  </div>
+</Showcase>
+
+### {m.global_disabled()}
+
+<p><I18nMarkupMessage message={m.color_picker_disabled_description} /></p>
+
+<Showcase columns={1} code={disabledCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <div class="variants">
+  <ColorPicker defaultValue="#0078d4" disabled />
+  <ColorPicker defaultValue="#d83b01" readonly />
+  </div>
+</Showcase>
+
+<style>
+  .variants { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; width: 100%; }
+  .stack { display: flex; flex-direction: column; gap: 1rem; }
+  .actions { display: flex; gap: 0.5rem; }
+</style>

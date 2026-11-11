@@ -90,6 +90,7 @@
 	},
 	"dependencies": {
 		"@floating-ui/dom": "^1.8.0",
+		"@hueycolor/svelte": "^1.0.1",
 		"@useupup/core": "3.3.5",
 		"@videojs/html": "10.3.0",
 		"fluentui-icons-svelte": "^1.2.0",
@@ -98,7 +99,7 @@
 		"tabspot": "^0.8.0"
 	},
 	"peerDependencies": {
-		"svelte": "^5.0.0"
+		"svelte": "^5.29.0"
 	},
 	"devDependencies": {
 		"@changesets/changelog-github": "^1.0.1",

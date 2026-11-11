@@ -1,0 +1,48 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '#i18n/messages.js';
+</script>
+
+## {m.color_picker_accessibility_title()}
+
+<p><I18nMarkupMessage message={m.color_picker_accessibility_description} /></p>
+
+## {m.color_picker_input_constraints_title()}
+
+<p><I18nMarkupMessage message={m.color_picker_input_constraints_description} /></p>
+
+## {m.global_component_props()}
+
+<div class="props-table">
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:ColorPickerProps -->
+
+| Name                                                                                                            | Type                                                                                                                                                             | Default          | Description                                                                                  |
+| --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | -------------------------------------------------------------------------------------------- |
+| `channelLabels`                                                                                                 | `Partial< Record<'hue'` &#124; `'saturation'` &#124; `'brightness'` &#124; `'opacity'` &#124; `'red'` &#124; `'green'` &#124; `'blue'` &#124; `'hex', string> >` |                  | `<I18nMarkupMessage message={m.generated_fs_color_picker_props_props_channel_labels} />`     |
+| `value` _bindable_                                                                                              | `string`                                                                                                                                                         |                  | `<I18nMarkupMessage message={m.generated_fs_color_picker_props_props_value} />`              |
+| `defaultValue`                                                                                                  | `string`                                                                                                                                                         | `'#ffffff'`      | `<I18nMarkupMessage message={m.generated_fs_color_picker_props_props_default_value} />`      |
+| `shape`                                                                                                         | `'circular'` &#124; `'rounded'` &#124; `'square'`                                                                                                                | `'rounded'`      | `<I18nMarkupMessage message={m.generated_fs_color_picker_props_props_shape} />`              |
+| `orientation`                                                                                                   | `'vertical'` &#124; `'horizontal'`                                                                                                                               | `'vertical'`     | `<I18nMarkupMessage message={m.generated_fs_color_picker_props_props_orientation} />`        |
+| `collapsed` _bindable_                                                                                          | `boolean`                                                                                                                                                        |                  | `<I18nMarkupMessage message={m.generated_fs_color_picker_props_props_collapsed} />`          |
+| `format` _bindable_                                                                                             | `'rgb'` &#124; `'hsv'`                                                                                                                                           | `'rgb'`          | `<I18nMarkupMessage message={m.generated_fs_color_picker_props_props_format} />`             |
+| `alpha`                                                                                                         | `boolean`                                                                                                                                                        |                  | `<I18nMarkupMessage message={m.generated_fs_color_picker_props_props_alpha} />`              |
+| `label`                                                                                                         | `string`                                                                                                                                                         | `'Color picker'` | `<I18nMarkupMessage message={m.generated_fs_color_picker_props_props_label} />`              |
+| `formatLabel`                                                                                                   | `string`                                                                                                                                                         | `'Color format'` | `<I18nMarkupMessage message={m.generated_fs_color_picker_props_props_format_label} />`       |
+| `moreLabel`                                                                                                     | `string`                                                                                                                                                         | `'More'`         | `<I18nMarkupMessage message={m.generated_fs_color_picker_props_props_more_label} />`         |
+| `lessLabel`                                                                                                     | `string`                                                                                                                                                         | `'Less'`         | `<I18nMarkupMessage message={m.generated_fs_color_picker_props_props_less_label} />`         |
+| `validationMessage`                                                                                             | `string`                                                                                                                                                         |                  | `<I18nMarkupMessage message={m.generated_fs_color_picker_props_props_validation_message} />` |
+| `onColorChange`                                                                                                 | `(value: string) => void`                                                                                                                                        |                  | `<I18nMarkupMessage message={m.generated_fs_color_picker_props_props_on_color_change} />`    |
+| `ref` _bindable_                                                                                                | `HTMLInputElement` &#124; `null`                                                                                                                                 |                  | `<I18nMarkupMessage message={m.generated_fs_color_picker_props_props_ref} />`                |
+| `wrapperRef` _bindable_                                                                                         | `HTMLDivElement` &#124; `null`                                                                                                                                   |                  | `<I18nMarkupMessage message={m.generated_fs_color_picker_props_props_wrapper_ref} />`        |
+| `wrapperAttributes`                                                                                             | `HTMLAttributes<HTMLDivElement>`                                                                                                                                 |                  | `<I18nMarkupMessage message={m.generated_fs_color_picker_props_props_wrapper_attributes} />` |
+| `NativeFieldAttributes<HTMLInputAttributes>` without `value`, `defaultValue`, `type`, `size`, `children`, `on:` |                                                                                                                                                                  |                  |                                                                                              |
+
+<!-- /props:ColorPickerProps -->
+
+</div>
+
+<style>
+  .props-table { max-width: 100%; overflow-x: auto; }
+</style>

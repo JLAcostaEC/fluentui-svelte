@@ -253,6 +253,48 @@ describe('previous and next', () => {
 		expect(onPrevious).toHaveBeenCalledOnce();
 		expect(onNext).toHaveBeenCalledOnce();
 	});
+
+	it('leaves the system media controls to the player that still plays when another pauses', async () => {
+		const handlers = new Map<string, (() => void) | null>();
+		let registered = 0;
+		vi.spyOn(navigator.mediaSession, 'setActionHandler').mockImplementation((action, handler) => {
+			handlers.set(action, handler as (() => void) | null);
+			if (action === 'nexttrack' && handler) registered++;
+		});
+		const onNextFirst = vi.fn();
+		const onNextSecond = vi.fn();
+		render(MediaPlayer, { src: silence(), muted: true, loop: true, label: 'First', onNext: onNextFirst });
+		render(MediaPlayer, { src: silence(), muted: true, loop: true, label: 'Second', onNext: onNextSecond });
+		await expect.element(video().nth(1)).toBeInTheDocument();
+		const [first, second] = video().elements() as HTMLVideoElement[];
+
+		// Each player takes the system controls when it starts playing: the second one plays last.
+		await first.play();
+		await expect.poll(() => registered).toBe(1);
+		await second.play();
+		await expect.poll(() => registered).toBe(2);
+
+		first.pause();
+		const firstPlayer = page.getByRole('region', { name: 'First' });
+		await expect.element(firstPlayer.getByRole('button', { name: 'Play', exact: true })).toBeInTheDocument();
+
+		handlers.get('nexttrack')?.();
+		expect(onNextSecond).toHaveBeenCalledOnce();
+		expect(onNextFirst).not.toHaveBeenCalled();
+
+		// The first one plays again, last; once it pauses, the controls go back to the second one, still playing.
+		await first.play();
+		await expect.poll(() => registered).toBe(3);
+		first.pause();
+		await expect.element(firstPlayer.getByRole('button', { name: 'Play', exact: true })).toBeInTheDocument();
+		handlers.get('nexttrack')?.();
+		expect(onNextSecond).toHaveBeenCalledTimes(2);
+		expect(onNextFirst).not.toHaveBeenCalled();
+
+		second.pause();
+		await expect.poll(() => handlers.get('nexttrack')).toBeNull();
+		vi.restoreAllMocks();
+	});
 });
 
 describe('more options', () => {
@@ -260,6 +302,19 @@ describe('more options', () => {
 		render(MediaPlayer, { ...WIDE, playbackRates: [1, 2] });
 		await button('More options').click();
 		await expect.element(page.getByRole('menuitemradio')).toHaveLength(2);
+	});
+
+	it('lists a single speed it is given', async () => {
+		render(MediaPlayer, { ...WIDE, playbackRates: [2] });
+		await button('More options').click();
+		await expect.element(page.getByRole('menuitemradio')).toHaveLength(1);
+		await expect.element(page.getByRole('menuitemradio')).toHaveTextContent('2×');
+	});
+
+	it('lists each speed once, however many times it is given', async () => {
+		render(MediaPlayer, { ...WIDE, playbackRates: [1, 1.5, 1.5, 2] });
+		await button('More options').click();
+		await expect.element(page.getByRole('menuitemradio')).toHaveLength(3);
 	});
 
 	it('disappears without speeds or custom items', async () => {
@@ -424,5 +479,15 @@ describe('controls visibility', () => {
 	it('keeps the controls on screen when they do not hide', async () => {
 		render(MediaPlayer, { autoHideControls: false, autoHideWhenPaused: true });
 		await expect.element(page.selector('.fs-media-player-controls')).toHaveAttribute('data-visible');
+	});
+});
+
+describe('aspect ratio', () => {
+	it('keeps the ratio it is given while the media has no size, after Video.js loads', async () => {
+		// A sound has no picture: the media never gets a size of its own.
+		render(MediaPlayer, { src: silence(), aspectRatio: '4 / 3' });
+		await expect.element(video()).toBeInTheDocument();
+		await expect.poll(() => (video().element() as HTMLVideoElement).readyState).toBeGreaterThan(0);
+		await expect.element(page.selector('.fs-media-player-container')).toHaveStyle({ aspectRatio: '4 / 3' });
 	});
 });

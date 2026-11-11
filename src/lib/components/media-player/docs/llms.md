@@ -63,6 +63,10 @@ A vertical video fills the height its width allows. Give the player a width and 
 `showRepeat` adds a repeat button to the start group, which toggles `loop`. Bind `loop` to follow it.
 
 ```svelte
+<script>
+	let loop = $state(false);
+</script>
+
 <MediaPlayer src="video.mp4" showRepeat bind:loop />
 ```
 
@@ -122,6 +126,14 @@ Pass WebVTT files in `tracks`. The player draws the subtitles itself, in a Fluen
 `startContent`, `centerContent` and `endContent` add controls to the start, middle and end groups of the button row; `moreContent` adds items, such as `MenuItem`, to the more options menu. Each is a snippet or a component that receives `{ store, layout, narrow, labels }`. `MediaPlayerButton` draws an icon button like the built-in ones: `label` names it and shows in its tooltip, and the `optional` class hides it in a narrow player.
 
 ```svelte
+<script>
+	import { MediaPlayer, MediaPlayerButton, MenuItem } from 'fluentui-svelte';
+	import { ArrowDownloadRegular, ShareRegular } from 'fluentui-icons-svelte';
+
+	/** Copies a link to the current moment of the video. */
+	const share = (time = 0) => navigator.clipboard.writeText(`${location.href}#t=${Math.floor(time)}`);
+</script>
+
 <MediaPlayer src="video.mp4">
 	{#snippet endContent({ store })}
 		<MediaPlayerButton label="Share this moment" class="optional" onclick={() => share(store?.currentTime)}>

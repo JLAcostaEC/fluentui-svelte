@@ -106,6 +106,9 @@
 	let loop = $state(false);
 	let liked = $state(false);
 	let chapters = $state(false);
+
+	/** Copies a link to the current moment of the video. */
+	const share = (time = 0) => navigator.clipboard.writeText(\`\${location.href}#t=\${Math.floor(time)}\`);
 <\/script>
 
 <!-- The repeat button is built in: showRepeat shows it, and bind:loop follows it. -->

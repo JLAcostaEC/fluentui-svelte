@@ -37,7 +37,8 @@
 	import type { MediaTextTrack } from '@videojs/html';
 	import type { VideoPlayerElement } from '@videojs/html/video';
 	import MediaPlayerButton from './media-player-button.svelte';
-	import { MEDIA_PLAYER_LABELS, TOOLTIP_POSITION, loadVideoJs } from './utils.ts';
+	import { MEDIA_PLAYER_LABELS, TOOLTIP_POSITION, claimMediaSession, loadVideoJs } from './utils.ts';
+	import { on } from 'svelte/events';
 	import type { MediaPlayerContent, MediaPlayerProps, MediaPlayerRenderState, MediaPlayerStore } from './types.ts';
 
 	let {
@@ -164,28 +165,37 @@
 	const active = $derived(!deferred || activated);
 	let splashElement: HTMLElement | null = $state(null);
 	let playButtonRef: HTMLButtonElement | null = $state(null);
+	/** The scripts of Video.js failed to download; a retry downloads them again. */
+	let loadFailed = $state(false);
+	let loadAttempt = $state(0);
 
 	// The player reads its store once Video.js has loaded, which happens in the browser only, for a mounted player.
 	$effect(() => {
 		const element = playerElement;
+		// A retry runs the effect again.
+		void loadAttempt;
 		if (!element) return;
 		let unsubscribe: (() => void) | undefined;
 		let mounted = true;
 
-		loadVideoJs().then(async () => {
-			if (!mounted) return;
-			playerRef = element as VideoPlayerElement;
-			store = playerRef.store;
-			sync();
-			unsubscribe = store.subscribe(sync);
-			// The video comes last: by the time the player attaches the media, its container is already registered.
-			ready = true;
-			if (!playOnReady) return;
-			playOnReady = false;
-			await tick();
-			ref?.play().catch(() => {});
-			playButtonRef?.focus();
-		});
+		loadVideoJs()
+			.then(async () => {
+				if (!mounted) return;
+				playerRef = element as VideoPlayerElement;
+				store = playerRef.store;
+				sync();
+				unsubscribe = store.subscribe(sync);
+				// The video comes last: by the time the player attaches the media, its container is already registered.
+				ready = true;
+				if (!playOnReady) return;
+				playOnReady = false;
+				await tick();
+				ref?.play().catch(() => {});
+				playButtonRef?.focus();
+			})
+			.catch(() => {
+				if (mounted) loadFailed = true;
+			});
 
 		return () => {
 			mounted = false;
@@ -299,16 +309,17 @@
 		if (store && (volumeOpen || captionsOpen || moreOpen)) return store.requestControlsLock();
 	});
 
-	// The system media controls, picture-in-picture included, offer the previous and next tracks of the playing player.
+	/** Whether the media is paused, apart from the rest of the state: the effect below follows only this. */
+	const paused = $derived(player.paused);
+
+	// The system media controls, picture-in-picture included, offer the previous and next tracks of the playing player:
+	// the last one to start, and the one before once it pauses.
 	$effect(() => {
-		if (player.paused || !('mediaSession' in navigator)) return;
-		const session = navigator.mediaSession;
-		session.setActionHandler('previoustrack', onPrevious ? () => onPrevious() : null);
-		session.setActionHandler('nexttrack', onNext ? () => onNext() : null);
-		return () => {
-			session.setActionHandler('previoustrack', null);
-			session.setActionHandler('nexttrack', null);
-		};
+		if (paused || !('mediaSession' in navigator)) return;
+		return claimMediaSession({
+			previous: onPrevious ? () => onPrevious() : null,
+			next: onNext ? () => onNext() : null
+		});
 	});
 
 	/** Delay before the buffering indicator shows. A brief stall never makes it flicker. */
@@ -342,7 +353,23 @@
 	);
 	const SkipBackIcon = $derived(SKIP_BACK_ICONS[skipBackward]);
 	const SkipForwardIcon = $derived(SKIP_FORWARD_ICONS[skipForward]);
-	const showRates = $derived(player.playbackRateAvailable && playbackRates.length > 1);
+	/** The speeds of the menu, each once. */
+	const rates = $derived([...new Set(playbackRates)]);
+	const showRates = $derived(player.playbackRateAvailable && rates.length > 0);
+
+	/**
+	 * Whether the video knows its size. Until then the container keeps `aspectRatio`, and the page does not move when
+	 * a video of another shape arrives.
+	 */
+	let mediaSized = $state(false);
+	$effect(() => {
+		const video = ref;
+		if (!video) return;
+		const update = () => (mediaSized = video.videoWidth > 0);
+		update();
+		const offs = [on(video, 'loadedmetadata', update), on(video, 'emptied', update)];
+		return () => offs.forEach((off) => off());
+	});
 	const hasMore = $derived(showRates || !!moreContent);
 
 	const togglePaused = () => (player.paused ? store?.play() : store?.pause());
@@ -423,7 +450,7 @@
 	>
 		<media-container
 			class="fs-media-player-container"
-			style:aspect-ratio={ready ? undefined : aspectRatio}
+			style:aspect-ratio={ready && mediaSized ? undefined : aspectRatio}
 			role="region"
 			aria-label={label}
 		>
@@ -469,8 +496,23 @@
 				</div>
 			{/if}
 
+			{#if loadFailed}
+				<div class="fs-media-player-overlay fs-media-player-alert" data-interactive>
+					<InfoBar status="critical" title={t.error} style="multiline" hideCloseButton>
+						{t.loadError}
+						<Button
+							appearance="standard"
+							onclick={() => {
+								loadFailed = false;
+								loadAttempt++;
+							}}>{t.retry}</Button
+						>
+					</InfoBar>
+				</div>
+			{/if}
+
 			{#if player.error}
-				<div class="fs-media-player-overlay" data-interactive>
+				<div class="fs-media-player-overlay fs-media-player-alert" data-interactive>
 					<InfoBar status="critical" title={t.error} style="multiline" hideCloseButton>
 						{player.error.message}
 						<Button appearance="standard" onclick={() => store?.dismissError()}>{t.dismiss}</Button>
@@ -700,7 +742,7 @@
 								<MenuList>
 									{#if showRates}
 										<MenuGroup header={t.playbackSpeed}>
-											{#each playbackRates as rate (rate)}
+											{#each rates as rate (rate)}
 												<MenuItemRadio name="rate" value={String(rate)}>
 													{rate === 1 ? t.normalSpeed : `${rate}×`}
 												</MenuItemRadio>
@@ -844,6 +886,11 @@
 		}
 	}
 
+	/* A message stays above the controls: in a short player they would cover its buttons. */
+	.fs-media-player-alert {
+		z-index: 2;
+	}
+
 	.fs-media-player-overlay {
 		position: absolute;
 		inset: 0;
@@ -885,9 +932,13 @@
 			background: var(--fs-acrylic-background-default);
 			backdrop-filter: blur(10px) saturate(125%);
 		}
-		/* The controls stay while the keyboard is in them, whatever the activity of the pointer. */
+		/*
+		 * The controls stay while the keyboard is in them, whatever the activity of the pointer. Hidden, they let the
+		 * pointer through to the video, for its gestures: the bar of the controls ignores the presses that start on it.
+		 */
 		&:not([data-visible]):not(:has(:focus-visible)) {
 			opacity: 0;
+			pointer-events: none;
 		}
 		@media (prefers-reduced-motion: reduce) {
 			transition: none;

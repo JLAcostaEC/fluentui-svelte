@@ -53,6 +53,10 @@ export type MediaPlayerLabels = {
 	/** The title of the message shown when the media fails. */
 	error: string;
 	dismiss: string;
+	/** The message shown when the scripts of the player fail to download. */
+	loadError: string;
+	/** The button that downloads the scripts of the player again. */
+	retry: string;
 };
 
 /** Custom content for the transport controls: a snippet or a component that receives the render state. */

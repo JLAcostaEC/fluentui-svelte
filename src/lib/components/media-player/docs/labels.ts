@@ -26,5 +26,7 @@ export const docsLabels = (): MediaPlayerLabels => ({
 	normalSpeed: m.media_player_label_normal_speed(),
 	loading: m.media_player_label_loading(),
 	error: m.media_player_label_error(),
-	dismiss: m.media_player_label_dismiss()
+	dismiss: m.media_player_label_dismiss(),
+	loadError: m.media_player_label_load_error(),
+	retry: m.media_player_label_retry()
 });

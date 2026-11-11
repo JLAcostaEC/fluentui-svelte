@@ -56,5 +56,35 @@ export const MEDIA_PLAYER_LABELS: MediaPlayerLabels = {
 	normalSpeed: 'Normal',
 	loading: 'Loading',
 	error: 'The media could not be played.',
-	dismiss: 'Dismiss'
+	dismiss: 'Dismiss',
+	loadError: 'The player could not be loaded. Check the connection and try again.',
+	retry: 'Try again'
 };
+
+/** The previous and next tracks a playing player offers to the system media controls. */
+export type MediaSessionClaim = { previous: (() => void) | null; next: (() => void) | null };
+
+/** The playing players, in the order they started. The system media controls offer the tracks of the last one. */
+const claims: MediaSessionClaim[] = [];
+
+const applyClaims = () => {
+	const top = claims.at(-1);
+	navigator.mediaSession.setActionHandler('previoustrack', top?.previous ?? null);
+	navigator.mediaSession.setActionHandler('nexttrack', top?.next ?? null);
+};
+
+/**
+ * Gives the system media controls to a player that starts playing. `navigator.mediaSession` is one per page: the
+ * returned release hands them back to the player that played before, when it still plays.
+ */
+export function claimMediaSession(claim: MediaSessionClaim) {
+	claims.push(claim);
+	applyClaims();
+	return () => {
+		const index = claims.indexOf(claim);
+		if (index < 0) return;
+		claims.splice(index, 1);
+		// Only the release of the last player changes what the system controls offer.
+		if (index === claims.length) applyClaims();
+	};
+}

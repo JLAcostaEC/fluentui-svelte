@@ -370,6 +370,7 @@ Folder, exports, status (only when the API may still change) and summary. Read
 - `dropdown`: `Dropdown`, `DropdownOption`. A custom dropdown that lets users select one or more options from a list, with rich option content.
 - `dropdown-select`: `DropdownSelect`, `DropdownSelectOption`. A native-select-based dropdown for choosing one or more options, with support for rich option content.
 - `expander`: `Expander`. A control that displays a header and a collapsible content area that can expand up or down.
+- `file-uploader`: `FileUploader`. A drop zone and file list that picks, drops, captures and imports files, and uploads them to any S3-compatible storage, powered by upup.
 - `flyout`: `Flyout`. A floating panel that displays additional information or options in a non-intrusive, accessible way.
 - `hyperlink`: `Hyperlink`. A clickable link that navigates to a specified URL, following Fluent UI design principles with built-in accessibility.
 - `info-bar`: `InfoBar`. An inline, non-intrusive status message with built-in severity levels and an optional close button.

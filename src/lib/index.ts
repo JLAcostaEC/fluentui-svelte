@@ -98,6 +98,23 @@ export { default as DropdownSelectOption } from './components/dropdown-select/dr
 export { default as Expander } from './components/expander/expander.svelte';
 // End Expander Component
 
+// Start FileUploader Component
+export { default as FileUploader } from './components/file-uploader/file-uploader.svelte';
+export { FILE_UPLOADER_LABELS } from './components/file-uploader/utils.ts';
+export { googleDriveSource, oneDriveSource, dropboxSource, boxSource } from './components/file-uploader/drives.ts';
+export type {
+	FileUploaderProps,
+	FileUploaderDrive,
+	FileUploaderFile,
+	FileUploaderLabels,
+	FileUploaderRejection,
+	FileUploaderRenderState,
+	FileUploaderSource,
+	FileUploaderStatus,
+	FileUploaderUploadOptions
+} from './components/file-uploader/types.ts';
+// End FileUploader Component
+
 // Start Flyout Component
 export { default as Flyout } from './components/flyout/flyout.svelte';
 // End Flyout Component

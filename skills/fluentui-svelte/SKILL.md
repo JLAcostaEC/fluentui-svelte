@@ -364,6 +364,7 @@ Folder, exports, status (only when the API may still change) and summary. Read
 - `calendar-view`: `CalendarView`, `CalendarViewHeader`, `CalendarViewControls`, `CalendarViewDays`, `CalendarViewMonths`, `CalendarViewYears`, `CalendarViewItem`. An inline calendar for browsing days, months, and years and selecting dates or a range.
 - `card`: `Card`, `CardHeader`, `CardFooter`, `CardPreview`. A card is a container that displays content and actions on a single topic.
 - `checkbox`: `Checkbox`. A control a user can check or clear, and that can also report an indeterminate (mixed) state.
+- `color-picker`: `ColorPicker`. A Fluent color picker with square and circular spectra, RGB and HSV fields, and optional opacity.
 - `date-picker`: `DatePicker`. An input for selecting a date from carousel-style day, month, and year columns.
 - `dialog`: `Dialog`, `DialogTitle`, `DialogContent`, `DialogActions`, `DialogSurface`, `DialogTrigger`. A window overlaid on the page that requires user attention, composed of trigger, surface, title, content, and actions.
 - `divider`: `Divider`. A horizontal or vertical rule that visually separates content within a layout, with an optional label.

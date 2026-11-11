@@ -1,0 +1,23 @@
+<script lang="ts">
+  import { ColorPicker } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+</script>
+
+# ColorPicker
+
+{m.color_picker_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow fluid>
+  <ColorPicker defaultValue="#0078d4" />
+</Showcase>
+
+## {m.global_usage()}
+
+```svelte
+<script>
+  import { ColorPicker } from 'fluentui-svelte';
+</script>
+
+<ColorPicker defaultValue="#0078d4" />
+```

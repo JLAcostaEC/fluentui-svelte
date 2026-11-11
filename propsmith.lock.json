@@ -1078,6 +1078,125 @@
       },
       "source": "src/lib/components/checkbox/types.ts#CheckboxProps.wrapperRef"
     },
+    "generated_fs_color_picker_props_props_alpha": {
+      "en": "9e30d9c2",
+      "locales": {
+        "es": "9e30d9c2"
+      },
+      "source": "src/lib/components/color-picker/types.ts#ColorPickerProps.alpha"
+    },
+    "generated_fs_color_picker_props_props_channel_labels": {
+      "en": "1a215f08",
+      "locales": {
+        "es": "1a215f08"
+      },
+      "source": "src/lib/components/color-picker/types.ts#ColorPickerProps.channelLabels"
+    },
+    "generated_fs_color_picker_props_props_collapsed": {
+      "en": "de5f211d",
+      "locales": {
+        "es": "de5f211d"
+      },
+      "source": "src/lib/components/color-picker/types.ts#ColorPickerProps.collapsed"
+    },
+    "generated_fs_color_picker_props_props_default_value": {
+      "en": "91d2a6b6",
+      "locales": {
+        "es": "91d2a6b6"
+      },
+      "source": "src/lib/components/color-picker/types.ts#ColorPickerProps.defaultValue"
+    },
+    "generated_fs_color_picker_props_props_format": {
+      "en": "c4588f80",
+      "locales": {
+        "es": "c4588f80"
+      },
+      "source": "src/lib/components/color-picker/types.ts#ColorPickerProps.format"
+    },
+    "generated_fs_color_picker_props_props_format_label": {
+      "en": "f6f5e083",
+      "locales": {
+        "es": "f6f5e083"
+      },
+      "source": "src/lib/components/color-picker/types.ts#ColorPickerProps.formatLabel"
+    },
+    "generated_fs_color_picker_props_props_label": {
+      "en": "1d4d6beb",
+      "locales": {
+        "es": "1d4d6beb"
+      },
+      "source": "src/lib/components/color-picker/types.ts#ColorPickerProps.label"
+    },
+    "generated_fs_color_picker_props_props_less_label": {
+      "en": "b559b9df",
+      "locales": {
+        "es": "b559b9df"
+      },
+      "source": "src/lib/components/color-picker/types.ts#ColorPickerProps.lessLabel"
+    },
+    "generated_fs_color_picker_props_props_more_label": {
+      "en": "99c60fc4",
+      "locales": {
+        "es": "99c60fc4"
+      },
+      "source": "src/lib/components/color-picker/types.ts#ColorPickerProps.moreLabel"
+    },
+    "generated_fs_color_picker_props_props_on_color_change": {
+      "en": "2a6072c3",
+      "locales": {
+        "es": "2a6072c3"
+      },
+      "source": "src/lib/components/color-picker/types.ts#ColorPickerProps.onColorChange"
+    },
+    "generated_fs_color_picker_props_props_orientation": {
+      "en": "d9548807",
+      "locales": {
+        "es": "d9548807"
+      },
+      "source": "src/lib/components/color-picker/types.ts#ColorPickerProps.orientation"
+    },
+    "generated_fs_color_picker_props_props_ref": {
+      "en": "c08e535a",
+      "locales": {
+        "es": "c08e535a"
+      },
+      "source": "src/lib/components/color-picker/types.ts#ColorPickerProps.ref"
+    },
+    "generated_fs_color_picker_props_props_shape": {
+      "en": "bf84f3c0",
+      "locales": {
+        "es": "bf84f3c0"
+      },
+      "source": "src/lib/components/color-picker/types.ts#ColorPickerProps.shape"
+    },
+    "generated_fs_color_picker_props_props_validation_message": {
+      "en": "0ae1b269",
+      "locales": {
+        "es": "0ae1b269"
+      },
+      "source": "src/lib/components/color-picker/types.ts#ColorPickerProps.validationMessage"
+    },
+    "generated_fs_color_picker_props_props_value": {
+      "en": "e7bc5679",
+      "locales": {
+        "es": "e7bc5679"
+      },
+      "source": "src/lib/components/color-picker/types.ts#ColorPickerProps.value"
+    },
+    "generated_fs_color_picker_props_props_wrapper_attributes": {
+      "en": "f974a2e1",
+      "locales": {
+        "es": "f974a2e1"
+      },
+      "source": "src/lib/components/color-picker/types.ts#ColorPickerProps.wrapperAttributes"
+    },
+    "generated_fs_color_picker_props_props_wrapper_ref": {
+      "en": "4e81bcd3",
+      "locales": {
+        "es": "4e81bcd3"
+      },
+      "source": "src/lib/components/color-picker/types.ts#ColorPickerProps.wrapperRef"
+    },
     "generated_fs_date_picker_props_props_button_attributes": {
       "en": "a0fe0814",
       "locales": {

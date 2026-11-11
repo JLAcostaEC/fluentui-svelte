@@ -66,6 +66,11 @@ export { default as CalendarDatePicker } from './components/calendar-date-picker
 export { default as Checkbox } from './components/checkbox/checkbox.svelte';
 // End Checkbox Component
 
+// Start ColorPicker Component
+export { default as ColorPicker } from './components/color-picker/color-picker.svelte';
+export type { ColorPickerProps, ColorPickerFormat } from './components/color-picker/types.js';
+// End ColorPicker Component
+
 // Start DatePicker Component
 export { default as DatePicker } from './components/date-picker/date-picker.svelte';
 // End DatePicker Component

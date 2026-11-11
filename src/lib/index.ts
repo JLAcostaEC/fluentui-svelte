@@ -147,6 +147,21 @@ export type {
 } from './components/list-view/types.ts';
 // End ListView Component
 
+// Start MediaPlayer Component
+export { default as MediaPlayer } from './components/media-player/media-player.svelte';
+export { default as MediaPlayerButton } from './components/media-player/media-player-button.svelte';
+export { MEDIA_PLAYER_LABELS } from './components/media-player/utils.ts';
+export type {
+	MediaPlayerProps,
+	MediaPlayerButtonProps,
+	MediaPlayerLabels,
+	MediaPlayerTrack,
+	MediaPlayerContent,
+	MediaPlayerRenderState,
+	MediaPlayerStore
+} from './components/media-player/types.ts';
+// End MediaPlayer Component
+
 // Start Menu Component
 export { default as Menu } from './components/menu/menu.svelte';
 export { default as MenuItem } from './components/menu/menu-item.svelte';
@@ -170,6 +185,16 @@ export { default as NumberBox } from './components/number-box/number-box.svelte'
 // Start Persona Component
 export { default as Persona } from './components/persona/persona.svelte';
 // End Persona Component
+
+// Start PillButton Component
+export { default as PillButton } from './components/pill-button/pill-button.svelte';
+export type {
+	PillButtonProps,
+	PillButtonAppearance,
+	PillButtonSize,
+	PillButtonMediaProps
+} from './components/pill-button/types.js';
+// End PillButton Component
 
 // Start ProgressBar Component
 export { default as ProgressBar } from './components/progress-bar/progress-bar.svelte';
@@ -216,6 +241,7 @@ export { default as TabViewTab } from './components/tab-view/tab-view-tab.svelte
 // Start Tag Component
 export { default as Tag } from './components/tag/tag.svelte';
 export { default as TagGroup } from './components/tag/tag-group.svelte';
+export type { TagMediaProps } from './components/tag/types.js';
 // End Tag Component
 
 // Start TagPicker Component

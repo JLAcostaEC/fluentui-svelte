@@ -2,6 +2,7 @@ import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import TagTestWrapper from './TagTestWrapper.svelte';
+import { Avatar, Tag } from '#lib/index.js';
 
 describe('Tag', () => {
 	describe('plain tag', () => {
@@ -63,6 +64,23 @@ describe('Tag', () => {
 		it('renders media', async () => {
 			render(TagTestWrapper, { withMedia: true });
 			await expect.element(page.getByTestId('media')).toBeInTheDocument();
+		});
+
+		it.each(['circular', 'rounded', 'square'] as const)('passes the %s shape to media', async (shape) => {
+			render(TagTestWrapper, { withAvatar: true, tagProps: { shape } });
+			await expect.element(page.getByTestId('avatar')).toHaveClass(shape);
+		});
+
+		it('updates the shape received by media', async () => {
+			render(TagTestWrapper, { withAvatar: true, tagProps: { shape: 'rounded' } });
+			await expect.element(page.getByTestId('avatar')).toHaveClass('rounded');
+			await page.getByRole('button', { name: 'Use square shape' }).click();
+			await expect.element(page.getByTestId('avatar')).toHaveClass('square');
+		});
+
+		it('passes shape to a media component', async () => {
+			render(Tag, { media: Avatar, shape: 'square' });
+			await expect.element(page.selector('.fs-tag-media .fs-avatar')).toHaveClass('square');
 		});
 
 		it('renders a string secondary text', async () => {

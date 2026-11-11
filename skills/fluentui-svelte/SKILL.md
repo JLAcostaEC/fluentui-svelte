@@ -376,9 +376,11 @@ Folder, exports, status (only when the API may still change) and summary. Read
 - `info-bar`: `InfoBar`. An inline, non-intrusive status message with built-in severity levels and an optional close button.
 - `label`: `Label`. An accessible caption for a form control, with configurable size, weight, position, and required state.
 - `list-view`: `ListView`, `ListViewItem`, `ListViewItemBranch`. A vertically stacked set of items that can be focused, selected, and navigated with the keyboard.
+- `media-player`: `MediaPlayer`, `MediaPlayerButton`. A video player with Fluent transport controls: seek bar, volume, subtitles, playback speed, full screen and picture-in-picture, powered by Video.js.
 - `menu`: `Menu`, `MenuItem`, `MenuDivider`, `MenuGroup`, `MenuTrigger`, `MenuPopover`, `MenuList`, `MenuItemCheckbox`, `MenuItemRadio`, `MenuItemSwitch`, `MenuCommandBar`, `MenuCommandBarItem`, `ContextMenuTrigger`. A dropdown list of actions or options, with support for groups, submenus, checkable items, and context menus.
 - `number-box`: `NumberBox`. A numeric input with min, max, and step constraints and optional spinner buttons.
 - `persona`: `Persona`. A visual representation of a person combining an avatar, presence, and up to three lines of text.
+- `pill-button`: `PillButton`. A checkbox styled as a Fluent pill, with native form submission, validation and reset.
 - `progress-bar`: `ProgressBar`. A horizontal progress indicator that shows determinate or indeterminate progress, with paused and error states.
 - `progress-ring`: `ProgressRing`. A circular progress indicator that shows determinate or indeterminate progress, with paused and error states.
 - `radio-button`: `RadioButton`. A control for choosing a single option from a set of mutually exclusive choices.

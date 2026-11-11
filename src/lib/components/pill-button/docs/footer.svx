@@ -1,0 +1,24 @@
+<script lang="ts">
+	import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+	import { m } from '#i18n/messages.js';
+</script>
+
+## {m.pill_button_props_title()}
+
+<!-- props:PillButtonProps -->
+
+| Name                                                                       | Type                                                                                 | Default      | Description                                                                                 |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------ | ------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                                           | `HTMLInputElement` &#124; `null`                                                     |              | `<I18nMarkupMessage message={m.generated_fs_pill_button_props_props_ref} />`                |
+| `wrapperRef` _bindable_                                                    | `HTMLElement` &#124; `null`                                                          |              | `<I18nMarkupMessage message={m.generated_fs_pill_button_props_props_wrapper_ref} />`        |
+| `wrapperAttributes`                                                        | `HTMLAttributes<HTMLSpanElement>`                                                    |              | `<I18nMarkupMessage message={m.generated_fs_pill_button_props_props_wrapper_attributes} />` |
+| `checked` _bindable_                                                       | `boolean` &#124; `null`                                                              |              | `<I18nMarkupMessage message={m.generated_fs_pill_button_props_props_checked} />`            |
+| `appearance`                                                               | `'filled'` &#124; `'outline'` &#124; `'brand'`                                       | `'filled'`   | `<I18nMarkupMessage message={m.generated_fs_pill_button_props_props_appearance} />`         |
+| `size`                                                                     | `'small'` &#124; `'medium'` &#124; `'large'` &#124; `'extra-large'`                  | `'medium'`   | `<I18nMarkupMessage message={m.generated_fs_pill_button_props_props_size} />`               |
+| `shape`                                                                    | `'circular'` &#124; `'rounded'` &#124; `'square'`                                    | `'circular'` | `<I18nMarkupMessage message={m.generated_fs_pill_button_props_props_shape} />`              |
+| `icon`                                                                     | `Snippet<[SVGAttributes<SVGElement>]>` &#124; `Component<SVGAttributes<SVGElement>>` |              | `<I18nMarkupMessage message={m.generated_fs_pill_button_props_props_icon} />`               |
+| `media`                                                                    | `Snippet<[PillButtonMediaProps]>` &#124; `Component<PillButtonMediaProps>`           |              | `<I18nMarkupMessage message={m.generated_fs_pill_button_props_props_media} />`              |
+| `children`                                                                 | `Snippet`                                                                            |              | `<I18nMarkupMessage message={m.generated_fs_pill_button_props_props_children} />`           |
+| `HTMLInputAttributes` without `type`, `children`, `checked`, `size`, `on:` |                                                                                      |              |                                                                                             |
+
+<!-- /props:PillButtonProps -->

@@ -1,0 +1,296 @@
+<script lang="ts">
+  import { MediaPlayer, MediaPlayerButton, MenuItem, Button, type MediaPlayerProps } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { ArrowDownloadRegular, FlagRegular, HeartFilled, HeartRegular, ShareRegular, TextBulletListLtrRegular } from 'fluentui-icons-svelte';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '#i18n/messages.js';
+  import { docsLabels } from './labels.ts';
+
+  const labels = { ...docsLabels(), player: m.media_player_label_player() };
+
+  const SRC = 'https://stream.mux.com/BV3YZtogl89mg9VcNBhhnHm02Y34zI1nlMuMQfAbl3dM/highest.mp4';
+  const POSTER = 'https://image.mux.com/BV3YZtogl89mg9VcNBhhnHm02Y34zI1nlMuMQfAbl3dM/thumbnail.webp';
+  const TRACKS = [
+    { src: '/media/media-player-en.vtt', srclang: 'en', label: 'English', default: true },
+    { src: '/media/media-player-es.vtt', srclang: 'es', label: 'Español' }
+  ];
+  const WIDE = { style: 'max-width: 40rem' };
+
+  const PLAYLIST = [
+    { title: 'Mux sample', src: SRC },
+    { title: 'Big Buck Bunny', src: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4' },
+    { title: 'Jellyfish', src: 'https://test-videos.co.uk/vids/jellyfish/mp4/h264/360/Jellyfish_360_10s_1MB.mp4' },
+    { title: 'Sintel', src: 'https://test-videos.co.uk/vids/sintel/mp4/h264/360/Sintel_360_10s_1MB.mp4' }
+  ];
+  let index = $state(0);
+
+  let loop = $state(false);
+  let liked = $state(false);
+  let chapters = $state(false);
+  let shared = $state(0);
+
+  const VERTICAL = 'https://videos.pexels.com/video-files/4434242/4434242-hd_1080_1920_24fps.mp4';
+  const VERTICAL_POSTER = 'https://images.pexels.com/videos/4434242/pexels-photo-4434242.jpeg?auto=compress&cs=tinysrgb&w=600';
+
+  let player: MediaPlayerProps['playerRef'] = $state(null);
+
+  const deferredCode = `
+<MediaPlayer src="video.mp4" poster="poster.jpg" deferred="intent" aspectRatio="16 / 9" />`;
+
+  const compactCode = `
+<MediaPlayer src="video.mp4" poster="poster.jpg" layout="compact" />`;
+
+  const narrowCode = `
+<MediaPlayer src="video.mp4" poster="poster.jpg" wrapperAttributes={{ style: 'max-width: 20rem' }} />`;
+
+  const verticalCode = `
+<MediaPlayer
+	src="vertical.mp4"
+	poster="vertical-poster.jpg"
+	deferred="click"
+	aspectRatio="9 / 16"
+	wrapperAttributes={{ style: 'max-width: 20rem' }}
+/>`;
+
+  const volumeCode = `
+<MediaPlayer src="video.mp4" volumeOrientation="vertical" />`;
+
+  const tracksCode = `
+<MediaPlayer
+	src="video.mp4"
+	tracks={[
+		{ src: '/subtitles-en.vtt', srclang: 'en', label: 'English', default: true },
+		{ src: '/subtitles-es.vtt', srclang: 'es', label: 'Español' }
+	]}
+/>`;
+
+  const subtitlesStyleCode = `
+<MediaPlayer
+	src="video.mp4"
+	subtitlesAppearance="translucent"
+	subtitlesSize="small"
+	tracks={[{ src: '/subtitles-en.vtt', srclang: 'en', label: 'English', default: true }]}
+/>`;
+
+  const skipCode = `
+<MediaPlayer src="video.mp4" skipBackward={15} skipForward={15} playbackRates={[1, 1.5, 2]} />`;
+
+  const playlistCode = `
+<script>
+	import { MediaPlayer } from 'fluentui-svelte';
+
+	const playlist = ['intro.mp4', 'chapter-1.mp4', 'chapter-2.mp4'];
+	let index = $state(0);
+<\/script>
+
+<MediaPlayer
+	src={playlist[index]}
+	autoplay={index > 0}
+	onPrevious={index > 0 ? () => index-- : undefined}
+	onNext={index < playlist.length - 1 ? () => index++ : undefined}
+	onended={() => index < playlist.length - 1 && index++}
+/>`;
+
+  const customCode = `
+<script>
+	import { MediaPlayer, MediaPlayerButton, MenuItem } from 'fluentui-svelte';
+	import {
+		ArrowDownloadRegular,
+		FlagRegular,
+		HeartFilled,
+		HeartRegular,
+		ShareRegular,
+		TextBulletListLtrRegular
+	} from 'fluentui-icons-svelte';
+
+	let loop = $state(false);
+	let liked = $state(false);
+	let chapters = $state(false);
+
+	/** Copies a link to the current moment of the video. */
+	const share = (time = 0) => navigator.clipboard.writeText(\`\${location.href}#t=\${Math.floor(time)}\`);
+<\/script>
+
+<!-- The repeat button is built in: showRepeat shows it, and bind:loop follows it. -->
+<MediaPlayer src="video.mp4" showRepeat bind:loop>
+	{#snippet startContent()}
+		<MediaPlayerButton label="Like" aria-pressed={liked} onclick={() => (liked = !liked)}>
+			{#if liked}<HeartFilled />{:else}<HeartRegular />{/if}
+		</MediaPlayerButton>
+	{/snippet}
+	{#snippet centerContent()}
+		<MediaPlayerButton label="Chapters" aria-pressed={chapters} onclick={() => (chapters = !chapters)}>
+			<TextBulletListLtrRegular />
+		</MediaPlayerButton>
+	{/snippet}
+	{#snippet endContent({ store })}
+		<MediaPlayerButton label="Share this moment" class="optional" onclick={() => share(store?.currentTime)}>
+			<ShareRegular />
+		</MediaPlayerButton>
+	{/snippet}
+	{#snippet moreContent()}
+		<MenuItem icon={ArrowDownloadRegular}>Download</MenuItem>
+		<MenuItem icon={FlagRegular}>Report a problem</MenuItem>
+	{/snippet}
+</MediaPlayer>`;
+
+  const labelsCode = `
+<MediaPlayer
+	src="video.mp4"
+	label="Reproductor multimedia"
+	labels={{
+		play: 'Reproducir',
+		pause: 'Pausar',
+		fullScreen: 'Pantalla completa',
+		moreOptions: 'Más opciones',
+		skipBackward: (seconds) => \`Retroceder \${seconds} segundos\`
+	}}
+/>`;
+
+  const storeCode = `
+<script>
+	import { Button, MediaPlayer } from 'fluentui-svelte';
+
+	let player = $state(null);
+<\/script>
+
+<MediaPlayer src="video.mp4" bind:playerRef={player} />
+<Button onclick={() => player?.store.seek(0)}>Restart</Button>
+<Button onclick={() => player?.store.setPlaybackRate(2)}>Play at 2×</Button>`;
+</script>
+
+### {m.media_player_deferred_title()}
+<p class="fs-docs"><I18nMarkupMessage message={m.media_player_deferred_description} /></p>
+
+<Showcase columns={1} code={deferredCode} minHeight="0" disablePanZoom showOverflow fluid>
+
+    <MediaPlayer {labels} label={labels.player} src={SRC} poster={POSTER} deferred="intent" wrapperAttributes={WIDE} />
+</Showcase>
+
+### {m.media_player_compact_title()}
+<p class="fs-docs"><I18nMarkupMessage message={m.media_player_compact_description} /></p>
+
+<Showcase columns={1} code={compactCode} minHeight="0" disablePanZoom showOverflow fluid>
+
+    <MediaPlayer {labels} label={labels.player} src={SRC} poster={POSTER} preload="metadata" layout="compact" wrapperAttributes={WIDE} />
+</Showcase>
+
+### {m.media_player_narrow_title()}
+<p class="fs-docs"><I18nMarkupMessage message={m.media_player_narrow_description} /></p>
+
+<Showcase columns={1} code={narrowCode} minHeight="0" disablePanZoom showOverflow fluid>
+
+    <MediaPlayer {labels} label={labels.player} src={SRC} poster={POSTER} preload="metadata" wrapperAttributes={{ style: 'max-width: 20rem' }} />
+</Showcase>
+
+### {m.media_player_volume_title()}
+<p class="fs-docs"><I18nMarkupMessage message={m.media_player_volume_description} /></p>
+
+<Showcase columns={1} code={volumeCode} minHeight="0" disablePanZoom showOverflow fluid>
+
+    <MediaPlayer {labels} label={labels.player} src={SRC} poster={POSTER} preload="metadata" volumeOrientation="vertical" wrapperAttributes={WIDE} />
+</Showcase>
+
+### {m.media_player_vertical_title()}
+<p class="fs-docs"><I18nMarkupMessage message={m.media_player_vertical_description} /></p>
+
+<Showcase columns={1} code={verticalCode} minHeight="0" disablePanZoom showOverflow fluid>
+
+    <MediaPlayer {labels} label={labels.player} src={VERTICAL} poster={VERTICAL_POSTER} deferred="visible" aspectRatio="9 / 16" wrapperAttributes={{ style: 'max-width: 20rem' }} />
+</Showcase>
+
+### {m.media_player_tracks_title()}
+<p class="fs-docs"><I18nMarkupMessage message={m.media_player_tracks_description} /></p>
+
+<Showcase columns={1} code={tracksCode} minHeight="0" disablePanZoom showOverflow fluid>
+
+    <MediaPlayer {labels} label={labels.player} src={SRC} poster={POSTER} preload="metadata" crossorigin="anonymous" tracks={TRACKS} wrapperAttributes={WIDE} />
+</Showcase>
+
+### {m.media_player_subtitles_style_title()}
+<p class="fs-docs"><I18nMarkupMessage message={m.media_player_subtitles_style_description} /></p>
+
+<Showcase columns={1} code={subtitlesStyleCode} minHeight="0" disablePanZoom showOverflow fluid>
+
+    <MediaPlayer {labels} label={labels.player} src={SRC} poster={POSTER} preload="metadata" crossorigin="anonymous" tracks={TRACKS} subtitlesAppearance="translucent" subtitlesSize="small" wrapperAttributes={WIDE} />
+</Showcase>
+
+### {m.media_player_skip_title()}
+<p class="fs-docs"><I18nMarkupMessage message={m.media_player_skip_description} /></p>
+
+<Showcase columns={1} code={skipCode} minHeight="0" disablePanZoom showOverflow fluid>
+
+    <MediaPlayer {labels} label={labels.player} src={SRC} poster={POSTER} preload="metadata" skipBackward={15} skipForward={15} playbackRates={[1, 1.5, 2]} wrapperAttributes={WIDE} />
+</Showcase>
+
+### {m.media_player_playlist_title()}
+<p class="fs-docs"><I18nMarkupMessage message={m.media_player_playlist_description} /></p>
+
+<Showcase columns={1} code={playlistCode} minHeight="0" disablePanZoom showOverflow fluid>
+
+    <div style="display: grid; gap: 0.5rem; max-width: 40rem; width: 100%;">
+      <MediaPlayer {labels}
+        src={PLAYLIST[index].src}
+        label={PLAYLIST[index].title}
+        preload="metadata"
+        autoplay={index > 0}
+        onPrevious={index > 0 ? () => index-- : undefined}
+        onNext={index < PLAYLIST.length - 1 ? () => index++ : undefined}
+        onended={() => index < PLAYLIST.length - 1 && index++}
+      />
+      <span>{index + 1} / {PLAYLIST.length} · {PLAYLIST[index].title}</span>
+    </div>
+</Showcase>
+
+### {m.media_player_custom_title()}
+<p class="fs-docs"><I18nMarkupMessage message={m.media_player_custom_description} /></p>
+
+<Showcase columns={1} code={customCode} minHeight="0" disablePanZoom showOverflow fluid>
+
+    <div style="display: grid; gap: 0.5rem; max-width: 40rem; width: 100%;">
+      <MediaPlayer {labels} label={labels.player} src={SRC} poster={POSTER} preload="metadata" showRepeat bind:loop>
+        {#snippet startContent()}
+          <MediaPlayerButton label={m.media_player_example_like()} aria-pressed={liked} onclick={() => (liked = !liked)}>
+            {#if liked}<HeartFilled />{:else}<HeartRegular />{/if}
+          </MediaPlayerButton>
+        {/snippet}
+        {#snippet centerContent()}
+          <MediaPlayerButton label={m.media_player_example_chapters()} aria-pressed={chapters} onclick={() => (chapters = !chapters)}>
+            <TextBulletListLtrRegular />
+          </MediaPlayerButton>
+        {/snippet}
+        {#snippet endContent()}
+          <MediaPlayerButton label={m.media_player_example_share()} class="optional" onclick={() => shared++}>
+            <ShareRegular />
+          </MediaPlayerButton>
+        {/snippet}
+        {#snippet moreContent()}
+          <MenuItem icon={ArrowDownloadRegular}>{m.media_player_example_download()}</MenuItem>
+          <MenuItem icon={FlagRegular}>{m.media_player_example_report()}</MenuItem>
+        {/snippet}
+      </MediaPlayer>
+      <span>{m.media_player_example_status({ repeat: loop ? m.media_player_example_on() : m.media_player_example_off(), like: liked ? m.media_player_example_on() : m.media_player_example_off(), chapters: chapters ? m.media_player_example_on() : m.media_player_example_off(), shared })}</span>
+    </div>
+</Showcase>
+
+### {m.media_player_store_title()}
+<p class="fs-docs"><I18nMarkupMessage message={m.media_player_store_description} /></p>
+
+<Showcase columns={1} code={storeCode} minHeight="0" disablePanZoom showOverflow fluid>
+
+    <div style="display: grid; gap: 0.5rem; max-width: 40rem; width: 100%;">
+      <MediaPlayer {labels} label={labels.player} src={SRC} poster={POSTER} preload="metadata" bind:playerRef={player} />
+      <div style="display: flex; gap: 0.5rem;">
+        <Button appearance="standard" onclick={() => player?.store.seek(0)}>{m.media_player_example_restart()}</Button>
+        <Button appearance="standard" onclick={() => player?.store.setPlaybackRate(2)}>{m.media_player_example_double_speed()}</Button>
+      </div>
+    </div>
+</Showcase>
+
+### {m.media_player_labels_title()}
+<p class="fs-docs"><I18nMarkupMessage message={m.media_player_labels_description} /></p>
+
+<Showcase columns={1} code={labelsCode} minHeight="0" disablePanZoom showOverflow fluid>
+
+    <MediaPlayer {labels} label={labels.player} src={SRC} poster={POSTER} preload="metadata" wrapperAttributes={WIDE} />
+</Showcase>

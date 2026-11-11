@@ -108,9 +108,15 @@ A tag can render a custom icon.
 
 A tag can render media, for example an Avatar. Do not use it together with `icon`.
 
+The media snippet receives the tag's current `shape`; forward it to `Avatar`. A media component receives the same value as a prop. Shape changes are reactive, and snippets that do not accept arguments still work.
+
 ```svelte
-{#snippet avatar()}
-	<Avatar name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
+<script lang="ts">
+	import { Avatar, Tag, type TagMediaProps } from 'fluentui-svelte';
+</script>
+
+{#snippet avatar({ shape }: TagMediaProps)}
+	<Avatar {shape} name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
 {/snippet}
 
 <Tag media={avatar}>Primary text</Tag>
@@ -141,8 +147,12 @@ A tag can have a second line of text, given as a string or a snippet.
 A tag can be `circular`, `rounded` or `square`. The default is `circular`.
 
 ```svelte
-{#snippet avatar()}
-	<Avatar name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
+<script lang="ts">
+	import { Avatar, Tag, type TagMediaProps } from 'fluentui-svelte';
+</script>
+
+{#snippet avatar({ shape }: TagMediaProps)}
+	<Avatar {shape} name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
 {/snippet}
 
 <Tag media={avatar}>Circular</Tag>
@@ -159,14 +169,18 @@ A tag can be `circular`, `rounded` or `square`. The default is `circular`.
 A tag supports `medium`, `small` and `extra-small` sizes. The default is `medium`.
 
 ```svelte
-{#snippet avatar()}
-	<Avatar name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
+<script lang="ts">
+	import { Avatar, Tag, type TagMediaProps } from 'fluentui-svelte';
+</script>
+
+{#snippet avatar({ shape }: TagMediaProps)}
+	<Avatar {shape} name="Katri Athokas" size={28} badge={{ status: 'busy' }} />
 {/snippet}
-{#snippet smallAvatar()}
-	<Avatar name="Katri Athokas" size={20} badge={{ status: 'busy' }} />
+{#snippet smallAvatar({ shape }: TagMediaProps)}
+	<Avatar {shape} name="Katri Athokas" size={20} badge={{ status: 'busy' }} />
 {/snippet}
-{#snippet extraSmallAvatar()}
-	<Avatar name="Katri Athokas" size={16} badge={{ status: 'busy' }} />
+{#snippet extraSmallAvatar({ shape }: TagMediaProps)}
+	<Avatar {shape} name="Katri Athokas" size={16} badge={{ status: 'busy' }} />
 {/snippet}
 
 <Tag>Medium</Tag>
@@ -189,7 +203,7 @@ A tag supports `medium`, `small` and `extra-small` sizes. The default is `medium
 
 | Name                      | Type                                                            | Default          | Description                                                                                                                                                                                                                                |
 | ------------------------- | --------------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `appearance`              | `'filled'` &#124; `'outline'` &#124; `'brand'`                  | `'filled'`       | The tag can have a filled, outlined or brand appearance. Falls back to the `appearance` of the `TagGroup` it is in.                                                                                                                        |
+| `appearance`              | `PillButtonAppearance`                                          | `'filled'`       | The tag can have a filled, outlined or brand appearance. Falls back to the `appearance` of the `TagGroup` it is in.                                                                                                                        |
 | `size`                    | `'extra-small'` &#124; `'small'` &#124; `'medium'`              | `'medium'`       | The tag comes in three sizes. Falls back to the `size` of the `TagGroup` it is in.                                                                                                                                                         |
 | `shape`                   | `'circular'` &#124; `'rounded'` &#124; `'square'`               | `'circular'`     | The tag can have a circular, rounded or square shape.                                                                                                                                                                                      |
 | `disabled`                | `boolean`                                                       | `false`          | Shows that the tag cannot be interacted with. A tag inside a disabled `TagGroup` is disabled too.                                                                                                                                          |
@@ -198,7 +212,7 @@ A tag supports `medium`, `small` and `extra-small` sizes. The default is `medium
 | `interactive`             | `boolean`                                                       | `false`          | Renders the tag as an interaction tag: a primary button that carries the action, followed, when the tag is dismissible, by a separate dismiss button. Use it for a tag that has a primary action, and a plain tag for one that does not.   |
 | `value`                   | `string`                                                        |                  | Identifies the tag inside a `TagGroup`. It is what `onDismiss` and `onTagSelect` report. Falls back to a generated id.                                                                                                                     |
 | `icon`                    | `Snippet` &#124; `Component`                                    |                  | An icon rendered before the text. Do not use it together with `media`.                                                                                                                                                                     |
-| `media`                   | `Snippet` &#124; `Component`                                    |                  | A visual element rendered before the text, usually an `Avatar`. Do not use it together with `icon`.                                                                                                                                        |
+| `media`                   | `Snippet` &#124; `Component`                                    |                  | A visual element rendered before the text, usually an `Avatar`. Receives the tag's current `shape`; forward it to the media component. Do not use it together with `icon`.                                                                 |
 | `secondaryText`           | `string` &#124; `Snippet`                                       |                  | A second line of text that describes or complements the main text.                                                                                                                                                                         |
 | `dismissIcon`             | `Snippet` &#124; `Component`                                    | `DismissRegular` | The icon of the dismiss control.                                                                                                                                                                                                           |
 | `dismissLabel`            | `string`                                                        | `'Dismiss'`      | The accessible name of the dismiss control. When the tag is named through `aria-label` or `aria-labelledby` instead, the dismiss icon is hidden from assistive technologies.                                                               |
@@ -371,7 +385,7 @@ A group can set the default size of all its tags. It supports `medium`, `small` 
 | Name                        | Type                                                                      | Default     | Description                                                                                                    |
 | --------------------------- | ------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------- |
 | `size`                      | `'extra-small'` &#124; `'small'` &#124; `'medium'`                        | `'medium'`  | The size given to the tags of the group that do not set their own.                                             |
-| `appearance`                | `'filled'` &#124; `'outline'` &#124; `'brand'`                            |             | The appearance given to the tags of the group that do not set their own.                                       |
+| `appearance`                | `PillButtonAppearance`                                                    |             | The appearance given to the tags of the group that do not set their own.                                       |
 | `disabled`                  | `boolean`                                                                 | `false`     | Disables every tag of the group.                                                                               |
 | `dismissible`               | `boolean`                                                                 |             | Makes the tags of the group that do not set their own dismissible.                                             |
 | `selectedValues` _bindable_ | `string[]`                                                                | `[]`        | The values of the selected interactive tags.                                                                   |

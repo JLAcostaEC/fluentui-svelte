@@ -99,7 +99,7 @@
 		"tabspot": "^0.8.0"
 	},
 	"peerDependencies": {
-		"svelte": "^5.0.0"
+		"svelte": "^5.29.0"
 	},
 	"devDependencies": {
 		"@changesets/changelog-github": "^1.0.1",

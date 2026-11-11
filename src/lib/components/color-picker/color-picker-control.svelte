@@ -90,6 +90,7 @@
 	$effect(() => {
 		ctx.setColor(parsed ? value : '#ffffff');
 		ref?.setCustomValidity(value && !parsed ? validationMessage : '');
+		if (ref && untrack(() => native.invalid) && ref.validity.valid) native.invalid = false;
 	});
 
 	$effect(() => {
@@ -222,6 +223,7 @@
 	{...wrapperAttributes}
 	bind:this={wrapperRef}
 	role="group"
+	tabindex="-1"
 	aria-label={attributes['aria-label'] ?? label}
 	aria-labelledby={attributes['aria-labelledby'] ?? labelId}
 	aria-describedby={attributes['aria-describedby']}
@@ -426,6 +428,9 @@
 		aria-label={attributes['aria-label'] ?? label}
 		aria-labelledby={attributes['aria-labelledby'] ?? labelId}
 		aria-hidden={native.reported ? undefined : 'true'}
+		onfocus={() => {
+			if (!native.reported) (readonly ? wrapperRef : hueRef)?.focus();
+		}}
 	/>
 </div>
 

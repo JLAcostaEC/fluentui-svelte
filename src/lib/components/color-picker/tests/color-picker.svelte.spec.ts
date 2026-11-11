@@ -233,6 +233,39 @@ describe('ColorPicker', () => {
 		await expect.element(hue).not.toHaveAttribute('aria-invalid');
 		expect(document.querySelector('form')!.checkValidity()).toBe(true);
 	});
+	it('clears reported invalid state after an external correction without firing edit events', async () => {
+		const onColorChange = vi.fn();
+		const onchange = vi.fn();
+		render(Wrapper, { initial: '', pickerProps: { required: true, onColorChange, onchange } });
+		expect(document.querySelector('form')!.checkValidity()).toBe(false);
+		const hue = page.getByRole('slider', { name: 'Hue', exact: true });
+		await expect.element(hue).toHaveAttribute('aria-invalid', 'true');
+		await page.getByRole('button', { name: 'Set blue' }).click();
+		await expect.element(hue).not.toHaveAttribute('aria-invalid');
+		expect(document.querySelector('form')!.checkValidity()).toBe(true);
+		expect(onColorChange).not.toHaveBeenCalled();
+		expect(onchange).not.toHaveBeenCalled();
+	});
+	it.each([false, true])('focuses a visible control when its label is activated (readonly: %s)', async (readonly) => {
+		render(Wrapper, { pickerProps: { readonly } });
+		const field = document.querySelector<HTMLInputElement>('input[name="color"]')!;
+		const label = document.createElement('label');
+		label.htmlFor = field.id;
+		label.textContent = 'Choose color';
+		document.querySelector('form')!.appendChild(label);
+		await page.getByText('Choose color', { exact: true }).click();
+		const target = readonly
+			? document.querySelector('.fs-color-picker')
+			: page.getByRole('slider', { name: 'Hue', exact: true }).element();
+		await expect.poll(() => document.activeElement).toBe(target);
+	});
+	it('keeps focus on the native field while reporting validation', async () => {
+		render(Wrapper, { initial: '', pickerProps: { required: true } });
+		const field = document.querySelector<HTMLInputElement>('input[name="color"]')!;
+		expect(document.querySelector('form')!.reportValidity()).toBe(false);
+		await expect.poll(() => document.activeElement).toBe(field);
+		expect(field.hasAttribute('aria-hidden')).toBe(false);
+	});
 	it('keeps readonly colors in the form without allowing edits', async () => {
 		render(Wrapper, { pickerProps: { readonly: true } });
 		await expect.element(page.getByRole('slider', { name: 'Hue', exact: true })).toBeDisabled();

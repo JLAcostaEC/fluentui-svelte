@@ -90,6 +90,7 @@
 	},
 	"dependencies": {
 		"@floating-ui/dom": "^1.8.0",
+		"@useupup/core": "3.3.5",
 		"@videojs/html": "10.3.0",
 		"fluentui-icons-svelte": "^1.2.0",
 		"mode-watcher": "^1.1.0",

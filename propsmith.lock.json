@@ -1631,6 +1631,181 @@
       },
       "source": "src/lib/components/expander/types.ts#ExpanderProps.summaryRef"
     },
+    "generated_fs_file_uploader_props_props_accept": {
+      "en": "4f6c6e9f",
+      "locales": {
+        "es": "4f6c6e9f"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.accept"
+    },
+    "generated_fs_file_uploader_props_props_auto_upload": {
+      "en": "6968f050",
+      "locales": {
+        "es": "6968f050"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.autoUpload"
+    },
+    "generated_fs_file_uploader_props_props_button_attributes": {
+      "en": "86e5ac41",
+      "locales": {
+        "es": "86e5ac41"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.buttonAttributes"
+    },
+    "generated_fs_file_uploader_props_props_button_ref": {
+      "en": "cf50e095",
+      "locales": {
+        "es": "cf50e095"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.buttonRef"
+    },
+    "generated_fs_file_uploader_props_props_description": {
+      "en": "e332452d",
+      "locales": {
+        "es": "e332452d"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.description"
+    },
+    "generated_fs_file_uploader_props_props_fetch_link": {
+      "en": "a8cbccd7",
+      "locales": {
+        "es": "a8cbccd7"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.fetchLink"
+    },
+    "generated_fs_file_uploader_props_props_files": {
+      "en": "be9cfdc6",
+      "locales": {
+        "es": "be9cfdc6"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.files"
+    },
+    "generated_fs_file_uploader_props_props_labels": {
+      "en": "b42d4079",
+      "locales": {
+        "es": "b42d4079"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.labels"
+    },
+    "generated_fs_file_uploader_props_props_max_file_size": {
+      "en": "87ced420",
+      "locales": {
+        "es": "87ced420"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.maxFileSize"
+    },
+    "generated_fs_file_uploader_props_props_max_files": {
+      "en": "1a91364a",
+      "locales": {
+        "es": "1a91364a"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.maxFiles"
+    },
+    "generated_fs_file_uploader_props_props_max_total_file_size": {
+      "en": "eeeb28b2",
+      "locales": {
+        "es": "eeeb28b2"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.maxTotalFileSize"
+    },
+    "generated_fs_file_uploader_props_props_min_file_size": {
+      "en": "66f9d8ea",
+      "locales": {
+        "es": "66f9d8ea"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.minFileSize"
+    },
+    "generated_fs_file_uploader_props_props_on_file_removed": {
+      "en": "6248aefb",
+      "locales": {
+        "es": "6248aefb"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.onFileRemoved"
+    },
+    "generated_fs_file_uploader_props_props_on_files_added": {
+      "en": "88897b55",
+      "locales": {
+        "es": "88897b55"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.onFilesAdded"
+    },
+    "generated_fs_file_uploader_props_props_on_reject": {
+      "en": "2cd16718",
+      "locales": {
+        "es": "2cd16718"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.onReject"
+    },
+    "generated_fs_file_uploader_props_props_on_upload_complete": {
+      "en": "dedbadba",
+      "locales": {
+        "es": "dedbadba"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.onUploadComplete"
+    },
+    "generated_fs_file_uploader_props_props_on_upload_error": {
+      "en": "6e1688ad",
+      "locales": {
+        "es": "6e1688ad"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.onUploadError"
+    },
+    "generated_fs_file_uploader_props_props_ref": {
+      "en": "0236fcc9",
+      "locales": {
+        "es": "0236fcc9"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.ref"
+    },
+    "generated_fs_file_uploader_props_props_show_limits": {
+      "en": "7f3bcfde",
+      "locales": {
+        "es": "7f3bcfde"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.showLimits"
+    },
+    "generated_fs_file_uploader_props_props_sources": {
+      "en": "3d50551f",
+      "locales": {
+        "es": "3d50551f"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.sources"
+    },
+    "generated_fs_file_uploader_props_props_upload": {
+      "en": "91cc01ef",
+      "locales": {
+        "es": "91cc01ef"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.upload"
+    },
+    "generated_fs_file_uploader_props_props_uploaded_value": {
+      "en": "0ba6bd53",
+      "locales": {
+        "es": "0ba6bd53"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.uploadedValue"
+    },
+    "generated_fs_file_uploader_props_props_uploader": {
+      "en": "cd990cab",
+      "locales": {
+        "es": "cd990cab"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.uploader"
+    },
+    "generated_fs_file_uploader_props_props_wrapper_attributes": {
+      "en": "0a0dad7a",
+      "locales": {
+        "es": "0a0dad7a"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.wrapperAttributes"
+    },
+    "generated_fs_file_uploader_props_props_wrapper_ref": {
+      "en": "cd9a3eca",
+      "locales": {
+        "es": "cd9a3eca"
+      },
+      "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.wrapperRef"
+    },
     "generated_fs_flyout_props_props_children": {
       "en": "d95ba4c0",
       "locales": {
@@ -4391,7 +4566,9 @@
     },
     "generated_fs_tag_props_props_media": {
       "en": "f01bc52b",
-      "locales": {},
+      "locales": {
+        "es": "f01bc52b"
+      },
       "source": "src/lib/components/tag/types.ts#TagProps.media"
     },
     "generated_fs_tag_props_props_on_dismiss": {

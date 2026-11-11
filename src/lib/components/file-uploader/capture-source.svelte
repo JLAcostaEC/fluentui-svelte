@@ -25,14 +25,20 @@
 	let elapsed = $state(0);
 	let result: { file: File; url: string } | null = $state(null);
 	let videoRef: HTMLVideoElement | null = $state(null);
+	/** Whether the preview has frames with a size: before, a photo or a recording would be empty. */
+	let hasFrames = $state(false);
 
 	let stream: MediaStream | null = null;
+	/** Counts the requests for a stream: one that answers after a newer request, or after the view closed, is stopped. */
+	let attempt = 0;
+	let closed = false;
 	let recorder: MediaRecorder | null = null;
 	let timer: ReturnType<typeof setInterval> | undefined;
 	/** Stops the mirrored copy of the camera a recording is made from. */
 	let stopMirror: (() => void) | null = null;
 
 	const showsVideo = $derived(kind !== 'microphone');
+	const ready = $derived(!showsVideo || hasFrames);
 	/** The front camera shows a mirror image, and what it captures keeps it: the result looks as previewed. */
 	const mirrored = $derived(kind === 'camera' && facing === 'user');
 	const clock = $derived(
@@ -54,19 +60,35 @@
 	async function start() {
 		release();
 		phase = 'starting';
+		const current = ++attempt;
+		const stale = () => closed || current !== attempt;
 		try {
-			stream = await request();
-			stream.getVideoTracks()[0]?.addEventListener('ended', () => {
-				// The browser stopped sharing the screen: what was recorded is kept.
+			const next = await request();
+			if (stale()) {
+				next.getTracks().forEach((track) => track.stop());
+				return;
+			}
+			stream = next;
+			(next.getVideoTracks()[0] ?? next.getAudioTracks()[0])?.addEventListener('ended', () => {
+				// The browser stopped sharing the screen, or the device went away: what was recorded is kept.
 				if (recorder?.state === 'recording') recorder.stop();
-				else if (phase === 'live') phase = 'idle';
+				else if (phase === 'live' && stream === next) {
+					release();
+					if (kind === 'screen') phase = 'idle';
+					else {
+						message = labels.captureError;
+						phase = 'error';
+					}
+				}
 			});
 			if (kind === 'camera') {
 				const inputs = (await navigator.mediaDevices.enumerateDevices()).filter((d) => d.kind === 'videoinput');
+				if (stale()) return;
 				canSwitch = inputs.length > 1;
 			}
 			phase = 'live';
 		} catch (error) {
+			if (stale()) return;
 			const name = (error as Error).name;
 			// Closing the screen picker is not a failure: the button to open it comes back.
 			if (kind === 'screen' && name === 'NotAllowedError') {
@@ -88,6 +110,7 @@
 		stopMirror = null;
 		stream?.getTracks().forEach((track) => track.stop());
 		stream = null;
+		hasFrames = false;
 		if (result) URL.revokeObjectURL(result.url);
 		result = null;
 		elapsed = 0;
@@ -100,8 +123,12 @@
 		phase = 'review';
 	}
 
+	function measure(event: Event & { currentTarget: HTMLVideoElement }) {
+		hasFrames = event.currentTarget.videoWidth > 0 && event.currentTarget.videoHeight > 0;
+	}
+
 	function takePhoto() {
-		if (!videoRef) return;
+		if (!videoRef || !hasFrames) return;
 		const canvas = document.createElement('canvas');
 		canvas.width = videoRef.videoWidth;
 		canvas.height = videoRef.videoHeight;
@@ -143,7 +170,7 @@
 	}
 
 	function record() {
-		if (!stream) return;
+		if (!stream || !ready) return;
 		const chunks: Blob[] = [];
 		recorder = new MediaRecorder(recordingStream(stream));
 		recorder.ondataavailable = (event) => {
@@ -183,6 +210,7 @@
 		// The screen picker needs a press of its own; the camera and the microphone ask right away.
 		if (kind !== 'screen') void start();
 		return () => {
+			closed = true;
 			if (recorder?.state === 'recording') {
 				recorder.onstop = null;
 				recorder.stop();
@@ -225,7 +253,15 @@
 	{:else}
 		<div class="stage">
 			{#if showsVideo}
-				<video bind:this={videoRef} autoplay muted playsinline class:mirrored></video>
+				<video
+					bind:this={videoRef}
+					autoplay
+					muted
+					playsinline
+					class={{ mirrored }}
+					onloadedmetadata={measure}
+					onresize={measure}
+				></video>
 			{:else}
 				<MicRegular class="placeholder-icon" aria-hidden="true" />
 			{/if}
@@ -240,7 +276,7 @@
 				</Button>
 			{/if}
 			{#if showsVideo && phase === 'live'}
-				<Button type="button" onclick={takePhoto}>
+				<Button type="button" disabled={!ready} onclick={takePhoto}>
 					<CameraRegular />
 					{labels.takePhoto}
 				</Button>
@@ -251,7 +287,7 @@
 					{labels.stop}
 				</Button>
 			{:else}
-				<Button type="button" appearance="accent" onclick={record}>
+				<Button type="button" appearance="accent" disabled={!ready} onclick={record}>
 					<RecordRegular />
 					{labels.record}
 				</Button>

@@ -44,6 +44,3 @@ src/site/utils/llms-index.js
 
 # tokenade — legacy per-project embedding model cache (now global)
 .fastembed_cache/
-
-# tgrep index
-.tgrep/

@@ -148,7 +148,7 @@ export type FileUploaderRenderState = {
 
 /** @propsmith FileUploaderProps */
 export type FileUploaderProps = {
-	/** The files of the list. Read it, or bind it, to know what the user chose and what was uploaded.
+	/** The files of the list. Read it, or bind it, to know what the user chose and what was uploaded. The files it starts with join the list.
 	 * @default []
 	 * @bindable
 	 */

@@ -3,14 +3,17 @@
 	import { PREFIX } from '#constants';
 	import { deriveFetchedFileName } from '@useupup/core/internal';
 	import type { FileUploaderLabels } from './types.ts';
+	import { formatSize } from './utils.ts';
 
 	let {
 		labels,
 		fetchLink = (url, signal) => fetch(url, { signal }),
+		maxFileSize,
 		onAdd
 	}: {
 		labels: FileUploaderLabels;
 		fetchLink?: (url: string, signal: AbortSignal) => Promise<Response>;
+		maxFileSize?: number;
 		onAdd: (file: File) => void;
 	} = $props();
 
@@ -19,8 +22,27 @@
 
 	let url = $state('');
 	let loading = $state(false);
-	let error = $state(false);
+	let error = $state('');
 	let controller: AbortController | null = null;
+
+	/** The body of a response, or `null` once it passes the limit: the download stops there, whatever the headers say. */
+	async function readBody(response: Response, limit: number | undefined): Promise<Blob | null> {
+		if (limit === undefined || !response.body) return response.blob();
+		const type = response.headers.get('content-type')?.split(';')[0].trim() ?? '';
+		const reader = response.body.getReader();
+		const chunks: BlobPart[] = [];
+		let size = 0;
+		for (;;) {
+			const { done, value } = await reader.read();
+			if (done) return new Blob(chunks, { type });
+			size += value.byteLength;
+			if (size > limit) {
+				await reader.cancel();
+				return null;
+			}
+			chunks.push(value);
+		}
+	}
 
 	async function fetchFile() {
 		const link = url.trim();
@@ -28,14 +50,16 @@
 		controller?.abort();
 		controller = new AbortController();
 		loading = true;
-		error = false;
+		error = '';
 		try {
 			const response = await fetchLink(link, controller.signal);
 			if (!response.ok) throw new Error(`${response.status}`);
-			const blob = await response.blob();
-			onAdd(new File([blob], deriveFetchedFileName(link, response, blob), { type: blob.type }));
+			const blob = await readBody(response, maxFileSize);
+			const name = deriveFetchedFileName(link, response, blob ?? new Blob());
+			if (!blob) error = labels.tooLarge(name, formatSize(maxFileSize!));
+			else onAdd(new File([blob], name, { type: blob.type }));
 		} catch (cause) {
-			if ((cause as Error).name !== 'AbortError') error = true;
+			if ((cause as Error).name !== 'AbortError') error = labels.linkError;
 		} finally {
 			loading = false;
 		}
@@ -51,10 +75,10 @@
 			bind:value={url}
 			placeholder="https://"
 			aria-label={labels.link}
-			aria-invalid={error || undefined}
+			aria-invalid={error ? true : undefined}
 			aria-describedby={error ? ERROR_ID : undefined}
 			justify
-			oninput={() => (error = false)}
+			oninput={() => (error = '')}
 			onkeydown={(event: KeyboardEvent) => {
 				// The uploader may be inside a form, which Enter would submit.
 				if (event.key !== 'Enter') return;
@@ -70,7 +94,7 @@
 		<ProgressRing size={24} aria-label={labels.loading} />
 	{/if}
 	{#if error}
-		<span class="error" id={ERROR_ID}>{labels.linkError}</span>
+		<span class="error" id={ERROR_ID}>{error}</span>
 	{/if}
 </div>
 

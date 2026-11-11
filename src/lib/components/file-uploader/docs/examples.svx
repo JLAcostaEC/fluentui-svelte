@@ -160,7 +160,8 @@ const ALLOWED_HOSTS = ['images.example.com', 'files.example.com'];
 export async function GET({ url, fetch }) {
 	const link = new URL(url.searchParams.get('url') ?? '');
 	if (link.protocol !== 'https:' || !ALLOWED_HOSTS.includes(link.hostname)) error(400, 'Link not allowed');
-	const response = await fetch(link);
+	// A redirect could lead to a host out of the list: it fails instead.
+	const response = await fetch(link, { redirect: 'error' }).catch(() => error(502, 'The file could not be fetched'));
 	if (!response.ok) error(502, 'The file could not be fetched');
 	return new Response(response.body, {
 		headers: {

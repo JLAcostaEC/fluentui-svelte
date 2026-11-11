@@ -1,7 +1,7 @@
 import { page, userEvent } from 'vitest/browser';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { googleDriveSource } from '#lib/index.js';
+import { googleDriveSource, type FileUploaderFile } from '#lib/index.js';
 import FileUploaderTestWrapper from './FileUploaderTestWrapper.svelte';
 
 const file = (name: string, size = 10, type = 'text/plain') => new File(['x'.repeat(size)], name, { type });
@@ -292,13 +292,49 @@ describe('uploading', () => {
 		release();
 
 		await expect.element(page.getByText('Upload failed')).toBeInTheDocument();
-		expect(onUploadError).toHaveBeenCalled();
+		// Once, for the file: not again for the run it failed.
+		expect(onUploadError).toHaveBeenCalledOnce();
+		expect(onUploadError.mock.calls[0][1]).toMatchObject({ name: 'report.pdf' });
 		expect(field().validationMessage).toBe('Some files failed to upload. Retry or remove them.');
 
 		await page.getByRole('button', { name: 'Retry report.pdf' }).click();
 
 		await expect.element(page.getByText('Uploaded')).toBeInTheDocument();
 		expect(field().validity.valid).toBe(true);
+	});
+
+	it('uploads a file added while a failed one is retried, once the retry ends', async () => {
+		stubStorage((attempt) => (attempt === 0 ? 500 : 200));
+		render(FileUploaderTestWrapper, { upload: { ...upload, maxRetries: 0 }, autoUpload: true, multiple: true });
+
+		await pick(file('first.pdf', 10, 'application/pdf'));
+		release();
+		await expect.element(page.getByText('Upload failed')).toBeInTheDocument();
+
+		// A storage that holds the next uploads until it is released.
+		stubStorage();
+		await page.getByRole('button', { name: 'Retry first.pdf' }).click();
+		await expect.element(page.getByText('Uploading 50%')).toBeInTheDocument();
+		await pick(file('second.pdf', 10, 'application/pdf'));
+		release();
+
+		await expect.element(page.getByText('Uploaded').nth(1)).toBeInTheDocument();
+		expect(received.map((request) => request.name).sort()).toEqual(['first.pdf', 'second.pdf']);
+	});
+
+	it('reports the end of the uploads when the file that waited for them was removed', async () => {
+		stubStorage();
+		const onUploadComplete = vi.fn();
+		render(FileUploaderTestWrapper, { upload, autoUpload: true, multiple: true, onUploadComplete });
+
+		await pick(file('first.pdf', 10, 'application/pdf'));
+		await expect.element(page.getByText('Uploading 50%')).toBeInTheDocument();
+		await pick(file('second.pdf', 10, 'application/pdf'));
+		await page.getByRole('button', { name: 'Remove second.pdf' }).click();
+		release();
+
+		await expect.element(page.getByText('Uploaded')).toBeInTheDocument();
+		await vi.waitFor(() => expect(onUploadComplete).toHaveBeenCalledOnce());
 	});
 });
 
@@ -315,6 +351,25 @@ describe('limits', () => {
 
 		const button = page.getByRole('button', { name: 'Browse' });
 		await expect.element(button).toHaveAccessibleDescription(/5 files max.*10 MB each/);
+	});
+
+	it('shows the total size limit when it takes only one file', async () => {
+		render(FileUploaderTestWrapper, { maxTotalFileSize: 20 * 1024 * 1024, showLimits: true });
+
+		await expect.element(page.getByRole('button', { name: 'Browse' })).toHaveAccessibleDescription(/20 MB/);
+	});
+});
+
+describe('initial files', () => {
+	it('lists the files it starts with, and keeps them when another is added', async () => {
+		const files = [file('seed.txt')] as unknown as FileUploaderFile[];
+		render(FileUploaderTestWrapper, { files, multiple: true });
+
+		await expect.element(names()).toHaveTextContent('seed.txt');
+		await pick(file('more.txt'));
+
+		await expect.element(names()).toHaveTextContent('seed.txt,more.txt');
+		expect([...field().files!].map((f) => f.name)).toEqual(['seed.txt', 'more.txt']);
 	});
 });
 
@@ -347,6 +402,63 @@ describe('sources', () => {
 		await expect.element(names()).toHaveTextContent('manual.pdf');
 		expect(onsubmit).not.toHaveBeenCalled();
 		await expect.element(page.getByRole('button', { name: 'Link' })).toHaveFocus();
+	});
+
+	it('stops the download of a link once it passes maxFileSize', async () => {
+		// A body with no end: only a download that stops at the limit gets an answer.
+		const cancel = vi.fn();
+		const body = new ReadableStream({
+			pull: (controller) => controller.enqueue(new Uint8Array(512)),
+			cancel
+		});
+		vi.stubGlobal(
+			'fetch',
+			vi.fn(async () => new Response(body, { headers: { 'content-type': 'application/pdf' } }))
+		);
+		render(FileUploaderTestWrapper, { sources: ['local', 'url'], maxFileSize: 1024 });
+
+		await page.getByRole('button', { name: 'Link' }).click();
+		await page.getByRole('textbox', { name: 'Link to a file' }).fill('https://example.com/files/manual.pdf');
+		await page.getByRole('button', { name: 'Import' }).click();
+
+		await expect.element(page.getByText('manual.pdf is larger than 1 KB.')).toBeInTheDocument();
+		expect(cancel).toHaveBeenCalled();
+		await expect.element(names()).toHaveTextContent('empty');
+	});
+
+	it('stops a camera stream that arrives after the camera view closed', async () => {
+		let answer: (stream: MediaStream) => void = () => {};
+		const getUserMedia = vi
+			.spyOn(navigator.mediaDevices, 'getUserMedia')
+			.mockImplementation(() => new Promise((resolve) => (answer = resolve)));
+		render(FileUploaderTestWrapper, { sources: ['local', 'camera'] });
+
+		await page.getByRole('button', { name: 'Camera' }).click();
+		await vi.waitFor(() => expect(getUserMedia).toHaveBeenCalled());
+		await page.getByRole('button', { name: 'Back' }).click();
+
+		const stream = document.createElement('canvas').captureStream();
+		answer(stream);
+		await vi.waitFor(() => expect(stream.getTracks().every((track) => track.readyState === 'ended')).toBe(true));
+		getUserMedia.mockRestore();
+	});
+
+	it('offers to take a photo or record once the camera shows frames', async () => {
+		const canvas = Object.assign(document.createElement('canvas'), { width: 64, height: 48 });
+		const getUserMedia = vi
+			.spyOn(navigator.mediaDevices, 'getUserMedia')
+			.mockImplementation(async () => canvas.captureStream());
+		render(FileUploaderTestWrapper, { sources: ['local', 'camera'] });
+
+		await page.getByRole('button', { name: 'Camera' }).click();
+		await expect.element(page.getByRole('button', { name: 'Take photo' })).toBeDisabled();
+		await expect.element(page.getByRole('button', { name: 'Record' })).toBeDisabled();
+
+		canvas.getContext('2d')!.fillRect(0, 0, 64, 48);
+
+		await expect.element(page.getByRole('button', { name: 'Take photo' })).toBeEnabled();
+		await expect.element(page.getByRole('button', { name: 'Record' })).toBeEnabled();
+		getUserMedia.mockRestore();
 	});
 
 	it('fetches a link through fetchLink, for a route of the server that avoids CORS', async () => {

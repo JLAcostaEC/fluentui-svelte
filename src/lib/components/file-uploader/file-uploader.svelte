@@ -116,11 +116,10 @@
 		[
 			isMultiple && maxFiles !== undefined && { icon: DocumentCopyRegular, text: labels.limitFiles(maxFiles) },
 			maxFileSize !== undefined && { icon: DatabaseRegular, text: labels.limitFileSize(formatSize(maxFileSize)) },
-			isMultiple &&
-				maxTotalFileSize !== undefined && {
-					icon: HardDriveRegular,
-					text: labels.limitTotalSize(formatSize(maxTotalFileSize))
-				}
+			maxTotalFileSize !== undefined && {
+				icon: HardDriveRegular,
+				text: labels.limitTotalSize(formatSize(maxTotalFileSize))
+			}
 		].filter((limit) => limit !== false)
 	);
 
@@ -147,6 +146,10 @@
 	let running = false;
 	/** An upload asked for while a run goes on, started when it ends. */
 	let queued = false;
+	/** Failed files to try again, one run each: upup joins a run that goes on instead of starting another. */
+	const retries = new Set<string>();
+	/** Whether the run that goes on reported a failed file. */
+	let fileFailed = false;
 
 	const native = new NativeField(
 		() => ref,
@@ -175,12 +178,24 @@
 				progress.delete(file.id);
 				onFileRemoved?.(file);
 			}),
-			core.on('upload-error', ({ error, file }) => onUploadError?.(error, file)),
+			core.on('upload-start', () => (fileFailed = false)),
+			// A failed run reports each failed file, then the run without a file: the run is reported only when no file was.
+			core.on('upload-error', ({ error, file }) => {
+				if (file) fileFailed = true;
+				else if (fileFailed) return;
+				onUploadError?.(error, file);
+			}),
 			// A run that more files wait for is not the end of the uploads.
 			core.on('upload-all-complete', (all) => {
-				if (!queued) onUploadComplete?.(all);
+				if (!(queued && hasWork())) onUploadComplete?.(all);
 			})
 		];
+
+		// Files given at the start join the engine, which holds the list from then on.
+		const initial = untrack(() => files);
+		if (initial.length > 0) {
+			void (isMultiple ? core.addFiles(initial) : core.setFiles(initial.slice(0, 1))).then(notifyField);
+		}
 
 		return () => {
 			offs.forEach((off) => off());
@@ -303,23 +318,26 @@
 	}
 
 	const hasWaiting = () => [...core.files.values()].some((file) => statusOf(file) === 'pending');
+	const hasWork = () => retries.size > 0 || hasWaiting();
 
-	/** Uploads the waiting files. Files added during a run are uploaded by another run once it ends. */
+	/** Runs the engine until nothing waits: the files to try again, then the waiting files. Files added during a run go in the next one. */
 	async function startUpload() {
 		if (running) {
 			queued = true;
 			return;
 		}
 		running = true;
+		// Each failed file is reported by `upload-error`, and shown failed in the list.
+		const run = (upload: () => Promise<unknown>) => upload().catch(() => {});
 		try {
 			do {
 				queued = false;
-				try {
-					await core.upload();
-				} catch {
-					// Each failed file is reported by `upload-error`, and shown failed in the list.
+				for (const fileId of retries) {
+					retries.delete(fileId);
+					if (core.files.has(fileId)) await run(() => core.retry(fileId));
 				}
-			} while (queued && hasWaiting());
+				if (hasWaiting()) await run(() => core.upload());
+			} while (queued || retries.size > 0);
 		} finally {
 			running = false;
 			queued = false;
@@ -343,12 +361,9 @@
 		(buttons?.[Math.min(index, buttons.length - 1)] ?? buttonRef ?? sourcesRef?.querySelector('button'))?.focus();
 	}
 
-	async function retryFile(file: FileUploaderFile) {
-		try {
-			await core.retry(file.id);
-		} catch {
-			// Reported by `upload-error`.
-		}
+	function retryFile(file: FileUploaderFile) {
+		retries.add(file.id);
+		void startUpload();
 	}
 
 	async function openSource(source: FileUploaderSource | FileUploaderDrive, event: MouseEvent) {
@@ -490,7 +505,7 @@
 						{#await import('./url-source.svelte')}
 							{@render loadingSource()}
 						{:then { default: UrlSource }}
-							<UrlSource {labels} {fetchLink} onAdd={(file) => addFromSource([file])} />
+							<UrlSource {labels} {fetchLink} {maxFileSize} onAdd={(file) => addFromSource([file])} />
 						{:catch}
 							{@render failedSource()}
 						{/await}
@@ -726,6 +741,10 @@
 		transition:
 			background var(--fs-fast-duration) ease,
 			border-color var(--fs-fast-duration) ease;
+
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
+		}
 
 		&:hover:not(.source-open) {
 			background: var(--fs-control-alt-fill-tertiary);

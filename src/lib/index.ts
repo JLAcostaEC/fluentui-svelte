@@ -103,6 +103,7 @@ export { default as FileUploader } from './components/file-uploader/file-uploade
 export { FILE_UPLOADER_LABELS } from './components/file-uploader/utils.ts';
 export { googleDriveSource, oneDriveSource, dropboxSource, boxSource } from './components/file-uploader/drives.ts';
 export type {
+	FileInputAttributes,
 	FileUploaderProps,
 	FileUploaderDrive,
 	FileUploaderFile,

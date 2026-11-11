@@ -1674,10 +1674,8 @@
       "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.fetchLink"
     },
     "generated_fs_file_uploader_props_props_files": {
-      "en": "9e53a9a7",
-      "locales": {
-        "es": "9e53a9a7"
-      },
+      "en": "be9cfdc6",
+      "locales": {},
       "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.files"
     },
     "generated_fs_file_uploader_props_props_labels": {

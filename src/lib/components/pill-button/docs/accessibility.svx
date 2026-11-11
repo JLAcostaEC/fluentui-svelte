@@ -1,0 +1,32 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { Label, PillButton } from '#lib/index.js';
+  import CalendarMonthRegular from 'fluentui-icons-svelte/CalendarMonthRegular.svelte';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+  import { fitCard } from '../../tag/docs/fit-card.js';
+  import { exampleCode, column } from './example-code.ts';
+
+  const labelCode = exampleCode(`<Label label="Message filter" labelPosition="above">
+  <PillButton name="filter" value="unread">Unread</PillButton>
+</Label>
+<Label label="Calendar filter" labelPosition="before">
+  <PillButton icon={CalendarMonthRegular} />
+</Label>`, '', 'PillButton, Label',
+    `  import CalendarMonthRegular from 'fluentui-icons-svelte/CalendarMonthRegular.svelte';`);
+</script>
+
+### {m.pill_button_labels_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.pill_button_accessibility_description} /></p>
+
+<Showcase columns={1} code={labelCode} minHeight="0" disablePanZoom>
+  <div style={column} {@attach fitCard}>
+    <Label label={m.pill_button_message_filter()} labelPosition="above">
+      <PillButton name="filter" value="unread">{m.pill_button_unread()}</PillButton>
+    </Label>
+    <Label label={m.pill_button_calendar_filter()} labelPosition="before">
+      <PillButton icon={CalendarMonthRegular} />
+    </Label>
+  </div>
+</Showcase>

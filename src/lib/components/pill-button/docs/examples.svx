@@ -1,0 +1,208 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { Avatar, Button, PillButton } from '#lib/index.js';
+  import CalendarMonthRegular from 'fluentui-icons-svelte/CalendarMonthRegular.svelte';
+  import CheckmarkFilled from 'fluentui-icons-svelte/CheckmarkFilled.svelte';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+  import { fitCard } from '../../tag/docs/fit-card.js';
+  import { exampleCode, row, lead, column } from './example-code.ts';
+
+  const appearances = ['filled', 'outline', 'brand'] as const;
+  const shapes = ['circular', 'rounded', 'square'] as const;
+  const sizes = ['small', 'medium', 'large', 'extra-large'] as const;
+  let checked = $state(false);
+
+  const appearanceCode = exampleCode(`<PillButton>Filled</PillButton>
+<PillButton checked>Filled selected</PillButton>
+<PillButton appearance="outline">Outline</PillButton>
+<PillButton appearance="outline" checked>Outline selected</PillButton>
+<PillButton appearance="brand">Brand</PillButton>
+<PillButton appearance="brand" checked>Brand selected</PillButton>`);
+
+  const sizeCode = exampleCode(`<PillButton size="medium">Medium</PillButton>
+<PillButton size="medium" checked>Medium selected</PillButton>
+<PillButton size="small">Small</PillButton>
+<PillButton size="small" checked>Small selected</PillButton>
+<PillButton size="large">Large</PillButton>
+<PillButton size="large" checked>Large selected</PillButton>
+<PillButton size="extra-large">Extra large</PillButton>
+<PillButton size="extra-large" checked>Extra large selected</PillButton>`);
+
+  const checkedCode = exampleCode(`<PillButton bind:checked>Unread</PillButton>
+<output>{checked ? 'Selected' : 'Not selected'}</output>
+<Button type="button" appearance="standard" onclick={() => (checked = !checked)}>Toggle</Button>`,
+    '  let checked = $state(false);', 'PillButton, Button');
+
+  const shapeCode = exampleCode(`<PillButton shape="circular">Circular</PillButton>
+<PillButton shape="circular" checked>
+  {#snippet media({ shape })}<Avatar {shape} name="Alex" />{/snippet}
+  Circular selected
+</PillButton>
+<PillButton shape="rounded">Rounded</PillButton>
+<PillButton shape="rounded" checked>
+  {#snippet media({ shape })}<Avatar {shape} name="Alex" />{/snippet}
+  Rounded selected
+</PillButton>
+<PillButton shape="square">Square</PillButton>
+<PillButton shape="square" checked>
+  {#snippet media({ shape })}<Avatar {shape} name="Alex" />{/snippet}
+  Square selected
+</PillButton>`, '', 'PillButton, Avatar');
+
+  const disabledCode = exampleCode(`<PillButton disabled>Disabled</PillButton>
+<PillButton checked disabled>Selected and disabled</PillButton>
+<PillButton appearance="outline" disabled>Disabled outline</PillButton>
+<PillButton appearance="brand" checked disabled>Selected brand</PillButton>
+<fieldset disabled>
+  <legend>Disabled filters</legend>
+  <PillButton name="filter" value="unread" checked>Unread</PillButton>
+</fieldset>`);
+
+  const iconCode = exampleCode(`<PillButton icon={CalendarMonthRegular}>Calendar</PillButton>
+<PillButton icon={CheckmarkFilled} checked>Selected</PillButton>
+<PillButton size="small" icon={CalendarMonthRegular}>Calendar</PillButton>
+<PillButton size="large" icon={CalendarMonthRegular}>Calendar</PillButton>
+<PillButton size="extra-large" icon={CalendarMonthRegular}>Calendar</PillButton>
+<PillButton icon={CalendarMonthRegular} aria-label="Filter by calendar" />`, '', 'PillButton',
+    `  import CalendarMonthRegular from 'fluentui-icons-svelte/CalendarMonthRegular.svelte';
+  import CheckmarkFilled from 'fluentui-icons-svelte/CheckmarkFilled.svelte';`);
+
+  const avatarCode = exampleCode(`<PillButton>
+  {#snippet media({ shape })}<Avatar {shape} name="Alex" />{/snippet}
+  Alex
+</PillButton>
+<PillButton checked>
+  {#snippet media({ shape })}<Avatar {shape} name="Alex" image={{ src: 'https://i.pravatar.cc/96?img=47' }} />{/snippet}
+  Alex
+</PillButton>
+<PillButton size="small">
+  {#snippet media({ shape })}<Avatar {shape} name="Alex" />{/snippet}
+  Alex
+</PillButton>
+<PillButton size="small" checked>
+  {#snippet media({ shape })}<Avatar {shape} name="Alex" image={{ src: 'https://i.pravatar.cc/96?img=47' }} />{/snippet}
+  Alex
+</PillButton>
+<PillButton size="large">
+  {#snippet media({ shape })}<Avatar {shape} name="Alex" />{/snippet}
+  Alex
+</PillButton>
+<PillButton size="large" checked>
+  {#snippet media({ shape })}<Avatar {shape} name="Alex" image={{ src: 'https://i.pravatar.cc/96?img=47' }} />{/snippet}
+  Alex
+</PillButton>
+<PillButton size="extra-large">
+  {#snippet media({ shape })}<Avatar {shape} name="Alex" />{/snippet}
+  Alex
+</PillButton>
+<PillButton size="extra-large" checked>
+  {#snippet media({ shape })}<Avatar {shape} name="Alex" image={{ src: 'https://i.pravatar.cc/96?img=47' }} />{/snippet}
+  Alex
+</PillButton>`, '', 'PillButton, Avatar');
+</script>
+
+### {m.pill_button_appearance_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.pill_button_appearance_description} /></p>
+
+<Showcase columns={1} code={appearanceCode} minHeight="0" disablePanZoom>
+  <div style={row + lead} {@attach fitCard}>
+    {#each appearances as appearance (appearance)}
+      <PillButton {appearance}>{appearance}</PillButton>
+      <PillButton {appearance} checked>{appearance} · {m.pill_button_selected()}</PillButton>
+    {/each}
+  </div>
+</Showcase>
+
+### {m.global_size()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.pill_button_size_description} /></p>
+
+<Showcase columns={1} code={sizeCode} minHeight="0" disablePanZoom>
+  <div style={row + lead} {@attach fitCard}>
+    {#each sizes as size (size)}
+      <PillButton {size}>{size}</PillButton>
+      <PillButton {size} checked>{size} · {m.pill_button_selected()}</PillButton>
+    {/each}
+  </div>
+</Showcase>
+
+### {m.global_shape()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.pill_button_shape_description} /></p>
+
+<Showcase columns={1} code={shapeCode} minHeight="0" disablePanZoom>
+  <div style={row + lead} {@attach fitCard}>
+    {#each shapes as shape (shape)}
+      <PillButton {shape}>{shape}</PillButton>
+      <PillButton {shape} checked>
+        {#snippet media({ shape })}<Avatar {shape} name="Alex" />{/snippet}
+        {shape} · {m.pill_button_selected()}
+      </PillButton>
+    {/each}
+  </div>
+</Showcase>
+
+### {m.pill_button_checked_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.pill_button_checked_description} /></p>
+
+<Showcase columns={1} code={checkedCode} minHeight="0" disablePanZoom>
+  <div style={column} {@attach fitCard}>
+    <PillButton bind:checked>{m.pill_button_unread()}</PillButton>
+    <output>{checked ? m.pill_button_selected() : m.pill_button_not_selected()}</output>
+    <Button type="button" appearance="standard" onclick={() => (checked = !checked)}>{m.pill_button_toggle()}</Button>
+  </div>
+</Showcase>
+
+### {m.global_disabled()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.pill_button_disabled_description} /></p>
+
+<Showcase columns={1} code={disabledCode} minHeight="0" disablePanZoom>
+  <div style={row + lead} {@attach fitCard}>
+    <PillButton disabled>{m.pill_button_disabled()}</PillButton>
+    <PillButton checked disabled>{m.pill_button_selected()}</PillButton>
+    <PillButton appearance="outline" disabled>Outline</PillButton>
+    <PillButton appearance="brand" checked disabled>Brand</PillButton>
+    <fieldset disabled>
+      <legend>{m.pill_button_disabled_filters()}</legend>
+      <PillButton name="filter" value="unread" checked>{m.pill_button_unread()}</PillButton>
+    </fieldset>
+  </div>
+</Showcase>
+
+### {m.pill_button_icon_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.pill_button_icon_description} /></p>
+
+<Showcase columns={1} code={iconCode} minHeight="0" disablePanZoom>
+  <div style={row + lead} {@attach fitCard}>
+    <PillButton icon={CalendarMonthRegular}>{m.pill_button_calendar()}</PillButton>
+    <PillButton icon={CheckmarkFilled} checked>{m.pill_button_selected()}</PillButton>
+    <PillButton size="small" icon={CalendarMonthRegular}>{m.pill_button_calendar()}</PillButton>
+    <PillButton size="large" icon={CalendarMonthRegular}>{m.pill_button_calendar()}</PillButton>
+    <PillButton size="extra-large" icon={CalendarMonthRegular}>{m.pill_button_calendar()}</PillButton>
+    <PillButton icon={CalendarMonthRegular} aria-label={m.pill_button_calendar_filter()} />
+  </div>
+</Showcase>
+
+### {m.pill_button_avatar_title()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.pill_button_avatar_description} /></p>
+
+<Showcase columns={1} code={avatarCode} minHeight="0" disablePanZoom>
+  <div style={row + lead} {@attach fitCard}>
+    {#each sizes as size (size)}
+      <PillButton {size}>
+        {#snippet media({ shape })}<Avatar {shape} name="Alex" />{/snippet}
+        Alex
+      </PillButton>
+      <PillButton {size} checked>
+        {#snippet media({ shape })}<Avatar {shape} name="Alex" image={{ src: 'https://i.pravatar.cc/96?img=47' }} />{/snippet}
+        Alex
+      </PillButton>
+    {/each}
+  </div>
+</Showcase>

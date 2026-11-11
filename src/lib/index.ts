@@ -153,6 +153,16 @@ export { default as NumberBox } from './components/number-box/number-box.svelte'
 export { default as Persona } from './components/persona/persona.svelte';
 // End Persona Component
 
+// Start PillButton Component
+export { default as PillButton } from './components/pill-button/pill-button.svelte';
+export type {
+	PillButtonProps,
+	PillButtonAppearance,
+	PillButtonSize,
+	PillButtonMediaProps
+} from './components/pill-button/types.js';
+// End PillButton Component
+
 // Start ProgressBar Component
 export { default as ProgressBar } from './components/progress-bar/progress-bar.svelte';
 // End ProgressBar Component
@@ -198,6 +208,7 @@ export { default as TabViewTab } from './components/tab-view/tab-view-tab.svelte
 // Start Tag Component
 export { default as Tag } from './components/tag/tag.svelte';
 export { default as TagGroup } from './components/tag/tag-group.svelte';
+export type { TagMediaProps } from './components/tag/types.js';
 // End Tag Component
 
 // Start TagPicker Component

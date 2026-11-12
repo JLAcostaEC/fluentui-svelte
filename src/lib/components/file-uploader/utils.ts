@@ -1,4 +1,4 @@
-import { UploadStatus } from '@useupup/core';
+import type { UploadStatus } from '@useupup/core';
 import type {
 	FileUploaderDrive,
 	FileUploaderFile,
@@ -107,17 +107,20 @@ export function accepts(file: File, accept: string | undefined) {
 		});
 }
 
-/** Where a file of the list is, from the status upup gives it. */
+/**
+ * Where a file of the list is, from the status upup gives it. The values of its `UploadStatus` are written out:
+ * importing the enum would bring upup into the server bundle.
+ */
 export function statusOf(file: FileUploaderFile): FileUploaderStatus {
-	switch (file.status) {
-		case UploadStatus.PROCESSING:
+	switch (file.status as `${UploadStatus}`) {
+		case 'PROCESSING':
 			return 'processing';
-		case UploadStatus.UPLOADING:
-		case UploadStatus.PAUSED:
+		case 'UPLOADING':
+		case 'PAUSED':
 			return 'uploading';
-		case UploadStatus.SUCCESSFUL:
+		case 'SUCCESSFUL':
 			return 'uploaded';
-		case UploadStatus.FAILED:
+		case 'FAILED':
 			return 'failed';
 		default:
 			return 'pending';

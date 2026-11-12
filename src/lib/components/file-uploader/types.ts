@@ -192,7 +192,7 @@ export type FileUploaderProps = {
 	showLimits?: boolean;
 	/** The texts of the uploader. The ones left out fall back to English. */
 	labels?: Partial<FileUploaderLabels>;
-	/** The upup engine of the uploader, to pause, resume or cancel the uploads, or to listen to its events.
+	/** The upup engine of the uploader, to pause, resume or cancel the uploads, or to listen to its events. The engine runs in the browser only: it is `null` on the server, and set once the uploader is mounted.
 	 * @bindable
 	 */
 	uploader?: UpupCore | null;

@@ -88,13 +88,17 @@
 	/** More than one file is accepted with `multiple`, or with room for more than one. */
 	const isMultiple = $derived(Boolean(multiple) || (maxFiles ?? 0) > 1);
 
-	// The engine is created with the component, on the server too, where it does nothing but hold the options.
-	// Only the drives passed in `sources` bring their upup plugins.
-	const core = new UpupCore(untrack(() => ({ ...upload })));
-	untrack(() => {
-		uploader = core;
-		for (const source of sources) if (isDrive(source)) core.use(source.plugin());
+	let core: UpupCore = $state.raw(null!);
+
+	// Excludes the engine from the server build
+	$effect.pre(() => {
+		untrack(() => {
+			core = new UpupCore({ ...upload });
+			uploader = core;
+			for (const source of sources) if (isDrive(source)) core.use(source.plugin());
+		});
 	});
+	
 	$effect(() => {
 		const options = { ...upload };
 		untrack(() => core.updateOptions(options));

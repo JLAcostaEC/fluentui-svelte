@@ -3521,6 +3521,132 @@
       },
       "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.viewportRef"
     },
+    "generated_fs_segmented_control_item_props_props_children": {
+      "en": "c44fe3ec",
+      "locales": {
+        "es": "c44fe3ec"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlItemProps.children"
+    },
+    "generated_fs_segmented_control_item_props_props_disabled": {
+      "en": "55286c0a",
+      "locales": {
+        "es": "55286c0a"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlItemProps.disabled"
+    },
+    "generated_fs_segmented_control_item_props_props_icon": {
+      "en": "c552881c",
+      "locales": {
+        "es": "c552881c"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlItemProps.icon"
+    },
+    "generated_fs_segmented_control_item_props_props_ref": {
+      "en": "ae219943",
+      "locales": {
+        "es": "ae219943"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlItemProps.ref"
+    },
+    "generated_fs_segmented_control_item_props_props_value": {
+      "en": "56510b89",
+      "locales": {
+        "es": "56510b89"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlItemProps.value"
+    },
+    "generated_fs_segmented_control_props_props_disable_tabspot": {
+      "en": "67d78b6a",
+      "locales": {
+        "es": "67d78b6a"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlProps.disableTabspot"
+    },
+    "generated_fs_segmented_control_props_props_disabled": {
+      "en": "8289ed9a",
+      "locales": {
+        "es": "8289ed9a"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlProps.disabled"
+    },
+    "generated_fs_segmented_control_props_props_equal_width": {
+      "en": "451c6859",
+      "locales": {
+        "es": "451c6859"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlProps.equalWidth"
+    },
+    "generated_fs_segmented_control_props_props_form": {
+      "en": "e5f69bd8",
+      "locales": {
+        "es": "e5f69bd8"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlProps.form"
+    },
+    "generated_fs_segmented_control_props_props_hide_indicator": {
+      "en": "3c8d2575",
+      "locales": {
+        "es": "3c8d2575"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlProps.hideIndicator"
+    },
+    "generated_fs_segmented_control_props_props_name": {
+      "en": "7e6219be",
+      "locales": {
+        "es": "7e6219be"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlProps.name"
+    },
+    "generated_fs_segmented_control_props_props_on_selection_change": {
+      "en": "5e06e669",
+      "locales": {
+        "es": "5e06e669"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlProps.onSelectionChange"
+    },
+    "generated_fs_segmented_control_props_props_ref": {
+      "en": "4e36c5c8",
+      "locales": {
+        "es": "4e36c5c8"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlProps.ref"
+    },
+    "generated_fs_segmented_control_props_props_required": {
+      "en": "44b59b22",
+      "locales": {
+        "es": "44b59b22"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlProps.required"
+    },
+    "generated_fs_segmented_control_props_props_select_on_focus": {
+      "en": "ef47b12f",
+      "locales": {
+        "es": "ef47b12f"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlProps.selectOnFocus"
+    },
+    "generated_fs_segmented_control_props_props_selected_value": {
+      "en": "47250bd2",
+      "locales": {
+        "es": "47250bd2"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlProps.selectedValue"
+    },
+    "generated_fs_segmented_control_props_props_size": {
+      "en": "8aca3a42",
+      "locales": {
+        "es": "8aca3a42"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlProps.size"
+    },
+    "generated_fs_segmented_control_props_props_validation_message": {
+      "en": "cefe849d",
+      "locales": {
+        "es": "cefe849d"
+      },
+      "source": "src/lib/components/segmented-control/types.ts#SegmentedControlProps.validationMessage"
+    },
     "generated_fs_side_nav_branch_props_props_children": {
       "en": "71c3a225",
       "locales": {

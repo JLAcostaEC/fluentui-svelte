@@ -1,0 +1,202 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { Button, Label, SegmentedControl, SegmentedControlItem } from '#lib/index.js';
+  import CalendarDayRegular from 'fluentui-icons-svelte/CalendarDayRegular.svelte';
+  import CalendarWeekStartRegular from 'fluentui-icons-svelte/CalendarWeekStartRegular.svelte';
+  import CalendarMonthRegular from 'fluentui-icons-svelte/CalendarMonthRegular.svelte';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+  const ID = $props.id();
+  let selectedValue = $state('day');
+  let formValue = $state('');
+  let submitted = $state('');
+  let lastChange = $state('');
+
+  const layoutCode = `<SegmentedControl selectedValue="day" aria-label="View">
+  <SegmentedControlItem value="day">Day</SegmentedControlItem>
+  <SegmentedControlItem value="week">Whole week</SegmentedControlItem>
+</SegmentedControl>
+
+<SegmentedControl selectedValue="day" aria-label="View">
+  <SegmentedControlItem value="day" icon={CalendarDayRegular} aria-label="Day" />
+  <SegmentedControlItem value="week" icon={CalendarWeekStartRegular} aria-label="Whole week" />
+</SegmentedControl>
+
+<SegmentedControl selectedValue="day" aria-label="View">
+  <SegmentedControlItem value="day" icon={CalendarDayRegular}>Day</SegmentedControlItem>
+  <SegmentedControlItem value="week" icon={CalendarWeekStartRegular}>Whole week</SegmentedControlItem>
+</SegmentedControl>`;
+  const widthCode = `<SegmentedControl equalWidth={true} aria-label="View">...</SegmentedControl>
+<SegmentedControl equalWidth={false} aria-label="View">...</SegmentedControl>`;
+  const sizeCode = `<SegmentedControl size="small" aria-label="View">...</SegmentedControl>
+<SegmentedControl size="medium" aria-label="View">...</SegmentedControl>
+<SegmentedControl size="large" aria-label="View">...</SegmentedControl>`;
+  const indicatorCode = `<SegmentedControl selectedValue="day" hideIndicator aria-label="View">...</SegmentedControl>`;
+  const focusCode = `<SegmentedControl selectedValue="day" selectOnFocus aria-label="View">...</SegmentedControl>`;
+  const disabledCode = `<SegmentedControl selectedValue="day" aria-label="View">
+  <SegmentedControlItem value="day">Day</SegmentedControlItem>
+  <SegmentedControlItem value="week" disabled>Whole week</SegmentedControlItem>
+  <SegmentedControlItem value="month">Month</SegmentedControlItem>
+</SegmentedControl>
+
+<SegmentedControl disabled selectedValue="day" aria-label="View">...</SegmentedControl>`;
+  const labelCode = `<Label label="View" labelPosition="above">
+  <SegmentedControl name="view" bind:selectedValue>
+    <SegmentedControlItem value="day">Day</SegmentedControlItem>
+    <SegmentedControlItem value="week">Whole week</SegmentedControlItem>
+  </SegmentedControl>
+</Label>`;
+  const formCode = `<script lang="ts">
+  import { Button, Label, SegmentedControl, SegmentedControlItem } from 'fluentui-svelte';
+  let selectedValue = $state('');
+  let submitted = $state('');
+<\/script>
+
+<form onsubmit={(event) => {
+  event.preventDefault();
+  submitted = JSON.stringify(Object.fromEntries(new FormData(event.currentTarget)));
+}}>
+  <Label label="View" required={{ message: 'Choose a view' }}>
+    <SegmentedControl name="view" required validationMessage="Choose a view" bind:selectedValue>
+      <SegmentedControlItem value="day">Day</SegmentedControlItem>
+      <SegmentedControlItem value="week">Whole week</SegmentedControlItem>
+    </SegmentedControl>
+  </Label>
+  <Button type="submit">Submit</Button>
+  <Button type="reset" appearance="standard">Reset</Button>
+</form>
+<output>{submitted}</output>`;
+  const externalCode = `<form id="preferences">
+  <Button type="submit">Submit</Button>
+</form>
+
+<SegmentedControl form="preferences" name="view" required aria-label="View">
+  <SegmentedControlItem value="day">Day</SegmentedControlItem>
+  <SegmentedControlItem value="week">Whole week</SegmentedControlItem>
+</SegmentedControl>`;
+  const changeCode = `<SegmentedControl bind:selectedValue aria-label="View"
+  onSelectionChange={(event, value) => console.log(event.type, value)}>
+  <SegmentedControlItem value="day">Day</SegmentedControlItem>
+  <SegmentedControlItem value="week">Whole week</SegmentedControlItem>
+</SegmentedControl>`;
+</script>
+
+{#snippet options(icons = false, disabled = false, iconOnly = false)}
+  <SegmentedControlItem value="day" icon={icons ? CalendarDayRegular : undefined} aria-label={iconOnly ? m.segmented_control_day() : undefined}>{#if !iconOnly}{m.segmented_control_day()}{/if}</SegmentedControlItem>
+  <SegmentedControlItem value="week" icon={icons ? CalendarWeekStartRegular : undefined} {disabled} aria-label={iconOnly ? m.segmented_control_week() : undefined}>{#if !iconOnly}{m.segmented_control_week()}{/if}</SegmentedControlItem>
+  <SegmentedControlItem value="month" icon={icons ? CalendarMonthRegular : undefined} aria-label={iconOnly ? m.segmented_control_month() : undefined}>{#if !iconOnly}{m.segmented_control_month()}{/if}</SegmentedControlItem>
+{/snippet}
+
+## {m.segmented_control_layout_title()}
+
+<p><I18nMarkupMessage message={m.segmented_control_layout_description} /></p>
+
+<Showcase columns={1} code={layoutCode} disablePanZoom>
+  <figure><figcaption>{m.segmented_control_text_only()}</figcaption><SegmentedControl selectedValue="day" aria-label={m.segmented_control_view()}>{@render options()}</SegmentedControl></figure>
+  <figure><figcaption>{m.segmented_control_icons_only()}</figcaption><SegmentedControl selectedValue="day" aria-label={m.segmented_control_view()}>{@render options(true, false, true)}</SegmentedControl></figure>
+  <figure><figcaption>{m.segmented_control_text_and_icons()}</figcaption><SegmentedControl selectedValue="day" aria-label={m.segmented_control_view()}>{@render options(true)}</SegmentedControl></figure>
+</Showcase>
+
+## {m.segmented_control_width_title()}
+
+<p><I18nMarkupMessage message={m.segmented_control_sizing} /></p>
+
+<Showcase columns={1} code={widthCode} disablePanZoom>
+  {#each [true, false] as equalWidth (equalWidth)}
+    <figure><figcaption>{equalWidth ? m.segmented_control_equal_width() : m.segmented_control_fit_width()}</figcaption><SegmentedControl {equalWidth} selectedValue="day" aria-label={m.segmented_control_view()}>{@render options()}</SegmentedControl></figure>
+  {/each}
+</Showcase>
+
+## {m.segmented_control_sizes_title()}
+
+<p><I18nMarkupMessage message={m.segmented_control_sizes_description} /></p>
+
+<Showcase columns={1} code={sizeCode} disablePanZoom>
+  {#each ['small', 'medium', 'large'] as size (size)}
+    <figure><figcaption>{size === 'small' ? m.segmented_control_size_small() : size === 'medium' ? m.segmented_control_size_medium() : m.segmented_control_size_large()}</figcaption><SegmentedControl size={size as 'small' | 'medium' | 'large'} selectedValue="day" aria-label={m.segmented_control_view()}>{@render options()}</SegmentedControl></figure>
+  {/each}
+</Showcase>
+
+## {m.segmented_control_indicator_title()}
+
+<p><I18nMarkupMessage message={m.segmented_control_indicator_description} /></p>
+
+<Showcase columns={1} code={indicatorCode} disablePanZoom>
+  <SegmentedControl selectedValue="day" hideIndicator aria-label={m.segmented_control_view()}>{@render options()}</SegmentedControl>
+</Showcase>
+
+## {m.segmented_control_focus_title()}
+
+<p><I18nMarkupMessage message={m.segmented_control_focus_description} /></p>
+
+<Showcase columns={1} code={focusCode} disablePanZoom>
+  <SegmentedControl selectedValue="day" selectOnFocus aria-label={m.segmented_control_view()}>{@render options()}</SegmentedControl>
+</Showcase>
+
+## {m.segmented_control_disabled_title()}
+
+<p><I18nMarkupMessage message={m.segmented_control_disabled_description} /></p>
+
+<Showcase columns={1} code={disabledCode} disablePanZoom>
+  <figure><figcaption>{m.segmented_control_disabled_item()}</figcaption><SegmentedControl selectedValue="day" aria-label={m.segmented_control_view()}>{@render options(false, true)}</SegmentedControl></figure>
+  <figure><figcaption>{m.segmented_control_disabled_group()}</figcaption><SegmentedControl disabled selectedValue="day" aria-label={m.segmented_control_view()}>{@render options()}</SegmentedControl></figure>
+</Showcase>
+
+<style>
+  figure { display: grid; gap: 0.5rem; margin: 0; }
+  figcaption { font-size: var(--fs-caption-font-size); color: var(--fs-text-secondary); }
+</style>
+
+## {m.segmented_control_label_title()}
+
+<p><I18nMarkupMessage message={m.segmented_control_label_description} /></p>
+
+<Showcase columns={1} code={labelCode} disablePanZoom>
+  <Label label={m.segmented_control_view()} labelPosition="above">
+    <SegmentedControl bind:selectedValue>{@render options()}</SegmentedControl>
+  </Label>
+</Showcase>
+
+## {m.segmented_control_form_title()}
+
+<p><I18nMarkupMessage message={m.segmented_control_form_description} /></p>
+
+<Showcase columns={1} code={formCode} disablePanZoom>
+  <form style="display: grid; gap: 1rem;" onsubmit={(event) => {
+    event.preventDefault();
+    submitted = JSON.stringify(Object.fromEntries(new FormData(event.currentTarget)));
+  }}>
+    <Label label={m.segmented_control_view()} required={{ message: m.segmented_control_required() }}>
+      <SegmentedControl name="view" required validationMessage={m.segmented_control_required()} bind:selectedValue={formValue}>{@render options()}</SegmentedControl>
+    </Label>
+    <div style="display: flex; gap: 0.5rem;">
+      <Button type="submit">{m.segmented_control_submit()}</Button>
+      <Button type="reset" appearance="standard">{m.segmented_control_reset()}</Button>
+    </div>
+    <p><output aria-live="polite">{#if submitted}{submitted}{:else}<I18nMarkupMessage message={m.segmented_control_not_submitted} />{/if}</output></p>
+  </form>
+</Showcase>
+
+## {m.segmented_control_external_title()}
+
+<p><I18nMarkupMessage message={m.segmented_control_external_description} /></p>
+
+<Showcase columns={1} code={externalCode} disablePanZoom>
+  <form id={`segmented-form-${ID}`} onsubmit={(event) => event.preventDefault()}>
+    <Button type="submit" appearance="standard">{m.segmented_control_submit()}</Button>
+  </form>
+  <SegmentedControl form={`segmented-form-${ID}`} name="view" required aria-label={m.segmented_control_view()}>{@render options()}</SegmentedControl>
+</Showcase>
+
+## {m.segmented_control_change_title()}
+
+<p><I18nMarkupMessage message={m.segmented_control_change_description} /></p>
+
+<Showcase columns={1} code={changeCode} disablePanZoom>
+  <div style="display: grid; gap: 1rem;">
+    <SegmentedControl bind:selectedValue aria-label={m.segmented_control_view()} onSelectionChange={(event, value) => lastChange = `${event.type}: ${value}`}>
+      {@render options()}
+    </SegmentedControl>
+    <output aria-live="polite">{selectedValue} {lastChange && `(${lastChange})`}</output>
+  </div>
+</Showcase>

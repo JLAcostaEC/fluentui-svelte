@@ -3388,6 +3388,132 @@
       },
       "source": "src/lib/components/rating/types.ts#RatingProps.wrapperRef"
     },
+    "generated_fs_scroll_bar_props_props_arrow_step": {
+      "en": "dcf3f740",
+      "locales": {
+        "es": "dcf3f740"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.arrowStep"
+    },
+    "generated_fs_scroll_bar_props_props_as": {
+      "en": "a0df2066",
+      "locales": {
+        "es": "a0df2066"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.as"
+    },
+    "generated_fs_scroll_bar_props_props_auto_hide": {
+      "en": "2a13b7ca",
+      "locales": {
+        "es": "2a13b7ca"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.autoHide"
+    },
+    "generated_fs_scroll_bar_props_props_auto_hide_delay": {
+      "en": "7bbe8b81",
+      "locales": {
+        "es": "7bbe8b81"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.autoHideDelay"
+    },
+    "generated_fs_scroll_bar_props_props_collapse_delay": {
+      "en": "70d8535e",
+      "locales": {
+        "es": "70d8535e"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.collapseDelay"
+    },
+    "generated_fs_scroll_bar_props_props_defer": {
+      "en": "98174e67",
+      "locales": {
+        "es": "98174e67"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.defer"
+    },
+    "generated_fs_scroll_bar_props_props_events": {
+      "en": "c9d28463",
+      "locales": {
+        "es": "c9d28463"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.events"
+    },
+    "generated_fs_scroll_bar_props_props_expanded": {
+      "en": "47a9910a",
+      "locales": {
+        "es": "47a9910a"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.expanded"
+    },
+    "generated_fs_scroll_bar_props_props_hide_arrows": {
+      "en": "8d9a7002",
+      "locales": {
+        "es": "8d9a7002"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.hideArrows"
+    },
+    "generated_fs_scroll_bar_props_props_hide_track": {
+      "en": "f6a81081",
+      "locales": {
+        "es": "f6a81081"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.hideTrack"
+    },
+    "generated_fs_scroll_bar_props_props_instance": {
+      "en": "f9651af0",
+      "locales": {
+        "es": "f9651af0"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.instance"
+    },
+    "generated_fs_scroll_bar_props_props_options": {
+      "en": "722bdedd",
+      "locales": {
+        "es": "722bdedd"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.options"
+    },
+    "generated_fs_scroll_bar_props_props_overflow": {
+      "en": "b6012018",
+      "locales": {
+        "es": "b6012018"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.overflow"
+    },
+    "generated_fs_scroll_bar_props_props_ref": {
+      "en": "6d0b8f8f",
+      "locales": {
+        "es": "6d0b8f8f"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.ref"
+    },
+    "generated_fs_scroll_bar_props_props_scroll_ref": {
+      "en": "35685ab3",
+      "locales": {
+        "es": "35685ab3"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.scrollRef"
+    },
+    "generated_fs_scroll_bar_props_props_show_focus_outline": {
+      "en": "108abb4d",
+      "locales": {
+        "es": "108abb4d"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.showFocusOutline"
+    },
+    "generated_fs_scroll_bar_props_props_viewport_attributes": {
+      "en": "59dfe4e2",
+      "locales": {
+        "es": "59dfe4e2"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.viewportAttributes"
+    },
+    "generated_fs_scroll_bar_props_props_viewport_ref": {
+      "en": "824e2e67",
+      "locales": {
+        "es": "824e2e67"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.viewportRef"
+    },
     "generated_fs_side_nav_branch_props_props_children": {
       "en": "71c3a225",
       "locales": {

@@ -184,6 +184,12 @@ importers:
       mode-watcher:
         specifier: ^1.1.0
         version: 1.1.0(svelte@5.57.3(@typescript-eslint/types@8.72.1))
+      overlayscrollbars:
+        specifier: ^2.17.0
+        version: 2.17.0
+      overlayscrollbars-svelte:
+        specifier: ^0.5.5
+        version: 0.5.5(overlayscrollbars@2.17.0)(svelte@5.57.3(@typescript-eslint/types@8.72.1))
       runed:
         specifier: ^0.38.0
         version: 0.38.0(@sveltejs/kit@3.1.1(@sveltejs/vite-plugin-svelte@7.3.1(svelte@5.57.3(@typescript-eslint/types@8.72.1))(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(svelte@5.57.3(@typescript-eslint/types@8.72.1))(typescript@6.0.3)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(svelte@5.57.3(@typescript-eslint/types@8.72.1))
@@ -2471,6 +2477,15 @@ packages:
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
     engines: {node: '>= 0.8.0'}
+
+  overlayscrollbars-svelte@0.5.5:
+    resolution: {integrity: sha512-+dRW3YZSvFbKi5vDCpnUOHuoPLLSdu0BUVVMYZdmfVghu7XkafDRebG2y91/ImPqj6YDAUsz1rcWVYhCJSS/pQ==}
+    peerDependencies:
+      overlayscrollbars: ^2.0.0
+      svelte: ^5.0.0
+
+  overlayscrollbars@2.17.0:
+    resolution: {integrity: sha512-tyFSxFVJ2FcTTiEkwMthAb+Ogs8vgpW31Sy5z2TL1Q6Kw7579zrcd4xDm38lmdD934LjiTHyrzR90KMDrbCXoA==}
 
   oxc-minify@0.136.0:
     resolution: {integrity: sha512-u9UvPFTYVwQ/i1kpp/c20S/SbvLaLV0Ngzyhgi0YV4B1SlxM7RgnnePl4vY9N3Z9sTRcozL1MRStI3PlUN9RFA==}
@@ -5017,6 +5032,13 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
       word-wrap: 1.2.5
+
+  overlayscrollbars-svelte@0.5.5(overlayscrollbars@2.17.0)(svelte@5.57.3(@typescript-eslint/types@8.72.1)):
+    dependencies:
+      overlayscrollbars: 2.17.0
+      svelte: 5.57.3(@typescript-eslint/types@8.72.1)
+
+  overlayscrollbars@2.17.0: {}
 
   oxc-minify@0.136.0:
     optionalDependencies:

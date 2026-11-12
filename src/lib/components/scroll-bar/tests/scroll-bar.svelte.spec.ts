@@ -82,6 +82,22 @@ describe('ScrollBar', () => {
 		expect(bar.querySelector('.os-scrollbar-handle')!.getBoundingClientRect().width).toBe(6);
 	});
 
+	it.each([
+		['thin', 8, 4, 6, 9],
+		['medium', 12, 6, 8, 12],
+		['large', 16, 8, 10, 15]
+	] as const)('sizes the expanded %s scroll bar', async (size, track, thumb, glyph, cap) => {
+		render(ScrollBar, { props: { children: tall, style, expanded: true, size } });
+		await vi.waitFor(() => expect(document.querySelector('.fs-scroll-bar-arrow.up svg')).not.toBeNull());
+		const bar = document.querySelector('.os-scrollbar-vertical')!;
+		const handle = bar.querySelector('.os-scrollbar-handle')!;
+		await vi.waitFor(() => expect(handle.getBoundingClientRect().width).toBe(thumb));
+		expect(bar.getBoundingClientRect().width).toBe(track);
+		expect(bar.getBoundingClientRect().right - handle.getBoundingClientRect().right).toBe((track - thumb) / 2);
+		expect(bar.querySelector('.fs-scroll-bar-arrow.up svg')!.getBoundingClientRect().width).toBe(glyph);
+		await vi.waitFor(() => expect(handle.getBoundingClientRect().top - bar.getBoundingClientRect().top).toBe(cap));
+	});
+
 	it('hides the arrow buttons with hideArrows', async () => {
 		render(ScrollBar, { props: { children: tall, style, hideArrows: true } });
 		await vi.waitFor(() => expect(document.querySelector('.fs-scroll-bar-arrow')).not.toBeNull());

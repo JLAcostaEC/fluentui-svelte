@@ -52,8 +52,12 @@
 </button>
 
 <style>
-	/* A 16px end cap of the 12px rail; the 8px glyph sits 4px from the end. */
+	/* An end cap of the rail; the glyph sits --fs-scroll-bar-glyph-offset from the end, close to the thumb. */
 	.fs-scroll-bar-arrow {
+		--track: var(--fs-scroll-bar-track, 12px);
+		--cap: var(--fs-scroll-bar-cap, 12px);
+		--glyph: var(--fs-scroll-bar-glyph, 8px);
+		--gap: var(--fs-scroll-bar-glyph-offset, 4px);
 		position: absolute;
 		display: flex;
 		align-items: center;
@@ -61,7 +65,7 @@
 		margin: 0;
 		padding: 0;
 		border: none;
-		border-radius: 6px;
+		border-radius: calc(var(--track) / 2);
 		background: transparent;
 		color: var(--fs-control-strong-default);
 		/* Hidden at rest; visibility switches after the fade so it stays clickable while fading. */
@@ -72,37 +76,46 @@
 			opacity 0.15s,
 			visibility 0s 0.15s;
 		cursor: default;
+		/* The cropped carets are 0.643 times as deep as they are wide. */
 		&.up,
 		&.down {
 			left: 0;
-			width: 12px;
-			height: 16px;
+			width: var(--track);
+			height: var(--cap);
+			& :global(svg) {
+				width: var(--glyph);
+				height: calc(var(--glyph) * 0.643);
+			}
 		}
 		&.left,
 		&.right {
 			top: 0;
-			width: 16px;
-			height: 12px;
+			width: var(--cap);
+			height: var(--track);
+			& :global(svg) {
+				width: calc(var(--glyph) * 0.643);
+				height: var(--glyph);
+			}
 		}
 		&.up {
 			top: 0;
 			align-items: flex-start;
-			padding-top: 4px;
+			padding-top: var(--gap);
 		}
 		&.down {
 			bottom: 0;
 			align-items: flex-end;
-			padding-bottom: 4px;
+			padding-bottom: var(--gap);
 		}
 		&.left {
 			left: 0;
 			justify-content: flex-start;
-			padding-left: 4px;
+			padding-left: var(--gap);
 		}
 		&.right {
 			right: 0;
 			justify-content: flex-end;
-			padding-right: 4px;
+			padding-right: var(--gap);
 		}
 		& :global(svg) {
 			flex: none;

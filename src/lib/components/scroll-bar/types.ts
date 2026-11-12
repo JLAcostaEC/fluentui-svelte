@@ -50,6 +50,10 @@ export type ScrollBarProps<Tag extends ScrollBarGenerics = 'div'> = {
 	showFocusOutline?: boolean;
 	/** Hides the track. */
 	hideTrack?: boolean;
+	/** The size of the expanded scroll bar.
+	 * @default 'medium'
+	 */
+	size?: 'thin' | 'medium' | 'large';
 	/** Pixels scrolled per arrow press.
 	 * @default 48
 	 */

@@ -33,6 +33,13 @@
 <ScrollBar overflow="y" style="height: 12rem;" viewportAttributes={{ 'aria-label': 'Article' }}>…</ScrollBar>
 <ScrollBar overflow="x" style="height: 12rem;" viewportAttributes={{ 'aria-label': 'Tiles' }}>…</ScrollBar>
 <ScrollBar overflow="both" style="height: 12rem;" viewportAttributes={{ 'aria-label': 'Grid' }}>…</ScrollBar>`;
+  const sizeCode = `<script>
+  import { ScrollBar } from 'fluentui-svelte';
+<\/script>
+
+<ScrollBar size="thin" expanded style="height: 12rem;">…</ScrollBar>
+<ScrollBar size="medium" expanded style="height: 12rem;">…</ScrollBar>
+<ScrollBar size="large" expanded style="height: 12rem;">…</ScrollBar>`;
   const hideTrackCode = `<script>
   import { ScrollBar } from 'fluentui-svelte';
 <\/script>
@@ -106,6 +113,25 @@
       {/each}
     </div>
   </ScrollBar>
+</Showcase>
+
+### {m.scroll_bar_size_title()}
+
+<p><I18nMarkupMessage message={m.scroll_bar_size_description} /></p>
+
+<Showcase columns={3} code={sizeCode} minHeight="0" disablePanZoom showOverflow fluid>
+  {#each ['thin', 'medium', 'large'] as const as size}
+    <figure>
+      <ScrollBar class="demo-surface" {size} expanded style="width: 100%; height: 12rem;" viewportAttributes={{ 'aria-label': `Size ${size}` }}>
+        <div class="article">
+          {#each paragraphs as paragraph}
+            <p>{paragraph}</p>
+          {/each}
+        </div>
+      </ScrollBar>
+      <figcaption><code>{size}</code></figcaption>
+    </figure>
+  {/each}
 </Showcase>
 
 ### {m.scroll_bar_scroll_ref_title()}

@@ -22,6 +22,7 @@
 		hideArrows = false,
 		showFocusOutline = false,
 		hideTrack = false,
+		size = 'medium',
 		arrowStep = 48,
 		options,
 		events,
@@ -36,7 +37,9 @@
 		'fs-scroll-bar-arrows': !hideArrows,
 		'fs-scroll-bar-expanded': expanded,
 		'fs-scroll-bar-focus-outline': showFocusOutline,
-		'fs-scroll-bar-no-track': hideTrack
+		'fs-scroll-bar-no-track': hideTrack,
+		'fs-scroll-bar-thin': size === 'thin',
+		'fs-scroll-bar-large': size === 'large'
 	});
 
 	/** `scrollRef` passed (even `null`): paint on that element instead of rendering one. */
@@ -189,9 +192,29 @@
 	/* Global: with `scrollRef` the scroll bars are painted on an element this component does not own. */
 	:global {
 		.fs-scroll-bar {
+			/* Expanded geometry per size; the resting thumb (2px, 1px from the edge) does not change. */
+			--fs-scroll-bar-track: 12px;
+			--fs-scroll-bar-thumb: 6px;
+			--fs-scroll-bar-glyph: 8px;
+			--fs-scroll-bar-glyph-offset: 4px;
+			--fs-scroll-bar-cap: 12px;
 			position: relative;
 			min-width: 0;
 			min-height: 0;
+			&.fs-scroll-bar-thin {
+				--fs-scroll-bar-track: 8px;
+				--fs-scroll-bar-thumb: 4px;
+				--fs-scroll-bar-glyph: 6px;
+				--fs-scroll-bar-glyph-offset: 3px;
+				--fs-scroll-bar-cap: 9px;
+			}
+			&.fs-scroll-bar-large {
+				--fs-scroll-bar-track: 16px;
+				--fs-scroll-bar-thumb: 8px;
+				--fs-scroll-bar-glyph: 10px;
+				--fs-scroll-bar-glyph-offset: 5px;
+				--fs-scroll-bar-cap: 15px;
+			}
 			& > [data-overlayscrollbars-viewport]:focus-visible {
 				outline: none;
 			}
@@ -203,9 +226,9 @@
 				display: none;
 			}
 
-			/* Track: 12px acrylic rail when expanded. Thumb: 2px at rest 1px from the outer edge, 6px centered when expanded. */
+			/* Track: acrylic rail when expanded. Thumb: 2px at rest 1px from the outer edge, centered when expanded. */
 			& > .os-scrollbar {
-				--os-size: 12px;
+				--os-size: var(--fs-scroll-bar-track);
 				--os-padding-perpendicular: 0px;
 				--os-padding-axis: 0px;
 				--os-handle-min-size: 24px;
@@ -229,7 +252,7 @@
 				& .os-scrollbar-handle:hover,
 				& .os-scrollbar-handle:active {
 					border: none;
-					border-radius: 3px;
+					border-radius: calc(var(--fs-scroll-bar-thumb) / 2);
 					background: var(--fs-control-strong-default);
 					transition-property: width, height, right, left, bottom;
 					transition-duration: 0.15s;
@@ -250,9 +273,9 @@
 			/* .fs-scroll-bar-hover is set on pointer enter and removed `collapseDelay` after pointer leave. */
 			& > .os-scrollbar:is(.fs-scroll-bar-hover, :has(:active)),
 			&.fs-scroll-bar-expanded > .os-scrollbar {
-				--thumb: 6px;
-				--inset: 3px;
-				--os-padding-axis: 3px;
+				--thumb: var(--fs-scroll-bar-thumb);
+				--inset: calc((var(--fs-scroll-bar-track) - var(--fs-scroll-bar-thumb)) / 2);
+				--os-padding-axis: var(--inset);
 				background: var(--fs-acrylic-background-default);
 			}
 			&.fs-scroll-bar-no-track > .os-scrollbar.os-scrollbar {
@@ -260,7 +283,7 @@
 			}
 			&.fs-scroll-bar-arrows > .os-scrollbar:is(.fs-scroll-bar-hover, :has(:active)),
 			&.fs-scroll-bar-arrows.fs-scroll-bar-expanded > .os-scrollbar {
-				--os-padding-axis: 16px;
+				--os-padding-axis: var(--fs-scroll-bar-cap);
 				& .fs-scroll-bar-arrow {
 					opacity: 1;
 					visibility: visible;

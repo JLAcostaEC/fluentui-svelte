@@ -3500,6 +3500,13 @@
       },
       "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.showFocusOutline"
     },
+    "generated_fs_scroll_bar_props_props_size": {
+      "en": "22a0d8b4",
+      "locales": {
+        "es": "22a0d8b4"
+      },
+      "source": "src/lib/components/scroll-bar/types.ts#ScrollBarProps.size"
+    },
     "generated_fs_scroll_bar_props_props_viewport_attributes": {
       "en": "59dfe4e2",
       "locales": {

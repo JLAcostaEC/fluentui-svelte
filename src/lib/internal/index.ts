@@ -9,3 +9,4 @@ export * from './floating-ui/floating.svelte.ts';
 export * from './floating-ui/utils.ts';
 export { default as RenderSoC } from './components/render-soc/render-soc.svelte';
 export { default as DynamicCarousel } from './components/dynamic-carousel/dynamic-carousel.svelte';
+export { default as CaretGlyph } from './components/caret-glyph/caret-glyph.svelte';

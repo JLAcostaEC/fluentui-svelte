@@ -21,6 +21,6 @@ export const META: Meta = {
 		description: 'Scroll overflowing content with Fluent overlay scroll bars.'
 	},
 	slug: 'scroll-bar',
-	status: 'New',
+	status: 'AI',
 	icon: ArrowAutofitHeightRegular
 };

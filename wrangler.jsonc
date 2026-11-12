@@ -11,7 +11,7 @@
 	"observability": {
 		"enabled": true
 	},
-	"upload_source_maps": false,
+	"upload_source_maps": false
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement

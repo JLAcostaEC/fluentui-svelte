@@ -98,7 +98,7 @@
 			for (const source of sources) if (isDrive(source)) core.use(source.plugin());
 		});
 	});
-	
+
 	$effect(() => {
 		const options = { ...upload };
 		untrack(() => core.updateOptions(options));

@@ -11,9 +11,11 @@
 		args?: Args;
 	} = $props();
 
-	// Snippets compile to ($$anchor, ...args) so they report length 1, components to
-	// ($$anchor, $$props) so they report 2. See https://github.com/sveltejs/svelte/issues/9774
-	const isSnippet = (value: Snippet<[Args]> | Component<Args>): value is Snippet<[Args]> => value.length === 1;
+	// Snippets are arrow functions, compiled or from `createRawSnippet`, and arrows have no `prototype`.
+	// Components are `function` declarations, also under HMR. The number of parameters does not tell them apart:
+	// in production a snippet with a destructured parameter, like `{ shape }`, takes two.
+	// See https://github.com/sveltejs/svelte/issues/9774
+	const isSnippet = (value: Snippet<[Args]> | Component<Args>): value is Snippet<[Args]> => !('prototype' in value);
 </script>
 
 {#if isSnippet(SoC)}

@@ -1,0 +1,31 @@
+<script lang="ts">
+  import { FlipView } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+
+  const photos = ['1506905925346-21bda4d32df4', '1501785888041-af3ef285b470', '1470071459604-3b5ec3a7fe05', '1441974231531-c6227db76b6e', '1469474968028-56623f02e42e'];
+</script>
+
+# FlipView
+{m.flip_view_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow fluid>
+  <FlipView aria-label="Landscapes" style="width: 24rem; height: 14rem;">
+    {#each photos as id, i (id)}
+      <img src="https://images.unsplash.com/photo-{id}?w=768&h=448&fit=crop&q=70" alt="Landscape {i + 1}" loading="lazy" />
+    {/each}
+  </FlipView>
+</Showcase>
+
+## {m.global_usage()}
+```svelte
+<script>
+  import { FlipView } from 'fluentui-svelte';
+</script>
+
+<FlipView aria-label="Landscapes" style="height: 14rem;">
+  <img src="/one.jpg" alt="One" />
+  <img src="/two.jpg" alt="Two" />
+  <img src="/three.jpg" alt="Three" />
+</FlipView>
+```

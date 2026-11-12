@@ -1939,6 +1939,55 @@
       },
       "source": "src/lib/components/file-uploader/types.ts#FileUploaderProps.wrapperRef"
     },
+    "generated_fs_flip_view_props_props_index": {
+      "en": "c526829d",
+      "locales": {
+        "es": "c526829d"
+      },
+      "source": "src/lib/components/flip-view/types.ts#FlipViewProps.index"
+    },
+    "generated_fs_flip_view_props_props_next_label": {
+      "en": "b3f87b33",
+      "locales": {
+        "es": "b3f87b33"
+      },
+      "source": "src/lib/components/flip-view/types.ts#FlipViewProps.nextLabel"
+    },
+    "generated_fs_flip_view_props_props_on_index_change": {
+      "en": "1ab4acbb",
+      "locales": {
+        "es": "1ab4acbb"
+      },
+      "source": "src/lib/components/flip-view/types.ts#FlipViewProps.onIndexChange"
+    },
+    "generated_fs_flip_view_props_props_orientation": {
+      "en": "66774a77",
+      "locales": {
+        "es": "66774a77"
+      },
+      "source": "src/lib/components/flip-view/types.ts#FlipViewProps.orientation"
+    },
+    "generated_fs_flip_view_props_props_previous_label": {
+      "en": "66b46124",
+      "locales": {
+        "es": "66b46124"
+      },
+      "source": "src/lib/components/flip-view/types.ts#FlipViewProps.previousLabel"
+    },
+    "generated_fs_flip_view_props_props_ref": {
+      "en": "6d0b8f8f",
+      "locales": {
+        "es": "6d0b8f8f"
+      },
+      "source": "src/lib/components/flip-view/types.ts#FlipViewProps.ref"
+    },
+    "generated_fs_flip_view_props_props_viewport_ref": {
+      "en": "bfb7362a",
+      "locales": {
+        "es": "bfb7362a"
+      },
+      "source": "src/lib/components/flip-view/types.ts#FlipViewProps.viewportRef"
+    },
     "generated_fs_flyout_props_props_children": {
       "en": "d95ba4c0",
       "locales": {

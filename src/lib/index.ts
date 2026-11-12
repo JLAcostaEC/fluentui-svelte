@@ -121,6 +121,11 @@ export type {
 } from './components/file-uploader/types.ts';
 // End FileUploader Component
 
+// Start FlipView Component
+export { default as FlipView } from './components/flip-view/flip-view.svelte';
+export type { FlipViewProps } from './components/flip-view/types.js';
+// End FlipView Component
+
 // Start Flyout Component
 export { default as Flyout } from './components/flyout/flyout.svelte';
 // End Flyout Component

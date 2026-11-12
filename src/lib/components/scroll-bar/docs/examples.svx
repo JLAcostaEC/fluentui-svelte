@@ -1,0 +1,221 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { ScrollBar } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+
+  const paragraphs = Array.from({ length: 8 }, (_, i) => `Paragraph ${i + 1}. Hover the scroll bar to expand it.`);
+  const tiles = Array.from({ length: 12 }, (_, i) => i + 1);
+  const cells = Array.from({ length: 12 * 16 }, (_, i) => i + 1);
+  let target = $state<HTMLElement | null>(null);
+
+  const expandedCode = `<script>
+  import { ScrollBar } from 'fluentui-svelte';
+<\/script>
+
+<ScrollBar expanded overflow="both" style="width: 20rem; height: 12rem;">
+  …
+</ScrollBar>`;
+  const scrollRefCode = `<script>
+  import { ScrollBar } from 'fluentui-svelte';
+  let target = $state(null);
+<\/script>
+
+<ul bind:this={target} style="width: 20rem; height: 12rem;">
+  <li>…</li>
+</ul>
+<ScrollBar scrollRef={target} viewportAttributes={{ 'aria-label': 'Items' }} />`;
+
+  const overflowCode = `<script>
+  import { ScrollBar } from 'fluentui-svelte';
+<\/script>
+
+<ScrollBar overflow="y" style="height: 12rem;" viewportAttributes={{ 'aria-label': 'Article' }}>…</ScrollBar>
+<ScrollBar overflow="x" style="height: 12rem;" viewportAttributes={{ 'aria-label': 'Tiles' }}>…</ScrollBar>
+<ScrollBar overflow="both" style="height: 12rem;" viewportAttributes={{ 'aria-label': 'Grid' }}>…</ScrollBar>`;
+  const sizeCode = `<script>
+  import { ScrollBar } from 'fluentui-svelte';
+<\/script>
+
+<ScrollBar size="thin" expanded style="height: 12rem;">…</ScrollBar>
+<ScrollBar size="medium" expanded style="height: 12rem;">…</ScrollBar>
+<ScrollBar size="large" expanded style="height: 12rem;">…</ScrollBar>`;
+  const hideTrackCode = `<script>
+  import { ScrollBar } from 'fluentui-svelte';
+<\/script>
+
+<ScrollBar hideTrack style="width: 20rem; height: 12rem;">
+  <p>…</p>
+</ScrollBar>`;
+  const autoHideCode = `<script>
+  import { ScrollBar } from 'fluentui-svelte';
+<\/script>
+
+<ScrollBar autoHide="never" style="height: 8rem;">…</ScrollBar>
+<ScrollBar autoHide="scroll" style="height: 8rem;">…</ScrollBar>
+<ScrollBar autoHide="leave" style="height: 8rem;">…</ScrollBar>
+<ScrollBar autoHide="move" style="height: 8rem;">…</ScrollBar>`;
+  const arrowsCode = `<script>
+  import { ScrollBar } from 'fluentui-svelte';
+<\/script>
+
+<ScrollBar hideArrows style="width: 20rem; height: 12rem;">
+  <p>…</p>
+</ScrollBar>`;
+</script>
+
+### {m.scroll_bar_overflow_title()}
+
+<p><I18nMarkupMessage message={m.scroll_bar_overflow_description} /></p>
+
+<Showcase columns={3} code={overflowCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <figure>
+    <ScrollBar class="demo-surface" overflow="y" autoHide="never" style="width: 100%; height: 12rem;" viewportAttributes={{ 'aria-label': 'Article' }}>
+      <div class="article">
+        {#each paragraphs as paragraph}
+          <p>{paragraph}</p>
+        {/each}
+      </div>
+    </ScrollBar>
+    <figcaption><code>overflow="y"</code></figcaption>
+  </figure>
+  <figure>
+    <ScrollBar class="demo-surface" overflow="x" autoHide="never" style="width: 100%; height: 12rem;" viewportAttributes={{ 'aria-label': 'Tiles' }}>
+      <div class="tiles">
+        {#each tiles as tile}
+          <div class="tile">{tile}</div>
+        {/each}
+      </div>
+    </ScrollBar>
+    <figcaption><code>overflow="x"</code></figcaption>
+  </figure>
+  <figure>
+    <ScrollBar class="demo-surface" overflow="both" autoHide="never" style="width: 100%; height: 12rem;" viewportAttributes={{ 'aria-label': 'Grid' }}>
+      <div class="grid">
+        {#each cells as cell}
+          <div class="cell">{cell}</div>
+        {/each}
+      </div>
+    </ScrollBar>
+    <figcaption><code>overflow="both"</code></figcaption>
+  </figure>
+</Showcase>
+
+### {m.scroll_bar_expanded_title()}
+
+<p><I18nMarkupMessage message={m.scroll_bar_expanded_description} /></p>
+
+<Showcase columns={1} code={expandedCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <ScrollBar class="demo-surface" expanded overflow="both" style="width: 20rem; height: 12rem;" viewportAttributes={{ 'aria-label': 'Expanded grid' }}>
+    <div class="grid">
+      {#each cells as cell}
+        <div class="cell">{cell}</div>
+      {/each}
+    </div>
+  </ScrollBar>
+</Showcase>
+
+### {m.scroll_bar_size_title()}
+
+<p><I18nMarkupMessage message={m.scroll_bar_size_description} /></p>
+
+<Showcase columns={3} code={sizeCode} minHeight="0" disablePanZoom showOverflow fluid>
+  {#each ['thin', 'medium', 'large'] as const as size}
+    <figure>
+      <ScrollBar class="demo-surface" {size} expanded style="width: 100%; height: 12rem;" viewportAttributes={{ 'aria-label': `Size ${size}` }}>
+        <div class="article">
+          {#each paragraphs as paragraph}
+            <p>{paragraph}</p>
+          {/each}
+        </div>
+      </ScrollBar>
+      <figcaption><code>{size}</code></figcaption>
+    </figure>
+  {/each}
+</Showcase>
+
+### {m.scroll_bar_scroll_ref_title()}
+
+<p><I18nMarkupMessage message={m.scroll_bar_scroll_ref_description} /></p>
+
+<Showcase columns={1} code={scrollRefCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <ul bind:this={target} class="demo-surface list" style="width: 20rem; height: 12rem;">
+    {#each paragraphs as paragraph, i}
+      <li>Item {i + 1}</li>
+    {/each}
+  </ul>
+  <ScrollBar scrollRef={target} autoHide="never" viewportAttributes={{ 'aria-label': 'Items' }} />
+</Showcase>
+
+### {m.scroll_bar_auto_hide_title()}
+
+<p><I18nMarkupMessage message={m.scroll_bar_auto_hide_description} /></p>
+
+<Showcase columns={4} code={autoHideCode} minHeight="0" disablePanZoom showOverflow fluid>
+  {#each ['never', 'scroll', 'leave', 'move'] as const as mode}
+    <figure>
+      <ScrollBar class="demo-surface" autoHide={mode} style="width: 100%; height: 8rem;" viewportAttributes={{ 'aria-label': `autoHide ${mode}` }}>
+        <div class="article">
+          {#each paragraphs.slice(0, 4) as paragraph}
+            <p>{paragraph}</p>
+          {/each}
+        </div>
+      </ScrollBar>
+      <figcaption><code>{mode}</code></figcaption>
+    </figure>
+  {/each}
+</Showcase>
+
+### {m.scroll_bar_arrows_title()}
+
+<p><I18nMarkupMessage message={m.scroll_bar_arrows_description} /></p>
+
+<Showcase columns={1} code={arrowsCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <ScrollBar class="demo-surface" hideArrows autoHide="never" style="width: 20rem; height: 12rem;" viewportAttributes={{ 'aria-label': 'Article without arrows' }}>
+    <div class="article">
+      {#each paragraphs as paragraph}
+        <p>{paragraph}</p>
+      {/each}
+    </div>
+  </ScrollBar>
+</Showcase>
+
+### {m.scroll_bar_hide_track_title()}
+
+<p><I18nMarkupMessage message={m.scroll_bar_hide_track_description} /></p>
+
+<Showcase columns={1} code={hideTrackCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <ScrollBar class="demo-surface" hideTrack autoHide="never" style="width: 20rem; height: 12rem;" viewportAttributes={{ 'aria-label': 'Article without track' }}>
+    <div class="article">
+      {#each paragraphs as paragraph}
+        <p>{paragraph}</p>
+      {/each}
+    </div>
+  </ScrollBar>
+</Showcase>
+
+<style>
+  :global(.demo-surface) {
+    border: 1px solid var(--fs-card-stroke-default);
+    border-radius: var(--fs-control-overlay-border-radius);
+    background: var(--fs-card-background-default);
+  }
+  .article { padding: 0.75rem 1rem; }
+  .article p { margin: 0 0 0.75rem; }
+  .tiles { display: flex; gap: 0.5rem; width: max-content; height: 12rem; box-sizing: border-box; padding: 0.75rem 0.75rem 1.25rem; }
+  .tile, .cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--fs-control-border-radius);
+    background: var(--fs-card-background-secondary);
+    border: 1px solid var(--fs-card-stroke-default);
+  }
+  .tile { width: 6rem; }
+  .grid { display: grid; grid-template-columns: repeat(16, 3rem); gap: 0.25rem; padding: 0.5rem; width: max-content; }
+  .cell { height: 2rem; font-size: 0.75rem; }
+  .list { margin: 0; padding: 0; list-style: none; }
+  .list li { padding: 0.5rem 1rem; border-bottom: 1px solid var(--fs-card-stroke-default); }
+  .list li:nth-child(odd) { padding-block: 0.75rem; }
+  figure { margin: 0; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+</style>

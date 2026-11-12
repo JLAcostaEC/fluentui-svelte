@@ -1,0 +1,31 @@
+<script lang="ts">
+  import { ScrollBar } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+
+  const paragraphs = Array.from({ length: 8 }, (_, i) => `Paragraph ${i + 1}. Hover the scroll bar to expand it.`);
+</script>
+
+# ScrollBar
+{m.scroll_bar_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow fluid>
+  <ScrollBar autoHide="never" style="width: 20rem; height: 12rem; border: 1px solid var(--fs-card-stroke-default); border-radius: var(--fs-control-overlay-border-radius); background: var(--fs-card-background-default);" viewportAttributes={{ 'aria-label': 'Article' }}>
+    <div style="padding: 0.75rem 1rem;">
+      {#each paragraphs as paragraph}
+        <p style="margin: 0 0 0.75rem;">{paragraph}</p>
+      {/each}
+    </div>
+  </ScrollBar>
+</Showcase>
+
+## {m.global_usage()}
+```svelte
+<script>
+  import { ScrollBar } from 'fluentui-svelte';
+</script>
+
+<ScrollBar style="height: 12rem;" viewportAttributes={{ 'aria-label': 'Article' }}>
+  <!-- Long content -->
+</ScrollBar>
+```

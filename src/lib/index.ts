@@ -218,6 +218,11 @@ export { default as Rating } from './components/rating/rating.svelte';
 export type { RatingProps } from './components/rating/types.js';
 // End Rating Component
 
+// Start ScrollBar Component
+export { default as ScrollBar } from './components/scroll-bar/scroll-bar.svelte';
+export type { ScrollBarProps, ScrollBarGenerics } from './components/scroll-bar/types.js';
+// End ScrollBar Component
+
 // Start Skeleton Component
 export { default as Skeleton } from './components/skeleton/skeleton.svelte';
 // End Skeleton Component

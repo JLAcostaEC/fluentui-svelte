@@ -1,21 +1,11 @@
 <script lang="ts">
-	import { CaretDownFilled, CaretLeftFilled, CaretRightFilled, CaretUpFilled } from 'fluentui-icons-svelte';
+	import { CaretGlyph } from '#internal';
 
 	let {
 		direction,
 		viewport,
 		step
 	}: { direction: 'up' | 'down' | 'left' | 'right'; viewport: () => HTMLElement; step: () => number } = $props();
-
-	// The Fluent carets sit inside a 24px box; each viewBox crops it to the glyph's bounding box
-	// (plus 0.3 units so antialiasing never clips the tip) so it renders 8px wide.
-	const icons = {
-		up: { Icon: CaretUpFilled, viewBox: '4.55 7.7 14.9 9.58', width: 8, height: 5.14 },
-		down: { Icon: CaretDownFilled, viewBox: '4.55 7.7 14.9 9.58', width: 8, height: 5.14 },
-		left: { Icon: CaretLeftFilled, viewBox: '5.72 4.55 9.58 14.9', width: 5.14, height: 8 },
-		right: { Icon: CaretRightFilled, viewBox: '8.7 4.55 9.58 14.9', width: 5.14, height: 8 }
-	};
-	const glyph = $derived(icons[direction]);
 
 	let delay: ReturnType<typeof setTimeout> | undefined;
 	let repeat: ReturnType<typeof setInterval> | undefined;
@@ -30,8 +20,6 @@
 	function stop() {
 		clearTimeout(delay);
 		clearInterval(repeat);
-		window.removeEventListener('pointerup', stop);
-		window.removeEventListener('pointercancel', stop);
 	}
 
 	function start(event: PointerEvent) {
@@ -40,19 +28,20 @@
 		const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 		scroll(reduced ? 'auto' : 'smooth');
 		delay = setTimeout(() => (repeat = setInterval(() => scroll('auto'), 40)), 400);
-		window.addEventListener('pointerup', stop);
-		window.addEventListener('pointercancel', stop);
 	}
 
 	$effect(() => stop);
 </script>
 
+<!-- The press can end anywhere, not only over the arrow. -->
+<svelte:window onpointerup={stop} onpointercancel={stop} />
+
 <button type="button" class="fs-scroll-bar-arrow {direction}" tabindex="-1" aria-hidden="true" onpointerdown={start}>
-	<glyph.Icon viewBox={glyph.viewBox} width={glyph.width} height={glyph.height} />
+	<CaretGlyph {direction} />
 </button>
 
 <style>
-	/* An end cap of the rail; the glyph sits --fs-scroll-bar-glyph-offset from the end, close to the thumb. */
+	/* Rail end cap; the glyph sits --fs-scroll-bar-glyph-offset from the end. */
 	.fs-scroll-bar-arrow {
 		--track: var(--fs-scroll-bar-track, 12px);
 		--cap: var(--fs-scroll-bar-cap, 12px);
@@ -68,7 +57,7 @@
 		border-radius: calc(var(--track) / 2);
 		background: transparent;
 		color: var(--fs-control-strong-default);
-		/* Hidden at rest; visibility switches after the fade so it stays clickable while fading. */
+		/* visibility switches after the fade: clickable while fading. */
 		opacity: 0;
 		visibility: hidden;
 		pointer-events: auto;

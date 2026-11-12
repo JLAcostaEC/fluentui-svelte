@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { claimLabel } from '../label/label-context.ts';
-	import { dispatchFieldEvents, invokeHandlers, NativeField } from '#internal';
+	import { circularInputShape, dispatchFieldEvents, invokeHandlers, NativeField } from '#internal';
 	import { onClickOutside } from 'runed';
 	import ChevronDownFilled from 'fluentui-icons-svelte/ChevronDownFilled.svelte';
 	import { Flyout, ListView, ListViewItem } from '#lib/index.js';
@@ -21,6 +21,7 @@
 		id = labelContext?.fieldId ?? ID,
 		name,
 		placeholder = 'Select an option',
+		shape = 'rounded',
 		multiple,
 		value = $bindable(multiple ? [] : ''),
 		disabled,
@@ -190,8 +191,9 @@
 
 <div
 	{...wrapperAttributes}
-	class={['fs-dropdown', `square-${roundClass}`, { open, disabled }, wrapperAttributes?.class]}
+	class={['fs-dropdown', shape, `square-${roundClass}`, { open, disabled }, wrapperAttributes?.class]}
 	bind:this={wrapperRef}
+	{@attach shape === 'circular' ? circularInputShape : undefined}
 >
 	<!-- Hidden while closed, not gone: each option reports its text as it is created, and comes before
 	     the button, so the button shows it before the list ever opens, on the server too. -->
@@ -307,6 +309,27 @@
 		background: var(--fs-control-fill-default);
 		min-width: 10rem;
 		cursor: pointer;
+		&.square {
+			border-radius: 0;
+			&::before,
+			&::after {
+				border-radius: 0;
+			}
+		}
+
+		&.circular {
+			border-radius: var(--input-circular-radius, 999px);
+			&::before {
+				border-radius: inherit;
+			}
+			/* Clip the underline to the pill instead of drawing square ends outside it. */
+			&::after {
+				height: calc(100% + 0.125rem);
+				border-radius: inherit;
+				clip-path: inset(calc(100% - 2px) 0 0);
+			}
+		}
+
 		&:before {
 			content: '';
 			pointer-events: none;
@@ -344,7 +367,7 @@
 			all: unset;
 			width: 100%;
 			padding: 0.275rem 2.2rem 0.4rem 0.713rem;
-			border-radius: var(--fs-control-border-radius);
+			border-radius: inherit;
 			font-size: var(--fs-body-font-size);
 			color: var(--fs-text-primary);
 			display: flex;

@@ -83,7 +83,7 @@ export type AutoSuggestBoxProps = {
 	 * @type ListViewItemProps
 	 */
 	listViewProps?: Omit<ListViewItemProps, 'as' | 'role' | 'ref' | 'navigationMode' | 'selectedItems'>;
-} & Pick<TextBoxProps, 'type' | 'placeholder' | 'hideActionButtons' | 'textChanged' | 'onClear'> &
+} & Pick<TextBoxProps, 'shape' | 'type' | 'placeholder' | 'hideActionButtons' | 'textChanged' | 'onClear'> &
 	Omit<HTMLInputAttributes, 'value' | 'type' | 'role' | 'size' | 'placeholder'>;
 
 /**

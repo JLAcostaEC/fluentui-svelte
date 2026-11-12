@@ -4,6 +4,7 @@
 	import ChevronDownFilled from 'fluentui-icons-svelte/ChevronDownFilled.svelte';
 	import { selectDirection } from './dropdown-select.svelte.ts';
 	import type { DropdownSelectProps } from './types.ts';
+	import { circularInputShape } from '#internal';
 
 	const labelContext = claimLabel(() => id);
 
@@ -15,6 +16,7 @@
 		wrapperRef = $bindable(null),
 		wrapperAttributes,
 		multiple,
+		shape = 'rounded',
 		class: classes,
 		value = $bindable(multiple ? [] : ''),
 		id = labelContext?.fieldId,
@@ -23,7 +25,12 @@
 	}: DropdownSelectProps = $props();
 </script>
 
-<div {...wrapperAttributes} class={['fs-dropdown', wrapperAttributes?.class]} bind:this={wrapperRef}>
+<div
+	{...wrapperAttributes}
+	class={['fs-dropdown', shape, wrapperAttributes?.class]}
+	bind:this={wrapperRef}
+	{@attach shape === 'circular' ? circularInputShape : undefined}
+>
 	{#if !multiple}
 		<ChevronDownFilled class="indicator" />
 	{/if}
@@ -85,6 +92,27 @@
 		border-radius: var(--fs-control-border-radius);
 		background: var(--fs-control-fill-default);
 		min-width: 10rem;
+		&.square {
+			border-radius: 0;
+			&::before,
+			&::after {
+				border-radius: 0;
+			}
+		}
+
+		&.circular {
+			border-radius: var(--input-circular-radius, 999px);
+			&::before {
+				border-radius: inherit;
+			}
+			/* Clip the underline to the pill instead of drawing square ends outside it. */
+			&::after {
+				height: calc(100% + 0.125rem);
+				border-radius: inherit;
+				clip-path: inset(calc(100% - 2px) 0 0);
+			}
+		}
+
 		&:before {
 			content: '';
 			pointer-events: none;
@@ -169,14 +197,17 @@
 				border-radius: var(--fs-control-border-radius) var(--fs-control-border-radius) 0 0;
 			}
 		}
-		&:global(:has(.open.popover-up):not(:has([multiple])))::before {
-			border-radius: 0 0 var(--fs-control-border-radius) var(--fs-control-border-radius);
+		&:has(> select:open):not(:has(> select:global(.popover-up))) {
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
 		}
-		&:global(:has(.open):not(:has(.popover-up, [multiple])))::before {
-			border-radius: var(--fs-control-border-radius) var(--fs-control-border-radius) 0 0;
+		&:has(> select:open:global(.popover-up)) {
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
 		}
-		&:global(:has(.open):not(:has(.popover-up, [multiple])))::after {
-			border-radius: 0;
+		&:has(> select:open)::before,
+		&:has(> select:open)::after {
+			border-radius: inherit;
 		}
 		& selectedcontent :global(:has(.value-text) :not(.value-text)),
 		& selectedcontent :global(.checkmark) {

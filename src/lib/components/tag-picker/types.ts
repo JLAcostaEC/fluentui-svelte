@@ -1,6 +1,7 @@
 import type { Component, Snippet } from 'svelte';
 import type { HTMLAttributes, HTMLInputAttributes, HTMLSelectAttributes, SVGAttributes } from 'svelte/elements';
 import type { FSContext, NativeFieldAttributes } from '#internal';
+import type { Shapes } from '#types';
 import type { ListViewItemProps } from '../list-view/types.ts';
 import type { TagGroupProps } from '../tag/types.ts';
 
@@ -8,6 +9,10 @@ export type TagPickerSizes = 'medium' | 'large' | 'extra-large';
 
 /** @propsmith TagPickerProps */
 export type TagPickerProps = {
+	/** Shape of the field and the default shape of its selected tags.
+	 * @default 'rounded'
+	 */
+	shape?: Shapes;
 	/** The DOM reference of the wrapper element.
 	 * @bindable
 	 */
@@ -68,7 +73,7 @@ export type TagPickerProps = {
 	 * @type Snippet<[{ value: string; text: string }]>
 	 */
 	tag?: Snippet<[{ value: string; text: string }]>;
-	/** The props to spread on the group holding the tags. This is where its `aria-label` goes, `'Selected options'` by default.
+	/** The props to spread on the group holding the tags. Override `shape` here to give the tags a different shape from the field. This is where its `aria-label` goes, `'Selected options'` by default.
 	 * @type TagGroupProps
 	 */
 	tagGroupProps?: Omit<

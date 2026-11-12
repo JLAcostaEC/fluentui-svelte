@@ -5,7 +5,7 @@
 	import { onClickOutside } from 'runed';
 	import ChevronDownRegular from 'fluentui-icons-svelte/ChevronDownRegular.svelte';
 	import { PREFIX } from '#constants';
-	import { dispatchFieldEvents, invokeHandlers, NativeField, RenderSoC } from '#internal';
+	import { circularInputShape, dispatchFieldEvents, invokeHandlers, NativeField, RenderSoC } from '#internal';
 	import { setTagPickerContext } from './tag-picker.ts';
 	import { Flyout, ListView, ListViewItem, Tag, TagGroup } from '#lib/index.js';
 	import {
@@ -42,6 +42,7 @@
 		single,
 		disabled,
 		size = 'medium',
+		shape = 'rounded',
 		placeholder,
 		notFoundText = 'No options available',
 		expandIcon = ChevronDownRegular,
@@ -285,12 +286,13 @@
 
 	/** A click on the secondary action must not strand focus on it: the list is still open, and Escape lives on the input. */
 	function handleAsideClick(e: MouseEvent) {
+		if (blocked()) return;
 		if (_picker.open && !(e.target as Element).closest('.chevron')) inputRef?.focus();
 	}
 
 	/** Focus stays in the input: the chrome around it only forwards the click. */
 	function keepFocus(e: MouseEvent) {
-		if (!(e.target as Element).closest('input, button')) e.preventDefault();
+		if (blocked() || !(e.target as Element).closest('input, button')) e.preventDefault();
 	}
 
 	function handlePlacementChange(newPlacement: string) {
@@ -389,12 +391,18 @@ A text field and a dropdown that give people a way to choose several options fro
 		</Flyout>
 	{/if}
 	<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
-	<div class={['control', _picker.open && `square-${roundClass}`]} onclick={handleControlClick} onmousedown={keepFocus}>
+	<div
+		class={['control', shape, _picker.open && `square-${roundClass}`]}
+		{@attach shape === 'circular' ? circularInputShape : undefined}
+		onclick={handleControlClick}
+		onmousedowncapture={keepFocus}
+	>
 		<div class="content">
 			{#if selectedOptions.length > 0}
 				<TagGroup
 					aria-label="Selected options"
 					{...tagGroupProps}
+					shape={tagGroupProps?.shape ?? shape}
 					size={tagSize}
 					disabled={_picker.disabled}
 					dismissible
@@ -428,7 +436,13 @@ A text field and a dropdown that give people a way to choose several options fro
 				bind:value
 				oninput={(e) => invokeHandlers(e, [disabled], [handleInput, inputAttributes?.oninput])}
 				onkeydown={(e) => invokeHandlers(e, [disabled], [handleKeyDown, inputAttributes?.onkeydown])}
-				onfocus={(e) => invokeHandlers(e, [], [onfocus, inputAttributes?.onfocus])}
+				onfocus={(e) => {
+					if (blocked()) {
+						e.currentTarget.blur();
+						return;
+					}
+					invokeHandlers(e, [], [onfocus, inputAttributes?.onfocus]);
+				}}
 				onblur={(e) => invokeHandlers(e, [], [onblur, inputAttributes?.onblur])}
 			/>
 		</div>
@@ -459,7 +473,7 @@ A text field and a dropdown that give people a way to choose several options fro
 		disabled={_picker.disabled}
 		bind:value={selectedOptions}
 		bind:this={ref}
-		onclick={() => inputRef?.focus()}
+		onclick={() => !blocked() && inputRef?.focus()}
 	>
 		{#each selectedOptions as option (option)}
 			<option value={option}>{labels.get(option) ?? option}</option>
@@ -498,6 +512,8 @@ A text field and a dropdown that give people a way to choose several options fro
 	}
 
 	.control {
+		--tp-action-radius: var(--fs-control-border-radius);
+
 		position: relative;
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) auto;
@@ -528,6 +544,29 @@ A text field and a dropdown that give people a way to choose several options fro
 			background: var(--fs-elevation-text-border);
 			z-index: 1;
 		}
+		&.square {
+			--tp-action-radius: 0;
+			border-radius: 0;
+			&::before,
+			&::after {
+				border-radius: 0;
+			}
+		}
+
+		&.circular {
+			--tp-action-radius: 999px;
+			border-radius: var(--input-circular-radius, 999px);
+			&::before {
+				border-radius: inherit;
+			}
+			/* Clip the underline to the pill instead of drawing square ends outside it. */
+			&::after {
+				block-size: calc(100% + 0.125rem);
+				border-radius: inherit;
+				clip-path: inset(calc(100% - 2px) 0 0);
+			}
+		}
+
 		/* The bar grows from the middle on focus. Its clip-path is static: animating it would freeze the page. */
 		&::after {
 			content: '';
@@ -650,6 +689,7 @@ A text field and a dropdown that give people a way to choose several options fro
 		/* The action sits inside the control, whatever size its own button has. */
 		& :global(.fs-button) {
 			block-size: calc(var(--tp-min-height) - 0.25rem);
+			border-radius: var(--tp-action-radius);
 			padding-block: 0;
 			font-size: var(--fs-body2-font-size);
 			line-height: var(--fs-body2-line-height);
@@ -660,7 +700,7 @@ A text field and a dropdown that give people a way to choose several options fro
 		display: flex;
 		margin-inline: calc(var(--tp-icon-gap) - 0.25rem) -0.25rem;
 		padding: 0.25rem;
-		border-radius: var(--fs-control-border-radius);
+		border-radius: var(--tp-action-radius);
 		cursor: pointer;
 		&:hover {
 			background: var(--fs-subtle-fill-secondary);
@@ -687,6 +727,9 @@ A text field and a dropdown that give people a way to choose several options fro
 		& input::placeholder,
 		& .fs-tagpicker-aside {
 			color: var(--fs-text-disabled);
+		}
+		& input {
+			caret-color: transparent;
 		}
 		& .chevron {
 			cursor: not-allowed;

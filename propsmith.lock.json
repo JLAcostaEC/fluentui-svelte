@@ -1568,6 +1568,13 @@
       },
       "source": "src/lib/components/dropdown/types.ts#DropdownProps.ref"
     },
+    "generated_fs_dropdown_props_props_shape": {
+      "en": "80bf0800",
+      "locales": {
+        "es": "80bf0800"
+      },
+      "source": "src/lib/components/dropdown/types.ts#DropdownProps.shape"
+    },
     "generated_fs_dropdown_props_props_value": {
       "en": "840f6257",
       "locales": {
@@ -1651,6 +1658,13 @@
         "es": "21a330b5"
       },
       "source": "src/lib/components/dropdown-select/types.ts#DropdownSelectProps.ref"
+    },
+    "generated_fs_dropdown_select_props_props_shape": {
+      "en": "80bf0800",
+      "locales": {
+        "es": "80bf0800"
+      },
+      "source": "src/lib/components/dropdown-select/types.ts#DropdownSelectProps.shape"
     },
     "generated_fs_dropdown_select_props_props_value": {
       "en": "840f6257",
@@ -4403,6 +4417,13 @@
       },
       "source": "src/lib/components/tag/types.ts#TagGroupProps.selectedValues"
     },
+    "generated_fs_tag_group_props_props_shape": {
+      "en": "68f95615",
+      "locales": {
+        "es": "68f95615"
+      },
+      "source": "src/lib/components/tag/types.ts#TagGroupProps.shape"
+    },
     "generated_fs_tag_group_props_props_size": {
       "en": "189d44c8",
       "locales": {
@@ -4571,6 +4592,13 @@
       },
       "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.selectedOptions"
     },
+    "generated_fs_tag_picker_props_props_shape": {
+      "en": "b189400b",
+      "locales": {
+        "es": "b189400b"
+      },
+      "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.shape"
+    },
     "generated_fs_tag_picker_props_props_single": {
       "en": "9c0e4a71",
       "locales": {
@@ -4593,9 +4621,9 @@
       "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.tag"
     },
     "generated_fs_tag_picker_props_props_tag_group_props": {
-      "en": "049daa04",
+      "en": "cdf62a40",
       "locales": {
-        "es": "049daa04"
+        "es": "cdf62a40"
       },
       "source": "src/lib/components/tag-picker/types.ts#TagPickerProps.tagGroupProps"
     },
@@ -4740,9 +4768,9 @@
       "source": "src/lib/components/tag/types.ts#TagProps.selected"
     },
     "generated_fs_tag_props_props_shape": {
-      "en": "01f8e359",
+      "en": "7a927540",
       "locales": {
-        "es": "01f8e359"
+        "es": "7a927540"
       },
       "source": "src/lib/components/tag/types.ts#TagProps.shape"
     },
@@ -4787,6 +4815,13 @@
         "es": "40f30bc3"
       },
       "source": "src/lib/components/textarea/types.ts#TextAreaProps.resize"
+    },
+    "generated_fs_text_area_props_props_shape": {
+      "en": "80bf0800",
+      "locales": {
+        "es": "80bf0800"
+      },
+      "source": "src/lib/components/textarea/types.ts#TextAreaProps.shape"
     },
     "generated_fs_text_area_props_props_value": {
       "en": "cbf41c2f",
@@ -4871,6 +4906,13 @@
         "es": "98d32ebc"
       },
       "source": "src/lib/components/text-box/types.ts#TextBoxProps.ref"
+    },
+    "generated_fs_text_box_props_props_shape": {
+      "en": "80bf0800",
+      "locales": {
+        "es": "80bf0800"
+      },
+      "source": "src/lib/components/text-box/types.ts#TextBoxProps.shape"
     },
     "generated_fs_text_box_props_props_size": {
       "en": "e1d179b8",

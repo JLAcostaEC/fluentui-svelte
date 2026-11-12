@@ -1,8 +1,13 @@
 import type { Snippet } from 'svelte';
 import type { HTMLAttributes, HTMLOptionAttributes, HTMLSelectAttributes } from 'svelte/elements';
+import type { Shapes } from '#types';
 
 /** @propsmith DropdownSelectProps */
 export type DropdownSelectProps = {
+	/** Shape of the input surface, including its border and focus indicator.
+	 * @default 'rounded'
+	 */
+	shape?: Shapes;
 	/** The selected value. An array of values when `multiple` is set.
 	 * @type string | string[]
 	 * @default multiple ? [] : ''

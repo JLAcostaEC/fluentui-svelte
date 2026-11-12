@@ -3,6 +3,7 @@ import type { HTMLAttributes, HTMLButtonAttributes, HTMLSelectAttributes } from 
 import type { ListViewProps, ListViewItemProps } from '../list-view/types.ts';
 import type { FlyoutProps } from '../flyout/types.ts';
 import type { FSContext, NativeFieldAttributes } from '#internal';
+import type { Shapes } from '#types';
 
 /** The value shape of a dropdown that allows more than one selection. */
 export type DropdownMultipleValue = {
@@ -18,6 +19,10 @@ export type DropdownSingleValue = {
 
 /** @propsmith DropdownProps */
 export type DropdownProps = {
+	/** Shape of the input surface, including its border and focus indicator.
+	 * @default 'rounded'
+	 */
+	shape?: Shapes;
 	/** The selected value. An array of values when `multiple` is set.
 	 * @type string | string[]
 	 * @default multiple ? [] : ''

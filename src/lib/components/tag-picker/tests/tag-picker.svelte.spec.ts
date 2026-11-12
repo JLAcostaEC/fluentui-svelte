@@ -78,10 +78,16 @@ describe('rendering', () => {
 	});
 
 	it('is disabled', async () => {
-		render(TagPickerTestWrapper, { disabled: true, selectedOptions: ['apple'] });
+		await render(TagPickerTestWrapper, { disabled: true, selectedOptions: ['apple'] });
 
 		await expect.element(combobox()).toBeDisabled();
 		await expect.element(tags()).toBeDisabled();
+		await page.getByRole('button', { name: 'before', exact: true }).click();
+		await control().click();
+		focusInput();
+		expect(document.activeElement).not.toBe(input());
+		await userEvent.tab();
+		expect(document.activeElement).not.toBe(input());
 	});
 
 	it('does not open when disabled', async () => {

@@ -13,26 +13,27 @@
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DropdownProps -->
 
-| Name                                                 | Type                              | Default              | Description                                                                              |
-| ---------------------------------------------------- | --------------------------------- | -------------------- | ---------------------------------------------------------------------------------------- |
-| `value` _bindable_                                   | `string` &#124; `string[]`        | `multiple ? [] : ''` | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_value} />`              |
-| `multiple`                                           | `boolean`                         |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_multiple} />`           |
-| `placeholder`                                        | `string`                          | `'Select an option'` | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_placeholder} />`        |
-| `disabled`                                           | `boolean`                         |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_disabled} />`           |
-| `name`                                               | `string` &#124; `null`            |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_name} />`               |
-| `wrapperRef` _bindable_                              | `HTMLDivElement` &#124; `null`    |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_wrapper_ref} />`        |
-| `wrapperAttributes`                                  | `HTMLAttributes`                  |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_wrapper_attributes} />` |
-| `ref` _bindable_                                     | `HTMLSelectElement` &#124; `null` |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_ref} />`                |
-| `buttonRef` _bindable_                               | `HTMLButtonElement` &#124; `null` |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_button_ref} />`         |
-| `buttonAttributes`                                   | `HTMLButtonAttributes`            |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_button_attributes} />`  |
-| `flyoutRef` _bindable_                               | `HTMLDivElement` &#124; `null`    |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_flyout_ref} />`         |
-| `flyoutProps`                                        | `FlyoutProps`                     |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_flyout_props} />`       |
-| `flyoutMaxHeight`                                    | `string`                          |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_flyout_max_height} />`  |
-| `listboxRef` _bindable_                              | `HTMLUListElement` &#124; `null`  |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_listbox_ref} />`        |
-| `listboxProps`                                       | `ListViewProps`                   |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_listbox_props} />`      |
-| `children`                                           | `Snippet`                         |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_children} />`           |
-| `DropdownMultipleValue` &#124; `DropdownSingleValue` |                                   |                      |                                                                                          |
-| `NativeFieldAttributes<HTMLSelectAttributes>`        |                                   |                      |                                                                                          |
+| Name                                                 | Type                                              | Default              | Description                                                                              |
+| ---------------------------------------------------- | ------------------------------------------------- | -------------------- | ---------------------------------------------------------------------------------------- |
+| `shape`                                              | `'circular'` &#124; `'rounded'` &#124; `'square'` | `'rounded'`          | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_shape} />`              |
+| `value` _bindable_                                   | `string` &#124; `string[]`                        | `multiple ? [] : ''` | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_value} />`              |
+| `multiple`                                           | `boolean`                                         |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_multiple} />`           |
+| `placeholder`                                        | `string`                                          | `'Select an option'` | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_placeholder} />`        |
+| `disabled`                                           | `boolean`                                         |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_disabled} />`           |
+| `name`                                               | `string` &#124; `null`                            |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_name} />`               |
+| `wrapperRef` _bindable_                              | `HTMLDivElement` &#124; `null`                    |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_wrapper_ref} />`        |
+| `wrapperAttributes`                                  | `HTMLAttributes`                                  |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_wrapper_attributes} />` |
+| `ref` _bindable_                                     | `HTMLSelectElement` &#124; `null`                 |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_ref} />`                |
+| `buttonRef` _bindable_                               | `HTMLButtonElement` &#124; `null`                 |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_button_ref} />`         |
+| `buttonAttributes`                                   | `HTMLButtonAttributes`                            |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_button_attributes} />`  |
+| `flyoutRef` _bindable_                               | `HTMLDivElement` &#124; `null`                    |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_flyout_ref} />`         |
+| `flyoutProps`                                        | `FlyoutProps`                                     |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_flyout_props} />`       |
+| `flyoutMaxHeight`                                    | `string`                                          |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_flyout_max_height} />`  |
+| `listboxRef` _bindable_                              | `HTMLUListElement` &#124; `null`                  |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_listbox_ref} />`        |
+| `listboxProps`                                       | `ListViewProps`                                   |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_listbox_props} />`      |
+| `children`                                           | `Snippet`                                         |                      | `<I18nMarkupMessage message={m.generated_fs_dropdown_props_props_children} />`           |
+| `DropdownMultipleValue` &#124; `DropdownSingleValue` |                                                   |                      |                                                                                          |
+| `NativeFieldAttributes<HTMLSelectAttributes>`        |                                                   |                      |                                                                                          |
 
 <!-- /props:DropdownProps -->
 

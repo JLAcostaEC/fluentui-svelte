@@ -16,6 +16,7 @@
 		value = $bindable(''),
 		ref = $bindable(null),
 		resize = 'vertical',
+		shape = 'rounded',
 		style,
 		wrapperAttributes,
 		onchange,
@@ -39,7 +40,7 @@
 	<TextArea resize="none" disabled />
 	```
 -->
-<div {...wrapperAttributes} class={['fs-textarea', wrapperAttributes?.class]} bind:this={wrapperRef}>
+<div {...wrapperAttributes} class={['fs-textarea', shape, wrapperAttributes?.class]} bind:this={wrapperRef}>
 	<textarea
 		{...attributes}
 		{name}
@@ -90,6 +91,14 @@
 				-webkit-appearance: none;
 			}
 		}
+		&.square {
+			border-radius: 0;
+			&::before,
+			&::after {
+				border-radius: 0;
+			}
+		}
+
 		&:before {
 			content: '';
 			pointer-events: none;

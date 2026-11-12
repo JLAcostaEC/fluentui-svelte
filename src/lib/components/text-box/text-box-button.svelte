@@ -19,7 +19,7 @@
 		outline: none;
 		background-color: var(--fs-subtle-fill-transparent);
 		border: 1px solid var(--fs-subtle-fill-transparent);
-		border-radius: var(--fs-control-border-radius);
+		border-radius: var(--text-box-button-radius, var(--fs-control-border-radius));
 		color: var(--fs-text-secondary);
 		cursor: pointer;
 		display: flex;

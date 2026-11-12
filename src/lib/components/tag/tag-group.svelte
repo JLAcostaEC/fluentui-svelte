@@ -7,6 +7,7 @@
 
 	let {
 		size,
+		shape,
 		appearance,
 		disabled,
 		dismissible,
@@ -30,6 +31,9 @@
 
 	const context: TagGroupContext = $state({
 		config: {
+			get shape() {
+				return shape;
+			},
 			get size() {
 				return size;
 			},

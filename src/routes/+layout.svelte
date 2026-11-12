@@ -17,7 +17,7 @@
 	import { page } from '$app/state';
 	import { ModeWatcher } from 'mode-watcher';
 	import { PersistedState } from 'runed';
-	import { FluentUISvelte } from '#lib/index.js';
+	import { FluentUISvelte, ScrollBar } from '#lib/index.js';
 	import { locales } from '#i18n/runtime.js';
 	import { m } from '#i18n/messages.js';
 	import { localizedPath } from '#site/utils/localized-path.js';
@@ -48,6 +48,7 @@
 		{@render children?.()}
 	</main>
 	<Footer />
+	<ScrollBar scrollRef={globalThis.document?.querySelector('body')} />
 </FluentUISvelte>
 
 <style>

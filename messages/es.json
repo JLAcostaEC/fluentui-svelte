@@ -639,7 +639,7 @@
 	"generated_fs_file_uploader_props_props_sources": "De dónde pueden venir los archivos. Cada origen distinto de {#code}local{/code} añade un botón a la zona de soltar. Las nubes usan {#code}googleDriveSource{/code}, {#code}oneDriveSource{/code}, {#code}dropboxSource{/code} o {#code}boxSource{/code}; solo se incluyen las que pasas. Se lee una vez, al crearse.",
 	"generated_fs_file_uploader_props_props_upload": "Dónde y cómo se suben los archivos. Con un {#code}uploadEndpoint{/code} o un {#code}serverUrl{/code}, los archivos se suben, y el formulario envía lo que devuelve {#code}uploadedValue{/code} por cada uno en lugar del archivo. Sin ellos, el formulario envía los archivos.",
 	"generated_fs_file_uploader_props_props_uploaded_value": "Lo que el formulario envía por un archivo subido.",
-	"generated_fs_file_uploader_props_props_uploader": "El motor de upup del uploader, para pausar, reanudar o cancelar las subidas, o escuchar sus eventos.",
+	"generated_fs_file_uploader_props_props_uploader": "El motor de upup del uploader, para pausar, reanudar o cancelar las subidas, o escuchar sus eventos. El motor solo se ejecuta en el navegador: es {#code}null{/code} en el servidor, y se asigna cuando el uploader se monta.",
 	"generated_fs_file_uploader_props_props_wrapper_attributes": "Los atributos que se aplican al elemento contenedor.",
 	"generated_fs_file_uploader_props_props_wrapper_ref": "La referencia DOM del elemento contenedor.",
 	"generated_fs_flyout_props_props_children": "El contenido del flyout.",

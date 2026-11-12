@@ -639,7 +639,7 @@
 	"generated_fs_file_uploader_props_props_sources": "Where the files can come from. Each source other than {#code}local{/code} adds a button to the drop zone. Cloud drives use {#code}googleDriveSource{/code}, {#code}oneDriveSource{/code}, {#code}dropboxSource{/code} or {#code}boxSource{/code}; only the ones passed are bundled. Read once, on creation.",
 	"generated_fs_file_uploader_props_props_upload": "Where and how the files are uploaded. With an {#code}uploadEndpoint{/code} or a {#code}serverUrl{/code}, the files are uploaded, and the form submits what {#code}uploadedValue{/code} returns for each one instead of the file. Without them, the form submits the files.",
 	"generated_fs_file_uploader_props_props_uploaded_value": "What the form submits for an uploaded file.",
-	"generated_fs_file_uploader_props_props_uploader": "The upup engine of the uploader, to pause, resume or cancel the uploads, or to listen to its events.",
+	"generated_fs_file_uploader_props_props_uploader": "The upup engine of the uploader, to pause, resume or cancel the uploads, or to listen to its events. The engine runs in the browser only: it is {#code}null{/code} on the server, and set once the uploader is mounted.",
 	"generated_fs_file_uploader_props_props_wrapper_attributes": "The attributes to spread on the wrapper element.",
 	"generated_fs_file_uploader_props_props_wrapper_ref": "The DOM reference of the wrapper element.",
 	"generated_fs_flyout_props_props_children": "The content of the flyout.",

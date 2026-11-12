@@ -1,40 +1,23 @@
-import {
-	createHighlighter,
-	type HighlighterCore,
-	type BundledHighlighterOptions,
-	type BundledLanguage,
-	type BundledTheme
-} from 'shiki/bundle/web';
+import { createHighlighterCore, type HighlighterCore } from 'shiki/core';
+import { createJavaScriptRegexEngine } from 'shiki/engine/javascript';
 
-export const DEFAULT_LANGS: BundledLanguage[] = ['javascript', 'typescript', 'svelte', 'html', 'css', 'json', 'bash'];
-export const DEFAULT_THEMES: BundledTheme[] = ['one-light', 'one-dark-pro'];
+let highlighter: Promise<HighlighterCore> | null = null;
 
-let highlighter: HighlighterCore | null = null;
-
-export const getHighlighter = async (
-	options?: BundledHighlighterOptions<BundledLanguage, BundledTheme>
-): Promise<HighlighterCore> => {
-	if (highlighter) return highlighter;
-
-	const _options: BundledHighlighterOptions<BundledLanguage, BundledTheme> = options ?? {
-		themes: DEFAULT_THEMES,
-		langs: DEFAULT_LANGS
-	};
-
-	highlighter = await createHighlighter(_options);
-
-	return highlighter;
-};
-
-export const updateHighlighter = async (
-	options: BundledHighlighterOptions<BundledLanguage, BundledTheme>
-): Promise<HighlighterCore> => {
-	if (highlighter) {
-		highlighter.dispose();
+export const getHighlighter = (): Promise<HighlighterCore> =>
+	(highlighter ??= createHighlighterCore({
+		themes: [import('shiki/themes/one-light.mjs'), import('shiki/themes/one-dark-pro.mjs')],
+		langs: [
+			import('shiki/langs/javascript.mjs'),
+			import('shiki/langs/typescript.mjs'),
+			import('shiki/langs/svelte.mjs'),
+			import('shiki/langs/html.mjs'),
+			import('shiki/langs/css.mjs'),
+			import('shiki/langs/json.mjs'),
+			import('shiki/langs/bash.mjs')
+		],
+		engine: createJavaScriptRegexEngine()
+	}).catch((error) => {
+		// A failed start is tried again by the next example.
 		highlighter = null;
-	}
-
-	highlighter = await createHighlighter(options);
-
-	return highlighter;
-};
+		throw error;
+	}));

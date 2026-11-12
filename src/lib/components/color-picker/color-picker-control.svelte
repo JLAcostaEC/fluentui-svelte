@@ -561,9 +561,7 @@
 		--color-picker-slider-radius: 999px;
 	}
 
-	.rails :global(.slider-rail),
-	.rails :global(.slider-thumb),
-	.rails :global(.slider-thumb::before) {
+	.rails :global(.slider-rail) {
 		border-radius: var(--color-picker-slider-radius);
 	}
 

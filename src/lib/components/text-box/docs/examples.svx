@@ -29,7 +29,26 @@
   const readonlyCode = `<TextBox readonly value="Read-only value" />`;
 
   const hideButtonsCode = `<TextBox type="search" hideActionButtons placeholder="No action buttons" />`;
+  const shapesCode = `<script>
+  import { TextBox } from 'fluentui-svelte';
+<\/script>
+
+<TextBox shape="rounded" aria-label="rounded" placeholder="rounded" />
+<TextBox shape="square" aria-label="square" placeholder="square" />
+<TextBox shape="circular" aria-label="circular" placeholder="circular" />`;
 </script>
+
+### {m.global_shape()}
+
+<p><I18nMarkupMessage message={m.textual_input_shapes_description} /></p>
+
+<Showcase columns={1} minHeight="0" code={shapesCode} disablePanZoom showOverflow fluid>
+  <div class="input-shapes">
+    <TextBox shape="rounded" aria-label="rounded" placeholder="rounded" />
+    <TextBox shape="square" aria-label="square" placeholder="square" />
+    <TextBox shape="circular" aria-label="circular" placeholder="circular" />
+  </div>
+</Showcase>
 
 ### {m.tb_type_title()}
 
@@ -78,3 +97,11 @@
 <Showcase columns={1} code={hideButtonsCode}>
   <TextBox type="search" hideActionButtons placeholder="No action buttons" />
 </Showcase>
+<style>
+  .input-shapes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1.5rem;
+    width: 100%;
+  }
+</style>

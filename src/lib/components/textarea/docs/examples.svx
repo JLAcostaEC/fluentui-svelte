@@ -12,7 +12,24 @@
 <TextArea resize="both" placeholder="Resize both" />`;
 
   const onChangeCode = `<TextArea onChange={(e) => console.log(e)} placeholder="Type..." />`;
+  const shapesCode = `<script>
+  import { TextArea } from 'fluentui-svelte';
+<\/script>
+
+<TextArea shape="rounded" aria-label="rounded" placeholder="rounded" />
+<TextArea shape="square" aria-label="square" placeholder="square" />`;
 </script>
+
+### {m.global_shape()}
+
+<p><I18nMarkupMessage message={m.text_area_shapes_description} /></p>
+
+<Showcase columns={1} minHeight="0" code={shapesCode} disablePanZoom showOverflow fluid>
+  <div class="input-shapes">
+    <TextArea shape="rounded" aria-label="rounded" placeholder="rounded" />
+    <TextArea shape="square" aria-label="square" placeholder="square" />
+  </div>
+</Showcase>
 
 ### {m.ta_placeholder_title()}
 
@@ -39,3 +56,12 @@
 <Showcase columns={1} code={onChangeCode} disablePanZoom showOverflow>
   <TextArea onChange={(e) => console.log(e)} placeholder="Type to see the change at console..." />
 </Showcase>
+
+<style>
+  .input-shapes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1.5rem;
+    width: 100%;
+  }
+</style>

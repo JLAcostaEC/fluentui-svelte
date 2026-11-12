@@ -24,7 +24,7 @@ export type TagProps = {
 	 * @default 'medium'
 	 */
 	size?: TagSize;
-	/** The tag can have a circular, rounded or square shape.
+	/** The tag can have a circular, rounded or square shape. Falls back to the `shape` of its `TagGroup`.
 	 * @default 'circular'
 	 */
 	shape?: Shapes;
@@ -96,6 +96,8 @@ export type TagProps = {
 
 /** @propsmith TagGroupProps */
 export type TagGroupProps = {
+	/** The shape given to tags that do not set their own. */
+	shape?: Shapes;
 	/** The size given to the tags of the group that do not set their own.
 	 * @default 'medium'
 	 */
@@ -132,6 +134,7 @@ export type TagGroupProps = {
 export type TagGroupContext = FSContext<
 	{
 		readonly size?: TagSize;
+		readonly shape?: Shapes;
 		readonly appearance?: TagAppearance;
 		readonly disabled?: boolean;
 		readonly dismissible?: boolean;

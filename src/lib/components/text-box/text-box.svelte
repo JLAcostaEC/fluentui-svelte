@@ -24,6 +24,7 @@
 		ref = $bindable(null),
 		placeholder = 'Fluent TextBox',
 		size = 'medium',
+		shape = 'rounded',
 		contentBefore,
 		contentAfter,
 		querySubmitted,
@@ -64,7 +65,7 @@
 	};
 
 	const handleKeyUp = (e: KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement }) => {
-		if (e.key === 'Escape') {
+		if (e.key === 'Escape' && !e.defaultPrevented) {
 			e.preventDefault();
 			(e.target as HTMLInputElement).blur();
 		}
@@ -94,7 +95,7 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 -->
 <div
 	{...wrapperAttributes}
-	class={['fs-textbox', `text-box-size-${size}`, wrapperAttributes?.class]}
+	class={['fs-textbox', shape, `text-box-size-${size}`, wrapperAttributes?.class]}
 	bind:this={wrapperRef}
 >
 	{#if contentBefore}
@@ -160,6 +161,8 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 
 <style>
 	.fs-textbox {
+		--text-box-button-radius: var(--fs-control-border-radius);
+
 		display: flex;
 		align-items: center;
 		position: relative;
@@ -197,6 +200,29 @@ This is a implementation of Fluent UI TextBox component. The TextBox component i
 				appearance: textfield;
 			}
 		}
+		&.square {
+			--text-box-button-radius: 0;
+			border-radius: 0;
+			&::before,
+			&::after {
+				border-radius: 0;
+			}
+		}
+
+		&.circular {
+			--text-box-button-radius: 999px;
+			border-radius: 999px;
+			&::before {
+				border-radius: inherit;
+			}
+			/* Clip the underline to the pill instead of drawing square ends outside it. */
+			&::after {
+				height: calc(100% + 0.125rem);
+				border-radius: inherit;
+				clip-path: inset(calc(100% - 2px) 0 0);
+			}
+		}
+
 		&:before {
 			content: '';
 			pointer-events: none;

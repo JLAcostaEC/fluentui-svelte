@@ -1,11 +1,15 @@
 import type { Component, Snippet } from 'svelte';
 import type { HTMLAttributes, HTMLInputAttributes } from 'svelte/elements';
-import type { Sizes } from '#types';
+import type { Shapes, Sizes } from '#types';
 
 export type TextBoxTypes = 'text' | 'search' | 'email' | 'url' | 'tel' | 'password' | 'number';
 
 /** @propsmith TextBoxProps */
 export type TextBoxProps = {
+	/** Shape of the input surface, including its border and focus indicator.
+	 * @default 'rounded'
+	 */
+	shape?: Shapes;
 	/** The type of the input element.
 	 * @default 'text'
 	 */

@@ -1,6 +1,7 @@
 export * from './utils.ts';
 export * from './dom-utils.svelte.ts';
 export * from './native-field.svelte.ts';
+export * from './circular-input-shape.ts';
 export * from './context.ts';
 export * from './transitions.ts';
 export * from './polyfills/expander.svelte.ts';

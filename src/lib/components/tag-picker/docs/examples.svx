@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { Avatar, Button, Tag, TagPicker, TagPickerOption, TagPickerOptionGroup } from '#lib/index.js';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
@@ -177,9 +178,37 @@
     </TagPickerOption>
   {/each}
 </TagPicker>`;
+  const shapesCode = `<script>
+  import { TagPicker, TagPickerOption } from 'fluentui-svelte';
+<\/script>
+
+<TagPicker shape="rounded" aria-label="rounded" selectedOptions={['svelte']}>
+  <TagPickerOption value="svelte">Svelte</TagPickerOption>
+</TagPicker>
+<TagPicker shape="square" aria-label="square" selectedOptions={['svelte']}>
+  <TagPickerOption value="svelte">Svelte</TagPickerOption>
+</TagPicker>
+<TagPicker shape="circular" aria-label="circular" selectedOptions={['svelte']}>
+  <TagPickerOption value="svelte">Svelte</TagPickerOption>
+</TagPicker>
+<TagPicker
+  shape="square"
+  tagGroupProps={{ shape: 'circular' }}
+  aria-label="square with circular tags"
+  selectedOptions={['svelte']}
+>
+  <TagPickerOption value="svelte">Svelte</TagPickerOption>
+</TagPicker>`;
 </script>
 
 <style>
+  .input-shapes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1.5rem;
+    width: 100%;
+  }
+
   /* A percentage width is cyclic in the shrink-to-fit grid of the showcase, so the width is set against the viewport instead:
      the card is 3.5rem inside it on a phone, and 31rem inside it once the sidebar shows. */
   :global(.tp-example) {
@@ -215,6 +244,33 @@
 {#snippet allClear()}
   <Button appearance="subtle" onclick={() => (secondarySelected = [])}>All Clear</Button>
 {/snippet}
+
+### {m.global_shape()}
+
+<p><I18nMarkupMessage message={m.textual_input_shapes_description} /></p>
+<p><I18nMarkupMessage message={m.tagpicker_shapes_description} /></p>
+
+<Showcase columns={1} minHeight="0" code={shapesCode} disablePanZoom showOverflow fluid>
+  <div class="input-shapes">
+    <TagPicker shape="rounded" aria-label="rounded" selectedOptions={['svelte']}>
+      <TagPickerOption value="svelte">Svelte</TagPickerOption>
+    </TagPicker>
+    <TagPicker shape="square" aria-label="square" selectedOptions={['svelte']}>
+      <TagPickerOption value="svelte">Svelte</TagPickerOption>
+    </TagPicker>
+    <TagPicker shape="circular" aria-label="circular" selectedOptions={['svelte']}>
+      <TagPickerOption value="svelte">Svelte</TagPickerOption>
+    </TagPicker>
+    <TagPicker
+      shape="square"
+      tagGroupProps={{ shape: 'circular' }}
+      aria-label="square with circular tags"
+      selectedOptions={['svelte']}
+    >
+      <TagPickerOption value="svelte">Svelte</TagPickerOption>
+    </TagPicker>
+  </div>
+</Showcase>
 
 ### {m.tagpicker_default_title()}
 

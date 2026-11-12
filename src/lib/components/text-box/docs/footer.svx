@@ -15,6 +15,7 @@
 
 | Name                                 | Type                                                            | Default            | Description                                                                               |
 | ------------------------------------ | --------------------------------------------------------------- | ------------------ | ----------------------------------------------------------------------------------------- |
+| `shape`                              | `'circular'` &#124; `'rounded'` &#124; `'square'`               | `'rounded'`        | `<I18nMarkupMessage message={m.generated_fs_text_box_props_props_shape} />`               |
 | `type`                               | [`TextBoxTypes`](/docs/types/#textboxtypes)                     | `'text'`           | `<I18nMarkupMessage message={m.generated_fs_text_box_props_props_type} />`                |
 | `value` _bindable_                   | `string` &#124; `number`                                        |                    | `<I18nMarkupMessage message={m.generated_fs_text_box_props_props_value} />`               |
 | `wrapperRef` _bindable_              | `HTMLDivElement` &#124; `null`                                  |                    | `<I18nMarkupMessage message={m.generated_fs_text_box_props_props_wrapper_ref} />`         |

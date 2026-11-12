@@ -1,7 +1,12 @@
 import type { HTMLAttributes, SvelteHTMLElements } from 'svelte/elements';
+import type { Shapes } from '#types';
 
 /** @propsmith TextAreaProps */
 export type TextAreaProps = {
+	/** Shape of the input surface, including its border and focus indicator.
+	 * @default 'rounded'
+	 */
+	shape?: Exclude<Shapes, 'circular'>;
 	/** The current value of the textarea.
 	 * @default ''
 	 * @bindable

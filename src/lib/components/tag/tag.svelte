@@ -12,7 +12,7 @@
 	let {
 		appearance,
 		size,
-		shape = 'circular',
+		shape,
 		disabled,
 		selected = false,
 		dismissible,
@@ -38,6 +38,7 @@
 
 	const _appearance = $derived(appearance ?? group?.config.appearance ?? 'filled');
 	const _size = $derived(size ?? group?.config.size ?? 'medium');
+	const _shape = $derived(shape ?? group?.config.shape ?? 'circular');
 	const _dismissible = $derived(dismissible ?? group?.config.dismissible ?? false);
 	const _disabled = $derived(!!(disabled || group?.config.disabled));
 	const _selected = $derived(interactive && group ? group.state.selectedValues.includes(value) : selected);
@@ -92,7 +93,7 @@
 -->
 {#snippet content()}
 	{#if media}
-		<span class="fs-tag-media"><RenderSoC SoC={media} args={{ shape }} /></span>
+		<span class="fs-tag-media"><RenderSoC SoC={media} args={{ shape: _shape }} /></span>
 	{:else if icon}
 		<span class="fs-tag-icon" aria-hidden="true"><RenderSoC SoC={icon} /></span>
 	{/if}
@@ -112,7 +113,7 @@
 	as={tag}
 	appearance={_appearance}
 	size={_size}
-	{shape}
+	shape={_shape}
 	selected={_selected}
 	{...attributes}
 	bind:ref

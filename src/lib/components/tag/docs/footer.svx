@@ -41,6 +41,7 @@
 
 | Name                        | Type                                                                      | Default     | Description                                                                            |
 | --------------------------- | ------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------- |
+| `shape`                     | `'circular'` &#124; `'rounded'` &#124; `'square'`                         |             | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_shape} />`           |
 | `size`                      | `'extra-small'` &#124; `'small'` &#124; `'medium'`                        | `'medium'`  | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_size} />`            |
 | `appearance`                | `PillButtonAppearance`                                                    |             | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_appearance} />`      |
 | `disabled`                  | `boolean`                                                                 | `false`     | `<I18nMarkupMessage message={m.generated_fs_tag_group_props_props_disabled} />`        |

@@ -62,16 +62,17 @@ HTML attributes, including class, id and ARIA attributes, apply to the control e
 <!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
 <!-- props:DropdownSelectProps -->
 
-| Name                          | Type                              | Default                    | Description                                                            |
-| ----------------------------- | --------------------------------- | -------------------------- | ---------------------------------------------------------------------- |
-| `value` _bindable_            | `string` &#124; `string[]`        | `multiple ? [] : ''`       | The selected value. An array of values when `multiple` is set.         |
-| `multiple`                    | `boolean`                         |                            | Allows more than one option to be selected at a time.                  |
-| `placeholder`                 | `string`                          | `'Native Select Dropdown'` | The text shown while no option is selected.                            |
-| `hidePlaceholder`             | `boolean`                         |                            | Keeps the placeholder out of the option list once a value is selected. |
-| `ref` _bindable_              | `HTMLSelectElement` &#124; `null` |                            | The DOM reference of the select element.                               |
-| `wrapperRef` _bindable_       | `HTMLDivElement` &#124; `null`    |                            | The DOM reference of the wrapper element.                              |
-| `wrapperAttributes`           | `HTMLAttributes`                  |                            | The attributes to spread on the wrapper element.                       |
-| Element Attributes (`select`) |                                   |                            |                                                                        |
+| Name                          | Type                                              | Default                    | Description                                                            |
+| ----------------------------- | ------------------------------------------------- | -------------------------- | ---------------------------------------------------------------------- |
+| `shape`                       | `'circular'` &#124; `'rounded'` &#124; `'square'` | `'rounded'`                | Shape of the input surface, including its border and focus indicator.  |
+| `value` _bindable_            | `string` &#124; `string[]`                        | `multiple ? [] : ''`       | The selected value. An array of values when `multiple` is set.         |
+| `multiple`                    | `boolean`                                         |                            | Allows more than one option to be selected at a time.                  |
+| `placeholder`                 | `string`                                          | `'Native Select Dropdown'` | The text shown while no option is selected.                            |
+| `hidePlaceholder`             | `boolean`                                         |                            | Keeps the placeholder out of the option list once a value is selected. |
+| `ref` _bindable_              | `HTMLSelectElement` &#124; `null`                 |                            | The DOM reference of the select element.                               |
+| `wrapperRef` _bindable_       | `HTMLDivElement` &#124; `null`                    |                            | The DOM reference of the wrapper element.                              |
+| `wrapperAttributes`           | `HTMLAttributes`                                  |                            | The attributes to spread on the wrapper element.                       |
+| Element Attributes (`select`) |                                                   |                            |                                                                        |
 
 <!-- /props:DropdownSelectProps -->
 

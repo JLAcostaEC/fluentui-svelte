@@ -15,6 +15,7 @@
 
 | Name                             | Type                                                               | Default      | Description                                                                               |
 | -------------------------------- | ------------------------------------------------------------------ | ------------ | ----------------------------------------------------------------------------------------- |
+| `shape`                          | `Exclude<Shapes, 'circular'>`                                      | `'rounded'`  | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_shape} />`              |
 | `value` _bindable_               | `string`                                                           | `''`         | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_value} />`              |
 | `ref` _bindable_                 | `HTMLTextAreaElement` &#124; `null`                                |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_ref} />`                |
 | `placeholder`                    | `string`                                                           |              | `<I18nMarkupMessage message={m.generated_fs_text_area_props_props_placeholder} />`        |

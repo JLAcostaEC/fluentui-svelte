@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { claimLabel } from '../label/label-context.js';
 	import { onMount, tick } from 'svelte';
+	import { createAttachmentKey } from 'svelte/attachments';
 	import { SvelteMap } from 'svelte/reactivity';
 	import { on } from 'svelte/events';
 	import { onClickOutside } from 'runed';
-	import { invokeHandlers } from '#internal';
+	import { circularInputShape, invokeHandlers } from '#internal';
 	import { PREFIX } from '#constants';
 	import { setAutoSuggestBoxContext } from './auto-suggest-box.js';
 	import { Flyout, TextBox, ListView, ListViewItem } from '#lib/index.js';
@@ -21,6 +22,7 @@
 
 	const FALLBACK_ID = $props.id();
 	const ID = `${PREFIX}autosuggestbox-${FALLBACK_ID}`;
+	const circularShapeKey = createAttachmentKey();
 
 	const labelContext = claimLabel(() => id);
 
@@ -33,6 +35,7 @@
 		placeholder,
 		hideActionButtons,
 		type = 'search',
+		shape = 'rounded',
 		open = $bindable(false),
 		multiselect,
 		wrapperRef = $bindable(null),
@@ -69,7 +72,7 @@
 
 	let lastTypedValue: string = $state('');
 
-	let roundClass = $state('bottom');
+	let roundClass = $state<'top' | 'bottom'>('bottom');
 
 	let activeOption: OptionType | null = $state(null);
 
@@ -296,7 +299,7 @@
 	}
 
 	function handlePlacementChange(newPlacement: string) {
-		roundClass = newPlacement.includes('-') ? newPlacement.split('-')[0] : newPlacement;
+		roundClass = newPlacement.startsWith('top') ? 'top' : 'bottom';
 	}
 
 	onClickOutside(
@@ -346,8 +349,7 @@
 
 	const globalContext = getGlobalFSContext();
 
-	// Closing takes the flyout down, and leaving `activeOption` behind,
-	// remove it..
+	// Closing removes the active suggestion from the accessibility tree.
 	$effect(() => {
 		if (!open) activeOption = null;
 	});
@@ -384,6 +386,7 @@
 	<TextBox
 		{...attributes}
 		{type}
+		{shape}
 		{placeholder}
 		{hideActionButtons}
 		{id}
@@ -395,12 +398,20 @@
 		textChanged={(e) => handleTextChanged(e, value)}
 		onClear={(e) => invokeHandlers(e, [], [handleClear, onClear])}
 		onfocus={(e) => invokeHandlers(e, [], [handleFocus, onfocus])}
+		onkeyupcapture={(e) => {
+			// Escape closes suggestions while focus stays on the query.
+			if (e.key === 'Escape') e.preventDefault();
+			attributes.onkeyupcapture?.(e);
+		}}
 		role="combobox"
 		aria-expanded={open}
 		aria-autocomplete="list"
 		aria-controls={open ? `${ID}-list` : undefined}
 		aria-haspopup="listbox"
-		wrapperAttributes={{ class: `square-${roundClass}` }}
+		wrapperAttributes={{
+			class: `square-${roundClass}`,
+			[circularShapeKey]: shape === 'circular' ? circularInputShape : undefined
+		}}
 	/>
 	{#if open}
 		<Flyout
@@ -409,7 +420,8 @@
 			offset={0}
 			reference={wrapperRef}
 			bind:ref={flyoutRef}
-			roundCorners="bottom"
+			placement={roundClass}
+			roundCorners={roundClass}
 			placementConfig={{ allowedPlacements: ['bottom', 'top'] }}
 			onPlacementChange={(place) => {
 				handlePlacementChange(place);
@@ -437,6 +449,9 @@
 
 <style>
 	.fs-autosuggestbox {
+		& :global(.fs-textbox.circular) {
+			border-radius: var(--input-circular-radius, 999px);
+		}
 		position: relative;
 		width: 100%;
 		& :global(.fs-flyout) {

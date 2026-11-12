@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
   import { AutoSuggestBox, AutoSuggestBoxOption } from '#lib/index.js';
   import { fake } from '#site/fake.js';
@@ -95,7 +96,26 @@
     {/snippet}
   </SvelteVirtualList>
 </AutoSuggestBox>`;
+  const shapesCode = `<script>
+  import { AutoSuggestBox } from 'fluentui-svelte';
+<\/script>
+
+<AutoSuggestBox shape="rounded" aria-label="rounded" placeholder="rounded" />
+<AutoSuggestBox shape="square" aria-label="square" placeholder="square" />
+<AutoSuggestBox shape="circular" aria-label="circular" placeholder="circular" />`;
 </script>
+
+### {m.global_shape()}
+
+<p><I18nMarkupMessage message={m.textual_input_shapes_description} /></p>
+
+<Showcase columns={1} minHeight="0" code={shapesCode} disablePanZoom showOverflow fluid>
+  <div class="input-shapes">
+    <AutoSuggestBox shape="rounded" aria-label="rounded" placeholder="rounded" />
+    <AutoSuggestBox shape="square" aria-label="square" placeholder="square" />
+    <AutoSuggestBox shape="circular" aria-label="circular" placeholder="circular" />
+  </div>
+</Showcase>
 
 ### {m.asb_open_on_focus_title()}
 
@@ -176,3 +196,11 @@
     </SvelteVirtualList>
   </AutoSuggestBox>
 </Showcase>
+<style>
+  .input-shapes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1.5rem;
+    width: 100%;
+  }
+</style>

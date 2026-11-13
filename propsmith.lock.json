@@ -2128,6 +2128,109 @@
       },
       "source": "src/lib/components/info-bar/types.ts#InfoBarProps.title"
     },
+    "generated_fs_items_view_item_props_props_disabled": {
+      "en": "b99cb72f",
+      "locales": {
+        "es": "b99cb72f"
+      },
+      "source": "src/lib/components/items-view/types.ts#ItemsViewItemProps.disabled"
+    },
+    "generated_fs_items_view_item_props_props_ref": {
+      "en": "67a74e4b",
+      "locales": {
+        "es": "67a74e4b"
+      },
+      "source": "src/lib/components/items-view/types.ts#ItemsViewItemProps.ref"
+    },
+    "generated_fs_items_view_item_props_props_value": {
+      "en": "c40c7d86",
+      "locales": {
+        "es": "c40c7d86"
+      },
+      "source": "src/lib/components/items-view/types.ts#ItemsViewItemProps.value"
+    },
+    "generated_fs_items_view_props_props_disable_tabspot": {
+      "en": "5659a0f2",
+      "locales": {
+        "es": "5659a0f2"
+      },
+      "source": "src/lib/components/items-view/types.ts#ItemsViewProps.disableTabspot"
+    },
+    "generated_fs_items_view_props_props_layout": {
+      "en": "05a5f629",
+      "locales": {
+        "es": "05a5f629"
+      },
+      "source": "src/lib/components/items-view/types.ts#ItemsViewProps.layout"
+    },
+    "generated_fs_items_view_props_props_line_height": {
+      "en": "5c188955",
+      "locales": {
+        "es": "5c188955"
+      },
+      "source": "src/lib/components/items-view/types.ts#ItemsViewProps.lineHeight"
+    },
+    "generated_fs_items_view_props_props_min_item_width": {
+      "en": "c52644b2",
+      "locales": {
+        "es": "c52644b2"
+      },
+      "source": "src/lib/components/items-view/types.ts#ItemsViewProps.minItemWidth"
+    },
+    "generated_fs_items_view_props_props_on_item_invoke": {
+      "en": "cf57c117",
+      "locales": {
+        "es": "cf57c117"
+      },
+      "source": "src/lib/components/items-view/types.ts#ItemsViewProps.onItemInvoke"
+    },
+    "generated_fs_items_view_props_props_on_selection_change": {
+      "en": "c10d6ec5",
+      "locales": {
+        "es": "c10d6ec5"
+      },
+      "source": "src/lib/components/items-view/types.ts#ItemsViewProps.onSelectionChange"
+    },
+    "generated_fs_items_view_props_props_orientation": {
+      "en": "34c46145",
+      "locales": {
+        "es": "34c46145"
+      },
+      "source": "src/lib/components/items-view/types.ts#ItemsViewProps.orientation"
+    },
+    "generated_fs_items_view_props_props_ref": {
+      "en": "d724d692",
+      "locales": {
+        "es": "d724d692"
+      },
+      "source": "src/lib/components/items-view/types.ts#ItemsViewProps.ref"
+    },
+    "generated_fs_items_view_props_props_selected_items": {
+      "en": "b40b38ee",
+      "locales": {
+        "es": "b40b38ee"
+      },
+      "source": "src/lib/components/items-view/types.ts#ItemsViewProps.selectedItems"
+    },
+    "generated_fs_items_view_props_props_selection_mode": {
+      "en": "f7c3c2e6",
+      "locales": {
+        "es": "f7c3c2e6"
+      },
+      "source": "src/lib/components/items-view/types.ts#ItemsViewProps.selectionMode"
+    },
+    "generated_fs_items_view_props_props_show_checkboxes": {
+      "en": "44b87e02",
+      "locales": {},
+      "source": "src/lib/components/items-view/types.ts#ItemsViewProps.showCheckboxes"
+    },
+    "generated_fs_items_view_props_props_spacing": {
+      "en": "71ce70c3",
+      "locales": {
+        "es": "71ce70c3"
+      },
+      "source": "src/lib/components/items-view/types.ts#ItemsViewProps.spacing"
+    },
     "generated_fs_label_props_props_as": {
       "en": "3974ba8b",
       "locales": {

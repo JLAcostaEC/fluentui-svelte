@@ -1,0 +1,44 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '#i18n/messages.js';
+</script>
+
+## {m.items_view_accessibility_title()}
+<p><I18nMarkupMessage message={m.items_view_accessibility_description} /></p>
+
+## {m.items_view_props_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:ItemsViewProps -->
+
+| Name                       | Type                                                                  | Default      | Description                                                                                 |
+| -------------------------- | --------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------- |
+| `layout`                   | `'stack'` &#124; `'grid'` &#124; `'flow'`                             | `'stack'`    | `<I18nMarkupMessage message={m.generated_fs_items_view_props_props_layout} />`              |
+| `orientation`              | `'horizontal'` &#124; `'vertical'`                                    | `'vertical'` | `<I18nMarkupMessage message={m.generated_fs_items_view_props_props_orientation} />`         |
+| `spacing`                  | `number` &#124; `string`                                              | `4`          | `<I18nMarkupMessage message={m.generated_fs_items_view_props_props_spacing} />`             |
+| `minItemWidth`             | `number` &#124; `string`                                              | `160`        | `<I18nMarkupMessage message={m.generated_fs_items_view_props_props_min_item_width} />`      |
+| `lineHeight`               | `number` &#124; `string`                                              | `160`        | `<I18nMarkupMessage message={m.generated_fs_items_view_props_props_line_height} />`         |
+| `selectionMode`            | `'none'` &#124; `'single'` &#124; `'multiselect'` &#124; `'extended'` | `'none'`     | `<I18nMarkupMessage message={m.generated_fs_items_view_props_props_selection_mode} />`      |
+| `showCheckboxes`           | `boolean`                                                             | `false`      | `<I18nMarkupMessage message={m.generated_fs_items_view_props_props_show_checkboxes} />`     |
+| `selectedItems` _bindable_ | `string[]`                                                            |              | `<I18nMarkupMessage message={m.generated_fs_items_view_props_props_selected_items} />`      |
+| `onSelectionChange`        | `(e: Event, selectedItems: string[]) => void`                         |              | `<I18nMarkupMessage message={m.generated_fs_items_view_props_props_on_selection_change} />` |
+| `onItemInvoke`             | `(e: Event, value: string) => void`                                   |              | `<I18nMarkupMessage message={m.generated_fs_items_view_props_props_on_item_invoke} />`      |
+| `disableTabspot`           | `boolean`                                                             | `false`      | `<I18nMarkupMessage message={m.generated_fs_items_view_props_props_disable_tabspot} />`     |
+| `ref` _bindable_           | `HTMLDivElement` &#124; `null`                                        |              | `<I18nMarkupMessage message={m.generated_fs_items_view_props_props_ref} />`                 |
+| Element Attributes (`div`) |                                                                       |              |                                                                                             |
+
+<!-- /props:ItemsViewProps -->
+
+## {m.items_view_item_props_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:ItemsViewItemProps -->
+
+| Name                       | Type                           | Default | Description                                                                           |
+| -------------------------- | ------------------------------ | ------- | ------------------------------------------------------------------------------------- |
+| `value`                    | `string`                       |         | `<I18nMarkupMessage message={m.generated_fs_items_view_item_props_props_value} />`    |
+| `disabled`                 | `boolean`                      |         | `<I18nMarkupMessage message={m.generated_fs_items_view_item_props_props_disabled} />` |
+| `ref` _bindable_           | `HTMLDivElement` &#124; `null` |         | `<I18nMarkupMessage message={m.generated_fs_items_view_item_props_props_ref} />`      |
+| Element Attributes (`div`) |                                |         |                                                                                       |
+
+<!-- /props:ItemsViewItemProps -->

@@ -138,6 +138,12 @@ export { default as Hyperlink } from './components/hyperlink/hyperlink.svelte';
 export { default as InfoBar } from './components/info-bar/info-bar.svelte';
 // End InfoBar Component
 
+// Start ItemsView Component
+export { default as ItemsView } from './components/items-view/items-view.svelte';
+export { default as ItemsViewItem } from './components/items-view/items-view-item.svelte';
+export type { ItemsViewProps, ItemsViewItemProps, ItemsViewLayout } from './components/items-view/types.js';
+// End ItemsView Component
+
 // Start Label Component
 export { default as Label } from './components/label/label.svelte';
 // End Label Component

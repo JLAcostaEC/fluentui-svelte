@@ -32,10 +32,10 @@
 
 	const initialSelectedValue = untrack(() => selectedValue);
 	const trackForm: Attachment<HTMLDivElement> = (element) => {
-		const owner = form !== undefined ? document.getElementById(form) : element.closest('form');
-		if (!(owner instanceof HTMLFormElement)) return;
 		let resetTimer: ReturnType<typeof setTimeout>;
-		const unsubscribe = on(owner, 'reset', (event) => {
+		const unsubscribe = on(document, 'reset', (event) => {
+			const owner = form !== undefined ? document.getElementById(form) : element.closest('form');
+			if (!(owner instanceof HTMLFormElement) || event.target !== owner) return;
 			// Defer until propagation and the native reset finish; later listeners can cancel it.
 			clearTimeout(resetTimer);
 			resetTimer = setTimeout(() => {
@@ -115,7 +115,7 @@
 		onkeydown?.(event);
 		if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
 		if (!(event.target instanceof HTMLInputElement) || event.target.type !== 'radio') return;
-		if (event.key === 'Enter' && !selectOnFocus && !event.target.disabled) {
+		if (event.key === 'Enter' && !event.target.disabled) {
 			event.preventDefault();
 			event.stopPropagation();
 			event.target.click();

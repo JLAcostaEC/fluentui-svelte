@@ -162,6 +162,46 @@ describe('native form integration', () => {
 		expect(new FormData(form()).getAll('view')).toEqual(['week']);
 	});
 
+	it('resets through an external form added or replaced after mounting', async () => {
+		const onSelectionChange = vi.fn();
+		render(Wrapper, { form: 'late-form', onSelectionChange });
+		const owner = document.createElement('form');
+		owner.id = 'late-form';
+		const unrelated = document.createElement('form');
+		document.body.appendChild(owner);
+		document.body.appendChild(unrelated);
+		try {
+			await page.getByRole('radio', { name: 'Whole week' }).click();
+			onSelectionChange.mockClear();
+			unrelated.reset();
+			await new Promise((resolve) => setTimeout(resolve));
+			await expect.element(page.getByRole('status', { name: 'Selection' })).toHaveTextContent('week');
+			owner.reset();
+			await expect.element(page.getByRole('status', { name: 'Selection' })).toHaveTextContent('day');
+			await page.getByRole('radio', { name: 'Whole week' }).click();
+			onSelectionChange.mockClear();
+			const replacement = document.createElement('form');
+			replacement.id = owner.id;
+			owner.replaceWith(replacement);
+			replacement.reset();
+			await expect.element(page.getByRole('status', { name: 'Selection' })).toHaveTextContent('day');
+			expect(onSelectionChange).not.toHaveBeenCalled();
+		} finally {
+			document.getElementById('late-form')?.remove();
+			unrelated.remove();
+		}
+	});
+
+	it('honors reset cancellation by a later document listener', async () => {
+		render(FormWrapper);
+		await page.getByRole('radio', { name: 'Whole week' }).click();
+		document.addEventListener('reset', (event) => event.preventDefault(), { once: true });
+		form().reset();
+		await new Promise((resolve) => setTimeout(resolve));
+		await expect.element(page.getByRole('status', { name: 'Selection' })).toHaveTextContent('week');
+		expect(new FormData(form()).get('view')).toBe('week');
+	});
+
 	it('validates required selection and focuses a native radio', async () => {
 		render(FormWrapper, { selectedValue: '', required: true });
 		expect(form().checkValidity()).toBe(false);
@@ -216,13 +256,13 @@ describe('native form integration', () => {
 		await userEvent.keyboard(' ');
 		await expect.element(page.getByRole('status', { name: 'Selection' })).toHaveTextContent('day');
 	});
-	it('selects with Enter without submitting the form or requiring a provider', async () => {
+	it.each([false, true])('selects with Enter without submitting with selectOnFocus %s', async (selectOnFocus) => {
 		const onSubmit = vi.fn();
-		render(FormWrapper, { selectedValue: 'day' });
+		render(FormWrapper, { selectedValue: 'day', selectOnFocus });
 		form().addEventListener('submit', onSubmit);
-		await page.getByRole('radio', { name: 'Day' }).click();
-		await userEvent.keyboard('{ArrowRight}');
+		(page.getByRole('radio', { name: 'Whole week' }).element() as HTMLInputElement).focus();
 		await expect.element(page.getByRole('radio', { name: 'Whole week' })).toHaveFocus();
+		await expect.element(page.getByRole('radio', { name: 'Whole week' })).not.toBeChecked();
 		await userEvent.keyboard('{Enter}');
 		await expect.element(page.getByRole('radio', { name: 'Whole week' })).toBeChecked();
 		expect(new FormData(form()).get('view')).toBe('week');

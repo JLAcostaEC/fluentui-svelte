@@ -1,0 +1,123 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { FlipView, Button, MediaPlayer } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+
+  const photos = ['1506905925346-21bda4d32df4', '1501785888041-af3ef285b470', '1470071459604-3b5ec3a7fe05', '1441974231531-c6227db76b6e', '1469474968028-56623f02e42e'];
+  const sections = [
+    { title: 'Design', text: 'Fluent 2 tokens, materials and motion.', hue: 210 },
+    { title: 'Build', text: 'Svelte 5 components with native forms.', hue: 150 },
+    { title: 'Ship', text: 'Accessible by default, light and dark.', hue: 280 }
+  ];
+  let index = $state(0);
+
+  const orientationCode = `<script>
+  import { FlipView } from 'fluentui-svelte';
+<\/script>
+
+<FlipView aria-label="Horizontal" style="height: 12rem;">…</FlipView>
+<FlipView aria-label="Vertical" orientation="vertical" style="height: 12rem;">…</FlipView>`;
+  const contentCode = `<script>
+  import { FlipView, MediaPlayer } from 'fluentui-svelte';
+<\/script>
+
+<FlipView aria-label="Steps" style="height: 12rem;">
+  <section>
+    <h3>Design</h3>
+    <p>Fluent 2 tokens, materials and motion.</p>
+  </section>
+  <section>…</section>
+  <MediaPlayer label="Video" src="video.mp4" poster="poster.jpg" layout="compact" />
+</FlipView>`;
+  const controlledCode = `<script>
+  import { FlipView, Button } from 'fluentui-svelte';
+  const photos = ['1506905925346-21bda4d32df4', '1501785888041-af3ef285b470', '1470071459604-3b5ec3a7fe05'];
+  let index = $state(0);
+<\/script>
+
+<FlipView aria-label="Landscapes" bind:index style="height: 12rem;">
+  {#each photos as id, i (id)}
+    <img src="https://images.unsplash.com/photo-{id}?w=768&h=384&fit=crop&q=70" alt="Landscape {i + 1}" />
+  {/each}
+</FlipView>
+{#each photos as _, i}
+  <Button appearance={i === index ? 'accent' : 'standard'} onclick={() => (index = i)}>{i + 1}</Button>
+{/each}`;
+</script>
+
+### {m.flip_view_orientation_title()}
+
+<p><I18nMarkupMessage message={m.flip_view_orientation_description} /></p>
+
+<Showcase columns={2} code={orientationCode} minHeight="0" disablePanZoom showOverflow fluid>
+  {#each ['horizontal', 'vertical'] as const as orientation (orientation)}
+    <figure>
+      <FlipView aria-label="{orientation} landscapes" {orientation} style="height: 12rem;">
+        {#each photos as id, i (id)}
+          <img src="https://images.unsplash.com/photo-{id}?w=640&h=384&fit=crop&q=70" alt="Landscape {i + 1}" loading="lazy" />
+        {/each}
+      </FlipView>
+      <figcaption><code>{orientation}</code></figcaption>
+    </figure>
+  {/each}
+</Showcase>
+
+### {m.flip_view_content_title()}
+
+<p><I18nMarkupMessage message={m.flip_view_content_description} /></p>
+
+<Showcase columns={1} code={contentCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <FlipView aria-label="Steps" style="width: 24rem; height: 12rem;">
+    {#each sections as section (section.title)}
+      <section class="slide" style="--hue: {section.hue};">
+        <h3>{section.title}</h3>
+        <p>{section.text}</p>
+      </section>
+    {/each}
+    <MediaPlayer
+      label="Video"
+      src="https://stream.mux.com/BV3YZtogl89mg9VcNBhhnHm02Y34zI1nlMuMQfAbl3dM/highest.mp4"
+      poster="https://image.mux.com/BV3YZtogl89mg9VcNBhhnHm02Y34zI1nlMuMQfAbl3dM/thumbnail.webp"
+      preload="metadata"
+      layout="compact"
+    />
+  </FlipView>
+</Showcase>
+
+### {m.flip_view_controlled_title()}
+
+<p><I18nMarkupMessage message={m.flip_view_controlled_description} /></p>
+
+<Showcase columns={1} code={controlledCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <div class="stack">
+    <FlipView aria-label="Selected landscape" bind:index style="width: 24rem; height: 12rem;">
+      {#each photos as id, i (id)}
+        <img src="https://images.unsplash.com/photo-{id}?w=768&h=384&fit=crop&q=70" alt="Landscape {i + 1}" loading="lazy" />
+      {/each}
+    </FlipView>
+    <div class="actions">
+      {#each photos as id, i (id)}
+        <Button appearance={i === index ? 'accent' : 'standard'} onclick={() => (index = i)}>{i + 1}</Button>
+      {/each}
+    </div>
+  </div>
+</Showcase>
+
+<style>
+  figure { margin: 0; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 1.5rem 2rem;
+    box-sizing: border-box;
+    color: white;
+    background: linear-gradient(135deg, hsl(var(--hue) 70% 42%), hsl(calc(var(--hue) + 40) 70% 32%));
+  }
+  .slide h3 { margin: 0; font-size: 1.25rem; font-weight: 600; }
+  .slide p { margin: 0; }
+  .stack { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+  .actions { display: flex; gap: 0.25rem; }
+</style>

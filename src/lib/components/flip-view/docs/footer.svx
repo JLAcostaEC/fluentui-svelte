@@ -1,0 +1,25 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '#i18n/messages.js';
+</script>
+
+## {m.flip_view_accessibility_title()}
+<p><I18nMarkupMessage message={m.flip_view_accessibility_description} /></p>
+
+## {m.global_component_props()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:FlipViewProps -->
+
+| Name                       | Type                               | Default        | Description                                                                            |
+| -------------------------- | ---------------------------------- | -------------- | -------------------------------------------------------------------------------------- |
+| `index` _bindable_         | `number`                           | `0`            | `<I18nMarkupMessage message={m.generated_fs_flip_view_props_props_index} />`           |
+| `orientation`              | `'horizontal'` &#124; `'vertical'` | `'horizontal'` | `<I18nMarkupMessage message={m.generated_fs_flip_view_props_props_orientation} />`     |
+| `previousLabel`            | `string`                           | `'Previous'`   | `<I18nMarkupMessage message={m.generated_fs_flip_view_props_props_previous_label} />`  |
+| `nextLabel`                | `string`                           | `'Next'`       | `<I18nMarkupMessage message={m.generated_fs_flip_view_props_props_next_label} />`      |
+| `onIndexChange`            | `(index: number) => void`          |                | `<I18nMarkupMessage message={m.generated_fs_flip_view_props_props_on_index_change} />` |
+| `ref` _bindable_           | `HTMLDivElement` &#124; `null`     |                | `<I18nMarkupMessage message={m.generated_fs_flip_view_props_props_ref} />`             |
+| `viewportRef` _bindable_   | `HTMLDivElement` &#124; `null`     |                | `<I18nMarkupMessage message={m.generated_fs_flip_view_props_props_viewport_ref} />`    |
+| Element Attributes (`div`) |                                    |                |                                                                                        |
+
+<!-- /props:FlipViewProps -->

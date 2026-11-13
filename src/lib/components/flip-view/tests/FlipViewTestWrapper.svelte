@@ -20,5 +20,6 @@
 	{/each}
 </FlipView>
 <button onclick={() => (index = 2)}>Go to last</button>
+<button onclick={() => (index = 99)}>Go out of range</button>
 <output data-testid="index">{index}</output>
 <output data-testid="changes">{changes.join(',')}</output>

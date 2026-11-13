@@ -32,10 +32,15 @@
 </FlipView>`;
   const controlledCode = `<script>
   import { FlipView, Button } from 'fluentui-svelte';
+  const photos = ['1506905925346-21bda4d32df4', '1501785888041-af3ef285b470', '1470071459604-3b5ec3a7fe05'];
   let index = $state(0);
 <\/script>
 
-<FlipView aria-label="Landscapes" bind:index style="height: 12rem;">…</FlipView>
+<FlipView aria-label="Landscapes" bind:index style="height: 12rem;">
+  {#each photos as id, i (id)}
+    <img src="https://images.unsplash.com/photo-{id}?w=768&h=384&fit=crop&q=70" alt="Landscape {i + 1}" />
+  {/each}
+</FlipView>
 {#each photos as _, i}
   <Button appearance={i === index ? 'accent' : 'standard'} onclick={() => (index = i)}>{i + 1}</Button>
 {/each}`;

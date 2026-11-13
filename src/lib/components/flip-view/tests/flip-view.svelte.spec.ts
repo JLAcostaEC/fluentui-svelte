@@ -47,6 +47,45 @@ describe('FlipView', () => {
 		expect(items()[2].inert).toBe(false);
 	});
 
+	it('makes a replacement hidden item inert without a count change', async () => {
+		render(Wrapper);
+		await vi.waitFor(() => expect(items()[1].inert).toBe(true));
+		const replacement = document.createElement('section');
+		replacement.innerHTML = '<a href="#replacement">Replacement</a>';
+		items()[1].replaceWith(replacement);
+		await vi.waitFor(() => expect(replacement.inert).toBe(true));
+		expect(items()[0].inert).toBe(false);
+	});
+
+	it.each([-1, 99])('clamps the initial index %s and reports the correction', async (initial) => {
+		render(Wrapper, { initial });
+		const expected = initial < 0 ? 0 : 2;
+		await expect.element(page.getByTestId('index')).toHaveTextContent(String(expected));
+		await expect.element(page.getByTestId('changes')).toHaveTextContent(String(expected));
+		await vi.waitFor(() => expect(items().map((item) => item.inert)).toEqual([0, 1, 2].map((i) => i !== expected)));
+	});
+
+	it('clamps an external index update and a count reduction', async () => {
+		render(Wrapper);
+		await page.getByRole('button', { name: 'Go out of range' }).click();
+		await expect.element(page.getByTestId('index')).toHaveTextContent('2');
+		await expect.element(page.getByTestId('changes')).toHaveTextContent('2');
+		items()[2].remove();
+		await expect.element(page.getByTestId('index')).toHaveTextContent('1');
+		await expect.element(page.getByTestId('changes')).toHaveTextContent('2,1');
+		await vi.waitFor(() => expect(items().map((item) => item.inert)).toEqual([true, false]));
+	});
+
+	it('includes both navigation buttons in the Tab order', async () => {
+		render(Wrapper, { initial: 1 });
+		await vi.waitFor(() => expect(items()[1].inert).toBe(false));
+		items()[1].querySelector('a')!.focus();
+		await userEvent.keyboard('{Tab}');
+		await expect.element(page.getByRole('button', { name: 'Previous' })).toHaveFocus();
+		await userEvent.keyboard('{Tab}');
+		await expect.element(page.getByRole('button', { name: 'Next' })).toHaveFocus();
+	});
+
 	it('settles the index after a native scroll (swipe or wheel)', async () => {
 		render(Wrapper);
 		viewport().scrollTo({ left: 600, behavior: 'instant' });

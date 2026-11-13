@@ -18,6 +18,7 @@
 
 	/** Each direct child of the viewport is an item. */
 	let count = $state(0);
+	let childrenVersion = $state(0);
 	const vertical = $derived(orientation === 'vertical');
 
 	const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -50,7 +51,10 @@
 		const viewport = viewportRef;
 		if (!viewport) return;
 		count = viewport.children.length;
-		const observer = new MutationObserver(() => (count = viewport.children.length));
+		const observer = new MutationObserver(() => {
+			count = viewport.children.length;
+			childrenVersion += 1;
+		});
 		observer.observe(viewport, { childList: true });
 
 		let timer: ReturnType<typeof setTimeout> | undefined;
@@ -73,7 +77,12 @@
 		const viewport = viewportRef;
 		const target = index;
 		void vertical;
+		void childrenVersion;
 		if (!viewport || !count) return;
+		if (target < 0 || target >= count) {
+			select(target);
+			return;
+		}
 		[...viewport.children].forEach((item, i) => item.toggleAttribute('inert', i !== target));
 		if (snapped(viewport) !== target) scrollTo(viewport, target, first || reducedMotion() ? 'instant' : 'smooth');
 		first = false;
@@ -106,18 +115,12 @@
 		{@render children?.()}
 	</div>
 	{#if index > 0}
-		<button
-			type="button"
-			class="nav previous"
-			tabindex="-1"
-			aria-label={previousLabel}
-			onclick={() => select(index - 1)}
-		>
+		<button type="button" class="nav previous" aria-label={previousLabel} onclick={() => select(index - 1)}>
 			<CaretGlyph direction={vertical ? 'up' : 'left'} />
 		</button>
 	{/if}
 	{#if index < count - 1}
-		<button type="button" class="nav next" tabindex="-1" aria-label={nextLabel} onclick={() => select(index + 1)}>
+		<button type="button" class="nav next" aria-label={nextLabel} onclick={() => select(index + 1)}>
 			<CaretGlyph direction={vertical ? 'down' : 'right'} />
 		</button>
 	{/if}
@@ -181,6 +184,9 @@
 			cursor: default;
 			opacity: 0;
 			transition: opacity 0.167s;
+			@media (prefers-reduced-motion: reduce) {
+				transition: none;
+			}
 			inline-size: 16px;
 			block-size: 38px;
 			inset-block: 0;
@@ -207,6 +213,7 @@
 			}
 		}
 
+		& .nav:focus-visible,
 		&:hover .nav,
 		&:has(.viewport:focus-visible) .nav {
 			opacity: 1;

@@ -227,6 +227,11 @@ export type { RatingProps } from './components/rating/types.js';
 export { default as ScrollBar } from './components/scroll-bar/scroll-bar.svelte';
 export type { ScrollBarProps, ScrollBarGenerics } from './components/scroll-bar/types.js';
 // End ScrollBar Component
+// Start SegmentedControl Component
+export { default as SegmentedControl } from './components/segmented-control/segmented-control.svelte';
+export { default as SegmentedControlItem } from './components/segmented-control/segmented-control-item.svelte';
+export type { SegmentedControlProps, SegmentedControlItemProps } from './components/segmented-control/types.ts';
+// End SegmentedControl Component
 
 // Start Skeleton Component
 export { default as Skeleton } from './components/skeleton/skeleton.svelte';

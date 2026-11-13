@@ -1,0 +1,49 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { Label, SegmentedControl, SegmentedControlItem } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+  let selectedValue = $state('day');
+</script>
+
+# SegmentedControl
+
+{m.segmented_control_description()}
+
+<Showcase columns={1} disablePanZoom>
+  <Label label={m.segmented_control_view()}>
+  <SegmentedControl bind:selectedValue>
+    <SegmentedControlItem value="day">{m.segmented_control_day()}</SegmentedControlItem>
+    <SegmentedControlItem value="week">{m.segmented_control_week()}</SegmentedControlItem>
+    <SegmentedControlItem value="month">{m.segmented_control_month()}</SegmentedControlItem>
+  </SegmentedControl>
+  </Label>
+</Showcase>
+
+## {m.global_usage()}
+
+```svelte
+<script>
+  import { Label, SegmentedControl, SegmentedControlItem } from 'fluentui-svelte';
+  let selectedValue = $state('day');
+</script>
+
+<Label label="View">
+<SegmentedControl name="view" bind:selectedValue>
+  <SegmentedControlItem value="day">Day</SegmentedControlItem>
+  <SegmentedControlItem value="week">Week</SegmentedControlItem>
+  <SegmentedControlItem value="month">Month</SegmentedControlItem>
+</SegmentedControl>
+</Label>
+```
+
+<p><I18nMarkupMessage message={m.segmented_control_accessibility} /></p>
+
+<style>
+  /* Keep wide segments reachable on phones without changing their padding. */
+  @media (max-width: 768px) {
+    :global(.showcase-wrapper:has(.fs-segmented-control) .showcase) {
+      overflow-x: auto !important;
+    }
+  }
+</style>

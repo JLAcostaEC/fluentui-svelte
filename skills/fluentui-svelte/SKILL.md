@@ -388,6 +388,7 @@ Folder, exports, status (only when the API may still change) and summary. Read
 - `radio-button`: `RadioButton`. A control for choosing a single option from a set of mutually exclusive choices.
 - `rating`: `Rating`. A control that lets users give a value to an item by selecting one of a row of stars.
 - `scroll-bar`: `ScrollBar`. Lets users scroll content that overflows its container, with Fluent overlay scroll bars.
+- `segmented-control`: `SegmentedControl`, `SegmentedControlItem`. A compact single-selection control with text, icons and equal or content-sized segments.
 - `side-nav`: `SideNav`, `SideNavItem`, `SideNavBranch`. Collapsible app navigation with an icon rail, floating overlay, nested links, custom content and a pinned footer.
 - `skeleton`: `Skeleton`. A placeholder that indicates where content will appear while it is loading.
 - `slider`: `Slider`. A control that lets users select a value from a continuous or discrete range by dragging a thumb along a track.

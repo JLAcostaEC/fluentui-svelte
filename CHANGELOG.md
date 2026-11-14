@@ -1,5 +1,47 @@
 # fluentui-svelte
 
+## 0.8.0
+
+### Minor Changes
+
+- feat: add ColorPicker component ([#146](https://github.com/JLAcostaEC/fluentui-svelte/pull/146))
+
+- feat: add FileUploader component powered by upup ([#145](https://github.com/JLAcostaEC/fluentui-svelte/pull/145))
+
+- feat: add FlipView component ([#155](https://github.com/JLAcostaEC/fluentui-svelte/pull/155))
+
+- feat: add ItemsView component ([#156](https://github.com/JLAcostaEC/fluentui-svelte/pull/156))
+
+- feat: add MediaPlayer component powered by Video.js ([#142](https://github.com/JLAcostaEC/fluentui-svelte/pull/142))
+
+- feat: add `PillButton` component ([#143](https://github.com/JLAcostaEC/fluentui-svelte/pull/143))
+
+- feat: add ScrollBar component powered by OverlayScrollbars ([#151](https://github.com/JLAcostaEC/fluentui-svelte/pull/151))
+
+- feat(Slider): a press on the rail moves the value to the pointer, and new `buffer` and `tooltipPositionConfig` props ([#138](https://github.com/JLAcostaEC/fluentui-svelte/pull/138))
+
+- feat: add configurable shapes to textual components ([#150](https://github.com/JLAcostaEC/fluentui-svelte/pull/150))
+
+- feat: add SegmentedControl and SegmentedControlItem components ([#153](https://github.com/JLAcostaEC/fluentui-svelte/pull/153))
+
+### Patch Changes
+
+- fix: AutoSuggestBox no longer fires querySubmitted twice or when Enter picks a suggestion ([#130](https://github.com/JLAcostaEC/fluentui-svelte/pull/130))
+
+- fix(ColorPicker): keep the brightness and opacity slider thumbs circular ([#152](https://github.com/JLAcostaEC/fluentui-svelte/pull/152))
+
+- <!-- coderabbit-ai-generated:v1 --> ([#155](https://github.com/JLAcostaEC/fluentui-svelte/pull/155))
+
+  Fix FlipView selection bounds, inert state after item replacement, keyboard access to navigation buttons, and reduced motion transitions. Complete the controlled example.
+
+- fix: snippets with a destructured parameter fails in production builds ([#149](https://github.com/JLAcostaEC/fluentui-svelte/pull/149))
+
+- fix: excludes UpupCore from the server build ([#147](https://github.com/JLAcostaEC/fluentui-svelte/pull/147))
+
+- fix(Tooltip): open on focus only when it is keyboard focus (`:focus-visible`) ([#141](https://github.com/JLAcostaEC/fluentui-svelte/pull/141))
+
+- fix(Tooltip): a pointer crossing the trigger quickly no longer leaves the tooltip open ([#139](https://github.com/JLAcostaEC/fluentui-svelte/pull/139))
+
 ## 0.7.2
 
 ### Patch Changes

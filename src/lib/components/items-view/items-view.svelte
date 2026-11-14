@@ -49,12 +49,12 @@
 	// The last selection the view wrote, to tell when the consumer changes it.
 	let written: string[] = [];
 	// The item that holds the tab stop in the server HTML, before Tabspot runs.
-	let tabStopId: string | null = null;
+	let tabStopId = $state<string | null>(null);
 
 	/** The registered items in DOM order, which can differ from the registration order after a keyed reorder. */
 	const orderedItems = () =>
-		Object.values(items)
-			.map((getItem) => getItem())
+		Object.entries(items)
+			.map(([id, getItem]) => ({ id, ...getItem() }))
 			.sort((a, b) => {
 				if (!a.element || !b.element) return 0;
 				return a.element.compareDocumentPosition(b.element) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
@@ -113,6 +113,9 @@
 		state: {
 			get selectedItems() {
 				return selectedItems;
+			},
+			get tabStopId() {
+				return tabStopId;
 			}
 		},
 		events: null,
@@ -120,7 +123,13 @@
 			select,
 			invoke: (e, value) => onItemInvoke?.(e, value),
 			registerItem: (id, getItem) => (items[id] = getItem),
-			unregisterItem: (id) => delete items[id],
+			unregisterItem: (id) => {
+				delete items[id];
+				if (tabStopId === id) {
+					tabStopId = null;
+					tabStopId = orderedItems().find((item) => !item.disabled)?.id ?? null;
+				}
+			},
 			claimTabStop: (id) => (tabStopId ??= id) === id
 		}
 	});

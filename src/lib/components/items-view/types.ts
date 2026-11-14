@@ -78,6 +78,7 @@ export type ItemsViewContextConfig = {
 
 export type ItemsViewContextState = {
 	selectedItems: string[];
+	tabStopId: string | null;
 };
 
 export type ItemsViewContextMethods = {

@@ -114,6 +114,30 @@ describe('ItemsView', () => {
 		await expect.element(option('three')).toHaveFocus();
 	});
 
+	it('preserves caller tab indices when Tabspot is disabled', async () => {
+		render(ItemsViewTestWrapper, {
+			viewProps: { selectionMode: 'single', disableTabspot: true },
+			items: [
+				{ value: 'one', tabindex: -1 },
+				{ value: 'two', tabindex: 3 },
+				{ value: 'three', disabled: true, tabindex: 0 }
+			]
+		});
+		await expect.element(option('one')).toHaveAttribute('tabindex', '-1');
+		await expect.element(option('two')).toHaveAttribute('tabindex', '3');
+		await expect.element(option('three')).toHaveAttribute('tabindex', '-1');
+	});
+
+	it('gives the first remaining enabled item the tab stop when its owner is removed', async () => {
+		const { rerender } = await render(ItemsViewTestWrapper, { viewProps: { selectionMode: 'single' } });
+		await expect.element(option('one')).toHaveAttribute('tabindex', '0');
+		await rerender({ items: [{ value: 'three' }, { value: 'two', disabled: true }, { value: 'four' }] });
+		await expect.element(option('three')).toHaveAttribute('tabindex', '0');
+		await expect.element(option('two')).toHaveAttribute('tabindex', '-1');
+		await expect.element(option('four')).toHaveAttribute('tabindex', '-1');
+		expect(document.querySelectorAll('[role="option"][tabindex="0"]')).toHaveLength(1);
+	});
+
 	it('moves between the rows of a grid with the arrow keys', async () => {
 		render(ItemsViewTestWrapper, {
 			viewProps: { selectionMode: 'single', layout: 'grid', minItemWidth: 150, style: 'width: 400px' },

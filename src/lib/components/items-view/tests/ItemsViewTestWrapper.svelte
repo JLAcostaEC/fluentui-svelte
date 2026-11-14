@@ -10,7 +10,7 @@
 		selectedItems = $bindable([])
 	}: {
 		viewProps?: Partial<ItemsViewProps>;
-		items?: { value: string; disabled?: boolean }[];
+		items?: { value: string; disabled?: boolean; tabindex?: number }[];
 		selectedItems?: string[];
 	} = $props();
 </script>
@@ -19,7 +19,7 @@
 	<form data-testid="form">
 		<ItemsView aria-label="Items" {...viewProps} bind:selectedItems>
 			{#each items as item (item.value)}
-				<ItemsViewItem value={item.value} disabled={item.disabled}>{item.value}</ItemsViewItem>
+				<ItemsViewItem value={item.value} disabled={item.disabled} tabindex={item.tabindex}>{item.value}</ItemsViewItem>
 			{/each}
 		</ItemsView>
 	</form>

@@ -32,7 +32,8 @@
 
 	// A roving view has one tab stop. Tabspot sets it on mount, so the server HTML gives it to the first item, as Tabspot will.
 	// svelte-ignore state_referenced_locally
-	const holdsTabStop = !config.roving || (interactive && !disabled && claimTabStop(ID));
+	if (config.roving && interactive && !disabled) claimTabStop(ID);
+	const holdsTabStop = $derived(_state.tabStopId === ID);
 
 	function handleClick(e: MouseEvent) {
 		invokeHandlers(e, disabled, [
@@ -71,7 +72,15 @@
 	aria-disabled={disabled || undefined}
 	data-value={value}
 	data-items-view-interactive={interactive || undefined}
-	tabindex={interactive ? (disabled || !holdsTabStop ? -1 : 0) : undefined}
+	tabindex={interactive
+		? disabled
+			? -1
+			: config.roving
+				? holdsTabStop
+					? 0
+					: -1
+				: (attributes.tabindex ?? 0)
+		: attributes.tabindex}
 	onclick={handleClick}
 	ondblclick={handleDblclick}
 	onkeydown={handleKeydown}

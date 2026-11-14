@@ -148,7 +148,7 @@
         </ItemsViewItem>
       {/each}
     </ItemsView>
-    <figcaption>Invoked: {invoked || '-'}</figcaption>
+    <figcaption>{m.items_view_invoked({ value: invoked || '-' })}</figcaption>
   </figure>
 </Showcase>
 

@@ -1,0 +1,157 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { ItemsView, ItemsViewItem } from '#lib/index.js';
+  import type { ItemsViewProps } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+
+  const photos = [
+    { id: '1506905925346-21bda4d32df4', w: 320, h: 214 },
+    { id: '1501785888041-af3ef285b470', w: 200, h: 300 },
+    { id: '1470071459604-3b5ec3a7fe05', w: 320, h: 214 },
+    { id: '1441974231531-c6227db76b6e', w: 240, h: 240 },
+    { id: '1469474968028-56623f02e42e', w: 360, h: 200 },
+    { id: '1447752875215-b2761acb3c5d', w: 200, h: 300 },
+    { id: '1433086966358-54859d0ed716', w: 320, h: 214 },
+    { id: '1472214103451-9374bd1c798e', w: 360, h: 200 }
+  ];
+  const src = (photo: (typeof photos)[number], w = photo.w, h = photo.h) =>
+    `https://images.unsplash.com/photo-${photo.id}?w=${w}&h=${h}&fit=crop&q=60`;
+
+  const layouts: { label: string; props: Partial<ItemsViewProps>; style: string }[] = [
+    { label: 'layout="stack"', props: { layout: 'stack' }, style: 'width: 10rem; height: 16rem; overflow-y: auto;' },
+    {
+      label: 'orientation="horizontal"',
+      props: { layout: 'stack', orientation: 'horizontal' },
+      style: 'width: 100%; overflow-x: auto;'
+    },
+    { label: 'layout="grid"', props: { layout: 'grid', minItemWidth: 96 }, style: 'width: 100%;' },
+    { label: 'layout="flow"', props: { layout: 'flow', lineHeight: 80 }, style: 'width: 100%;' }
+  ];
+
+  const modes = ['none', 'single', 'multiselect', 'extended'] as const;
+  let selection = $state<Record<(typeof modes)[number], string[]>>({
+    none: [],
+    single: [photos[1].id],
+    multiselect: [photos[0].id, photos[2].id],
+    extended: [photos[1].id, photos[2].id]
+  });
+
+  let invoked = $state('');
+
+  const layoutCode = `<script>
+  import { ItemsView, ItemsViewItem } from 'fluentui-svelte';
+<\/script>
+
+<ItemsView aria-label="Stack">…</ItemsView>
+<ItemsView aria-label="Horizontal stack" orientation="horizontal">…</ItemsView>
+<ItemsView aria-label="Grid" layout="grid" minItemWidth={96}>…</ItemsView>
+<ItemsView aria-label="Flow" layout="flow" lineHeight={80}>
+  <ItemsViewItem value="one"><img src="/wide.jpg" alt="Wide" /></ItemsViewItem>
+  <ItemsViewItem value="two"><img src="/tall.jpg" alt="Tall" /></ItemsViewItem>
+</ItemsView>`;
+
+  const selectionCode = `<script>
+  import { ItemsView, ItemsViewItem } from 'fluentui-svelte';
+  let selectedItems = $state(['one', 'three']);
+<\/script>
+
+<ItemsView aria-label="Photos" layout="grid" selectionMode="multiselect" showCheckboxes bind:selectedItems>
+  <ItemsViewItem value="one"><img src="/one.jpg" alt="One" /></ItemsViewItem>
+  <ItemsViewItem value="two"><img src="/two.jpg" alt="Two" /></ItemsViewItem>
+  <ItemsViewItem value="three"><img src="/three.jpg" alt="Three" /></ItemsViewItem>
+</ItemsView>
+<p>{selectedItems.length} selected</p>`;
+
+  const invokeCode = `<script>
+  import { ItemsView, ItemsViewItem } from 'fluentui-svelte';
+  let invoked = $state('');
+<\/script>
+
+<ItemsView aria-label="Photos" layout="grid" selectionMode="single" onItemInvoke={(e, value) => (invoked = value)}>
+  <ItemsViewItem value="Item 1"><img src="/one.jpg" alt="Item 1" /></ItemsViewItem>
+  <ItemsViewItem value="Item 2"><img src="/two.jpg" alt="Item 2" /></ItemsViewItem>
+</ItemsView>
+<p>Invoked: {invoked}</p>`;
+</script>
+
+### {m.items_view_layout_title()}
+
+<p><I18nMarkupMessage message={m.items_view_layout_description} /></p>
+
+<Showcase columns={2} code={layoutCode} minHeight="0" disablePanZoom showOverflow fluid>
+  {#each layouts as layout (layout.label)}
+    <figure>
+      <ItemsView aria-label={layout.label} {...layout.props} style={layout.style}>
+        {#each photos as photo, i (photo.id)}
+          <ItemsViewItem
+            value={photo.id}
+            style={layout.props.layout === 'stack' ? `width: 9rem; height: 6rem; flex: none;` : layout.props.layout === 'grid' ? 'height: 4.5rem;' : ''}
+          >
+            <img src={src(photo)} alt="Landscape {i + 1}" loading="lazy" />
+          </ItemsViewItem>
+        {/each}
+      </ItemsView>
+      <figcaption><code>{layout.label}</code></figcaption>
+    </figure>
+  {/each}
+</Showcase>
+
+### {m.items_view_selection_title()}
+
+<p><I18nMarkupMessage message={m.items_view_selection_description} /></p>
+
+<I18nMarkupMessage message={m.items_view_selection_list} />
+
+<Showcase columns={2} code={selectionCode} minHeight="0" disablePanZoom showOverflow fluid>
+  {#each modes as mode (mode)}
+    <figure>
+      <ItemsView
+        aria-label="{mode} selection"
+        layout="grid"
+        minItemWidth={88}
+        selectionMode={mode}
+        showCheckboxes={mode === 'multiselect'}
+        bind:selectedItems={selection[mode]}
+        style="width: 100%;"
+      >
+        {#each photos.slice(0, 6) as photo, i (photo.id)}
+          <ItemsViewItem value={photo.id} style="height: 4.5rem;">
+            <img src={src(photo, 240, 160)} alt="Landscape {i + 1}" loading="lazy" />
+          </ItemsViewItem>
+        {/each}
+      </ItemsView>
+      <figcaption>
+        <code>selectionMode="{mode}"{mode === 'multiselect' ? ' showCheckboxes' : ''}</code> ({selection[mode].length})
+      </figcaption>
+    </figure>
+  {/each}
+</Showcase>
+
+### {m.items_view_invoke_title()}
+
+<p><I18nMarkupMessage message={m.items_view_invoke_description} /></p>
+
+<Showcase columns={1} code={invokeCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <figure>
+    <ItemsView
+      aria-label="Invokable photos"
+      layout="grid"
+      minItemWidth={112}
+      selectionMode="single"
+      onItemInvoke={(e, value) => (invoked = value)}
+      style="width: 30rem; max-width: 100%;"
+    >
+      {#each photos.slice(0, 4) as photo, i (photo.id)}
+        <ItemsViewItem value="Item {i + 1}" style="height: 5rem;">
+          <img src={src(photo, 240, 160)} alt="Item {i + 1}" loading="lazy" />
+        </ItemsViewItem>
+      {/each}
+    </ItemsView>
+    <figcaption>{m.items_view_invoked({ value: invoked || '-' })}</figcaption>
+  </figure>
+</Showcase>
+
+<style>
+  figure { margin: 0; width: 100%; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+</style>

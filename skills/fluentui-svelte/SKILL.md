@@ -306,6 +306,7 @@ optional `TitleBar` across the top, an optional `SideNav` and the `AppSurface` t
 | A few exclusive options always visible                 | `RadioButton` with `bind:group`                                              |
 | Date / time                                            | `CalendarDatePicker`, `DatePicker`, `TimePicker`, inline `CalendarView`      |
 | Selectable list of items                               | `ListView` + `ListViewItem value` (`bind:selectedItems`, `selectionMode`)    |
+| Gallery or grid of selectable items                    | `ItemsView` + `ItemsViewItem value` (`layout`, `selectionMode`)              |
 | Hierarchy                                              | `TreeView` + `TreeViewItem` (`bind:openItems`, `bind:checkedItems`)          |
 | Tabular data                                           | `Table` primitives: sorting and selection are yours to wire                  |
 | Document tabs                                          | `TabView` (`bind:activeTab`; you render the panels)                          |
@@ -376,6 +377,7 @@ Folder, exports, status (only when the API may still change) and summary. Read
 - `flyout`: `Flyout`. A floating panel that displays additional information or options in a non-intrusive, accessible way.
 - `hyperlink`: `Hyperlink`. A clickable link that navigates to a specified URL, following Fluent UI design principles with built-in accessibility.
 - `info-bar`: `InfoBar`. An inline, non-intrusive status message with built-in severity levels and an optional close button.
+- `items-view`: `ItemsView`, `ItemsViewItem`. Shows a collection of items as a stack, a uniform grid or lines, and lets users select and invoke them.
 - `label`: `Label`. An accessible caption for a form control, with configurable size, weight, position, and required state.
 - `list-view`: `ListView`, `ListViewItem`, `ListViewItemBranch`. A vertically stacked set of items that can be focused, selected, and navigated with the keyboard.
 - `media-player`: `MediaPlayer`, `MediaPlayerButton`. A video player with Fluent transport controls: seek bar, volume, subtitles, playback speed, full screen and picture-in-picture, powered by Video.js.

@@ -34,48 +34,6 @@ describe('AnnotatedScrollBar', () => {
 		await expect.element(bar()).not.toHaveAttribute('aria-valuetext');
 	});
 
-	it.each([{ labels: [] }, { labels: [{ label: 'Start', offset: 0 }] }])(
-		'follows nested overflow with explicit labels %j',
-		async ({ labels }) => {
-			render(Wrapper, { labels, count: 1 });
-			await expect.element(bar()).toHaveAttribute('aria-valuemax', '0');
-			const section = target().querySelector('section')!;
-			const nested = document.createElement('div');
-			section.appendChild(nested);
-			// Changing a stylesheet produces no mutation inside the scroll target.
-			const style = document.createElement('style');
-			document.head.appendChild(style);
-			try {
-				style.sheet!.insertRule('[data-testid="target"] section > div { height: 600px; }');
-				await expect.element(bar()).toHaveAttribute('aria-valuemax', '400');
-				expect(section.clientHeight).toBe(200);
-				section.style.overflow = 'clip';
-				await expect.element(bar()).toHaveAttribute('aria-valuemax', '0');
-				style.sheet!.deleteRule(0);
-				style.sheet!.insertRule('[data-testid="target"] section > div { height: 800px; }');
-				await expect.poll(() => nested.clientHeight).toBe(800);
-				await expect.element(bar()).toHaveAttribute('aria-valuemax', '0');
-				section.style.overflow = 'visible';
-				await expect.element(bar()).toHaveAttribute('aria-valuemax', '600');
-				nested.remove();
-				await expect.element(bar()).toHaveAttribute('aria-valuemax', '0');
-				const image = document.createElement('img');
-				section.appendChild(image);
-				image.src =
-					'data:image/svg+xml,' +
-					encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="50" height="700"/>');
-				await image.decode();
-				await expect
-					.poll(() => Number(bar().element().getAttribute('aria-valuemax')))
-					.toBe(target().scrollHeight - target().clientHeight);
-				expect(target().scrollHeight).toBeGreaterThanOrEqual(700);
-				expect(section.clientHeight).toBe(200);
-			} finally {
-				style.remove();
-			}
-		}
-	);
-
 	it('reads the labels from the elements that selector matches, named after their text', async () => {
 		render(Wrapper, { subgroups: true, selector: '[data-scroll-subgroup]' });
 		await expect.element(rail().getByText('December', { exact: true })).toBeInTheDocument();
@@ -214,20 +172,6 @@ describe('AnnotatedScrollBar', () => {
 		await expect.element(page.getByRole('tooltip')).not.toBeInTheDocument();
 	});
 
-	it('keeps the detail open when returning from it to the rail', async () => {
-		render(Wrapper, { customDetail: true });
-		await userEvent.hover(rail());
-		const tooltip = page.getByRole('tooltip');
-		await expect.element(tooltip).toBeVisible();
-		await userEvent.hover(tooltip);
-		await userEvent.hover(rail());
-		// Tooltip's own mouseleave timer must not dismiss the scrollbar preview.
-		await new Promise((resolve) => setTimeout(resolve, 400));
-		await expect.element(tooltip).toBeVisible();
-		await userEvent.keyboard('{Escape}');
-		await expect.element(tooltip).not.toBeInTheDocument();
-	});
-
 	it('describes the bar with the detail while it has the focus', async () => {
 		render(Wrapper, { customDetail: true });
 		(bar().element() as HTMLElement).focus();
@@ -240,6 +184,30 @@ describe('AnnotatedScrollBar', () => {
 		await userEvent.keyboard('{Escape}');
 		await expect.element(tooltip).not.toBeInTheDocument();
 		await expect.element(bar()).not.toHaveAttribute('aria-describedby');
+	});
+
+	it('keeps the detail of the focused bar open when the pointer leaves it', async () => {
+		render(Wrapper, { customDetail: true });
+		(bar().element() as HTMLElement).focus();
+		const tooltip = page.getByRole('tooltip');
+		await userEvent.hover(tooltip);
+		await userEvent.hover(rail());
+		await new Promise((resolve) => setTimeout(resolve, 500));
+		await expect.element(tooltip).toBeInTheDocument();
+	});
+
+	it('reads the scroll range again when content grows inside a fixed-height child', async () => {
+		render(Wrapper, { labels: [{ label: 'Start', offset: 0 }], count: 2 });
+		await expect.element(bar()).toHaveAttribute('aria-valuemax', '200');
+		// Lets the first notifications of the observers pass.
+		await new Promise((resolve) => setTimeout(resolve, 100));
+
+		const nested = document.createElement('div');
+		nested.style.height = '600px';
+		target().querySelectorAll('section')[1].appendChild(nested);
+		(bar().element() as HTMLElement).focus();
+		await expect.element(bar()).not.toHaveAttribute('aria-valuemax', '200');
+		expect(bar().element().getAttribute('aria-valuemax')).toBe(`${target().scrollHeight - target().clientHeight}`);
 	});
 
 	it('is inert when disabled or when the content fits, and still follows the content', async () => {

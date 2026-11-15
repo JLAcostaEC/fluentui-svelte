@@ -24,7 +24,7 @@
 	"about_title": "About The Project",
 	"about_ux_text": "I don't have formal reviews to point to, but there's one thing I keep hearing from people using apps built with this UI: they just get it. Because everything follows a consistent, familiar design system, users pick up how to navigate the interface almost immediately, with very little learning curve.",
 	"about_ux_title": "What people notice when using it",
-	"annotated_scroll_bar_accessibility": "The bar is one tab stop. Name it with {#code}aria-label{/code}, {#code}aria-labelledby{/code} or {#code}Label{/code}. Arrow keys scroll by {#code}arrowStep{/code}, Page Up and Page Down by a viewport, and Home and End to the ends. Escape closes the detail. Keep the headings in the content: the labels do not replace them.",
+	"annotated_scroll_bar_accessibility": "The bar is one tab stop. Name it with {#code}aria-label{/code}, {#code}aria-labelledby{/code} or {#code}Label{/code}. Arrow keys scroll by {#code}arrowStep{/code}, Page Up and Page Down by a viewport, and Home and End to the ends. Escape closes the detail. Keep the headings in the content: the labels do not replace them. Give the scrolling element an {#code}id{/code}: the bar points to it with {#code}aria-controls{/code}.",
 	"annotated_scroll_bar_accessibility_title": "Keyboard and accessibility",
 	"annotated_scroll_bar_album": "Album {number}",
 	"annotated_scroll_bar_arrows_description": "{#code}hideArrows{/code} hides the arrow buttons. {#code}arrowStep{/code} sets the pixels scrolled by each arrow press and arrow key, 48 by default; the virtualized collection sets it to the height of a row.",

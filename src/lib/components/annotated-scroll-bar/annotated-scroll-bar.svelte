@@ -7,7 +7,7 @@
 
 	import Tooltip from '../tooltip/tooltip.svelte';
 	import { claimLabel } from '../label/label-context.ts';
-	import { findAt, fromAnchor, layoutLabels, readLabels, toAnchor, type Category } from './utils.ts';
+	import { findAt, fromAnchor, layoutLabels, readLabels, readsContent, toAnchor, type Category } from './utils.ts';
 	import type { AnnotatedScrollBarProps } from './types.ts';
 
 	type Kind = Parameters<NonNullable<AnnotatedScrollBarProps['onScrolling']>>[1];
@@ -31,6 +31,7 @@
 		ref = $bindable(null),
 		class: classes,
 		onkeydown,
+		onpointerenter,
 		onfocusin,
 		onfocusout,
 		...attributes
@@ -86,7 +87,12 @@
 		return { offset: Math.min(maximum, Math.max(0, target.scrollTop)), maximum, viewport: target.clientHeight };
 	}
 
-	/** Follows the scroll position and changes to the content. */
+	/** Reads the scroll range again before the bar is used: content can grow without resizing what the bar observes. */
+	function sync() {
+		if (scrollRef) scroll = read(scrollRef);
+	}
+
+	/** Follows the scroll position, the size of the content and, when the labels come from it, its changes. */
 	const connect: Attachment = () => {
 		const target = scrollRef;
 		const source = labels ?? selector;
@@ -101,10 +107,10 @@
 			categories = readLabels(target, source);
 		};
 
-		// Descendants can overflow a fixed-size child without resizing that child.
+		// The size of the viewport and of its children gives the scroll height without watching every element.
 		let observed = new Set<Element>();
 		const observe = () => {
-			const next = new Set([target, ...target.querySelectorAll('*')]);
+			const next = new Set([target, ...target.children]);
 			for (const element of observed) if (!next.has(element)) resize.unobserve(element);
 			for (const element of next) if (!observed.has(element)) resize.observe(element);
 			observed = next;
@@ -120,13 +126,18 @@
 		};
 		const resize = new ResizeObserver(schedule);
 		const mutations = new MutationObserver(schedule);
-		mutations.observe(target, { childList: true, subtree: true, attributes: true, characterData: true });
+		const dom = readsContent(source);
+		mutations.observe(target, { childList: true, subtree: dom, attributes: dom, characterData: dom });
 		observe();
 		measure();
 
-		const off = on(target, 'scroll', () => (scroll = read(target)));
+		const offs = [
+			on(target, 'scroll', () => (scroll = read(target))),
+			// Images and frames in the content change its height once they load; `load` does not bubble.
+			on(target, 'load', schedule, { capture: true })
+		];
 		return () => {
-			off();
+			offs.forEach((off) => off());
 			resize.disconnect();
 			mutations.disconnect();
 			cancelAnimationFrame(frame);
@@ -147,6 +158,7 @@
 		);
 
 	function scrollTo(offset: number, kind: Kind) {
+		sync();
 		if (inert || !scrollRef) return false;
 
 		const next = Math.min(scroll.maximum, Math.max(0, offset));
@@ -293,8 +305,13 @@
 	aria-valuetext={attributes['aria-valuetext'] ?? (describe(status) || undefined)}
 	aria-disabled={inert || undefined}
 	onkeydown={keydown}
+	onpointerenter={(event) => {
+		onpointerenter?.(event);
+		sync();
+	}}
 	onfocusin={(event) => {
 		onfocusin?.(event);
+		sync();
 		focused = true;
 		dismissed = false;
 	}}

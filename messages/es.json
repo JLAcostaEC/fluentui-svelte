@@ -24,7 +24,7 @@
 	"about_title": "Sobre El Proyecto",
 	"about_ux_text": "No tengo reseñas formales para mostrar, pero hay algo que escucho seguido de quienes usan apps construidas con este UI: simplemente lo entienden. Como todo sigue un sistema de diseño consistente y familiar, los usuarios aprenden a moverse por la interfaz casi de inmediato, con muy poca curva de aprendizaje.",
 	"about_ux_title": "Lo que la gente nota al usarla",
-	"annotated_scroll_bar_accessibility": "La barra es una sola parada de tabulación. Nómbrala con {#code}aria-label{/code}, {#code}aria-labelledby{/code} o {#code}Label{/code}. Las flechas desplazan {#code}arrowStep{/code}, RePág y AvPág una vista, e Inicio y Fin llevan a los extremos. Escape cierra el detalle. Conserva los encabezados en el contenido: las etiquetas no los reemplazan.",
+	"annotated_scroll_bar_accessibility": "La barra es una sola parada de tabulación. Nómbrala con {#code}aria-label{/code}, {#code}aria-labelledby{/code} o {#code}Label{/code}. Las flechas desplazan {#code}arrowStep{/code}, RePág y AvPág una vista, e Inicio y Fin llevan a los extremos. Escape cierra el detalle. Conserva los encabezados en el contenido: las etiquetas no los reemplazan. Da un {#code}id{/code} al elemento que se desplaza: la barra apunta a él con {#code}aria-controls{/code}.",
 	"annotated_scroll_bar_accessibility_title": "Teclado y accesibilidad",
 	"annotated_scroll_bar_album": "Álbum {number}",
 	"annotated_scroll_bar_arrows_description": "{#code}hideArrows{/code} oculta los botones de flecha. {#code}arrowStep{/code} define los píxeles que avanza cada flecha y cada tecla de flecha, 48 por defecto; la colección virtualizada lo iguala a la altura de una fila.",

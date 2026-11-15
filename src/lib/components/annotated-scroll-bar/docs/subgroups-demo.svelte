@@ -3,7 +3,7 @@
 	import { m } from '#i18n/messages.js';
 	import { getLocale } from '#i18n/runtime.js';
 
-	const galleryId = $props.id();
+	const id = $props.id();
 	let gallery = $state<HTMLDivElement | null>(null);
 	// The months of each year, with the ones in a row side by side.
 	const years = [
@@ -15,13 +15,7 @@
 </script>
 
 <div class="collection">
-	<div
-		id={galleryId}
-		class="gallery"
-		role="region"
-		aria-label={m.annotated_scroll_bar_collection()}
-		bind:this={gallery}
-	>
+	<div {id} class="gallery" role="region" aria-label={m.annotated_scroll_bar_collection()} bind:this={gallery}>
 		{#each years as { year, rows } (year)}
 			<section data-scroll-label={year}>
 				<h3>{year}</h3>

@@ -20,13 +20,12 @@
 <script lang="ts">
   import { AnnotatedScrollBar } from 'fluentui-svelte';
 
-  const galleryId = $props.id();
   let gallery = $state<HTMLDivElement | null>(null);
   const years = Array.from({ length: 50 }, (_, index) => 2024 - index);
 </script>
 
 <div class="collection">
-  <div id={galleryId} class="gallery" bind:this={gallery}>
+  <div id="photos" class="gallery" bind:this={gallery}>
     {#each years as year (year)}
       <section data-scroll-label={year}><h3>{year}</h3></section>
     {/each}

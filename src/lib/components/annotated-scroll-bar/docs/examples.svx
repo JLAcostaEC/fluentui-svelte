@@ -12,7 +12,7 @@
 
   /** The code of a gallery of years with a bar next to it. */
   function gallery({ bar, script = '', imports = '', before = '', section = 'data-scroll-label={year}', count = 9, height = 240, left = false }) {
-    const content = `<div class="gallery" bind:this={gallery}>
+    const content = `<div id={galleryId} class="gallery" bind:this={gallery}>
     {#each years as year (year)}
       <section${section ? ' ' + section : ''}><h3>{year}</h3></section>
     {/each}
@@ -20,6 +20,7 @@
     return `<script lang="ts">
   import { AnnotatedScrollBar${imports} } from 'fluentui-svelte';
 
+  const galleryId = $props.id();
   let gallery = $state<HTMLDivElement | null>(null);
   const years = Array.from({ length: ${count} }, (_, index) => 2023 - index);${script ? '\n' + script : ''}
 <\/script>
@@ -50,6 +51,7 @@ ${before}<div class="collection">
   const subgroupsCode = `<script lang="ts">
   import { AnnotatedScrollBar } from 'fluentui-svelte';
 
+  const galleryId = $props.id();
   let gallery = $state<HTMLDivElement | null>(null);
   // The months of each year, with the ones in a row side by side.
   const years = [
@@ -60,7 +62,7 @@ ${before}<div class="collection">
 <\/script>
 
 <div class="collection">
-  <div class="gallery" bind:this={gallery}>
+  <div id={galleryId} class="gallery" bind:this={gallery}>
     {#each years as { year, rows } (year)}
       <section data-scroll-label={year}>
         <h3>{year}</h3>

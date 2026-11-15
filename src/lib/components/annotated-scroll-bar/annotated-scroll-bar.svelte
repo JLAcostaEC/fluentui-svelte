@@ -7,7 +7,7 @@
 
 	import Tooltip from '../tooltip/tooltip.svelte';
 	import { claimLabel } from '../label/label-context.ts';
-	import { findAt, fromAnchor, layoutLabels, readLabels, readsContent, toAnchor, type Category } from './utils.ts';
+	import { findAt, fromAnchor, layoutLabels, readLabels, toAnchor, type Category } from './utils.ts';
 	import type { AnnotatedScrollBarProps } from './types.ts';
 
 	type Kind = Parameters<NonNullable<AnnotatedScrollBarProps['onScrolling']>>[1];
@@ -86,7 +86,7 @@
 		return { offset: Math.min(maximum, Math.max(0, target.scrollTop)), maximum, viewport: target.clientHeight };
 	}
 
-	/** Follows the scroll position, the size of the content and, when the labels come from it, its changes. */
+	/** Follows the scroll position and changes to the content. */
 	const connect: Attachment = () => {
 		const target = scrollRef;
 		const source = labels ?? selector;
@@ -101,10 +101,10 @@
 			categories = readLabels(target, source);
 		};
 
-		// The size of the viewport and of its children gives the scroll height without watching every element.
+		// Descendants can overflow a fixed-size child without resizing that child.
 		let observed = new Set<Element>();
 		const observe = () => {
-			const next = new Set([target, ...target.children]);
+			const next = new Set([target, ...target.querySelectorAll('*')]);
 			for (const element of observed) if (!next.has(element)) resize.unobserve(element);
 			for (const element of next) if (!observed.has(element)) resize.observe(element);
 			observed = next;
@@ -120,8 +120,7 @@
 		};
 		const resize = new ResizeObserver(schedule);
 		const mutations = new MutationObserver(schedule);
-		const dom = readsContent(source);
-		mutations.observe(target, { childList: true, subtree: dom, attributes: dom, characterData: dom });
+		mutations.observe(target, { childList: true, subtree: true, attributes: true, characterData: true });
 		observe();
 		measure();
 
@@ -374,6 +373,7 @@
 		id="fs-annotated-scroll-bar-detail-{ID}"
 		target={anchor}
 		open
+		preventClose
 		{content}
 		placement={position === 'left' ? 'top-start' : 'top-end'}
 		relationship={describing ? 'description' : 'inaccessible'}

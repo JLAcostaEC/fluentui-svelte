@@ -16,6 +16,7 @@
 		events?: boolean;
 	} = $props();
 
+	const galleryId = $props.id();
 	let gallery = $state<HTMLDivElement | null>(null);
 	let locked = $state(false);
 	let request = $state('');
@@ -27,7 +28,13 @@
 <div class="demo">
 	{#if events}<Checkbox bind:checked={locked}>{m.annotated_scroll_bar_cancel()}</Checkbox>{/if}
 	<div class={['collection', { left: props.position === 'left' }]} style:--section-height="{height}px">
-		<div class="gallery" role="region" aria-label={m.annotated_scroll_bar_collection()} bind:this={gallery}>
+		<div
+			id={galleryId}
+			class="gallery"
+			role="region"
+			aria-label={m.annotated_scroll_bar_collection()}
+			bind:this={gallery}
+		>
 			{#each years as year (year)}
 				<section data-year={year} data-scroll-label={marked ? year : undefined}>
 					<h3>{year}</h3>

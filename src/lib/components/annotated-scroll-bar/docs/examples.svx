@@ -1,0 +1,219 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import Demo from './demo.svelte';
+  import SubgroupsDemo from './subgroups-demo.svelte';
+  import VirtualizedDemo from './virtualized-demo.svelte';
+  import { m } from '#i18n/messages.js';
+
+  const years = Array.from({ length: 9 }, (_, index) => 2023 - index);
+  const shortLabels = years.map((year) => ({ label: `’${String(year).slice(2)}`, selector: `[data-year="${year}"]` }));
+  const photos = { 2023: 124, 2022: 87, 2021: 152, 2020: 63, 2019: 98, 2018: 41, 2017: 77, 2016: 110, 2015: 55 };
+
+  /** The code of a gallery of years with a bar next to it. */
+  function gallery({ bar, script = '', imports = '', before = '', section = 'data-scroll-label={year}', count = 9, height = 240, left = false }) {
+    const content = `<div class="gallery" bind:this={gallery}>
+    {#each years as year (year)}
+      <section${section ? ' ' + section : ''}><h3>{year}</h3></section>
+    {/each}
+  </div>`;
+    return `<script lang="ts">
+  import { AnnotatedScrollBar${imports} } from 'fluentui-svelte';
+
+  let gallery = $state<HTMLDivElement | null>(null);
+  const years = Array.from({ length: ${count} }, (_, index) => 2023 - index);${script ? '\n' + script : ''}
+<\/script>
+
+${before}<div class="collection">
+  ${left ? `${bar}\n  ${content}` : `${content}\n  ${bar}`}
+</div>
+
+\x3Cstyle>
+  .collection { display: flex; gap: 16px; height: 360px; }
+  .gallery { flex: 1; overflow: auto; }
+  section { height: ${height}px; }
+\x3C/style>`;
+  }
+
+  const contentCode = gallery({
+    section: '',
+    bar: `<AnnotatedScrollBar scrollRef={gallery} selector="section" aria-label="Photo timeline" />`
+  });
+  const listCode = gallery({
+    section: 'data-year={year}',
+    script: `  const labels = years.map((year) => ({
+    label: "’" + String(year).slice(2),
+    selector: \`[data-year="\${year}"]\`
+  }));`,
+    bar: `<AnnotatedScrollBar scrollRef={gallery} {labels} aria-label="Photo timeline" />`
+  });
+  const subgroupsCode = `<script lang="ts">
+  import { AnnotatedScrollBar } from 'fluentui-svelte';
+
+  let gallery = $state<HTMLDivElement | null>(null);
+  // The months of each year, with the ones in a row side by side.
+  const years = [
+    { year: 2024, rows: [['June', 'July'], ['December']] },
+    { year: 2023, rows: [['March'], ['August', 'September']] },
+    { year: 2022, rows: [['January', 'February'], ['October']] }
+  ];
+<\/script>
+
+<div class="collection">
+  <div class="gallery" bind:this={gallery}>
+    {#each years as { year, rows } (year)}
+      <section data-scroll-label={year}>
+        <h3>{year}</h3>
+        {#each rows as months, index (index)}
+          <div class="row">
+            {#each months as month (month)}
+              <div class="month" data-scroll-subgroup={month}>{month}</div>
+            {/each}
+          </div>
+        {/each}
+      </section>
+    {/each}
+  </div>
+  <AnnotatedScrollBar scrollRef={gallery} aria-label="Photo timeline" />
+</div>
+
+\x3Cstyle>
+  .collection { display: flex; gap: 16px; height: 420px; }
+  .gallery { flex: 1; overflow: auto; }
+  .row { display: flex; gap: 16px; }
+  .month { flex: 1; height: 160px; }
+\x3C/style>`;
+  const virtualizationCode = `<script lang="ts">
+  import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
+  import { AnnotatedScrollBar } from 'fluentui-svelte';
+
+  const rowHeight = 48;
+  const perMonth = 50;
+  const years = Array.from({ length: 10 }, (_, index) => 2024 - index);
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const photos = years.flatMap((year) =>
+    months.flatMap((month) => Array.from({ length: perMonth }, (_, index) => ({ id: year + month + index, year, month, number: index + 1 })))
+  );
+
+  // Rows that are not rendered cannot be measured: the offsets come from the row height.
+  const labels = years.map((year, y) => ({
+    label: String(year),
+    offset: y * months.length * perMonth * rowHeight,
+    subgroups: months.map((month, index) => ({
+      label: month,
+      offset: (y * months.length + index) * perMonth * rowHeight
+    }))
+  }));
+
+  let viewport = $state<HTMLElement | null>(null);
+<\/script>
+
+<div class="collection">
+  <div class="list" {@attach (host) => { viewport = host.querySelector('.photos-viewport'); }}>
+    <SvelteVirtualList items={photos} itemKey={(photo) => photo.id} defaultEstimatedItemHeight={rowHeight} viewportClass="virtual-list-viewport photos-viewport">
+      {#snippet renderItem(photo)}
+        <div style:height="{rowHeight}px">{photo.month} {photo.year}, photo {photo.number}</div>
+      {/snippet}
+    </SvelteVirtualList>
+  </div>
+  <AnnotatedScrollBar scrollRef={viewport} {labels} hideSubgroups arrowStep={rowHeight} aria-label="Photo timeline" />
+</div>
+
+\x3Cstyle>
+  .collection { display: flex; gap: 16px; height: 360px; }
+  .list { flex: 1; overflow: hidden; }
+\x3C/style>`;
+  const detailCode = gallery({
+    script: `  // The number of photos of each year.
+  const photos: Record<number, number> = { 2023: 124, 2022: 87, 2021: 152, 2020: 63, 2019: 98, 2018: 41, 2017: 77, 2016: 110, 2015: 55 };`,
+    bar: `<AnnotatedScrollBar scrollRef={gallery} aria-label="Photo timeline">
+    {#snippet detail({ label })}
+      <strong>{label}</strong>: {photos[Number(label)]} photos
+    {/snippet}
+  </AnnotatedScrollBar>`
+  });
+  const crowdedCode = gallery({
+    count: 40,
+    height: 120,
+    bar: `<AnnotatedScrollBar scrollRef={gallery} aria-label="Photo timeline" />`
+  });
+  const positionCode = gallery({
+    left: true,
+    bar: `<AnnotatedScrollBar scrollRef={gallery} position="left" aria-label="Photo timeline" />`
+  });
+  const arrowsCode = gallery({ bar: `<AnnotatedScrollBar scrollRef={gallery} hideArrows aria-label="Photo timeline" />` });
+  const scrollingCode = gallery({
+    imports: ', Checkbox',
+    script: `  let locked = $state(false);`,
+    before: `<Checkbox bind:checked={locked}>Cancel the scrolls of the bar</Checkbox>\n`,
+    bar: `<AnnotatedScrollBar
+    scrollRef={gallery}
+    aria-label="Photo timeline"
+    onScrolling={(offset, kind) => {
+      console.log(kind, offset);
+      return !locked;
+    }}
+  />`
+  });
+  const disabledCode = gallery({ bar: `<AnnotatedScrollBar scrollRef={gallery} disabled aria-label="Photo timeline" />` });
+</script>
+
+## {m.annotated_scroll_bar_content_title()}
+
+<p><I18nMarkupMessage message={m.annotated_scroll_bar_content_description} /></p>
+
+<Showcase columns={1} columnWidth="minmax(0, 1fr)" code={contentCode} disablePanZoom><Demo selector="section" /></Showcase>
+
+## {m.annotated_scroll_bar_list_title()}
+
+<p><I18nMarkupMessage message={m.annotated_scroll_bar_list_description} /></p>
+
+<Showcase columns={1} columnWidth="minmax(0, 1fr)" code={listCode} disablePanZoom><Demo labels={shortLabels} /></Showcase>
+
+## {m.annotated_scroll_bar_subgroups_title()}
+
+<p><I18nMarkupMessage message={m.annotated_scroll_bar_subgroups_description} /></p>
+
+<Showcase columns={1} columnWidth="minmax(0, 1fr)" code={subgroupsCode} disablePanZoom><SubgroupsDemo /></Showcase>
+
+## {m.annotated_scroll_bar_virtualization_title()}
+
+<p><I18nMarkupMessage message={m.annotated_scroll_bar_virtualization_description} /></p>
+
+<Showcase columns={1} columnWidth="minmax(0, 1fr)" code={virtualizationCode} disablePanZoom><VirtualizedDemo /></Showcase>
+
+## {m.annotated_scroll_bar_detail_title()}
+
+<p><I18nMarkupMessage message={m.annotated_scroll_bar_detail_description} /></p>
+
+<Showcase columns={1} columnWidth="minmax(0, 1fr)" code={detailCode} disablePanZoom><Demo {photos} /></Showcase>
+
+## {m.annotated_scroll_bar_crowded_title()}
+
+<p><I18nMarkupMessage message={m.annotated_scroll_bar_crowded_description} /></p>
+
+<Showcase columns={1} columnWidth="minmax(0, 1fr)" code={crowdedCode} disablePanZoom><Demo count={40} height={120} /></Showcase>
+
+## {m.annotated_scroll_bar_position_title()}
+
+<p><I18nMarkupMessage message={m.annotated_scroll_bar_position_description} /></p>
+
+<Showcase columns={1} columnWidth="minmax(0, 1fr)" code={positionCode} disablePanZoom><Demo position="left" /></Showcase>
+
+## {m.annotated_scroll_bar_arrows_title()}
+
+<p><I18nMarkupMessage message={m.annotated_scroll_bar_arrows_description} /></p>
+
+<Showcase columns={1} columnWidth="minmax(0, 1fr)" code={arrowsCode} disablePanZoom><Demo hideArrows /></Showcase>
+
+## {m.annotated_scroll_bar_scrolling_title()}
+
+<p><I18nMarkupMessage message={m.annotated_scroll_bar_scrolling_description} /></p>
+
+<Showcase columns={1} columnWidth="minmax(0, 1fr)" code={scrollingCode} disablePanZoom><Demo events /></Showcase>
+
+## {m.annotated_scroll_bar_disabled_title()}
+
+<p><I18nMarkupMessage message={m.annotated_scroll_bar_disabled_description} /></p>
+
+<Showcase columns={1} columnWidth="minmax(0, 1fr)" code={disabledCode} disablePanZoom><Demo disabled /></Showcase>

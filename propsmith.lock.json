@@ -1,5 +1,85 @@
 {
   "keys": {
+    "generated_fs_annotated_scroll_bar_props_props_arrow_step": {
+      "en": "dcf3f740",
+      "locales": {
+        "es": "dcf3f740"
+      },
+      "source": "src/lib/components/annotated-scroll-bar/types.ts#AnnotatedScrollBarProps.arrowStep"
+    },
+    "generated_fs_annotated_scroll_bar_props_props_detail": {
+      "en": "3a4bb03e",
+      "locales": {
+        "es": "3a4bb03e"
+      },
+      "source": "src/lib/components/annotated-scroll-bar/types.ts#AnnotatedScrollBarProps.detail"
+    },
+    "generated_fs_annotated_scroll_bar_props_props_disabled": {
+      "en": "11c51f50",
+      "locales": {
+        "es": "11c51f50"
+      },
+      "source": "src/lib/components/annotated-scroll-bar/types.ts#AnnotatedScrollBarProps.disabled"
+    },
+    "generated_fs_annotated_scroll_bar_props_props_hide_arrows": {
+      "en": "8d9a7002",
+      "locales": {
+        "es": "8d9a7002"
+      },
+      "source": "src/lib/components/annotated-scroll-bar/types.ts#AnnotatedScrollBarProps.hideArrows"
+    },
+    "generated_fs_annotated_scroll_bar_props_props_hide_subgroups": {
+      "en": "da8af260",
+      "locales": {
+        "es": "da8af260"
+      },
+      "source": "src/lib/components/annotated-scroll-bar/types.ts#AnnotatedScrollBarProps.hideSubgroups"
+    },
+    "generated_fs_annotated_scroll_bar_props_props_label_spacing": {
+      "en": "55333b57",
+      "locales": {
+        "es": "55333b57"
+      },
+      "source": "src/lib/components/annotated-scroll-bar/types.ts#AnnotatedScrollBarProps.labelSpacing"
+    },
+    "generated_fs_annotated_scroll_bar_props_props_labels": {
+      "en": "573ad087",
+      "locales": {},
+      "source": "src/lib/components/annotated-scroll-bar/types.ts#AnnotatedScrollBarProps.labels"
+    },
+    "generated_fs_annotated_scroll_bar_props_props_on_scrolling": {
+      "en": "d61e6aa3",
+      "locales": {
+        "es": "d61e6aa3"
+      },
+      "source": "src/lib/components/annotated-scroll-bar/types.ts#AnnotatedScrollBarProps.onScrolling"
+    },
+    "generated_fs_annotated_scroll_bar_props_props_position": {
+      "en": "38e66f6f",
+      "locales": {
+        "es": "38e66f6f"
+      },
+      "source": "src/lib/components/annotated-scroll-bar/types.ts#AnnotatedScrollBarProps.position"
+    },
+    "generated_fs_annotated_scroll_bar_props_props_ref": {
+      "en": "6d0b8f8f",
+      "locales": {
+        "es": "6d0b8f8f"
+      },
+      "source": "src/lib/components/annotated-scroll-bar/types.ts#AnnotatedScrollBarProps.ref"
+    },
+    "generated_fs_annotated_scroll_bar_props_props_scroll_ref": {
+      "en": "93b61529",
+      "locales": {
+        "es": "93b61529"
+      },
+      "source": "src/lib/components/annotated-scroll-bar/types.ts#AnnotatedScrollBarProps.scrollRef"
+    },
+    "generated_fs_annotated_scroll_bar_props_props_selector": {
+      "en": "b4afc661",
+      "locales": {},
+      "source": "src/lib/components/annotated-scroll-bar/types.ts#AnnotatedScrollBarProps.selector"
+    },
     "generated_fs_app_surface_props_props_active": {
       "en": "d569d42a",
       "locales": {

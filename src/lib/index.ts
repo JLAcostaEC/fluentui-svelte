@@ -15,6 +15,15 @@ export type {
 } from './components/app-window/types.js';
 // End AppWindow Component
 
+// Start AnnotatedScrollBar Component
+export { default as AnnotatedScrollBar } from './components/annotated-scroll-bar/annotated-scroll-bar.svelte';
+export type {
+	AnnotatedScrollBarProps,
+	AnnotatedScrollBarLabel,
+	AnnotatedScrollBarDetail
+} from './components/annotated-scroll-bar/types.js';
+// End AnnotatedScrollBar Component
+
 // Start AutoSuggestBox Component
 export { default as AutoSuggestBox } from './components/auto-suggest-box/auto-suggest-box.svelte';
 export { default as AutoSuggestBoxOption } from './components/auto-suggest-box/option.svelte';

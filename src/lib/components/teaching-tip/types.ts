@@ -101,8 +101,6 @@ export type TeachingTipContext = FSContext<
 	},
 	{
 		readonly open: boolean;
-		/** Set by `TeachingTipHeader`, to point `aria-labelledby` at its title. */
-		titleId: string | undefined;
 	},
 	null,
 	{

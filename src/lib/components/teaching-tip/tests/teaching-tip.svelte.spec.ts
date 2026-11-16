@@ -29,6 +29,32 @@ describe('open state', () => {
 		await userEvent.keyboard('{Escape}');
 		await expect.element(page.getByTestId('teaching-tip')).not.toBeVisible();
 	});
+
+	it('stays open on an Escape a child already handled', async () => {
+		render(TeachingTipTestWrapper);
+		const event = new KeyboardEvent('keydown', { key: 'Escape', cancelable: true });
+		event.preventDefault();
+		document.dispatchEvent(event);
+		await expect.element(page.getByTestId('teaching-tip')).toBeVisible();
+	});
+
+	it('moves the focus to the target when it closes with the focus inside', async () => {
+		render(TeachingTipTestWrapper, { withTarget: true });
+		await page.getByRole('button', { name: 'Close' }).click();
+		await expect.element(page.getByTestId('target')).toHaveFocus();
+	});
+
+	it('does not submit a form from the close button', async () => {
+		const onsubmit = vi.fn((e: SubmitEvent) => e.preventDefault());
+		const form = document.createElement('form');
+		form.addEventListener('submit', onsubmit);
+		document.body.appendChild(form);
+		render(TeachingTipTestWrapper, { target: form });
+		form.appendChild(page.getByTestId('teaching-tip').element());
+		await page.getByRole('button', { name: 'Close' }).click();
+		expect(onsubmit).not.toHaveBeenCalled();
+		form.remove();
+	});
 });
 
 describe('light dismiss', () => {
@@ -52,9 +78,31 @@ describe('light dismiss', () => {
 });
 
 describe('target', () => {
-	it('floats against its target', async () => {
-		render(TeachingTipTestWrapper, { withTarget: true });
-		await expect.element(page.getByTestId('teaching-tip')).toHaveClass('targeted');
+	const rects = () => ({
+		tip: page.getByTestId('teaching-tip').element().getBoundingClientRect(),
+		target: page.getByTestId('target').element().getBoundingClientRect()
+	});
+
+	it('floats below its target and follows it', async () => {
+		const screen = await render(TeachingTipTestWrapper, { withTarget: true });
+		await expect.poll(() => Math.round(rects().tip.top - rects().target.bottom)).toBe(8);
+
+		await screen.rerender({ targetOffset: 200 });
+		await expect
+			.poll(() =>
+				Math.round(rects().tip.left + rects().tip.width / 2 - (rects().target.left + rects().target.width / 2))
+			)
+			.toBe(0);
+	});
+
+	it('drops the floating position when the target goes away', async () => {
+		const screen = await render(TeachingTipTestWrapper, { withTarget: true });
+		const tip = page.getByTestId('teaching-tip').element() as HTMLElement;
+		await expect.poll(() => tip.style.transform).not.toBe('');
+
+		await screen.rerender({ withTarget: false });
+		await expect.poll(() => tip.style.transform).toBe('');
+		await expect.element(page.getByTestId('teaching-tip')).toBeVisible();
 	});
 
 	it('stays in the flow without a target', async () => {

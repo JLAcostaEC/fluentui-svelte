@@ -25,15 +25,8 @@
 	if (!context)
 		throw new Error('TeachingTip context is not available. Make sure this component is used within a TeachingTip.');
 
+	// The TeachingTip points `aria-labelledby` at this id.
 	const titleId = $derived(`${context.config.id}-title`);
-
-	$effect.pre(() => {
-		context.state.titleId = titleId;
-
-		return () => {
-			context.state.titleId = undefined;
-		};
-	});
 </script>
 
 <div {...attributes} bind:this={ref} class={['fs-teaching-tip-header', classes]}>
@@ -62,7 +55,13 @@
 		</span>
 	{/if}
 	{#if !hideCloseButton}
-		<Button class="fs-teaching-tip-close" appearance="subtle" aria-label={closeLabel} onclick={context.methods.close}>
+		<Button
+			type="button"
+			class="fs-teaching-tip-close"
+			appearance="subtle"
+			aria-label={closeLabel}
+			onclick={context.methods.close}
+		>
 			<DismissRegular />
 		</Button>
 	{/if}

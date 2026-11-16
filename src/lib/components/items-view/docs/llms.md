@@ -21,13 +21,7 @@ An ItemsView displays a collection of items as a stack, a uniform grid or lines 
 - `selectionMode`: `none` (default), `single`, `multiselect` (a click toggles) or `extended` (Ctrl + click toggles, Shift + click selects a range). `showCheckboxes` adds a checkbox to each selectable item. `bind:selectedItems` holds the selected `value`s; `onSelectionChange` reports changes.
 - `onItemInvoke(e, value)` runs on a double-click or Enter; with `selectionMode="none"` a click invokes.
 
-<!-- coderabbit-ai-generated:v1 -->
-
-<!-- coderabbit-ai-generated-section:v1:75a7616deac1253c9db8b256feba41c4a57aed6f8f6d845b9b4df0622aa6aaa5 -->
-
 - A `listbox` when selectable, a `list` otherwise. When keyboard focus is available and Tabspot is enabled, items share one tab stop. Arrow-key navigation requires `FluentUISvelte`: arrows move (across rows in `grid` and `flow`), Home and End jump to the ends. Space selects. Enter invokes only when `onItemInvoke` is provided; otherwise, it selects in single-selection mode. Name it with `aria-label` and describe each image with `alt`.
-
-<!-- /coderabbit-ai-generated:v1 -->
 
 ## ItemsView Props
 

@@ -1,0 +1,51 @@
+<script lang="ts">
+  import { TeachingTip, TeachingTipPreview, TeachingTipHeader, TeachingTipFooter, Button } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+</script>
+
+# TeachingTip
+{m.teaching_tip_description()}
+
+{#snippet action()}
+  <Button appearance="standard">Got it</Button>
+{/snippet}
+
+<Showcase columns={1} minHeight="0" disablePanZoom autoCenter>
+  <TeachingTip open>
+    <TeachingTipPreview>
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=640&h=320&fit=crop&q=60" alt="" />
+    </TeachingTipPreview>
+    <TeachingTipHeader title="Save automatically" />
+    <p>Your changes are saved to the cloud as you work.</p>
+    <TeachingTipFooter {action} />
+  </TeachingTip>
+</Showcase>
+
+{m.teaching_tip_composition_description()}
+
+- `TeachingTip`: {m.teaching_tip_composition_teachingtip_description()}
+- `TeachingTipPreview`: {m.teaching_tip_composition_teachingtippreview_description()}
+- `TeachingTipHeader`: {m.teaching_tip_composition_teachingtipheader_description()}
+- `TeachingTipFooter`: {m.teaching_tip_composition_teachingtipfooter_description()}
+
+## {m.global_usage()}
+```svelte
+<script>
+  import { TeachingTip, TeachingTipPreview, TeachingTipHeader, TeachingTipFooter, Button } from 'fluentui-svelte';
+  let open = $state(false);
+  let target = $state(null);
+</script>
+
+{#snippet action()}
+  <Button appearance="standard" onclick={() => (open = false)}>Got it</Button>
+{/snippet}
+
+<Button bind:ref={target} onclick={() => (open = !open)}>Save</Button>
+<TeachingTip bind:open {target}>
+  <TeachingTipPreview><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=640&h=320&fit=crop&q=60" alt="" /></TeachingTipPreview>
+  <TeachingTipHeader title="Save automatically" />
+  <p>Your changes are saved to the cloud as you work.</p>
+  <TeachingTipFooter {action} />
+</TeachingTip>
+```

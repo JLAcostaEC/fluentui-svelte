@@ -1,0 +1,229 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { TeachingTip, TeachingTipPreview, TeachingTipHeader, TeachingTipFooter, Button } from '#lib/index.js';
+  import LightbulbRegular from 'fluentui-icons-svelte/LightbulbRegular.svelte';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+
+  const image = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=640&h=320&fit=crop&q=60';
+
+  // Target
+  let saveOpen = $state(false);
+  let saveButton = $state<HTMLElement | null>(null);
+
+  // Step counter
+  const steps = [
+    { title: 'Search', text: 'Find files, people and settings from one place.' },
+    { title: 'Share', text: 'Invite others to work on a file with you.' },
+    { title: 'Settings', text: 'Change the theme and the language of the app.' }
+  ];
+  let targets = $state<(HTMLElement | null)[]>(steps.map(() => null));
+  let tourOpen = $state(false);
+  let step = $state(1);
+  let current = $derived(steps[step - 1]);
+
+  const startTour = () => {
+    step = 1;
+    tourOpen = true;
+  };
+
+  const targetCode = `<script>
+  import { TeachingTip, TeachingTipHeader, TeachingTipFooter, Button } from 'fluentui-svelte';
+
+  let open = $state(false);
+  let target = $state(null);
+<\/script>
+
+{#snippet action()}
+  <Button appearance="standard" onclick={() => (open = false)}>Got it</Button>
+{/snippet}
+
+<Button bind:ref={target} onclick={() => (open = !open)}>Save</Button>
+
+<TeachingTip bind:open {target} placement="bottom" lightDismiss>
+  <TeachingTipHeader title="Save automatically" />
+  <p>Your changes are saved to the cloud as you work.</p>
+  <TeachingTipFooter {action} />
+</TeachingTip>`;
+
+  const previewCode = `<script>
+  import { TeachingTip, TeachingTipPreview, TeachingTipHeader } from 'fluentui-svelte';
+
+  const image = '${image}';
+<\/script>
+
+<TeachingTip open>
+  <TeachingTipPreview><img src={image} alt="" /></TeachingTipPreview>
+  <TeachingTipHeader title="New wallpapers" hideCloseButton />
+  <p>Pick one of the new landscapes from the personalization settings.</p>
+</TeachingTip>
+
+<TeachingTip open>
+  <TeachingTipHeader title="New wallpapers" hideCloseButton />
+  <p>Pick one of the new landscapes from the personalization settings.</p>
+  <TeachingTipPreview><img src={image} alt="" /></TeachingTipPreview>
+</TeachingTip>`;
+
+  const headerCode = `<script>
+  import { TeachingTip, TeachingTipHeader } from 'fluentui-svelte';
+  import LightbulbRegular from 'fluentui-icons-svelte/LightbulbRegular.svelte';
+<\/script>
+
+<TeachingTip open>
+  <TeachingTipHeader title="Pinned files" description="New in this version" icon={LightbulbRegular} />
+  <p>Pin the files you use the most to find them at the top of the list.</p>
+</TeachingTip>
+
+<TeachingTip open>
+  <TeachingTipHeader title="Pinned files" hideCloseButton />
+  <p>Pin the files you use the most to find them at the top of the list.</p>
+</TeachingTip>`;
+
+  const stepsCode = `<script>
+  import { TeachingTip, TeachingTipHeader, TeachingTipFooter, Button } from 'fluentui-svelte';
+
+  const steps = [
+    { title: 'Search', text: 'Find files, people and settings from one place.' },
+    { title: 'Share', text: 'Invite others to work on a file with you.' },
+    { title: 'Settings', text: 'Change the theme and the language of the app.' }
+  ];
+
+  let targets = $state(steps.map(() => null));
+  let open = $state(false);
+  let step = $state(1);
+  let current = $derived(steps[step - 1]);
+
+  const start = () => {
+    step = 1;
+    open = true;
+  };
+<\/script>
+
+{#snippet action()}
+  <Button appearance="standard" disabled={step === 1} onclick={() => step--}>Back</Button>
+  {#if step < steps.length}
+    <Button onclick={() => step++}>Next</Button>
+  {:else}
+    <Button onclick={() => (open = false)}>Finish</Button>
+  {/if}
+{/snippet}
+
+<Button onclick={start}>Start the tour</Button>
+
+{#each steps as { title }, i (title)}
+  <Button appearance="subtle" bind:ref={targets[i]}>{title}</Button>
+{/each}
+
+<TeachingTip bind:open target={targets[step - 1]} placement="bottom">
+  <TeachingTipHeader title={current.title} {step} totalSteps={steps.length} />
+  <p>{current.text}</p>
+  <TeachingTipFooter {action} />
+</TeachingTip>`;
+</script>
+
+### {m.teaching_tip_target_title()}
+
+<p><I18nMarkupMessage message={m.teaching_tip_target_description} /></p>
+
+{#snippet saveAction()}
+  <Button appearance="standard" onclick={() => (saveOpen = false)}>Got it</Button>
+{/snippet}
+
+<Showcase columns={1} code={targetCode} minHeight="320px" disablePanZoom autoCenter>
+  <Button bind:ref={saveButton} onclick={() => (saveOpen = !saveOpen)}>Save</Button>
+  <TeachingTip bind:open={saveOpen} target={saveButton} placement="bottom" lightDismiss>
+    <TeachingTipHeader title="Save automatically" />
+    <p>Your changes are saved to the cloud as you work.</p>
+    <TeachingTipFooter action={saveAction} />
+  </TeachingTip>
+</Showcase>
+
+### {m.teaching_tip_preview_title()}
+
+<p><I18nMarkupMessage message={m.teaching_tip_preview_description} /></p>
+
+<Showcase columns={2} code={previewCode} minHeight="0" disablePanZoom fluid>
+  <figure>
+    <TeachingTip open>
+      <TeachingTipPreview><img src={image} alt="" /></TeachingTipPreview>
+      <TeachingTipHeader title="New wallpapers" hideCloseButton />
+      <p>Pick one of the new landscapes from the personalization settings.</p>
+    </TeachingTip>
+    <figcaption>{m.teaching_tip_preview_top()}</figcaption>
+  </figure>
+  <figure>
+    <TeachingTip open>
+      <TeachingTipHeader title="New wallpapers" hideCloseButton />
+      <p>Pick one of the new landscapes from the personalization settings.</p>
+      <TeachingTipPreview><img src={image} alt="" /></TeachingTipPreview>
+    </TeachingTip>
+    <figcaption>{m.teaching_tip_preview_bottom()}</figcaption>
+  </figure>
+</Showcase>
+
+### {m.teaching_tip_header_title()}
+
+<p><I18nMarkupMessage message={m.teaching_tip_header_description} /></p>
+
+<Showcase columns={2} code={headerCode} minHeight="0" disablePanZoom fluid>
+  <figure>
+    <TeachingTip open>
+      <TeachingTipHeader title="Pinned files" description="New in this version" icon={LightbulbRegular} />
+      <p>Pin the files you use the most to find them at the top of the list.</p>
+    </TeachingTip>
+    <figcaption><code>icon</code>, <code>description</code></figcaption>
+  </figure>
+  <figure>
+    <TeachingTip open>
+      <TeachingTipHeader title="Pinned files" hideCloseButton />
+      <p>Pin the files you use the most to find them at the top of the list.</p>
+    </TeachingTip>
+    <figcaption><code>hideCloseButton</code></figcaption>
+  </figure>
+</Showcase>
+
+### {m.teaching_tip_steps_title()}
+
+<p><I18nMarkupMessage message={m.teaching_tip_steps_description} /></p>
+
+{#snippet tourAction()}
+  <Button appearance="standard" disabled={step === 1} onclick={() => step--}>Back</Button>
+  {#if step < steps.length}
+    <Button onclick={() => step++}>Next</Button>
+  {:else}
+    <Button onclick={() => (tourOpen = false)}>Finish</Button>
+  {/if}
+{/snippet}
+
+<Showcase columns={1} code={stepsCode} minHeight="360px" disablePanZoom autoCenter>
+  <div class="tour">
+    <Button onclick={startTour}>Start the tour</Button>
+    <div class="toolbar">
+      {#each steps as { title }, i (title)}
+        <Button appearance="subtle" bind:ref={targets[i]}>{title}</Button>
+      {/each}
+    </div>
+  </div>
+  <TeachingTip bind:open={tourOpen} target={targets[step - 1]} placement="bottom">
+    <TeachingTipHeader title={current.title} {step} totalSteps={steps.length} />
+    <p>{current.text}</p>
+    <TeachingTipFooter action={tourAction} />
+  </TeachingTip>
+</Showcase>
+
+<style>
+  figure {
+    width: 100%;
+    min-width: 0;
+  }
+  .tour {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .toolbar {
+    display: flex;
+    gap: 0.5rem;
+  }
+</style>

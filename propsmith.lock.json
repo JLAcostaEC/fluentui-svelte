@@ -44,7 +44,9 @@
     },
     "generated_fs_annotated_scroll_bar_props_props_labels": {
       "en": "573ad087",
-      "locales": {},
+      "locales": {
+        "es": "573ad087"
+      },
       "source": "src/lib/components/annotated-scroll-bar/types.ts#AnnotatedScrollBarProps.labels"
     },
     "generated_fs_annotated_scroll_bar_props_props_on_scrolling": {
@@ -77,7 +79,9 @@
     },
     "generated_fs_annotated_scroll_bar_props_props_selector": {
       "en": "b4afc661",
-      "locales": {},
+      "locales": {
+        "es": "b4afc661"
+      },
       "source": "src/lib/components/annotated-scroll-bar/types.ts#AnnotatedScrollBarProps.selector"
     },
     "generated_fs_app_surface_props_props_active": {
@@ -2301,7 +2305,9 @@
     },
     "generated_fs_items_view_props_props_show_checkboxes": {
       "en": "44b87e02",
-      "locales": {},
+      "locales": {
+        "es": "44b87e02"
+      },
       "source": "src/lib/components/items-view/types.ts#ItemsViewProps.showCheckboxes"
     },
     "generated_fs_items_view_props_props_spacing": {
@@ -5278,6 +5284,167 @@
         "es": "b3df9436"
       },
       "source": "src/lib/components/tag/types.ts#TagProps.value"
+    },
+    "generated_fs_teaching_tip_footer_props_props_action": {
+      "en": "4ac89f64",
+      "locales": {
+        "es": "4ac89f64"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipFooterProps.action"
+    },
+    "generated_fs_teaching_tip_footer_props_props_ref": {
+      "en": "b77ced29",
+      "locales": {
+        "es": "b77ced29"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipFooterProps.ref"
+    },
+    "generated_fs_teaching_tip_header_props_props_close_label": {
+      "en": "15971991",
+      "locales": {
+        "es": "15971991"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipHeaderProps.closeLabel"
+    },
+    "generated_fs_teaching_tip_header_props_props_description": {
+      "en": "15d85b99",
+      "locales": {
+        "es": "15d85b99"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipHeaderProps.description"
+    },
+    "generated_fs_teaching_tip_header_props_props_format_step": {
+      "en": "ad23d768",
+      "locales": {
+        "es": "ad23d768"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipHeaderProps.formatStep"
+    },
+    "generated_fs_teaching_tip_header_props_props_heading_level": {
+      "en": "1501ff3d",
+      "locales": {
+        "es": "1501ff3d"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipHeaderProps.headingLevel"
+    },
+    "generated_fs_teaching_tip_header_props_props_hide_close_button": {
+      "en": "c325d378",
+      "locales": {
+        "es": "c325d378"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipHeaderProps.hideCloseButton"
+    },
+    "generated_fs_teaching_tip_header_props_props_icon": {
+      "en": "5289fab6",
+      "locales": {
+        "es": "5289fab6"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipHeaderProps.icon"
+    },
+    "generated_fs_teaching_tip_header_props_props_ref": {
+      "en": "02f56faa",
+      "locales": {
+        "es": "02f56faa"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipHeaderProps.ref"
+    },
+    "generated_fs_teaching_tip_header_props_props_step": {
+      "en": "974560d0",
+      "locales": {
+        "es": "974560d0"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipHeaderProps.step"
+    },
+    "generated_fs_teaching_tip_header_props_props_title": {
+      "en": "46b86852",
+      "locales": {
+        "es": "46b86852"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipHeaderProps.title"
+    },
+    "generated_fs_teaching_tip_header_props_props_total_steps": {
+      "en": "4198c88a",
+      "locales": {
+        "es": "4198c88a"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipHeaderProps.totalSteps"
+    },
+    "generated_fs_teaching_tip_preview_props_props_children": {
+      "en": "d268bc41",
+      "locales": {
+        "es": "d268bc41"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipPreviewProps.children"
+    },
+    "generated_fs_teaching_tip_preview_props_props_ref": {
+      "en": "cfdad65c",
+      "locales": {
+        "es": "cfdad65c"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipPreviewProps.ref"
+    },
+    "generated_fs_teaching_tip_props_props_children": {
+      "en": "3404c813",
+      "locales": {
+        "es": "3404c813"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipProps.children"
+    },
+    "generated_fs_teaching_tip_props_props_id": {
+      "en": "6e0f2242",
+      "locales": {
+        "es": "6e0f2242"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipProps.id"
+    },
+    "generated_fs_teaching_tip_props_props_light_dismiss": {
+      "en": "9b5a36e2",
+      "locales": {
+        "es": "9b5a36e2"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipProps.lightDismiss"
+    },
+    "generated_fs_teaching_tip_props_props_on_open_change": {
+      "en": "7c3a1c27",
+      "locales": {
+        "es": "7c3a1c27"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipProps.onOpenChange"
+    },
+    "generated_fs_teaching_tip_props_props_open": {
+      "en": "bb1c9d7e",
+      "locales": {
+        "es": "bb1c9d7e"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipProps.open"
+    },
+    "generated_fs_teaching_tip_props_props_placement": {
+      "en": "5c02231e",
+      "locales": {
+        "es": "5c02231e"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipProps.placement"
+    },
+    "generated_fs_teaching_tip_props_props_position_config": {
+      "en": "6027941f",
+      "locales": {
+        "es": "6027941f"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipProps.positionConfig"
+    },
+    "generated_fs_teaching_tip_props_props_ref": {
+      "en": "2ce876db",
+      "locales": {
+        "es": "2ce876db"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipProps.ref"
+    },
+    "generated_fs_teaching_tip_props_props_target": {
+      "en": "4ed191b2",
+      "locales": {
+        "es": "4ed191b2"
+      },
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipProps.target"
     },
     "generated_fs_text_area_props_props_disabled": {
       "en": "b99cb72f",

@@ -1,0 +1,74 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '#i18n/messages.js';
+</script>
+
+## {m.teaching_tip_accessibility_title()}
+<p><I18nMarkupMessage message={m.teaching_tip_accessibility_description} /></p>
+
+## {m.teaching_tip_teachingtip_props_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TeachingTipProps -->
+
+| Name                                                | Type                        | Default | Description                                                                               |
+| --------------------------------------------------- | --------------------------- | ------- | ----------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLElement` &#124; `null` |         | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_props_props_ref} />`             |
+| `id`                                                | `string`                    |         | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_props_props_id} />`              |
+| `open` _bindable_                                   | `boolean`                   | `false` | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_props_props_open} />`            |
+| `onOpenChange`                                      | `(open: boolean) => void`   |         | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_props_props_on_open_change} />`  |
+| `target`                                            | `HTMLElement` &#124; `null` |         | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_props_props_target} />`          |
+| `placement`                                         | `Placement`                 | `'top'` | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_props_props_placement} />`       |
+| `positionConfig`                                    | `ComputePositionConfig`     |         | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_props_props_position_config} />` |
+| `lightDismiss`                                      | `boolean`                   | `false` | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_props_props_light_dismiss} />`   |
+| `children`                                          | `Snippet`                   |         | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_props_props_children} />`        |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                             |         |                                                                                           |
+
+<!-- /props:TeachingTipProps -->
+
+## {m.teaching_tip_teachingtippreview_props_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TeachingTipPreviewProps -->
+
+| Name                                                | Type                           | Default | Description                                                                                |
+| --------------------------------------------------- | ------------------------------ | ------- | ------------------------------------------------------------------------------------------ |
+| `ref` _bindable_                                    | `HTMLDivElement` &#124; `null` |         | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_preview_props_props_ref} />`      |
+| `children`                                          | `Snippet`                      |         | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_preview_props_props_children} />` |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                                |         |                                                                                            |
+
+<!-- /props:TeachingTipPreviewProps -->
+
+## {m.teaching_tip_teachingtipheader_props_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TeachingTipHeaderProps -->
+
+| Name                                                         | Type                                                       | Default   | Description                                                                                        |
+| ------------------------------------------------------------ | ---------------------------------------------------------- | --------- | -------------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                             | `HTMLDivElement` &#124; `null`                             |           | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_header_props_props_ref} />`               |
+| `title`                                                      | `Snippet` &#124; `Component` &#124; `string`               |           | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_header_props_props_title} />`             |
+| `headingLevel`                                               | `1` &#124; `2` &#124; `3` &#124; `4` &#124; `5` &#124; `6` | `3`       | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_header_props_props_heading_level} />`     |
+| `icon`                                                       | `Snippet` &#124; `Component`                               |           | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_header_props_props_icon} />`              |
+| `description`                                                | `Snippet` &#124; `Component` &#124; `string`               |           | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_header_props_props_description} />`       |
+| `step`                                                       | `number`                                                   |           | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_header_props_props_step} />`              |
+| `totalSteps`                                                 | `number`                                                   |           | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_header_props_props_total_steps} />`       |
+| `formatStep`                                                 | `(step: number, totalSteps: number) => string`             |           | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_header_props_props_format_step} />`       |
+| `hideCloseButton`                                            | `boolean`                                                  |           | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_header_props_props_hide_close_button} />` |
+| `closeLabel`                                                 | `string`                                                   | `'Close'` | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_header_props_props_close_label} />`       |
+| `HTMLAttributes<HTMLDivElement>` without `children`, `title` |                                                            |           |                                                                                                    |
+
+<!-- /props:TeachingTipHeaderProps -->
+
+## {m.teaching_tip_teachingtipfooter_props_title()}
+
+<!-- DO NOT EDIT THIS SECTION (propsmith generated) -->
+<!-- props:TeachingTipFooterProps -->
+
+| Name                                                | Type                           | Default | Description                                                                             |
+| --------------------------------------------------- | ------------------------------ | ------- | --------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLDivElement` &#124; `null` |         | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_footer_props_props_ref} />`    |
+| `action`                                            | `Snippet` &#124; `Component`   |         | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_footer_props_props_action} />` |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                                |         |                                                                                         |
+
+<!-- /props:TeachingTipFooterProps -->

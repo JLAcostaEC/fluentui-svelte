@@ -1,0 +1,26 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '#i18n/messages.js';
+</script>
+
+## AnnotatedScrollBar
+
+<!-- props:AnnotatedScrollBarProps -->
+
+| Name                                                | Type                                                                                                                             | Default                 | Description                                                                                      |
+| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------ |
+| `scrollRef`                                         | `HTMLElement` &#124; `null`                                                                                                      |                         | `<I18nMarkupMessage message={m.generated_fs_annotated_scroll_bar_props_props_scroll_ref} />`     |
+| `labels`                                            | `readonly AnnotatedScrollBarLabel[]`                                                                                             |                         | `<I18nMarkupMessage message={m.generated_fs_annotated_scroll_bar_props_props_labels} />`         |
+| `selector`                                          | `string`                                                                                                                         | `'[data-scroll-label]'` | `<I18nMarkupMessage message={m.generated_fs_annotated_scroll_bar_props_props_selector} />`       |
+| `position`                                          | `'left'` &#124; `'right'`                                                                                                        | `'right'`               | `<I18nMarkupMessage message={m.generated_fs_annotated_scroll_bar_props_props_position} />`       |
+| `arrowStep`                                         | `number`                                                                                                                         | `48`                    | `<I18nMarkupMessage message={m.generated_fs_annotated_scroll_bar_props_props_arrow_step} />`     |
+| `labelSpacing`                                      | `number`                                                                                                                         | `4`                     | `<I18nMarkupMessage message={m.generated_fs_annotated_scroll_bar_props_props_label_spacing} />`  |
+| `hideArrows`                                        | `boolean`                                                                                                                        |                         | `<I18nMarkupMessage message={m.generated_fs_annotated_scroll_bar_props_props_hide_arrows} />`    |
+| `hideSubgroups`                                     | `boolean`                                                                                                                        |                         | `<I18nMarkupMessage message={m.generated_fs_annotated_scroll_bar_props_props_hide_subgroups} />` |
+| `disabled`                                          | `boolean`                                                                                                                        |                         | `<I18nMarkupMessage message={m.generated_fs_annotated_scroll_bar_props_props_disabled} />`       |
+| `detail`                                            | `Snippet`                                                                                                                        |                         | `<I18nMarkupMessage message={m.generated_fs_annotated_scroll_bar_props_props_detail} />`         |
+| `onScrolling`                                       | `(offset: number, kind: 'click'` &#124; `'drag'` &#124; `'arrow'` &#124; `'wheel'` &#124; `'keyboard') => boolean` &#124; `void` |                         | `<I18nMarkupMessage message={m.generated_fs_annotated_scroll_bar_props_props_on_scrolling} />`   |
+| `ref` _bindable_                                    | `HTMLDivElement` &#124; `null`                                                                                                   |                         | `<I18nMarkupMessage message={m.generated_fs_annotated_scroll_bar_props_props_ref} />`            |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                                                                                                                                  |                         |                                                                                                  |
+
+<!-- /props:AnnotatedScrollBarProps -->

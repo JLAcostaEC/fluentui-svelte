@@ -354,6 +354,7 @@ Folder, exports, status (only when the API may still change) and summary. Read
 
 <!-- components:start -->
 
+- `annotated-scroll-bar`: `AnnotatedScrollBar`. A vertical scroll bar with labels for the content of an existing scrolling element, such as the years of a photo gallery.
 - `app-surface`: `AppSurface`. The area of an app that holds its content: a layer over the window or its Mica, with rounded corners next to a SideNav, in the colors of an active or an inactive window.
 - `app-window`: `AppWindow`. The surface of an app: a Mica window built on the Flyout, with its own border and the shell shadow of an active or an inactive window, sized by a width and a height.
 - `auto-suggest-box`: `AutoSuggestBox`, `AutoSuggestBoxOption`. An input field that shows dynamic suggestions as the user types, improving form and search efficiency.

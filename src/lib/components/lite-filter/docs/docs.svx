@@ -1,0 +1,33 @@
+<script lang="ts">
+  import { LiteFilter, LiteFilterItem } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+
+  const filters = ['All', 'Apps', 'Documents', 'Web', 'People', 'IMG', 'JPG'];
+  let filter = $state('all');
+</script>
+
+# LiteFilter
+{m.lite_filter_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow fluid>
+  <LiteFilter aria-label="Search filters" bind:selectedValue={filter}>
+    {#each filters as label (label)}
+      <LiteFilterItem value={label.toLowerCase()}>{label}</LiteFilterItem>
+    {/each}
+  </LiteFilter>
+</Showcase>
+
+## {m.global_usage()}
+```svelte
+<script>
+  import { LiteFilter, LiteFilterItem } from 'fluentui-svelte';
+  let filter = $state('all');
+</script>
+
+<LiteFilter aria-label="Search filters" bind:selectedValue={filter}>
+  <LiteFilterItem value="all">All</LiteFilterItem>
+  <LiteFilterItem value="apps">Apps</LiteFilterItem>
+  <LiteFilterItem value="documents">Documents</LiteFilterItem>
+</LiteFilter>
+```

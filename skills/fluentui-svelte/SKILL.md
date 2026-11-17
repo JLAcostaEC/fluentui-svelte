@@ -11,7 +11,7 @@ and plain event attributes (`onclick`), so write consumer code the same way: no 
 The styles rely on CSS that only Chromium ships today (`field-sizing`, unprefixed `mask`, `backdrop-filter`). In
 Firefox and Safari some visuals degrade; behaviour and accessibility do not.
 
-Written for fluentui-svelte `0.7.2`. When the installed version (`node_modules/fluentui-svelte/package.json`)
+Written for fluentui-svelte `0.8.0`. When the installed version (`node_modules/fluentui-svelte/package.json`)
 differs, the guides inside `node_modules` win.
 
 ## Before writing code

@@ -14,7 +14,7 @@ export type LiteFilterProps = {
 	 * @bindable
 	 */
 	selectedValue?: string | string[];
-	/** Lets more than one item be selected, and none. */
+	/** Lets more than one item be selected, and none. A selection kept across a change of mode takes the new shape: the first value, or an array. */
 	multiple?: boolean;
 	/** The field name shared by every item. */
 	name?: string;
@@ -40,6 +40,8 @@ export type LiteFilterProps = {
 	 * @default 'Scroll forward'
 	 */
 	nextLabel?: string;
+	/** Disables tabspot keyboard navigation. */
+	disableTabspot?: boolean;
 	/** The items of the filter. */
 	children?: Snippet;
 } & Omit<HTMLAttributes<HTMLDivElement>, 'children'>;
@@ -69,10 +71,15 @@ export type LiteFilterContext = FSContext<
 		readonly size: PillButtonSize;
 		readonly appearance: PillButtonAppearance;
 	},
-	null,
+	{
+		/** With single selection, the value of the one pill in the tab order. */
+		readonly tabStop: string | undefined;
+	},
 	null,
 	{
 		isSelected: (value: string) => boolean;
+		isInitiallySelected: (value: string) => boolean;
+		register: (item: { value: string; disabled: () => boolean }) => () => void;
 		select: (event: Event, value: string, checked: boolean) => void;
 	}
 >;

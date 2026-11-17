@@ -1,4 +1,4 @@
-import { page } from 'vitest/browser';
+import { page, userEvent } from 'vitest/browser';
 import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { LiteFilterItem } from '#lib/index.js';
@@ -78,6 +78,43 @@ describe('LiteFilter', () => {
 		await expect
 			.element(page.getByTestId('submitted'))
 			.toHaveTextContent('{"type":"documents","source":["this-pc","onedrive"]}');
+	});
+
+	it('keeps one tab stop with single selection and moves with the arrow keys', async () => {
+		render(Wrapper, { selectedValue: 'apps' });
+		await expect.element(page.getByRole('radio', { name: 'Apps' })).toHaveAttribute('tabindex', '0');
+		await expect.element(page.getByRole('radio', { name: 'All' })).toHaveAttribute('tabindex', '-1');
+		(page.getByRole('radio', { name: 'Apps' }).element() as HTMLElement).focus();
+		await userEvent.keyboard('{ArrowRight}');
+		await expect.element(page.getByRole('radio', { name: 'Documents' })).toHaveFocus();
+		await userEvent.keyboard('{ArrowRight}');
+		await expect.element(page.getByRole('radio', { name: 'People' })).toHaveFocus();
+		await userEvent.keyboard('{Enter}');
+		await expect.element(page.getByTestId('value')).toHaveTextContent('people');
+		await userEvent.keyboard('{End}');
+		await expect.element(page.getByRole('radio', { name: 'Videos' })).toHaveFocus();
+		await userEvent.keyboard('{ArrowRight}');
+		await expect.element(page.getByRole('radio', { name: 'All' })).toHaveFocus();
+	});
+
+	it('goes back to the initial selection on a form reset', async () => {
+		render(Wrapper, { selectedValue: 'all' });
+		await page.getByRole('radio', { name: 'Apps' }).click();
+		(page.getByTestId('form').element() as HTMLFormElement).reset();
+		await expect.element(page.getByTestId('value')).toHaveTextContent('all');
+		await expect.element(page.getByRole('radio', { name: 'All' })).toBeChecked();
+		await expect.element(page.getByRole('radio', { name: 'Apps' })).not.toBeChecked();
+	});
+
+	it('keeps the selection when multiple changes', async () => {
+		const { rerender } = await render(Wrapper, { selectedValue: 'apps' });
+		await rerender({ multiple: true });
+		await expect.element(page.getByTestId('value')).toHaveTextContent('apps');
+		await expect.element(page.getByRole('checkbox', { name: 'Apps' })).toBeChecked();
+		await page.getByRole('checkbox', { name: 'People' }).click();
+		await rerender({ multiple: false });
+		await expect.element(page.getByTestId('value')).toHaveTextContent('apps');
+		await expect.element(page.getByRole('radio', { name: 'People' })).not.toBeChecked();
 	});
 
 	it('throws when an item is used outside a LiteFilter', async () => {

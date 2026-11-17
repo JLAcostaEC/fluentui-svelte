@@ -24,6 +24,7 @@
 | `onSelectionChange`                                 | `(event: Event, value: string` &#124; `string[]) => void`           |                    | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_on_selection_change} />` |
 | `previousLabel`                                     | `string`                                                            | `'Scroll back'`    | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_previous_label} />`      |
 | `nextLabel`                                         | `string`                                                            | `'Scroll forward'` | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_next_label} />`          |
+| `disableTabspot`                                    | `boolean`                                                           |                    | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_disable_tabspot} />`     |
 | `children`                                          | `Snippet`                                                           |                    | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_children} />`            |
 | `HTMLAttributes<HTMLDivElement>` without `children` |                                                                     |                    |                                                                                              |
 

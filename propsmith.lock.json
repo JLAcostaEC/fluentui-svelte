@@ -2702,6 +2702,11 @@
       },
       "source": "src/lib/components/lite-filter/types.ts#LiteFilterProps.children"
     },
+    "generated_fs_lite_filter_props_props_disable_tabspot": {
+      "en": "67d78b6a",
+      "locales": {},
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterProps.disableTabspot"
+    },
     "generated_fs_lite_filter_props_props_disabled": {
       "en": "bb1c112f",
       "locales": {
@@ -2717,10 +2722,8 @@
       "source": "src/lib/components/lite-filter/types.ts#LiteFilterProps.form"
     },
     "generated_fs_lite_filter_props_props_multiple": {
-      "en": "96b8d3d8",
-      "locales": {
-        "es": "96b8d3d8"
-      },
+      "en": "d80f31a4",
+      "locales": {},
       "source": "src/lib/components/lite-filter/types.ts#LiteFilterProps.multiple"
     },
     "generated_fs_lite_filter_props_props_name": {

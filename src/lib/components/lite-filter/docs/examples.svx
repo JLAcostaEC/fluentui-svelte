@@ -10,6 +10,19 @@
   import { m } from '#i18n/messages.js';
 
   const places = ['All', 'Apps', 'Documents', 'Web', 'People', 'IMG', 'JPG', 'Gif', 'iCloud', 'OneDrive', 'SkyDrive', 'Pictures', 'Songs', 'Videos'];
+  // Labels of the live pills on this page; the values stay the same in every language.
+  const labels: Record<string, () => string> = {
+    all: m.lite_filter_example_all,
+    apps: m.lite_filter_example_apps,
+    documents: m.lite_filter_example_documents,
+    people: m.lite_filter_example_people,
+    pictures: m.lite_filter_example_pictures,
+    songs: m.lite_filter_example_songs,
+    videos: m.lite_filter_example_videos,
+    images: m.lite_filter_example_images,
+    'this-pc': m.lite_filter_example_this_pc
+  };
+  const label = (value: string, fallback: string) => labels[value]?.() ?? fallback;
   const results = [
     { name: 'Budget 2026.xlsx', kind: 'documents' },
     { name: 'Fluent UI', kind: 'web' },
@@ -138,13 +151,13 @@
 <Showcase columns={1} code={overflowCode} minHeight="0" disablePanZoom showOverflow fluid>
   <figure>
     <div class="narrow">
-      <LiteFilter aria-label="Places" bind:selectedValue={place}>
-        {#each places as label (label)}
-          <LiteFilterItem value={label.toLowerCase()}>{label}</LiteFilterItem>
+      <LiteFilter aria-label={m.lite_filter_example_places()} bind:selectedValue={place}>
+        {#each places as text (text)}
+          <LiteFilterItem value={text.toLowerCase()}>{label(text.toLowerCase(), text)}</LiteFilterItem>
         {/each}
       </LiteFilter>
     </div>
-    <figcaption>Selected: <code>{place}</code></figcaption>
+    <figcaption>{m.lite_filter_example_selected()} <code>{place}</code></figcaption>
   </figure>
 </Showcase>
 
@@ -154,9 +167,9 @@
 
 <Showcase columns={1} code={resultsCode} minHeight="0" disablePanZoom showOverflow fluid>
   <figure>
-    <LiteFilter aria-label="Result type" size="small" bind:selectedValue={kind}>
+    <LiteFilter aria-label={m.lite_filter_example_result_type()} size="small" bind:selectedValue={kind}>
       {#each ['all', 'apps', 'documents', 'web', 'people'] as value (value)}
-        <LiteFilterItem {value}>{value[0].toUpperCase() + value.slice(1)}</LiteFilterItem>
+        <LiteFilterItem {value}>{label(value, 'Web')}</LiteFilterItem>
       {/each}
     </LiteFilter>
     <ul class="results">
@@ -173,12 +186,12 @@
 
 <Showcase columns={1} code={multipleCode} minHeight="0" disablePanZoom showOverflow fluid>
   <figure>
-    <LiteFilter aria-label="Content types" multiple bind:selectedValue={tags}>
+    <LiteFilter aria-label={m.lite_filter_example_content_types()} multiple bind:selectedValue={tags}>
       {#each kinds as item (item.value)}
-        <LiteFilterItem value={item.value} icon={item.icon} disabled={item.value === 'images'}>{item.label}</LiteFilterItem>
+        <LiteFilterItem value={item.value} icon={item.icon} disabled={item.value === 'images'}>{label(item.value, item.label)}</LiteFilterItem>
       {/each}
     </LiteFilter>
-    <figcaption>Selected: <code>{tags.join(', ') || 'none'}</code></figcaption>
+    <figcaption>{m.lite_filter_example_selected()} <code>{tags.join(', ') || m.lite_filter_example_none()}</code></figcaption>
   </figure>
 </Showcase>
 
@@ -189,23 +202,23 @@
 <Showcase columns={1} code={formCode} minHeight="0" disablePanZoom showOverflow fluid>
   <figure>
     <form class="form" {onsubmit}>
-      <Label label="Type" labelPosition="above">
+      <Label label={m.lite_filter_example_type()} labelPosition="above">
         <LiteFilter name="type" selectedValue="all">
-          <LiteFilterItem value="all">All</LiteFilterItem>
-          <LiteFilterItem value="documents">Documents</LiteFilterItem>
-          <LiteFilterItem value="pictures">Pictures</LiteFilterItem>
+          {#each ['all', 'documents', 'pictures'] as value (value)}
+            <LiteFilterItem {value}>{label(value, value)}</LiteFilterItem>
+          {/each}
         </LiteFilter>
       </Label>
-      <Label label="Sources" labelPosition="above">
+      <Label label={m.lite_filter_example_sources()} labelPosition="above">
         <LiteFilter name="source" multiple selectedValue={['onedrive']}>
-          <LiteFilterItem value="this-pc">This PC</LiteFilterItem>
+          <LiteFilterItem value="this-pc">{label('this-pc', 'This PC')}</LiteFilterItem>
           <LiteFilterItem value="onedrive">OneDrive</LiteFilterItem>
           <LiteFilterItem value="sharepoint">SharePoint</LiteFilterItem>
         </LiteFilter>
       </Label>
-      <Button appearance="accent" type="submit">Search</Button>
+      <Button appearance="accent" type="submit">{m.lite_filter_example_search()}</Button>
     </form>
-    <figcaption>Submitted: <code>{submitted || 'nothing yet'}</code></figcaption>
+    <figcaption>{m.lite_filter_example_submitted()} <code>{submitted || m.lite_filter_example_nothing_yet()}</code></figcaption>
   </figure>
 </Showcase>
 

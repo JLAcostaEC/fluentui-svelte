@@ -10,8 +10,10 @@
 	if (!context)
 		throw new Error('LiteFilter context is not available. Make sure this component is used within a LiteFilter.');
 
-	const { config, methods } = context;
+	const { config, state, methods } = context;
 	const checked = $derived(methods.isSelected(value));
+
+	$effect(() => methods.register({ value, disabled: () => disabled }));
 
 	// With single selection, the selected pill stays selected, like a radio.
 	const onclick = (e: MouseEvent) => {
@@ -24,6 +26,8 @@
 	{value}
 	{icon}
 	{checked}
+	defaultChecked={methods.isInitiallySelected(value)}
+	tabindex={config.multiple ? undefined : state.tabStop === value ? 0 : -1}
 	name={config.name}
 	form={config.form}
 	size={config.size}

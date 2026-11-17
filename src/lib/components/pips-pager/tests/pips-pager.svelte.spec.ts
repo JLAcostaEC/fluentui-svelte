@@ -74,6 +74,14 @@ describe('PipsPager', () => {
 		await vi.waitFor(() => expect(pip(2).element().textContent).toBe('2'));
 	});
 
+	it('moves the selection to the last page when pages go away', async () => {
+		const { rerender } = await render(Wrapper, { index: 7 });
+		await rerender({ numberOfPages: 3 });
+		await expect.element(page.getByTestId('index')).toHaveTextContent('2');
+		await expect.element(pip(3)).toHaveAttribute('aria-current', 'page');
+		await expect.element(pip(3)).toHaveAttribute('tabindex', '0');
+	});
+
 	it('uses formatPage for the accessible names', async () => {
 		render(Wrapper, { formatPage: (n: number) => `Slide ${n}` });
 		await expect.element(page.getByRole('button', { name: 'Slide 1' })).toBeInTheDocument();

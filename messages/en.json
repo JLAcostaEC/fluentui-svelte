@@ -1677,6 +1677,7 @@
 	"pips_pager_accessibility_title": "Keyboard and accessibility",
 	"pips_pager_buttons_description": "{#code}buttonVisibility{/code} shows the buttons always ({#code}visible{/code}) or on hover and focus ({#code}hover{/code}). They hide on the first and last page, unless {#code}wrap{/code} loops past the ends.",
 	"pips_pager_buttons_title": "Previous and next buttons",
+	"pips_pager_chapter": "Chapter {page} of {total}",
 	"pips_pager_description": "A {#code}PipsPager{/code} is a row of dots that shows the current page in a paginated set, such as a FlipView, and lets users move to another page.",
 	"pips_pager_flip_view_description": "Bind the same {#code}index{/code} to a {#code}FlipView{/code} and the PipsPager to keep them in sync.",
 	"pips_pager_flip_view_title": "With a FlipView",

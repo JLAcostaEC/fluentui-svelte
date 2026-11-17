@@ -107,7 +107,7 @@
 <Showcase columns={1} code={maxVisibleCode} minHeight="0" disablePanZoom showOverflow fluid>
   <figure>
     <PipsPager aria-label="Chapters" numberOfPages={20} maxVisiblePips={7} buttonVisibility="visible" bind:index={longIndex} />
-    <figcaption>Chapter {longIndex + 1} of 20</figcaption>
+    <figcaption>{m.pips_pager_chapter({ page: longIndex + 1, total: 20 })}</figcaption>
   </figure>
 </Showcase>
 

@@ -1677,6 +1677,7 @@
 	"pips_pager_accessibility_title": "Teclado y accesibilidad",
 	"pips_pager_buttons_description": "{#code}buttonVisibility{/code} muestra los botones siempre ({#code}visible{/code}) o al pasar el puntero y al enfocar ({#code}hover{/code}). Se ocultan en la primera y la última página, salvo que {#code}wrap{/code} dé la vuelta en los extremos.",
 	"pips_pager_buttons_title": "Botones anterior y siguiente",
+	"pips_pager_chapter": "Capítulo {page} de {total}",
 	"pips_pager_description": "{#code}PipsPager{/code} es una fila de puntos que muestra la página actual de un conjunto paginado, como un FlipView, y permite pasar a otra página.",
 	"pips_pager_flip_view_description": "Enlaza el mismo {#code}index{/code} a un {#code}FlipView{/code} y al PipsPager para mantenerlos sincronizados.",
 	"pips_pager_flip_view_title": "Con un FlipView",

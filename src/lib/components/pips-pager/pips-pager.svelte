@@ -53,6 +53,21 @@
 
 	$effect(() => () => clearTimeout(flashTimer));
 
+	// Pages that go away take the selection and the focus with them: both fall back to the last page,
+	// to keep a pip selected and the pager in the tab order. With no pages, the index waits for them.
+	$effect(() => {
+		if (numberOfPages <= 0) {
+			focused = null;
+			return;
+		}
+		const clamped = Math.max(0, Math.min(last, index));
+		if (clamped !== index) {
+			index = clamped;
+			onIndexChange?.(clamped);
+		}
+		if (focused !== null && focused > last) focused = null;
+	});
+
 	// Arrow keys, Home and End move the focus; Enter and Space select.
 	const onkeydown = (event: KeyboardEvent) => {
 		if (focused === null) return;
@@ -170,6 +185,9 @@
 				border-radius: 50%;
 				background: currentColor;
 				transition: scale 0.083s;
+				@media (prefers-reduced-motion: reduce) {
+					transition: none;
+				}
 			}
 			&:hover {
 				color: var(--fs-text-secondary);

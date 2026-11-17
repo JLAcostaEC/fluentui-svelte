@@ -371,6 +371,7 @@ Folder, exports, status (only when the API may still change) and summary. Read
 - `date-picker`: `DatePicker`. An input for selecting a date from carousel-style day, month, and year columns.
 - `dialog`: `Dialog`, `DialogTitle`, `DialogContent`, `DialogActions`, `DialogSurface`, `DialogTrigger`. A window overlaid on the page that requires user attention, composed of trigger, surface, title, content, and actions.
 - `divider`: `Divider`. A horizontal or vertical rule that visually separates content within a layout, with an optional label.
+- `drawer`: `Drawer`, `DrawerHeader`, `DrawerBody`, `DrawerFooter`. A panel that slides in from an edge of the viewport, as an overlay or inline next to the content.
 - `dropdown`: `Dropdown`, `DropdownOption`. A custom dropdown that lets users select one or more options from a list, with rich option content.
 - `dropdown-select`: `DropdownSelect`, `DropdownSelectOption`. A native-select-based dropdown for choosing one or more options, with support for rich option content.
 - `expander`: `Expander`. A control that displays a header and a collapsible content area that can expand up or down.

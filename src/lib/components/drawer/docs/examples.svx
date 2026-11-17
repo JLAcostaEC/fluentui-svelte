@@ -1,0 +1,417 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { Button, Drawer, DrawerHeader, DrawerBody, DrawerFooter, InfoBar, Label, TextArea, TextBox, ToggleSwitch } from '#lib/index.js';
+  import type { DrawerPosition, DrawerType } from '#lib/index.js';
+  import NavigationRegular from 'fluentui-icons-svelte/NavigationRegular.svelte';
+  import ArrowClockwiseRegular from 'fluentui-icons-svelte/ArrowClockwiseRegular.svelte';
+  import ChevronRightRegular from 'fluentui-icons-svelte/ChevronRightRegular.svelte';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+
+  let positionOpen = $state(false);
+  let position: DrawerPosition = $state('start');
+  let sizeOpen = $state(false);
+  let size = $state('small');
+  let floatingOpen = $state(false);
+  let resizableOpen = $state(false);
+  let resizableSize = $state('small');
+  let nestedOpen = $state(false);
+  let nestedItem: string | null = $state(null);
+  let typeOpen = $state(false);
+  let type: DrawerType = $state('non-modal');
+  let hideBackdrop = $state(false);
+  let guardOpen = $state(false);
+  let note = $state('');
+  let blocked = $state(false);
+  let inlineOpen = $state(true);
+  let section = $state('Home');
+
+  const items = ['Profile', 'Notifications', 'Privacy'];
+
+  const positionCode = `<script>
+  import { Button, Drawer, DrawerHeader, DrawerBody } from 'fluentui-svelte';
+  let open = $state(false);
+  let position = $state('start');
+<\/script>
+
+{#each ['start', 'end', 'top', 'bottom'] as value}
+  <Button onclick={() => ((position = value), (open = true))}>{value}</Button>
+{/each}
+
+<Drawer bind:open {position}>
+  <DrawerHeader title="Position: {position}" />
+  <DrawerBody>
+    <p>The drawer slides in from the {position} edge.</p>
+  </DrawerBody>
+</Drawer>`;
+  const sizeCode = `<script>
+  import { Button, Drawer, DrawerHeader, DrawerBody } from 'fluentui-svelte';
+  let open = $state(false);
+  let size = $state('small');
+<\/script>
+
+{#each ['small', 'medium', 'large', 'full', '30rem', '50%'] as value}
+  <Button onclick={() => ((size = value), (open = true))}>{value}</Button>
+{/each}
+
+<Drawer bind:open {size}>
+  <DrawerHeader title="Size: {size}" />
+  <DrawerBody>
+    <p>The presets are 320px, 592px, 940px and the whole viewport. Any CSS length works too.</p>
+  </DrawerBody>
+</Drawer>`;
+  const floatingCode = `<script>
+  import { Button, Drawer, DrawerHeader, DrawerBody, DrawerFooter, Label, TextBox, ToggleSwitch } from 'fluentui-svelte';
+  let open = $state(false);
+<\/script>
+
+<Button appearance="accent" onclick={() => (open = true)}>New contact</Button>
+
+<Drawer bind:open position="end" size="medium" floating>
+  <DrawerHeader title="New contact" />
+  <DrawerBody>
+    <form
+      id="contact"
+      style="display: flex; flex-direction: column; gap: 1rem;"
+      onsubmit={(e) => (e.preventDefault(), (open = false))}
+    >
+      <Label label="Name" labelPosition="above"><TextBox name="name" placeholder="Ada Lovelace" required /></Label>
+      <Label label="Email" labelPosition="above"><TextBox name="email" type="email" placeholder="ada@example.com" /></Label>
+      <Label label="Phone" labelPosition="above"><TextBox name="phone" type="tel" placeholder="+1 555 0100" /></Label>
+      <ToggleSwitch name="favorite" label="Add to favorites" />
+    </form>
+  </DrawerBody>
+  <DrawerFooter>
+    <Button appearance="accent" type="submit" form="contact">Save</Button>
+    <Button onclick={() => (open = false)}>Cancel</Button>
+  </DrawerFooter>
+</Drawer>`;
+  const resizableCode = `<script>
+  import { Button, Drawer, DrawerHeader, DrawerBody } from 'fluentui-svelte';
+  let open = $state(false);
+  let size = $state('small');
+<\/script>
+
+<Button onclick={() => (open = true)}>Open resizable drawer</Button>
+
+<Drawer bind:open bind:size position="end" resizable>
+  <DrawerHeader title="Resizable" />
+  <DrawerBody>
+    <p>Drag the inner edge, or focus it and use the arrow keys.</p>
+    <p>Size: {size}</p>
+  </DrawerBody>
+</Drawer>`;
+  const nestedCode = `<script>
+  import { Button, Drawer, DrawerHeader, DrawerBody } from 'fluentui-svelte';
+  import ChevronRightRegular from 'fluentui-icons-svelte/ChevronRightRegular.svelte';
+  const items = ['Profile', 'Notifications', 'Privacy'];
+  let open = $state(false);
+  let item = $state(null);
+<\/script>
+
+<Button onclick={() => (open = true)}>Settings</Button>
+
+<Drawer bind:open position="end">
+  <DrawerHeader title="Settings" />
+  <DrawerBody>
+    {#each items as value}
+      <Button appearance="subtle" onclick={() => (item = value)}>
+        {value}
+        <ChevronRightRegular />
+      </Button>
+    {/each}
+
+    <Drawer open={item !== null} onOpenChange={(value) => !value && (item = null)} position="end" hideBackdrop>
+      <DrawerHeader title={item ?? ''} />
+      <DrawerBody>
+        <p>The {item} settings. Escape closes this level only; closing Settings closes it too.</p>
+      </DrawerBody>
+    </Drawer>
+  </DrawerBody>
+</Drawer>`;
+  const typeCode = `<script>
+  import { Button, Drawer, DrawerHeader, DrawerBody, DrawerFooter, ToggleSwitch } from 'fluentui-svelte';
+  import ArrowClockwiseRegular from 'fluentui-icons-svelte/ArrowClockwiseRegular.svelte';
+  let open = $state(false);
+  let type = $state('modal');
+  let hideBackdrop = $state(false);
+<\/script>
+
+<ToggleSwitch label="Hide backdrop" bind:checked={hideBackdrop} />
+{#each ['modal', 'non-modal', 'alert'] as value}
+  <Button onclick={() => ((type = value), (open = true))}>{value}</Button>
+{/each}
+
+<Drawer bind:open {type} {hideBackdrop} position="end">
+  <DrawerHeader title={type === 'alert' ? 'Unsaved changes' : 'Filters'} hideCloseButton={type === 'alert'}>
+    {#snippet action()}
+      {#if type !== 'alert'}
+        <Button appearance="subtle" aria-label="Reset filters"><ArrowClockwiseRegular /></Button>
+      {/if}
+    {/snippet}
+  </DrawerHeader>
+  <DrawerBody>
+    <p>{type === 'alert' ? 'Save your changes before leaving?' : 'Type: ' + type}</p>
+  </DrawerBody>
+  <DrawerFooter>
+    <Button appearance="accent" onclick={() => (open = false)}>{type === 'alert' ? 'Save' : 'Apply'}</Button>
+    <Button onclick={() => (open = false)}>{type === 'alert' ? 'Discard' : 'Close'}</Button>
+  </DrawerFooter>
+</Drawer>`;
+  const guardCode = `<script>
+  import { Button, Drawer, DrawerHeader, DrawerBody, DrawerFooter, InfoBar, Label, TextArea } from 'fluentui-svelte';
+  let open = $state(false);
+  let note = $state('');
+  let blocked = $state(false);
+
+  // Escape, the backdrop and the close button ask first; the footer buttons close it directly.
+  const onBeforeClose = () => {
+    blocked = note.trim() !== '';
+    return !blocked;
+  };
+  const finish = () => ((note = ''), (blocked = false), (open = false));
+<\/script>
+
+<Button onclick={() => (open = true)}>Write a note</Button>
+
+<Drawer bind:open {onBeforeClose} position="end">
+  <DrawerHeader title="New note" />
+  <DrawerBody>
+    {#if blocked}
+      <InfoBar status="warning" title="Unsaved note">Save or discard it before closing.</InfoBar>
+    {/if}
+    <Label label="Note" labelPosition="above"><TextArea bind:value={note} rows={6} /></Label>
+  </DrawerBody>
+  <DrawerFooter>
+    <Button appearance="accent" onclick={finish}>Save</Button>
+    <Button onclick={finish}>Discard</Button>
+  </DrawerFooter>
+</Drawer>`;
+  const inlineCode = `<script>
+  import { Button, Drawer, DrawerHeader, DrawerBody } from 'fluentui-svelte';
+  import NavigationRegular from 'fluentui-icons-svelte/NavigationRegular.svelte';
+  let open = $state(true);
+  let section = $state('Home');
+<\/script>
+
+<div style="display: flex; height: 18rem;">
+  <Drawer bind:open type="inline" size="15rem" resizable>
+    <DrawerHeader title="Navigation" />
+    <DrawerBody>
+      {#each ['Home', 'Documents', 'Settings'] as item}
+        <Button appearance={item === section ? 'accent' : 'subtle'} onclick={() => (section = item)}>{item}</Button>
+      {/each}
+    </DrawerBody>
+  </Drawer>
+  <div style="flex: 1; padding: 1rem;">
+    <Button appearance="subtle" aria-label="Toggle navigation" aria-expanded={open} onclick={() => (open = !open)}>
+      <NavigationRegular />
+    </Button>
+    <h3>{section}</h3>
+  </div>
+</div>`;
+
+  const onBeforeClose = () => {
+    blocked = note.trim() !== '';
+    return !blocked;
+  };
+  const finish = () => ((note = ''), (blocked = false), (guardOpen = false));
+</script>
+
+### {m.drawer_position_title()}
+
+<p><I18nMarkupMessage message={m.drawer_position_description} /></p>
+
+<Showcase columns={1} code={positionCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <div class="row">
+    {#each ['start', 'end', 'top', 'bottom'] as const as value (value)}
+      <Button onclick={() => ((position = value), (positionOpen = true))}>{value}</Button>
+    {/each}
+  </div>
+  <Drawer bind:open={positionOpen} {position}>
+    <DrawerHeader title="Position: {position}" />
+    <DrawerBody>
+      <p>The drawer slides in from the {position} edge.</p>
+    </DrawerBody>
+  </Drawer>
+</Showcase>
+
+### {m.drawer_size_title()}
+
+<p><I18nMarkupMessage message={m.drawer_size_description} /></p>
+
+<Showcase columns={1} code={sizeCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <div class="row">
+    {#each ['small', 'medium', 'large', 'full', '30rem', '50%'] as value (value)}
+      <Button onclick={() => ((size = value), (sizeOpen = true))}>{value}</Button>
+    {/each}
+  </div>
+  <Drawer bind:open={sizeOpen} {size}>
+    <DrawerHeader title="Size: {size}" />
+    <DrawerBody>
+      <p>The presets are 320px, 592px, 940px and the whole viewport. Any CSS length works too.</p>
+    </DrawerBody>
+  </Drawer>
+</Showcase>
+
+### {m.drawer_floating_title()}
+
+<p><I18nMarkupMessage message={m.drawer_floating_description} /></p>
+
+<Showcase columns={1} code={floatingCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <Button appearance="accent" onclick={() => (floatingOpen = true)}>New contact</Button>
+  <Drawer bind:open={floatingOpen} position="end" size="medium" floating>
+    <DrawerHeader title="New contact" />
+    <DrawerBody>
+      <form id="drawer-contact" class="form" onsubmit={(e) => (e.preventDefault(), (floatingOpen = false))}>
+        <Label label="Name" labelPosition="above"><TextBox name="name" placeholder="Ada Lovelace" required /></Label>
+        <Label label="Email" labelPosition="above"><TextBox name="email" type="email" placeholder="ada@example.com" /></Label>
+        <Label label="Phone" labelPosition="above"><TextBox name="phone" type="tel" placeholder="+1 555 0100" /></Label>
+        <ToggleSwitch name="favorite" label="Add to favorites" />
+      </form>
+    </DrawerBody>
+    <DrawerFooter>
+      <Button appearance="accent" type="submit" form="drawer-contact">Save</Button>
+      <Button onclick={() => (floatingOpen = false)}>Cancel</Button>
+    </DrawerFooter>
+  </Drawer>
+</Showcase>
+
+### {m.drawer_resizable_title()}
+
+<p><I18nMarkupMessage message={m.drawer_resizable_description} /></p>
+
+<Showcase columns={1} code={resizableCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <Button onclick={() => (resizableOpen = true)}>Open resizable drawer</Button>
+  <Drawer bind:open={resizableOpen} bind:size={resizableSize} position="end" resizable>
+    <DrawerHeader title="Resizable" />
+    <DrawerBody>
+      <p>Drag the inner edge, or focus it and use the arrow keys.</p>
+      <p>Size: {resizableSize}</p>
+    </DrawerBody>
+  </Drawer>
+</Showcase>
+
+### {m.drawer_nested_title()}
+
+<p><I18nMarkupMessage message={m.drawer_nested_description} /></p>
+
+<Showcase columns={1} code={nestedCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <Button onclick={() => (nestedOpen = true)}>Settings</Button>
+  <Drawer bind:open={nestedOpen} position="end">
+    <DrawerHeader title="Settings" />
+    <DrawerBody>
+      <div class="list">
+        {#each items as value (value)}
+          <Button appearance="subtle" onclick={() => (nestedItem = value)}>
+            {value}
+            <ChevronRightRegular />
+          </Button>
+        {/each}
+      </div>
+      <Drawer open={nestedItem !== null} onOpenChange={(value) => !value && (nestedItem = null)} position="end" hideBackdrop>
+        <DrawerHeader title={nestedItem ?? ''} />
+        <DrawerBody>
+          <p>The {nestedItem} settings. Escape closes this level only; closing Settings closes it too.</p>
+        </DrawerBody>
+      </Drawer>
+    </DrawerBody>
+  </Drawer>
+</Showcase>
+
+### {m.drawer_type_title()}
+
+<p><I18nMarkupMessage message={m.drawer_type_description} /></p>
+
+<Showcase columns={1} code={typeCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <div class="stack">
+    <ToggleSwitch label="Hide backdrop" bind:checked={hideBackdrop} />
+    <div class="row">
+      {#each ['modal', 'non-modal', 'alert'] as const as value (value)}
+        <Button onclick={() => ((type = value), (typeOpen = true))}>{value}</Button>
+      {/each}
+    </div>
+  </div>
+  <Drawer bind:open={typeOpen} {type} {hideBackdrop} position="end">
+    <DrawerHeader title={type === 'alert' ? 'Unsaved changes' : 'Filters'} hideCloseButton={type === 'alert'}>
+      {#snippet action()}
+        {#if type !== 'alert'}
+          <Button appearance="subtle" aria-label="Reset filters"><ArrowClockwiseRegular /></Button>
+        {/if}
+      {/snippet}
+    </DrawerHeader>
+    <DrawerBody>
+      <p>{type === 'alert' ? 'Save your changes before leaving?' : 'Type: ' + type}</p>
+    </DrawerBody>
+    <DrawerFooter>
+      <Button appearance="accent" onclick={() => (typeOpen = false)}>{type === 'alert' ? 'Save' : 'Apply'}</Button>
+      <Button onclick={() => (typeOpen = false)}>{type === 'alert' ? 'Discard' : 'Close'}</Button>
+    </DrawerFooter>
+  </Drawer>
+</Showcase>
+
+### {m.drawer_guard_title()}
+
+<p><I18nMarkupMessage message={m.drawer_guard_description} /></p>
+
+<Showcase columns={1} code={guardCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <Button onclick={() => (guardOpen = true)}>Write a note</Button>
+  <Drawer bind:open={guardOpen} {onBeforeClose} position="end">
+    <DrawerHeader title="New note" />
+    <DrawerBody>
+      <div class="form">
+        {#if blocked}
+          <InfoBar status="warning" title="Unsaved note">Save or discard it before closing.</InfoBar>
+        {/if}
+        <Label label="Note" labelPosition="above"><TextArea bind:value={note} rows={6} /></Label>
+      </div>
+    </DrawerBody>
+    <DrawerFooter>
+      <Button appearance="accent" onclick={finish}>Save</Button>
+      <Button onclick={finish}>Discard</Button>
+    </DrawerFooter>
+  </Drawer>
+</Showcase>
+
+### {m.drawer_inline_title()}
+
+<p><I18nMarkupMessage message={m.drawer_inline_description} /></p>
+
+<Showcase columns={1} code={inlineCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <div class="layout">
+    <Drawer bind:open={inlineOpen} type="inline" size="15rem" resizable>
+      <DrawerHeader title="Navigation" />
+      <DrawerBody>
+        <div class="list">
+          {#each ['Home', 'Documents', 'Settings'] as item (item)}
+            <Button appearance={item === section ? 'accent' : 'subtle'} onclick={() => (section = item)}>{item}</Button>
+          {/each}
+        </div>
+      </DrawerBody>
+    </Drawer>
+    <div class="main">
+      <Button appearance="subtle" aria-label="Toggle navigation" aria-expanded={inlineOpen} onclick={() => (inlineOpen = !inlineOpen)}>
+        <NavigationRegular />
+      </Button>
+      <h3 class="subtitle">{section}</h3>
+    </div>
+  </div>
+</Showcase>
+
+<style>
+  .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+  .stack { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+  .form { display: flex; flex-direction: column; gap: 1rem; }
+  .list { display: flex; flex-direction: column; gap: 0.25rem; }
+  .list :global(.fs-button) { justify-content: space-between; }
+  .layout {
+    display: flex;
+    width: 100%;
+    height: 18rem;
+    overflow: hidden;
+    border: 1px solid var(--fs-card-stroke-default);
+    border-radius: var(--fs-control-overlay-border-radius);
+  }
+  .main { flex: 1; min-width: 0; padding: 1rem; }
+  .main h3 { margin: 0.5rem 0 0; }
+</style>

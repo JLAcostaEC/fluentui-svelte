@@ -1,0 +1,66 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '#i18n/messages.js';
+</script>
+
+## {m.drawer_accessibility_title()}
+<p><I18nMarkupMessage message={m.drawer_accessibility_description} /></p>
+
+## {m.global_component_props()}
+
+### Drawer
+<!-- props:DrawerProps -->
+
+| Name                                             | Type                                                              | Default    | Description                                                                         |
+| ------------------------------------------------ | ----------------------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------- |
+| `ref` _bindable_                                 | `HTMLDialogElement` &#124; `HTMLDivElement`                       |            | `<I18nMarkupMessage message={m.generated_fs_drawer_props_props_ref} />`             |
+| `id`                                             | `string`                                                          |            | `<I18nMarkupMessage message={m.generated_fs_drawer_props_props_id} />`              |
+| `open` _bindable_                                | `boolean`                                                         | `false`    | `<I18nMarkupMessage message={m.generated_fs_drawer_props_props_open} />`            |
+| `onOpenChange`                                   | `(open: boolean) => void`                                         |            | `<I18nMarkupMessage message={m.generated_fs_drawer_props_props_on_open_change} />`  |
+| `type`                                           | `'modal'` &#124; `'non-modal'` &#124; `'alert'` &#124; `'inline'` | `'modal'`  | `<I18nMarkupMessage message={m.generated_fs_drawer_props_props_type} />`            |
+| `position`                                       | `'start'` &#124; `'end'` &#124; `'top'` &#124; `'bottom'`         | `'start'`  | `<I18nMarkupMessage message={m.generated_fs_drawer_props_props_position} />`        |
+| `size` _bindable_                                | `DrawerSize` &#124; `string`                                      | `'small'`  | `<I18nMarkupMessage message={m.generated_fs_drawer_props_props_size} />`            |
+| `floating`                                       | `boolean`                                                         |            | `<I18nMarkupMessage message={m.generated_fs_drawer_props_props_floating} />`        |
+| `hideBackdrop`                                   | `boolean`                                                         |            | `<I18nMarkupMessage message={m.generated_fs_drawer_props_props_hide_backdrop} />`   |
+| `resizable`                                      | `boolean`                                                         |            | `<I18nMarkupMessage message={m.generated_fs_drawer_props_props_resizable} />`       |
+| `resizeLabel`                                    | `string`                                                          | `'Resize'` | `<I18nMarkupMessage message={m.generated_fs_drawer_props_props_resize_label} />`    |
+| `onBeforeClose`                                  | `(reason: DrawerCloseReason) => boolean` &#124; `void`            |            | `<I18nMarkupMessage message={m.generated_fs_drawer_props_props_on_before_close} />` |
+| `children`                                       | `Snippet`                                                         |            | `<I18nMarkupMessage message={m.generated_fs_drawer_props_props_children} />`        |
+| `HTMLAttributes<HTMLElement>` without `children` |                                                                   |            |                                                                                     |
+
+<!-- /props:DrawerProps -->
+
+### DrawerHeader
+<!-- props:DrawerHeaderProps -->
+
+| Name                                                      | Type                                                       | Default   | Description                                                                                  |
+| --------------------------------------------------------- | ---------------------------------------------------------- | --------- | -------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                          | `HTMLElement` &#124; `null`                                |           | `<I18nMarkupMessage message={m.generated_fs_drawer_header_props_props_ref} />`               |
+| `title`                                                   | `Snippet` &#124; `Component` &#124; `string`               |           | `<I18nMarkupMessage message={m.generated_fs_drawer_header_props_props_title} />`             |
+| `headingLevel`                                            | `1` &#124; `2` &#124; `3` &#124; `4` &#124; `5` &#124; `6` | `2`       | `<I18nMarkupMessage message={m.generated_fs_drawer_header_props_props_heading_level} />`     |
+| `action`                                                  | `Snippet` &#124; `Component`                               |           | `<I18nMarkupMessage message={m.generated_fs_drawer_header_props_props_action} />`            |
+| `hideCloseButton`                                         | `boolean`                                                  |           | `<I18nMarkupMessage message={m.generated_fs_drawer_header_props_props_hide_close_button} />` |
+| `closeLabel`                                              | `string`                                                   | `'Close'` | `<I18nMarkupMessage message={m.generated_fs_drawer_header_props_props_close_label} />`       |
+| `HTMLAttributes<HTMLElement>` without `children`, `title` |                                                            |           |                                                                                              |
+
+<!-- /props:DrawerHeaderProps -->
+
+### DrawerBody
+<!-- props:DrawerBodyProps -->
+
+| Name                       | Type                           | Default | Description                                                                  |
+| -------------------------- | ------------------------------ | ------- | ---------------------------------------------------------------------------- |
+| `ref` _bindable_           | `HTMLDivElement` &#124; `null` |         | `<I18nMarkupMessage message={m.generated_fs_drawer_body_props_props_ref} />` |
+| Element Attributes (`div`) |                                |         |                                                                              |
+
+<!-- /props:DrawerBodyProps -->
+
+### DrawerFooter
+<!-- props:DrawerFooterProps -->
+
+| Name               | Type                        | Default | Description                                                                    |
+| ------------------ | --------------------------- | ------- | ------------------------------------------------------------------------------ |
+| `ref` _bindable_   | `HTMLElement` &#124; `null` |         | `<I18nMarkupMessage message={m.generated_fs_drawer_footer_props_props_ref} />` |
+| Element Attributes |                             |         |                                                                                |
+
+<!-- /props:DrawerFooterProps -->

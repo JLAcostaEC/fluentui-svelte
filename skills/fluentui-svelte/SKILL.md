@@ -312,6 +312,7 @@ optional `TitleBar` across the top, an optional `SideNav` and the `AppSurface` t
 | Document tabs                                          | `TabView` (`bind:activeTab`; you render the panels)                          |
 | Section navigation                                     | `TopNav` (`bind:selectedValue`), `Breadcrumb`                                |
 | Status message                                         | `InfoBar`                                                                    |
+| Teach a feature, guided tour                           | `TeachingTip` + `TeachingTipHeader` (`bind:open`, `target`, `step`)          |
 | App frame with title bar and side navigation           | `AppWindow` + `TitleBar` + `SideNav` + `AppSurface`                          |
 | Icon-only commands in a menu (cut, copy, paste)        | `MenuCommandBar` + `MenuCommandBarItem` inside a `MenuList`                  |
 
@@ -399,6 +400,7 @@ Folder, exports, status (only when the API may still change) and summary. Read
 - `table`: `Table`, `TableHeader`, `TableHeaderCell`, `TableBody`, `TableRow`, `TableCell`, `TableSelectionCell`, `TableCellLayout`, `TableCellActions`. A low level set of primitives to display two dimensional data, with support for sorting, selection and custom cell layouts.
 - `tag`: `Tag`, `TagGroup`. A visual representation of an attribute, person or asset that can be dismissed, selected and grouped, with an interactive variant that carries a primary action.
 - `tag-picker`: `TagPicker`, `TagPickerOption`, `TagPickerOptionGroup`. A text field and a dropdown that let people choose several options from a list, or enter their own, each choice shown as a dismissible tag.
+- `teaching-tip`: `TeachingTip`, `TeachingTipPreview`, `TeachingTipHeader`, `TeachingTipFooter`. A flyout that points at an element to inform, remind and teach users about a feature, with an optional preview, a header, content and actions.
 - `text-box`: `TextBox`, `TextBoxButton`. A single-line (or configurable) text input for capturing plain text, with search, password, and number types.
 - `textarea`: `TextArea`. A multiline text input that lets the user enter and edit longer, free-form text.
 - `time-picker`: `TimePicker`. An input for selecting a time from carousel-style hour, minute, and second columns, in 12- or 24-hour format.

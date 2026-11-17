@@ -285,6 +285,19 @@ export { default as TagPickerOption } from './components/tag-picker/option.svelt
 export { default as TagPickerOptionGroup } from './components/tag-picker/option-group.svelte';
 // End TagPicker Component
 
+// Start TeachingTip Component
+export { default as TeachingTip } from './components/teaching-tip/teaching-tip.svelte';
+export { default as TeachingTipPreview } from './components/teaching-tip/teaching-tip-preview.svelte';
+export { default as TeachingTipHeader } from './components/teaching-tip/teaching-tip-header.svelte';
+export { default as TeachingTipFooter } from './components/teaching-tip/teaching-tip-footer.svelte';
+export type {
+	TeachingTipProps,
+	TeachingTipPreviewProps,
+	TeachingTipHeaderProps,
+	TeachingTipFooterProps
+} from './components/teaching-tip/types.js';
+// End TeachingTip Component
+
 // Start TextArea Component
 export { default as TextArea } from './components/textarea/textarea.svelte';
 // End TextArea Component

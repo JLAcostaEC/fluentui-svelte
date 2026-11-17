@@ -36,9 +36,14 @@ export const floating =
 		{ animationFrame, onComputed, onError }: FloatingOptions = {}
 	): Attachment<HTMLElement> =>
 	(node) => {
+		// A position that resolves after the teardown is dropped.
+		let active = true;
+
 		const update = () => {
 			computePosition(ref, node, positionConfig)
 				.then((data) => {
+					if (!active) return;
+
 					const { x, y, middlewareData } = data;
 
 					node.style.transform = `translate(${roundByDPR(x)}px, ${roundByDPR(y)}px)`;
@@ -53,5 +58,8 @@ export const floating =
 
 		const cleanup = autoUpdate(ref, node, update, { animationFrame });
 
-		return () => cleanup();
+		return () => {
+			active = false;
+			cleanup();
+		};
 	};

@@ -124,6 +124,39 @@ describe('Drawer', () => {
 		await vi.waitFor(() => expect(nested().open).toBe(false));
 	});
 
+	it('reopens with the new modality when type changes while open', async () => {
+		const { rerender } = await render(Wrapper, { open: true, type: 'non-modal', position: 'end' });
+		await vi.waitFor(() => expect((drawer() as HTMLDialogElement).open).toBe(true));
+		expect(drawer().matches(':modal')).toBe(false);
+		await rerender({ type: 'modal' });
+		await vi.waitFor(() => expect(drawer().matches(':modal')).toBe(true));
+		await rerender({ type: 'non-modal' });
+		await vi.waitFor(() => expect(drawer().matches(':modal')).toBe(false));
+		expect((drawer() as HTMLDialogElement).open).toBe(true);
+		await expect.element(page.getByTestId('changes')).toHaveTextContent('');
+	});
+
+	it('leaves Escape to a nested alert inside a non-modal drawer', async () => {
+		render(Wrapper, { open: true, type: 'non-modal', withNested: true, nestedType: 'alert' });
+		const nested = () => document.querySelector<HTMLDialogElement>('[data-testid="nested"]')!;
+		await page.getByTestId('open-nested').click();
+		await vi.waitFor(() => expect(nested().open).toBe(true));
+		await userEvent.keyboard('{Escape}');
+		expect(nested().open).toBe(true);
+		expect((drawer() as HTMLDialogElement).open).toBe(true);
+	});
+
+	it('adds one step per key press and exposes the resize range', async () => {
+		render(Wrapper, { open: true, resizable: true, type: 'inline' });
+		const handle = page.getByRole('separator', { name: 'Resize' });
+		(handle.element() as HTMLElement).focus();
+		await userEvent.keyboard('{ArrowRight}{ArrowRight}{ArrowRight}');
+		await expect.element(page.getByTestId('size')).toHaveTextContent('368px');
+		await vi.waitFor(() => expect(handle.element().getAttribute('aria-valuenow')).toBe('368'));
+		expect(handle.element().getAttribute('aria-valuemin')).toBe('200');
+		expect(Number(handle.element().getAttribute('aria-valuemax'))).toBe(window.innerWidth);
+	});
+
 	it('throws when a part is used outside a Drawer', async () => {
 		await expect(async () => render(DrawerBody)).rejects.toThrow('Drawer context is not available');
 	});

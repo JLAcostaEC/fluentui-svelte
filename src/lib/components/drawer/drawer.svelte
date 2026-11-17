@@ -65,13 +65,22 @@
 	});
 
 	// The overlay is a native dialog: `showModal` brings the backdrop, the focus trap and the focus restore.
+	// The modality is fixed when the dialog opens, then a change of `type` while open reopens it the new way;
+	// that close is not a dismissal, as the dialog is open again by the time its `close` event runs.
+	let openedModal: boolean | null = null;
+
 	$effect(() => {
 		if (!(ref instanceof HTMLDialogElement)) return;
 
-		if (open && !ref.open) {
-			if (type === 'non-modal') ref.show();
-			else ref.showModal();
-		} else if (!open && ref.open) ref.close();
+		const modal = type !== 'non-modal';
+		if (open) {
+			if (ref.open && openedModal !== modal) ref.close();
+			if (!ref.open) {
+				if (modal) ref.showModal();
+				else ref.show();
+				openedModal = modal;
+			}
+		} else if (ref.open) ref.close();
 	});
 
 	// The inline drawer has no dialog to restore the focus: it goes back to the control that opened it.
@@ -108,16 +117,19 @@
 		if (type !== 'alert') close('escape');
 	};
 
-	// A non-modal dialog does not cancel on Escape by itself; the handled key stops at the innermost drawer.
+	// A non-modal dialog does not cancel on Escape by itself. The key only counts inside this drawer: one that
+	// bubbles from a nested drawer belongs to that drawer, which handles it (natively when it is modal).
 	const onkeydown = (e: KeyboardEvent) => {
 		if (type !== 'non-modal' || e.key !== 'Escape' || e.defaultPrevented) return;
+		if ((e.target as Element).closest('.fs-drawer') !== ref) return;
 		e.preventDefault();
 		close('escape');
 	};
 
-	// A `<form method="dialog">` or a script can close the dialog without the drawer.
+	// A `<form method="dialog">` or a script can close the dialog without the drawer. The event runs later than
+	// the close: a dialog open again by then (reopened, or a change of modality) ignores it.
 	const onclose = () => {
-		if (!open) return;
+		if (!open || (ref instanceof HTMLDialogElement && ref.open)) return;
 		open = false;
 		onOpenChange?.(false);
 	};
@@ -131,15 +143,34 @@
 		return (position === 'start') !== rtl ? dx : -dx;
 	};
 
+	/** The rendered size and the viewport size along the resize axis, for the range of the handle. */
+	let measured = $state(0);
+	let viewportWidth = $state(0);
+	let viewportHeight = $state(0);
+	const maxSize = $derived(Math.round(horizontal ? viewportWidth : viewportHeight));
+
+	$effect(() => {
+		if (!resizable || !ref) return;
+		const node = ref;
+		const observer = new ResizeObserver(([entry]) => {
+			const box = entry.borderBoxSize[0];
+			measured = Math.round(horizontal ? box.inlineSize : box.blockSize);
+		});
+		observer.observe(node);
+		return () => observer.disconnect();
+	});
+
 	const resizeTo = (value: number) => {
-		const max = horizontal ? window.innerWidth : window.innerHeight;
-		size = `${Math.round(Math.max(MIN_SIZE, Math.min(max, value)))}px`;
+		size = `${Math.round(Math.max(MIN_SIZE, Math.min(maxSize, value)))}px`;
 	};
 
 	const current = () => {
 		const rect = ref!.getBoundingClientRect();
 		return horizontal ? rect.width : rect.height;
 	};
+
+	// The size asked for, not the rendered one, which lags behind while the size transition runs.
+	const requested = () => (size.endsWith('px') ? parseFloat(size) : current());
 
 	const onHandleDown = (e: PointerEvent) => {
 		if (e.button !== 0) return;
@@ -164,9 +195,11 @@
 			: { ArrowUp: [0, -KEY_STEP], ArrowDown: [0, KEY_STEP] };
 		if (!(e.key in deltas)) return;
 		e.preventDefault();
-		resizeTo(current() + grows(...deltas[e.key]));
+		resizeTo(requested() + grows(...deltas[e.key]));
 	};
 </script>
+
+<svelte:window bind:innerWidth={viewportWidth} bind:innerHeight={viewportHeight} />
 
 <!--
 	@component
@@ -195,8 +228,9 @@
 			tabindex="0"
 			aria-label={resizeLabel}
 			aria-orientation={horizontal ? 'vertical' : 'horizontal'}
-			aria-valuenow={size.endsWith('px') ? parseFloat(size) : undefined}
+			aria-valuenow={measured || undefined}
 			aria-valuemin={MIN_SIZE}
+			aria-valuemax={maxSize || undefined}
 			onpointerdown={onHandleDown}
 			onkeydown={onHandleKeydown}
 		></div>
@@ -296,6 +330,7 @@
 
 		&.fs-drawer-resizing {
 			--fs-drawer-duration: 0ms;
+			--fs-drawer-handle-duration: 0ms;
 			user-select: none;
 		}
 
@@ -318,7 +353,7 @@
 				content: '';
 				position: absolute;
 				background: transparent;
-				transition: background var(--fs-fast-duration, 167ms);
+				transition: background var(--fs-drawer-handle-duration, var(--fs-fast-duration, 167ms));
 			}
 			&:hover::after,
 			&:focus-visible::after {
@@ -527,10 +562,12 @@
 
 	:global(:root[data-fs-reduced-motion='true']) .fs-drawer {
 		--fs-drawer-duration: 0ms;
+		--fs-drawer-handle-duration: 0ms;
 	}
 	@media (prefers-reduced-motion: reduce) {
 		:global(:root:not([data-fs-reduced-motion='false'])) .fs-drawer {
 			--fs-drawer-duration: 0ms;
+			--fs-drawer-handle-duration: 0ms;
 		}
 	}
 </style>

@@ -6,8 +6,9 @@
 		open = $bindable(false),
 		size = $bindable('small'),
 		withNested = false,
+		nestedType = 'modal',
 		...props
-	}: Partial<DrawerProps> & { withNested?: boolean } = $props();
+	}: Partial<DrawerProps> & { withNested?: boolean; nestedType?: DrawerProps['type'] } = $props();
 	let changes: boolean[] = $state([]);
 	let outsideClicks = $state(0);
 	let nestedOpen = $state(false);
@@ -24,7 +25,7 @@
 		<p>Drawer content</p>
 		{#if withNested}
 			<button data-testid="open-nested" onclick={() => (nestedOpen = true)}>Details</button>
-			<Drawer bind:open={nestedOpen} data-testid="nested">
+			<Drawer bind:open={nestedOpen} type={nestedType} data-testid="nested">
 				<DrawerHeader title="Details" closeLabel="Close details" />
 			</Drawer>
 		{/if}

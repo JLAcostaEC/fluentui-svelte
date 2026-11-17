@@ -231,7 +231,7 @@
   <Drawer bind:open={positionOpen} {position}>
     <DrawerHeader title="Position: {position}" />
     <DrawerBody>
-      <p>The drawer slides in from the {position} edge.</p>
+      <p>{m.drawer_example_position({ position })}</p>
     </DrawerBody>
   </Drawer>
 </Showcase>
@@ -249,7 +249,7 @@
   <Drawer bind:open={sizeOpen} {size}>
     <DrawerHeader title="Size: {size}" />
     <DrawerBody>
-      <p>The presets are 320px, 592px, 940px and the whole viewport. Any CSS length works too.</p>
+      <p>{m.drawer_example_size()}</p>
     </DrawerBody>
   </Drawer>
 </Showcase>
@@ -286,8 +286,8 @@
   <Drawer bind:open={resizableOpen} bind:size={resizableSize} position="end" resizable>
     <DrawerHeader title="Resizable" />
     <DrawerBody>
-      <p>Drag the inner edge, or focus it and use the arrow keys.</p>
-      <p>Size: {resizableSize}</p>
+      <p>{m.drawer_example_resizable()}</p>
+      <p>{m.drawer_example_resizable_size({ size: resizableSize })}</p>
     </DrawerBody>
   </Drawer>
 </Showcase>
@@ -312,7 +312,7 @@
       <Drawer open={nestedItem !== null} onOpenChange={(value) => !value && (nestedItem = null)} position="end" hideBackdrop>
         <DrawerHeader title={nestedItem ?? ''} />
         <DrawerBody>
-          <p>The {nestedItem} settings. Escape closes this level only; closing Settings closes it too.</p>
+          <p>{m.drawer_example_nested({ item: nestedItem ?? '' })}</p>
         </DrawerBody>
       </Drawer>
     </DrawerBody>
@@ -341,7 +341,7 @@
       {/snippet}
     </DrawerHeader>
     <DrawerBody>
-      <p>{type === 'alert' ? 'Save your changes before leaving?' : 'Type: ' + type}</p>
+      <p>{type === 'alert' ? m.drawer_example_alert() : m.drawer_example_type({ type })}</p>
     </DrawerBody>
     <DrawerFooter>
       <Button appearance="accent" onclick={() => (typeOpen = false)}>{type === 'alert' ? 'Save' : 'Apply'}</Button>
@@ -361,7 +361,7 @@
     <DrawerBody>
       <div class="form">
         {#if blocked}
-          <InfoBar status="warning" title="Unsaved note">Save or discard it before closing.</InfoBar>
+          <InfoBar status="warning" title={m.drawer_example_unsaved_title()}>{m.drawer_example_unsaved()}</InfoBar>
         {/if}
         <Label label="Note" labelPosition="above"><TextArea bind:value={note} rows={6} /></Label>
       </div>

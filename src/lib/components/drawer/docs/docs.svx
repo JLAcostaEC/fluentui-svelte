@@ -1,0 +1,43 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { Button, Drawer, DrawerHeader, DrawerBody, DrawerFooter } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+
+  let open = $state(false);
+</script>
+
+# Drawer
+<p><I18nMarkupMessage message={m.drawer_description} /></p>
+
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow fluid>
+  <Button appearance="accent" onclick={() => (open = true)}>Open drawer</Button>
+  <Drawer bind:open>
+    <DrawerHeader title="Default drawer" />
+    <DrawerBody>
+      <p>{m.drawer_example_default()}</p>
+    </DrawerBody>
+    <DrawerFooter>
+      <Button appearance="accent" onclick={() => (open = false)}>Done</Button>
+    </DrawerFooter>
+  </Drawer>
+</Showcase>
+
+## {m.global_usage()}
+```svelte
+<script>
+  import { Button, Drawer, DrawerHeader, DrawerBody, DrawerFooter } from 'fluentui-svelte';
+  let open = $state(false);
+</script>
+
+<Button onclick={() => (open = true)}>Open drawer</Button>
+<Drawer bind:open>
+  <DrawerHeader title="Default drawer" />
+  <DrawerBody>
+    <p>Drawer content</p>
+  </DrawerBody>
+  <DrawerFooter>
+    <Button appearance="accent" onclick={() => (open = false)}>Done</Button>
+  </DrawerFooter>
+</Drawer>
+```

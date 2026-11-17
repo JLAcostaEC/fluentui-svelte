@@ -98,6 +98,23 @@ export { default as DialogTrigger } from './components/dialog/dialog-trigger.sve
 export { default as Divider } from './components/divider/divider.svelte';
 // End Divider Component
 
+// Start Drawer Component
+export { default as Drawer } from './components/drawer/drawer.svelte';
+export { default as DrawerHeader } from './components/drawer/drawer-header.svelte';
+export { default as DrawerBody } from './components/drawer/drawer-body.svelte';
+export { default as DrawerFooter } from './components/drawer/drawer-footer.svelte';
+export type {
+	DrawerProps,
+	DrawerHeaderProps,
+	DrawerBodyProps,
+	DrawerFooterProps,
+	DrawerType,
+	DrawerPosition,
+	DrawerSize,
+	DrawerCloseReason
+} from './components/drawer/types.js';
+// End Drawer Component
+
 // Start Dropdown Component
 export { default as Dropdown } from './components/dropdown/dropdown.svelte';
 export { default as DropdownOption } from './components/dropdown/dropdown-option.svelte';

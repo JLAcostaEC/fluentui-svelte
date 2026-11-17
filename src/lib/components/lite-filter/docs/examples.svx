@@ -1,0 +1,230 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { Button, Label, LiteFilter, LiteFilterItem } from '#lib/index.js';
+  import AppsRegular from 'fluentui-icons-svelte/AppsRegular.svelte';
+  import DocumentRegular from 'fluentui-icons-svelte/DocumentRegular.svelte';
+  import GlobeRegular from 'fluentui-icons-svelte/GlobeRegular.svelte';
+  import PeopleRegular from 'fluentui-icons-svelte/PeopleRegular.svelte';
+  import ImageRegular from 'fluentui-icons-svelte/ImageRegular.svelte';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+
+  const places = ['All', 'Apps', 'Documents', 'Web', 'People', 'IMG', 'JPG', 'Gif', 'iCloud', 'OneDrive', 'SkyDrive', 'Pictures', 'Songs', 'Videos'];
+  // Labels of the live pills on this page; the values stay the same in every language.
+  const labels: Record<string, () => string> = {
+    all: m.lite_filter_example_all,
+    apps: m.lite_filter_example_apps,
+    documents: m.lite_filter_example_documents,
+    people: m.lite_filter_example_people,
+    pictures: m.lite_filter_example_pictures,
+    songs: m.lite_filter_example_songs,
+    videos: m.lite_filter_example_videos,
+    images: m.lite_filter_example_images,
+    'this-pc': m.lite_filter_example_this_pc
+  };
+  const label = (value: string, fallback: string) => labels[value]?.() ?? fallback;
+  const results = [
+    { name: 'Budget 2026.xlsx', kind: 'documents' },
+    { name: 'Fluent UI', kind: 'web' },
+    { name: 'Calculator', kind: 'apps' },
+    { name: 'Ada Lovelace', kind: 'people' },
+    { name: 'Notes.docx', kind: 'documents' },
+    { name: 'Svelte docs', kind: 'web' }
+  ];
+  const kinds = [
+    { value: 'apps', label: 'Apps', icon: AppsRegular },
+    { value: 'documents', label: 'Documents', icon: DocumentRegular },
+    { value: 'web', label: 'Web', icon: GlobeRegular },
+    { value: 'people', label: 'People', icon: PeopleRegular },
+    { value: 'images', label: 'Images', icon: ImageRegular }
+  ];
+
+  let place = $state('all');
+  let kind = $state('all');
+  let tags: string[] = $state(['documents']);
+  let submitted = $state('');
+
+  const visible = $derived(kind === 'all' ? results : results.filter((r) => r.kind === kind));
+
+  const onsubmit = (event: SubmitEvent & { currentTarget: HTMLFormElement }) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    submitted = JSON.stringify({ type: data.get('type'), source: data.getAll('source') });
+  };
+
+  const overflowCode = `<script>
+  import { LiteFilter, LiteFilterItem } from 'fluentui-svelte';
+  const places = ['All', 'Apps', 'Documents', 'Web', 'People', 'IMG', 'JPG', 'Gif', 'iCloud', 'OneDrive', 'SkyDrive', 'Pictures', 'Songs', 'Videos'];
+  let place = $state('all');
+<\/script>
+
+<div style="max-width: 24rem;">
+  <LiteFilter aria-label="Places" bind:selectedValue={place}>
+    {#each places as label}
+      <LiteFilterItem value={label.toLowerCase()}>{label}</LiteFilterItem>
+    {/each}
+  </LiteFilter>
+</div>
+<p>Selected: {place}</p>`;
+  const resultsCode = `<script>
+  import { LiteFilter, LiteFilterItem } from 'fluentui-svelte';
+  const results = [
+    { name: 'Budget 2026.xlsx', kind: 'documents' },
+    { name: 'Fluent UI', kind: 'web' },
+    { name: 'Calculator', kind: 'apps' },
+    { name: 'Ada Lovelace', kind: 'people' },
+    { name: 'Notes.docx', kind: 'documents' },
+    { name: 'Svelte docs', kind: 'web' }
+  ];
+  let kind = $state('all');
+  const visible = $derived(kind === 'all' ? results : results.filter((r) => r.kind === kind));
+<\/script>
+
+<LiteFilter aria-label="Result type" size="small" bind:selectedValue={kind}>
+  {#each ['all', 'apps', 'documents', 'web', 'people'] as value}
+    <LiteFilterItem {value}>{value[0].toUpperCase() + value.slice(1)}</LiteFilterItem>
+  {/each}
+</LiteFilter>
+<ul>
+  {#each visible as result (result.name)}
+    <li>{result.name}</li>
+  {/each}
+</ul>`;
+  const multipleCode = `<script>
+  import { LiteFilter, LiteFilterItem } from 'fluentui-svelte';
+  import AppsRegular from 'fluentui-icons-svelte/AppsRegular.svelte';
+  import DocumentRegular from 'fluentui-icons-svelte/DocumentRegular.svelte';
+  import GlobeRegular from 'fluentui-icons-svelte/GlobeRegular.svelte';
+  import PeopleRegular from 'fluentui-icons-svelte/PeopleRegular.svelte';
+  import ImageRegular from 'fluentui-icons-svelte/ImageRegular.svelte';
+  const kinds = [
+    { value: 'apps', label: 'Apps', icon: AppsRegular },
+    { value: 'documents', label: 'Documents', icon: DocumentRegular },
+    { value: 'web', label: 'Web', icon: GlobeRegular },
+    { value: 'people', label: 'People', icon: PeopleRegular },
+    { value: 'images', label: 'Images', icon: ImageRegular }
+  ];
+  let tags = $state(['documents']);
+<\/script>
+
+<LiteFilter aria-label="Content types" multiple bind:selectedValue={tags}>
+  {#each kinds as kind (kind.value)}
+    <LiteFilterItem value={kind.value} icon={kind.icon} disabled={kind.value === 'images'}>{kind.label}</LiteFilterItem>
+  {/each}
+</LiteFilter>
+<p>Selected: {tags.join(', ') || 'none'}</p>`;
+  const formCode = `<script>
+  import { Button, Label, LiteFilter, LiteFilterItem } from 'fluentui-svelte';
+  let submitted = $state('');
+
+  const onsubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    submitted = JSON.stringify({ type: data.get('type'), source: data.getAll('source') });
+  };
+<\/script>
+
+<form {onsubmit}>
+  <Label label="Type" labelPosition="above">
+    <LiteFilter name="type" selectedValue="all">
+      <LiteFilterItem value="all">All</LiteFilterItem>
+      <LiteFilterItem value="documents">Documents</LiteFilterItem>
+      <LiteFilterItem value="pictures">Pictures</LiteFilterItem>
+    </LiteFilter>
+  </Label>
+  <Label label="Sources" labelPosition="above">
+    <LiteFilter name="source" multiple selectedValue={['onedrive']}>
+      <LiteFilterItem value="this-pc">This PC</LiteFilterItem>
+      <LiteFilterItem value="onedrive">OneDrive</LiteFilterItem>
+      <LiteFilterItem value="sharepoint">SharePoint</LiteFilterItem>
+    </LiteFilter>
+  </Label>
+  <Button appearance="accent" type="submit">Search</Button>
+</form>
+<p>Submitted: {submitted || 'nothing yet'}</p>`;
+</script>
+
+### {m.lite_filter_overflow_title()}
+
+<p><I18nMarkupMessage message={m.lite_filter_overflow_description} /></p>
+
+<Showcase columns={1} code={overflowCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <figure>
+    <div class="narrow">
+      <LiteFilter aria-label={m.lite_filter_example_places()} bind:selectedValue={place}>
+        {#each places as text (text)}
+          <LiteFilterItem value={text.toLowerCase()}>{label(text.toLowerCase(), text)}</LiteFilterItem>
+        {/each}
+      </LiteFilter>
+    </div>
+    <figcaption>{m.lite_filter_example_selected()} <code>{place}</code></figcaption>
+  </figure>
+</Showcase>
+
+### {m.lite_filter_results_title()}
+
+<p><I18nMarkupMessage message={m.lite_filter_results_description} /></p>
+
+<Showcase columns={1} code={resultsCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <figure>
+    <LiteFilter aria-label={m.lite_filter_example_result_type()} size="small" bind:selectedValue={kind}>
+      {#each ['all', 'apps', 'documents', 'web', 'people'] as value (value)}
+        <LiteFilterItem {value}>{label(value, 'Web')}</LiteFilterItem>
+      {/each}
+    </LiteFilter>
+    <ul class="results">
+      {#each visible as result (result.name)}
+        <li>{result.name}</li>
+      {/each}
+    </ul>
+  </figure>
+</Showcase>
+
+### {m.lite_filter_multiple_title()}
+
+<p><I18nMarkupMessage message={m.lite_filter_multiple_description} /></p>
+
+<Showcase columns={1} code={multipleCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <figure>
+    <LiteFilter aria-label={m.lite_filter_example_content_types()} multiple bind:selectedValue={tags}>
+      {#each kinds as item (item.value)}
+        <LiteFilterItem value={item.value} icon={item.icon} disabled={item.value === 'images'}>{label(item.value, item.label)}</LiteFilterItem>
+      {/each}
+    </LiteFilter>
+    <figcaption>{m.lite_filter_example_selected()} <code>{tags.join(', ') || m.lite_filter_example_none()}</code></figcaption>
+  </figure>
+</Showcase>
+
+### {m.lite_filter_form_title()}
+
+<p><I18nMarkupMessage message={m.lite_filter_form_description} /></p>
+
+<Showcase columns={1} code={formCode} minHeight="0" disablePanZoom showOverflow fluid>
+  <figure>
+    <form class="form" {onsubmit}>
+      <Label label={m.lite_filter_example_type()} labelPosition="above">
+        <LiteFilter name="type" selectedValue="all">
+          {#each ['all', 'documents', 'pictures'] as value (value)}
+            <LiteFilterItem {value}>{label(value, value)}</LiteFilterItem>
+          {/each}
+        </LiteFilter>
+      </Label>
+      <Label label={m.lite_filter_example_sources()} labelPosition="above">
+        <LiteFilter name="source" multiple selectedValue={['onedrive']}>
+          <LiteFilterItem value="this-pc">{label('this-pc', 'This PC')}</LiteFilterItem>
+          <LiteFilterItem value="onedrive">OneDrive</LiteFilterItem>
+          <LiteFilterItem value="sharepoint">SharePoint</LiteFilterItem>
+        </LiteFilter>
+      </Label>
+      <Button appearance="accent" type="submit">{m.lite_filter_example_search()}</Button>
+    </form>
+    <figcaption>{m.lite_filter_example_submitted()} <code>{submitted || m.lite_filter_example_nothing_yet()}</code></figcaption>
+  </figure>
+</Showcase>
+
+<style>
+  figure { margin: 0; width: 100%; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+  .narrow { max-width: 24rem; width: 100%; display: flex; justify-content: center; }
+  .results { margin: 0; padding: 0; list-style: none; text-align: center; }
+  .form { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; max-width: 100%; }
+</style>

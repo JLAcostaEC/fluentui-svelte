@@ -1,0 +1,44 @@
+<script lang="ts">
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import { m } from '#i18n/messages.js';
+</script>
+
+## {m.lite_filter_accessibility_title()}
+<p><I18nMarkupMessage message={m.lite_filter_accessibility_description} /></p>
+
+## {m.global_component_props()}
+
+### LiteFilter
+<!-- props:LiteFilterProps -->
+
+| Name                                                | Type                                                                | Default            | Description                                                                                  |
+| --------------------------------------------------- | ------------------------------------------------------------------- | ------------------ | -------------------------------------------------------------------------------------------- |
+| `ref` _bindable_                                    | `HTMLDivElement` &#124; `null`                                      |                    | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_ref} />`                 |
+| `selectedValue` _bindable_                          | `string` &#124; `string[]`                                          |                    | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_selected_value} />`      |
+| `multiple`                                          | `boolean`                                                           |                    | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_multiple} />`            |
+| `name`                                              | `string`                                                            |                    | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_name} />`                |
+| `form`                                              | `string`                                                            |                    | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_form} />`                |
+| `disabled`                                          | `boolean`                                                           |                    | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_disabled} />`            |
+| `size`                                              | `'small'` &#124; `'medium'` &#124; `'large'` &#124; `'extra-large'` | `'medium'`         | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_size} />`                |
+| `appearance`                                        | `'filled'` &#124; `'outline'` &#124; `'brand'`                      | `'filled'`         | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_appearance} />`          |
+| `onSelectionChange`                                 | `(event: Event, value: string` &#124; `string[]) => void`           |                    | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_on_selection_change} />` |
+| `previousLabel`                                     | `string`                                                            | `'Scroll back'`    | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_previous_label} />`      |
+| `nextLabel`                                         | `string`                                                            | `'Scroll forward'` | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_next_label} />`          |
+| `disableTabspot`                                    | `boolean`                                                           |                    | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_disable_tabspot} />`     |
+| `children`                                          | `Snippet`                                                           |                    | `<I18nMarkupMessage message={m.generated_fs_lite_filter_props_props_children} />`            |
+| `HTMLAttributes<HTMLDivElement>` without `children` |                                                                     |                    |                                                                                              |
+
+<!-- /props:LiteFilterProps -->
+
+### LiteFilterItem
+<!-- props:LiteFilterItemProps -->
+
+| Name             | Type                                                                                 | Default | Description                                                                            |
+| ---------------- | ------------------------------------------------------------------------------------ | ------- | -------------------------------------------------------------------------------------- |
+| `ref` _bindable_ | `HTMLInputElement` &#124; `null`                                                     |         | `<I18nMarkupMessage message={m.generated_fs_lite_filter_item_props_props_ref} />`      |
+| `value`          | `string`                                                                             |         | `<I18nMarkupMessage message={m.generated_fs_lite_filter_item_props_props_value} />`    |
+| `icon`           | `Snippet<[SVGAttributes<SVGElement>]>` &#124; `Component<SVGAttributes<SVGElement>>` |         | `<I18nMarkupMessage message={m.generated_fs_lite_filter_item_props_props_icon} />`     |
+| `disabled`       | `boolean`                                                                            |         | `<I18nMarkupMessage message={m.generated_fs_lite_filter_item_props_props_disabled} />` |
+| `children`       | `Snippet`                                                                            |         | `<I18nMarkupMessage message={m.generated_fs_lite_filter_item_props_props_children} />` |
+
+<!-- /props:LiteFilterItemProps -->

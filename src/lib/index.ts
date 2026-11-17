@@ -172,6 +172,12 @@ export type {
 } from './components/list-view/types.ts';
 // End ListView Component
 
+// Start LiteFilter Component
+export { default as LiteFilter } from './components/lite-filter/lite-filter.svelte';
+export { default as LiteFilterItem } from './components/lite-filter/lite-filter-item.svelte';
+export type { LiteFilterProps, LiteFilterItemProps } from './components/lite-filter/types.js';
+// End LiteFilter Component
+
 // Start MediaPlayer Component
 export { default as MediaPlayer } from './components/media-player/media-player.svelte';
 export { default as MediaPlayerButton } from './components/media-player/media-player-button.svelte';

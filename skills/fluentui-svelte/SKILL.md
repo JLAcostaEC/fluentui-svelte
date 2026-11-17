@@ -382,6 +382,7 @@ Folder, exports, status (only when the API may still change) and summary. Read
 - `items-view`: `ItemsView`, `ItemsViewItem`. Shows a collection of items as a stack, a uniform grid or lines, and lets users select and invoke them.
 - `label`: `Label`. An accessible caption for a form control, with configurable size, weight, position, and required state.
 - `list-view`: `ListView`, `ListViewItem`, `ListViewItemBranch`. A vertically stacked set of items that can be focused, selected, and navigated with the keyboard.
+- `lite-filter`: `LiteFilter`, `LiteFilterItem`. A row of pills that filters content, with arrows that scroll the pills that do not fit.
 - `media-player`: `MediaPlayer`, `MediaPlayerButton`. A video player with Fluent transport controls: seek bar, volume, subtitles, playback speed, full screen and picture-in-picture, powered by Video.js.
 - `menu`: `Menu`, `MenuItem`, `MenuDivider`, `MenuGroup`, `MenuTrigger`, `MenuPopover`, `MenuList`, `MenuItemCheckbox`, `MenuItemRadio`, `MenuItemSwitch`, `MenuCommandBar`, `MenuCommandBarItem`, `ContextMenuTrigger`. A dropdown list of actions or options, with support for groups, submenus, checkable items, and context menus.
 - `number-box`: `NumberBox`. A numeric input with min, max, and step constraints and optional spinner buttons.

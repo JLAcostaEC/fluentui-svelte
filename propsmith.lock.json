@@ -2653,6 +2653,128 @@
       },
       "source": "src/lib/components/list-view/types.ts#ListViewProps.toggleOnClick"
     },
+    "generated_fs_lite_filter_item_props_props_children": {
+      "en": "2fc04525",
+      "locales": {
+        "es": "2fc04525"
+      },
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterItemProps.children"
+    },
+    "generated_fs_lite_filter_item_props_props_disabled": {
+      "en": "22877001",
+      "locales": {
+        "es": "22877001"
+      },
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterItemProps.disabled"
+    },
+    "generated_fs_lite_filter_item_props_props_icon": {
+      "en": "8804b34c",
+      "locales": {
+        "es": "8804b34c"
+      },
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterItemProps.icon"
+    },
+    "generated_fs_lite_filter_item_props_props_ref": {
+      "en": "909ba617",
+      "locales": {
+        "es": "909ba617"
+      },
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterItemProps.ref"
+    },
+    "generated_fs_lite_filter_item_props_props_value": {
+      "en": "d8bc369e",
+      "locales": {
+        "es": "d8bc369e"
+      },
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterItemProps.value"
+    },
+    "generated_fs_lite_filter_props_props_appearance": {
+      "en": "80ddd116",
+      "locales": {
+        "es": "80ddd116"
+      },
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterProps.appearance"
+    },
+    "generated_fs_lite_filter_props_props_children": {
+      "en": "ef317336",
+      "locales": {
+        "es": "ef317336"
+      },
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterProps.children"
+    },
+    "generated_fs_lite_filter_props_props_disable_tabspot": {
+      "en": "67d78b6a",
+      "locales": {},
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterProps.disableTabspot"
+    },
+    "generated_fs_lite_filter_props_props_disabled": {
+      "en": "bb1c112f",
+      "locales": {
+        "es": "bb1c112f"
+      },
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterProps.disabled"
+    },
+    "generated_fs_lite_filter_props_props_form": {
+      "en": "5764e97b",
+      "locales": {
+        "es": "5764e97b"
+      },
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterProps.form"
+    },
+    "generated_fs_lite_filter_props_props_multiple": {
+      "en": "d80f31a4",
+      "locales": {},
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterProps.multiple"
+    },
+    "generated_fs_lite_filter_props_props_name": {
+      "en": "dfe9b593",
+      "locales": {
+        "es": "dfe9b593"
+      },
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterProps.name"
+    },
+    "generated_fs_lite_filter_props_props_next_label": {
+      "en": "a1181230",
+      "locales": {
+        "es": "a1181230"
+      },
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterProps.nextLabel"
+    },
+    "generated_fs_lite_filter_props_props_on_selection_change": {
+      "en": "5e06e669",
+      "locales": {
+        "es": "5e06e669"
+      },
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterProps.onSelectionChange"
+    },
+    "generated_fs_lite_filter_props_props_previous_label": {
+      "en": "4579af59",
+      "locales": {
+        "es": "4579af59"
+      },
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterProps.previousLabel"
+    },
+    "generated_fs_lite_filter_props_props_ref": {
+      "en": "f1e570ea",
+      "locales": {
+        "es": "f1e570ea"
+      },
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterProps.ref"
+    },
+    "generated_fs_lite_filter_props_props_selected_value": {
+      "en": "840eaba1",
+      "locales": {
+        "es": "840eaba1"
+      },
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterProps.selectedValue"
+    },
+    "generated_fs_lite_filter_props_props_size": {
+      "en": "2aaeb2cf",
+      "locales": {
+        "es": "2aaeb2cf"
+      },
+      "source": "src/lib/components/lite-filter/types.ts#LiteFilterProps.size"
+    },
     "generated_fs_media_player_button_props_props_children": {
       "en": "af4d914b",
       "locales": {
@@ -3439,7 +3561,9 @@
     },
     "generated_fs_pips_pager_props_props_show_numbers": {
       "en": "73367c3c",
-      "locales": {},
+      "locales": {
+        "es": "73367c3c"
+      },
       "source": "src/lib/components/pips-pager/types.ts#PipsPagerProps.showNumbers"
     },
     "generated_fs_pips_pager_props_props_wrap": {

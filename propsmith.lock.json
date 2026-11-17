@@ -3367,6 +3367,88 @@
       },
       "source": "src/lib/components/pill-button/types.ts#PillButtonProps.wrapperRef"
     },
+    "generated_fs_pips_pager_props_props_button_visibility": {
+      "en": "0f52a1cd",
+      "locales": {
+        "es": "0f52a1cd"
+      },
+      "source": "src/lib/components/pips-pager/types.ts#PipsPagerProps.buttonVisibility"
+    },
+    "generated_fs_pips_pager_props_props_format_page": {
+      "en": "becf8343",
+      "locales": {
+        "es": "becf8343"
+      },
+      "source": "src/lib/components/pips-pager/types.ts#PipsPagerProps.formatPage"
+    },
+    "generated_fs_pips_pager_props_props_index": {
+      "en": "885e93f5",
+      "locales": {
+        "es": "885e93f5"
+      },
+      "source": "src/lib/components/pips-pager/types.ts#PipsPagerProps.index"
+    },
+    "generated_fs_pips_pager_props_props_max_visible_pips": {
+      "en": "b4051d23",
+      "locales": {
+        "es": "b4051d23"
+      },
+      "source": "src/lib/components/pips-pager/types.ts#PipsPagerProps.maxVisiblePips"
+    },
+    "generated_fs_pips_pager_props_props_next_label": {
+      "en": "b3f87b33",
+      "locales": {
+        "es": "b3f87b33"
+      },
+      "source": "src/lib/components/pips-pager/types.ts#PipsPagerProps.nextLabel"
+    },
+    "generated_fs_pips_pager_props_props_number_of_pages": {
+      "en": "9eb08cb1",
+      "locales": {
+        "es": "9eb08cb1"
+      },
+      "source": "src/lib/components/pips-pager/types.ts#PipsPagerProps.numberOfPages"
+    },
+    "generated_fs_pips_pager_props_props_on_index_change": {
+      "en": "ff3db118",
+      "locales": {
+        "es": "ff3db118"
+      },
+      "source": "src/lib/components/pips-pager/types.ts#PipsPagerProps.onIndexChange"
+    },
+    "generated_fs_pips_pager_props_props_orientation": {
+      "en": "421b7f1a",
+      "locales": {
+        "es": "421b7f1a"
+      },
+      "source": "src/lib/components/pips-pager/types.ts#PipsPagerProps.orientation"
+    },
+    "generated_fs_pips_pager_props_props_previous_label": {
+      "en": "66b46124",
+      "locales": {
+        "es": "66b46124"
+      },
+      "source": "src/lib/components/pips-pager/types.ts#PipsPagerProps.previousLabel"
+    },
+    "generated_fs_pips_pager_props_props_ref": {
+      "en": "6d0b8f8f",
+      "locales": {
+        "es": "6d0b8f8f"
+      },
+      "source": "src/lib/components/pips-pager/types.ts#PipsPagerProps.ref"
+    },
+    "generated_fs_pips_pager_props_props_show_numbers": {
+      "en": "73367c3c",
+      "locales": {},
+      "source": "src/lib/components/pips-pager/types.ts#PipsPagerProps.showNumbers"
+    },
+    "generated_fs_pips_pager_props_props_wrap": {
+      "en": "886f1917",
+      "locales": {
+        "es": "886f1917"
+      },
+      "source": "src/lib/components/pips-pager/types.ts#PipsPagerProps.wrap"
+    },
     "generated_fs_progress_bar_props_props_class": {
       "en": "d374eae3",
       "locales": {
@@ -5448,7 +5530,9 @@
     },
     "generated_fs_teaching_tip_props_props_with_arrow": {
       "en": "71ee1a22",
-      "locales": {},
+      "locales": {
+        "es": "71ee1a22"
+      },
       "source": "src/lib/components/teaching-tip/types.ts#TeachingTipProps.withArrow"
     },
     "generated_fs_text_area_props_props_disabled": {

@@ -221,6 +221,11 @@ export type {
 } from './components/pill-button/types.js';
 // End PillButton Component
 
+// Start PipsPager Component
+export { default as PipsPager } from './components/pips-pager/pips-pager.svelte';
+export type { PipsPagerProps, PipsPagerButtonVisibility } from './components/pips-pager/types.js';
+// End PipsPager Component
+
 // Start ProgressBar Component
 export { default as ProgressBar } from './components/progress-bar/progress-bar.svelte';
 // End ProgressBar Component

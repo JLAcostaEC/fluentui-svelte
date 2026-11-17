@@ -1,0 +1,24 @@
+<script lang="ts">
+  import { PipsPager } from '#lib/index.js';
+  import Showcase from '#site/components/showcase/showcase.svelte';
+  import { m } from '#i18n/messages.js';
+
+  let index = $state(0);
+</script>
+
+# PipsPager
+{m.pips_pager_description()}
+
+<Showcase columns={1} minHeight="0" disablePanZoom showOverflow fluid>
+  <PipsPager aria-label="Pages" numberOfPages={5} bind:index buttonVisibility="visible" />
+</Showcase>
+
+## {m.global_usage()}
+```svelte
+<script>
+  import { PipsPager } from 'fluentui-svelte';
+  let index = $state(0);
+</script>
+
+<PipsPager aria-label="Pages" numberOfPages={5} bind:index />
+```

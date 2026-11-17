@@ -387,6 +387,7 @@ Folder, exports, status (only when the API may still change) and summary. Read
 - `number-box`: `NumberBox`. A numeric input with min, max, and step constraints and optional spinner buttons.
 - `persona`: `Persona`. A visual representation of a person combining an avatar, presence, and up to three lines of text.
 - `pill-button`: `PillButton`. A checkbox styled as a Fluent pill, with native form submission, validation and reset.
+- `pips-pager`: `PipsPager`. A row of dots that shows the current page and moves between pages.
 - `progress-bar`: `ProgressBar`. A horizontal progress indicator that shows determinate or indeterminate progress, with paused and error states.
 - `progress-ring`: `ProgressRing`. A circular progress indicator that shows determinate or indeterminate progress, with paused and error states.
 - `radio-button`: `RadioButton`. A control for choosing a single option from a set of mutually exclusive choices.

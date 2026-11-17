@@ -32,6 +32,10 @@ export type TeachingTipProps = {
 	 * @default false
 	 */
 	lightDismiss?: boolean;
+	/** Whether the teaching tip has an arrow pointing at its target.
+	 * @default false
+	 */
+	withArrow?: boolean;
 	/** The parts of the teaching tip: a preview, a header, the content and a footer. */
 	children?: Snippet;
 } & Omit<HTMLAttributes<HTMLDivElement>, 'children'>;

@@ -16,7 +16,7 @@ A TeachingTip is a flyout that points at an element to inform, remind and teach 
 {/snippet}
 
 <Button bind:ref={target} onclick={() => (open = !open)}>Save</Button>
-<TeachingTip bind:open {target} placement="bottom">
+<TeachingTip bind:open {target} placement="bottom" withArrow>
 	<TeachingTipPreview
 		><img
 			src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=640&h=320&fit=crop&q=60"
@@ -30,7 +30,7 @@ A TeachingTip is a flyout that points at an element to inform, remind and teach 
 ```
 
 - `open` (bindable, `false` by default) shows and hides it. `onOpenChange(open)` runs when it closes from within: the close button, Escape, or a click outside with `lightDismiss`.
-- `target` floats it against an element (`position: fixed`, no portal), with `placement` (`'top'` by default) and `positionConfig`. Without a target it stays in the normal flow.
+- `target` floats it against an element (`position: fixed`, no portal), with `placement` (`'top'` by default) and `positionConfig`. `withArrow` points an arrow at the target. Without a target it stays in the normal flow.
 - The parts throw outside a `TeachingTip`. Put `TeachingTipPreview` first for a preview at the top, or last for one at the bottom; it spans the full width.
 - `TeachingTipHeader` takes `title` (a string renders an `h3`, see `headingLevel`), `icon`, `description`, `hideCloseButton` and `closeLabel` (`'Close'`).
 - Step counter (outside the Fluent spec): set `step` and `totalSteps` on the header to show "1 of 3" next to the close button; `formatStep(step, totalSteps)` changes the text.
@@ -52,6 +52,7 @@ A TeachingTip is a flyout that points at an element to inform, remind and teach 
 | `placement`                                         | `Placement`                 | `'top'` | Where the teaching tip is placed relative to its target.                                       |
 | `positionConfig`                                    | `ComputePositionConfig`     |         | The position configuration handed over to floating-ui.                                         |
 | `lightDismiss`                                      | `boolean`                   | `false` | Closes the teaching tip on a click outside of it and its target.                               |
+| `withArrow`                                         | `boolean`                   | `false` | Whether the teaching tip has an arrow pointing at its target.                                  |
 | `children`                                          | `Snippet`                   |         | The parts of the teaching tip: a preview, a header, the content and a footer.                  |
 | `HTMLAttributes<HTMLDivElement>` without `children` |                             |         |                                                                                                |
 

@@ -13,18 +13,22 @@
 </div>
 
 <style>
-	/* The preview spans the padding of the teaching tip, up to the edge it sits against. */
+	/* The preview spans the padding of the teaching tip, up to the edge it sits against, and follows its corners. */
 	.fs-teaching-tip-preview {
 		display: flex;
 		flex-direction: column;
 		margin-inline: -0.75rem;
-		&:first-child {
+		overflow: hidden;
+		--fs-teaching-tip-radius: calc(var(--fs-control-overlay-border-radius) - 1px);
+		&:first-of-type {
 			margin-top: -0.75rem;
 			margin-bottom: 0.75rem;
+			border-radius: var(--fs-teaching-tip-radius) var(--fs-teaching-tip-radius) 0 0;
 		}
-		&:last-child {
+		&:last-of-type {
 			margin-top: 0.75rem;
 			margin-bottom: -0.75rem;
+			border-radius: 0 0 var(--fs-teaching-tip-radius) var(--fs-teaching-tip-radius);
 		}
 		& > :global(img),
 		& > :global(video) {

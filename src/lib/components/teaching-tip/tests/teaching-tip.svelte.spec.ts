@@ -95,6 +95,22 @@ describe('target', () => {
 			.toBe(0);
 	});
 
+	it('points an arrow at its target with withArrow', async () => {
+		render(TeachingTipTestWrapper, { withTarget: true, withArrow: true });
+		const arrow = () =>
+			page.getByTestId('teaching-tip').element().querySelector('.fs-teaching-tip-arrow')!.getBoundingClientRect();
+		await expect
+			.poll(() => Math.abs(arrow().left + arrow().width / 2 - (rects().target.left + rects().target.width / 2)))
+			.toBeLessThanOrEqual(2);
+		expect(arrow().top).toBeLessThan(rects().tip.top);
+	});
+
+	it('renders no arrow without a target', async () => {
+		render(TeachingTipTestWrapper, { withArrow: true });
+		await expect.element(page.getByTestId('teaching-tip')).toBeVisible();
+		expect(page.getByTestId('teaching-tip').element().querySelector('.fs-teaching-tip-arrow')).toBeNull();
+	});
+
 	it('drops the floating position when the target goes away', async () => {
 		const screen = await render(TeachingTipTestWrapper, { withTarget: true });
 		const tip = page.getByTestId('teaching-tip').element() as HTMLElement;

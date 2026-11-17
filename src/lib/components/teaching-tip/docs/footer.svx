@@ -21,6 +21,7 @@
 | `placement`                                         | `Placement`                 | `'top'` | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_props_props_placement} />`       |
 | `positionConfig`                                    | `ComputePositionConfig`     |         | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_props_props_position_config} />` |
 | `lightDismiss`                                      | `boolean`                   | `false` | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_props_props_light_dismiss} />`   |
+| `withArrow`                                         | `boolean`                   | `false` | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_props_props_with_arrow} />`      |
 | `children`                                          | `Snippet`                   |         | `<I18nMarkupMessage message={m.generated_fs_teaching_tip_props_props_children} />`        |
 | `HTMLAttributes<HTMLDivElement>` without `children` |                             |         |                                                                                           |
 

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { on } from 'svelte/events';
-	import { floating, roundByDPR, RenderSoC } from '#internal';
+	import { floating, placeArrow, RenderSoC } from '#internal';
 	import { Flyout } from '#lib/index.js';
 	import { PREFIX } from '#constants';
-	import { arrow, flip, hide, offset, shift, type ComputePositionReturn, type Side } from '@floating-ui/dom';
+	import { arrow, flip, hide, offset, shift, type ComputePositionReturn } from '@floating-ui/dom';
 	import type { Attachment } from 'svelte/attachments';
 	import type { TooltipProps } from './types.ts';
 
@@ -84,38 +84,7 @@
 	});
 
 	const arrowComputeCallback = (data: ComputePositionReturn) => {
-		if (!arrowElement) return;
-
-		const { x, y } = data.middlewareData.arrow || {};
-		const { placement } = data;
-
-		const side = placement.split('-')[0] as Side;
-
-		// Invert the side of the arrow
-		const staticSide = {
-			top: 'bottom',
-			right: 'left',
-			bottom: 'top',
-			left: 'right'
-		}[side];
-
-		if (staticSide && arrowElement.style) {
-			Object.assign(arrowElement.style, {
-				left: x != null ? `${roundByDPR(x)}px` : '',
-				top: y != null ? `${roundByDPR(y)}px` : '',
-				[staticSide]: `${-(arrowElement.offsetWidth / 2) + 1}px`,
-				transform: 'rotate(45deg)'
-			});
-			arrowElement.style.setProperty(
-				'--fs-tooltip-mask-angle',
-				{
-					top: '135deg',
-					right: '-135deg',
-					bottom: '-45deg',
-					left: '45deg'
-				}[side]
-			);
-		}
+		if (arrowElement) placeArrow(arrowElement, data);
 	};
 
 	$effect(() => {
@@ -223,13 +192,7 @@
 			border-radius: var(--fs-control-border-radius);
 			border: 1px solid var(--fs-control-surface-stroke-flyout);
 			transform: rotate(45deg);
-			mask: linear-gradient(
-				var(--fs-tooltip-mask-angle, -45deg),
-				transparent 0%,
-				transparent 50%,
-				black 50%,
-				black 100%
-			);
+			mask: linear-gradient(var(--fs-arrow-mask-angle, -45deg), transparent 0%, transparent 50%, black 50%, black 100%);
 			&::before {
 				content: '';
 				border-radius: calc(var(--fs-control-overlay-border-radius) - 0.063rem);

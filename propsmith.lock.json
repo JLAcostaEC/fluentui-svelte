@@ -5446,6 +5446,11 @@
       },
       "source": "src/lib/components/teaching-tip/types.ts#TeachingTipProps.target"
     },
+    "generated_fs_teaching_tip_props_props_with_arrow": {
+      "en": "71ee1a22",
+      "locales": {},
+      "source": "src/lib/components/teaching-tip/types.ts#TeachingTipProps.withArrow"
+    },
     "generated_fs_text_area_props_props_disabled": {
       "en": "b99cb72f",
       "locales": {

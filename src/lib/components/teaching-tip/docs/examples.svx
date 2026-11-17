@@ -2,10 +2,14 @@
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { TeachingTip, TeachingTipPreview, TeachingTipHeader, TeachingTipFooter, Button } from '#lib/index.js';
   import LightbulbRegular from 'fluentui-icons-svelte/LightbulbRegular.svelte';
+  import { driver, type Driver, type DriveStep } from 'driver.js/headless';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
 
   const image = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=640&h=320&fit=crop&q=60';
+
+  // Arrow
+  let arrowTargets = $state<(HTMLElement | null)[]>([null, null]);
 
   // Target
   let saveOpen = $state(false);
@@ -27,6 +31,40 @@
     tourOpen = true;
   };
 
+  // driver.js
+  const driverSteps: DriveStep[] = [
+    {
+      element: '#driver-new',
+      advanceOn: 'click',
+      data: { title: 'Create a file', text: 'Click New to start a blank document.' }
+    },
+    { element: '#driver-share', data: { title: 'Share', text: 'Invite others to work on the file with you.' } },
+    { element: '#driver-settings', data: { title: 'Settings', text: 'Change the theme and the language of the app.' } }
+  ];
+  let tour: Driver | undefined;
+  let driverOpen = $state(false);
+  let driverTarget = $state<HTMLElement | null>(null);
+  let driverStep = $state<DriveStep>();
+  let driverIndex = $state(0);
+  let driverLast = $state(false);
+
+  const startDriver = () => {
+    tour ??= driver({
+      steps: driverSteps,
+      onHighlighted: (element, step, { driver }) => {
+        driverTarget = element as HTMLElement;
+        driverStep = step;
+        driverIndex = driver.getActiveIndex() ?? 0;
+        driverLast = driver.isLastStep();
+        driverOpen = true;
+      },
+      onDestroyed: () => (driverOpen = false)
+    });
+    tour.drive();
+  };
+
+  $effect(() => () => tour?.destroy());
+
   const targetCode = `<script>
   import { TeachingTip, TeachingTipHeader, TeachingTipFooter, Button } from 'fluentui-svelte';
 
@@ -44,6 +82,25 @@
   <TeachingTipHeader title="Save automatically" />
   <p>Your changes are saved to the cloud as you work.</p>
   <TeachingTipFooter {action} />
+</TeachingTip>`;
+
+  const arrowCode = `<script>
+  import { TeachingTip, TeachingTipHeader, Button } from 'fluentui-svelte';
+
+  let below = $state(null);
+  let above = $state(null);
+<\/script>
+
+<Button bind:ref={below}>Below</Button>
+<TeachingTip open target={below} placement="bottom" withArrow>
+  <TeachingTipHeader title="Placed below" hideCloseButton />
+  <p>The arrow points up at the button.</p>
+</TeachingTip>
+
+<Button bind:ref={above}>Above</Button>
+<TeachingTip open target={above} placement="top" withArrow>
+  <TeachingTipHeader title="Placed above" hideCloseButton />
+  <p>The arrow points down at the button.</p>
 </TeachingTip>`;
 
   const previewCode = `<script>
@@ -114,9 +171,65 @@
   <Button appearance="subtle" bind:ref={targets[i]}>{title}</Button>
 {/each}
 
-<TeachingTip bind:open target={targets[step - 1]} placement="bottom">
+<TeachingTip bind:open target={targets[step - 1]} placement="bottom" withArrow>
   <TeachingTipHeader title={current.title} {step} totalSteps={steps.length} />
   <p>{current.text}</p>
+  <TeachingTipFooter {action} />
+</TeachingTip>`;
+
+  const driverCode = `<script>
+  import { TeachingTip, TeachingTipHeader, TeachingTipFooter, Button } from 'fluentui-svelte';
+  import { driver } from 'driver.js/headless';
+
+  const steps = [
+    {
+      element: '#driver-new',
+      advanceOn: 'click',
+      data: { title: 'Create a file', text: 'Click New to start a blank document.' }
+    },
+    { element: '#driver-share', data: { title: 'Share', text: 'Invite others to work on the file with you.' } },
+    { element: '#driver-settings', data: { title: 'Settings', text: 'Change the theme and the language of the app.' } }
+  ];
+
+  let tour;
+  let open = $state(false);
+  let target = $state(null);
+  let current = $state();
+  let index = $state(0);
+  let last = $state(false);
+
+  const start = () => {
+    tour ??= driver({
+      steps,
+      onHighlighted: (element, step, { driver }) => {
+        target = element;
+        current = step;
+        index = driver.getActiveIndex() ?? 0;
+        last = driver.isLastStep();
+        open = true;
+      },
+      onDestroyed: () => (open = false)
+    });
+    tour.drive();
+  };
+
+  $effect(() => () => tour?.destroy());
+<\/script>
+
+{#snippet action()}
+  <Button appearance="standard" disabled={index === 0} onclick={() => tour.movePrevious()}>Back</Button>
+  <Button onclick={() => tour.moveNext()}>{last ? 'Finish' : 'Next'}</Button>
+{/snippet}
+
+<Button onclick={start}>Start the tour</Button>
+
+<Button id="driver-new" appearance="subtle">New</Button>
+<Button id="driver-share" appearance="subtle">Share</Button>
+<Button id="driver-settings" appearance="subtle">Settings</Button>
+
+<TeachingTip bind:open {target} placement="bottom" withArrow onOpenChange={(open) => !open && tour?.destroy()}>
+  <TeachingTipHeader title={current?.data.title} step={index + 1} totalSteps={steps.length} />
+  <p>{current?.data.text}</p>
   <TeachingTipFooter {action} />
 </TeachingTip>`;
 </script>
@@ -136,6 +249,33 @@
     <p>Your changes are saved to the cloud as you work.</p>
     <TeachingTipFooter action={saveAction} />
   </TeachingTip>
+</Showcase>
+
+### {m.teaching_tip_arrow_title()}
+
+<p><I18nMarkupMessage message={m.teaching_tip_arrow_description} /></p>
+
+<Showcase columns={1} code={arrowCode} minHeight="0" disablePanZoom fluid>
+  <figure>
+    <div class="arrow-demo">
+      <Button bind:ref={arrowTargets[0]}>Below</Button>
+    </div>
+    <TeachingTip open target={arrowTargets[0]} placement="bottom" withArrow>
+      <TeachingTipHeader title="Placed below" hideCloseButton />
+      <p>The arrow points up at the button.</p>
+    </TeachingTip>
+    <figcaption><code>placement="bottom"</code></figcaption>
+  </figure>
+  <figure>
+    <div class="arrow-demo end">
+      <Button bind:ref={arrowTargets[1]}>Above</Button>
+    </div>
+    <TeachingTip open target={arrowTargets[1]} placement="top" withArrow>
+      <TeachingTipHeader title="Placed above" hideCloseButton />
+      <p>The arrow points down at the button.</p>
+    </TeachingTip>
+    <figcaption><code>placement="top"</code></figcaption>
+  </figure>
 </Showcase>
 
 ### {m.teaching_tip_preview_title()}
@@ -204,10 +344,41 @@
       {/each}
     </div>
   </div>
-  <TeachingTip bind:open={tourOpen} target={targets[step - 1]} placement="bottom">
+  <TeachingTip bind:open={tourOpen} target={targets[step - 1]} placement="bottom" withArrow>
     <TeachingTipHeader title={current.title} {step} totalSteps={steps.length} />
     <p>{current.text}</p>
     <TeachingTipFooter action={tourAction} />
+  </TeachingTip>
+</Showcase>
+
+### {m.teaching_tip_driver_title()}
+
+<p><I18nMarkupMessage message={m.teaching_tip_driver_description} /></p>
+
+{#snippet driverAction()}
+  <Button appearance="standard" disabled={driverIndex === 0} onclick={() => tour?.movePrevious()}>Back</Button>
+  <Button onclick={() => tour?.moveNext()}>{driverLast ? 'Finish' : 'Next'}</Button>
+{/snippet}
+
+<Showcase columns={1} code={driverCode} minHeight="360px" disablePanZoom autoCenter>
+  <div class="tour">
+    <Button onclick={startDriver}>Start the tour</Button>
+    <div class="toolbar">
+      <Button id="driver-new" appearance="subtle">New</Button>
+      <Button id="driver-share" appearance="subtle">Share</Button>
+      <Button id="driver-settings" appearance="subtle">Settings</Button>
+    </div>
+  </div>
+  <TeachingTip
+    bind:open={driverOpen}
+    target={driverTarget}
+    placement="bottom"
+    withArrow
+    onOpenChange={(open) => !open && tour?.destroy()}
+  >
+    <TeachingTipHeader title={driverStep?.data?.title ?? ''} step={driverIndex + 1} totalSteps={driverSteps.length} />
+    <p>{driverStep?.data?.text}</p>
+    <TeachingTipFooter action={driverAction} />
   </TeachingTip>
 </Showcase>
 
@@ -215,6 +386,15 @@
   figure {
     width: 100%;
     min-width: 0;
+  }
+  .arrow-demo {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 11rem;
+    &.end {
+      align-items: flex-end;
+    }
   }
   .tour {
     display: flex;

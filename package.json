@@ -126,7 +126,7 @@
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.24.1",
 		"globals": "^17.14.0",
-		"mdsvex": "^1.0.1",
+		"mdsvex": "0.12.8",
 		"panzoom": "^9.4.4",
 		"playwright": "^1.65.1",
 		"prettier": "^3.10.1",

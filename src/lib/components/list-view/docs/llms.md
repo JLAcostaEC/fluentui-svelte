@@ -157,8 +157,10 @@ With `navigationMode` set to `composite` and a `selectionMode`, every item is a 
 			<Button
 				onclick={() => {
 					lastAction = 'Installed ' + card.name;
-				}}>Install</Button
+				}}
 			>
+				Install
+			</Button>
 		{/snippet}
 		<ListViewItem
 			as="div"

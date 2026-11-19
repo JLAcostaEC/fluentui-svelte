@@ -47,9 +47,9 @@
 					bind:selectedItems={childSelected}
 					onSelectionChange={onChildSelectionChange}
 				>
-					<ListViewItem as="a" href="#inbox" value="inbox" onclick={(event) => event.preventDefault()}
-						>Inbox</ListViewItem
-					>
+					<ListViewItem as="a" href="#inbox" value="inbox" onclick={(event) => event.preventDefault()}>
+						Inbox
+					</ListViewItem>
 					<ListViewItemBranch label="Settings" bind:expanded={nestedExpanded}>
 						<ListView
 							role="list"
@@ -58,9 +58,9 @@
 							bind:selectedItems={grandchildSelected}
 							onSelectionChange={onGrandchildSelectionChange}
 						>
-							<ListViewItem as="a" href="#users" value="users" onclick={(event) => event.preventDefault()}
-								>Users</ListViewItem
-							>
+							<ListViewItem as="a" href="#users" value="users" onclick={(event) => event.preventDefault()}>
+								Users
+							</ListViewItem>
 						</ListView>
 					</ListViewItemBranch>
 				</ListView>

@@ -46,9 +46,9 @@ A tag can show that it cannot be interacted with. Every part of it is blocked, t
 
 ```svelte
 <Tag disabled secondaryText="appearance=filled" icon={CalendarMonthRegular} dismissible>Disabled</Tag>
-<Tag disabled appearance="outline" secondaryText="appearance=outline" icon={CalendarMonthRegular} dismissible
-	>Disabled</Tag
->
+<Tag disabled appearance="outline" secondaryText="appearance=outline" icon={CalendarMonthRegular} dismissible>
+	Disabled
+</Tag>
 <Tag disabled appearance="brand" secondaryText="appearance=brand" icon={CalendarMonthRegular} dismissible>Disabled</Tag>
 ```
 
@@ -136,9 +136,9 @@ A tag can have a second line of text, given as a string or a snippet.
 
 ```svelte
 <Tag selected secondaryText="appearance=filled" icon={CalendarMonthRegular} dismissible>Selected</Tag>
-<Tag selected appearance="outline" secondaryText="appearance=outline" icon={CalendarMonthRegular} dismissible
-	>Selected</Tag
->
+<Tag selected appearance="outline" secondaryText="appearance=outline" icon={CalendarMonthRegular} dismissible>
+	Selected
+</Tag>
 <Tag selected appearance="brand" secondaryText="appearance=brand" icon={CalendarMonthRegular} dismissible>Selected</Tag>
 ```
 

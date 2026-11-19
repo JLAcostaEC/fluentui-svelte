@@ -47,9 +47,9 @@
 	<Menu>
 		<MenuTrigger>
 			{#snippet children({ state, menuTriggerProps })}
-				<Button bind:ref={state.ref} {...menuTriggerProps as any} appearance="subtle" aria-label="Account menu"
-					>Account</Button
-				>
+				<Button bind:ref={state.ref} {...menuTriggerProps as any} appearance="subtle" aria-label="Account menu">
+					Account
+				</Button>
 			{/snippet}
 		</MenuTrigger>
 		<MenuPopover><MenuList><MenuItem>Sign out</MenuItem></MenuList></MenuPopover>
@@ -101,9 +101,9 @@
 				<SideNavItem href="#settings" label="Settings" icon={SettingsRegular} />
 			{/snippet}
 		</SideNav>
-		<AppSurface style="display: flex; justify-content: flex-end; align-items: flex-start; min-width: 0"
-			><Button>Outside navigation</Button></AppSurface
-		>
+		<AppSurface style="display: flex; justify-content: flex-end; align-items: flex-start; min-width: 0">
+			<Button>Outside navigation</Button>
+		</AppSurface>
 	</AppWindow>
 	<output aria-label="Selected navigation">{selectedItems.join(',')}</output>
 </FluentUISvelte>

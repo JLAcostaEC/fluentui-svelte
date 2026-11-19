@@ -17,12 +17,9 @@ A TeachingTip is a flyout that points at an element to inform, remind and teach 
 
 <Button bind:ref={target} onclick={() => (open = !open)}>Save</Button>
 <TeachingTip bind:open {target} placement="bottom" withArrow>
-	<TeachingTipPreview
-		><img
-			src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=640&h=320&fit=crop&q=60"
-			alt=""
-		/></TeachingTipPreview
-	>
+	<TeachingTipPreview>
+		<img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=640&h=320&fit=crop&q=60" alt="" />
+	</TeachingTipPreview>
 	<TeachingTipHeader title="Save automatically" />
 	<p>Your changes are saved to the cloud as you work.</p>
 	<TeachingTipFooter {action} />

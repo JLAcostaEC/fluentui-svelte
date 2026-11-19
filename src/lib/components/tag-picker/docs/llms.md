@@ -109,9 +109,9 @@ Replace the dropdown arrow with `expandIcon`, a component or a snippet, or remov
 </script>
 
 <!-- A custom icon -->
-<TagPicker bind:selectedOptions expandIcon={ArrowDownFilled} inputAttributes={{ 'aria-label': 'Select Employees' }}
-	>...</TagPicker
->
+<TagPicker bind:selectedOptions expandIcon={ArrowDownFilled} inputAttributes={{ 'aria-label': 'Select Employees' }}>
+	...
+</TagPicker>
 
 <!-- No icon -->
 <TagPicker bind:selectedOptions expandIcon={null} inputAttributes={{ 'aria-label': 'Select Employees' }}>...</TagPicker>

@@ -41,8 +41,10 @@
 			href="https://github.com/JLAcostaEC/fluentui-svelte"
 			target="_blank"
 			rel="noreferrer"
-			appearance="standard">{m.home_github_repo_button()}</Button
+			appearance="standard"
 		>
+			{m.home_github_repo_button()}
+		</Button>
 	</div>
 </section>
 <section id="showcase">

@@ -32,9 +32,9 @@
 </script>
 
 {#snippet option(opt: Option)}
-	<TagPickerOption id={opt.value} value={opt.value} text={opt.text} disabled={opt.disabled}
-		>{opt.text ?? opt.value}</TagPickerOption
-	>
+	<TagPickerOption id={opt.value} value={opt.value} text={opt.text} disabled={opt.disabled}>
+		{opt.text ?? opt.value}
+	</TagPickerOption>
 {/snippet}
 
 {#snippet list()}

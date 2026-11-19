@@ -340,9 +340,9 @@
 		onpointercancel={release}
 		onlostpointercapture={release}
 	>
-		<span class="fs-annotated-scroll-bar-label fs-annotated-scroll-bar-strut" bind:offsetHeight={labelHeight}
-			>&nbsp;</span
-		>
+		<span class="fs-annotated-scroll-bar-label fs-annotated-scroll-bar-strut" bind:offsetHeight={labelHeight}>
+			&nbsp;
+		</span>
 		{#each entries as entry, index (index)}
 			{@const top = tops[index]}
 			<span
@@ -351,16 +351,19 @@
 				style:translate="0 {top ?? 0}px"
 				style:visibility={top === null ? 'hidden' : undefined}
 				onpointerdown={(event) => press(event, entry.offset)}
-				onpointermove={(event) => move(event, entry.offset)}>{entry.label}</span
+				onpointermove={(event) => move(event, entry.offset)}
 			>
+				{entry.label}
+			</span>
 		{/each}
 		<span class="fs-annotated-scroll-bar-indicator" style:top="{current * scale}px"></span>
 		<span
 			class={['fs-annotated-scroll-bar-preview', { 'fs-annotated-scroll-bar-touch': hover?.touch }]}
 			style:visibility={hover ? undefined : 'hidden'}
 			style:top="{Math.min(railHeight - INDICATOR_HEIGHT, previewOffset * scale)}px"
-			><span class="fs-annotated-scroll-bar-anchor" bind:this={anchor}></span></span
 		>
+			<span class="fs-annotated-scroll-bar-anchor" bind:this={anchor}></span>
+		</span>
 	</div>
 	{#if !hideArrows}{@render arrow(1)}{/if}
 </div>

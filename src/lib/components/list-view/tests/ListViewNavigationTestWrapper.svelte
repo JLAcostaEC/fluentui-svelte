@@ -65,8 +65,10 @@
 						onclick={(event) => {
 							nestedMounted = true;
 							onParentAction?.(event, 'projects');
-						}}>Projects</button
+						}}
 					>
+						Projects
+					</button>
 				{:else}
 					<span>Projects</span>
 				{/if}
@@ -79,12 +81,12 @@
 						bind:selectedItems={childSelected}
 						onSelectionChange={onChildSelection}
 					>
-						<ListViewItem as="a" href="#inbox" value="inbox" onclick={(event) => event.preventDefault()}
-							>Inbox</ListViewItem
-						>
-						<ListViewItem as="a" href="#archive" value="archive" disabled onclick={(event) => event.preventDefault()}
-							>Archive</ListViewItem
-						>
+						<ListViewItem as="a" href="#inbox" value="inbox" onclick={(event) => event.preventDefault()}>
+							Inbox
+						</ListViewItem>
+						<ListViewItem as="a" href="#archive" value="archive" disabled onclick={(event) => event.preventDefault()}>
+							Archive
+						</ListViewItem>
 						<ListViewItem value="settings">
 							{#if selectionMode === 'none'}
 								<button type="button">Settings</button>
@@ -98,12 +100,17 @@
 								bind:selectedItems={grandchildSelected}
 								onSelectionChange={onGrandchildSelection}
 							>
-								<ListViewItem as="a" href="#users" value="users" onclick={(event) => event.preventDefault()}
-									>Users</ListViewItem
+								<ListViewItem as="a" href="#users" value="users" onclick={(event) => event.preventDefault()}>
+									Users
+								</ListViewItem>
+								<ListViewItem
+									as="a"
+									href="#permissions"
+									value="permissions"
+									onclick={(event) => event.preventDefault()}
 								>
-								<ListViewItem as="a" href="#permissions" value="permissions" onclick={(event) => event.preventDefault()}
-									>Permissions</ListViewItem
-								>
+									Permissions
+								</ListViewItem>
 							</ListView>
 						</ListViewItem>
 					</ListView>

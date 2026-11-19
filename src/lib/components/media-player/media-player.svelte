@@ -505,8 +505,10 @@
 							onclick={() => {
 								loadFailed = false;
 								loadAttempt++;
-							}}>{t.retry}</Button
+							}}
 						>
+							{t.retry}
+						</Button>
 					</InfoBar>
 				</div>
 			{/if}

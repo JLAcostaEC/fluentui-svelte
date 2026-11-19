@@ -98,15 +98,15 @@
 		</a>
 		<nav>
 			<div class="nav-links">
-				<Button as="a" appearance={path === '/' ? 'accent' : 'subtle'} href={localizeHref('/')}
-					>{m.global_home()}</Button
-				>
-				<Button as="a" appearance={path.includes('/docs') ? 'accent' : 'subtle'} href={localizeHref('/docs')}
-					>{m.global_docs()}</Button
-				>
-				<Button as="a" appearance={path === '/about' ? 'accent' : 'subtle'} href={localizeHref('/about')}
-					>{m.global_about()}</Button
-				>
+				<Button as="a" appearance={path === '/' ? 'accent' : 'subtle'} href={localizeHref('/')}>
+					{m.global_home()}
+				</Button>
+				<Button as="a" appearance={path.includes('/docs') ? 'accent' : 'subtle'} href={localizeHref('/docs')}>
+					{m.global_docs()}
+				</Button>
+				<Button as="a" appearance={path === '/about' ? 'accent' : 'subtle'} href={localizeHref('/about')}>
+					{m.global_about()}
+				</Button>
 			</div>
 
 			<!-- TODO: this is not SEO friendly -->
@@ -131,9 +131,9 @@
 						<MenuItem as="a" href={localizeHref('/about')}>{m.global_about()}</MenuItem>
 						<MenuDivider />
 						<MenuItem as="a" href={localizeHref('/docs/getting-started')}>{m.global_getting_started()}</MenuItem>
-						<MenuItem as="a" href={GITHUB_REPO_URL} target="_blank" rel="noopener noreferrer"
-							>{m.header_view_on_github()}</MenuItem
-						>
+						<MenuItem as="a" href={GITHUB_REPO_URL} target="_blank" rel="noopener noreferrer">
+							{m.header_view_on_github()}
+						</MenuItem>
 					</MenuList>
 				</MenuPopover>
 			</Menu>
@@ -157,14 +157,17 @@
 					<MenuItemSwitch
 						bind:checked={() => globalState.reducedMotion, () => null}
 						onclick={() => methods.setReducedMotion(!globalState.reducedMotion)}
-						>{m.header_reduce_motion()}</MenuItemSwitch
 					>
+						{m.header_reduce_motion()}
+					</MenuItemSwitch>
 					<MenuItemSwitch
 						aria-label={m.header_disable_panzoom()}
 						bind:checked={() => disablePanZoom.current, () => null}
 						onclick={() => (disablePanZoom.current = !disablePanZoom.current)}
-						subText={m.header_disable_panzoom_subtext()}>{m.header_disable_panzoom()}</MenuItemSwitch
+						subText={m.header_disable_panzoom_subtext()}
 					>
+						{m.header_disable_panzoom()}
+					</MenuItemSwitch>
 					<MenuItemSwitch bind:checked={() => mode.current === 'dark', () => null} onclick={toggleMode}>
 						{m.header_dark_mode()}
 					</MenuItemSwitch>

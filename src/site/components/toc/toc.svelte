@@ -1,45 +1,14 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	import { blur } from 'svelte/transition';
 	import { useIntersectionObserver } from 'runed';
 	import { ListView, ListViewItem } from '#lib/index.js';
 	import { getLinks, type TocLink, type TocProps } from './toc.ts';
 	import { m } from '#i18n/messages.js';
-	import { getGlobalFSContext } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
-
-	const globalContext = getGlobalFSContext();
-
-	const { state: globalState } = globalContext!;
-
-	let { selector, searchFor = 'h1, h2, h3, h4, h5, h6', offset = '80px' }: TocProps = $props();
-
-	let links: TocLink[] = $state([]);
-	let headings: HTMLElement[] = $state([]);
-	let key = $state('');
+	let { target, searchFor = 'h2, h3, h4' }: TocProps = $props();
+	const outline = $derived(getLinks(target, searchFor));
 	let activeId = $state('');
 
-	$effect(() => {
-		if (page.url.pathname !== key) {
-			key = page.url.pathname;
-
-			setTimeout(() => {
-				const wrapper = document.querySelector(selector);
-
-				if (!wrapper) {
-					console.warn(`No element found for selector: ${selector}`);
-					return () => {};
-				}
-
-				const current = getLinks(wrapper, searchFor, offset);
-
-				links = current.result;
-				headings = current.headings;
-			}, 600);
-		}
-	});
-
 	useIntersectionObserver(
-		() => headings,
+		() => outline.headings,
 		(entries) => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
@@ -54,19 +23,14 @@
 	);
 </script>
 
-<nav class="toc" aria-label={m.docs_toc_title()}>
-	<h3>{m.docs_toc_title()}</h3>
-	{#key key}
-		<div
-			in:blur={!globalState.reducedMotion ? { amount: 20, delay: 500 } : { duration: 0 }}
-			out:blur={!globalState.reducedMotion ? { amount: 20 } : { duration: 0 }}
-		>
-			<ListView navigationMode="items">
-				{@render ToC(links)}
-			</ListView>
-		</div>
-	{/key}
-</nav>
+{#if outline.result.length}
+	<nav class="toc" aria-label={m.docs_toc_title()}>
+		<h3>{m.docs_toc_title()}</h3>
+		<ListView navigationMode="items">
+			{@render ToC(outline.result)}
+		</ListView>
+	</nav>
+{/if}
 
 {#snippet ToC(items: TocLink[])}
 	{#each items as { id, text, children } (id)}
@@ -99,8 +63,6 @@
 
 <style>
 	.toc {
-		position: sticky;
-		top: 80px;
 		& h3 {
 			margin-bottom: 1rem;
 		}

@@ -55,7 +55,7 @@
 
 ### {m.btn_adding_a_menu_title()}
 
-{m.btn_adding_a_menu_description_before_link()} <a href="./menu">{m.btn_adding_a_menu_description_link_text()}</a> {m.btn_adding_a_menu_description_after_link()}
+<p>{m.btn_adding_a_menu_description_before_link()} <a href="./menu"><I18nMarkupMessage message={m.btn_adding_a_menu_description_link_text} /></a> <I18nMarkupMessage message={m.btn_adding_a_menu_description_after_link} /></p>
 
 ### {m.global_component_props()}
 

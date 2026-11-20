@@ -2,6 +2,7 @@
   import { Slider } from '#lib/index.js';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
 
   const rangeCode = `
 <Slider value={20} min={0} max={50} step={5} />`;
@@ -31,7 +32,7 @@
 
 ### {m.slider_ticks_title()}
 
-{m.slider_ticks_description()}
+<p><I18nMarkupMessage message={m.slider_ticks_description} /></p>
 
 <Showcase columns={1} code={ticksCode} minHeight="0" disablePanZoom showOverflow>
   <div style="width: 200px;">
@@ -61,7 +62,7 @@
 
 ### {m.global_disabled()}
 
-{m.slider_disabled_description()}
+<p><I18nMarkupMessage message={m.slider_disabled_description} /></p>
 
 <Showcase columns={1} code={disabledCode} minHeight="0" disablePanZoom showOverflow>
   <div style="width: 200px;">

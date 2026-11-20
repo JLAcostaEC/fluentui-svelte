@@ -1,14 +1,18 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import DocsActions from '#site/components/docs/docs-actions.svelte';
   import { Label, SegmentedControl, SegmentedControlItem } from '#lib/index.js';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
   let selectedValue = $state('day');
 </script>
 
-# SegmentedControl
+# SegmentedControl <StatusBadge />
 
 {m.segmented_control_description()}
+
+<DocsActions />
 
 <Showcase columns={1} disablePanZoom>
   <Label label={m.segmented_control_view()}>

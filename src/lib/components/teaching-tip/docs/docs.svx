@@ -1,11 +1,15 @@
 <script lang="ts">
   import { TeachingTip, TeachingTipPreview, TeachingTipHeader, TeachingTipFooter, Button } from '#lib/index.js';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import DocsActions from '#site/components/docs/docs-actions.svelte';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
 </script>
 
-# TeachingTip
+# TeachingTip <StatusBadge />
 {m.teaching_tip_description()}
+
+<DocsActions />
 
 {#snippet action()}
   <Button appearance="standard">Got it</Button>

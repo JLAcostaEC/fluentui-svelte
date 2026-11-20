@@ -1,368 +1,240 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
-	import { AutoSuggestBox, AutoSuggestBoxOption, ListView, ListViewItem, Badge, Button, Tooltip } from '#lib/index.js';
-	import Toc from '../../components/toc/toc.svelte';
 	import { page } from '$app/state';
-	import { goto } from '$app/navigation';
-	import { fly } from 'svelte/transition';
-	import { dev } from '$app/env';
-	import EditRegular from 'fluentui-icons-svelte/EditRegular.svelte';
-	import CopyRegular from 'fluentui-icons-svelte/CopyRegular.svelte';
-	import CheckmarkRegular from 'fluentui-icons-svelte/CheckmarkRegular.svelte';
-	import MarkdownRegular from 'fluentui-icons-svelte/MarkdownRegular.svelte';
+	import type { Snippet } from 'svelte';
+	import { Button, Drawer, DrawerBody, DrawerHeader, ScrollBar } from '#lib/index.js';
+	import NavigationRegular from 'fluentui-icons-svelte/NavigationRegular.svelte';
+	import { m } from '#i18n/messages.js';
 	import { deLocalizeUrl } from '#i18n/runtime.js';
 	import { localizedPath } from '#site/utils/localized-path.js';
-	import type { Meta } from '#types';
-	import { GITHUB_REPO_URL } from '#site/constants.js';
-	import { m } from '#i18n/messages.js';
-	import { statusBadge } from '#site/utils/status.js';
-	import { getGlobalFSContext } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
-	import { MediaQuery } from 'svelte/reactivity';
+	import { docsNavigation } from '#site/utils/docs-navigation.js';
+	import Toc from '#site/components/toc/toc.svelte';
+	import DocsSidebar from './docs-sidebar.svelte';
+	import DocsSupport from './docs-support.svelte';
+	import DocsActions from './docs-actions.svelte';
 
-	const globalContext = getGlobalFSContext();
+	let { children }: { children: Snippet } = $props();
+	let open = $state(false);
+	let content = $state<HTMLDivElement | null>(null);
+	let scrollBar: HTMLElement | null = $state(null);
+	let drawerBody: HTMLDivElement | null = $state(null);
 
-	const { state: globalState } = globalContext!;
-
-	// Resolves the GitHub link that documents the current route.
-	const editUrl = $derived.by(() => {
-		const pathname = deLocalizeUrl(page.url).pathname;
-		const componentSlug = pathname.match(/^\/docs\/components\/(.+)$/);
-
-		if (componentSlug) {
-			return `${GITHUB_REPO_URL}/tree/main/src/lib/components/${componentSlug[1]}/docs`;
-		}
-
-		const filePath = PAGE_FILES[pathname] ?? 'src/routes/docs/+page.svx';
-		return `${GITHUB_REPO_URL}/edit/main/${filePath}`;
-	});
-
-	const PAGE_FILES: Record<string, string> = {
-		'/docs/getting-started': 'src/routes/docs/getting-started/+page.svx',
-		'/docs/llms': 'src/routes/docs/llms/+page.svx'
-	};
-
-	// The Markdown version of the current page, published for AI agents. Pages without one get null.
-	const markdownUrl = $derived.by(() => {
-		const pathname = deLocalizeUrl(page.url).pathname;
-		const componentSlug = pathname.match(/^\/docs\/components\/([^/]+)$/);
-
-		if (componentSlug) return `/docs/components/${componentSlug[1]}.md`;
-		return pathname === '/docs/llms' ? '/docs/llms.md' : null;
-	});
-
-	let copyStatus = $state<'idle' | 'done' | 'failed'>('idle');
-	let copyTimer: ReturnType<typeof setTimeout> | undefined;
-
-	const copyMarkdown = async () => {
-		if (!markdownUrl) return;
-		clearTimeout(copyTimer);
-
-		try {
-			const response = await fetch(markdownUrl);
-			if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
-			await navigator.clipboard.writeText(await response.text());
-			copyStatus = 'done';
-		} catch {
-			copyStatus = 'failed';
-		}
-
-		copyTimer = setTimeout(() => (copyStatus = 'idle'), 2000);
-	};
-
-	const copyLabel = $derived(
-		copyStatus === 'done'
-			? m.docs_copy_markdown_done()
-			: copyStatus === 'failed'
-				? m.docs_copy_markdown_failed()
-				: m.docs_copy_markdown()
-	);
-
-	type NavLink = {
-		label: string;
-		url: string;
-		status?: string | null;
-		icon?: any;
-	};
-
-	let {
-		children,
-		primaryNavigation,
-		secondaryNavigation
-	}: { children: Snippet; primaryNavigation: NavLink[]; secondaryNavigation: Meta[] } = $props();
-
-	// Component navigation is derived from each component's META (title + slug).
-	const componentLinks = $derived<NavLink[]>(
-		secondaryNavigation.map((meta) => ({
-			label: meta.title,
-			url: `/docs/components/${meta.slug}`,
-			status: meta.status,
-			icon: meta.icon
-		}))
-	);
-
-	const typesUrl = '/docs/types';
-
-	const suggestions = $derived([...primaryNavigation, ...componentLinks].map((nav) => nav.label));
-
-	const handleNav = async (item: string) => {
-		const navItem = [...primaryNavigation, ...componentLinks].find((nav) => nav.label === item);
-
-		if (navItem) {
-			goto(localizedPath(navItem.url));
-		}
-	};
-
-	const isMobile = new MediaQuery('pointer: coarse');
+	const path = $derived(deLocalizeUrl(page.url).pathname.replace(/\/$/, ''));
+	const componentSlug = $derived(path.match(/^\/docs\/components\/([^/]+)$/)?.[1]);
+	const position = $derived(docsNavigation.findIndex((entry) => entry.url === path));
+	const previous = $derived(position > 0 ? docsNavigation[position - 1] : null);
+	const next = $derived(position >= 0 ? docsNavigation[position + 1] : null);
 </script>
 
-<section class="container">
-	<div id="navigation">
-		<search id="search-box" style="width: 100%; max-width: 100%; display: flex; flex-grow: 0;">
-			<AutoSuggestBox
-				openOnFocus={isMobile.current}
-				suggestionChosen={(e, item) => handleNav(item)}
-				placeholder={m.docs_search_placeholder()}
-			>
-				{#each suggestions as suggestion, index (suggestion)}
-					<AutoSuggestBoxOption {index} value={suggestion}>{suggestion}</AutoSuggestBoxOption>
-				{/each}
-			</AutoSuggestBox>
-		</search>
-
-		<nav class="navigation-list" aria-label={m.docs_primary_navigation_label()}>
-			{#if primaryNavigation}
-				<ListView navigationMode="items">
-					{#each primaryNavigation as nav (nav.label)}
-						<ListViewItem
-							as="a"
-							href={localizedPath(nav.url)}
-							active={page.url.pathname.endsWith(nav.url)}
-							aria-current={page.url.pathname.endsWith(nav.url) ? 'page' : undefined}
-						>
-							{nav.label}
-						</ListViewItem>
-					{/each}
-				</ListView>
-			{/if}
-		</nav>
-
-		<h3>{m.docs_nav_title()}</h3>
-
-		<nav class="navigation-list" aria-label={m.docs_nav_title()}>
-			{#if componentLinks}
-				<ListView navigationMode="items">
-					{#each componentLinks as doc (doc.label)}
-						{#if doc.status !== 'Empty' || dev}
-							<ListViewItem
-								as="a"
-								href={localizedPath(doc.url)}
-								active={page.url.pathname.endsWith(doc.url)}
-								aria-current={page.url.pathname.endsWith(doc.url) ? 'page' : undefined}
-							>
-								{#if doc.icon}
-									<doc.icon width="1.2rem" aria-hidden="true" />
-								{/if}
-								{doc.label}
-								{#if doc.status}
-									{@const bagdeData = statusBadge(doc.status)}
-									{let tooltipTarget: HTMLElement | null = $state(null)}
-
-									<Badge bind:ref={tooltipTarget} {...bagdeData as any}>
-										{doc.status}
-									</Badge>
-									{#if bagdeData.message && tooltipTarget}
-										<Tooltip
-											style="max-width: 200px; text-align: center;"
-											target={tooltipTarget}
-											content={bagdeData.message}
-											withArrow
-										/>
-									{/if}
-								{/if}
-							</ListViewItem>
-						{/if}
-					{/each}
-					<ListViewItem
-						as="a"
-						href={localizedPath(typesUrl)}
-						active={page.url.pathname.endsWith(typesUrl)}
-						aria-current={page.url.pathname.endsWith(typesUrl) ? 'page' : undefined}
-					>
-						{m.docs_types_reference()}
-					</ListViewItem>
-				</ListView>
-			{/if}
-		</nav>
-	</div>
-
-	<article id="docs" tabindex="-1">
-		{#key page.url.pathname}
-			<div
-				class="docs-content"
-				in:fly={!globalState.reducedMotion ? { y: 50, duration: 333, delay: 333 } : { duration: 0 }}
-				out:fly={!globalState.reducedMotion ? { y: 50, duration: 333 } : { duration: 0 }}
-			>
-				{@render children?.()}
-			</div>
-		{/key}
-	</article>
-
-	<div id="table-of-contents">
-		<Button as="a" href={editUrl} target="_blank" rel="noopener noreferrer" appearance="subtle">
-			<EditRegular />
-			{m.docs_edit_button()}
+<div class="site-shell docs-shell">
+	<div class="mobile-sidebar">
+		<Button appearance="standard" aria-expanded={open} onclick={() => (open = true)}>
+			<NavigationRegular width="1em" />{m.site_docs_navigation()}
 		</Button>
-		{#if markdownUrl}
-			<Button appearance="subtle" onclick={copyMarkdown}>
-				{#if copyStatus === 'done'}
-					<CheckmarkRegular />
-				{:else}
-					<CopyRegular />
-				{/if}
-				{copyLabel}
-			</Button>
-			<span class="copy-status" role="status">{copyStatus === 'idle' ? '' : copyLabel}</span>
-			<!-- A server route, not a page: the client router must not try to render it. -->
-			<Button as="a" href={markdownUrl} target="_blank" rel="noopener" data-sveltekit-reload appearance="subtle">
-				<MarkdownRegular />
-				{m.docs_view_markdown()}
-			</Button>
-		{/if}
-		<Toc selector="#docs > div" />
+		<Drawer bind:open size="min(22rem, 100vw)" position="start">
+			<DrawerHeader title={m.site_docs_navigation()} closeLabel={m.site_close()} />
+			<DrawerBody bind:ref={drawerBody}><DocsSidebar {path} picked={() => (open = false)} /></DrawerBody>
+			<ScrollBar scrollRef={drawerBody} hideArrows size="thin" />
+		</Drawer>
 	</div>
-</section>
+
+	<aside class="docs-sidebar" bind:this={scrollBar}>
+		<DocsSidebar {path} />
+	</aside>
+	<ScrollBar scrollRef={scrollBar} hideArrows size="thin" />
+
+	<div class="docs-panel">
+		<article id="docs" tabindex="-1">
+			{#if !componentSlug}<DocsActions />{/if}
+
+			{#key path}
+				<div class="docs-content" bind:this={content}>{@render children()}</div>
+			{/key}
+
+			{#if previous || next}
+				<nav class="page-navigation" aria-label={m.site_docs_navigation()}>
+					{#if previous}
+						<Button as="a" appearance="standard" href={localizedPath(previous.url)}>
+							<span class="page-link"><small>{m.site_previous()}</small>{previous.label()}</span>
+						</Button>
+					{/if}
+					{#if next}
+						<Button as="a" appearance="standard" href={localizedPath(next.url)} class="next-page">
+							<span class="page-link"><small>{m.site_next()}</small>{next.label()}</span>
+						</Button>
+					{/if}
+				</nav>
+			{/if}
+
+			<DocsSupport />
+		</article>
+
+		<aside class="docs-outline">
+			<Toc target={content} searchFor="h2, h3, h4" />
+		</aside>
+	</div>
+</div>
 
 <style>
-	.container {
+	.docs-shell {
+		--fs-site-header-offset: calc(var(--site-header-height, 56px) + 0.5rem);
 		display: grid;
-		grid-template-columns: 1fr 3fr 0.8fr;
-		gap: 1rem;
-		padding: 2rem;
 		width: 100%;
-		& #navigation {
-			border-right: 1px solid var(--fs-control-stroke-default);
-			padding: 1rem 2rem 1rem 0;
-			display: flex;
-			flex-direction: column;
-			gap: 0.5rem;
-			& :global(.fs-auto-suggest-box) {
-				width: 100%;
-			}
-			& .navigation-list {
-				display: flex;
-				flex-direction: column;
-				gap: 0.5rem;
-				& :global(.fs-list-view-item) {
-					margin: 0.3rem 0;
-				}
-			}
-			& h3 {
-				font-size: 1.2rem;
-				padding-left: 0.6rem;
-			}
-		}
-		& #docs {
-			min-width: 10rem;
-			outline: none;
-			& > .docs-content {
-				padding: 1rem 1rem;
-				display: flex;
-				flex-direction: column;
-				align-items: flex-start;
-				gap: 1rem;
-				width: 100%;
-				& > :global(p),
-				& > :global(*) {
-					font-size: var(--fs-body-font-size);
-					line-height: var(--fs-body-line-height);
-				}
-				& :global(code span) {
-					font-size: inherit;
-				}
-				& > :global(h1) {
-					font-size: 3rem;
-					line-height: var(--fs-title-large-line-height);
-					font-weight: 600;
-					/* Keeps a component's status badge beside the title: the heading text wraps
-					   inside its own flex item instead of pushing the badge onto its own row. */
-					display: flex;
-					align-items: center;
-					flex-wrap: nowrap;
-					gap: 0.5rem;
-					& :global(.fs-badge) {
-						flex-shrink: 0;
-					}
-				}
-				& > :global(h2) {
-					font-size: var(--fs-title2-font-size);
-					line-height: var(--fs-title2-line-height);
-					font-weight: 600;
-				}
-				& > :global(h3) {
-					font-size: var(--fs-title3-font-size);
-					line-height: var(--fs-title3-line-height);
-					font-weight: 600;
-				}
-			}
-		}
-		& #table-of-contents {
-			padding-top: 1rem;
-			padding: 1rem 0rem 1rem 1rem;
-			display: flex;
-			flex-direction: column;
-			gap: 1rem;
-			& :global(.fs-button) {
-				width: 100%;
-			}
-			& :global(.fs-button svg) {
-				width: 1rem;
-				height: auto;
-			}
-			/* Announces the copy result without showing it twice. */
-			& .copy-status {
-				position: absolute;
-				width: 1px;
-				height: 1px;
-				overflow: hidden;
-				clip-path: inset(50%);
-				white-space: nowrap;
-			}
-		}
+		grid-template-columns: minmax(13rem, 17vw) minmax(0, 1fr);
+		align-items: start;
+		padding: 0;
+	}
+	.docs-panel {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(9rem, 14rem);
+		justify-content: center;
+		align-items: start;
+		gap: clamp(1.5rem, 3vw, 3rem);
+		min-width: 0;
+		min-height: calc(100dvh - var(--fs-site-header-offset));
+		margin-block-start: 0.5rem;
+		padding: 2.5rem clamp(1rem, 3vw, 3rem) 4rem;
+		border: 1px solid var(--fs-card-stroke-default);
+		border-inline-end: 0;
+		border-start-start-radius: 0.5rem;
+		background: var(--fs-solid-background-tertiary);
+	}
 
-		/* Tablet: drop the table of contents and collapse to navigation + docs. */
-		@media (max-width: 1024px) {
-			grid-template-columns: minmax(0, auto) minmax(0, 1fr);
-			padding: 1.5rem;
-			& #table-of-contents {
-				display: none;
+	.docs-sidebar,
+	.docs-outline {
+		position: sticky;
+		top: var(--fs-site-header-offset);
+		max-height: max(8rem, calc(100dvh - var(--fs-site-header-offset) - var(--site-footer-height, 0px)));
+		overflow: auto;
+		min-width: 0;
+		scrollbar-width: thin;
+	}
+	.docs-sidebar {
+		padding: 0.25rem 0.5rem 1rem;
+		& :global(.fs-side-nav) {
+			max-width: 100%;
+		}
+	}
+	.docs-outline {
+		width: 100%;
+		justify-self: end;
+		padding-inline-start: clamp(0.75rem, 2.2vw, 2.25rem);
+	}
+	.docs-outline :global(.toc h3) {
+		font-size: 0.85rem;
+		font-weight: 650;
+	}
+	.mobile-sidebar {
+		display: none;
+	}
+	#docs {
+		width: min(100%, 50rem);
+		min-width: 0;
+		justify-self: center;
+		outline: none;
+		overflow-wrap: anywhere;
+		scroll-margin-block-start: var(--fs-site-header-offset);
+	}
+	.docs-content {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.95rem;
+		min-width: 0;
+		& > :global(*) {
+			max-width: 100%;
+		}
+		& > :global(h1) {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 0.6rem;
+			margin-block: 0.25rem;
+			font-size: 2rem;
+			line-height: 1.18;
+			letter-spacing: -0.025em;
+			font-weight: 650;
+			overflow-wrap: anywhere;
+		}
+		& > :global(h2) {
+			font-size: 1.55rem;
+			font-weight: 650;
+			margin-block-start: 1.1rem;
+		}
+		& > :global(h3) {
+			font-size: var(--fs-title3-font-size);
+			font-weight: 650;
+		}
+		& > :global(:is(h1, h2, h3, h4, h5, h6)[id]) {
+			scroll-margin-block-start: 8rem;
+		}
+		& > :global(.shiki) {
+			width: 100%;
+			overflow: auto;
+		}
+		& :global(table.fs-docs) {
+			width: 100%;
+			max-width: 100%;
+			overflow-wrap: anywhere;
+		}
+		& :global(.table-preview) {
+			width: 100%;
+			overflow-x: auto;
+		}
+	}
+	.page-navigation {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.75rem;
+		margin-block-start: 1.5rem;
+		& :global(.fs-button) {
+			min-width: 0;
+			justify-content: flex-start;
+			white-space: normal;
+		}
+		& :global(.next-page) {
+			grid-column: 2;
+			justify-content: flex-end;
+			& .page-link {
+				text-align: end;
 			}
 		}
+	}
+	.page-link {
+		display: grid;
+		gap: 0.3rem;
+		text-align: start;
+		overflow-wrap: anywhere;
+		& small {
+			color: var(--fs-text-secondary);
+		}
+	}
 
-		/* Mobile: single column with the navigation stacked above the docs. */
-		@media (max-width: 768px) {
+	@media (max-width: 1090px) {
+		.docs-panel {
+			grid-template-columns: minmax(0, 49rem);
+		}
+		.docs-outline {
+			display: none;
+		}
+	}
+	@media (max-width: 900px) {
+		.docs-shell {
 			grid-template-columns: minmax(0, 1fr);
-			padding: 1rem;
-			gap: 0.75rem;
-			& #navigation {
-				border-right: none;
-				border-bottom: 1px solid var(--fs-control-stroke-default);
-				padding: 0 0 1rem 0;
-				/* On mobile only the search box stays; the nav lists are hidden. */
-				& .navigation-list,
-				& h3 {
-					display: none;
-				}
-			}
-			& #docs > .docs-content {
-				padding: 1rem 0;
-				& > :global(h1) {
-					font-size: 2rem;
-				}
-				/* Props tables: drop the Description column so the rest of the table fits. */
-				& :global(table.fs-docs :is(th, td):nth-child(4)) {
-					display: none;
-				}
-			}
+		}
+		.docs-sidebar {
+			display: none;
+		}
+		.mobile-sidebar {
+			display: block;
+			padding: 0.75rem 1rem 0;
+		}
+		.docs-panel {
+			padding: 1.4rem 1rem 3rem;
+			border-inline-start: 0;
+			border-radius: 0;
+		}
+		.docs-content :global(table.fs-docs) {
+			table-layout: fixed;
 		}
 	}
 </style>

@@ -2,6 +2,7 @@
   import { Avatar } from '#lib/index.js';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { ClockRegular } from 'fluentui-icons-svelte';
 
   const imageCode = `
@@ -36,7 +37,7 @@
 
 ### {m.avatar_image_title()}
 
-{m.avatar_image_description()}
+<p><I18nMarkupMessage message={m.avatar_image_description} /></p>
 
 <Showcase columns={1} gap="40px" code={imageCode} autoCenter>
   <Avatar
@@ -76,7 +77,7 @@
 
 ### {m.avatar_colorful_title()}
 
-{m.avatar_colorful_description()}
+<p><I18nMarkupMessage message={m.avatar_colorful_description} /></p>
 
 <Showcase columns={3} gap="40px" code={colorfulCode} autoCenter>
   <Avatar active="active" size={56} name="FluentUI Svelte" color="colorful" />

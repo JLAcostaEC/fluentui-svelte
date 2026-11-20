@@ -1,12 +1,17 @@
 <script lang="ts">
   import { Tooltip, Button } from '#lib/index.js';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import DocsActions from '#site/components/docs/docs-actions.svelte';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
 </script>
 
-# Tooltip
+# Tooltip <StatusBadge />
 
 {m.tooltip_description()}
+
+<DocsActions />
 
 <Showcase columns={1} minHeight="250px">
   <Tooltip content="Here you can see additional information about this button" relationship="description" withArrow>
@@ -18,7 +23,7 @@
 
 ## {m.global_usage()}
 
-{m.tooltip_usage_snippet_description()}
+<p><I18nMarkupMessage message={m.tooltip_usage_snippet_description} /></p>
 
 ```svelte
 <script>

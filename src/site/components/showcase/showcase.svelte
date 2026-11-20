@@ -1,6 +1,6 @@
 <script lang="ts">
 	import panzoom from 'panzoom';
-	import ToggleSwitch from '#components/toggle-switch/toggle-switch.svelte';
+	import { SegmentedControl, SegmentedControlItem } from '#lib/index.js';
 	import RenderShiki from '#site/components/render-shiki/render-shiki.svelte';
 	import { getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { m } from '#i18n/messages.js';
@@ -77,7 +77,8 @@
 		};
 	};
 
-	let showCode = $state(false);
+	let view = $state('preview');
+	const showCode = $derived(view === 'code');
 	const sharedDisablePanZoom = getDisablePanZoom();
 	const getMotionPreference = getReducedMotion();
 	let reducedMotion = $derived(getMotionPreference());
@@ -86,22 +87,30 @@
 
 <div class={['showcase-wrapper', code && 'has-code']}>
 	{#if code}
-		<ToggleSwitch
-			label={m.showcase_view_code()}
-			bind:checked={showCode}
-			wrapperAttributes={{ class: `switch-view ${showCode ? 'show' : ''}` }}
-		/>
+		<SegmentedControl
+			size="small"
+			hideIndicator
+			aria-label={m.showcase_display()}
+			bind:selectedValue={view}
+			class={['switch-view', { show: showCode }]}
+		>
+			<SegmentedControlItem value="preview">{m.showcase_preview()}</SegmentedControlItem>
+			<SegmentedControlItem value="code">{m.showcase_view_code()}</SegmentedControlItem>
+		</SegmentedControl>
 		<div style={`display: ${code && showCode ? 'block' : 'none'};`}>
 			<RenderShiki {code} />
 		</div>
 	{/if}
 	<div
-		class="showcase"
-		style={`display: ${!showCode ? 'block' : 'none'};; min-height: ${minHeight}; overflow: ${showOverflow ? 'visible' : 'hidden'}`}
+		class={['showcase', { backdrop: !effectiveDisabled }]}
+		style:display={showCode ? 'none' : 'block'}
+		style:min-height={minHeight}
+		style:--showcase-overflow={showOverflow ? 'visible' : 'hidden'}
 	>
 		<div
 			{@attach !effectiveDisabled &&
 				!reducedMotion &&
+				!showCode &&
 				_panzoom({
 					minZoom,
 					maxZoom,
@@ -113,26 +122,6 @@
 				})}
 			class={['inner', { fluid }]}
 		>
-			{#if !effectiveDisabled}
-				<svg class="showcase-backdrop">
-					<pattern
-						id="showcase-backdrop-pattern"
-						x="5.800038310074086"
-						y="6.229276141719765"
-						width="11.17258097342026"
-						height="11.17258097342026"
-						patternUnits="userSpaceOnUse"
-					>
-						<circle
-							cx="0.2979354926245403"
-							cy="0.2979354926245403"
-							r="0.2979354926245403"
-							fill="var(--fds-text-disabled)"
-						></circle>
-					</pattern>
-					<rect x="0" y="0" width="100%" height="100%" fill="url(#showcase-backdrop-pattern)"></rect>
-				</svg>
-			{/if}
 			<div
 				class={['showcase-grid', { fluid }]}
 				style={`grid-template-columns: ${((fluid ? 'minmax(0, 1fr)' : columnWidth) + ' ').repeat(columns)}; grid-auto-rows: auto; grid-gap: ${gap};`}
@@ -158,11 +147,21 @@
 		outline: none;
 		min-height: 280px;
 		width: 100%;
+		min-width: 0;
+		overflow: var(--showcase-overflow);
 		border-radius: var(--fs-control-overlay-border-radius);
 		background-clip: padding-box;
 		background-color: var(--fs-card-background-default);
 		border: 1px solid var(--fs-card-stroke-default);
 		box-shadow: var(--fs-shadow-card);
+		&.backdrop {
+			background-image: radial-gradient(var(--fs-control-stroke-secondary) 1px, transparent 1px);
+			background-size: 12px 12px;
+		}
+		@media (max-width: 600px) {
+			overflow: auto;
+			overscroll-behavior-inline: contain;
+		}
 	}
 	.inner {
 		display: flex;
@@ -198,36 +197,17 @@
 			margin: 1.5rem 0.5rem;
 		}
 	}
-	.showcase-backdrop {
-		width: 600%;
-		max-width: unset;
-		height: 600%;
-		position: absolute;
-		inset: 0;
-		z-index: -1;
-		transform: translate(-50%, -50%);
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		opacity: 0.5;
-	}
-	:global(.switch-view) {
+	.showcase-wrapper :global(.switch-view) {
 		z-index: 2;
 		position: absolute;
 		top: 14px;
 		right: 5px;
 		transition: right var(--fs-normal-duration) var(--fs-point-to-point);
-		&::before {
-			content: '';
-			position: absolute;
-			inset: -0.25rem;
-			z-index: -1;
-			border-radius: 999px;
-			padding: 0.5rem;
-			backdrop-filter: blur(8px);
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
 		}
-		&.show {
-			right: 45px;
-		}
+	}
+	.showcase-wrapper :global(.switch-view.show) {
+		right: 45px;
 	}
 </style>

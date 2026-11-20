@@ -57,7 +57,7 @@
 
 ### {m.global_size()}
 
-{m.label_size_description()}
+<p><I18nMarkupMessage message={m.label_size_description} /></p>
 
 <Showcase columns={1} code={sizeCode}>
   <Label size="small" label="Small"><TextBox /></Label>
@@ -76,7 +76,7 @@
 
 ### {m.label_position_title()}
 
-{m.label_position_description()}
+<p><I18nMarkupMessage message={m.label_position_description} /></p>
 
 <Showcase columns={1} code={positionCode}>
   <Label labelPosition="before" label="Before"><TextBox /></Label>

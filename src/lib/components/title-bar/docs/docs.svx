@@ -1,14 +1,18 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import DocsActions from '#site/components/docs/docs-actions.svelte';
   import { TitleBar, TitleBarLeftControls, TitleBarRightControls } from '#lib/index.js';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { AppsRegular } from 'fluentui-icons-svelte';
   import { m } from '#i18n/messages.js';
 </script>
 
-# TitleBar
+# TitleBar <StatusBadge />
 
 {m.title_bar_description()}
+
+<DocsActions />
 
 <Showcase columns={1} columnWidth="430px" minHeight="0" disablePanZoom showOverflow>
   <div class="demo-window" style="width: 100%">

@@ -1,46 +1,149 @@
 <script lang="ts">
-  import { InfoBar } from '#lib/index.js';
+  import { Card, CardHeader, InfoBar } from '#lib/index.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { m } from '#i18n/messages.js';
-  import aboutBanner from '#site/assets/images/about-banner.png?w=1472;736&enhanced';
-  import aboutBannerWhite from '#site/assets/images/about-banner-white.png?w=1472;736&enhanced';
-  import ThemedImage from '#site/components/themed-image/themed-image.svelte';
+  import { localizedPath } from '#site/utils/localized-path.js';
+  import IconsCta from '#site/components/icons-cta.svelte';
   import Seo from '#site/components/seo/seo.svelte';
+  import RocketRegular from 'fluentui-icons-svelte/RocketRegular.svelte';
+  import AppsRegular from 'fluentui-icons-svelte/AppsRegular.svelte';
+  import SparkleRegular from 'fluentui-icons-svelte/SparkleRegular.svelte';
+  import CodeRegular from 'fluentui-icons-svelte/CodeRegular.svelte';
+  import AccessibilityRegular from 'fluentui-icons-svelte/AccessibilityRegular.svelte';
+  import DocumentRegular from 'fluentui-icons-svelte/DocumentRegular.svelte';
+  import PlayRegular from 'fluentui-icons-svelte/PlayRegular.svelte';
+  import KeyboardRegular from 'fluentui-icons-svelte/KeyboardRegular.svelte';
+  import WeatherSunnyRegular from 'fluentui-icons-svelte/WeatherSunnyRegular.svelte';
 </script>
 
 <Seo title={m.seo_docs_title()} description={m.seo_docs_description()} keywords={m.seo_docs_keywords().split(', ')} />
-
 
 # {m.global_overview()}
 
 {m.docs_overview_description()}
 
-<ThemedImage
-  light={aboutBanner}
-  dark={aboutBannerWhite}
-  style="max-width: 100%; height: auto; border-radius: var(--fs-control-border-radius)"
-  alt={m.about_hero_image_alt()}
-  sizes="(min-width: 1200px) 800px, calc(100vw - 4rem)"
-  loading="eager"
-  fetchpriority="high"
-/>
+<InfoBar title={m.docs_overview_attention_title()} status="warning" style="multiline" hideCloseButton>
+  <p>{m.docs_overview_attention_description()}</p>
+</InfoBar>
+
+<div class="overview-grid shortcuts">
+  <Card as="a" orientation="vertical" href={localizedPath('/docs/getting-started')}>
+    <span class="glyph"><RocketRegular width="1.15rem" aria-hidden="true" /></span>
+    <CardHeader headingLevel={2} title={m.global_getting_started()} description={m.gs_description()} />
+  </Card>
+  <Card as="a" orientation="vertical" href={localizedPath('/docs/components')}>
+    <span class="glyph"><AppsRegular width="1.15rem" aria-hidden="true" /></span>
+    <CardHeader headingLevel={2} title={m.docs_nav_title()} description={m.site_component_index_text()} />
+  </Card>
+  <Card as="a" orientation="vertical" href={localizedPath('/docs/llms')}>
+    <span class="glyph"><SparkleRegular width="1.15rem" aria-hidden="true" /></span>
+    <CardHeader headingLevel={2} title={m.global_llms()} description={m.llms_description()} />
+  </Card>
+</div>
 
 ## {m.docs_overview_what_is_title()}
 
 {m.global_library_description()}
 
-## {m.docs_overview_features_title()}
+## {m.site_principles()}
 
-- {m.docs_overview_features_item1()}
-- {m.docs_overview_features_item2_before_link()} <a href="https://www.w3.org/WAI/standards-guidelines/aria/" target="_blank" rel="noreferrer">{m.docs_overview_features_item2_link_text()}</a> {m.docs_overview_features_item2_after_link()}
-- {m.docs_overview_features_item3_before_code()} `<dialog></dialog>` {m.docs_overview_features_item3_middle()} `<summary></summary>` {m.docs_overview_features_item3_after_code()}
-- {m.docs_overview_features_item4()}
+<div class="overview-grid principles">
+  <Card>
+    <span class="glyph"><CodeRegular width="1.15rem" aria-hidden="true" /></span>
+    <div>
+    <h3>{m.site_principle_svelte()}</h3>
+    <p>{m.docs_overview_features_item1()}</p>
+    </div>
+  </Card>
+  <Card>
+    <span class="glyph"><AccessibilityRegular width="1.15rem" aria-hidden="true" /></span>
+    <div>
+    <h3>{m.site_principle_accessible()}</h3>
+    <p>{m.docs_overview_features_item2_before_link()} <a href="https://www.w3.org/WAI/standards-guidelines/aria/">{m.docs_overview_features_item2_link_text()}</a> {m.docs_overview_features_item2_after_link()}</p>
+    </div>
+  </Card>
+  <Card>
+    <span class="glyph"><DocumentRegular width="1.15rem" aria-hidden="true" /></span>
+    <div>
+    <h3>{m.site_why_native()}</h3>
+    <p>{m.docs_overview_features_item3_before_code()} <code>&lt;dialog&gt;</code>, <code>&lt;details&gt;</code> {m.docs_overview_features_item3_middle()} <code>&lt;summary&gt;</code> {m.docs_overview_features_item3_after_code()}</p>
+    </div>
+  </Card>
+  <Card>
+    <span class="glyph"><PlayRegular width="1.15rem" aria-hidden="true" /></span>
+    <div>
+    <h3>{m.site_principle_motion()}</h3>
+    <p>{m.docs_overview_features_item4()}</p>
+    </div>
+  </Card>
+  <Card>
+    <span class="glyph"><KeyboardRegular width="1.15rem" aria-hidden="true" /></span>
+    <div>
+    <h3>{m.site_why_keyboard()}</h3>
+    <p>{m.site_why_keyboard_text()}</p>
+    </div>
+  </Card>
+  <Card>
+    <span class="glyph"><WeatherSunnyRegular width="1.15rem" aria-hidden="true" /></span>
+    <div>
+    <h3>{m.site_principle_tokens()}</h3>
+    <p><I18nMarkupMessage message={m.site_principle_tokens_text} /></p>
+    </div>
+  </Card>
+</div>
 
-<InfoBar title={m.docs_overview_attention_title()} status="warning" style="multiline" hideCloseButton>
-  <p>
-    {m.docs_overview_attention_description()}
-  </p>
-</InfoBar>
+## {m.site_browser_title()}
+
+{m.site_browser_note()}
+
+<table class="fs-docs">
+  <thead>
+    <tr><th scope="col">{m.site_browser_feature()}</th><th scope="col">{m.site_browser_use()}</th><th scope="col">{m.site_browser_compatibility()}</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>field-sizing: content</code></td><td>{m.site_browser_use_size()}</td><td>{m.site_browser_size_fallback()}</td></tr>
+    <tr><td><code>mask</code></td><td>{m.site_browser_use_mask()}</td><td>{m.site_browser_mask_fallback()}</td></tr>
+    <tr><td><code>backdrop-filter</code></td><td>{m.site_browser_use_blur()}</td><td>{m.site_browser_blur_fallback()}</td></tr>
+    <tr><td><code>color-mix()</code>, <code>:has()</code></td><td>{m.site_browser_use_tokens()}</td><td>{m.site_browser_supported()}</td></tr>
+  </tbody>
+</table>
+
+<IconsCta />
 
 ## {m.docs_overview_changelog_title()}
 
 {m.docs_overview_changelog_description_before_link()} <a href="https://github.com/JLAcostaEC/fluentui-svelte/blob/main/CHANGELOG.md">{m.docs_overview_changelog_description_link_text()}</a>.
+
+<style>
+  .overview-grid {
+    display: grid;
+    gap: 0.75rem;
+    width: 100%;
+    & :global(.fs-card) {
+      min-width: 0;
+      align-items: start;
+      gap: 0.65rem;
+      padding: 1rem;
+      color: var(--fs-text-primary);
+      text-decoration: none;
+    }
+    & :global(.fs-card-header) { padding: 0; }
+    & h3 { font-weight: 650; font-size: 0.94rem; margin-block-end: 0.2rem; }
+    & p { color: var(--fs-text-secondary); font-size: 0.88rem; line-height: 1.5; }
+    &.shortcuts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    &.principles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  .glyph {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 2.15rem;
+    aspect-ratio: 1;
+    border-radius: var(--fs-control-border-radius);
+    background: var(--fs-subtle-fill-secondary);
+    color: var(--fs-accent-text-primary);
+  }
+  @media (max-width: 600px) {
+    .overview-grid.shortcuts, .overview-grid.principles { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>

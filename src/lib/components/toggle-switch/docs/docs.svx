@@ -1,12 +1,16 @@
 <script lang="ts">
   import { ToggleSwitch } from '#lib/index.js';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import DocsActions from '#site/components/docs/docs-actions.svelte';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
 </script>
 
-# Toggle Switch
+# Toggle Switch <StatusBadge />
 
 {m.tswitch_description()}
+
+<DocsActions />
 
 <Showcase>
   <ToggleSwitch aria-label="Notifications" />

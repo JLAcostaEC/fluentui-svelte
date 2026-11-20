@@ -15,6 +15,11 @@ code.shiki {
 		min-height: 1rem;
 	}
 }
+pre.shiki,
+code.shiki {
+	font-size: 0.95rem;
+	letter-spacing: -0.03rem;
+}
 #docs table.fs-docs {
 	background-color: var(--fs-card-background-default) !important;
 	padding: 1rem 1rem 0.2rem 1rem;
@@ -28,27 +33,60 @@ code.shiki {
 			font-size: 0.8rem;
 			line-height: 1.8em;
 			padding: 0.4rem 1rem 0.4rem 0;
-			& > code {
-				background-color: var(--fs-card-background-default) !important;
-				border: 1px solid var(--fs-card-stroke-default);
-				border-radius: var(--fs-control-border-radius);
-				padding: 2px 5px 5px 5px;
-				background-clip: padding-box;
-			}
 		}
 		&:not(:last-child) td {
 			border-bottom: 1px solid var(--fs-control-stroke-default);
 		}
 	}
+
+	&:has(> thead > tr > th:nth-child(4):last-child) {
+		& th {
+			padding-block: 0.3rem 0.5rem;
+		}
+		& th:first-child {
+			inline-size: 24%;
+		}
+		& th:nth-child(2) {
+			inline-size: 32%;
+		}
+		& th:nth-child(3) {
+			inline-size: 11%;
+			padding-inline-end: 0.75rem;
+			white-space: nowrap;
+		}
+		& td:nth-child(2) code {
+			display: inline-block;
+			max-inline-size: 100%;
+		}
+
+		@media (max-width: 600px) {
+			padding-inline: 0.65rem;
+
+			& :is(th, td) {
+				padding-inline-end: 0.35rem;
+			}
+			& th {
+				font-size: var(--fs-caption-font-size);
+			}
+			& th:first-child {
+				inline-size: 20%;
+			}
+			& th:nth-child(3) {
+				inline-size: 3rem;
+				padding-inline-end: 0.35rem;
+			}
+		}
+	}
 }
-:is(p, li) > code {
+code:not(pre code, .shiki) {
 	background-color: var(--fs-card-background-default) !important;
 	border: 1px solid var(--fs-card-stroke-default);
 	border-radius: var(--fs-control-border-radius);
-	padding: 2px 5px 5px 5px;
+	padding: 2px 4px;
 	background-clip: padding-box;
 	word-break: normal;
-	display: inline-block;
+	overflow-wrap: anywhere;
+	box-decoration-break: clone;
 }
 pre:has(code) {
 	position: relative;

@@ -1,12 +1,17 @@
 <script lang="ts">
   import { Persona } from '#lib/index.js';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import DocsActions from '#site/components/docs/docs-actions.svelte';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
 </script>
 
-# Persona
+# Persona <StatusBadge />
 
-{m.persona_description()}
+<p><I18nMarkupMessage message={m.persona_description} /></p>
+
+<DocsActions />
 
 <Showcase columns={4} autoCenter>
   <Persona name="John Doe" primaryText="Software Engineer" secondaryText="Intranet" tertiaryText="Team A" presence={{status: 'available'}} avatarProps={{ color: "colorful", idForColor: '' }} />

@@ -119,7 +119,7 @@
 
 ### {m.asb_open_on_focus_title()}
 
-{m.asb_open_on_focus_description()}
+<p><I18nMarkupMessage message={m.asb_open_on_focus_description} /></p>
 
 <Showcase columns={1} code={openOnFocusCode} minHeight="0" disablePanZoom showOverflow>
   <AutoSuggestBox openOnFocus placeholder="Choose a fruit...">
@@ -131,7 +131,7 @@
 
 ### {m.asb_virtualization_title()}
 
-{m.asb_virtualization_description()}
+<p><I18nMarkupMessage message={m.asb_virtualization_description} /></p>
 
 <Showcase columns={1} code={virtualizationCode} minHeight="0" disablePanZoom showOverflow>
   <AutoSuggestBox

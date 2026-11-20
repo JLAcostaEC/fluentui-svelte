@@ -1,54 +1,53 @@
-<script>
+<script lang="ts">
 	import { Button } from '#lib/index.js';
 	import { m } from '#i18n/messages.js';
-	import { localizeHref } from '#i18n/runtime.js';
+	import { GITHUB_REPO_URL, SPONSOR_URL } from '#site/constants.js';
+	import { localizedPath } from '#site/utils/localized-path.js';
+	let { height = $bindable(0) }: { height?: number } = $props();
 </script>
 
-<footer id="footer">
-	<section class="container">
-		<div class="info">
-			<p>{m.footer_copyright_design_system()}</p>
-			<p>{m.footer_copyright_components()}</p>
+<footer id="footer" bind:clientHeight={height}>
+	<div class="site-shell footer-inner">
+		<div>
+			<p>{m.footer_copyright_design_system()}. {m.footer_copyright_components()}.</p>
+			<p>{m.about_disclaimer_title()}.</p>
 		</div>
-		<nav>
-			<Button as="a" appearance="subtle" href={localizeHref('/about')}>{m.global_about()}</Button>
+		<nav class="site-actions" aria-label={m.site_navigation()}>
+			<Button as="a" appearance="subtle" href={localizedPath('/docs')}>{m.global_docs()}</Button>
+			<Button as="a" appearance="subtle" href={localizedPath('/about')}>{m.global_about()}</Button>
+			<Button as="a" appearance="subtle" href={GITHUB_REPO_URL}>GitHub</Button>
+			<Button as="a" appearance="subtle" href={SPONSOR_URL}>{m.site_sponsor()}</Button>
 			<Button as="a" appearance="subtle" href="https://jorgelacosta.com">{m.global_contact()}</Button>
 		</nav>
-	</section>
+	</div>
 </footer>
 
 <style>
 	#footer {
-		background-color: var(--fs-control-fill-default);
-		border-top: 1px solid var(--fs-control-stroke-default);
-		& .container {
-			display: flex;
-			width: 100%;
-			max-width: 1600px;
-			padding: 1rem 2rem;
-			margin-inline: auto;
-			justify-content: space-between;
-			align-items: center;
-			& .info p {
-				margin: 0;
-				font-size: 0.8rem;
-				line-height: 1.3em;
-			}
-			& nav {
-				display: flex;
-				gap: 0.5rem;
-			}
+		background: var(--fs-card-background-default);
+		border-block-start: 1px solid var(--fs-control-stroke-secondary);
+	}
 
-			@media (max-width: 768px) {
-				flex-direction: column;
-				align-items: center;
-				gap: 1rem;
-				padding: 1.5rem 1rem;
-				text-align: center;
-				& nav {
-					flex-wrap: wrap;
-					justify-content: center;
-				}
+	.footer-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 1rem;
+		padding-block: 1.25rem;
+		color: var(--fs-text-secondary);
+		font-size: var(--fs-caption-font-size);
+
+		& p {
+			margin: 0;
+		}
+
+		@media (max-width: 600px) {
+			flex-direction: column;
+			text-align: center;
+
+			& nav {
+				justify-content: center;
 			}
 		}
 	}

@@ -2,6 +2,7 @@
   import { Card, CardPreview, CardHeader, CardFooter, Button } from '#lib/index.js';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { MoreHorizontalRegular } from 'fluentui-icons-svelte';
 
   let selected = $state(false);
@@ -119,7 +120,7 @@
 
 ### {m.card_selectable_title()}
 
-{m.card_selectable_description()}
+<p><I18nMarkupMessage message={m.card_selectable_description} /></p>
 
 <Showcase columns={1} columnWidth="320px" minHeight="200px" minZoom={1} code={selectableCode} autoCenter>
   <Card selectable showFloatingAction bind:selected>
@@ -144,7 +145,7 @@
 
 ### {m.card_preview_title()}
 
-{m.card_preview_description()}
+<p><I18nMarkupMessage message={m.card_preview_description} /></p>
 
 <Showcase columns={1} columnWidth="360px" minHeight="260px" code={previewCode} autoCenter>
   <Card orientation="vertical">

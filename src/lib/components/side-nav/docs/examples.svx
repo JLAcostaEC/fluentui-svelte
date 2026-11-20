@@ -13,6 +13,7 @@
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { FolderRegular, HomeRegular, SettingsRegular } from 'fluentui-icons-svelte';
   import { m } from '#i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
 
   let collapsed = $state(true);
   let customCollapsed = $state(false);
@@ -90,7 +91,7 @@
 
 ### {m.side_nav_collapsed_title()}
 
-{m.side_nav_collapsed_description()}
+<p><I18nMarkupMessage message={m.side_nav_collapsed_description} /></p>
 
 <Showcase columns={1} columnWidth="260px" minHeight="0" disablePanZoom showOverflow code={collapsedCode}>
   <SideNav bind:collapsed header="Workspace">
@@ -101,7 +102,7 @@
 
 ### {m.side_nav_floating_title()}
 
-{m.side_nav_floating_description()}
+<p><I18nMarkupMessage message={m.side_nav_floating_description} /></p>
 
 <Showcase columns={1} columnWidth="320px" minHeight="0" disablePanZoom showOverflow code={floatingCode}>
   <div style="position: relative; min-height: 8rem">
@@ -115,7 +116,7 @@
 
 ### {m.side_nav_position_title()}
 
-{m.side_nav_position_description()}
+<p><I18nMarkupMessage message={m.side_nav_position_description} /></p>
 
 <Showcase columns={1} columnWidth="480px" minHeight="0" disablePanZoom showOverflow code={positionCode}>
   <AppWindow width={480} height={200}>
@@ -129,7 +130,7 @@
 
 ### {m.side_nav_title_bar_title()}
 
-{m.side_nav_title_bar_description()}
+<p><I18nMarkupMessage message={m.side_nav_title_bar_description} /></p>
 
 <Showcase columns={1} columnWidth="480px" minHeight="0" disablePanZoom showOverflow code={titleBarCode}>
   <AppWindow width={480} height={200}>
@@ -151,7 +152,7 @@
 
 ### {m.side_nav_branches_title()}
 
-{m.side_nav_branches_description()}
+<p><I18nMarkupMessage message={m.side_nav_branches_description} /></p>
 
 <Showcase columns={1} columnWidth="260px" minHeight="0" disablePanZoom showOverflow code={branchCode}>
   <div style="display: flex; height: 15rem">
@@ -169,7 +170,7 @@
 
 ### {m.side_nav_custom_title()}
 
-{m.side_nav_custom_description()}
+<p><I18nMarkupMessage message={m.side_nav_custom_description} /></p>
 
 <Showcase columns={1} columnWidth="260px" minHeight="0" disablePanZoom showOverflow code={customCode}>
   <SideNav bind:collapsed={customCollapsed} header="Workspace">

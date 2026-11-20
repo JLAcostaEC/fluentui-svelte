@@ -2,6 +2,7 @@
   import { Badge, InfoBar } from '#lib/index.js';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { AccessibilityRegular } from 'fluentui-icons-svelte';
 
   const appearanceCode = `
@@ -40,7 +41,7 @@
 
 ### {m.global_appearance()}
 
-{m.badge_appearance_description()}
+<p><I18nMarkupMessage message={m.badge_appearance_description} /></p>
 
 <Showcase columns={4} initialZoom={1} autoCenter code={appearanceCode}>
   <Badge size={46} color="attention">5</Badge>
@@ -51,7 +52,7 @@
 
 ### {m.badge_sizes_title()}
 
-{m.badge_sizes_description()}
+<p><I18nMarkupMessage message={m.badge_sizes_description} /></p>
 
 <Showcase columns={4} initialZoom={1} autoCenter code={sizesCode}>
   <Badge size={42} color="attention">46</Badge>
@@ -62,7 +63,7 @@
 
 ### {m.badge_shapes_title()}
 
-{m.badge_shapes_description()}
+<p><I18nMarkupMessage message={m.badge_shapes_description} /></p>
 
 <Showcase columns={4} initialZoom={1} autoCenter code={shapesCode}>
   <Badge size={36} color="attention">36</Badge>
@@ -72,7 +73,7 @@
 
 ### {m.badge_color_title()}
 
-{m.badge_color_description()}
+<p><I18nMarkupMessage message={m.badge_color_description} /></p>
 
 <Showcase columns={5} initialZoom={1} autoCenter code={colorCode}>
   <Badge size={36} color="information">I</Badge>
@@ -84,10 +85,10 @@
 
 ### {m.global_icon()}
 
-{m.badge_icon_description()}
+<p><I18nMarkupMessage message={m.badge_icon_description} /></p>
 
 <InfoBar status="warning" style="multiline" title={m.badge_only_icon_title()} hideCloseButton>
-  <p>{m.badge_only_icon_description()}</p>
+  <p><I18nMarkupMessage message={m.badge_only_icon_description} /></p>
 </InfoBar>
 
 <Showcase columns={1} initialZoom={1} autoCenter code={iconCode}>

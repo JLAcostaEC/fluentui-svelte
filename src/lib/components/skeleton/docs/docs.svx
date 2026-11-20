@@ -1,13 +1,17 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import DocsActions from '#site/components/docs/docs-actions.svelte';
   import { Skeleton } from '#lib/index.js';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
 </script>
 
-# Skeleton
+# Skeleton <StatusBadge />
 
 {m.skeleton_description()}
+
+<DocsActions />
 
 <Showcase columns={1}>
   <Skeleton style="width: 24px;" />

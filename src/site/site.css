@@ -1,0 +1,105 @@
+#app {
+	background: var(--fs-solid-background-base);
+}
+
+.site-shell {
+	width: min(100%, 79rem);
+	margin-inline: auto;
+	padding-inline: clamp(1rem, 3.4vw, 2rem);
+}
+
+.site-section {
+	padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+
+.site-section-label {
+	font-size: 0.84rem;
+	font-weight: 650;
+	color: var(--fs-accent-text-primary);
+}
+
+.site-vivid {
+	position: relative;
+	isolation: isolate;
+	background:
+		radial-gradient(ellipse 66% 76% at 45% -14%, rgb(var(--fs-accent-dark-2)), transparent),
+		linear-gradient(175deg, rgb(var(--fs-accent-dark-3)) 11%, #060b18 89%);
+}
+
+.site-on-vivid {
+	--fs-text-primary: #fff;
+	--fs-text-secondary: #ffffffe0;
+	--fs-control-fill-default: #ffffff12;
+	--fs-control-fill-secondary: #ffffff1f;
+	--fs-control-fill-tertiary: #ffffff0c;
+	--fs-control-stroke-default: #ffffff2e;
+	--fs-control-stroke-secondary: #ffffff25;
+	--fs-accent-fill-default: rgb(var(--fs-accent-light-2));
+	--fs-accent-fill-secondary: rgb(var(--fs-accent-light-3));
+	--fs-accent-fill-tertiary: rgb(var(--fs-accent-light-1));
+	--fs-text-on-accent-primary: #101010;
+	--fs-focus-stroke-outer: #fff;
+	color: var(--fs-text-primary);
+	& code:not(pre code, .shiki) {
+		background: var(--fs-control-fill-secondary) !important;
+		border-color: var(--fs-control-stroke-secondary);
+	}
+}
+
+.site-sr-only {
+	position: absolute;
+	inline-size: 1px;
+	block-size: 1px;
+	clip-path: inset(50%);
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.site-actions {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+}
+
+.site-heading {
+	display: grid;
+	gap: 0.5rem;
+	margin: 0 0 1.5rem;
+
+	& h2 {
+		font-size: clamp(1.65rem, 3.2vw, 2.5rem);
+		line-height: 1.15;
+		font-weight: 650;
+		letter-spacing: -0.025em;
+	}
+
+	& p {
+		max-width: 58ch;
+		color: var(--fs-text-secondary);
+	}
+}
+
+.site-canvas {
+	background:
+		radial-gradient(circle, var(--fs-control-stroke-secondary) 1px, transparent 1px) 0 0 / 12px 12px,
+		var(--fs-card-background-secondary);
+}
+
+.site-card-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+	gap: 0.9rem;
+
+	& :where(.fs-card) {
+		min-width: 0;
+		padding: 1rem;
+		gap: 0.6rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}

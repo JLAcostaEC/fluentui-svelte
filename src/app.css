@@ -3,7 +3,7 @@
 	src:
 		local('Cascadia Code'),
 		url('/fonts/cascadia-code/cascadia-code.woff2') format('woff2');
-	font-weight: normal;
+	font-weight: 370;
 	font-style: normal;
 	font-display: swap;
 }
@@ -42,7 +42,7 @@ html {
 	min-height: 100dvh;
 	display: grid;
 	grid-template-rows: auto 1fr auto;
-	grid-template-columns: 1fr;
+	grid-template-columns: minmax(0, 1fr);
 	position: relative;
 	z-index: 0;
 	& :is(header, main, footer) {

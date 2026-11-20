@@ -1,7 +1,10 @@
 <script lang="ts">
   import { ItemsView, ItemsViewItem } from '#lib/index.js';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import DocsActions from '#site/components/docs/docs-actions.svelte';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
 
   const photos = [
     { id: '1506905925346-21bda4d32df4', likes: 75 },
@@ -14,8 +17,10 @@
   let selectedItems = $state<string[]>([photos[0].id]);
 </script>
 
-# ItemsView
-{m.items_view_description()}
+# ItemsView <StatusBadge />
+<p><I18nMarkupMessage message={m.items_view_description} /></p>
+
+<DocsActions />
 
 <Showcase columns={1} minHeight="0" disablePanZoom showOverflow fluid>
   <ItemsView aria-label="Photos" layout="grid" selectionMode="single" bind:selectedItems style="width: 30rem; max-width: 100%;">

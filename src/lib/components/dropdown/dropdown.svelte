@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { claimLabel } from '../label/label-context.ts';
 	import { circularInputShape, dispatchFieldEvents, invokeHandlers, NativeField } from '#internal';
-	import { onClickOutside } from 'runed';
 	import ChevronDownFilled from 'fluentui-icons-svelte/ChevronDownFilled.svelte';
 	import { Flyout, ListView, ListViewItem } from '#lib/index.js';
 	import type { DropdownContext, DropdownOptionLabel, DropdownProps } from './types.ts';
@@ -83,13 +82,11 @@
 		hasValue ? selectedValues.map((v) => optionLabels.get(v) ?? v).join(', ') : placeholder
 	);
 
-	onClickOutside(
-		() => wrapperRef,
-		(event) => {
-			if (event.target instanceof Element && event.target.closest('label')?.control === ref) return;
-			closeDropdown();
-		}
-	);
+	function handleOutsideClick(event: MouseEvent) {
+		if (!open || !wrapperRef || event.composedPath().includes(wrapperRef)) return;
+		if (event.target instanceof Element && event.target.closest('label')?.control === ref) return;
+		closeDropdown();
+	}
 
 	function handlePlacementChange(newPlacement: string) {
 		roundClass = newPlacement.includes('-') ? newPlacement.split('-')[0] : newPlacement;
@@ -188,6 +185,8 @@
 		});
 	});
 </script>
+
+<svelte:document onclickcapture={handleOutsideClick} />
 
 <div
 	{...wrapperAttributes}

@@ -179,6 +179,24 @@ describe('native fields of custom controls', () => {
 		await expect.element(page.selector(popup)).toBeVisible();
 	});
 
+	it('keeps the Dropdown open when ArrowDown immediately follows an invalid submit', async () => {
+		render(FormControlsTestWrapper, { control: 'Dropdown', fieldProps: { required: true } });
+		const submit = form().querySelector<HTMLButtonElement>('[type="submit"]')!;
+
+		vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+		try {
+			submit.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
+			submit.click();
+			expect(document.activeElement).toBe(native());
+			native().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, cancelable: true }));
+			await vi.runOnlyPendingTimersAsync();
+		} finally {
+			vi.useRealTimers();
+		}
+
+		expect(visibleOf('Dropdown').getAttribute('aria-expanded')).toBe('true');
+	});
+
 	it('hides again a field that checkValidity found invalid, since nothing reports it', async () => {
 		render(FormControlsTestWrapper, { control: 'Dropdown', fieldProps: { required: true } });
 

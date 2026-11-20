@@ -72,6 +72,9 @@ describe.each(controls.filter(({ interaction }) => interaction !== 'aria'))(
 			if (interaction === 'dialog' || interaction === 'listbox') {
 				await expect.element(field).toHaveAttribute('aria-expanded', 'true');
 				await expect.element(page.getByRole(interaction)).toBeVisible();
+			} else if (control === 'DropdownSelect') {
+				// The native picker can open on label activation and focus the selected option.
+				await expect.poll(() => field.element().contains(document.activeElement)).toBe(true);
 			} else {
 				await expect.element(field).toHaveFocus();
 				if (interaction === 'check') await expect.element(field).toBeChecked();

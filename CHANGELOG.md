@@ -1,5 +1,11 @@
 # fluentui-svelte
 
+## 0.8.1
+
+### Patch Changes
+
+- fix: solve dependency problems by updating them ([#163](https://github.com/JLAcostaEC/fluentui-svelte/pull/163))
+
 ## 0.8.0
 
 ### Minor Changes

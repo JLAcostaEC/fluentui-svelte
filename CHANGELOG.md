@@ -1,5 +1,11 @@
 # fluentui-svelte
 
+## 0.8.2
+
+### Patch Changes
+
+- fix(dropdown): dismiss synchronously on outside click ([`7f72483`](https://github.com/JLAcostaEC/fluentui-svelte/commit/7f72483f188e0376b08e164762da7a25cc681dc5))
+
 ## 0.8.1
 
 ### Patch Changes

@@ -15,4 +15,5 @@ bun.lockb
 # Generated files
 propsmith.lock.json
 messages/*.json
+project.inlang/README.md
 worker-configuration.d.ts

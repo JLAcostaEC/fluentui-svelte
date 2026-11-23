@@ -6,7 +6,8 @@
 	import { docsNavigation } from '#site/utils/docs-navigation.js';
 	import { localizedPath } from '#site/utils/localized-path.js';
 
-	let { hideSuggestionsOnFocus = false }: { hideSuggestionsOnFocus?: boolean } = $props();
+	let { hideSuggestionsOnFocus = false, onSelect }: { hideSuggestionsOnFocus?: boolean; onSelect?: () => void } =
+		$props();
 	let input = $state<HTMLInputElement | null>(null);
 	let query = $state('');
 	let open = $state(false);
@@ -29,7 +30,10 @@
 
 	function navigate(_: Event, label: string) {
 		const result = docsNavigation.find((entry) => entry.label() === label);
-		if (result) void goto(localizedPath(result.url));
+		if (!result) return;
+		open = false;
+		onSelect?.();
+		void goto(localizedPath(result.url));
 	}
 </script>
 
@@ -85,13 +89,18 @@
 	kbd {
 		pointer-events: none;
 		position: absolute;
-		inset-block-start: 0.35rem;
+		inset-block-start: 50%;
 		inset-inline-end: 0.65rem;
+		transform: translateY(-50%);
+		display: grid;
+		place-items: center;
 		border: 1px solid var(--fs-control-stroke-secondary);
 		border-radius: 0.2rem;
-		padding-inline: 0.3rem;
+		inline-size: 1.15rem;
+		block-size: 1.45rem;
 		color: var(--fs-text-secondary);
 		font-size: 0.85rem;
+		line-height: 1;
 	}
 	@media (pointer: coarse) {
 		kbd {

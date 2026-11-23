@@ -69,4 +69,13 @@
 		font-size: 1rem;
 		font-weight: 650;
 	}
+	@media (max-width: 600px) {
+		.site-actions {
+			display: grid;
+			width: 100%;
+			& :global(.fs-button) {
+				white-space: normal;
+			}
+		}
+	}
 </style>

@@ -175,9 +175,9 @@
 						</div>
 					</Card>
 				{:else if selected === 'home'}
-					<InfoBar status="success" title={m.site_demo_up_to_date()} hideCloseButton
-						>{m.site_demo_up_to_date_hint()}</InfoBar
-					>
+					<InfoBar status="success" title={m.site_demo_up_to_date()} hideCloseButton>
+						{m.site_demo_up_to_date_hint()}
+					</InfoBar>
 					<Card class="setting" orientation="vertical">
 						<div class="setting-copy">
 							<span>{m.site_demo_storage()}</span><small>{m.site_demo_storage_hint()}</small>
@@ -185,33 +185,23 @@
 						<ProgressBar aria-label={m.site_demo_storage()} value={164} max={256} />
 					</Card>
 				{:else}
-					<Card class="setting"
-						><Persona
-							name="Jorge Acosta"
-							primaryText={m.site_demo_local_account()}
-							presence={{ status: 'available' }}
-						/></Card
-					>
+					<Card class="setting">
+						<Persona name="Jorge Acosta" primaryText={m.site_demo_local_account()} presence={{ status: 'available' }} />
+					</Card>
 				{/if}
 			</AppSurface>
 		</AppWindow>
 	</div>
 
 	<div class="floating-persona" aria-hidden="true">
-		<Flyout class="scene-flyout"
-			><Persona
-				name="María Fernández"
-				primaryText={m.site_demo_review()}
-				presence={{ status: 'available' }}
-				size={36}
-			/></Flyout
-		>
+		<Flyout class="scene-flyout">
+			<Persona name="María Fernández" primaryText={m.site_demo_review()} presence={{ status: 'available' }} size={36} />
+		</Flyout>
 	</div>
 	<div class="floating-notice" aria-hidden="true">
-		<Flyout class="scene-flyout"
-			><InfoBar status="success" title="svelte-check" hideCloseButton><span>{m.site_demo_ready()}</span></InfoBar
-			></Flyout
-		>
+		<Flyout class="scene-flyout">
+			<InfoBar status="success" title="svelte-check" hideCloseButton><span>{m.site_demo_ready()}</span></InfoBar>
+		</Flyout>
 	</div>
 	<div class="floating-tip">
 		<TeachingTip bind:open={showTip} class="scene-tip">

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { MediaQuery } from 'svelte/reactivity';
 	import { Badge, Button, Card, Expander, Hyperlink, InfoBar, Tag, ToggleSwitch } from '#lib/index.js';
 	import CheckmarkCircleFilled from 'fluentui-icons-svelte/CheckmarkCircleFilled.svelte';
 	import CheckmarkRegular from 'fluentui-icons-svelte/CheckmarkRegular.svelte';
@@ -18,7 +19,6 @@
 	import AccentGenerator from '#site/components/home/accent-generator.svelte';
 	import AccentPresets from '#site/components/home/accent-presets.svelte';
 	import ComponentGallery from '#site/components/home/component-gallery.svelte';
-	import DesktopScene from '#site/components/home/desktop-scene.svelte';
 	import HeroWallpaper from '#site/components/home/hero-wallpaper.svelte';
 	import BlocksGallery from '#site/components/home/blocks-gallery.svelte';
 	import UseLibrary from '#site/components/home/use-library.svelte';
@@ -29,6 +29,7 @@
 	const storedAccent = getAccentPreference();
 	const accent = $derived(normalizeAccent(storedAccent.current) ?? defaultAccent);
 	const reduceMotion = getReducedMotion();
+	const showDesktopScene = new MediaQuery('(min-width: 601px)');
 	const visibleComponents = components.filter(({ status }) => status !== 'Empty');
 	const middle = Math.ceil(visibleComponents.length / 2);
 	const rows = [visibleComponents.slice(0, middle), visibleComponents.slice(middle)];
@@ -81,14 +82,20 @@
 				<li><CheckmarkCircleFilled width="1em" aria-hidden="true" />{m.site_hero_runes()}</li>
 				<li><CheckmarkCircleFilled width="1em" aria-hidden="true" />{m.site_hero_accessible()}</li>
 				<li>
-					<CheckmarkCircleFilled width="1em" aria-hidden="true" /><span
-						><I18nMarkupMessage message={m.site_hero_native} /></span
-					>
+					<CheckmarkCircleFilled width="1em" aria-hidden="true" /><span>
+						<I18nMarkupMessage message={m.site_hero_native} />
+					</span>
 				</li>
 				<li><CheckmarkCircleFilled width="1em" aria-hidden="true" />{m.site_hero_mit()}</li>
 			</ul>
 		</div>
-		<DesktopScene {accent} select={setAccent} />
+		<div class="desktop-slot">
+			{#if showDesktopScene.current}
+				{#await import('#site/components/home/desktop-scene.svelte') then { default: DesktopScene }}
+					<DesktopScene {accent} select={setAccent} />
+				{/await}
+			{/if}
+		</div>
 	</div>
 </section>
 
@@ -97,7 +104,7 @@
 		<div class={['marquee-track', { reverse: index === 1 }]}>
 			{#each [0, 1] as copy (copy)}
 				<div class="marquee-items">
-					{#each row as { title, slug } (slug)}<Tag shape="rounded">{title}</Tag>{/each}
+					{#each row as { title, slug } (slug)}<span>{title}</span>{/each}
 				</div>
 			{/each}
 		</div>
@@ -141,9 +148,9 @@
 			<div class="states" inert aria-hidden="true">
 				{#each states as [state, caption] (state)}
 					<figure>
-						<Button class={'state-' + state} appearance="standard" disabled={state === 'disabled'}
-							>{m.site_demo_save()}</Button
-						>
+						<Button class={'state-' + state} appearance="standard" disabled={state === 'disabled'}>
+							{m.site_demo_save()}
+						</Button>
 						<figcaption>{caption()}</figcaption>
 					</figure>
 				{/each}
@@ -207,7 +214,7 @@
 	<HeroWallpaper {accent} />
 	<div class="site-section site-shell site-on-vivid">
 		<div class="kicker">
-			<Badge class="hero-version" shape="rounded">MIT</Badge>
+			<Badge class="hero-version" shape="circular">MIT</Badge>
 			<span>{m.site_closing_notice()}</span>
 		</div>
 		<div class="site-heading">
@@ -225,6 +232,12 @@
 <style>
 	.hero-inner {
 		padding-block: clamp(3rem, 6.7vw, 6rem) 3rem;
+	}
+	@media (min-width: 601px) {
+		.desktop-slot {
+			min-block-size: calc(34rem + clamp(3.3rem, 7.6vw, 6.7rem));
+			display: flow-root;
+		}
 	}
 	.hero-copy {
 		display: grid;
@@ -334,6 +347,14 @@
 	.marquee-items {
 		gap: 0.5rem;
 		padding-inline: 0.25rem;
+		& span {
+			padding: 0.3rem 0.7rem;
+			border: 1px solid var(--fs-control-stroke-default);
+			border-radius: 2rem;
+			background: var(--fs-control-fill-default);
+			font-size: var(--fs-body-font-size);
+			line-height: 1.4;
+		}
 	}
 	@keyframes marquee {
 		to {

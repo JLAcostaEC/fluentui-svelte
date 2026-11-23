@@ -90,5 +90,13 @@
 		& :global(.fs-button) {
 			white-space: normal;
 		}
+		@media (max-width: 900px) {
+			gap: 0.25rem;
+			& :global(.fs-button) {
+				min-block-size: 2rem;
+				padding: 0.25rem 0.5rem;
+				font-size: var(--fs-caption-font-size);
+			}
+		}
 	}
 </style>

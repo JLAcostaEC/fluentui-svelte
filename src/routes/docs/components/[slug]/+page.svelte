@@ -3,6 +3,9 @@
 	import Seo from '#site/components/seo/seo.svelte';
 	import { Breadcrumb, BreadcrumbItem, BreadcrumbButton, BreadcrumbDivider, Tag } from '#lib/index.js';
 	import { m } from '#i18n/messages.js';
+	import { extractLocaleFromUrl } from '#i18n/runtime.js';
+	import { page } from '$app/state';
+	import { componentDescription } from '#site/utils/component-descriptions.js';
 	import { componentExports } from '#site/utils/component-exports.js';
 	import { localizedPath } from '#site/utils/localized-path.js';
 
@@ -11,16 +14,23 @@
 	const Docs = $derived(data.docs);
 	const Footer = $derived(data.footer);
 	const exports = $derived(componentExports(data.meta.slug));
+	const localizedDescription = $derived(
+		extractLocaleFromUrl(page.url.href) === 'es' ? componentDescription(data.meta.slug) : undefined
+	);
 </script>
 
 <Seo
 	title={data.meta.title}
-	description={data.meta.description}
+	description={localizedDescription ?? data.meta.description}
 	keywords={data.meta.keywords}
 	canonical={data.meta.canonical}
 	robots={data.meta.robots}
-	openGraph={{ type: 'article', ...data.meta.openGraph }}
-	twitter={data.meta.twitter}
+	openGraph={{
+		type: 'article',
+		...data.meta.openGraph,
+		description: localizedDescription ?? data.meta.openGraph?.description
+	}}
+	twitter={{ ...data.meta.twitter, description: localizedDescription ?? data.meta.twitter?.description }}
 />
 
 <svelte:head>
@@ -29,14 +39,13 @@
 </svelte:head>
 
 <Breadcrumb aria-label={m.site_docs_navigation()}>
-	<BreadcrumbItem
-		><BreadcrumbButton as="a" href={localizedPath('/docs')}>{m.global_docs()}</BreadcrumbButton></BreadcrumbItem
-	>
+	<BreadcrumbItem>
+		<BreadcrumbButton as="a" href={localizedPath('/docs')}>{m.global_docs()}</BreadcrumbButton>
+	</BreadcrumbItem>
 	<BreadcrumbDivider />
-	<BreadcrumbItem
-		><BreadcrumbButton as="a" href={localizedPath('/docs/components')}>{m.docs_nav_title()}</BreadcrumbButton
-		></BreadcrumbItem
-	>
+	<BreadcrumbItem>
+		<BreadcrumbButton as="a" href={localizedPath('/docs/components')}>{m.docs_nav_title()}</BreadcrumbButton>
+	</BreadcrumbItem>
 	<BreadcrumbDivider />
 	<BreadcrumbItem><BreadcrumbButton current>{data.meta.title}</BreadcrumbButton></BreadcrumbItem>
 </Breadcrumb>

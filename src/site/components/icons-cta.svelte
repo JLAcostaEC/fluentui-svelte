@@ -111,8 +111,10 @@
 			{#each feature ? icons : icons.slice(0, 18) as Icon, index (Icon)}
 				<span
 					class={{ accent: [3, 12, 22, 29].includes(index), muted: [0, 7, 8, 15, 32, 39].includes(index) }}
-					style:--tile-delay={-0.37 * index + 's'}><Icon width="45%" height="45%" /></span
+					style:--tile-delay={-0.37 * index + 's'}
 				>
+					<Icon width="45%" height="45%" />
+				</span>
 			{/each}
 		</div>
 	</div>

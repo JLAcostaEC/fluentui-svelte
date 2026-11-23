@@ -35,9 +35,9 @@
 						<span class="rail-title">{item.title}</span>
 						{#if item.status}
 							{@const badge = statusBadge(item.status)}
-							<Badge shape="rounded" appearance={badge.appearance} color={badge.color} title={badge.message}
-								>{badge.label}</Badge
-							>
+							<Badge shape="rounded" appearance={badge.appearance} size={16} color={badge.color} title={badge.message}>
+								{badge.label}
+							</Badge>
 						{/if}
 					</SideNavItem>
 				{/each}

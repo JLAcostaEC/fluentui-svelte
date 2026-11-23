@@ -1,7 +1,7 @@
 <script lang="ts">
 	import panzoom from 'panzoom';
+	import { MediaQuery } from 'svelte/reactivity';
 	import { SegmentedControl, SegmentedControlItem } from '#lib/index.js';
-	import RenderShiki from '#site/components/render-shiki/render-shiki.svelte';
 	import { getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { m } from '#i18n/messages.js';
 	import { getDisablePanZoom } from '#site/preferences.js';
@@ -81,25 +81,31 @@
 	const showCode = $derived(view === 'code');
 	const sharedDisablePanZoom = getDisablePanZoom();
 	const getMotionPreference = getReducedMotion();
-	let reducedMotion = $derived(getMotionPreference());
-	let effectiveDisabled = $derived(disablePanZoom || sharedDisablePanZoom.current);
+	const narrowScreen = new MediaQuery('(max-width: 900px)');
+	const reducedMotion = $derived(getMotionPreference());
+	const effectiveDisabled = $derived(disablePanZoom || sharedDisablePanZoom.current || narrowScreen.current);
+	const fixedWidth = $derived(!fluid && /^\d+(?:\.\d+)?px$/.test(columnWidth) ? columnWidth : undefined);
 </script>
 
-<div class={['showcase-wrapper', code && 'has-code']}>
+<div class="showcase-wrapper">
 	{#if code}
 		<SegmentedControl
 			size="small"
 			hideIndicator
 			aria-label={m.showcase_display()}
 			bind:selectedValue={view}
-			class={['switch-view', { show: showCode }]}
+			class="switch-view"
 		>
 			<SegmentedControlItem value="preview">{m.showcase_preview()}</SegmentedControlItem>
 			<SegmentedControlItem value="code">{m.showcase_view_code()}</SegmentedControlItem>
 		</SegmentedControl>
-		<div style={`display: ${code && showCode ? 'block' : 'none'};`}>
-			<RenderShiki {code} />
-		</div>
+		{#if showCode}
+			{#await import('#site/components/render-shiki/render-shiki.svelte')}
+				<pre class="shiki"><code>{code.trim()}</code></pre>
+			{:then { default: RenderShiki }}
+				<RenderShiki {code} />
+			{/await}
+		{/if}
 	{/if}
 	<div
 		class={['showcase', { backdrop: !effectiveDisabled }]}
@@ -120,11 +126,14 @@
 					autocenter: autoCenter,
 					boundsPadding: 0
 				})}
-			class={['inner', { fluid }]}
+			class="inner"
 		>
 			<div
-				class={['showcase-grid', { fluid }]}
-				style={`grid-template-columns: ${((fluid ? 'minmax(0, 1fr)' : columnWidth) + ' ').repeat(columns)}; grid-auto-rows: auto; grid-gap: ${gap};`}
+				class="showcase-grid"
+				style:--showcase-column-size={fixedWidth}
+				style:--showcase-grid-size={columns === 1 ? fixedWidth : undefined}
+				style:--showcase-columns={columns}
+				style:--showcase-gap={gap}
 			>
 				{@render children?.()}
 			</div>
@@ -138,9 +147,7 @@
 		flex-direction: column;
 		width: 100%;
 		position: relative;
-		&.has-code :global(.shiki) {
-			padding: 4rem 1rem 1rem !important;
-		}
+		container-type: inline-size;
 	}
 	.showcase {
 		position: relative;
@@ -155,59 +162,59 @@
 		border: 1px solid var(--fs-card-stroke-default);
 		box-shadow: var(--fs-shadow-card);
 		&.backdrop {
-			background-image: radial-gradient(var(--fs-control-stroke-secondary) 1px, transparent 1px);
+			background-image: radial-gradient(
+				color-mix(in srgb, var(--fs-control-stroke-secondary) 50%, transparent) 1px,
+				transparent 1px
+			);
 			background-size: 12px 12px;
 		}
-		@media (max-width: 600px) {
+	}
+	.inner {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		place-items: center;
+		position: relative;
+		min-height: 100%;
+		min-width: 0;
+		padding: clamp(0.75rem, 3cqi, 2rem);
+	}
+	.showcase-grid {
+		--column-gap: min(var(--showcase-gap), 3cqi);
+		--column-share: (100% - (var(--showcase-columns) - 1) * var(--column-gap)) / var(--showcase-columns);
+		display: grid;
+		inline-size: min(100%, var(--showcase-grid-size, 100%));
+		grid-template-columns: repeat(
+			auto-fit,
+			minmax(min(100%, max(var(--showcase-column-size, 10rem), var(--column-share))), 1fr)
+		);
+		gap: var(--column-gap);
+		place-items: center;
+		& > :global(*),
+		& :global(.fs-app-window),
+		& :global(.fs-flip-view) {
+			max-inline-size: 100%;
+			min-inline-size: 0;
+		}
+		& :global(.fs-top-nav),
+		& :global(.fs-tab-view) {
+			max-inline-size: 100%;
+			overflow-x: auto;
+			scrollbar-width: thin;
+		}
+	}
+	.showcase-wrapper :global(.switch-view) {
+		align-self: end;
+		margin-block-end: 0.4rem;
+	}
+	@media (max-width: 900px) {
+		.showcase {
 			overflow: auto;
 			overscroll-behavior-inline: contain;
 		}
 	}
-	.inner {
-		display: flex;
-		justify-content: center;
-		flex: 1;
-		align-items: center;
-		position: relative;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		min-width: max-content;
-		min-height: 100%;
-		max-width: 100%;
-	}
-	.inner.fluid {
-		min-width: 0;
-	}
-	.showcase-grid.fluid {
-		flex: 1;
-		min-width: 0;
-	}
-	.showcase-grid {
-		transform-origin: 40% 40%;
-		margin: 3rem;
-		position: relative;
-		display: grid;
-		place-items: center;
-
-		/* A 3rem gutter costs 96px of a phone's width, which is enough to push
-		   fixed-width components past the edge of the card. */
-		@media (max-width: 768px) {
-			margin: 1.5rem 0.5rem;
+	@media (max-width: 360px) {
+		.inner {
+			padding-inline: 0.5rem;
 		}
-	}
-	.showcase-wrapper :global(.switch-view) {
-		z-index: 2;
-		position: absolute;
-		top: 14px;
-		right: 5px;
-		transition: right var(--fs-normal-duration) var(--fs-point-to-point);
-		@media (prefers-reduced-motion: reduce) {
-			transition: none;
-		}
-	}
-	.showcase-wrapper :global(.switch-view.show) {
-		right: 45px;
 	}
 </style>

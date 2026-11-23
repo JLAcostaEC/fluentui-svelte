@@ -7,6 +7,7 @@ import rehypeSlug from 'rehype-slug';
 import { mdsvex, escapeSvelte } from 'mdsvex';
 import rehypeClassNames from 'rehype-class-names';
 import adapter from '@sveltejs/adapter-cloudflare';
+import { markPropsTables } from './scripts/mark-props-tables.ts';
 import { fsShikiCopyButton } from './scripts/shiki-copy-button.js';
 import { fsShikiFocusableCode } from './scripts/shiki-focusable-code.js';
 import { createHighlighter } from 'shiki';
@@ -47,6 +48,7 @@ export default defineConfig({
 				mdsvex({
 					rehypePlugins: [
 						rehypeSlug as any,
+						markPropsTables,
 						[
 							rehypeClassNames,
 							{

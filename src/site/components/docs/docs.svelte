@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import type { Snippet } from 'svelte';
-	import { Button, Drawer, DrawerBody, DrawerHeader, ScrollBar } from '#lib/index.js';
-	import NavigationRegular from 'fluentui-icons-svelte/NavigationRegular.svelte';
+	import { MediaQuery } from 'svelte/reactivity';
+	import { Button, ScrollBar } from '#lib/index.js';
 	import { m } from '#i18n/messages.js';
 	import { deLocalizeUrl } from '#i18n/runtime.js';
 	import { localizedPath } from '#site/utils/localized-path.js';
@@ -13,10 +13,11 @@
 	import DocsActions from './docs-actions.svelte';
 
 	let { children }: { children: Snippet } = $props();
-	let open = $state(false);
 	let content = $state<HTMLDivElement | null>(null);
-	let scrollBar: HTMLElement | null = $state(null);
-	let drawerBody: HTMLDivElement | null = $state(null);
+	let sidebar = $state<HTMLElement | null>(null);
+	let outline = $state<HTMLElement | null>(null);
+	const showSidebar = new MediaQuery('(min-width: 901px)');
+	const showOutline = new MediaQuery('(min-width: 1091px)');
 
 	const path = $derived(deLocalizeUrl(page.url).pathname.replace(/\/$/, ''));
 	const componentSlug = $derived(path.match(/^\/docs\/components\/([^/]+)$/)?.[1]);
@@ -26,21 +27,10 @@
 </script>
 
 <div class="site-shell docs-shell">
-	<div class="mobile-sidebar">
-		<Button appearance="standard" aria-expanded={open} onclick={() => (open = true)}>
-			<NavigationRegular width="1em" />{m.site_docs_navigation()}
-		</Button>
-		<Drawer bind:open size="min(22rem, 100vw)" position="start">
-			<DrawerHeader title={m.site_docs_navigation()} closeLabel={m.site_close()} />
-			<DrawerBody bind:ref={drawerBody}><DocsSidebar {path} picked={() => (open = false)} /></DrawerBody>
-			<ScrollBar scrollRef={drawerBody} hideArrows size="thin" />
-		</Drawer>
-	</div>
-
-	<aside class="docs-sidebar" bind:this={scrollBar}>
+	<aside class="docs-sidebar" bind:this={sidebar}>
 		<DocsSidebar {path} />
 	</aside>
-	<ScrollBar scrollRef={scrollBar} hideArrows size="thin" />
+	<ScrollBar scrollRef={showSidebar.current ? sidebar : null} size="thin" defer />
 
 	<div class="docs-panel">
 		<article id="docs" tabindex="-1">
@@ -68,9 +58,10 @@
 			<DocsSupport />
 		</article>
 
-		<aside class="docs-outline">
+		<aside class="docs-outline" bind:this={outline}>
 			<Toc target={content} searchFor="h2, h3, h4" />
 		</aside>
+		<ScrollBar scrollRef={showOutline.current ? outline : null} size="thin" defer />
 	</div>
 </div>
 
@@ -122,9 +113,6 @@
 	.docs-outline :global(.toc h3) {
 		font-size: 0.85rem;
 		font-weight: 650;
-	}
-	.mobile-sidebar {
-		display: none;
 	}
 	#docs {
 		width: min(100%, 50rem);
@@ -224,10 +212,6 @@
 		.docs-sidebar {
 			display: none;
 		}
-		.mobile-sidebar {
-			display: block;
-			padding: 0.75rem 1rem 0;
-		}
 		.docs-panel {
 			padding: 1.4rem 1rem 3rem;
 			border-inline-start: 0;
@@ -235,6 +219,14 @@
 		}
 		.docs-content :global(table.fs-docs) {
 			table-layout: fixed;
+		}
+		.docs-content :global(.props-table :is(th, td):nth-child(3)) {
+			display: none;
+		}
+	}
+	@media (max-width: 600px) {
+		.docs-content :global(.props-table :is(th, td):nth-child(4)) {
+			display: none;
 		}
 	}
 </style>

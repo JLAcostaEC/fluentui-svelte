@@ -2,6 +2,10 @@
 	background: var(--fs-solid-background-base);
 }
 
+html {
+	scroll-padding-block-start: 3.5rem;
+}
+
 .site-shell {
 	width: min(100%, 79rem);
 	margin-inline: auto;

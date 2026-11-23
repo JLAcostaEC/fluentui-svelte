@@ -73,7 +73,7 @@
 		{@render children?.()}
 	</main>
 	<Footer bind:height={footerHeight} />
-	<ScrollBar scrollRef={body} hideArrows size="thin" />
+	<ScrollBar scrollRef={body} hideArrows size="thin" defer />
 </FluentUISvelte>
 
 <style>

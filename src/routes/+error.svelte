@@ -13,7 +13,10 @@
 	const title = $derived(missing ? m.error_not_found_title() : m.error_unavailable_title());
 </script>
 
-<svelte:head><title>{page.status} · {title}</title></svelte:head>
+<svelte:head>
+	<title>{page.status} · {title}</title>
+	<meta name="robots" content="noindex" />
+</svelte:head>
 
 <section class="error-page" aria-labelledby="error-title">
 	<div class="site-shell error-layout">

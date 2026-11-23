@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { prefersReducedMotion } from 'svelte/motion';
+	import { MediaQuery } from 'svelte/reactivity';
 	import { getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { generateAccentRamp } from '#site/utils/accent-ramp.js';
 	import { startWallpaper } from '#site/utils/hero-wallpaper.js';
@@ -9,6 +10,7 @@
 	let bands: HTMLCanvasElement;
 	let lines: HTMLCanvasElement;
 	const getMotionPreference = getReducedMotion();
+	const compact = new MediaQuery('(max-width: 600px)');
 	let update = $state.raw<ReturnType<typeof startWallpaper>['update']>();
 
 	onMount(() => {
@@ -18,7 +20,7 @@
 	});
 
 	const colors = $derived(generateAccentRamp(accent));
-	const still = $derived(prefersReducedMotion.current || getMotionPreference());
+	const still = $derived(compact.current || prefersReducedMotion.current || getMotionPreference());
 
 	$effect(() => update?.(colors, still));
 </script>

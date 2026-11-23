@@ -109,9 +109,9 @@
 						<div class={['theme-preview', index === 1 && 'night']}>
 							<h3>{theme}</h3>
 							<div class="site-actions">
-								<Button appearance="accent" onclick={() => setMode(index === 1 ? 'dark' : 'light')}
-									>{m.site_demo_apply()}</Button
-								>
+								<Button appearance="accent" onclick={() => setMode(index === 1 ? 'dark' : 'light')}>
+									{m.site_demo_apply()}
+								</Button>
 								<Hyperlink href="#accent-generator">{m.site_accent()}</Hyperlink>
 							</div>
 						</div>

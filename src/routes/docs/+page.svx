@@ -98,13 +98,13 @@
 
 <table class="fs-docs">
   <thead>
-    <tr><th scope="col">{m.site_browser_feature()}</th><th scope="col">{m.site_browser_use()}</th><th scope="col">{m.site_browser_compatibility()}</th></tr>
+    <tr><th scope="col">{m.site_browser_feature()}</th><th scope="col">{m.site_browser_use()}</th></tr>
   </thead>
   <tbody>
-    <tr><td><code>field-sizing: content</code></td><td>{m.site_browser_use_size()}</td><td>{m.site_browser_size_fallback()}</td></tr>
-    <tr><td><code>mask</code></td><td>{m.site_browser_use_mask()}</td><td>{m.site_browser_mask_fallback()}</td></tr>
-    <tr><td><code>backdrop-filter</code></td><td>{m.site_browser_use_blur()}</td><td>{m.site_browser_blur_fallback()}</td></tr>
-    <tr><td><code>color-mix()</code>, <code>:has()</code></td><td>{m.site_browser_use_tokens()}</td><td>{m.site_browser_supported()}</td></tr>
+    <tr><td><code>field-sizing: content</code></td><td>{m.site_browser_use_size()}</td></tr>
+    <tr><td><code>mask</code></td><td>{m.site_browser_use_mask()}</td></tr>
+    <tr><td><code>backdrop-filter</code></td><td>{m.site_browser_use_blur()}</td></tr>
+    <tr><td><code>color-mix()</code>, <code>:has()</code></td><td>{m.site_browser_use_tokens()}</td></tr>
   </tbody>
 </table>
 

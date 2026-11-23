@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import ChevronRightRegular from 'fluentui-icons-svelte/ChevronRightRegular.svelte';
 	import SettingsRegular from 'fluentui-icons-svelte/SettingsRegular.svelte';
 	import NavigationRegular from 'fluentui-icons-svelte/NavigationRegular.svelte';
 	import logo from '#site/assets/images/banner.png?w=300;150&enhanced';
@@ -31,11 +32,16 @@
 	import PageLoader from '#site/components/page-loader/page-loader.svelte';
 	import ThemeSelector from '#site/components/theme-selector.svelte';
 	import DocsSearch from '#site/components/docs/docs-search.svelte';
+	import DocsSidebar from '#site/components/docs/docs-sidebar.svelte';
 
 	let { height = $bindable(56) }: { height?: number } = $props();
 	let scrollY = $state(0);
 	let drawerOpen = $state(false);
+	let explorerOpen = $state(false);
 	let drawerBody = $state<HTMLDivElement | null>(null);
+	let explorerBody = $state<HTMLDivElement | null>(null);
+	const drawerId = $props.id();
+	const explorerId = `${drawerId}-docs`;
 	const flags = { en: flagEn, es: flagEs };
 	const languageNames = Object.fromEntries(
 		locales.map((locale) => [
@@ -55,9 +61,14 @@
 		{ href: '/about', label: m.global_about }
 	];
 	const active = (href: string) => ((href === '/docs' ? inDocs : path === href) ? 'page' : undefined);
+
+	function closeNavigation() {
+		explorerOpen = false;
+		drawerOpen = false;
+	}
 </script>
 
-<svelte:window bind:scrollY />
+<svelte:window bind:scrollY onresize={() => window.innerWidth > 900 && closeNavigation()} />
 
 {#snippet githubIcon()}
 	<svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
@@ -93,12 +104,12 @@
 		<div class="header-actions">
 			<ThemeSelector showLabels={isHome} />
 			{#if isHome}
-				<Button as="a" appearance="subtle" href={GITHUB_REPO_URL} class="desktop-github"
-					>{@render githubIcon()}GitHub</Button
-				>
-				<Button as="a" appearance="accent" href={localizedPath('/docs/getting-started')} class="desktop-start"
-					>{m.site_get_started()}</Button
-				>
+				<Button as="a" appearance="subtle" href={GITHUB_REPO_URL} class="desktop-github">
+					{@render githubIcon()}GitHub
+				</Button>
+				<Button as="a" appearance="accent" href={localizedPath('/docs/getting-started')} class="desktop-start">
+					{m.site_get_started()}
+				</Button>
 			{/if}
 
 			<div class="desktop-settings">
@@ -151,30 +162,46 @@
 					appearance="subtle"
 					aria-label={m.header_nav_menu_tooltip()}
 					aria-expanded={drawerOpen}
+					aria-controls={drawerId}
 					onclick={() => (drawerOpen = true)}
 				>
 					<NavigationRegular width="1.1em" />
 				</Button>
-				<Drawer bind:open={drawerOpen} size="min(22rem, 100vw)" position="end">
+				<Drawer id={drawerId} bind:open={drawerOpen} size="22rem" position="end">
 					<DrawerHeader title={m.site_navigation()} closeLabel={m.site_close()} />
 					<DrawerBody bind:ref={drawerBody}>
 						<nav class="drawer-navigation" aria-label={m.site_navigation()}>
-							{#if inDocs && drawerOpen}<DocsSearch hideSuggestionsOnFocus />{/if}
+							{#if drawerOpen}
+								<DocsSearch hideSuggestionsOnFocus onSelect={closeNavigation} />
+							{/if}
 							{#each navigation as { href, label } (href)}
 								<Button
 									as="a"
 									appearance="subtle"
 									href={localizedPath(href)}
 									aria-current={active(href)}
-									onclick={() => (drawerOpen = false)}>{label()}</Button
+									onclick={closeNavigation}
 								>
+									{label()}
+								</Button>
 							{/each}
+							<Button
+								appearance="subtle"
+								class="open-docs-explorer"
+								aria-expanded={explorerOpen}
+								aria-controls={explorerId}
+								onclick={() => (explorerOpen = true)}
+							>
+								{m.site_docs_navigation()}<ChevronRightRegular width="1em" aria-hidden="true" />
+							</Button>
 							<Button
 								as="a"
 								appearance="subtle"
 								href={localizedPath('/docs/getting-started')}
-								onclick={() => (drawerOpen = false)}>{m.site_get_started()}</Button
+								onclick={closeNavigation}
 							>
+								{m.site_get_started()}
+							</Button>
 							<Button as="a" appearance="subtle" href={GITHUB_REPO_URL}>{@render githubIcon()}GitHub</Button>
 						</nav>
 						<div class="drawer-settings">
@@ -200,7 +227,14 @@
 							{/each}
 						</div>
 					</DrawerBody>
-					<ScrollBar scrollRef={drawerBody} hideArrows size="thin" />
+					<ScrollBar scrollRef={drawerOpen ? drawerBody : null} hideArrows size="thin" />
+					<Drawer id={explorerId} bind:open={explorerOpen} size="22rem" position="end" hideBackdrop>
+						<DrawerHeader title={m.site_docs_navigation()} closeLabel={m.site_close()} />
+						<DrawerBody bind:ref={explorerBody}>
+							{#if explorerOpen}<DocsSidebar {path} picked={closeNavigation} />{/if}
+						</DrawerBody>
+						<ScrollBar scrollRef={explorerOpen ? explorerBody : null} hideArrows size="thin" />
+					</Drawer>
 				</Drawer>
 			</div>
 		</div>
@@ -292,6 +326,9 @@
 	.drawer-settings,
 	.drawer-languages {
 		border-block-start: 1px solid var(--fs-control-stroke-secondary);
+	}
+	.drawer-navigation :global(.open-docs-explorer) {
+		justify-content: space-between;
 	}
 	.drawer-languages {
 		padding-block: 0.65rem;

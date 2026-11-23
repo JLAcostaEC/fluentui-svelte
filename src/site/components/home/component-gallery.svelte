@@ -75,9 +75,9 @@
 		</div>
 		<TopNav aria-label={m.docs_nav_title()} bind:selectedValue={selected} appearance="subtle" class="gallery-tabs">
 			{#each families as [family, label] (family)}
-				<TopNavItem value={family} id={'gallery-tab-' + family} aria-controls={'gallery-' + family}
-					>{label()}</TopNavItem
-				>
+				<TopNavItem value={family} id={'gallery-tab-' + family} aria-controls={'gallery-' + family}>
+					{label()}
+				</TopNavItem>
 			{/each}
 		</TopNav>
 
@@ -183,8 +183,9 @@
 	</div>
 {/snippet}
 
-{#snippet link()}<Hyperlink href={localizedPath('/docs/getting-started')}>{m.global_getting_started()}</Hyperlink
-	>{/snippet}
+{#snippet link()}<Hyperlink href={localizedPath('/docs/getting-started')}>
+		{m.global_getting_started()}
+	</Hyperlink>{/snippet}
 
 {#snippet textBox()}
 	<Label labelPosition="above" label={m.site_gallery_email()}>
@@ -221,9 +222,9 @@
 	<div>
 		<TopNav aria-label={m.site_navigation()} bind:selectedValue={selectedTab} appearance="subtle" class="gallery-tabs">
 			{#each navItems as label, index (label)}
-				<TopNavItem value={String(index)} id={'sample-tab-' + index} aria-controls={'sample-panel-' + index}
-					>{label()}</TopNavItem
-				>
+				<TopNavItem value={String(index)} id={'sample-tab-' + index} aria-controls={'sample-panel-' + index}>
+					{label()}
+				</TopNavItem>
 			{/each}
 		</TopNav>
 		{#each navItems as label, index (label)}
@@ -244,9 +245,9 @@
 	<div class="demo-list">
 		<ListView selectionMode="single" bind:selectedItems={listSelection}>
 			{#each inboxItems as label, index (label)}
-				<ListViewItem value={String(index)}
-					>{label()}{#if index < 2}<Badge shape="rounded">{index === 0 ? '12' : '3'}</Badge>{/if}</ListViewItem
-				>
+				<ListViewItem value={String(index)}>
+					{label()}{#if index < 2}<Badge shape="rounded">{index === 0 ? '12' : '3'}</Badge>{/if}
+				</ListViewItem>
 			{/each}
 		</ListView>
 	</div>
@@ -254,13 +255,13 @@
 
 {#snippet breadcrumbs()}
 	<Breadcrumb aria-label={m.site_navigation()}>
-		<BreadcrumbItem
-			><BreadcrumbButton as="a" href={localizedPath('/')}>{m.global_home()}</BreadcrumbButton></BreadcrumbItem
-		>
+		<BreadcrumbItem>
+			<BreadcrumbButton as="a" href={localizedPath('/')}>{m.global_home()}</BreadcrumbButton>
+		</BreadcrumbItem>
 		<BreadcrumbDivider />
-		<BreadcrumbItem
-			><BreadcrumbButton as="a" href={localizedPath('/docs')}>{m.global_docs()}</BreadcrumbButton></BreadcrumbItem
-		>
+		<BreadcrumbItem>
+			<BreadcrumbButton as="a" href={localizedPath('/docs')}>{m.global_docs()}</BreadcrumbButton>
+		</BreadcrumbItem>
 		<BreadcrumbDivider />
 		<BreadcrumbItem><BreadcrumbButton current>{m.docs_nav_title()}</BreadcrumbButton></BreadcrumbItem>
 	</Breadcrumb>
@@ -273,20 +274,22 @@
 				dismissible
 				shape="rounded"
 				dismissLabel={m.site_close()}
-				onDismiss={() => (tags = tags.filter((value) => value !== tag))}>{tag}</Tag
+				onDismiss={() => (tags = tags.filter((value) => value !== tag))}
 			>
+				{tag}
+			</Tag>
 		{/each}
 	</div>
 {/snippet}
 
 {#snippet notice()}
 	<div class="choice-stack">
-		<InfoBar title={m.site_gallery_update_pending()} status="warning" style="multiline" hideCloseButton
-			>{m.site_gallery_update_hint()}</InfoBar
-		>
-		<InfoBar title={m.site_gallery_sync_failed()} status="critical" style="multiline" hideCloseButton
-			>{m.site_gallery_sync_hint()}</InfoBar
-		>
+		<InfoBar title={m.site_gallery_update_pending()} status="warning" style="multiline" hideCloseButton>
+			{m.site_gallery_update_hint()}
+		</InfoBar>
+		<InfoBar title={m.site_gallery_sync_failed()} status="critical" style="multiline" hideCloseButton>
+			{m.site_gallery_sync_hint()}
+		</InfoBar>
 	</div>
 {/snippet}
 

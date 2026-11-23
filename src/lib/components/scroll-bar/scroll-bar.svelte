@@ -220,7 +220,7 @@
 				outline: 2px solid var(--fs-focus-stroke-outer);
 				outline-offset: -2px;
 			}
-			&:not(.fs-scroll-bar-arrows) .fs-scroll-bar-arrow {
+			&:not(.fs-scroll-bar-arrows) > .os-scrollbar > .fs-scroll-bar-arrow {
 				display: none;
 			}
 

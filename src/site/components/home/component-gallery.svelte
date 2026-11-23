@@ -118,7 +118,7 @@
 </section>
 
 {#snippet tile(name: string, slug: string, demo: Snippet)}
-	<Card as="article" orientation="vertical" class="gallery-tile">
+	<Card orientation="vertical" class="gallery-tile">
 		<div class="site-canvas demo-canvas">{@render demo()}</div>
 		<h3 class="demo-label"><Hyperlink href={localizedPath(componentPath(slug))}>{name}</Hyperlink></h3>
 	</Card>

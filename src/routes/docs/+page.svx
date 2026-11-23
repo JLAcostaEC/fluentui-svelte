@@ -22,7 +22,7 @@
 
 {m.docs_overview_description()}
 
-<InfoBar title={m.docs_overview_attention_title()} status="warning" style="multiline" hideCloseButton>
+<InfoBar title={m.docs_overview_attention_title()} headingLevel={2} status="warning" style="multiline" hideCloseButton>
   <p>{m.docs_overview_attention_description()}</p>
 </InfoBar>
 

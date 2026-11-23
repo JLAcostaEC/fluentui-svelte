@@ -12,7 +12,7 @@
 <Seo title={m.global_about()} description={m.seo_about_description()} keywords={m.seo_about_keywords().split(', ')} />
 
 <section class="about-page">
-  <Card as="article" orientation="vertical" class="about-card">
+  <Card orientation="vertical" class="about-card">
 
 
 # {m.about_title()}

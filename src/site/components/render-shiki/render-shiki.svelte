@@ -37,21 +37,19 @@
 		const transformers = [fsShikiFocusableCode()];
 		if (!hideCopyButton) transformers.unshift(fsShikiCopyButton(copyLabel));
 
-		return import('#site/utils/highlighter.js')
-			.then(({ getHighlighter }) => getHighlighter())
-			.then((highlighter) =>
-				highlighter.codeToHtml(source, {
-					lang: language,
-					themes: {
-						light: 'one-light',
-						dark: 'one-dark-pro'
-					},
-					defaultColor: 'light-dark()',
-					cssVariablePrefix: '--shiki-',
-					tabindex: false,
-					transformers
-				})
-			);
+		return import('#site/utils/highlighter.js').then(({ codeToHtml }) =>
+			codeToHtml(source, {
+				lang: language,
+				themes: {
+					light: 'one-light',
+					dark: 'one-dark-pro'
+				},
+				defaultColor: 'light-dark()',
+				cssVariablePrefix: '--shiki-',
+				tabindex: false,
+				transformers
+			})
+		);
 	});
 </script>
 

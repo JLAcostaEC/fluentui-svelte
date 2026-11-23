@@ -112,7 +112,13 @@
 </div>
 
 <div class="site-shell attention">
-	<InfoBar title={m.docs_overview_attention_title()} status="warning" style="multiline" hideCloseButton>
+	<InfoBar
+		title={m.docs_overview_attention_title()}
+		headingLevel={2}
+		status="warning"
+		style="multiline"
+		hideCloseButton
+	>
 		<p>{m.docs_overview_attention_description()}</p>
 	</InfoBar>
 </div>
@@ -123,7 +129,7 @@
 		<h2>{m.site_why_title()}</h2>
 	</div>
 	<div class="bento">
-		<Card as="article" orientation="vertical" class="materials">
+		<Card orientation="vertical" class="materials">
 			<h3>{m.site_why_materials()}</h3>
 			<p>{m.site_why_materials_text()}</p>
 			<div class="materials-stack" aria-hidden="true">
@@ -133,7 +139,7 @@
 				<div>Acrylic</div>
 			</div>
 		</Card>
-		<Card as="article" orientation="vertical">
+		<Card orientation="vertical">
 			<h3>{m.site_why_svelte()}</h3>
 			<p><I18nMarkupMessage message={m.site_why_svelte_text} /></p>
 			<div class="rune-preview">
@@ -142,7 +148,7 @@
 				<output>checked = {notifications}</output>
 			</div>
 		</Card>
-		<Card as="article" orientation="vertical">
+		<Card orientation="vertical">
 			<h3>{m.site_why_states()}</h3>
 			<p>{m.site_why_states_text()}</p>
 			<div class="states" inert aria-hidden="true">
@@ -156,7 +162,7 @@
 				{/each}
 			</div>
 		</Card>
-		<Card as="article" orientation="vertical">
+		<Card orientation="vertical">
 			<h3>{m.site_why_rebrand()}</h3>
 			<p>{m.site_why_rebrand_text()}</p>
 			<div class="mini-ramp" aria-hidden="true">
@@ -164,7 +170,7 @@
 			</div>
 			<AccentPresets {accent} select={setAccent} />
 		</Card>
-		<Card as="article" orientation="vertical">
+		<Card orientation="vertical">
 			<h3>{m.site_why_keyboard()}</h3>
 			<p>{m.site_why_keyboard_text()}</p>
 			<div class="keycaps">
@@ -182,7 +188,7 @@
 				<Button as="a" appearance="accent" href={localizedPath('/docs/getting-started')}>{m.site_get_started()}</Button>
 			</div>
 		</Card>
-		<Card as="article" orientation="vertical">
+		<Card orientation="vertical">
 			<h3>{m.site_why_native()}</h3>
 			<p><I18nMarkupMessage message={m.site_why_native_text} /></p>
 			<Expander header={m.site_expanded()} justify>

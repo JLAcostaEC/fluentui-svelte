@@ -63,7 +63,7 @@
 	</div>
 	<div class="templates">
 		{#each templates as { id, label, description, layout } (id)}
-			<Card as="article" orientation="vertical" class="template">
+			<Card orientation="vertical" class="template">
 				<div
 					class={['wireframe', id]}
 					style:grid-template-areas={layout
@@ -111,6 +111,10 @@
 		flex-wrap: wrap;
 		gap: 0.35rem 0.6rem;
 		justify-content: space-between;
+
+		& :global(.fs-badge) {
+			--fs-system-neutral: var(--fs-text-secondary);
+		}
 	}
 	.wireframe {
 		display: grid;

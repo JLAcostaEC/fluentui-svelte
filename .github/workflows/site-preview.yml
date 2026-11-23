@@ -1,0 +1,74 @@
+name: Site Preview
+
+on:
+  push:
+    branches: [staging, preview]
+  pull_request:
+    types: [opened, reopened, synchronize, labeled, unlabeled, closed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-preview-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    if: >-
+      github.repository == 'JLAcostaEC/fluentui-svelte' &&
+      ((github.event_name == 'push' && !github.event.deleted) ||
+        (github.event_name == 'pull_request' &&
+          github.event.action != 'closed' &&
+          github.event.pull_request.head.repo.full_name == github.repository &&
+          (contains(github.event.pull_request.labels.*.name, 'site') ||
+            contains(github.event.pull_request.labels.*.name, 'documentation') ||
+            contains(github.event.pull_request.labels.*.name, 'preview') ||
+            contains(github.event.pull_request.labels.*.name, 'staging'))))
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: site-preview
+      url: ${{ steps.publish.outputs.url }}
+    defaults:
+      run:
+        shell: bash
+    env:
+      PREVIEW_NAME: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || github.ref_name }}
+
+    steps:
+      - name: Check Cloudflare credentials
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          : "${CLOUDFLARE_API_TOKEN:?Add CLOUDFLARE_API_TOKEN to the site-preview environment}"
+          : "${CLOUDFLARE_ACCOUNT_ID:?Add CLOUDFLARE_ACCOUNT_ID to the site-preview environment}"
+
+      - name: Check out the approved revision
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build the website
+        run: pnpm build:site
+
+      - name: Publish a Cloudflare Preview
+        id: publish
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          url=$(pnpm exec wrangler preview --name "$PREVIEW_NAME" --json | jq -er '.preview.urls[0]')
+          printf 'url=%s\n' "$url" >> "$GITHUB_OUTPUT"
+          printf '[Open Cloudflare Preview](%s)\n' "$url" >> "$GITHUB_STEP_SUMMARY"

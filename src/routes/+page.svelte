@@ -585,6 +585,14 @@
 			}
 		}
 	}
+	@media (max-width: 383px) {
+		.kicker {
+			flex-wrap: nowrap;
+			gap: 0.35rem;
+			padding-inline-end: 0.45rem;
+			font-size: 0.72rem;
+		}
+	}
 	@media (max-width: 420px) {
 		.states {
 			grid-template-columns: repeat(3, minmax(0, 1fr));

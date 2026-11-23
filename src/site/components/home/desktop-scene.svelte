@@ -4,6 +4,7 @@
 	import {
 		AppSurface,
 		AppWindow,
+		Badge,
 		Button,
 		CalendarView,
 		Card,
@@ -21,7 +22,6 @@
 		MenuPopover,
 		MenuTrigger,
 		Persona,
-		ProgressBar,
 		SideNav,
 		SideNavItem,
 		Slider,
@@ -39,10 +39,13 @@
 	import DocumentRegular from 'fluentui-icons-svelte/DocumentRegular.svelte';
 	import CalendarRegular from 'fluentui-icons-svelte/CalendarRegular.svelte';
 	import AddRegular from 'fluentui-icons-svelte/AddRegular.svelte';
+	import HeartRegular from 'fluentui-icons-svelte/HeartRegular.svelte';
 	import { getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { m } from '#i18n/messages.js';
 	import { getLocale } from '#i18n/runtime.js';
-	import { INSTALL_COMMAND } from '#site/constants.js';
+	import { GITHUB_REPO_URL, INSTALL_COMMAND, SITE_NAME, SPONSOR_URL, VERSION } from '#site/constants.js';
+	import { localizedPath } from '#site/utils/localized-path.js';
+	import Command from '#site/components/command.svelte';
 	import CopyText from '#site/components/copy-text.svelte';
 	import AccentPresets from './accent-presets.svelte';
 
@@ -175,18 +178,37 @@
 						</div>
 					</Card>
 				{:else if selected === 'home'}
-					<InfoBar status="success" title={m.site_demo_up_to_date()} hideCloseButton>
-						{m.site_demo_up_to_date_hint()}
-					</InfoBar>
 					<Card class="setting" orientation="vertical">
-						<div class="setting-copy">
-							<span>{m.site_demo_storage()}</span><small>{m.site_demo_storage_hint()}</small>
+						<div class="package-heading">
+							<h3>{SITE_NAME}</h3>
+							<Badge>v{VERSION}</Badge>
 						</div>
-						<ProgressBar aria-label={m.site_demo_storage()} value={164} max={256} />
+						<Command command={INSTALL_COMMAND} />
+					</Card>
+					<Card class="setting" orientation="vertical">
+						<h3>{m.site_docs_navigation()}</h3>
+						<ListView aria-label={m.site_docs_navigation()}>
+							<ListViewItem as="a" href={localizedPath('/docs/getting-started')}>
+								<DocumentRegular width="1em" aria-hidden="true" />{m.global_getting_started()}
+							</ListViewItem>
+							<ListViewItem as="a" href={localizedPath('/docs/components')}>
+								<FolderRegular width="1em" aria-hidden="true" />{m.docs_nav_title()}
+							</ListViewItem>
+							<ListViewItem as="a" href={GITHUB_REPO_URL}>{m.home_github_repo_button()}</ListViewItem>
+						</ListView>
 					</Card>
 				{:else}
 					<Card class="setting">
-						<Persona name="Jorge Acosta" primaryText={m.site_demo_local_account()} presence={{ status: 'available' }} />
+						<Persona name="Jorge Acosta" primaryText={m.site_demo_maintainer()} />
+					</Card>
+					<Card class="setting" orientation="vertical">
+						<h3>{m.site_docs_support()}</h3>
+						<p class="support-copy">{m.site_docs_support_description()}</p>
+						<div class="site-actions">
+							<Button as="a" href={SPONSOR_URL}>
+								<HeartRegular width="1em" aria-hidden="true" />{m.site_sponsor()}
+							</Button>
+						</div>
 					</Card>
 				{/if}
 			</AppSurface>
@@ -267,8 +289,8 @@
 
 		& :global(.scene-flyout),
 		& :global(.scene-tip) {
-			background: color-mix(in srgb, var(--fs-acrylic-background-default) 77%, transparent);
-			backdrop-filter: blur(1.4rem) saturate(1.4);
+			--fs-acrilic-noise: none;
+			background-color: var(--fs-solid-background-secondary);
 		}
 	}
 	.settings {
@@ -303,6 +325,18 @@
 			font-weight: 650;
 			margin-block-end: 0.45rem;
 		}
+		& h3 {
+			font-weight: 650;
+		}
+	}
+	.package-heading {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5rem;
+	}
+	.support-copy {
+		color: var(--fs-text-secondary);
 	}
 	.setting-copy {
 		display: grid;

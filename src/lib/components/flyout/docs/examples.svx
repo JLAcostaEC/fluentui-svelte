@@ -2,6 +2,7 @@
   import { Flyout } from '#lib/index.js';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
 
   const roundCornersCode = `
 <Flyout roundCorners="top">
@@ -11,7 +12,7 @@
 
 ### {m.flyout_round_corners_title()}
 
-{m.flyout_round_corners_description()}
+<p><I18nMarkupMessage message={m.flyout_round_corners_description} /></p>
 
 <Showcase columns={1} code={roundCornersCode}>
   <div style="max-width: 300px; margin: auto;">

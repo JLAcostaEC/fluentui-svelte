@@ -2,7 +2,7 @@
  * Creates a Shiki transformer that adds a copy button to code blocks
  * @returns {import('shiki').ShikiTransformer} A Shiki transformer object
  */
-export function fsShikiCopyButton() {
+export function fsShikiCopyButton(label = 'Copy code to clipboard') {
 	return {
 		name: 'fs-shiki-copy-button',
 		pre(node) {
@@ -14,7 +14,7 @@ export function fsShikiCopyButton() {
 					class: 'copy',
 					'data-code': this.source,
 					onclick: `navigator.clipboard.writeText(this.dataset.code);this.classList.add('copied');setTimeout(() => this.classList.remove('copied'), 2000)`,
-					ariaLabel: 'Copy code to clipboard'
+					ariaLabel: label
 				},
 				children: [
 					{

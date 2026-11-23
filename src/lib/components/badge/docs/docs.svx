@@ -1,13 +1,17 @@
 <script lang="ts">
   import { Badge } from '#lib/index.js';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import DocsActions from '#site/components/docs/docs-actions.svelte';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
   import { AccessibilityRegular } from 'fluentui-icons-svelte';
 </script>
 
-# Badge
+# Badge <StatusBadge />
 
 {m.badge_description()}
+
+<DocsActions />
 
 <Showcase columns={6} initialZoom={1}>
   <Badge color="information">5</Badge>

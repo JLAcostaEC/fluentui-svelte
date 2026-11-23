@@ -1,11 +1,17 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import { m } from '#i18n/messages.js';
-  import { Button, InfoBar } from '#lib/index.js';
+  import { Button, Card, InfoBar } from '#lib/index.js';
   import DocPanel from '#site/components/doc-panel/doc-panel.svelte';
   import Steps from '#site/components/doc-steps/steps.svelte';
   import Step from '#site/components/doc-steps/step.svelte';
   import Seo from '#site/components/seo/seo.svelte';
+  import UsageExample from '#site/components/usage-example.svelte';
+  import InstallOptions from '#site/components/docs/install-options.svelte';
+  import AccentLesson from '#site/components/docs/accent-lesson.svelte';
+  import RenderShiki from '#site/components/render-shiki/render-shiki.svelte';
+  import { usageCode } from '#site/utils/usage-code.js';
+  import { localizedPath } from '#site/utils/localized-path.js';
 </script>
 
 <Seo title={m.global_getting_started()} description={m.seo_getting_started_description()} keywords={m.seo_getting_started_keywords().split(', ')} />
@@ -18,20 +24,7 @@
 
 {m.gs_installation_description()}
 
-{m.gs_npm_label()}
-```bash
-npm i -D fluentui-svelte
-```
-
-{m.gs_yarn_label()}
-```bash
-yarn add -D fluentui-svelte
-```
-
-{m.gs_pnpm_label()}
-```bash
-pnpm add -D fluentui-svelte
-```
+<InstallOptions />
 
 ### {m.gs_required_css_title()}
 
@@ -42,6 +35,17 @@ import 'fluentui-svelte/theme.css';
 ```
 - {m.gs_required_css_bullet1()}
 - {m.gs_required_css_bullet2_before_code()} `dist` {m.gs_required_css_bullet2_after_code()}
+
+<table class="fs-docs">
+  <thead><tr><th scope="col">CSS</th><th scope="col">{m.site_browser_use()}</th></tr></thead>
+  <tbody>
+    <tr><td><code>theme.css</code></td><td>{m.site_gs_styles_theme()}</td></tr>
+    <tr><td><code>reset.css</code></td><td>{m.site_gs_styles_reset()}</td></tr>
+    <tr><td><code>typography.css</code></td><td>{m.site_gs_styles_type()}</td></tr>
+    <tr><td><code>class-darkmode.css</code></td><td><I18nMarkupMessage message={m.site_gs_styles_class} /></td></tr>
+    <tr><td><code>media-darkmode.css</code></td><td><I18nMarkupMessage message={m.site_gs_styles_media} /></td></tr>
+  </tbody>
+</table>
 
 ## {m.gs_optional_section_title()}
 
@@ -218,7 +222,58 @@ import '../app.css';
 </FluentUISvelte.Button>
 ```
 
+## {m.site_use_compose()}
+
+<Card orientation="vertical" class="first-component">
+  <div class="site-canvas example-pad"><UsageExample stacked /></div>
+  <RenderShiki code={usageCode()} />
+</Card>
+
+## {m.site_gs_dark()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.site_gs_dark_text} /></p>
+
+```bash
+pnpm add mode-watcher
+```
+
+```svelte
+<script>
+  import 'fluentui-svelte/theme.css';
+  import 'fluentui-svelte/class-darkmode.css';
+  import { FluentUISvelte } from 'fluentui-svelte';
+  import { ModeWatcher } from 'mode-watcher';
+
+  let { children } = $props();
+</script>
+
+<ModeWatcher />
+<FluentUISvelte>
+  {@render children()}
+</FluentUISvelte>
+```
+
+## {m.site_gs_accent()}
+
+<p class="fs-docs"><I18nMarkupMessage message={m.site_gs_accent_text} /></p>
+<AccentLesson />
+<Button as="a" href={localizedPath('/') + '#accent-generator'} appearance="standard">{m.site_accent_title()}</Button>
+
+## {m.site_gs_next()}
+
+<div class="site-actions">
+  <Button as="a" href={localizedPath('/docs/components')}>{m.docs_nav_title()}</Button>
+  <Button as="a" href={localizedPath('/docs/llms')} appearance="standard">{m.global_llms()}</Button>
+  <Button as="a" href={localizedPath('/docs/types')} appearance="standard">{m.docs_types_reference()}</Button>
+</div>
+
 <style>
+  :global(.first-component) {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .example-pad { padding: 1.4rem; }
   .font-downloads {
     padding-inline-start: 1.5rem;
     & li {

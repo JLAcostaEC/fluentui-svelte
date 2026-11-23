@@ -2,6 +2,7 @@
   import { CalendarView } from '#lib/index.js';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
 
   const multipleCode = `<CalendarView selectionMode="multiple" />`;
   const rangeCode = `<script>
@@ -16,7 +17,7 @@
 
 ### {m.global_multiple_selection()}
 
-{m.cv_multiple_description()}
+<p><I18nMarkupMessage message={m.cv_multiple_description} /></p>
 
 <Showcase columns={1} code={multipleCode} minHeight="450px">
   <CalendarView selectionMode="multiple" />
@@ -24,7 +25,7 @@
 
 ### {m.cv_range_title()}
 
-{m.cv_range_description()}
+<p><I18nMarkupMessage message={m.cv_range_description} /></p>
 
 <Showcase columns={1} code={rangeCode} minHeight="450px">
   <CalendarView selectionMode="range" bind:range />
@@ -32,7 +33,7 @@
 
 ### {m.cv_week_start_title()}
 
-{m.cv_week_start_description()}
+<p><I18nMarkupMessage message={m.cv_week_start_description} /></p>
 
 <Showcase columns={1} code={weekStartCode} minHeight="450px">
   <CalendarView weekStart={3} />

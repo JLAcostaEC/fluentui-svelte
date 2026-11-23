@@ -2,6 +2,7 @@
   import { InfoBar } from '#lib/index.js';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
 
   const statusCode = `
 <InfoBar status="information" title="Information">
@@ -40,7 +41,7 @@
 
 ### {m.global_status()}
 
-{m.ib_status_description()}
+<p><I18nMarkupMessage message={m.ib_status_description} /></p>
 
 <Showcase columns={1} minHeight="350px" code={statusCode}>
   <InfoBar status="information" title="Information">
@@ -62,7 +63,7 @@
 
 ### {m.ib_style_title()}
 
-{m.ib_style_description()}
+<p><I18nMarkupMessage message={m.ib_style_description} /></p>
 
 <Showcase columns={1} minHeight="250px" code={styleCode}>
   <InfoBar status="information" style="inline" title="Inline Style">
@@ -75,7 +76,7 @@
 
 ### {m.ib_hide_close_button_title()}
 
-{m.ib_hide_close_button_description()}
+<p><I18nMarkupMessage message={m.ib_hide_close_button_description} /></p>
 
 <Showcase columns={1} minHeight="250px" code={hideCloseButtonCode}>
   <InfoBar status="information" title="Without Close Button" hideCloseButton>

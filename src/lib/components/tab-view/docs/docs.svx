@@ -1,5 +1,7 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import DocsActions from '#site/components/docs/docs-actions.svelte';
   import { TabView, TabViewTab } from '#lib/index.js';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { DocumentRegular, MailRegular, CalendarLtrRegular } from 'fluentui-icons-svelte';
@@ -12,9 +14,11 @@
     'background: var(--fs-solid-background-quaternary); border: 1px solid var(--fs-card-stroke-default); border-radius: 0.4375rem; padding: 1rem; margin: 0;';
 </script>
 
-# TabView
+# TabView <StatusBadge />
 
-{m.tab_view_description()}
+<p><I18nMarkupMessage message={m.tab_view_description} /></p>
+
+<DocsActions />
 
 <Showcase columns={1} columnWidth="680px" >
   <div style="width: 100%">

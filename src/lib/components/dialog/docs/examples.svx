@@ -2,6 +2,7 @@
   import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent, DialogActions, Button } from '#lib/index.js';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
   import type { DialogAnimation, DialogPosition } from '#lib/index.js';
 
   const animations: DialogAnimation[] = ['fade', 'zoom', 'slide', 'bounce'];
@@ -160,7 +161,7 @@
 
 ### {m.dialog_animation_title()}
 
-{m.dialog_animation_description()}
+<p><I18nMarkupMessage message={m.dialog_animation_description} /></p>
 
 <Showcase columns={2} columnWidth="auto" gap="12px" minHeight="0" disablePanZoom showOverflow code={animationCode}>
   {#each animations as animation (animation)}
@@ -176,7 +177,7 @@
 
 ### {m.dialog_with_actions_title()}
 
-{m.dialog_with_actions_description()}
+<p><I18nMarkupMessage message={m.dialog_with_actions_description} /></p>
 
 <Showcase columns={1} minHeight="0" disablePanZoom showOverflow code={actionsCode}>
   <Dialog bind:this={actionsDialog}>
@@ -249,7 +250,7 @@
 
 ### {m.dialog_on_open_change_title()}
 
-{m.dialog_on_open_change_description()}
+<p><I18nMarkupMessage message={m.dialog_on_open_change_description} /></p>
 
 <Showcase columns={1} minHeight="0" disablePanZoom showOverflow code={openChangeCode}>
   <Dialog bind:this={eventsDialog} onOpenChange={(open) => (openChanges = [...openChanges, `onOpenChange(${open})`].slice(-5))}>

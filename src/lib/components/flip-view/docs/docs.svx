@@ -1,13 +1,18 @@
 <script lang="ts">
   import { FlipView } from '#lib/index.js';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import DocsActions from '#site/components/docs/docs-actions.svelte';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
 
   const photos = ['1506905925346-21bda4d32df4', '1501785888041-af3ef285b470', '1470071459604-3b5ec3a7fe05', '1441974231531-c6227db76b6e', '1469474968028-56623f02e42e'];
 </script>
 
-# FlipView
-{m.flip_view_description()}
+# FlipView <StatusBadge />
+<p><I18nMarkupMessage message={m.flip_view_description} /></p>
+
+<DocsActions />
 
 <Showcase columns={1} minHeight="0" disablePanZoom showOverflow fluid>
   <FlipView aria-label="Landscapes" style="width: 24rem; height: 14rem;">

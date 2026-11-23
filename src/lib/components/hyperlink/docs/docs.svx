@@ -1,12 +1,17 @@
 <script lang="ts">
   import { Hyperlink } from '#lib/index.js';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import DocsActions from '#site/components/docs/docs-actions.svelte';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
 </script>
 
-# Hyperlink
+# Hyperlink <StatusBadge />
 
-{m.hl_description()}
+<p><I18nMarkupMessage message={m.hl_description} /></p>
+
+<DocsActions />
 
 <Showcase column={2} autoCenter>
   <Hyperlink href="/">Go to Home</Hyperlink>

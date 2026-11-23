@@ -1,16 +1,14 @@
 export type TocLink = { id: string; text: string; active?: boolean; children?: TocLink[] };
 
-export type TocProps = { selector: string; searchFor?: string; offset?: string };
+export type TocProps = { target: Element | null; searchFor?: string };
 
-export const getLinks = (wrapper: Element, search: string, scrollOffSet: string) => {
-	const headings = Array.from(wrapper.querySelectorAll<HTMLElement>(`:scope > :is(${search})`));
+export const getLinks = (wrapper: Element | null, search: string) => {
+	const headings = Array.from(wrapper?.querySelectorAll<HTMLElement>(`:scope > :is(${search})[id]`) ?? []);
 
 	const stack: ({ level: number } & TocLink)[] = [];
 	const result: TocLink[] = [];
 
 	headings.forEach((heading) => {
-		heading.style.scrollMarginTop = scrollOffSet;
-
 		const level = parseInt(heading.tagName.replace('H', ''), 10);
 		const clone = heading.cloneNode(true) as HTMLElement;
 		clone.querySelectorAll('span').forEach((span) => span.remove());

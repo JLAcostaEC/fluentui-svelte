@@ -2,6 +2,7 @@
   import { ProgressBar } from '#lib/index.js';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
 
   const valueCode = `
 <ProgressBar value={30} />
@@ -21,7 +22,7 @@
 
 ### {m.global_value()}
 
-{m.pbar_value_description()}
+<p><I18nMarkupMessage message={m.pbar_value_description} /></p>
 
 <Showcase minHeight="150px" minZoom={1} columns={1} code={valueCode}>
   <ProgressBar value={30} />
@@ -31,7 +32,7 @@
 
 ### {m.global_indeterminate()}
 
-{m.pbar_indeterminate_description()}
+<p><I18nMarkupMessage message={m.pbar_indeterminate_description} /></p>
 
 <Showcase minHeight="100px" minZoom={1} columns={1} code={indeterminateCode}>
   <ProgressBar indeterminate />
@@ -39,7 +40,7 @@
 
 ### {m.global_hide_rail()}
 
-{m.pbar_hide_rail_description()}
+<p><I18nMarkupMessage message={m.pbar_hide_rail_description} /></p>
 
 <Showcase minHeight="100px" minZoom={1} code={hideRailCode}>
   <ProgressBar value={50} hideRail />
@@ -47,7 +48,7 @@
 
 ### {m.global_status()}
 
-{m.pbar_status_description()}
+<p><I18nMarkupMessage message={m.pbar_status_description} /></p>
 
 <Showcase minHeight="100px" columns={1} code={statusCode}>
   <ProgressBar value={50} status="paused" />

@@ -1,5 +1,7 @@
 <script lang="ts">
   import { MediaPlayer } from '#lib/index.js';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import DocsActions from '#site/components/docs/docs-actions.svelte';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
   import { docsLabels } from './labels.ts';
@@ -7,8 +9,10 @@
   const labels = { ...docsLabels(), player: m.media_player_label_player() };
 </script>
 
-# Media Player
+# Media Player <StatusBadge />
 {m.media_player_description()}
+
+<DocsActions />
 
 <Showcase columns={1} minHeight="0" disablePanZoom showOverflow fluid>
 

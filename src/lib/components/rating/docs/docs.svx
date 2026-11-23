@@ -1,12 +1,16 @@
 <script lang="ts">
   import { Rating } from '#lib/index.js';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import DocsActions from '#site/components/docs/docs-actions.svelte';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
 </script>
 
-# Rating
+# Rating <StatusBadge />
 
 {m.rating_description()}
+
+<DocsActions />
 
 <Showcase columns={1} minHeight="0" disablePanZoom showOverflow>
   <Rating value={3} />

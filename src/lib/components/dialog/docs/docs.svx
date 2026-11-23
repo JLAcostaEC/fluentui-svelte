@@ -1,13 +1,17 @@
 <script lang="ts">
   import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import DocsActions from '#site/components/docs/docs-actions.svelte';
   import { Dialog, DialogTrigger, DialogSurface, DialogTitle, DialogContent } from '#lib/index.js';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
 </script>
 
-# Dialog
+# Dialog <StatusBadge />
 
 {m.dialog_description()}
+
+<DocsActions />
 
 <Showcase columns={1} minHeight="0" disablePanZoom showOverflow>
   <Dialog>
@@ -21,7 +25,7 @@
   </Dialog>
 </Showcase>
 
-{m.dialog_composition_description()}
+<p><I18nMarkupMessage message={m.dialog_composition_description} /></p>
 
 - `Dialog`: {m.dialog_composition_dialog_description()}
 - `DialogTrigger`: {m.dialog_composition_dialogtrigger_description()}

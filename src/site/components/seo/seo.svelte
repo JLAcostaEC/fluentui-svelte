@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { MetaTags } from 'svelte-meta-tags';
 	import { page } from '$app/state';
-	import { baseLocale, deLocalizeUrl, getLocale, locales, localizeHref } from '#i18n/runtime.js';
-	import { SITE_NAME } from '#site/constants.js';
+	import { baseLocale, deLocalizeUrl, extractLocaleFromUrl, locales } from '#i18n/runtime.js';
+	import { SITE_NAME, SITE_URL } from '#site/constants.js';
+	import { sitePageUrl } from '#site/utils/seo-url.js';
 	import type { SeoMeta } from '#types';
 
 	type Props = Pick<SeoMeta, 'title' | 'description'> &
@@ -22,18 +23,16 @@
 		robots = 'index, follow',
 		openGraph,
 		twitter,
-		titleTemplate = `%s — ${SITE_NAME}`
+		titleTemplate = `%s | ${SITE_NAME}`
 	}: Props = $props();
 
-	// getLocale() is not reactive, so it is re-evaluated whenever the URL changes.
-	const locale = $derived(page.url.pathname && getLocale());
+	const locale = $derived(extractLocaleFromUrl(page.url.href) ?? baseLocale);
 	const isAbsolute = $derived(!!canonical && /^https?:\/\//.test(canonical));
 	const path = $derived(canonical && !isAbsolute ? canonical : deLocalizeUrl(page.url).pathname);
 
-	const toAbsolute = (url: string) => new URL(url, page.url.origin).href;
-	const hrefFor = (target: (typeof locales)[number]) => toAbsolute(localizeHref(path, { locale: target }));
+	const hrefFor = (target: (typeof locales)[number]) => sitePageUrl(path, target);
 
-	const canonicalUrl = $derived(isAbsolute ? canonical : hrefFor(locale as any));
+	const canonicalUrl = $derived(isAbsolute ? canonical : hrefFor(locale));
 	const languageAlternates = $derived(
 		isAbsolute
 			? []
@@ -43,7 +42,7 @@
 				]
 	);
 
-	const image = $derived(toAbsolute(openGraph?.image ?? twitter?.image ?? DEFAULT_IMAGE));
+	const image = $derived(new URL(openGraph?.image ?? twitter?.image ?? DEFAULT_IMAGE, SITE_URL).href);
 </script>
 
 <MetaTags

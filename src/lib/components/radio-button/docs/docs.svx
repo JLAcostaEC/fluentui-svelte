@@ -1,12 +1,17 @@
 <script lang="ts">
   import { RadioButton } from '#lib/index.js';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import DocsActions from '#site/components/docs/docs-actions.svelte';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
+  import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
 </script>
 
-# Radio Button
+# Radio Button <StatusBadge />
 
-{m.rb_description()}
+<p><I18nMarkupMessage message={m.rb_description} /></p>
+
+<DocsActions />
 
 <Showcase columns={3} autoCenter>
   <RadioButton label="Option 1" name="group1" value="A" checked />

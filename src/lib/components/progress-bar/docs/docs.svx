@@ -1,12 +1,16 @@
 <script lang="ts">
   import { ProgressBar } from '#lib/index.js';
+  import StatusBadge from '#site/components/status-badge/status-badge.svelte';
+  import DocsActions from '#site/components/docs/docs-actions.svelte';
   import Showcase from '#site/components/showcase/showcase.svelte';
   import { m } from '#i18n/messages.js';
 </script>
 
-# Progress Bar
+# Progress Bar <StatusBadge />
 
 {m.pbar_description()}
+
+<DocsActions />
 
 <Showcase columns={1} autoCenter>
   <ProgressBar value={30} />

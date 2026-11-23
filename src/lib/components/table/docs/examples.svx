@@ -624,6 +624,8 @@
 
 <!-- Panzoom binds the arrow keys to pan its canvas, which would swallow the resize handle's own. -->
 <Showcase columns={1} minHeight="300px" disablePanZoom code={resizeCode}>
+  <!-- svelte-ignore a11y_no_noninteractive_tabindex (Keyboard scrolling for the table viewport.) -->
+  <div class="table-preview" role="region" aria-label={m.table_resizable_columns_title()} tabindex="0">
   <Table resizableColumns bind:columnWidths columnSizing={[{ minWidth: 120 }, { minWidth: 100 }, { minWidth: 100 }]} aria-label="Table with resizable columns">
     <TableHeader>
       <TableRow>
@@ -644,6 +646,7 @@
       {/each}
     </TableBody>
   </Table>
+  </div>
 </Showcase>
 
 ### {m.table_no_row_borders_title()}
@@ -703,6 +706,8 @@
 <p class="fs-docs"><I18nMarkupMessage message={m.table_virtualization_description} /></p>
 
 <Showcase columns={1} minHeight="420px" disablePanZoom code={virtualCode}>
+  <!-- svelte-ignore a11y_no_noninteractive_tabindex (Keyboard scrolling for the table viewport.) -->
+  <div class="table-preview" role="region" aria-label={m.table_virtualization_title()} tabindex="0">
   <Table
     noNativeElements
     enableTabspot
@@ -738,4 +743,5 @@
       </SvelteVirtualList>
     </TableBody>
   </Table>
+  </div>
 </Showcase>

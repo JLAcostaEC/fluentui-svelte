@@ -19,9 +19,9 @@
 		{#if text}
 			<span class="value-text">{text}</span>
 		{/if}
-		<span>
-			{@render children?.()}
-		</span>
+		{#if children}
+			<span>{@render children()}</span>
+		{/if}
 	</span>
 </option>
 
@@ -36,7 +36,7 @@
 
 		&::checkmark,
 		& :global(.checkmark),
-		& .value-text {
+		& .value-text:not(:last-child) {
 			display: none;
 		}
 		& .option-content {

@@ -1,5 +1,11 @@
 # fluentui-svelte
 
+## 0.8.3
+
+### Patch Changes
+
+- fix: restore the display of option labels in the picker when only text is provided ([#170](https://github.com/JLAcostaEC/fluentui-svelte/pull/170))
+
 ## 0.8.2
 
 ### Patch Changes

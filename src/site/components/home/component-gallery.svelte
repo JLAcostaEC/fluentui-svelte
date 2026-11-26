@@ -295,7 +295,7 @@
 
 {#snippet badges()}
 	<div class="site-actions">
-		<Badge shape="rounded" color="attention">{m.site_gallery_appearance_accent()}</Badge>
+		<Badge shape="rounded" color="attention">{m.site_gallery_attention()}</Badge>
 		<Badge shape="rounded" color="success" appearance="tint">{m.site_gallery_available()}</Badge>
 		<Badge shape="rounded" color="warning" appearance="tint">{m.site_gallery_away()}</Badge>
 		<Badge shape="rounded" color="critical" appearance="tint">{m.site_gallery_offline()}</Badge>

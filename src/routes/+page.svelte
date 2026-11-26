@@ -12,7 +12,7 @@
 	import { getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
 	import { GITHUB_REPO_URL, INSTALL_COMMAND, SPONSOR_URL, VERSION } from '#site/constants.js';
 	import { getAccentPreference } from '#site/preferences.js';
-	import { accentSteps, defaultAccent, normalizeAccent } from '#site/utils/accent-ramp.js';
+	import { accentSteps, accentVividTextColors } from '#site/utils/accent-ramp.js';
 	import { localizedPath } from '#site/utils/localized-path.js';
 	import components from '#site/utils/components-index.js';
 	import Command from '#site/components/command.svelte';
@@ -26,8 +26,10 @@
 	import Seo from '#site/components/seo/seo.svelte';
 	import RenderShiki from '#site/components/render-shiki/render-shiki.svelte';
 
-	const storedAccent = getAccentPreference();
-	const accent = $derived(normalizeAccent(storedAccent.current) ?? defaultAccent);
+	const accentPreference = getAccentPreference();
+	const accent = $derived(accentPreference.color);
+	const vividText = $derived(accentPreference.textColors && accentVividTextColors(accentPreference.ramp));
+	const setAccent = accentPreference.setColor;
 	const reduceMotion = getReducedMotion();
 	const showDesktopScene = new MediaQuery('(min-width: 601px)');
 	const visibleComponents = components.filter(({ status }) => status !== 'Empty');
@@ -47,11 +49,6 @@
 	};
 	const nativeTags = ['<dialog>', '<details>', '<summary>'];
 	const keys = ['Tab', '←', '→', 'Enter'];
-
-	function setAccent(color: string) {
-		const valid = normalizeAccent(color);
-		if (valid) storedAccent.current = valid;
-	}
 </script>
 
 <Seo
@@ -63,9 +60,14 @@
 />
 
 <section class="hero site-vivid">
-	<HeroWallpaper {accent} />
+	<HeroWallpaper ramp={accentPreference.ramp} />
 	<div class="site-shell hero-inner">
-		<div class="hero-copy site-on-vivid">
+		<div
+			class="hero-copy site-on-vivid"
+			data-adjust-accent-text={vividText ? '' : undefined}
+			style:--fs-text-on-accent-primary={vividText?.primary}
+			style:--fs-text-on-accent-secondary={vividText?.secondary}
+		>
 			<div class="kicker">
 				<Badge shape="circular" class="hero-version">v{VERSION}</Badge>
 				<span>{m.site_hero_kicker()}</span>
@@ -79,14 +81,13 @@
 				<Button as="a" appearance="standard" href={GITHUB_REPO_URL}>{m.home_github_repo_button()}</Button>
 			</div>
 			<ul class="facts">
-				<li><CheckmarkCircleFilled width="1em" aria-hidden="true" />{m.site_hero_runes()}</li>
-				<li><CheckmarkCircleFilled width="1em" aria-hidden="true" />{m.site_hero_accessible()}</li>
+				<li><CheckmarkCircleFilled aria-hidden="true" /><span>{m.site_hero_runes()}</span></li>
+				<li><CheckmarkCircleFilled aria-hidden="true" /><span>{m.site_hero_accessible()}</span></li>
 				<li>
-					<CheckmarkCircleFilled width="1em" aria-hidden="true" /><span>
-						<I18nMarkupMessage message={m.site_hero_native} />
-					</span>
+					<CheckmarkCircleFilled aria-hidden="true" />
+					<span><I18nMarkupMessage message={m.site_hero_native} /></span>
 				</li>
-				<li><CheckmarkCircleFilled width="1em" aria-hidden="true" />{m.site_hero_mit()}</li>
+				<li><CheckmarkCircleFilled aria-hidden="true" /><span>{m.site_hero_mit()}</span></li>
 			</ul>
 		</div>
 		<div class="desktop-slot">
@@ -214,11 +215,16 @@
 
 <BlocksGallery />
 
-<AccentGenerator {accent} select={setAccent} />
+<AccentGenerator />
 
 <section class="closing site-vivid">
-	<HeroWallpaper {accent} />
-	<div class="site-section site-shell site-on-vivid">
+	<HeroWallpaper ramp={accentPreference.ramp} />
+	<div
+		class="site-section site-shell site-on-vivid"
+		data-adjust-accent-text={vividText ? '' : undefined}
+		style:--fs-text-on-accent-primary={vividText?.primary}
+		style:--fs-text-on-accent-secondary={vividText?.secondary}
+	>
 		<div class="kicker">
 			<Badge class="hero-version" shape="circular">MIT</Badge>
 			<span>{m.site_closing_notice()}</span>
@@ -307,19 +313,24 @@
 	.facts {
 		display: flex;
 		justify-content: center;
+		align-items: start;
 		flex-wrap: wrap;
 		gap: 0.55rem 1.1rem;
 		padding: 0;
 		list-style: none;
 		color: var(--fs-text-secondary);
 		font-size: 0.76rem;
+		line-height: 1.5;
 		& li {
-			display: flex;
-			align-items: center;
+			display: grid;
+			grid-template-columns: auto minmax(0, 1fr);
 			gap: 0.36rem;
+			text-align: start;
 		}
-		& :global(svg) {
-			color: rgb(var(--fs-accent-light-2));
+		& li > :global(svg) {
+			inline-size: 1.2em;
+			block-size: 1lh;
+			color: var(--fs-text-primary);
 		}
 	}
 	.marquee {

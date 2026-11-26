@@ -1,7 +1,21 @@
 export const accentSteps = ['light-3', 'light-2', 'light-1', 'base', 'dark-1', 'dark-2', 'dark-3'] as const;
 export const defaultAccent = '#0078D4';
 
+export type AccentAnchor = 'base' | 'dark-1' | 'light-2' | 'both';
+
+export function normalizeAccentAnchor(value: unknown): AccentAnchor {
+	if (value === 'light-1') return 'light-2';
+	return value === 'dark-1' || value === 'light-2' || value === 'both' ? value : 'base';
+}
+
 type RGB = [number, number, number];
+type TextColor = '#000' | '#fff';
+type AccentTextColors = Record<'light' | 'dark', { primary: TextColor; secondary: TextColor }>;
+
+const white: RGB = [255, 255, 255];
+const black: RGB = [0, 0, 0];
+const lightSurface: RGB = [249, 249, 249];
+const darkSurface: RGB = [40, 40, 40];
 
 const defaultRamp: RGB[] = [
 	[152, 236, 254],
@@ -99,11 +113,20 @@ function contrast(a: RGB, b: RGB) {
 	return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
 }
 
-export function generateAccentRamp(hex: string): RGB[] {
-	const accent = normalizeAccent(hex) ?? defaultAccent;
-	if (accent === defaultAccent) return defaultRamp.map(([r, g, b]) => [r, g, b]);
+export function generateAccentRamp(hex: string, anchor: AccentAnchor = 'base'): RGB[] {
+	if (anchor === 'both') {
+		const baseIndex = accentSteps.indexOf('base');
+		const light = generateAccentRamp(hex, 'light-2');
+		const dark = generateAccentRamp(hex, 'dark-1');
+		return [...light.slice(0, baseIndex), ...dark.slice(baseIndex)];
+	}
 
-	const [lightness, chroma, hue] = rgbToOklch(hexToRgb(accent));
+	const accent = normalizeAccent(hex) ?? defaultAccent;
+	if (anchor === 'base' && accent === defaultAccent) return defaultRamp.map(([r, g, b]) => [r, g, b]);
+
+	const color = hexToRgb(accent);
+	const [lightness, chroma, hue] = rgbToOklch(color);
+	const anchorIndex = accentSteps.indexOf(anchor);
 	const plan = [
 		[0.94, 0.42],
 		[0.85, 0.8],
@@ -113,49 +136,103 @@ export function generateAccentRamp(hex: string): RGB[] {
 		[0.4, 0.85],
 		[0.28, 0.7]
 	];
-	const lightnesses = plan.map(([level]) => level);
-	const make = (index: number) => oklchToRgb(lightnesses[index], chroma * plan[index][1], hue);
-	const ramp = plan.map((_, index) => make(index));
+	const [referenceLightness, referenceChroma] = plan[anchorIndex];
+	const anchorLightness = clamp(lightness, 0, 1);
 
-	if (lightness >= 0.52 && lightness <= 0.68) ramp[3] = hexToRgb(accent);
+	// Scale each side toward its endpoint to retain the ordering at the edges of the gamut.
+	const lightnesses = plan.map(([level]) =>
+		level <= referenceLightness
+			? (level / referenceLightness) * anchorLightness
+			: 1 - ((1 - level) / (1 - referenceLightness)) * (1 - anchorLightness)
+	);
+	const make = (index: number) => oklchToRgb(lightnesses[index], chroma * (plan[index][1] / referenceChroma), hue);
+	const ramp = plan.map((_, index) => (index === anchorIndex ? color : make(index)));
 
 	const fix = (index: number, against: RGB, direction: number) => {
+		if (index === anchorIndex) return;
 		for (let count = 0; count < 80 && contrast(ramp[index], against) < 4.6; count++) {
 			lightnesses[index] = clamp(lightnesses[index] + direction * 0.01, 0, 1);
 			ramp[index] = make(index);
 		}
 	};
 
-	fix(4, [255, 255, 255], -1);
-	lightnesses[5] = Math.min(lightnesses[5], lightnesses[4] - 0.09);
+	fix(4, white, -1);
+	lightnesses[5] = clamp(lightnesses[5], 0, Math.max(0, lightnesses[4] - 0.09));
 	ramp[5] = make(5);
-	fix(5, [249, 249, 249], -1);
-	lightnesses[6] = Math.min(lightnesses[6], lightnesses[5] - 0.1);
+	fix(5, lightSurface, -1);
+	lightnesses[6] = clamp(lightnesses[6], 0, Math.max(0, lightnesses[5] - 0.1));
 	ramp[6] = make(6);
-	fix(1, [0, 0, 0], 1);
-	lightnesses[0] = Math.max(lightnesses[0], lightnesses[1] + 0.06);
+	fix(1, black, 1);
+	lightnesses[0] = clamp(lightnesses[0], Math.min(1, lightnesses[1] + 0.06), 1);
 	ramp[0] = make(0);
-	fix(0, [40, 40, 40], 1);
+	fix(0, darkSurface, 1);
 
 	const round = (value: number) => clamp(Math.round(value), 0, 255);
 	return ramp.map(([r, g, b]) => [round(r), round(g), round(b)]);
 }
 
-export function accentChecks(ramp: RGB[]) {
+function contrastingText(...backgrounds: RGB[]): TextColor {
+	const againstWhite = Math.min(...backgrounds.map((background) => contrast(background, white)));
+	const againstBlack = Math.min(...backgrounds.map((background) => contrast(background, black)));
+	return againstWhite > againstBlack ? '#fff' : '#000';
+}
+
+function composite(fill: RGB, surface: RGB, opacity: number): RGB {
+	const [r, g, b] = fill.map((channel, index) => opacity * channel + (1 - opacity) * surface[index]);
+	return [r, g, b];
+}
+
+export function accentTextColors(ramp: RGB[]): AccentTextColors {
+	const lightFill = ramp[4];
+	const darkFill = ramp[1];
+	return {
+		light: {
+			primary: contrastingText(lightFill),
+			secondary: contrastingText(composite(lightFill, lightSurface, 0.84), composite(lightFill, lightSurface, 0.67))
+		},
+		dark: {
+			primary: contrastingText(darkFill),
+			secondary: contrastingText(composite(darkFill, darkSurface, 0.7), composite(darkFill, darkSurface, 0.6))
+		}
+	};
+}
+
+export function accentVividTextColors(ramp: RGB[]) {
+	return { primary: contrastingText(ramp[1]), secondary: contrastingText(ramp[0]) };
+}
+
+export function accentChecks(ramp: RGB[], text?: AccentTextColors) {
 	return [
-		contrast(ramp[4], [255, 255, 255]),
-		contrast(ramp[1], [0, 0, 0]),
-		contrast(ramp[5], [249, 249, 249]),
-		contrast(ramp[0], [40, 40, 40])
+		contrast(ramp[4], text?.light.primary === '#000' ? black : white),
+		contrast(ramp[1], text?.dark.primary === '#fff' ? white : black),
+		contrast(ramp[5], lightSurface),
+		contrast(ramp[0], darkSurface)
 	];
 }
 
 export const accentProperties = (ramp: RGB[]) =>
 	accentSteps.map((step, index) => ['--fs-accent-' + step, ramp[index].join(', ')] as const);
 
-export const accentCss = (ramp: RGB[]) =>
-	':root {\n' +
-	accentProperties(ramp)
-		.map(([key, value]) => '\t' + key + ': ' + value + ';')
-		.join('\n') +
-	'\n}';
+export const accentTextProperties = ({ primary, secondary }: { primary: string; secondary: string }) =>
+	[
+		['--fs-text-on-accent-primary', primary],
+		['--fs-text-on-accent-secondary', secondary]
+	] as const;
+
+function cssRule(selector: string, properties: readonly (readonly [string, string])[]) {
+	return `${selector} {\n${properties.map(([key, value]) => `\t${key}: ${value};`).join('\n')}\n}`;
+}
+
+export function accentCss(ramp: RGB[], text?: AccentTextColors) {
+	const colors = accentProperties(ramp);
+	if (!text) return cssRule(':root', colors);
+
+	const { light, dark } = text;
+	const adaptive = accentTextProperties({
+		primary: `light-dark(${light.primary}, ${dark.primary})`,
+		secondary: `light-dark(${light.secondary}, ${dark.secondary})`
+	});
+	const root = cssRule(':root', [...colors, ...adaptive]);
+	const darkRule = cssRule(':is(html:has(.dark), html.dark):root', accentTextProperties(dark));
+	return `${root}\n\n${darkRule}`;
+}

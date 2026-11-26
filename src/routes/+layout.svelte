@@ -17,7 +17,7 @@
 
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
-	import { ModeWatcher } from 'mode-watcher';
+	import { mode, ModeWatcher } from 'mode-watcher';
 	import { PersistedState } from 'runed';
 	import { FluentUISvelte, ScrollBar } from '#lib/index.js';
 	import { locales } from '#i18n/runtime.js';
@@ -27,7 +27,15 @@
 	import Header from '#site/components/header/header.svelte';
 	import Footer from '#site/components/footer/footer.svelte';
 	import { setAccentPreference, setDisablePanZoom } from '#site/preferences.js';
-	import { accentProperties, defaultAccent, generateAccentRamp } from '#site/utils/accent-ramp.js';
+	import {
+		accentProperties,
+		accentTextColors,
+		accentTextProperties,
+		defaultAccent,
+		generateAccentRamp,
+		normalizeAccent,
+		normalizeAccentAnchor
+	} from '#site/utils/accent-ramp.js';
 
 	let { children } = $props();
 	let headerHeight = $state(56);
@@ -36,15 +44,48 @@
 
 	const disablePanZoom = new PersistedState<boolean>('fluentui-svelte-disable-panzoom', false);
 	setDisablePanZoom(disablePanZoom);
-	const accent = new PersistedState('fs-accent', defaultAccent);
-	setAccentPreference(accent);
-	const properties = $derived(accentProperties(generateAccentRamp(accent.current)));
+	const storedAccent = new PersistedState('fs-accent', defaultAccent);
+	const storedAnchor = new PersistedState('fs-accent-anchor', 'base');
+	const storedTextContrast = new PersistedState('fs-accent-adjust-text-contrast', false);
+	const accent = $derived(normalizeAccent(storedAccent.current) ?? defaultAccent);
+	const anchor = $derived(normalizeAccentAnchor(storedAnchor.current));
+	const ramp = $derived(generateAccentRamp(accent, anchor));
+	const textColors = $derived(storedTextContrast.current === true ? accentTextColors(ramp) : undefined);
+	const properties = $derived([
+		...accentProperties(ramp),
+		...(textColors ? accentTextProperties(textColors[mode.current ?? 'light']) : [])
+	]);
+	setAccentPreference({
+		get color() {
+			return accent;
+		},
+		get anchor() {
+			return anchor;
+		},
+		get ramp() {
+			return ramp;
+		},
+		get textColors() {
+			return textColors;
+		},
+		setColor(value) {
+			const valid = normalizeAccent(value);
+			if (valid) storedAccent.current = valid;
+		},
+		setAnchor(value) {
+			storedAnchor.current = normalizeAccentAnchor(value);
+		},
+		setAdjustTextContrast(value) {
+			storedTextContrast.current = value === true;
+		}
+	});
 
 	$effect(() => {
 		const root = document.documentElement;
-		for (const [key, value] of properties) root.style.setProperty(key, value);
+		const applied = properties;
+		for (const [key, value] of applied) root.style.setProperty(key, value);
 		return () => {
-			for (const [key] of properties) root.style.removeProperty(key);
+			for (const [key] of applied) root.style.removeProperty(key);
 		};
 	});
 

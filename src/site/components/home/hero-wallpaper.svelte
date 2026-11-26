@@ -3,10 +3,10 @@
 	import { prefersReducedMotion } from 'svelte/motion';
 	import { MediaQuery } from 'svelte/reactivity';
 	import { getReducedMotion } from '#lib/providers/fluentui-svelte/fluentui-svelte.js';
-	import { generateAccentRamp } from '#site/utils/accent-ramp.js';
+	import type { generateAccentRamp } from '#site/utils/accent-ramp.js';
 	import { startWallpaper } from '#site/utils/hero-wallpaper.js';
 
-	let { accent }: { accent: string } = $props();
+	let { ramp }: { ramp: ReturnType<typeof generateAccentRamp> } = $props();
 	let bands: HTMLCanvasElement;
 	let lines: HTMLCanvasElement;
 	const getMotionPreference = getReducedMotion();
@@ -19,10 +19,9 @@
 		return wallpaper.destroy;
 	});
 
-	const colors = $derived(generateAccentRamp(accent));
 	const still = $derived(compact.current || prefersReducedMotion.current || getMotionPreference());
 
-	$effect(() => update?.(colors, still));
+	$effect(() => update?.(ramp, still));
 </script>
 
 <div class="wallpaper" aria-hidden="true">

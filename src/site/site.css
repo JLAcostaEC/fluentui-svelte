@@ -44,6 +44,9 @@ html {
 	--fs-text-on-accent-primary: #101010;
 	--fs-focus-stroke-outer: #fff;
 	color: var(--fs-text-primary);
+	&[data-adjust-accent-text] .fs-button.accent:hover {
+		color: var(--fs-text-on-accent-secondary);
+	}
 	& code:not(pre code, .shiki) {
 		background: var(--fs-control-fill-secondary) !important;
 		border-color: var(--fs-control-stroke-secondary);

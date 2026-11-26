@@ -1,26 +1,51 @@
 <script lang="ts">
 	import { setMode } from 'mode-watcher';
-	import { Badge, Button, Card, ColorPicker, Hyperlink, Label, TextBox } from '#lib/index.js';
+	import {
+		Badge,
+		Button,
+		Card,
+		ColorPicker,
+		Dropdown,
+		DropdownOption,
+		Hyperlink,
+		InfoBar,
+		Label,
+		TextBox,
+		ToggleSwitch
+	} from '#lib/index.js';
 	import { I18nMarkupMessage } from '@jlacostaec/paraglide-markup-svelte';
 	import { m } from '#i18n/messages.js';
+	import { getAccentPreference } from '#site/preferences.js';
 	import {
 		accentChecks,
 		accentCss,
 		accentSteps,
 		defaultAccent,
-		generateAccentRamp,
 		normalizeAccent,
 		rgbToHex
 	} from '#site/utils/accent-ramp.js';
 	import AccentPresets from './accent-presets.svelte';
 	import RenderShiki from '#site/components/render-shiki/render-shiki.svelte';
 
-	let { accent, select }: { accent: string; select: (color: string) => void } = $props();
+	const preference = getAccentPreference();
 	let draft = $state<string | null>(null);
+	const accent = $derived(preference.color);
 	const displayedHex = $derived(draft ?? accent);
 	const invalid = $derived(draft !== null && normalizeAccent(draft) === null);
-	const ramp = $derived(generateAccentRamp(accent));
-	const checks = $derived(accentChecks(ramp));
+	const ramp = $derived(preference.ramp);
+	const textColors = $derived(preference.textColors);
+	const checks = $derived(accentChecks(ramp, textColors));
+	const anchoredSteps = $derived(preference.anchor === 'both' ? ['light-2', 'dark-1'] : [preference.anchor]);
+	const anchorOptions = [
+		['base', m.site_accent_anchor_base],
+		['dark-1', m.site_accent_anchor_light_theme],
+		['light-2', m.site_accent_anchor_dark_theme],
+		['both', m.site_accent_anchor_both_themes]
+	] as const;
+	const previewThemes = [
+		['light', m.site_theme_light],
+		['dark', m.site_theme_dark]
+	] as const;
 	const labels = [
 		m.site_accent_check_light_fill,
 		m.site_accent_check_dark_fill,
@@ -30,13 +55,19 @@
 
 	function selectColor(value: string) {
 		draft = null;
-		select(value);
+		preference.setColor(value);
+	}
+
+	function reset() {
+		preference.setAnchor('base');
+		preference.setAdjustTextContrast(false);
+		selectColor(defaultAccent);
 	}
 
 	function editHex(value: string) {
 		draft = value;
 		const valid = normalizeAccent(value);
-		if (valid && value.trim().replace(/^#/, '').length === 6) select(valid);
+		if (valid && value.trim().replace(/^#/, '').length === 6) preference.setColor(valid);
 	}
 
 	function finishHex() {
@@ -90,26 +121,54 @@
 						<AccentPresets {accent} select={selectColor} />
 					</div>
 				</div>
+				<Label labelPosition="above" label={m.site_accent_anchor_label()}>
+					<Dropdown
+						bind:value={() => preference.anchor, preference.setAnchor}
+						aria-describedby="accent-anchor-description"
+					>
+						{#each anchorOptions as [value, label] (value)}
+							<DropdownOption {value} text={label()}>{label()}</DropdownOption>
+						{/each}
+					</Dropdown>
+				</Label>
+				<p id="accent-anchor-description">{m.site_accent_anchor_description()}</p>
+				{#if preference.anchor === 'both'}
+					<InfoBar
+						status="warning"
+						style="multiline"
+						title={m.site_accent_shared_warning_title()}
+						headingLevel={4}
+						hideCloseButton
+					>
+						<p>{m.site_accent_shared_warning_text()}</p>
+					</InfoBar>
+				{/if}
 			</Card>
 			<div class="accent-results">
 				<div class="ramp-heading">
 					<h3>{m.site_accent_ramp()}</h3>
-					<Button appearance="subtle" onclick={() => selectColor(defaultAccent)}>{m.site_accent_reset()}</Button>
+					<Button appearance="subtle" onclick={reset}>{m.site_accent_reset()}</Button>
 				</div>
 				<ul class="ramp" aria-label={m.site_accent_ramp()}>
 					{#each accentSteps as step, index (step)}
-						<li>
+						{@const anchored = anchoredSteps.includes(step)}
+						<li class:anchored>
 							<div style:background={rgbToHex(ramp[index])}></div>
 							<strong>{step}</strong><code>{rgbToHex(ramp[index])}</code>
+							{#if anchored}<span class="site-sr-only">{m.site_accent_anchor_selected()}</span>{/if}
 						</li>
 					{/each}
 				</ul>
 				<div class="theme-previews">
-					{#each [m.site_theme_light(), m.site_theme_dark()] as theme, index (theme)}
-						<div class={['theme-preview', index === 1 && 'night']}>
-							<h3>{theme}</h3>
+					{#each previewThemes as [theme, label] (theme)}
+						<div
+							class={['theme-preview', theme === 'dark' && 'night']}
+							style:--fs-text-on-accent-primary={textColors?.[theme].primary}
+							style:--fs-text-on-accent-secondary={textColors?.[theme].secondary}
+						>
+							<h3>{label()}</h3>
 							<div class="site-actions">
-								<Button appearance="accent" onclick={() => setMode(index === 1 ? 'dark' : 'light')}>
+								<Button appearance="accent" onclick={() => setMode(theme)}>
 									{m.site_demo_apply()}
 								</Button>
 								<Hyperlink href="#accent-generator">{m.site_accent()}</Hyperlink>
@@ -119,6 +178,10 @@
 				</div>
 				<Card orientation="vertical" class="accent-checks">
 					<h3>{m.site_accent_checks()}</h3>
+					<ToggleSwitch
+						label={m.site_accent_adjust_text_contrast()}
+						bind:checked={() => textColors !== undefined, preference.setAdjustTextContrast}
+					/>
 					<ul>
 						{#each checks as ratio, index (index)}
 							<li>
@@ -133,7 +196,7 @@
 				</Card>
 			</div>
 			<div class="css-output">
-				<RenderShiki code={accentCss(ramp)} lang="css" copyLabel={m.site_accent_css()} />
+				<RenderShiki code={accentCss(ramp, textColors)} lang="css" copyLabel={m.site_accent_css()} />
 			</div>
 		</div>
 	</div>
@@ -172,10 +235,11 @@
 		display: grid;
 		gap: 0.65rem;
 		align-content: start;
-		& p {
-			color: var(--fs-text-secondary);
-			font-size: 0.82rem;
-		}
+	}
+	.picker-details p,
+	#accent-anchor-description {
+		color: var(--fs-text-secondary);
+		font-size: 0.82rem;
 	}
 	.ramp-heading {
 		display: flex;
@@ -203,6 +267,11 @@
 		& li {
 			min-width: 0;
 			text-align: center;
+
+			&.anchored strong {
+				text-decoration: underline;
+				text-underline-offset: 0.18em;
+			}
 		}
 		& div {
 			min-height: 3.7rem;
@@ -222,9 +291,10 @@
 	}
 	.theme-preview {
 		--fs-accent-fill-default: rgb(var(--fs-accent-dark-1));
-		--fs-accent-fill-secondary: rgb(var(--fs-accent-dark-2));
-		--fs-accent-fill-tertiary: rgb(var(--fs-accent-dark-3));
+		--fs-accent-fill-secondary: rgba(var(--fs-accent-dark-1), 0.84);
+		--fs-accent-fill-tertiary: rgba(var(--fs-accent-dark-1), 0.67);
 		--fs-text-on-accent-primary: #fff;
+		--fs-text-on-accent-secondary: #ffffffb3;
 		--fs-accent-text-primary: rgb(var(--fs-accent-dark-2));
 		--fs-accent-text-secondary: rgb(var(--fs-accent-dark-3));
 		--fs-accent-text-tertiary: rgb(var(--fs-accent-dark-1));
@@ -238,9 +308,10 @@
 
 		&.night {
 			--fs-accent-fill-default: rgb(var(--fs-accent-light-2));
-			--fs-accent-fill-secondary: rgb(var(--fs-accent-light-3));
-			--fs-accent-fill-tertiary: rgb(var(--fs-accent-light-1));
+			--fs-accent-fill-secondary: rgba(var(--fs-accent-light-2), 0.7);
+			--fs-accent-fill-tertiary: rgba(var(--fs-accent-light-2), 0.6);
 			--fs-text-on-accent-primary: #000;
+			--fs-text-on-accent-secondary: #00000080;
 			--fs-accent-text-primary: rgb(var(--fs-accent-light-3));
 			--fs-accent-text-secondary: rgb(var(--fs-accent-light-3));
 			--fs-accent-text-tertiary: rgb(var(--fs-accent-light-2));

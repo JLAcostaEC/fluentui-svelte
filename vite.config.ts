@@ -11,6 +11,7 @@ import { markPropsTables } from './scripts/mark-props-tables.ts';
 import { fsShikiCopyButton } from './scripts/shiki-copy-button.js';
 import { fsShikiFocusableCode } from './scripts/shiki-focusable-code.js';
 import { createHighlighter } from 'shiki';
+import { optimizedDependencies } from './scripts/vite-optimize-deps.ts';
 
 /** @type {(import('shiki').BundledLanguage | import('shiki').LanguageInput | import('shiki').SpecialLanguage)[]} */
 const langs = ['typescript', 'bash', 'css', 'svelte', 'json', 'markdown'];
@@ -119,74 +120,8 @@ export default defineConfig({
 			}
 		]
 	},
-	// Optimize deps to avoid issues with vitest on Github Actions
-	optimizeDeps: {
-		include: [
-			'@floating-ui/dom',
-			'fluentui-icons-svelte',
-			'fluentui-icons-svelte/AddRegular.svelte',
-			'fluentui-icons-svelte/ArrowCircleLeftRegular.svelte',
-			'fluentui-icons-svelte/ArrowLeftRegular.svelte',
-			'fluentui-icons-svelte/ArrowUpRegular.svelte',
-			'fluentui-icons-svelte/CaretDownFilled.svelte',
-			'fluentui-icons-svelte/CaretUpFilled.svelte',
-			'fluentui-icons-svelte/CheckmarkCircleFilled.svelte',
-			'fluentui-icons-svelte/CheckmarkCircleRegular.svelte',
-			'fluentui-icons-svelte/CheckmarkFilled.svelte',
-			'fluentui-icons-svelte/ChevronDownFilled.svelte',
-			'fluentui-icons-svelte/ChevronDownRegular.svelte',
-			'fluentui-icons-svelte/ChevronRightFilled.svelte',
-			'fluentui-icons-svelte/ChevronRightRegular.svelte',
-			'fluentui-icons-svelte/ChevronUpFilled.svelte',
-			'fluentui-icons-svelte/CircleFilled.svelte',
-			'fluentui-icons-svelte/CircleRegular.svelte',
-			'fluentui-icons-svelte/ClockFilled.svelte',
-			'fluentui-icons-svelte/DismissCircleFilled.svelte',
-			'fluentui-icons-svelte/DismissCircleRegular.svelte',
-			'fluentui-icons-svelte/DismissFilled.svelte',
-			'fluentui-icons-svelte/DismissRegular.svelte',
-			'fluentui-icons-svelte/ErrorCircleFilled.svelte',
-			'fluentui-icons-svelte/EyeHideFilled.svelte',
-			'fluentui-icons-svelte/EyeShowFilled.svelte',
-			'fluentui-icons-svelte/InfoFilled.svelte',
-			'fluentui-icons-svelte/NavigationRegular.svelte',
-			'fluentui-icons-svelte/ProhibitedFilled.svelte',
-			'fluentui-icons-svelte/SearchFilled.svelte',
-			'fluentui-icons-svelte/SearchRegular.svelte',
-			'fluentui-icons-svelte/SquareMultipleRegular.svelte',
-			'fluentui-icons-svelte/SquareRegular.svelte',
-			'fluentui-icons-svelte/SubtractCircleFilled.svelte',
-			'fluentui-icons-svelte/SubtractCircleRegular.svelte',
-			'fluentui-icons-svelte/SubtractFilled.svelte',
-			'fluentui-icons-svelte/SubtractRegular.svelte',
-			'fluentui-icons-svelte/WarningFilled.svelte',
-			'fluentui-icons-svelte/StarFilled.svelte',
-			'fluentui-icons-svelte/StarHalfRegular.svelte',
-			'fluentui-icons-svelte/StarOneQuarterRegular.svelte',
-			'fluentui-icons-svelte/StarRegular.svelte',
-			'fluentui-icons-svelte/StarThreeQuarterRegular.svelte',
-			'fluentui-icons-svelte/ArrowClockwiseRegular.svelte',
-			'fluentui-icons-svelte/ArrowUploadRegular.svelte',
-			'fluentui-icons-svelte/CameraRegular.svelte',
-			'fluentui-icons-svelte/CameraSwitchRegular.svelte',
-			'fluentui-icons-svelte/DatabaseRegular.svelte',
-			'fluentui-icons-svelte/DocumentCopyRegular.svelte',
-			'fluentui-icons-svelte/DocumentRegular.svelte',
-			'fluentui-icons-svelte/FolderRegular.svelte',
-			'fluentui-icons-svelte/HardDriveRegular.svelte',
-			'fluentui-icons-svelte/ImageRegular.svelte',
-			'fluentui-icons-svelte/LinkRegular.svelte',
-			'fluentui-icons-svelte/MicRegular.svelte',
-			'fluentui-icons-svelte/MusicNote2Regular.svelte',
-			'fluentui-icons-svelte/RecordRegular.svelte',
-			'fluentui-icons-svelte/RecordStopRegular.svelte',
-			'fluentui-icons-svelte/ShareScreenStartRegular.svelte',
-			'fluentui-icons-svelte/SignOutRegular.svelte',
-			'fluentui-icons-svelte/VideoRegular.svelte',
-			'mode-watcher',
-			'runed',
-			'tabspot',
-			'@humanspeak/svelte-virtual-list'
-		]
+	optimizeDeps: { include: optimizedDependencies },
+	environments: {
+		ssr: { optimizeDeps: { include: optimizedDependencies } }
 	}
 });
